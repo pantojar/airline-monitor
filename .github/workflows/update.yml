@@ -6,7 +6,7 @@ on:
   workflow_dispatch: {}      # "Run workflow" button on the Actions tab
   push:
     branches: [main]
-    paths: ["scripts/**", "config/**"]
+    paths: ["scripts/**", "config/**", ".github/workflows/**"]
 
 permissions:
   contents: write
@@ -21,6 +21,8 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:
@@ -40,6 +42,6 @@ jobs:
             echo "No changes."
           else
             git commit -m "Data refresh $(date -u +%Y-%m-%d)"
-            git pull --rebase origin main
+            git pull --rebase -X theirs origin main
             git push
           fi

@@ -252,7 +252,7 @@ def update_sec(meta, facts_dir=None):
             pc["latest_filing"] = f"{lf['form']} filed {lf['filed']}"
         page_carriers.append(pc)
     save(os.path.join(DATA, "carriers.json"), page_carriers)
-    meta["sec"] = {"at": now_iso(), "carriers": status}
+    meta["sec"] = {"at": now_iso(), "contact_set": bool(os.environ.get("SEC_CONTACT", "").strip()), "carriers": status}
 
 
 # ---------------------------------------------------------------- news
