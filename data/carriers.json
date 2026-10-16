@@ -6,7 +6,8 @@
   "status": "Active",
   "returns_complete": true,
   "note": "",
-  "cik": "27904"
+  "cik": "27904",
+  "latest_filing": "10-Q filed 2026-10-09"
  },
  {
   "ticker": "UAL",
@@ -15,7 +16,8 @@
   "status": "Active",
   "returns_complete": true,
   "note": "",
-  "cik": "100517"
+  "cik": "100517",
+  "latest_filing": "10-Q filed 2026-07-16"
  },
  {
   "ticker": "AAL",
@@ -24,7 +26,8 @@
   "status": "Active",
   "returns_complete": true,
   "note": "Includes Envoy, Piedmont and PSA; subsidiaries are not broken out.",
-  "cik": "6201"
+  "cik": "6201",
+  "latest_filing": "10-Q filed 2026-07-23"
  },
  {
   "ticker": "LUV",
@@ -33,7 +36,8 @@
   "status": "Active",
   "returns_complete": true,
   "note": "",
-  "cik": "92380"
+  "cik": "92380",
+  "latest_filing": "10-Q filed 2026-07-23"
  },
  {
   "ticker": "ALK",
@@ -42,7 +46,8 @@
   "status": "Active",
   "returns_complete": true,
   "note": "Includes Hawaiian from Sep 18, 2024 and Horizon.",
-  "cik": "766421"
+  "cik": "766421",
+  "latest_filing": "10-Q filed 2026-08-04"
  },
  {
   "ticker": "JBLU",
@@ -51,7 +56,8 @@
   "status": "Active",
   "returns_complete": true,
   "note": "",
-  "cik": "1158463"
+  "cik": "1158463",
+  "latest_filing": "10-Q filed 2026-07-28"
  },
  {
   "ticker": "ULCC",
@@ -60,7 +66,8 @@
   "status": "Active",
   "returns_complete": true,
   "note": "",
-  "cik": "1670076"
+  "cik": "1670076",
+  "latest_filing": "10-Q filed 2026-05-05"
  },
  {
   "ticker": "ALGT",
@@ -69,7 +76,8 @@
   "status": "Active",
   "returns_complete": true,
   "note": "Includes Sun Country from May 13, 2026.",
-  "cik": "1362468"
+  "cik": "1362468",
+  "latest_filing": "10-Q filed 2026-08-10"
  },
  {
   "ticker": "SNCY",
@@ -78,7 +86,8 @@
   "status": "Acquired by Allegiant May 13, 2026",
   "returns_complete": true,
   "note": "Last standalone quarter: Q1 2026.",
-  "cik": "1743907"
+  "cik": "1743907",
+  "latest_filing": "10-Q filed 2026-05-01"
  },
  {
   "ticker": "SAVE",
@@ -87,7 +96,8 @@
   "status": "Ceased operations May 2, 2026",
   "returns_complete": true,
   "note": "Last filed quarter: Q4 2025. Q1 2025 split by fresh-start accounting.",
-  "cik": "1498710"
+  "cik": "1498710",
+  "latest_filing": "10-K/A filed 2026-04-30"
  },
  {
   "ticker": "SKYW",
@@ -96,7 +106,8 @@
   "status": "Active",
   "returns_complete": false,
   "note": "Revenue tag includes assessed taxes. Share repurchases after Q1 2024 are not in the cash-flow data SEC publishes, so shareholder returns show as unavailable.",
-  "cik": "793733"
+  "cik": "793733",
+  "latest_filing": "10-Q filed 2026-07-24"
  },
  {
   "ticker": "RJET",
@@ -105,6 +116,7 @@
   "status": "Active",
   "returns_complete": true,
   "note": "Republic–Mesa merger closed Nov 2025. Pre-merger Mesa history excluded; 2025 Q1–Q2 are Republic comparatives.",
-  "cik": "810332"
+  "cik": "810332",
+  "latest_filing": "10-Q filed 2026-07-31"
  }
 ]
