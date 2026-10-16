@@ -1,116 +1,73 @@
 {
  "sec": {
-  "at": "2026-10-16T18:59:09Z",
+  "at": "2026-10-16T19:04:46Z",
   "carriers": {
    "DAL": {
-    "ok": true,
-    "latest_filing": {
-     "form": "10-Q",
-     "filed": "2026-10-09"
-    },
-    "quarters": 15,
-    "through": "2026-09"
+    "ok": false,
+    "error": "HTTPError: HTTP Error 403: Forbidden",
+    "kept_previous_rows": 15
    },
    "UAL": {
-    "ok": true,
-    "latest_filing": {
-     "form": "10-Q",
-     "filed": "2026-07-16"
-    },
-    "quarters": 14,
-    "through": "2026-06"
+    "ok": false,
+    "error": "HTTPError: HTTP Error 403: Forbidden",
+    "kept_previous_rows": 14
    },
    "AAL": {
-    "ok": true,
-    "latest_filing": {
-     "form": "10-Q",
-     "filed": "2026-07-23"
-    },
-    "quarters": 14,
-    "through": "2026-06"
+    "ok": false,
+    "error": "HTTPError: HTTP Error 403: Forbidden",
+    "kept_previous_rows": 14
    },
    "LUV": {
-    "ok": true,
-    "latest_filing": {
-     "form": "10-Q",
-     "filed": "2026-07-23"
-    },
-    "quarters": 14,
-    "through": "2026-06"
+    "ok": false,
+    "error": "HTTPError: HTTP Error 403: Forbidden",
+    "kept_previous_rows": 14
    },
    "ALK": {
-    "ok": true,
-    "latest_filing": {
-     "form": "10-Q",
-     "filed": "2026-08-04"
-    },
-    "quarters": 14,
-    "through": "2026-06"
+    "ok": false,
+    "error": "HTTPError: HTTP Error 403: Forbidden",
+    "kept_previous_rows": 14
    },
    "JBLU": {
-    "ok": true,
-    "latest_filing": {
-     "form": "10-Q",
-     "filed": "2026-07-28"
-    },
-    "quarters": 14,
-    "through": "2026-06"
+    "ok": false,
+    "error": "HTTPError: HTTP Error 403: Forbidden",
+    "kept_previous_rows": 14
    },
    "ULCC": {
-    "ok": true,
-    "latest_filing": {
-     "form": "10-Q",
-     "filed": "2026-05-05"
-    },
-    "quarters": 14,
-    "through": "2026-06"
+    "ok": false,
+    "error": "HTTPError: HTTP Error 403: Forbidden",
+    "kept_previous_rows": 14
    },
    "ALGT": {
-    "ok": true,
-    "latest_filing": {
-     "form": "10-Q",
-     "filed": "2026-08-10"
-    },
-    "quarters": 14,
-    "through": "2026-06"
+    "ok": false,
+    "error": "HTTPError: HTTP Error 403: Forbidden",
+    "kept_previous_rows": 14
    },
    "SNCY": {
-    "ok": true,
-    "latest_filing": {
-     "form": "10-Q",
-     "filed": "2026-05-01"
-    },
-    "quarters": 13,
-    "through": "2026-03"
+    "ok": false,
+    "error": "HTTPError: HTTP Error 403: Forbidden",
+    "kept_previous_rows": 13
    },
    "SAVE": {
-    "ok": true,
-    "latest_filing": {
-     "form": "10-K/A",
-     "filed": "2026-04-30"
-    },
-    "quarters": 12,
-    "through": "2025-12"
+    "ok": false,
+    "error": "HTTPError: HTTP Error 403: Forbidden",
+    "kept_previous_rows": 12
    },
    "SKYW": {
-    "ok": true,
-    "latest_filing": {
-     "form": "10-Q",
-     "filed": "2026-07-24"
-    },
-    "quarters": 14,
-    "through": "2026-06"
+    "ok": false,
+    "error": "HTTPError: HTTP Error 403: Forbidden",
+    "kept_previous_rows": 14
    },
    "RJET": {
-    "ok": true,
-    "latest_filing": {
-     "form": "10-Q",
-     "filed": "2026-07-31"
-    },
-    "quarters": 5,
-    "through": "2026-06"
+    "ok": false,
+    "error": "HTTPError: HTTP Error 403: Forbidden",
+    "kept_previous_rows": 5
    }
   }
  },
- "generated": "2026-10-16T18:59:09Z"
+ "generated": "2026-10-16T19:05:10Z",
+ "news": {
+  "at": "2026-10-16T19:05:10Z",
+  "items": 77,
+  "errors": []
+ }
 }
