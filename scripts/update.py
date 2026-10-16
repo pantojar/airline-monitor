@@ -55,7 +55,7 @@ def user_agent():
     contact = os.environ.get("SEC_CONTACT", "").strip()
     repo = os.environ.get("GITHUB_REPOSITORY", "airline-monitor")
     # SEC asks automated clients to identify themselves with a contact.
-    return f"AirlineFinancialMonitor/1.0 ({contact or 'github.com/' + repo})"
+    return f"AirlineFinancialMonitor {contact or 'github.com/' + repo}"
 
 
 def http_get(url, accept="application/json", tries=3):
@@ -257,6 +257,8 @@ def update_sec(meta, facts_dir=None):
 
 # ---------------------------------------------------------------- news
 LABOR_RE = re.compile(r"union|contract|pilot|flight attendant|mechanic|strike|mediat|labor|negotiat|ratif|picket|teamsters|\bAFA\b|\bALPA\b|\bTWU\b|\bIAM\b", re.I)
+# Investor-chatter and filing-bot headlines that add noise rather than news
+SKIP_RE = re.compile(r"Form 4|Form 144|13F|price target|\bupgrade|\bdowngrade|shares (sold|bought|acquired)|stake in|position in|holdings in|stock (rises|falls|jumps|drops|slides|gains)|short interest|options? (trading|activity)", re.I)
 EARN_RE = re.compile(r"earnings|quarter|profit|loss|revenue|guidance|outlook|forecast", re.I)
 
 
@@ -290,7 +292,7 @@ def update_news(meta, per_query=6, keep_days=30, cap=80):
     queries = [{"query": c["news_query"], "tags": c["ticker"], "kind": None} for c in carriers if c.get("news_query") and c.get("status") == "Active"]
     queries += load(os.path.join(CONFIG, "news_queries.json"), [])
     name_tags = {
-        "DAL": r"\bDelta\b", "UAL": r"\bUnited Airlines\b", "AAL": r"American Airlines|\bEnvoy\b|\bPSA\b|Piedmont",
+        "DAL": r"\bDelta\b", "UAL": r"\bUnited Airlines\b", "AAL": r"American Airlines|Envoy Air|PSA Airlines|Piedmont Airlines",
         "LUV": r"Southwest", "ALK": r"Alaska Air|Hawaiian|Horizon", "JBLU": r"JetBlue", "ULCC": r"Frontier",
         "ALGT": r"Allegiant|Sun Country", "SKYW": r"SkyWest", "RJET": r"Republic Airways|\bMesa\b",
     }
@@ -304,6 +306,8 @@ def update_news(meta, per_query=6, keep_days=30, cap=80):
             errors.append(f"{q['query']}: {type(e).__name__}")
             continue
         for g in got:
+            if SKIP_RE.search(g["title"]):
+                continue
             key = re.sub(r"\W+", " ", g["title"].lower()).strip()
             if key in seen:
                 continue

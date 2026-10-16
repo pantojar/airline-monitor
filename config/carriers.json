@@ -4,7 +4,7 @@
   {"ticker": "UAL", "carrier": "United Airlines Holdings", "group": "Network", "status": "Active", "cik": 100517, "returns_complete": true,
    "news_query": "\"United Airlines\"", "note": ""},
   {"ticker": "AAL", "carrier": "American Airlines Group", "group": "Network", "status": "Active", "cik": 6201, "returns_complete": true,
-   "news_query": "\"American Airlines\" OR Envoy OR \"PSA Airlines\" OR \"Piedmont Airlines\"",
+   "news_query": "\"American Airlines\" OR \"Envoy Air\" OR \"PSA Airlines\" OR \"Piedmont Airlines\"",
    "note": "Includes Envoy, Piedmont and PSA; subsidiaries are not broken out."},
   {"ticker": "LUV", "carrier": "Southwest Airlines", "group": "Hybrid / value", "status": "Active", "cik": 92380, "returns_complete": true,
    "news_query": "\"Southwest Airlines\"", "note": ""},
