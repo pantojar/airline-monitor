@@ -1,0 +1,8 @@
+[
+  {"query": "airline pilots union contract", "tags": "Industry", "kind": "Labor"},
+  {"query": "airline flight attendants union contract", "tags": "Industry", "kind": "Labor"},
+  {"query": "airline mechanics OR \"fleet service\" union contract", "tags": "Industry", "kind": "Labor"},
+  {"query": "\"National Mediation Board\" airline", "tags": "Industry", "kind": "Labor"},
+  {"query": "jet fuel prices airlines", "tags": "Industry", "kind": "Costs"},
+  {"query": "airline earnings guidance quarter", "tags": "Industry", "kind": "Earnings"}
+]

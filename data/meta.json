@@ -1,0 +1,116 @@
+{
+ "sec": {
+  "at": "2026-10-16T18:59:09Z",
+  "carriers": {
+   "DAL": {
+    "ok": true,
+    "latest_filing": {
+     "form": "10-Q",
+     "filed": "2026-10-09"
+    },
+    "quarters": 15,
+    "through": "2026-09"
+   },
+   "UAL": {
+    "ok": true,
+    "latest_filing": {
+     "form": "10-Q",
+     "filed": "2026-07-16"
+    },
+    "quarters": 14,
+    "through": "2026-06"
+   },
+   "AAL": {
+    "ok": true,
+    "latest_filing": {
+     "form": "10-Q",
+     "filed": "2026-07-23"
+    },
+    "quarters": 14,
+    "through": "2026-06"
+   },
+   "LUV": {
+    "ok": true,
+    "latest_filing": {
+     "form": "10-Q",
+     "filed": "2026-07-23"
+    },
+    "quarters": 14,
+    "through": "2026-06"
+   },
+   "ALK": {
+    "ok": true,
+    "latest_filing": {
+     "form": "10-Q",
+     "filed": "2026-08-04"
+    },
+    "quarters": 14,
+    "through": "2026-06"
+   },
+   "JBLU": {
+    "ok": true,
+    "latest_filing": {
+     "form": "10-Q",
+     "filed": "2026-07-28"
+    },
+    "quarters": 14,
+    "through": "2026-06"
+   },
+   "ULCC": {
+    "ok": true,
+    "latest_filing": {
+     "form": "10-Q",
+     "filed": "2026-05-05"
+    },
+    "quarters": 14,
+    "through": "2026-06"
+   },
+   "ALGT": {
+    "ok": true,
+    "latest_filing": {
+     "form": "10-Q",
+     "filed": "2026-08-10"
+    },
+    "quarters": 14,
+    "through": "2026-06"
+   },
+   "SNCY": {
+    "ok": true,
+    "latest_filing": {
+     "form": "10-Q",
+     "filed": "2026-05-01"
+    },
+    "quarters": 13,
+    "through": "2026-03"
+   },
+   "SAVE": {
+    "ok": true,
+    "latest_filing": {
+     "form": "10-K/A",
+     "filed": "2026-04-30"
+    },
+    "quarters": 12,
+    "through": "2025-12"
+   },
+   "SKYW": {
+    "ok": true,
+    "latest_filing": {
+     "form": "10-Q",
+     "filed": "2026-07-24"
+    },
+    "quarters": 14,
+    "through": "2026-06"
+   },
+   "RJET": {
+    "ok": true,
+    "latest_filing": {
+     "form": "10-Q",
+     "filed": "2026-07-31"
+    },
+    "quarters": 5,
+    "through": "2026-06"
+   }
+  }
+ },
+ "generated": "2026-10-16T18:59:09Z"
+}

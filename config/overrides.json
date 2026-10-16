@@ -1,0 +1,8 @@
+[
+  {
+    "ticker": "ULCC",
+    "quarter": "2026-06",
+    "source": "Frontier Q2 2026 10-Q text (SEC structured data not yet posted)",
+    "values": {"rev": 1279, "opex": 1376, "labor": 266, "fuel": 436, "opinc": -97, "ni": -90, "cash": 955, "debt": 506}
+  }
+]

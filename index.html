@@ -1,0 +1,869 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Airline Financial Monitor</title>
+<meta name="robots" content="noindex">
+<style>
+:root{
+ --font-anthropic-sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+ --font-anthropic-serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+ --color-bg:#f7f6f3;--color-panel:#ffffff;--color-fg:#1f1e1c;--color-fg-muted:#6b6862;--color-border-line:#e4e1da;
+ --color-ok:#2e7d4f;--color-warn:#a8650b;--color-bad:#c0392b;
+ --cds-radius:10px;--cds-pad-xs:4px;--cds-pad-sm:8px;--cds-pad-lg:18px;
+ --cds-gap-xs:4px;--cds-gap-sm:8px;--cds-gap-md:16px;--cds-gap-lg:24px;
+ --cds-font-size-caption:12px;--cds-font-size-body:14px;--cds-font-size-heading:16px;--cds-font-size-title:30px;--cds-font-weight-medium:600;
+ --cds-chart-grid:#ece9e3;--cds-chart-axis:#bdb8ae;--cds-chart-reference:#8a857c;--cds-chart-muted:#c9c4ba;
+ --cds-surface-popover:#ffffff;--cds-border:#e4e1da;--cds-shadow-popover:0 4px 16px rgba(0,0,0,.12);--cds-text-secondary:#6b6862;--cds-dur-slow:300ms;
+ --c1:#2f6fdb;--c2:#d9822b;--c3:#2e9e8f;--c4:#8e5bd6;
+ color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+ --color-bg:#161615;--color-panel:#1f1f1d;--color-fg:#ecebe7;--color-fg-muted:#a19d95;--color-border-line:#33322f;
+ --color-ok:#5cbf86;--color-warn:#e0a24a;--color-bad:#ef6b5b;
+ --cds-chart-grid:#2b2a28;--cds-chart-axis:#55524c;--cds-chart-reference:#8a857c;--cds-chart-muted:#4f4c47;
+ --cds-surface-popover:#262624;--cds-border:#3a3936;--cds-shadow-popover:0 4px 16px rgba(0,0,0,.5);--cds-text-secondary:#a19d95;
+ --c1:#6e9ef0;--c2:#f0a35a;--c3:#5cc4b5;--c4:#b48cf0;
+ color-scheme:dark;
+}}
+html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
+#dash-root{max-width:1280px;margin:0 auto;padding:28px 16px 48px}
+#dash-root .am-asof{margin:4px 0 0;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+#dash-root .dash-skeleton{color:transparent;background:var(--cds-chart-grid);border-radius:4px}</style>
+<script src="vendor/d3.min.js"></script>
+<script>
+window.dash = (function () {
+  var DEFAULTS = { group: 'All', basis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All' };
+  var params = Object.assign({}, DEFAULTS), calcs = {}, order = [], res = null, fns = [];
+  var DATA = null, state = 'loading';
+  function compute() {
+    res = {};
+    order.forEach(function (id) {
+      var c = calcs[id];
+      res[id] = c.fn.apply(null, c.inputs.map(function (i) { return DATA[i] !== undefined ? DATA[i] : res[i]; }));
+    });
+  }
+  function redraw() { fns.forEach(function (f) { try { f(); } catch (e) { console.error(e); } }); }
+  var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(redraw, 150); });
+  function get(n) {
+    return fetch('data/' + n + '.json?t=' + Math.floor(Date.now() / 60000), { cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw new Error(n + ' ' + r.status); return r.json(); });
+  }
+  function asOf(text) { var el = document.getElementById('asof'); if (el) el.textContent = text; }
+  function start() {
+    Promise.all([
+      get('financials'), get('carriers'),
+      get('news_curated').catch(function () { return []; }),
+      get('news_feed').catch(function () { return []; }),
+      get('meta').catch(function () { return {}; }),
+    ]).then(function (v) {
+      var today = new Date().toISOString().slice(0, 10);
+      var curated = v[2].filter(function (r) { return !(r.kind === 'Upcoming' && r.date < today); });
+      DATA = { financials: v[0], carriers: v[1], news: curated.concat(v[3]) };
+      res = null; state = 'ok';
+      var g = v[4] && v[4].generated ? new Date(v[4].generated) : null;
+      asOf(g && !isNaN(g)
+        ? 'Updated ' + g.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' }) + ' · SEC EDGAR filings and news feeds'
+        : 'SEC EDGAR filings and news feeds');
+      redraw();
+    }).catch(function () {
+      state = 'error';
+      asOf('Couldn’t load the data files. If you opened this file directly from your computer, use the website link instead.');
+      redraw();
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else setTimeout(start, 0);
+  return {
+    calc: function (id, o) { calcs[id] = o; order.push(id); res = null; },
+    data: function (id) {
+      if (state !== 'ok') return { status: state, data: [], meta: [] };
+      if (!res) compute();
+      var d = DATA[id] !== undefined ? DATA[id] : res[id];
+      return d === undefined ? { status: 'missing', data: [], meta: [] } : { status: 'ok', data: d, refreshing: false, meta: [] };
+    },
+    onData: function (fn) { fns.push(fn); fn(); },
+    params: function () { return Object.assign({}, params); },
+    setParams: function (o) { Object.assign(params, o); redraw(); },
+    resetParams: function () { params = Object.assign({}, DEFAULTS); redraw(); },
+    colors: ['var(--c1)', 'var(--c2)', 'var(--c3)', 'var(--c4)'],
+    setLink: function (n) { try { history.replaceState(null, '', '#' + n); } catch (e) {} },
+    refresh: function () {},
+  };
+})();
+</script>
+</head>
+<body>
+<div id="dash-root">
+<style>
+#dash-root .am{font-family:var(--font-anthropic-sans);color:var(--color-fg);font-variant-numeric:tabular-nums}
+#dash-root .am-head h1{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);margin:0}
+#dash-root .am-take{color:var(--color-fg-muted);font-size:var(--cds-font-size-body);margin:var(--cds-gap-xs) 0 0;max-width:62rem;line-height:1.5}
+#dash-root .am-take b{color:var(--color-fg);font-weight:var(--cds-font-weight-medium)}
+#dash-root .am-tabs{display:flex;gap:var(--cds-gap-xs);flex-wrap:wrap;margin:var(--cds-gap-lg) 0 var(--cds-gap-md);border-bottom:1px solid var(--color-border-line)}
+#dash-root .am-tab{appearance:none;background:none;border:0;border-bottom:2px solid transparent;padding:var(--cds-pad-xs) var(--cds-pad-sm);font:inherit;font-size:var(--cds-font-size-body);color:var(--color-fg-muted);cursor:pointer;margin-bottom:-1px}
+#dash-root .am-tab[aria-selected=true]{color:var(--color-fg);border-bottom-color:var(--color-fg)}
+#dash-root .am-bar{display:flex;flex-wrap:wrap;gap:var(--cds-gap-sm);align-items:center;margin-bottom:var(--cds-gap-md)}
+#dash-root .am-bar .sp{flex:1}
+#dash-root .am-chip{appearance:none;font:inherit;font-size:var(--cds-font-size-caption);border:1px solid var(--color-border-line);background:var(--color-panel);color:var(--color-fg-muted);border-radius:999px;padding:3px 11px;cursor:pointer}
+#dash-root .am-chip[aria-pressed=true]{color:var(--color-fg);border-color:var(--color-fg)}
+#dash-root .am-chk{display:inline-flex;gap:6px;align-items:center;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+#dash-root .am-sel{font:inherit;font-size:var(--cds-font-size-body);padding:4px 8px;border:1px solid var(--color-border-line);border-radius:var(--cds-radius);background:var(--color-panel);color:var(--color-fg)}
+#dash-root .am-card{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:var(--cds-pad-lg);min-width:0}
+#dash-root .am-card h2{font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);margin:0}
+#dash-root .am-note{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin:3px 0 var(--cds-gap-md);line-height:1.45}
+#dash-root .am-stack{display:grid;gap:var(--cds-gap-md)}
+#dash-root .am-grid2{display:grid;gap:var(--cds-gap-md);grid-template-columns:repeat(auto-fit,minmax(min(100%,26rem),1fr))}
+#dash-root .am-multi{display:grid;gap:var(--cds-gap-md) var(--cds-gap-sm);grid-template-columns:repeat(auto-fill,minmax(min(100%,12rem),1fr));min-height:130px}
+#dash-root .am-sm{position:relative}
+#dash-root .am-sm-t{display:flex;justify-content:space-between;gap:6px;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+#dash-root .am-sm-t b{color:var(--color-fg);font-weight:var(--cds-font-weight-medium)}
+#dash-root .am-wrap{position:relative}
+#dash-root .am-legend{display:flex;flex-wrap:wrap;gap:var(--cds-gap-md);font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin-bottom:var(--cds-gap-sm)}
+#dash-root .am-sw{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+#dash-root .am-tbl-box{overflow:auto;max-height:36rem}
+#dash-root table.am-t{border-collapse:collapse;width:100%;font-size:var(--cds-font-size-caption)}
+#dash-root .am-t th{position:sticky;top:0;z-index:1;background:var(--color-panel);text-align:right;font-weight:var(--cds-font-weight-medium);color:var(--color-fg-muted);padding:6px 8px;border-bottom:1px solid var(--color-border-line);white-space:nowrap;vertical-align:bottom}
+#dash-root .am-t th button{all:unset;cursor:pointer}
+#dash-root .am-t th[aria-sort=ascending] button::after{content:' ↑'}
+#dash-root .am-t th[aria-sort=descending] button::after{content:' ↓'}
+#dash-root .am-t td{text-align:right;padding:6px 8px;border-bottom:1px solid var(--color-border-line);white-space:nowrap}
+#dash-root .am-t th.l,#dash-root .am-t td.l{text-align:left}
+#dash-root .am-t td.w{white-space:normal;min-width:18rem;line-height:1.4}
+#dash-root .am-t tr.off td{color:var(--color-fg-muted)}
+#dash-root .am-neg{color:var(--color-bad)}
+#dash-root .am-ib{display:inline-block;height:6px;border-radius:3px;background:var(--cds-chart-muted);margin-right:6px;vertical-align:1px}
+#dash-root .am-tiles{display:grid;gap:var(--cds-gap-md);grid-template-columns:repeat(auto-fit,minmax(min(100%,10.5rem),1fr))}
+#dash-root .am-tile .k{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+#dash-root .am-tile .v{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);margin:2px 0}
+#dash-root .am-tile .d{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+#dash-root .am-tip{position:absolute;pointer-events:none;z-index:5;background:var(--cds-surface-popover);border:1px solid var(--cds-border);border-radius:var(--cds-radius);box-shadow:var(--cds-shadow-popover);padding:var(--cds-pad-xs) var(--cds-pad-sm);font-size:var(--cds-font-size-caption);white-space:nowrap}
+#dash-root .am-tip-h{color:var(--cds-text-secondary);margin-bottom:2px}
+#dash-root .am-tip b{font-weight:var(--cds-font-weight-medium)}
+#dash-root .am-news{display:grid;gap:var(--cds-gap-sm)}
+#dash-root .am-item{border-top:1px solid var(--color-border-line);padding-top:var(--cds-pad-sm)}
+#dash-root .am-item:first-child{border-top:0;padding-top:0}
+#dash-root .am-meta{display:flex;gap:var(--cds-gap-sm);flex-wrap:wrap;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+#dash-root .am-kind{border:1px solid var(--color-border-line);border-radius:999px;padding:0 8px}
+#dash-root .am-item h3{font-size:var(--cds-font-size-body);font-weight:var(--cds-font-weight-medium);margin:4px 0 2px}
+#dash-root .am-item h3 a{color:inherit;text-decoration:none}
+#dash-root .am-item h3 a:hover{text-decoration:underline}
+#dash-root .am-item p{margin:0;font-size:var(--cds-font-size-body);line-height:1.5;color:var(--color-fg-muted)}
+#dash-root .am-link{appearance:none;border:0;background:none;padding:0;font:inherit;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);text-decoration:underline;cursor:pointer}
+#dash-root .am-prose{font-size:var(--cds-font-size-body);line-height:1.55;max-width:60rem}
+#dash-root .am-prose p{margin:0 0 var(--cds-gap-sm)}
+#dash-root .am-prose ul{margin:0 0 var(--cds-gap-sm);padding-left:1.2rem}
+#dash-root .am [data-dash-source-state=empty]{color:transparent}
+#dash-root .am [data-dash-source-state=refreshing]{opacity:.5;transition:opacity var(--cds-dur-slow)}
+#dash-root .am-fail{display:flex;align-items:center;justify-content:center;gap:6px;min-height:120px;color:var(--color-fg-muted);font-size:var(--cds-font-size-caption)}
+#dash-root .am-fail::before{content:'';width:.375rem;height:.375rem;border-radius:50%;background:var(--color-bad)}
+#dash-root .am-chart{min-height:300px}
+@media (max-width:700px){#dash-root .am-hn{display:none}}
+</style>
+
+<div class="am">
+  <header class="am-head" id="top">
+    <h1>Airline Financial Monitor</h1>
+    <p class="am-asof" id="asof">Loading latest data…</p>
+    <p class="am-take" id="takeaway">
+      In each carrier's latest reported quarter, <b><span class="dash-skeleton" data-source="summary" data-field="n_loss" data-row="0">—</span></b> of
+      <b><span class="dash-skeleton" data-source="summary" data-field="n_active" data-row="0">—</span></b> active carriers posted an operating loss.
+      Fuel took a median <b><span class="dash-skeleton" data-source="summary" data-field="med_fuel_lq" data-row="0">—</span></b> of operating expense, up from
+      <b><span class="dash-skeleton" data-source="summary" data-field="med_fuel_ya" data-row="0">—</span></b> a year earlier; labor took a median
+      <b><span class="dash-skeleton" data-source="summary" data-field="med_lopex_lq" data-row="0">—</span></b>.
+    </p>
+  </header>
+
+  <nav class="am-tabs" role="tablist">
+    <button class="am-tab" role="tab" data-tab="peers" aria-selected="true">Peer comparison</button>
+    <button class="am-tab" role="tab" data-tab="carrier" aria-selected="false">Carrier detail</button>
+    <button class="am-tab" role="tab" data-tab="news" aria-selected="false">News</button>
+    <button class="am-tab" role="tab" data-tab="notes" aria-selected="false">Sources &amp; notes</button>
+  </nav>
+
+  <!-- PEERS -->
+  <section class="am-page am-stack" id="peers">
+    <div class="am-bar">
+      <span id="group-chips" data-source="carriers"></span>
+      <span class="sp"></span>
+      <span id="basis-chips">
+        <button class="am-chip" data-basis="ttm" aria-pressed="true">Trailing 12 months</button>
+        <button class="am-chip" data-basis="lq" aria-pressed="false">Latest quarter</button>
+      </span>
+      <label class="am-chk"><input type="checkbox" id="inactive"> Include acquired / ceased</label>
+    </div>
+
+    <div class="am-card" id="peer-card">
+      <h2>Peer comparison</h2>
+      <p class="am-note" id="peer-note">GAAP figures as filed with the SEC, $ millions. Labor is the salaries, wages and benefits line. Returned to shareholders is buybacks plus dividends paid. Click a header to sort; click a row for that carrier's detail.</p>
+      <div class="am-tbl-box">
+        <table class="am-t" id="peer-table" data-source="peer" data-row-key="ticker">
+          <thead><tr>
+            <th class="l" data-field="ticker"><button data-sort="ticker">Ticker</button></th>
+            <th class="l am-hn" data-field="carrier"><button data-sort="carrier">Carrier</button></th>
+            <th class="l" data-field="latest"><button data-sort="latest">Through</button></th>
+            <th data-base="rev" data-field="rev_ttm"><button data-sort="rev">Revenue</button></th>
+            <th data-base="opm" data-field="opm_ttm"><button data-sort="opm">Op. margin</button></th>
+            <th data-base="labor" data-field="labor_ttm"><button data-sort="labor">Labor cost</button></th>
+            <th data-base="lopex" data-field="lopex_ttm"><button data-sort="lopex">Labor % of opex</button></th>
+            <th data-base="lyoy" data-field="lyoy_ttm"><button data-sort="lyoy">Labor cost YoY</button></th>
+            <th data-base="ret" data-field="ret_ttm"><button data-sort="ret">Returned to shareholders</button></th>
+            <th class="am-hn" data-base="rl" data-field="rl_ttm"><button data-sort="rl">Returns ÷ labor</button></th>
+            <th class="am-hn" data-field="liquidity"><button data-sort="liquidity">Cash + ST inv.</button></th>
+            <th class="am-hn" data-field="debt"><button data-sort="debt">Debt</button></th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="am-card" id="margin-card">
+      <h2>Operating margin by quarter</h2>
+      <p class="am-note">Operating income ÷ revenue, Q1 2023 onward. All panels share one scale; the dashed line is breakeven.</p>
+      <div class="am-multi" id="mult-margin" data-source="qtr"></div>
+    </div>
+
+    <div class="am-card" id="mix-card">
+      <h2>Labor and fuel as a share of operating expense</h2>
+      <p class="am-note">Where the fuel line drops out, the carrier didn't tag fuel separately that quarter.</p>
+      <div class="am-legend"><span><i class="am-sw" id="sw-labor"></i>Labor</span><span><i class="am-sw" id="sw-fuel"></i>Fuel</span></div>
+      <div class="am-multi" id="mult-mix" data-source="qtr"></div>
+    </div>
+
+    <div class="am-grid2">
+      <div class="am-card" id="returns-card">
+        <h2>Cash returned to shareholders vs net income</h2>
+        <p class="am-note">Cumulative from Q1 2024 through each carrier's latest quarter. Carriers without a continuous record over that span are left out.</p>
+        <div class="am-legend"><span><i class="am-sw" id="sw-ret"></i>Buybacks + dividends</span><span><i class="am-sw" id="sw-ni"></i>Net income</span></div>
+        <div class="am-wrap am-chart" id="ret-chart" data-source="peer"></div>
+      </div>
+      <div class="am-card" id="latest-news">
+        <h2>Latest news</h2>
+        <p class="am-note">Most recent items from the News tab. <button class="am-link" id="all-news">See all news</button></p>
+        <div class="am-news" id="news-mini" data-source="news"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARRIER -->
+  <section class="am-page am-stack" id="carrier" hidden>
+    <div class="am-bar">
+      <select class="am-sel" id="car-sel" aria-label="Carrier" data-source="carriers"></select>
+      <span class="am-note" id="car-status" style="margin:0"></span>
+    </div>
+    <div class="am-card" id="tiles-card">
+      <h2 id="tiles-h">Latest quarter</h2>
+      <p class="am-note">Changes are against the same quarter a year earlier.</p>
+      <div class="am-tiles" id="tiles">
+        <div class="am-tile"><div class="k">Revenue</div><div class="v" id="t-rev">—</div><div class="d"><span id="t-rev-d">—</span> YoY</div></div>
+        <div class="am-tile"><div class="k">Operating margin</div><div class="v" id="t-opm">—</div><div class="d" id="t-opm-d">—</div></div>
+        <div class="am-tile"><div class="k">Labor cost</div><div class="v" id="t-lab">—</div><div class="d"><span id="t-lab-d">—</span> YoY</div></div>
+        <div class="am-tile"><div class="k">Labor % of opex</div><div class="v" id="t-lpo">—</div><div class="d" id="t-lpo-d">—</div></div>
+        <div class="am-tile"><div class="k">Fuel % of opex</div><div class="v" id="t-fpo">—</div><div class="d" id="t-fpo-d">—</div></div>
+        <div class="am-tile"><div class="k">Returned to shareholders</div><div class="v" id="t-ret">—</div><div class="d" id="t-ret-d">Buybacks + dividends</div></div>
+      </div>
+    </div>
+    <div class="am-card" id="cost-card">
+      <h2>Revenue and where it went</h2>
+      <p class="am-note">Bars stack operating expense by labor, fuel and everything else; the line is revenue. Where the bar clears the line, the quarter lost money at the operating level.</p>
+      <div class="am-legend"><span><i class="am-sw" id="sw2-labor"></i>Labor</span><span><i class="am-sw" id="sw2-fuel"></i>Fuel</span><span><i class="am-sw" id="sw2-other"></i>Other opex</span><span><i class="am-sw" id="sw2-rev"></i>Revenue</span></div>
+      <div class="am-wrap am-chart" id="det-chart" data-source="financials"></div>
+    </div>
+    <div class="am-card" id="det-table-card">
+      <h2>Quarterly figures</h2>
+      <p class="am-note">$ millions, newest first.</p>
+      <div class="am-tbl-box">
+        <table class="am-t" id="det-table" data-source="financials" data-row-key="ticker,quarter">
+          <thead><tr>
+            <th class="l" data-field="quarter">Quarter</th>
+            <th data-field="rev">Revenue</th><th data-field="opex">Opex</th><th data-field="labor">Labor</th><th data-field="fuel">Fuel</th>
+            <th data-field="opinc">Op. income</th><th data-field="ni">Net income</th>
+            <th class="am-hn" data-field="buyback">Buybacks</th><th class="am-hn" data-field="div">Dividends</th>
+            <th class="am-hn" data-field="cash">Cash</th><th class="am-hn" data-field="debt">Debt</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section class="am-page am-stack" id="news" hidden>
+    <div class="am-bar"><span id="tag-chips" data-source="news"></span></div>
+    <div class="am-card">
+      <h2>Industry news</h2>
+      <p class="am-note">Items with a summary were written up by hand; the rest are recent headlines from news feeds, refreshed each morning. Follow a headline to the original reporting.</p>
+      <div class="am-news" id="news-list" data-source="news"></div>
+    </div>
+  </section>
+
+  <!-- NOTES -->
+  <section class="am-page am-stack" id="notes" hidden>
+    <div class="am-card am-prose">
+      <h2>How the numbers are built</h2>
+      <p class="am-note">Read this before quoting a figure across the table. The data refreshes automatically each morning.</p>
+      <ul>
+        <li><b>Refresh.</b> A scheduled job runs every morning: it pulls each carrier's latest filings from the SEC and recent headlines from news feeds. Items with a written summary were added by hand; the rest are headlines straight from the feeds.</li>
+        <li><b>Source.</b> SEC EDGAR structured data (XBRL company facts) from each carrier's 10-Q and 10-K. Figures are GAAP as filed, not the adjusted figures in earnings releases.</li>
+        <li><b>Quarters.</b> Where a filing reports only year-to-date amounts (every Q4, and all cash-flow items), the quarter is the year-to-date figure minus the prior year-to-date figure.</li>
+        <li><b>Line items.</b> Revenue is total operating revenue. Labor is the salaries, wages and benefits line (us-gaap LaborAndRelatedExpense), which includes profit sharing for carriers that book it there. Fuel is aircraft fuel and related taxes. Returned to shareholders is cash paid for share repurchases plus dividends.</li>
+        <li><b>Trailing 12 months</b> needs four consecutive reported quarters; carriers with a gap show a dash.</li>
+        <li><b>Cash + ST investments</b> excludes undrawn credit lines, so it runs below the "total liquidity" carriers quote.</li>
+        <li><b>Debt</b> is as each carrier tags it. Some include finance leases and some do not, so compare debt levels across carriers with care.</li>
+        <li><b>Not here yet:</b> unit metrics (CASM, labor cost per ASM) need traffic data, and wholly owned subsidiaries such as Envoy, Horizon and PSA need DOT Form 41.</li>
+      </ul>
+    </div>
+    <div class="am-card">
+      <h2>Carriers covered</h2>
+      <p class="am-note">US-listed passenger airlines, with the gaps and structural changes that affect each series.</p>
+      <div class="am-tbl-box">
+        <table class="am-t" id="car-table" data-source="carriers" data-row-key="ticker">
+          <thead><tr>
+            <th class="l" data-field="ticker">Ticker</th><th class="l" data-field="carrier">Carrier</th>
+            <th class="l am-hn" data-field="group">Group</th><th class="l" data-field="status">Status</th><th class="l" data-field="note">Notes</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+dash.calc('qtr', {
+  title: 'Quarterly ratios',
+  description: 'Per carrier and quarter: operating margin, labor and fuel shares of operating expense, cash returned to shareholders, cash plus short-term investments, and change from the same quarter a year earlier.',
+  inputs: ['financials', 'carriers'],
+  fn: (financials, carriers) => {
+    const num = (v) => (v === null || v === undefined || v === '' ? null : Number(v));
+    const div = (a, b) => (a === null || b === null || !b ? null : a / b);
+    const rc = new Map(carriers.map((c) => [c.ticker, c.returns_complete === true || c.returns_complete === 'true']));
+    const base = financials.map((r) => {
+      const f = (k) => num(r[k]);
+      return {
+        ticker: r.ticker, quarter: r.quarter,
+        op_margin: div(f('opinc'), f('rev')),
+        labor_pct_opex: div(f('labor'), f('opex')),
+        fuel_pct_opex: div(f('fuel'), f('opex')),
+        labor_pct_rev: div(f('labor'), f('rev')),
+        returns: rc.get(r.ticker) ? (f('buyback') || 0) + (f('div') || 0) : null,
+        liquidity: f('cash') === null ? null : f('cash') + (f('sti') || 0),
+        _rev: f('rev'), _labor: f('labor'), _opex: f('opex'),
+      };
+    });
+    const idx = new Map(base.map((r) => [r.ticker + '|' + r.quarter, r]));
+    const g = (a, b) => (a === null || b === null || b === undefined || !b ? null : a / b - 1);
+    const d = (a, b) => (a === null || b === null || b === undefined ? null : a - b);
+    return base.map((r) => {
+      const p = idx.get(r.ticker + '|' + (Number(r.quarter.slice(0, 4)) - 1) + r.quarter.slice(4)) || {};
+      const out = Object.assign({}, r, {
+        rev_yoy: g(r._rev, p._rev), labor_yoy: g(r._labor, p._labor), opex_yoy: g(r._opex, p._opex),
+        opm_chg: d(r.op_margin, p.op_margin), lopex_chg: d(r.labor_pct_opex, p.labor_pct_opex), fuel_chg: d(r.fuel_pct_opex, p.fuel_pct_opex),
+      });
+      delete out._rev; delete out._labor; delete out._opex;
+      return out;
+    });
+  },
+});
+
+dash.calc('peer', {
+  title: 'Peer comparison',
+  description: 'One row per carrier: latest complete quarter and trailing four quarters of revenue, margin, labor cost and shareholder returns, plus cumulative returns and net income from Q1 2024.',
+  inputs: ['financials', 'carriers'],
+  fn: (financials, carriers) => {
+    const num = (v) => (v === null || v === undefined || v === '' ? null : Number(v));
+    const dv = (a, b) => (a === null || b === null || !b ? null : a / b);
+    const gr = (a, b) => (a === null || b === null || !b ? null : a / b - 1);
+    const Q = [...new Set(financials.map((r) => r.quarter))].sort();
+    return carriers.map((c) => {
+      const rc = c.returns_complete === true || c.returns_complete === 'true';
+      const rows = financials.filter((r) => r.ticker === c.ticker);
+      const m = new Map(rows.map((r) => [r.quarter, r]));
+      const ok = (r) => !!r && ['rev', 'opex', 'labor', 'opinc'].every((k) => num(r[k]) !== null);
+      const done = rows.filter(ok).map((r) => r.quarter).sort();
+      const lqq = done.length ? done[done.length - 1] : null;
+      const lq = lqq ? m.get(lqq) : {};
+      const k = lqq ? Q.indexOf(lqq) : -1;
+      const span = (a, b) => (a < 0 ? [] : Q.slice(a, b + 1).map((q) => m.get(q)));
+      const sum = (rs, f) => (rs.length && rs.every((r) => r && num(r[f]) !== null) ? rs.reduce((s, r) => s + num(r[f]), 0) : null);
+      const retOf = (r) => (num(r.buyback) || 0) + (num(r.div) || 0);
+      const t4 = span(k - 3, k);
+      const ttmOk = t4.length === 4 && t4.every(ok);
+      const ttm = (f) => (ttmOk ? sum(t4, f) : null);
+      const rev_ttm = ttm('rev'), labor_ttm = ttm('labor'), opex_ttm = ttm('opex'), opinc_ttm = ttm('opinc');
+      const p4 = span(k - 7, k - 4);
+      const labor_prev = p4.length === 4 ? sum(p4, 'labor') : null;
+      const ya = lqq ? m.get(Number(lqq.slice(0, 4)) - 1 + lqq.slice(4)) : null;
+      const ret_ttm = ttmOk && rc ? t4.reduce((s, r) => s + retOf(r), 0) : null;
+      const ret_lq = lqq && rc ? retOf(lq) : null;
+      const withCash = rows.filter((r) => num(r.cash) !== null).sort((a, b) => (a.quarter < b.quarter ? 1 : -1))[0];
+      const withDebt = rows.filter((r) => num(r.debt) !== null).sort((a, b) => (a.quarter < b.quarter ? 1 : -1))[0];
+      const cq = lqq ? Q.filter((q) => q >= '2024-03' && q <= lqq).map((q) => m.get(q)) : [];
+      const cumOk = cq.length > 0 && cq.every((r) => r && num(r.ni) !== null);
+      return {
+        ticker: c.ticker, carrier: c.carrier, group: c.group, status: c.status, active: c.status === 'Active',
+        latest: lqq,
+        rev_lq: lqq ? num(lq.rev) : null, rev_ttm,
+        opm_lq: lqq ? dv(num(lq.opinc), num(lq.rev)) : null, opm_ttm: dv(opinc_ttm, rev_ttm),
+        labor_lq: lqq ? num(lq.labor) : null, labor_ttm,
+        lopex_lq: lqq ? dv(num(lq.labor), num(lq.opex)) : null, lopex_ttm: dv(labor_ttm, opex_ttm),
+        lyoy_lq: lqq && ya ? gr(num(lq.labor), num(ya.labor)) : null, lyoy_ttm: gr(labor_ttm, labor_prev),
+        ret_lq, ret_ttm,
+        rl_lq: dv(ret_lq, lqq ? num(lq.labor) : null), rl_ttm: dv(ret_ttm, labor_ttm),
+        ni_lq: lqq ? num(lq.ni) : null, ni_ttm: ttm('ni'),
+        liquidity: withCash ? num(withCash.cash) + (num(withCash.sti) || 0) : null,
+        debt: withDebt ? num(withDebt.debt) : null,
+        ret_cum: cumOk && rc ? cq.reduce((s, r) => s + retOf(r), 0) : null,
+        ni_cum: cumOk ? cq.reduce((s, r) => s + num(r.ni), 0) : null,
+      };
+    });
+  },
+});
+
+dash.calc('summary', {
+  title: 'Headline summary',
+  description: 'Active carriers only, each at its latest reported quarter: how many lost money at the operating line, and median fuel and labor shares of operating expense against the same quarter a year earlier.',
+  inputs: ['peer', 'qtr'],
+  fn: (peer, qtr) => {
+    const med = (a) => {
+      const s = a.filter((v) => v !== null && v !== undefined && !isNaN(v)).sort((x, y) => x - y);
+      if (!s.length) return null;
+      const h = Math.floor(s.length / 2);
+      return s.length % 2 ? s[h] : (s[h - 1] + s[h]) / 2;
+    };
+    const act = peer.filter((p) => p.active && p.latest);
+    const get = (t, q) => qtr.find((r) => r.ticker === t && r.quarter === q);
+    const pairs = act.map((p) => {
+      const a = get(p.ticker, p.latest);
+      const b = get(p.ticker, Number(p.latest.slice(0, 4)) - 1 + p.latest.slice(4));
+      return [a ? a.fuel_pct_opex : null, b ? b.fuel_pct_opex : null];
+    }).filter((x) => x[0] !== null && x[1] !== null);
+    return [{
+      n_active: act.length,
+      n_loss: act.filter((p) => p.opm_lq !== null && p.opm_lq < 0).length,
+      med_lopex_lq: med(act.map((p) => p.lopex_lq)),
+      med_fuel_lq: med(pairs.map((x) => x[0])),
+      med_fuel_ya: med(pairs.map((x) => x[1])),
+      n_fuel: pairs.length,
+    }];
+  },
+});
+</script>
+
+<script>
+(() => {
+  const root = document.querySelector('#dash-root .am') || document.querySelector('.am');
+  const num = (v) => (v === null || v === undefined || v === '' ? null : Number(v));
+  const bad = (v) => v === null || v === undefined || isNaN(v);
+  const fmtM = (v) => {
+    v = num(v); if (bad(v)) return '—';
+    const a = Math.abs(v), s = v < 0 ? '−' : '';
+    return a >= 1000 ? s + '$' + d3.format(',.1f')(a / 1000) + 'B' : s + '$' + d3.format(',.0f')(a) + 'M';
+  };
+  const pct = (v) => (bad(v) ? '—' : (v < 0 ? '−' : '') + d3.format('.1%')(Math.abs(v)));
+  const sgn = (v) => (bad(v) ? '—' : (v > 0 ? '+' : v < 0 ? '−' : '') + d3.format('.1%')(Math.abs(v)));
+  const pts = (v) => (bad(v) ? '—' : (v > 0 ? '+' : v < 0 ? '−' : '') + d3.format('.1f')(Math.abs(v * 100)) + ' pts');
+  const ql = (q) => (q ? 'Q' + Number(q.slice(5, 7)) / 3 + ' ' + q.slice(0, 4) : '—');
+  const qs = (q) => 'Q' + Number(q.slice(5, 7)) / 3 + ' ’' + q.slice(2, 4);
+  const dfmt = (s) => { const d = new Date(s + 'T12:00:00Z'); return isNaN(d) ? s : d3.utcFormat('%b %-d, %Y')(d); };
+  const C = () => dash.colors;
+  const BASED = new Set(['rev', 'opm', 'labor', 'lopex', 'lyoy', 'ret', 'rl']);
+  let sortCol = 'rev', sortDir = -1, tab = 'peers', drawn = false;
+
+  // legends
+  const sw = (id, c) => { const el = document.getElementById(id); if (el) el.style.background = c; };
+
+  // tooltip
+  function tip(wrap) {
+    let el = wrap.querySelector(':scope > .am-tip');
+    if (!el) { el = document.createElement('div'); el.className = 'am-tip'; el.hidden = true; wrap.appendChild(el); }
+    return {
+      show(x, y, title, lines) {
+        el.replaceChildren();
+        const h = document.createElement('div'); h.className = 'am-tip-h'; h.textContent = title; el.append(h);
+        for (const l of lines) {
+          const row = document.createElement('div');
+          if (l.color) { const s = document.createElement('i'); s.className = 'am-sw'; s.style.background = l.color; row.append(s); }
+          const n = document.createElement('span'); n.textContent = l.name ? l.name + '  ' : '';
+          const v = document.createElement('b'); v.textContent = l.value;
+          row.append(n, v); el.append(row);
+        }
+        el.hidden = false;
+        const W = wrap.clientWidth, tw = el.offsetWidth, th = el.offsetHeight;
+        let left = x + 14; if (left + tw > W) left = Math.max(0, x - 14 - tw);
+        let top = y - th / 2; top = Math.max(0, Math.min(top, wrap.clientHeight - th));
+        el.style.left = left + 'px'; el.style.top = top + 'px';
+      },
+      hide() { el.hidden = true; },
+    };
+  }
+  const clearSvg = (box) => { box.querySelectorAll(':scope > svg, :scope > .am-fail, :scope > .am-sm, :scope > .am-empty').forEach((n) => n.remove()); };
+  const fail = (box) => { clearSvg(box); const f = document.createElement('div'); f.className = 'am-fail'; f.textContent = 'Failed to load'; box.append(f); };
+  const textW = (svg, s) => { const t = svg.append('text').style('font-size', 'var(--cds-font-size-caption)').text(s); const w = t.node().getComputedTextLength(); t.remove(); return w; };
+
+  // tabs
+  const tabs = [...root.querySelectorAll('.am-tab')];
+  function showTab(id, link) {
+    if (!document.getElementById(id)) return;
+    tab = id;
+    tabs.forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === id)));
+    root.querySelectorAll('.am-page').forEach((p) => { p.hidden = p.id !== id; });
+    if (link) dash.setLink(id);
+    draw();
+  }
+  tabs.forEach((b) => b.addEventListener('click', () => showTab(b.dataset.tab, true)));
+  document.getElementById('all-news').addEventListener('click', () => showTab('news', true));
+
+  // controls
+  root.querySelectorAll('#basis-chips .am-chip').forEach((b) => b.addEventListener('click', () => dash.setParams({ basis: b.dataset.basis })));
+  const inact = document.getElementById('inactive');
+  inact.addEventListener('change', () => dash.setParams({ inactive: inact.checked }));
+  const carSel = document.getElementById('car-sel');
+  carSel.addEventListener('change', () => dash.setParams({ carrier: carSel.value }));
+  root.querySelectorAll('#peer-table th button').forEach((b) => b.addEventListener('click', () => {
+    const c = b.dataset.sort;
+    if (sortCol === c) sortDir = -sortDir; else { sortCol = c; sortDir = ['ticker', 'carrier', 'latest'].includes(c) ? 1 : -1; }
+    draw();
+  }));
+  document.querySelector('#peer-table tbody').addEventListener('click', (e) => {
+    const tr = e.target.closest('tr[data-key]');
+    if (tr) { dash.setParams({ carrier: tr.dataset.key }); showTab('carrier', true); }
+  });
+
+  function visiblePeers(peer, P) {
+    return peer.filter((r) => (P.inactive === true || r.active) && (!P.group || P.group === 'All' || r.group === P.group));
+  }
+
+  // ---------- small multiples ----------
+  function multiples(box, tickers, series, domain, headFn, qm, Q) {
+    clearSvg(box);
+    const colW = Math.max(150, (box.firstElementChild && box.firstElementChild.clientWidth) || 0);
+    for (const t of tickers) {
+      const p = document.createElement('div'); p.className = 'am-sm'; p.id = box.id + '-' + t;
+      const head = document.createElement('div'); head.className = 'am-sm-t';
+      const nm = document.createElement('b'); nm.textContent = t;
+      const lv = document.createElement('span'); lv.textContent = headFn(t);
+      head.append(nm, lv); p.append(head); box.append(p);
+      const W = Math.max(150, p.clientWidth || colW), H = 96;
+      const svg = d3.select(p).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).style('display', 'block');
+      const y = d3.scaleLinear(domain, [H - 16, 6]);
+      const ticks = y.ticks(3);
+      const lw = d3.max(ticks, (d) => textW(svg, d3.format('.0%')(d))) || 20;
+      const m = { l: Math.ceil(lw) + 6, r: 6 };
+      const x = d3.scalePoint(Q, [m.l, W - m.r]);
+      const g = svg.append('g');
+      g.selectAll('line.gr').data(ticks).join('line').attr('class', 'gr').attr('x1', m.l).attr('x2', W - m.r).attr('y1', (d) => y(d)).attr('y2', (d) => y(d))
+        .attr('stroke', (d) => (d === 0 ? 'var(--cds-chart-reference)' : 'var(--cds-chart-grid)')).attr('stroke-dasharray', (d) => (d === 0 ? '3 3' : null));
+      g.selectAll('text.tk').data(ticks).join('text').attr('class', 'tk').attr('x', m.l - 4).attr('y', (d) => y(d) + 3).attr('text-anchor', 'end')
+        .attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text((d) => d3.format('.0%')(d));
+      const yrs = Q.filter((q) => q.endsWith('-03'));
+      g.selectAll('text.yr').data(yrs).join('text').attr('class', 'yr').attr('x', (q) => x(q)).attr('y', H - 3).attr('text-anchor', (q, i) => (i === 0 ? 'start' : 'middle'))
+        .attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text((q) => '’' + q.slice(2, 4));
+      for (const s of series) {
+        const pts = Q.map((q) => ({ q, v: s.get(qm, t, q) }));
+        svg.append('path').datum(pts).attr('fill', 'none').attr('stroke', s.color).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round')
+          .attr('d', d3.line().defined((d) => !bad(d.v)).x((d) => x(d.q)).y((d) => y(Math.max(domain[0], Math.min(domain[1], d.v)))));
+        const last = pts.filter((d) => !bad(d.v)).pop();
+        if (last) svg.append('circle').attr('cx', x(last.q)).attr('cy', y(Math.max(domain[0], Math.min(domain[1], last.v)))).attr('r', 2.5).attr('fill', s.color);
+      }
+      const tp = tip(p);
+      const hover = svg.append('line').attr('y1', 6).attr('y2', H - 16).attr('stroke', 'var(--cds-chart-axis)').attr('opacity', 0);
+      svg.append('rect').attr('x', m.l).attr('y', 0).attr('width', W - m.l - m.r).attr('height', H).attr('fill', 'transparent')
+        .on('pointermove', (ev) => {
+          const [mx] = d3.pointer(ev);
+          const q = Q[d3.minIndex(Q, (qq) => Math.abs(x(qq) - mx))];
+          hover.attr('x1', x(q)).attr('x2', x(q)).attr('opacity', 1);
+          const scale = p.clientWidth / W;
+          tp.show(x(q) * scale, (H / 2) * scale + 16, t + ' · ' + ql(q), series.map((s) => ({ color: series.length > 1 ? s.color : null, name: s.name, value: pct(s.get(qm, t, q)) })));
+        })
+        .on('pointerleave', () => { hover.attr('opacity', 0); tp.hide(); });
+    }
+  }
+
+  // ---------- returns chart ----------
+  function returnsChart(box, rows) {
+    clearSvg(box);
+    const data = rows.filter((r) => !bad(r.ret_cum) || !bad(r.ni_cum)).sort((a, b) => (num(b.ret_cum) ?? -1e12) - (num(a.ret_cum) ?? -1e12));
+    if (!data.length) { const e = document.createElement('div'); e.className = 'am-fail am-empty'; e.textContent = 'No carriers in this view'; box.append(e); return; }
+    const W = Math.max(280, box.clientWidth), band = 34, H = data.length * band + 24;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).style('display', 'block');
+    const vals = data.flatMap((r) => [num(r.ret_cum), num(r.ni_cum)]).filter((v) => !bad(v));
+    const lo = Math.min(0, d3.min(vals)), hi = Math.max(0, d3.max(vals));
+    const lab = Math.max(...data.map((r) => textW(svg, r.ticker))) + 10;
+    const endW = Math.max(...vals.map((v) => textW(svg, fmtM(v)))) + 8;
+    const x = d3.scaleLinear([lo, hi], [lab + (lo < 0 ? endW : 0), W - endW]).nice();
+    const y = d3.scaleBand(data.map((r) => r.ticker), [4, H - 20]).paddingInner(0.25);
+    svg.append('line').attr('x1', x(0)).attr('x2', x(0)).attr('y1', 0).attr('y2', H - 18).attr('stroke', 'var(--cds-chart-axis)');
+    const xt = x.ticks(4);
+    svg.selectAll('text.xt').data(xt).join('text').attr('x', (d) => x(d)).attr('y', H - 4).attr('text-anchor', 'middle')
+      .attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text((d) => fmtM(d));
+    const ser = [{ k: 'ret_cum', name: 'Buybacks + dividends', color: C()[0], off: 0 }, { k: 'ni_cum', name: 'Net income', color: 'var(--cds-chart-muted)', off: 1 }];
+    const bh = y.bandwidth() / 2 - 1;
+    const tp = tip(box);
+    for (const r of data) {
+      svg.append('text').attr('x', 0).attr('y', y(r.ticker) + y.bandwidth() / 2 + 4).attr('fill', 'var(--color-fg)').style('font-size', 'var(--cds-font-size-caption)').text(r.ticker);
+      for (const s of ser) {
+        const v = num(r[s.k]); if (bad(v)) continue;
+        const x0 = Math.min(x(0), x(v)), w = Math.max(1, Math.abs(x(v) - x(0)));
+        const yy = y(r.ticker) + s.off * (bh + 2);
+        svg.append('rect').attr('x', x0).attr('y', yy).attr('width', w).attr('height', bh).attr('rx', 3).attr('fill', s.color);
+        svg.append('text').attr('x', v >= 0 ? x(v) + 4 : x(v) - 4).attr('y', yy + bh / 2 + 4).attr('text-anchor', v >= 0 ? 'start' : 'end')
+          .attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(fmtM(v));
+      }
+      svg.append('rect').attr('x', 0).attr('y', y(r.ticker)).attr('width', W).attr('height', y.bandwidth()).attr('fill', 'transparent')
+        .on('pointermove', (ev) => {
+          const sc = box.clientWidth / W; const [mx, my] = d3.pointer(ev);
+          tp.show(mx * sc, my * sc, r.carrier + ' · Q1 2024–' + qs(r.latest), ser.map((s) => ({ color: s.color, name: s.name, value: fmtM(r[s.k]) })));
+        })
+        .on('pointerleave', () => tp.hide());
+    }
+  }
+
+  // ---------- detail chart ----------
+  function costChart(box, rows) {
+    clearSvg(box);
+    if (!rows.length) return;
+    const W = Math.max(300, box.clientWidth), H = 300;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).style('display', 'block');
+    const d = rows.map((r) => {
+      const opex = num(r.opex), lab = num(r.labor) ?? 0, fu = num(r.fuel);
+      return { q: r.quarter, rev: num(r.rev), opex, labor: lab, fuel: fu ?? 0, fuelNA: fu === null, other: Math.max(0, (opex ?? 0) - lab - (fu ?? 0)), opinc: num(r.opinc) };
+    });
+    const max = d3.max(d, (r) => Math.max(r.rev ?? 0, r.opex ?? 0)) || 1;
+    const big = max >= 3000;
+    const tf = (v) => (big ? '$' + d3.format(',.0f')(v / 1000) + 'B' : '$' + d3.format(',.0f')(v) + 'M');
+    const y = d3.scaleLinear([0, max * 1.05], [H - 22, 8]).nice();
+    const ticks = y.ticks(5);
+    const lw = d3.max(ticks, (t) => textW(svg, tf(t)));
+    const m = { l: Math.ceil(lw) + 8, r: 6 };
+    const x = d3.scaleBand(d.map((r) => r.q), [m.l, W - m.r]).paddingInner(0.28).paddingOuter(0.1);
+    svg.selectAll('line.gr').data(ticks).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', (t) => y(t)).attr('y2', (t) => y(t)).attr('stroke', 'var(--cds-chart-grid)');
+    svg.selectAll('text.tk').data(ticks).join('text').attr('x', m.l - 6).attr('y', (t) => y(t) + 4).attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(tf);
+    const every = x.step() >= 52;
+    svg.selectAll('text.xl').data(every ? d : d.filter((r) => r.q.endsWith('-03'))).join('text')
+      .attr('x', (r) => x(r.q) + x.bandwidth() / 2).attr('y', H - 6).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)')
+      .text((r) => (every ? qs(r.q) : 'Q1 ’' + r.q.slice(2, 4)));
+    const segs = [{ k: 'labor', c: C()[0] }, { k: 'fuel', c: C()[1] }, { k: 'other', c: 'var(--cds-chart-muted)' }];
+    const bw = Math.min(32, x.bandwidth()), off = (x.bandwidth() - bw) / 2;
+    for (const r of d) {
+      let acc = 0;
+      segs.forEach((s, i) => {
+        const v = r[s.k]; if (!v) return;
+        svg.append('rect').attr('x', x(r.q) + off).attr('width', bw).attr('y', y(acc + v)).attr('height', Math.max(0, y(acc) - y(acc + v))).attr('fill', s.c)
+          .attr('rx', i === 2 || (i === 1 && !r.other) ? 3 : 0);
+        acc += v;
+      });
+    }
+    const line = d3.line().defined((r) => !bad(r.rev)).x((r) => x(r.q) + x.bandwidth() / 2).y((r) => y(r.rev));
+    svg.append('path').datum(d).attr('fill', 'none').attr('stroke', 'var(--color-fg)').attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round').attr('d', line);
+    svg.selectAll('circle.rv').data(d.filter((r) => !bad(r.rev))).join('circle').attr('cx', (r) => x(r.q) + x.bandwidth() / 2).attr('cy', (r) => y(r.rev)).attr('r', 2.5).attr('fill', 'var(--color-fg)');
+    const tp = tip(box);
+    svg.append('rect').attr('x', m.l).attr('y', 0).attr('width', W - m.l - m.r).attr('height', H).attr('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const [mx, my] = d3.pointer(ev);
+        const r = d[d3.minIndex(d, (rr) => Math.abs(x(rr.q) + x.bandwidth() / 2 - mx))];
+        const sc = box.clientWidth / W;
+        tp.show(mx * sc, my * sc, ql(r.q), [
+          { name: 'Revenue', value: fmtM(r.rev), color: 'var(--color-fg)' },
+          { name: 'Labor', value: fmtM(r.labor), color: C()[0] },
+          { name: 'Fuel', value: r.fuelNA ? 'not tagged' : fmtM(r.fuel), color: C()[1] },
+          { name: r.fuelNA ? 'Other (incl. fuel)' : 'Other opex', value: fmtM(r.other), color: 'var(--cds-chart-muted)' },
+          { name: 'Operating income', value: fmtM(r.opinc) },
+        ]);
+      })
+      .on('pointerleave', () => tp.hide());
+  }
+
+  // ---------- news ----------
+  function newsItems(box, rows, limit) {
+    box.replaceChildren();
+    for (const r of rows.slice(0, limit || rows.length)) {
+      const it = document.createElement('article'); it.className = 'am-item'; it.id = 'news-' + r.id;
+      const meta = document.createElement('div'); meta.className = 'am-meta';
+      const dt = document.createElement('span'); dt.textContent = dfmt(r.date);
+      dt.setAttribute('data-source', 'news'); dt.setAttribute('data-field', 'date'); dt.setAttribute('data-where', 'id=' + encodeURIComponent(r.id));
+      const kd = document.createElement('span'); kd.className = 'am-kind'; kd.textContent = r.kind;
+      const tg = document.createElement('span'); tg.textContent = r.tags;
+      meta.append(dt, kd, tg);
+      const h = document.createElement('h3');
+      const a = document.createElement('a'); a.textContent = r.headline;
+      if (/^https:\/\//.test(r.url || '')) { a.setAttribute('href', r.url); a.setAttribute('target', '_blank'); a.setAttribute('rel', 'noopener noreferrer'); }
+      a.setAttribute('data-source', 'news'); a.setAttribute('data-field', 'headline'); a.setAttribute('data-where', 'id=' + encodeURIComponent(r.id));
+      h.append(a);
+      const p = document.createElement('p'); p.textContent = r.summary;
+      p.setAttribute('data-source', 'news'); p.setAttribute('data-field', 'summary'); p.setAttribute('data-where', 'id=' + encodeURIComponent(r.id));
+      const src = document.createElement('div'); src.className = 'am-meta'; src.style.marginTop = '4px'; src.textContent = r.source;
+      it.append(meta, h); if (r.summary) it.append(p); it.append(src); box.append(it);
+    }
+  }
+
+  function setMark(el, src, field, where, text) {
+    el.setAttribute('data-source', src); el.setAttribute('data-field', field);
+    if (where) el.setAttribute('data-where', where); else el.removeAttribute('data-where');
+    el.textContent = text; el.classList.remove('dash-skeleton');
+  }
+
+  // ---------- main draw ----------
+  function draw() {
+    const P = dash.params();
+    sw('sw-labor', C()[0]); sw('sw-fuel', C()[1]); sw('sw-ret', C()[0]); sw('sw-ni', 'var(--cds-chart-muted)');
+    sw('sw2-labor', C()[0]); sw('sw2-fuel', C()[1]); sw('sw2-other', 'var(--cds-chart-muted)'); sw('sw2-rev', 'var(--color-fg)');
+    const fin = dash.data('financials'), car = dash.data('carriers'), nws = dash.data('news');
+    const qtr = dash.data('qtr'), peer = dash.data('peer'), sum = dash.data('summary');
+
+    // takeaway
+    const S = sum.status === 'ok' && sum.data && sum.data[0];
+    const tk = { n_loss: (v) => String(v), n_active: (v) => String(v), med_fuel_lq: pct, med_fuel_ya: pct, med_lopex_lq: pct };
+    root.querySelectorAll('#takeaway [data-field]').forEach((el) => {
+      const f = el.dataset.field;
+      if (S) { el.textContent = tk[f](S[f]); el.classList.remove('dash-skeleton'); } else el.textContent = '—';
+    });
+
+    // controls
+    root.querySelectorAll('#basis-chips .am-chip').forEach((b) => b.setAttribute('aria-pressed', String((P.basis || 'ttm') === b.dataset.basis)));
+    inact.checked = P.inactive === true;
+    const gc = document.getElementById('group-chips');
+    if (car.status === 'ok') {
+      const groups = ['All', ...new Set(car.data.map((c) => c.group))];
+      gc.replaceChildren(...groups.map((g) => {
+        const b = document.createElement('button'); b.className = 'am-chip'; b.textContent = g === 'All' ? 'All carriers' : g;
+        b.setAttribute('aria-pressed', String((P.group || 'All') === g)); b.style.marginRight = '6px';
+        b.addEventListener('click', () => dash.setParams({ group: g })); return b;
+      }));
+      const cur = P.carrier || 'DAL';
+      if (carSel.options.length !== car.data.length) carSel.replaceChildren(...car.data.map((c) => new Option(c.ticker + ' — ' + c.carrier, c.ticker)));
+      carSel.value = cur;
+    }
+
+    const allQ = fin.status === 'ok' ? [...new Set(fin.data.map((r) => r.quarter))].sort() : [];
+    const basis = P.basis === 'lq' ? 'lq' : 'ttm';
+
+    if (tab === 'peers') {
+      // peer table
+      const tb = document.querySelector('#peer-table tbody');
+      root.querySelectorAll('#peer-table th[data-base]').forEach((th) => th.setAttribute('data-field', th.dataset.base + '_' + basis));
+      root.querySelectorAll('#peer-table th').forEach((th) => {
+        const b = th.querySelector('button'); th.removeAttribute('aria-sort');
+        if (b && b.dataset.sort === sortCol) th.setAttribute('aria-sort', sortDir > 0 ? 'ascending' : 'descending');
+      });
+      if (peer.status === 'ok') {
+        const field = BASED.has(sortCol) ? sortCol + '_' + basis : sortCol;
+        const rows = visiblePeers(peer.data, P).slice().sort((a, b) => {
+          const va = a[field], vb = b[field];
+          if (bad(va) && typeof va !== 'string') return 1; if (bad(vb) && typeof vb !== 'string') return -1;
+          return (typeof va === 'string' ? va.localeCompare(vb) : va - vb) * sortDir;
+        });
+        const maxL = d3.max(peer.data, (r) => r['lopex_' + basis]) || 0.5;
+        tb.replaceChildren(...rows.map((r) => {
+          const tr = document.createElement('tr'); tr.dataset.key = r.ticker; tr.style.cursor = 'pointer';
+          if (!r.active) tr.className = 'off';
+          const td = (txt, cls) => { const c = document.createElement('td'); if (cls) c.className = cls; c.textContent = txt; return c; };
+          const op = r['opm_' + basis];
+          const lp = td('');
+          if (!bad(r['lopex_' + basis])) { const i = document.createElement('i'); i.className = 'am-ib'; i.style.width = Math.round(48 * r['lopex_' + basis] / maxL) + 'px'; lp.append(i); }
+          lp.append(document.createTextNode(pct(r['lopex_' + basis])));
+          tr.append(
+            td(r.ticker, 'l'), td(r.carrier, 'l am-hn'), td(r.latest ? ql(r.latest) : '—', 'l'),
+            td(fmtM(r['rev_' + basis])), td(pct(op), op < 0 ? 'am-neg' : ''), td(fmtM(r['labor_' + basis])), lp,
+            td(sgn(r['lyoy_' + basis])), td(fmtM(r['ret_' + basis])), td(pct(r['rl_' + basis]), 'am-hn'),
+            td(fmtM(r.liquidity), 'am-hn'), td(fmtM(r.debt), 'am-hn'),
+          );
+          return tr;
+        }));
+      } else if (peer.status === 'error') { tb.replaceChildren(); }
+
+      // multiples
+      const mm = document.getElementById('mult-margin'), mx = document.getElementById('mult-mix');
+      if (qtr.status === 'ok' && peer.status === 'ok' && allQ.length) {
+        const qm = d3.index(qtr.data, (r) => r.ticker, (r) => r.quarter);
+        const get = (f) => (qmap, t, q) => { const r = qmap.get(t) && qmap.get(t).get(q); return r ? r[f] : null; };
+        const vis = visiblePeers(peer.data, P);
+        const order = vis.slice().sort((a, b) => (num(b.rev_ttm ?? b.rev_lq) ?? 0) - (num(a.rev_ttm ?? a.rev_lq) ?? 0)).map((r) => r.ticker);
+        const tickSet = new Set(order);
+        const mv = qtr.data.filter((r) => tickSet.has(r.ticker)).map((r) => r.op_margin).filter((v) => !bad(v));
+        const dom = d3.scaleLinear().domain([Math.min(-0.1, d3.min(mv) ?? 0), Math.max(0.2, d3.max(mv) ?? 0)]).nice().domain();
+        const latestOf = (t, f) => { const m = qm.get(t); if (!m) return null; const qs2 = [...m.keys()].sort().reverse(); for (const q of qs2) { const v = m.get(q)[f]; if (!bad(v)) return { q, v }; } return null; };
+        multiples(mm, order, [{ name: 'Op. margin', color: C()[0], get: get('op_margin') }], dom,
+          (t) => { const l = latestOf(t, 'op_margin'); return l ? pct(l.v) + ' · ' + qs(l.q) : ''; }, qm, allQ);
+        const lv = qtr.data.filter((r) => tickSet.has(r.ticker)).flatMap((r) => [r.labor_pct_opex, r.fuel_pct_opex]).filter((v) => !bad(v));
+        const dom2 = [0, Math.max(0.5, Math.ceil((d3.max(lv) || 0.5) * 10) / 10)];
+        multiples(mx, order, [{ name: 'Labor', color: C()[0], get: get('labor_pct_opex') }, { name: 'Fuel', color: C()[1], get: get('fuel_pct_opex') }], dom2,
+          (t) => { const a = latestOf(t, 'labor_pct_opex'), b = latestOf(t, 'fuel_pct_opex'); return (a ? 'L ' + d3.format('.0%')(a.v) : '') + (b ? ' · F ' + d3.format('.0%')(b.v) : ''); }, qm, allQ);
+      } else if (qtr.status === 'error' || fin.status === 'error') { fail(mm); fail(mx); }
+
+      // returns chart
+      const rc = document.getElementById('ret-chart');
+      if (peer.status === 'ok') returnsChart(rc, visiblePeers(peer.data, P));
+      else if (peer.status === 'error') fail(rc);
+
+      // mini news
+      if (nws.status === 'ok') newsItems(document.getElementById('news-mini'), nws.data.slice().sort((a, b) => (a.date < b.date ? 1 : -1)).filter((r) => r.kind !== 'Upcoming'), 4);
+    }
+
+    if (tab === 'carrier' && fin.status === 'ok' && qtr.status === 'ok' && peer.status === 'ok' && car.status === 'ok') {
+      const t = P.carrier || 'DAL';
+      const c = car.data.find((x) => x.ticker === t) || {};
+      const pr = peer.data.find((x) => x.ticker === t) || {};
+      const cs = document.getElementById('car-status');
+      cs.textContent = (c.status && c.status !== 'Active' ? c.status + '. ' : '') + (c.note || '');
+      const rows = fin.data.filter((r) => r.ticker === t).sort((a, b) => (a.quarter < b.quarter ? -1 : 1));
+      const q = pr.latest;
+      document.getElementById('tiles-h').textContent = q ? 'Latest quarter: ' + ql(q) : 'Latest quarter';
+      const w = q ? 'ticker=' + encodeURIComponent(t) + '&quarter=' + encodeURIComponent(q) : null;
+      const f = rows.find((r) => r.quarter === q) || {};
+      const qr = qtr.data.find((r) => r.ticker === t && r.quarter === q) || {};
+      const S2 = (id, src, field, txt) => setMark(document.getElementById(id), src, field, w, txt);
+      S2('t-rev', 'financials', 'rev', fmtM(f.rev)); S2('t-rev-d', 'qtr', 'rev_yoy', sgn(qr.rev_yoy));
+      S2('t-opm', 'qtr', 'op_margin', pct(qr.op_margin)); S2('t-opm-d', 'qtr', 'opm_chg', pts(qr.opm_chg));
+      S2('t-lab', 'financials', 'labor', fmtM(f.labor)); S2('t-lab-d', 'qtr', 'labor_yoy', sgn(qr.labor_yoy));
+      S2('t-lpo', 'qtr', 'labor_pct_opex', pct(qr.labor_pct_opex)); S2('t-lpo-d', 'qtr', 'lopex_chg', pts(qr.lopex_chg));
+      S2('t-fpo', 'qtr', 'fuel_pct_opex', pct(qr.fuel_pct_opex)); S2('t-fpo-d', 'qtr', 'fuel_chg', pts(qr.fuel_chg));
+      S2('t-ret', 'qtr', 'returns', fmtM(qr.returns));
+      document.getElementById('t-opm').classList.toggle('am-neg', num(qr.op_margin) < 0);
+      costChart(document.getElementById('det-chart'), rows.filter((r) => num(r.opex) !== null));
+      const tb = document.querySelector('#det-table tbody');
+      tb.replaceChildren(...rows.slice().reverse().map((r) => {
+        const tr = document.createElement('tr'); tr.dataset.key = encodeURIComponent(r.ticker) + ',' + encodeURIComponent(r.quarter);
+        const td = (txt, cls) => { const x = document.createElement('td'); if (cls) x.className = cls; x.textContent = txt; return x; };
+        tr.append(td(ql(r.quarter), 'l'), td(fmtM(r.rev)), td(fmtM(r.opex)), td(fmtM(r.labor)), td(fmtM(r.fuel)),
+          td(fmtM(r.opinc), num(r.opinc) < 0 ? 'am-neg' : ''), td(fmtM(r.ni), num(r.ni) < 0 ? 'am-neg' : ''),
+          td(fmtM(r.buyback), 'am-hn'), td(fmtM(r.div), 'am-hn'), td(fmtM(r.cash), 'am-hn'), td(fmtM(r.debt), 'am-hn'));
+        return tr;
+      }));
+    } else if (tab === 'carrier' && (fin.status === 'error' || qtr.status === 'error')) { fail(document.getElementById('det-chart')); }
+
+    if (tab === 'news' && nws.status === 'ok') {
+      const tags = ['All', ...[...new Set(nws.data.flatMap((r) => String(r.tags).split(' ')))].sort((a, b) => (a === 'Industry' ? -1 : b === 'Industry' ? 1 : a.localeCompare(b)))];
+      const cur = P.tag || 'All';
+      document.getElementById('tag-chips').replaceChildren(...tags.map((g) => {
+        const b = document.createElement('button'); b.className = 'am-chip'; b.textContent = g === 'All' ? 'All news' : g; b.style.marginRight = '6px';
+        b.setAttribute('aria-pressed', String(cur === g)); b.addEventListener('click', () => dash.setParams({ tag: g })); return b;
+      }));
+      const list = nws.data.filter((r) => cur === 'All' || String(r.tags).split(' ').includes(cur)).sort((a, b) => (a.date < b.date ? 1 : -1));
+      newsItems(document.getElementById('news-list'), list);
+    }
+
+    if (tab === 'notes' && car.status === 'ok') {
+      const tb = document.querySelector('#car-table tbody');
+      tb.replaceChildren(...car.data.map((c) => {
+        const tr = document.createElement('tr');
+        const td = (txt, cls) => { const x = document.createElement('td'); x.className = cls; x.textContent = txt; return x; };
+        tr.append(td(c.ticker, 'l'), td(c.carrier, 'l'), td(c.group, 'l am-hn'), td(c.status, 'l'), td(c.note || '', 'l w'));
+        return tr;
+      }));
+    }
+
+    if (!drawn && fin.status === 'ok') {
+      drawn = true;
+      const h = location.hash.slice(1);
+      if (h && h !== tab && document.getElementById(h) && document.getElementById(h).classList.contains('am-page')) showTab(h, false);
+    }
+  }
+
+  dash.onData(draw);
+})();
+</script>
+
+</div>
+</body>
+</html>
