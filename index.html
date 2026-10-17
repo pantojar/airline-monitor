@@ -16,7 +16,7 @@
  --cds-font-size-caption:12px;--cds-font-size-body:14px;--cds-font-size-heading:16px;--cds-font-size-title:30px;--cds-font-weight-medium:600;
  --cds-chart-grid:#ece9e3;--cds-chart-axis:#bdb8ae;--cds-chart-reference:#8a857c;--cds-chart-muted:#c9c4ba;
  --cds-surface-popover:#ffffff;--cds-border:#e4e1da;--cds-shadow-popover:0 4px 16px rgba(0,0,0,.12);--cds-text-secondary:#6b6862;--cds-dur-slow:300ms;
- --c1:#2f6fdb;--c2:#d9822b;--c3:#2e9e8f;--c4:#8e5bd6;
+ --c1:#2f6fdb;--c2:#d9822b;--c3:#2e9e8f;--c4:#8e5bd6;--c5:#b8a43a;
  color-scheme:light;
 }
 @media (prefers-color-scheme:dark){:root{
@@ -24,7 +24,7 @@
  --color-ok:#5cbf86;--color-warn:#e0a24a;--color-bad:#ef6b5b;
  --cds-chart-grid:#2b2a28;--cds-chart-axis:#55524c;--cds-chart-reference:#8a857c;--cds-chart-muted:#4f4c47;
  --cds-surface-popover:#262624;--cds-border:#3a3936;--cds-shadow-popover:0 4px 16px rgba(0,0,0,.5);--cds-text-secondary:#a19d95;
- --c1:#6e9ef0;--c2:#f0a35a;--c3:#5cc4b5;--c4:#b48cf0;
+ --c1:#6e9ef0;--c2:#f0a35a;--c3:#5cc4b5;--c4:#b48cf0;--c5:#d6c45c;
  color-scheme:dark;
 }}
 html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
@@ -34,7 +34,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
 <script src="vendor/d3.min.js"></script>
 <script>
 window.dash = (function () {
-  var DEFAULTS = { group: 'All', basis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All' };
+  var DEFAULTS = { group: 'All', basis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null };
   var params = Object.assign({}, DEFAULTS), calcs = {}, order = [], res = null, fns = [];
   var DATA = null, state = 'loading';
   function compute() {
@@ -57,15 +57,17 @@ window.dash = (function () {
       get('news_curated').catch(function () { return []; }),
       get('news_feed').catch(function () { return []; }),
       get('meta').catch(function () { return {}; }),
+      get('dot').catch(function () { return []; }),
+      get('dot_carriers').catch(function () { return []; }),
     ]).then(function (v) {
       var today = new Date().toISOString().slice(0, 10);
       var curated = v[2].filter(function (r) { return !(r.kind === 'Upcoming' && r.date < today); });
-      DATA = { financials: v[0], carriers: v[1], news: curated.concat(v[3]) };
+      DATA = { financials: v[0], carriers: v[1], news: curated.concat(v[3]), dot: v[5], dot_carriers: v[6], meta: [v[4] || {}] };
       res = null; state = 'ok';
       var g = v[4] && v[4].generated ? new Date(v[4].generated) : null;
       asOf(g && !isNaN(g)
-        ? 'Updated ' + g.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' }) + ' · SEC EDGAR filings and news feeds'
-        : 'SEC EDGAR filings and news feeds');
+        ? 'Updated ' + g.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' }) + ' · SEC EDGAR filings, DOT Form 41 and news feeds'
+        : 'SEC EDGAR filings, DOT Form 41 and news feeds');
       redraw();
     }).catch(function () {
       state = 'error';
@@ -86,7 +88,7 @@ window.dash = (function () {
     params: function () { return Object.assign({}, params); },
     setParams: function (o) { Object.assign(params, o); redraw(); },
     resetParams: function () { params = Object.assign({}, DEFAULTS); redraw(); },
-    colors: ['var(--c1)', 'var(--c2)', 'var(--c3)', 'var(--c4)'],
+    colors: ['var(--c1)', 'var(--c2)', 'var(--c3)', 'var(--c4)', 'var(--c5)'],
     setLink: function (n) { try { history.replaceState(null, '', '#' + n); } catch (e) {} },
     refresh: function () {},
   };
@@ -158,6 +160,8 @@ window.dash = (function () {
 #dash-root .am-fail{display:flex;align-items:center;justify-content:center;gap:6px;min-height:120px;color:var(--color-fg-muted);font-size:var(--cds-font-size-caption)}
 #dash-root .am-fail::before{content:'';width:.375rem;height:.375rem;border-radius:50%;background:var(--color-bad)}
 #dash-root .am-chart{min-height:300px}
+#dash-root .am-foot{margin:var(--cds-gap-sm) 0 0;padding-left:1.2rem;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);line-height:1.5}
+#dash-root .am-foot b{color:var(--color-fg);font-weight:var(--cds-font-weight-medium)}
 @media (max-width:700px){#dash-root .am-hn{display:none}}
 </style>
 
@@ -177,6 +181,7 @@ window.dash = (function () {
   <nav class="am-tabs" role="tablist">
     <button class="am-tab" role="tab" data-tab="peers" aria-selected="true">Peer comparison</button>
     <button class="am-tab" role="tab" data-tab="carrier" aria-selected="false">Carrier detail</button>
+    <button class="am-tab" role="tab" data-tab="opcarriers" aria-selected="false">Operating carriers (DOT)</button>
     <button class="am-tab" role="tab" data-tab="news" aria-selected="false">News</button>
     <button class="am-tab" role="tab" data-tab="notes" aria-selected="false">Sources &amp; notes</button>
   </nav>
@@ -285,6 +290,91 @@ window.dash = (function () {
         </table>
       </div>
     </div>
+    <div class="am-card" id="family-card" hidden>
+      <h2 id="family-h">Operating carriers</h2>
+      <p class="am-note" id="family-note">DOT Form 41, each airline certificate on its own. Trailing 12 months through the latest DOT quarter.</p>
+      <div class="am-tbl-box">
+        <table class="am-t" id="family-table" data-source="dotpeer" data-row-key="code">
+          <thead><tr>
+            <th class="l" data-field="name">Carrier</th><th class="l am-hn" data-field="role">Role</th><th class="l" data-field="latest">Through</th>
+            <th data-field="rev_ttm">Revenue</th><th data-field="opm_ttm">Op. margin</th><th data-field="comp_ttm">Salaries &amp; benefits</th>
+            <th data-field="lopex_ttm">Labor % of opex</th><th data-field="fte_ttm">FTEs</th><th data-field="comp_fte_ttm">Labor cost per FTE</th>
+            <th class="am-hn" data-field="lcasm_ttm">Labor ¢ per ASM</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="am-note" style="margin-top:var(--cds-gap-sm)"><button class="am-link" id="to-dot">Compare with every operating carrier</button></p>
+    </div>
+  </section>
+
+  <!-- OPERATING CARRIERS (DOT) -->
+  <section class="am-page am-stack" id="opcarriers" hidden>
+    <div class="am-bar">
+      <span id="dgroup-chips" data-source="dot_carriers"></span>
+      <span class="sp"></span>
+      <span id="dbasis-chips">
+        <button class="am-chip" data-basis="ttm" aria-pressed="true">Trailing 12 months</button>
+        <button class="am-chip" data-basis="lq" aria-pressed="false">Latest quarter</button>
+      </span>
+      <label class="am-chk"><input type="checkbox" id="dinactive"> Include carriers no longer reporting</label>
+    </div>
+
+    <div class="am-card" id="dot-card">
+      <h2>Operating carriers</h2>
+      <p class="am-note" id="dot-note">DOT Form 41 reports, one row per airline certificate, so wholly owned regionals such as Envoy, PSA, Piedmont, Endeavor and Horizon appear on their own. $ millions. Salaries &amp; benefits use the same definition as the SEC labor line. Per-FTE figures are annual. Click a row to chart that carrier.</p>
+      <div class="am-tbl-box">
+        <table class="am-t" id="dot-table" data-source="dotpeer" data-row-key="code">
+          <thead><tr>
+            <th class="l" data-field="name"><button data-sort="name">Carrier</button></th>
+            <th class="l am-hn" data-field="parent"><button data-sort="parent">Owner</button></th>
+            <th class="l" data-field="latest"><button data-sort="latest">Through</button></th>
+            <th data-base="rev" data-field="rev_ttm"><button data-sort="rev">Revenue</button></th>
+            <th data-base="opm" data-field="opm_ttm"><button data-sort="opm">Op. margin</button></th>
+            <th data-base="comp" data-field="comp_ttm"><button data-sort="comp">Salaries &amp; benefits</button></th>
+            <th data-base="lopex" data-field="lopex_ttm"><button data-sort="lopex">Labor % of opex</button></th>
+            <th data-base="casm" data-field="casm_ttm"><button data-sort="casm">CASM ¢</button></th>
+            <th class="am-hn" data-base="casmx" data-field="casmx_ttm"><button data-sort="casmx">CASM ex fuel ¢</button></th>
+            <th data-base="lcasm" data-field="lcasm_ttm"><button data-sort="lcasm">Labor ¢ per ASM</button></th>
+            <th data-base="fte" data-field="fte_ttm"><button data-sort="fte">FTEs</button></th>
+            <th data-base="comp_fte" data-field="comp_fte_ttm"><button data-sort="comp_fte">Labor cost per FTE</button></th>
+            <th data-base="cfyoy" data-field="cfyoy_ttm"><button data-sort="cfyoy">Per-FTE YoY</button></th>
+            <th class="am-hn" data-base="asm_fte" data-field="asm_fte_ttm"><button data-sort="asm_fte">ASMs per FTE (000)</button></th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <ol class="am-foot" id="dot-foot"></ol>
+    </div>
+
+    <div class="am-grid2">
+      <div class="am-card" id="lcasm-card">
+        <h2>Labor cost per available seat mile</h2>
+        <p class="am-note">Salaries &amp; benefits ÷ ASMs, in cents. Regionals flying under capacity-purchase agreements are paid per block hour or departure; their seat-mile costs are not directly comparable to mainline carriers.</p>
+        <div class="am-wrap am-chart" id="lcasm-chart" data-source="dotpeer"></div>
+      </div>
+      <div class="am-card" id="salmix-card">
+        <h2>Where salary dollars go</h2>
+        <p class="am-note">Share of salaries (before benefits) by DOT employee group.</p>
+        <div class="am-legend" id="salmix-legend"></div>
+        <div class="am-wrap am-chart" id="salmix-chart" data-source="dotpeer"></div>
+      </div>
+    </div>
+
+    <div class="am-card" id="dtrend-card">
+      <h2 id="dtrend-h">Trend by carrier</h2>
+      <p class="am-note" id="dtrend-note">Each point is a trailing four-quarter figure. All panels share one scale; the highlighted panel is the carrier you clicked.</p>
+      <div class="am-bar" style="margin-bottom:var(--cds-gap-sm)">
+        <select class="am-sel" id="dmetric" aria-label="Metric">
+          <option value="comp_fte">Labor cost per FTE ($ thousands)</option>
+          <option value="lcasm">Labor cost per ASM (¢)</option>
+          <option value="casmx">CASM excluding fuel (¢)</option>
+          <option value="lopex">Labor % of operating expense</option>
+          <option value="fte">Full-time equivalent employees</option>
+        </select>
+      </div>
+      <div class="am-multi" id="mult-dot" data-source="dotq"></div>
+    </div>
   </section>
 
   <!-- NEWS -->
@@ -310,7 +400,10 @@ window.dash = (function () {
         <li><b>Trailing 12 months</b> needs four consecutive reported quarters; carriers with a gap show a dash.</li>
         <li><b>Cash + ST investments</b> excludes undrawn credit lines, so it runs below the "total liquidity" carriers quote.</li>
         <li><b>Debt</b> is as each carrier tags it. Some include finance leases and some do not, so compare debt levels across carriers with care.</li>
-        <li><b>Not here yet:</b> unit metrics (CASM, labor cost per ASM) need traffic data, and wholly owned subsidiaries such as Envoy, Horizon and PSA need DOT Form 41.</li>
+        <li><b>Operating carriers (DOT Form 41).</b> Each airline certificate files its own reports with the Department of Transportation, published by BTS on TranStats. The dashboard uses Schedule P-1.2 (profit and loss), P-6 (salaries by employee group, benefits, fuel), P-1(a) (monthly employees) and T-100 (available seat miles, all services). Figures are summed across DOT reporting regions to a system total. Financial schedules run about one quarter behind SEC filings; BTS publishes Q3 2026 on December 17. The job checks for new DOT data weekly.</li>
+        <li><b>Salaries &amp; benefits (DOT)</b> is DOT's total salaries and related fringe benefits, less its "personnel expense" line (training, uniforms, crew travel and the like). That definition reproduces the SEC labor line exactly for single-certificate carriers such as United and Southwest. <b>FTEs</b> are the quarter's average monthly full-time equivalents. <b>Labor cost per FTE</b> is salaries &amp; benefits divided by average FTEs, stated per year.</li>
+        <li><b>Summing operating carriers</b> does not reproduce a parent's SEC figures. Revenue a wholly owned regional earns from its parent under a capacity-purchase agreement is counted on both certificates, and the parent's SEC labor line can exclude regional labor (American reports it inside "regional expenses"). Regionals' fuel and some airport costs are typically paid by the mainline partner.</li>
+        <li><b>Not here yet:</b> headcount by employee group (DOT P-10, filed annually).</li>
       </ul>
     </div>
     <div class="am-card">
@@ -448,6 +541,112 @@ dash.calc('summary', {
     }];
   },
 });
+
+dash.calc('dotq', {
+  title: 'DOT quarterly ratios',
+  description: 'Per operating carrier and quarter (DOT Form 41): quarter ratios and trailing four-quarter labor cost per FTE, labor cost and CASM excluding fuel per available seat mile, and labor share of operating expense.',
+  inputs: ['dot'],
+  fn: (dot) => {
+    const num = (v) => (v === null || v === undefined || v === '' ? null : Number(v));
+    const nextQ = (q) => { let y = +q.slice(0, 4), m = +q.slice(5, 7) + 3; if (m > 12) { m -= 12; y += 1; } return y + '-' + String(m).padStart(2, '0'); };
+    const by = d3.group(dot, (r) => r.code);
+    const out = [];
+    for (const [code, rs] of by) {
+      const m = new Map(rs.map((r) => [r.quarter, r]));
+      const qs = [...m.keys()].sort();
+      for (const q of qs) {
+        const r = m.get(q);
+        const w = [q];
+        for (let i = 0; i < 3; i++) { const prev = qs.filter((x) => nextQ(x) === w[0])[0]; if (!prev) break; w.unshift(prev); }
+        const win = w.length === 4 ? w.map((x) => m.get(x)) : null;
+        const s = (f) => (win && win.every((x) => num(x[f]) !== null) ? win.reduce((a, x) => a + num(x[f]), 0) : null);
+        const comp4 = s('comp'), opex4 = s('opex'), fuel4 = s('fuel'), asm4 = s('asm'), fte4 = s('fte');
+        out.push({
+          code, quarter: q,
+          comp: num(r.comp), opex: num(r.opex), asm: num(r.asm), fte: num(r.fte),
+          op_margin: num(r.rev) ? num(r.opinc) / num(r.rev) : null,
+          comp_fte: comp4 !== null && fte4 ? (comp4 * 1e6) / (fte4 / 4) / 1000 : null,
+          lcasm: comp4 !== null && asm4 ? (comp4 / asm4) * 100 : null,
+          casmx: opex4 !== null && fuel4 !== null && asm4 ? ((opex4 - fuel4) / asm4) * 100 : null,
+          lopex: comp4 !== null && opex4 ? comp4 / opex4 : null,
+        });
+      }
+    }
+    return out;
+  },
+});
+
+dash.calc('dotpeer', {
+  title: 'DOT operating-carrier comparison',
+  description: 'One row per operating carrier: latest quarter and trailing four quarters of revenue, margin, salaries and benefits, unit costs per available seat mile, FTEs, labor cost per FTE, and salary shares by employee group.',
+  inputs: ['dot', 'dot_carriers'],
+  fn: (dot, dot_carriers) => {
+    const num = (v) => (v === null || v === undefined || v === '' ? null : Number(v));
+    const dv = (a, b) => (a === null || b === null || !b ? null : a / b);
+    const nextQ = (q) => { let y = +q.slice(0, 4), m = +q.slice(5, 7) + 3; if (m > 12) { m -= 12; y += 1; } return y + '-' + String(m).padStart(2, '0'); };
+    const prevQ = (q, n) => { let y = +q.slice(0, 4), m = +q.slice(5, 7) - 3 * n; while (m < 1) { m += 12; y -= 1; } return y + '-' + String(m).padStart(2, '0'); };
+    const ok = (r) => !!r && ['rev', 'opex', 'comp'].every((k) => num(r[k]) !== null);
+    const allLatest = d3.max(dot.filter(ok), (r) => r.quarter);
+    const SAL = ['sal_flight', 'sal_maint', 'sal_traffic', 'sal_mgt', 'sal_other'];
+    return dot_carriers.map((c) => {
+      const rs = dot.filter((r) => r.code === c.code);
+      const m = new Map(rs.map((r) => [r.quarter, r]));
+      const done = rs.filter(ok).map((r) => r.quarter).sort();
+      const lq = done.length ? done[done.length - 1] : null;
+      const L = lq ? m.get(lq) : {};
+      const win = (end) => [3, 2, 1, 0].map((i) => m.get(prevQ(end, i)));
+      const t4 = lq ? win(lq) : [];
+      const p4 = lq ? win(prevQ(lq, 4)) : [];
+      const full = (w, f) => w.length === 4 && w.every((r) => r && num(r[f]) !== null);
+      const sum = (w, f) => (full(w, f) ? w.reduce((a, r) => a + num(r[f]), 0) : null);
+      const T = (f) => (t4.every(ok) ? sum(t4, f) : null);
+      const rev_ttm = T('rev'), opex_ttm = T('opex'), comp_ttm = T('comp'), fuel_ttm = T('fuel'), opinc_ttm = T('opinc'), asm_ttm = T('asm');
+      const fte_ttm = full(t4, 'fte') ? sum(t4, 'fte') / 4 : null;
+      const comp_prev = sum(p4, 'comp'), fte_prev = full(p4, 'fte') ? sum(p4, 'fte') / 4 : null;
+      const ya = lq ? m.get(prevQ(lq, 4)) : null;
+      const lqv = (f) => (lq ? num(L[f]) : null);
+      const cf_ttm = comp_ttm !== null && fte_ttm ? (comp_ttm * 1e6) / fte_ttm : null;
+      const cf_prev = comp_prev !== null && fte_prev ? (comp_prev * 1e6) / fte_prev : null;
+      const cf_lq = lqv('comp') !== null && lqv('fte') ? (lqv('comp') * 4e6) / lqv('fte') : null;
+      const cf_ya = ya && num(ya.comp) !== null && num(ya.fte) ? (num(ya.comp) * 4e6) / num(ya.fte) : null;
+      const salT = SAL.map((f) => T(f)), salL = SAL.map((f) => lqv(f));
+      const share = (arr) => { const t = arr.every((v) => v !== null) ? arr.reduce((a, b) => a + b, 0) : null; return arr.map((v) => (t ? v / t : null)); };
+      const sT = share(salT), sL = share(salL);
+      const row = {
+        code: c.code, name: c.name, parent: c.parent, group: c.group, role: c.role, note: c.note || '',
+        latest: lq, current: !!lq && lq === allLatest && c.active !== false,
+        spike: (() => {
+          // A quarter whose labor cost jumps well above the carrier's typical level (a ratification
+          // payment, retro pay or a one-time accrual) distorts trailing figures; flag it.
+          if (!lq) return null;
+          const vals = [7, 6, 5, 4, 3, 2, 1, 0].map((i) => { const r = m.get(prevQ(lq, i)); return r && num(r.comp) !== null ? { q: r.quarter, v: num(r.comp) } : null; }).filter(Boolean);
+          for (const x of vals.slice(-4)) {
+            const others = vals.filter((y) => y.q !== x.q).map((y) => y.v).sort((a, b) => a - b);
+            if (others.length < 3) continue;
+            const med = others[Math.floor(others.length / 2)];
+            if (med > 0 && x.v > med * 1.4) return x.q;
+          }
+          return null;
+        })(),
+        rev_lq: lqv('rev'), rev_ttm,
+        opm_lq: dv(lqv('opinc'), lqv('rev')), opm_ttm: dv(opinc_ttm, rev_ttm),
+        comp_lq: lqv('comp'), comp_ttm,
+        lopex_lq: dv(lqv('comp'), lqv('opex')), lopex_ttm: dv(comp_ttm, opex_ttm),
+        casm_lq: lqv('asm') ? dv(lqv('opex'), lqv('asm')) * 100 : null, casm_ttm: asm_ttm ? dv(opex_ttm, asm_ttm) * 100 : null,
+        casmx_lq: lqv('asm') && lqv('fuel') !== null ? dv(lqv('opex') - lqv('fuel'), lqv('asm')) * 100 : null,
+        casmx_ttm: asm_ttm && fuel_ttm !== null && opex_ttm !== null ? dv(opex_ttm - fuel_ttm, asm_ttm) * 100 : null,
+        lcasm_lq: lqv('asm') ? dv(lqv('comp'), lqv('asm')) * 100 : null, lcasm_ttm: asm_ttm ? dv(comp_ttm, asm_ttm) * 100 : null,
+        fte_lq: lqv('fte'), fte_ttm,
+        comp_fte_lq: cf_lq, comp_fte_ttm: cf_ttm,
+        cfyoy_lq: cf_lq !== null && cf_ya ? cf_lq / cf_ya - 1 : null, cfyoy_ttm: cf_ttm !== null && cf_prev ? cf_ttm / cf_prev - 1 : null,
+        asm_fte_lq: lqv('asm') && lqv('fte') ? (lqv('asm') * 4e3) / lqv('fte') : null,
+        asm_fte_ttm: asm_ttm && fte_ttm ? (asm_ttm * 1e3) / fte_ttm : null,
+      };
+      SAL.forEach((f, i) => { row[f + '_sh_ttm'] = sT[i]; row[f + '_sh_lq'] = sL[i]; });
+      return row;
+    });
+  },
+});
 </script>
 
 <script>
@@ -534,28 +733,112 @@ dash.calc('summary', {
     return peer.filter((r) => (P.inactive === true || r.active) && (!P.group || P.group === 'All' || r.group === P.group));
   }
 
+  // ---------- operating carriers (DOT) controls ----------
+  let dSortCol = 'comp', dSortDir = -1;
+  const DBASED = new Set(['rev', 'opm', 'comp', 'lopex', 'casm', 'casmx', 'lcasm', 'fte', 'comp_fte', 'cfyoy', 'asm_fte']);
+  root.querySelectorAll('#dbasis-chips .am-chip').forEach((b) => b.addEventListener('click', () => dash.setParams({ basis: b.dataset.basis })));
+  const dinact = document.getElementById('dinactive');
+  dinact.addEventListener('change', () => dash.setParams({ dinactive: dinact.checked }));
+  const dmetric = document.getElementById('dmetric');
+  dmetric.addEventListener('change', () => dash.setParams({ dmetric: dmetric.value }));
+  root.querySelectorAll('#dot-table th button').forEach((b) => b.addEventListener('click', () => {
+    const c = b.dataset.sort;
+    if (dSortCol === c) dSortDir = -dSortDir; else { dSortCol = c; dSortDir = ['name', 'parent', 'latest'].includes(c) ? 1 : -1; }
+    draw();
+  }));
+  document.querySelector('#dot-table tbody').addEventListener('click', (e) => {
+    const tr = e.target.closest('tr[data-key]');
+    if (tr) {
+      dash.setParams({ dcode: dash.params().dcode === tr.dataset.key ? null : tr.dataset.key });
+      const el = document.getElementById('mult-dot-' + tr.dataset.key);
+      if (el) el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+  });
+  document.getElementById('to-dot').addEventListener('click', () => showTab('opcarriers', true));
+  function visibleDot(rows, P) {
+    return rows.filter((r) => r.latest && (P.dinactive === true || r.current) && (!P.dgroup || P.dgroup === 'All' || r.group === P.dgroup));
+  }
+  const fmtK = (v) => (bad(v) ? '—' : '$' + d3.format(',.0f')(v / 1000) + 'K');
+  const fmtC = (v) => (bad(v) ? '—' : d3.format('.2f')(v));
+  const fmtN = (v) => (bad(v) ? '—' : d3.format(',.0f')(v));
+  const SALG = [['sal_flight', 'Flight crew'], ['sal_traffic', 'Aircraft & traffic handling'], ['sal_maint', 'Maintenance'], ['sal_mgt', 'General management'], ['sal_other', 'Other']];
+
+  function hbar(box, rows, valFn, fmt, tipFn) {
+    clearSvg(box);
+    const data = rows.filter((r) => !bad(valFn(r))).sort((a, b) => valFn(b) - valFn(a));
+    if (!data.length) return;
+    const W = Math.max(280, box.clientWidth), band = 24, H = data.length * band + 8;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).style('display', 'block');
+    const lab = Math.max(...data.map((r) => textW(svg, r.name))) + 10;
+    const endW = Math.max(...data.map((r) => textW(svg, fmt(valFn(r))))) + 8;
+    const x = d3.scaleLinear([0, d3.max(data, valFn)], [lab, W - endW]);
+    const y = d3.scaleBand(data.map((r) => r.code), [4, H - 4]).paddingInner(0.3);
+    const tp = tip(box);
+    for (const r of data) {
+      const v = valFn(r), reg = r.group === 'Regional';
+      svg.append('text').attr('x', lab - 8).attr('y', y(r.code) + y.bandwidth() / 2 + 4).attr('text-anchor', 'end').attr('fill', 'var(--color-fg)').style('font-size', 'var(--cds-font-size-caption)').text(r.name);
+      svg.append('rect').attr('x', x(0)).attr('y', y(r.code)).attr('width', Math.max(1, x(v) - x(0))).attr('height', y.bandwidth()).attr('rx', 3)
+        .attr('fill', reg ? 'var(--cds-chart-muted)' : dash.colors[0]);
+      svg.append('text').attr('x', x(v) + 4).attr('y', y(r.code) + y.bandwidth() / 2 + 4).attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(fmt(v));
+      svg.append('rect').attr('x', 0).attr('y', y(r.code) - 2).attr('width', W).attr('height', y.bandwidth() + 4).attr('fill', 'transparent')
+        .on('pointermove', (ev) => { const sc = box.clientWidth / W; const [mx, my] = d3.pointer(ev); tp.show(mx * sc, my * sc, r.name + ' (' + r.code + ')', tipFn(r)); })
+        .on('pointerleave', () => tp.hide());
+    }
+  }
+
+  function salmix(box, rows, basis) {
+    clearSvg(box);
+    const key = (f) => f + '_sh_' + basis;
+    const data = rows.filter((r) => !bad(r[key('sal_flight')])).sort((a, b) => b[key('sal_flight')] - a[key('sal_flight')]);
+    if (!data.length) return;
+    const W = Math.max(280, box.clientWidth), band = 24, H = data.length * band + 22;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).style('display', 'block');
+    const lab = Math.max(...data.map((r) => textW(svg, r.name))) + 10;
+    const x = d3.scaleLinear([0, 1], [lab, W - 6]);
+    const y = d3.scaleBand(data.map((r) => r.code), [4, H - 18]).paddingInner(0.3);
+    [0, 0.25, 0.5, 0.75, 1].forEach((t) => {
+      svg.append('line').attr('x1', x(t)).attr('x2', x(t)).attr('y1', 0).attr('y2', H - 16).attr('stroke', 'var(--cds-chart-grid)');
+      svg.append('text').attr('x', x(t)).attr('y', H - 3).attr('text-anchor', t === 0 ? 'start' : t === 1 ? 'end' : 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(d3.format('.0%')(t));
+    });
+    const tp = tip(box);
+    for (const r of data) {
+      svg.append('text').attr('x', lab - 8).attr('y', y(r.code) + y.bandwidth() / 2 + 4).attr('text-anchor', 'end').attr('fill', 'var(--color-fg)').style('font-size', 'var(--cds-font-size-caption)').text(r.name);
+      let acc = 0;
+      SALG.forEach(([f], i) => {
+        const v = r[key(f)] || 0;
+        svg.append('rect').attr('x', x(acc)).attr('y', y(r.code)).attr('width', Math.max(0, x(acc + v) - x(acc) - (v > 0.004 ? 1 : 0))).attr('height', y.bandwidth()).attr('fill', dash.colors[i]);
+        acc += v;
+      });
+      svg.append('rect').attr('x', 0).attr('y', y(r.code) - 2).attr('width', W).attr('height', y.bandwidth() + 4).attr('fill', 'transparent')
+        .on('pointermove', (ev) => { const sc = box.clientWidth / W; const [mx, my] = d3.pointer(ev); tp.show(mx * sc, my * sc, r.name, SALG.map(([f, n], i) => ({ color: dash.colors[i], name: n, value: pct(r[key(f)]) }))); })
+        .on('pointerleave', () => tp.hide());
+    }
+  }
+
   // ---------- small multiples ----------
-  function multiples(box, tickers, series, domain, headFn, qm, Q) {
+  function multiples(box, tickers, series, domain, headFn, qm, Q, opts = {}) {
+    const tf = opts.tick || d3.format('.0%'), vf = opts.fmt || pct;
     clearSvg(box);
     const colW = Math.max(150, (box.firstElementChild && box.firstElementChild.clientWidth) || 0);
     for (const t of tickers) {
       const p = document.createElement('div'); p.className = 'am-sm'; p.id = box.id + '-' + t;
       const head = document.createElement('div'); head.className = 'am-sm-t';
-      const nm = document.createElement('b'); nm.textContent = t;
+      const nm = document.createElement('b'); nm.textContent = opts.name ? opts.name(t) : t;
+      if (opts.highlight === t) { p.style.outline = '2px solid ' + dash.colors[0]; p.style.outlineOffset = '6px'; p.style.borderRadius = '4px'; }
       const lv = document.createElement('span'); lv.textContent = headFn(t);
       head.append(nm, lv); p.append(head); box.append(p);
       const W = Math.max(150, p.clientWidth || colW), H = 96;
       const svg = d3.select(p).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).style('display', 'block');
       const y = d3.scaleLinear(domain, [H - 16, 6]);
       const ticks = y.ticks(3);
-      const lw = d3.max(ticks, (d) => textW(svg, d3.format('.0%')(d))) || 20;
+      const lw = d3.max(ticks, (d) => textW(svg, tf(d))) || 20;
       const m = { l: Math.ceil(lw) + 6, r: 6 };
       const x = d3.scalePoint(Q, [m.l, W - m.r]);
       const g = svg.append('g');
       g.selectAll('line.gr').data(ticks).join('line').attr('class', 'gr').attr('x1', m.l).attr('x2', W - m.r).attr('y1', (d) => y(d)).attr('y2', (d) => y(d))
         .attr('stroke', (d) => (d === 0 ? 'var(--cds-chart-reference)' : 'var(--cds-chart-grid)')).attr('stroke-dasharray', (d) => (d === 0 ? '3 3' : null));
       g.selectAll('text.tk').data(ticks).join('text').attr('class', 'tk').attr('x', m.l - 4).attr('y', (d) => y(d) + 3).attr('text-anchor', 'end')
-        .attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text((d) => d3.format('.0%')(d));
+        .attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text((d) => tf(d));
       const yrs = Q.filter((q) => q.endsWith('-03'));
       g.selectAll('text.yr').data(yrs).join('text').attr('class', 'yr').attr('x', (q) => x(q)).attr('y', H - 3).attr('text-anchor', (q, i) => (i === 0 ? 'start' : 'middle'))
         .attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text((q) => '’' + q.slice(2, 4));
@@ -574,7 +857,7 @@ dash.calc('summary', {
           const q = Q[d3.minIndex(Q, (qq) => Math.abs(x(qq) - mx))];
           hover.attr('x1', x(q)).attr('x2', x(q)).attr('opacity', 1);
           const scale = p.clientWidth / W;
-          tp.show(x(q) * scale, (H / 2) * scale + 16, t + ' · ' + ql(q), series.map((s) => ({ color: series.length > 1 ? s.color : null, name: s.name, value: pct(s.get(qm, t, q)) })));
+          tp.show(x(q) * scale, (H / 2) * scale + 16, (opts.name ? opts.name(t) : t) + ' · ' + ql(q), series.map((s) => ({ color: series.length > 1 ? s.color : null, name: s.name, value: vf(s.get(qm, t, q)) })));
         })
         .on('pointerleave', () => { hover.attr('opacity', 0); tp.hide(); });
     }
@@ -737,6 +1020,131 @@ dash.calc('summary', {
 
     const allQ = fin.status === 'ok' ? [...new Set(fin.data.map((r) => r.quarter))].sort() : [];
     const basis = P.basis === 'lq' ? 'lq' : 'ttm';
+
+    // ---------- operating carriers (DOT) ----------
+    const dpeer = dash.data('dotpeer'), dq = dash.data('dotq'), dcar = dash.data('dot_carriers');
+    const dReady = dpeer.status === 'ok' && dq.status === 'ok' && dpeer.data.some((r) => r.latest);
+    const td = (txt, cls) => { const c = document.createElement('td'); if (cls) c.className = cls; c.textContent = txt; return c; };
+    if (tab === 'opcarriers') {
+      root.querySelectorAll('#dbasis-chips .am-chip').forEach((b) => b.setAttribute('aria-pressed', String(basis === b.dataset.basis)));
+      dinact.checked = P.dinactive === true;
+      dmetric.value = P.dmetric || 'comp_fte';
+      if (dcar.status === 'ok') {
+        const groups = ['All', ...new Set(dcar.data.map((c) => c.group))];
+        document.getElementById('dgroup-chips').replaceChildren(...groups.map((g) => {
+          const b = document.createElement('button'); b.className = 'am-chip'; b.textContent = g === 'All' ? 'All carriers' : g;
+          b.setAttribute('aria-pressed', String((P.dgroup || 'All') === g)); b.style.marginRight = '6px';
+          b.addEventListener('click', () => dash.setParams({ dgroup: g })); return b;
+        }));
+      }
+      root.querySelectorAll('#dot-table th[data-base]').forEach((th) => th.setAttribute('data-field', th.dataset.base + '_' + basis));
+      root.querySelectorAll('#dot-table th').forEach((th) => {
+        const b = th.querySelector('button'); th.removeAttribute('aria-sort');
+        if (b && b.dataset.sort === dSortCol) th.setAttribute('aria-sort', dSortDir > 0 ? 'ascending' : 'descending');
+      });
+      const tb = document.querySelector('#dot-table tbody');
+      if (dReady) {
+        const rows = visibleDot(dpeer.data, P);
+        const field = DBASED.has(dSortCol) ? dSortCol + '_' + basis : dSortCol;
+        const sorted = rows.slice().sort((a, b) => {
+          const va = a[field], vb = b[field];
+          if (bad(va) && typeof va !== 'string') return 1; if (bad(vb) && typeof vb !== 'string') return -1;
+          return (typeof va === 'string' ? va.localeCompare(vb) : va - vb) * dSortDir;
+        });
+        const k = (f) => f + '_' + basis;
+        const fnRows = sorted.filter((r) => r.note || r.spike);
+        const fnIndex = new Map(fnRows.map((r, i) => [r.code, String(i + 1)]));
+        const fnBox = document.getElementById('dot-foot');
+        fnBox.replaceChildren(...fnRows.map((r, i) => {
+          const li = document.createElement('li');
+          const b = document.createElement('b'); b.textContent = r.name + '. ';
+          li.append(b, document.createTextNode([r.note, r.spike ? 'Labor cost in ' + ql(r.spike) + ' was well above its usual level (often a ratification or retro payment), which lifts trailing-12-month labor figures.' : ''].filter(Boolean).join(' ')));
+          li.value = i + 1; return li;
+        }));
+        tb.replaceChildren(...sorted.map((r) => {
+          const tr = document.createElement('tr'); tr.dataset.key = r.code; tr.style.cursor = 'pointer';
+          if (!r.current) tr.className = 'off';
+          if (P.dcode === r.code) tr.style.background = 'var(--cds-chart-grid)';
+          const nm = td('', 'l'); const b = document.createElement('span'); b.textContent = r.name; const cd = document.createElement('span');
+          cd.textContent = ' ' + r.code; cd.style.color = 'var(--color-fg-muted)'; nm.append(b, cd);
+          if (r.note) nm.title = r.note;
+          if (r.note || r.spike) { const f = document.createElement('sup'); f.textContent = ' ' + (fnIndex.get(r.code) || ''); f.style.color = 'var(--color-fg-muted)'; nm.append(f); }
+          const op = r[k('opm')];
+          tr.append(nm, td(r.parent === 'Private' ? 'Private' : r.parent, 'l am-hn'), td(r.latest ? ql(r.latest) : '—', 'l'),
+            td(fmtM(r[k('rev')])), td(pct(op), op < 0 ? 'am-neg' : ''), td(fmtM(r[k('comp')])), td(pct(r[k('lopex')])),
+            td(fmtC(r[k('casm')])), td(fmtC(r[k('casmx')]), 'am-hn'), td(fmtC(r[k('lcasm')])), td(fmtN(r[k('fte')])),
+            td(fmtK(r[k('comp_fte')])), td(sgn(r[k('cfyoy')])), td(fmtN(r[k('asm_fte')]), 'am-hn'));
+          return tr;
+        }));
+        const dl = d3.max(dpeer.data, (r) => r.latest);
+        document.getElementById('dot-note').textContent = 'DOT Form 41 reports through ' + ql(dl) + ', one row per airline certificate, so wholly owned regionals such as Envoy, PSA, Piedmont, Endeavor and Horizon appear on their own. $ millions. Salaries & benefits use the same definition as the SEC labor line. Per-FTE figures are annual. A regional\'s revenue is set by its contract with its mainline partner, so compare regionals on costs rather than margins. Click a row to highlight that carrier in the trend chart.';
+        hbar(document.getElementById('lcasm-chart'), rows, (r) => r[k('lcasm')], (v) => d3.format('.2f')(v) + '¢',
+          (r) => [{ name: 'Labor ¢ per ASM', value: fmtC(r[k('lcasm')]) + '¢' }, { name: 'CASM ex fuel', value: fmtC(r[k('casmx')]) + '¢' }, { name: 'Labor cost per FTE', value: fmtK(r[k('comp_fte')]) }]);
+        document.getElementById('salmix-legend').replaceChildren(...SALG.map(([, n], i) => { const s = document.createElement('span'); const w = document.createElement('i'); w.className = 'am-sw'; w.style.background = dash.colors[i]; s.append(w, document.createTextNode(n)); return s; }));
+        salmix(document.getElementById('salmix-chart'), rows, basis);
+        // trends
+        const MET = {
+          comp_fte: { label: 'Labor cost per FTE', tick: (v) => '$' + d3.format(',.0f')(v) + 'K', fmt: (v) => (bad(v) ? '—' : '$' + d3.format(',.0f')(v) + 'K'), zero: false },
+          lcasm: { label: 'Labor cost per ASM', tick: (v) => d3.format('.1f')(v) + '¢', fmt: (v) => (bad(v) ? '—' : d3.format('.2f')(v) + '¢'), zero: true },
+          casmx: { label: 'CASM excluding fuel', tick: (v) => d3.format('.0f')(v) + '¢', fmt: (v) => (bad(v) ? '—' : d3.format('.2f')(v) + '¢'), zero: true },
+          lopex: { label: 'Labor % of operating expense', tick: d3.format('.0%'), fmt: pct, zero: true },
+          fte: { label: 'Full-time equivalent employees', tick: (v) => d3.format('.2~s')(v), fmt: (v) => (bad(v) ? '—' : d3.format(',.0f')(v)), zero: true },
+        };
+        const mk = MET[P.dmetric] ? P.dmetric : 'comp_fte', M = MET[mk];
+        document.getElementById('dtrend-h').textContent = M.label + ' by carrier';
+        document.getElementById('dtrend-note').textContent = mk === 'fte'
+          ? 'Quarterly average of monthly full-time equivalents. Each panel has its own scale, since carrier sizes differ by orders of magnitude.'
+          : 'Each point is a trailing four-quarter figure. All panels share one scale; the outlined panel is the carrier you clicked in the table.';
+        const qm = d3.index(dq.data, (r) => r.code, (r) => r.quarter);
+        const DQ = [...new Set(dq.data.map((r) => r.quarter))].filter((q) => q >= '2023-03').sort();
+        const order = sorted.map((r) => r.code);
+        const vals = dq.data.filter((r) => order.includes(r.code) && r.quarter >= '2023-03').map((r) => r[mk]).filter((v) => !bad(v));
+        const lo = M.zero ? 0 : (d3.min(vals) || 0) * 0.95, hi = (d3.max(vals) || 1) * 1.02;
+        const nameOf = new Map(rows.map((r) => [r.code, r.name]));
+        const box = document.getElementById('mult-dot');
+        if (mk === 'fte') {
+          clearSvg(box);
+          for (const c of order) {
+            const vv = dq.data.filter((r) => r.code === c && r.quarter >= '2023-03').map((r) => r.fte).filter((v) => !bad(v));
+            const tmp = document.createElement('div'); box.append(tmp);
+            multiples(tmp, [c], [{ name: M.label, color: C()[0], get: (m, t, q) => { const r = m.get(t) && m.get(t).get(q); return r ? r[mk] : null; } }],
+              [0, (d3.max(vv) || 1) * 1.05], (t) => { const r = dpeer.data.find((x) => x.code === t); return r ? M.fmt(r.fte_lq) + ' · ' + qs(r.latest) : ''; }, qm, DQ,
+              { tick: M.tick, fmt: M.fmt, name: (t) => nameOf.get(t) || t, highlight: P.dcode });
+            const panel = tmp.querySelector('.am-sm');
+            if (panel) { panel.id = 'mult-dot-' + c; box.insertBefore(panel, tmp); }
+            tmp.remove();
+          }
+        } else {
+          multiples(box, order, [{ name: M.label, color: C()[0], get: (m, t, q) => { const r = m.get(t) && m.get(t).get(q); return r ? r[mk] : null; } }],
+            d3.scaleLinear().domain([lo, hi]).nice(3).domain(),
+            (t) => { const mm = qm.get(t); if (!mm) return ''; const q = [...mm.keys()].sort().reverse().find((qq) => !bad(mm.get(qq)[mk])); return q ? M.fmt(mm.get(q)[mk]) + ' · ' + qs(q) : ''; },
+            qm, DQ, { tick: M.tick, fmt: M.fmt, name: (t) => nameOf.get(t) || t, highlight: P.dcode });
+        }
+      } else if (dpeer.status === 'ok') {
+        tb.replaceChildren();
+        document.getElementById('dot-note').textContent = 'DOT data has not loaded yet. It is added by the weekly refresh.';
+      }
+    }
+
+    if (tab === 'carrier') {
+      const fc = document.getElementById('family-card');
+      const fam = dReady ? dpeer.data.filter((r) => r.parent === (P.carrier || 'DAL') && r.latest) : [];
+      fc.hidden = !fam.length;
+      if (fam.length) {
+        const c0 = car.status === 'ok' ? car.data.find((c) => c.ticker === (P.carrier || 'DAL')) : null;
+        document.getElementById('family-h').textContent = 'Operating carriers' + (c0 ? ' in ' + c0.carrier : '');
+        const multi = fam.length > 1;
+        document.getElementById('family-note').textContent = 'DOT Form 41, each airline certificate on its own; trailing 12 months through each carrier\'s latest DOT quarter.' +
+          (multi ? ' Rows don\'t add up to the SEC figures above: revenue a wholly owned regional earns from its parent is counted on both certificates, and fuel for regional flying is usually paid by the mainline carrier.' : '');
+        document.querySelector('#family-table tbody').replaceChildren(...fam.sort((a, b) => (b.rev_ttm || 0) - (a.rev_ttm || 0)).map((r) => {
+          const tr = document.createElement('tr'); tr.dataset.key = r.code; if (!r.current) tr.className = 'off';
+          const nmc = td(r.name + ' (' + r.code + ')' + (r.note || r.spike ? ' *' : ''), 'l'); nmc.title = [r.note, r.spike ? 'Labor cost in ' + ql(r.spike) + ' was well above its usual level, lifting trailing figures.' : ''].filter(Boolean).join(' ');
+          tr.append(nmc, td(r.role, 'l am-hn'), td(ql(r.latest), 'l'), td(fmtM(r.rev_ttm)), td(pct(r.opm_ttm), r.opm_ttm < 0 ? 'am-neg' : ''),
+            td(fmtM(r.comp_ttm)), td(pct(r.lopex_ttm)), td(fmtN(r.fte_ttm)), td(fmtK(r.comp_fte_ttm)), td(fmtC(r.lcasm_ttm) + (bad(r.lcasm_ttm) ? '' : '¢'), 'am-hn'));
+          return tr;
+        }));
+      }
+    }
 
     if (tab === 'peers') {
       // peer table

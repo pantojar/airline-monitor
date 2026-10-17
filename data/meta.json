@@ -118,5 +118,8 @@
   "at": "2026-10-17T10:37:57Z",
   "items": 75,
   "errors": []
+ },
+ "dot": {
+  "seeded": "2026-10-17 from TranStats downloads; first scheduled run refreshes 2025-2026"
  }
 }

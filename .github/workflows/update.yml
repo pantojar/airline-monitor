@@ -3,7 +3,12 @@ name: Refresh data
 on:
   schedule:
     - cron: "17 10 * * *"   # daily, 6:17 a.m. Eastern (5:17 a.m. in winter)
-  workflow_dispatch: {}      # "Run workflow" button on the Actions tab
+  workflow_dispatch:         # "Run workflow" button on the Actions tab
+    inputs:
+      force_dot:
+        description: "Also refresh DOT Form 41 data now (otherwise it refreshes weekly)"
+        type: boolean
+        default: false
   push:
     branches: [main]
     paths: ["scripts/**", "config/**", ".github/workflows/**"]
@@ -18,7 +23,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
@@ -31,6 +36,7 @@ jobs:
       - name: Pull SEC filings and news
         env:
           SEC_CONTACT: ${{ vars.SEC_CONTACT }}
+          FORCE_DOT: ${{ inputs.force_dot }}
         run: python scripts/update.py
 
       - name: Save updated data

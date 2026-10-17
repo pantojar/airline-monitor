@@ -6,11 +6,13 @@ Runs on a schedule (see .github/workflows/update.yml). Standard library only.
   python scripts/update.py --sec-only
   python scripts/update.py --news-only
   python scripts/update.py --facts-dir DIR   # read saved companyfacts JSON instead of fetching (testing)
+  python scripts/update.py --force-dot       # refresh DOT Form 41 data now (otherwise weekly)
 
 Outputs (all in data/):
   financials.json   one row per carrier-quarter, $ millions
   carriers.json     carrier list for the page (copied from config, plus last filing seen)
   news_feed.json    recent headlines from news feeds, tagged by carrier
+  dot.json          DOT Form 41 figures by operating carrier and quarter (see scripts/dot.py)
   meta.json         when each part last refreshed and anything that failed
 
 A failed fetch never wipes good data: the previous rows for that carrier are kept.
@@ -26,6 +28,9 @@ import time
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import dot  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG = os.path.join(ROOT, "config")
@@ -345,10 +350,17 @@ def main(argv):
         update_sec(meta, facts_dir)
     if "--sec-only" not in argv:
         update_news(meta)
+    if "--sec-only" not in argv and "--news-only" not in argv and "--no-dot" not in argv:
+        try:
+            dot.update_dot(ROOT, meta, user_agent(), force="--force-dot" in argv or os.environ.get("FORCE_DOT") == "true")
+        except Exception as e:  # noqa: BLE001
+            meta.setdefault("dot", {})["error"] = f"{type(e).__name__}: {e}"[:300]
+            print(f"[warn] DOT: {e}", file=sys.stderr)
     meta["generated"] = now_iso()
     save(os.path.join(DATA, "meta.json"), meta)
     bad = [t for t, s in meta.get("sec", {}).get("carriers", {}).items() if not s.get("ok")]
-    print(json.dumps({"generated": meta["generated"], "sec_failures": bad, "news_items": meta.get("news", {}).get("items")}, indent=1))
+    print(json.dumps({"generated": meta["generated"], "sec_failures": bad, "news_items": meta.get("news", {}).get("items"),
+                      "dot": meta.get("dot")}, indent=1))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,182 @@
+[
+ {
+  "code": "AA",
+  "name": "American Airlines",
+  "parent": "AAL",
+  "group": "Network",
+  "role": "Mainline"
+ },
+ {
+  "code": "MQ",
+  "name": "Envoy Air",
+  "parent": "AAL",
+  "group": "Regional",
+  "role": "Wholly owned regional",
+  "note": "Also handles ground operations at many American stations, which adds traffic-handling staff and raises seat-mile costs. Revenue is set by its contract with American."
+ },
+ {
+  "code": "OH",
+  "name": "PSA Airlines",
+  "parent": "AAL",
+  "group": "Regional",
+  "role": "Wholly owned regional",
+  "note": "Revenue is set by its contract with American."
+ },
+ {
+  "code": "PT",
+  "name": "Piedmont Airlines",
+  "parent": "AAL",
+  "group": "Regional",
+  "role": "Wholly owned regional",
+  "note": "Mostly a ground-handling business for American; its small flying operation makes seat-mile metrics unrepresentative."
+ },
+ {
+  "code": "DL",
+  "name": "Delta Air Lines",
+  "parent": "DAL",
+  "group": "Network",
+  "role": "Mainline"
+ },
+ {
+  "code": "9E",
+  "name": "Endeavor Air",
+  "parent": "DAL",
+  "group": "Regional",
+  "role": "Wholly owned regional",
+  "note": "Revenue is set by Delta and runs below Endeavor’s costs, so its operating margin reflects intercompany pricing rather than performance."
+ },
+ {
+  "code": "UA",
+  "name": "United Airlines",
+  "parent": "UAL",
+  "group": "Network",
+  "role": "Mainline"
+ },
+ {
+  "code": "WN",
+  "name": "Southwest Airlines",
+  "parent": "LUV",
+  "group": "Hybrid / value",
+  "role": "Mainline"
+ },
+ {
+  "code": "AS",
+  "name": "Alaska Airlines",
+  "parent": "ALK",
+  "group": "Hybrid / value",
+  "role": "Mainline",
+  "note": "Reports Hawaiian's operations from 2026, after the two carriers moved to one operating certificate."
+ },
+ {
+  "code": "HA",
+  "name": "Hawaiian Airlines",
+  "parent": "ALK",
+  "group": "Hybrid / value",
+  "role": "Mainline",
+  "note": "Separate reports end with Q4 2025; folded into Alaska's certificate."
+ },
+ {
+  "code": "QX",
+  "name": "Horizon Air",
+  "parent": "ALK",
+  "group": "Regional",
+  "role": "Wholly owned regional",
+  "note": "Revenue is set by its contract with Alaska."
+ },
+ {
+  "code": "B6",
+  "name": "JetBlue Airways",
+  "parent": "JBLU",
+  "group": "Hybrid / value",
+  "role": "Mainline"
+ },
+ {
+  "code": "F9",
+  "name": "Frontier Airlines",
+  "parent": "ULCC",
+  "group": "Ultra-low-cost / leisure",
+  "role": "Mainline"
+ },
+ {
+  "code": "NK",
+  "name": "Spirit Airlines",
+  "parent": "SAVE",
+  "group": "Ultra-low-cost / leisure",
+  "role": "Mainline",
+  "note": "Ceased operations May 2, 2026.",
+  "active": false
+ },
+ {
+  "code": "G4",
+  "name": "Allegiant Air",
+  "parent": "ALGT",
+  "group": "Ultra-low-cost / leisure",
+  "role": "Mainline"
+ },
+ {
+  "code": "SY",
+  "name": "Sun Country Airlines",
+  "parent": "ALGT",
+  "group": "Ultra-low-cost / leisure",
+  "role": "Mainline",
+  "note": "Owned by Allegiant from May 13, 2026; standalone (SNCY) before that."
+ },
+ {
+  "code": "MX",
+  "name": "Breeze Airways",
+  "parent": "Private",
+  "group": "Ultra-low-cost / leisure",
+  "role": "Mainline"
+ },
+ {
+  "code": "XP",
+  "name": "Avelo Airlines",
+  "parent": "Private",
+  "group": "Ultra-low-cost / leisure",
+  "role": "Mainline"
+ },
+ {
+  "code": "OO",
+  "name": "SkyWest Airlines",
+  "parent": "SKYW",
+  "group": "Regional",
+  "role": "Independent regional"
+ },
+ {
+  "code": "YX",
+  "name": "Republic Airways",
+  "parent": "RJET",
+  "group": "Regional",
+  "role": "Independent regional"
+ },
+ {
+  "code": "YV",
+  "name": "Mesa Airlines",
+  "parent": "RJET",
+  "group": "Regional",
+  "role": "Independent regional",
+  "note": "Owned by Republic from Nov 2025."
+ },
+ {
+  "code": "G7",
+  "name": "GoJet Airlines",
+  "parent": "Private",
+  "group": "Regional",
+  "role": "Independent regional"
+ },
+ {
+  "code": "C5",
+  "name": "CommuteAir",
+  "parent": "Private",
+  "group": "Regional",
+  "role": "Independent regional"
+ },
+ {
+  "code": "ZW",
+  "name": "Air Wisconsin",
+  "parent": "Private",
+  "group": "Regional",
+  "role": "Independent regional",
+  "note": "Financial schedules not filed after Q4 2025."
+ }
+]
