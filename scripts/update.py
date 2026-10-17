@@ -13,6 +13,10 @@ Outputs (all in data/):
   carriers.json     carrier list for the page (copied from config, plus last filing seen)
   news_feed.json    recent headlines from news feeds, tagged by carrier
   dot.json          DOT Form 41 figures by operating carrier and quarter (see scripts/dot.py)
+  dot_annual.json   DOT headcount by employee group and pilot salaries, by carrier and year
+  dot_fuel.json     DOT monthly fuel gallons and cost by carrier
+  fuel_spot.json    daily Gulf Coast jet fuel spot price (FRED DJFUELUSGULF)
+  exec_pay.json     CEO pay, median employee pay and pay ratio from proxy statements (see scripts/proxy.py)
   meta.json         when each part last refreshed and anything that failed
 
 A failed fetch never wipes good data: the previous rows for that carrier are kept.
@@ -31,6 +35,7 @@ import xml.etree.ElementTree as ET
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import dot  # noqa: E402
+import proxy  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG = os.path.join(ROOT, "config")
@@ -337,6 +342,27 @@ def update_news(meta, per_query=6, keep_days=30, cap=80):
     meta["news"] = {"at": now_iso(), "items": len(items), "errors": errors}
 
 
+def update_fuel_spot(meta):
+    """Daily U.S. Gulf Coast kerosene-type jet fuel spot price ($/gal), EIA via FRED (series DJFUELUSGULF)."""
+    url = "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJFUELUSGULF&cosd=2022-01-01"
+    try:
+        text = http_get(url, accept="text/csv").decode("utf-8", "replace")
+        rows = []
+        for line in text.strip().splitlines()[1:]:
+            d, _, v = line.partition(",")
+            try:
+                rows.append([d, round(float(v), 3)])
+            except ValueError:
+                continue  # holidays are blank
+        if len(rows) < 100:
+            raise ValueError("too few observations")
+        save(os.path.join(DATA, "fuel_spot.json"), rows)
+        meta["fuel_spot"] = {"at": now_iso(), "latest": rows[-1][0], "rows": len(rows)}
+    except Exception as e:  # noqa: BLE001
+        meta.setdefault("fuel_spot", {})["error"] = f"{type(e).__name__}: {e}"[:200]
+        print(f"[warn] fuel spot: {e}", file=sys.stderr)
+
+
 def now_iso():
     return dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
@@ -350,6 +376,14 @@ def main(argv):
         update_sec(meta, facts_dir)
     if "--sec-only" not in argv:
         update_news(meta)
+    if "--sec-only" not in argv and "--news-only" not in argv:
+        update_fuel_spot(meta)
+        try:
+            listed = [c for c in load(os.path.join(CONFIG, "carriers.json"), []) if c.get("status") == "Active"]
+            proxy.update_exec_pay(ROOT, meta, user_agent(), listed, force="--force-proxy" in argv)
+        except Exception as e:  # noqa: BLE001
+            meta.setdefault("exec_pay", {})["error"] = f"{type(e).__name__}: {e}"[:300]
+            print(f"[warn] exec pay: {e}", file=sys.stderr)
     if "--sec-only" not in argv and "--news-only" not in argv and "--no-dot" not in argv:
         try:
             dot.update_dot(ROOT, meta, user_agent(), force="--force-dot" in argv or os.environ.get("FORCE_DOT") == "true")

@@ -44,6 +44,28 @@ TABLES = {
     "t1": {"code": "FJH", "db": SUM_DB, "period": "month",
            "fields": ["YEAR", "MONTH", "UNIQUE_CARRIER", "REGION", "SERVICE_CLASS",
                       "REV_PAX_ENP_110", "REV_PAX_MILES_140", "AVL_SEAT_MILES_320", "REV_ACRFT_DEP_PERF_510"]},
+    # Annual employment by labor category
+    "p10": {"code": "GDF", "db": FIN_DB, "period": "year",
+            "fields": ["YEAR", "UNIQUE_CARRIER", "ENTITY", "GENERAL_MANAGE", "PILOTS_COPILOTS", "OTHER_FLT_PERS",
+                       "PASS_GEN_SVC_ADMIN", "MAINTENANCE", "ARCFT_TRAF_HANDLING_GRP1", "GEN_ARCFT_TRAF_HANDLING",
+                       "AIRCRAFT_CONTROL", "PASSENGER_HANDLING", "CARGO_HANDLING", "TRAINEES_INTRUCTOR", "STATISTICAL",
+                       "TRAFFIC_SOLICITERS", "OTHER", "TRANSPORT_RELATED", "TOTAL"]},
+    # Aircraft operating expenses: pilot and copilot salaries (summed across aircraft types)
+    "p52": {"code": "FMK", "db": FIN_DB, "period": "quarter",
+            "fields": ["YEAR", "QUARTER", "UNIQUE_CARRIER", "REGION", "AIRCRAFT_TYPE", "PILOT_FLY_OPS"]},
+    # Monthly fuel consumption and cost
+    "p12a": {"code": "FMH", "db": FIN_DB, "period": "month",
+             "fields": ["YEAR", "MONTH", "UNIQUE_CARRIER", "TOTAL_GALLONS", "TOTAL_COST"]},
+}
+
+# P-10 categories grouped for display
+P10_GROUPS = {
+    "pilots": ["PILOTS_COPILOTS"],
+    "cabin": ["PASS_GEN_SVC_ADMIN", "OTHER_FLT_PERS"],
+    "maint": ["MAINTENANCE"],
+    "handling": ["ARCFT_TRAF_HANDLING_GRP1", "GEN_ARCFT_TRAF_HANDLING", "AIRCRAFT_CONTROL", "PASSENGER_HANDLING", "CARGO_HANDLING"],
+    "mgmt": ["GENERAL_MANAGE"],
+    "other": ["TRAINEES_INTRUCTOR", "STATISTICAL", "TRAFFIC_SOLICITERS", "OTHER", "TRANSPORT_RELATED"],
 }
 
 
@@ -165,6 +187,56 @@ def aggregate(raw, codes):
     return out
 
 
+def aggregate_annual(raw, codes):
+    """Headcount by labor category (P-10) and pilot salaries (P-5.2) by carrier and year."""
+    out = {}
+    for r in raw.get("p10", []):
+        c = r.get("UNIQUE_CARRIER")
+        if c not in codes:
+            continue
+        a = out.setdefault((c, int(r["YEAR"])), {"code": c, "year": int(r["YEAR"])})
+        for g, cols in P10_GROUPS.items():
+            a["h_" + g] = a.get("h_" + g, 0) + sum(num(r.get(k)) for k in cols)
+        a["h_total"] = a.get("h_total", 0) + num(r.get("TOTAL"))
+    pil = {}
+    for r in raw.get("p52", []):
+        c = r.get("UNIQUE_CARRIER")
+        if c not in codes:
+            continue
+        k = (c, int(r["YEAR"]))
+        pil.setdefault(k, {})
+        q = int(r["QUARTER"])
+        pil[k][q] = pil[k].get(q, 0.0) + num(r.get("PILOT_FLY_OPS"))
+    for k, qs in pil.items():
+        if len(qs) == 4:  # complete years only
+            a = out.setdefault(k, {"code": k[0], "year": k[1]})
+            a["pilot_sal"] = round(sum(qs.values()) / 1000, 1)  # $ millions
+    rows = []
+    for a in out.values():
+        for kk in list(a):
+            if kk.startswith("h_"):
+                a[kk] = round(a[kk])
+        if a.get("pilot_sal") and a.get("h_pilots"):
+            a["pilot_avg"] = round(a["pilot_sal"] * 1e6 / a["h_pilots"])
+        rows.append(a)
+    return sorted(rows, key=lambda r: (r["code"], r["year"]))
+
+
+def aggregate_fuel(raw, codes):
+    """Monthly fuel gallons (millions) and cost ($ millions) by carrier, from P-12(a)."""
+    acc = {}
+    for r in raw.get("p12a", []):
+        c = r.get("UNIQUE_CARRIER")
+        if c not in codes:
+            continue
+        k = (c, f"{int(r['YEAR'])}-{int(r['MONTH']):02d}")
+        a = acc.setdefault(k, [0.0, 0.0])
+        a[0] += num(r.get("TOTAL_GALLONS"))
+        a[1] += num(r.get("TOTAL_COST"))
+    return [{"code": c, "month": m, "gal": round(g / 1e6, 3), "cost": round(cost / 1e6, 3)}
+            for (c, m), (g, cost) in sorted(acc.items()) if g > 0]
+
+
 def update_dot(root, meta, user_agent, first_year=2022, force=False, refetch_years=2):
     """Refresh data/dot.json. Weekly unless forced; on failure keep what was there."""
     data_dir = os.path.join(root, "data")
@@ -202,6 +274,8 @@ def update_dot(root, meta, user_agent, first_year=2022, force=False, refetch_yea
                 status[key] = f"failed: {type(e).__name__}: {e}"[:200]
     raw = {t: [r for y in years for r in cache.get(f"{t}_{y}", [])] for t in TABLES}
     recs = aggregate(raw, codes)
+    annual = aggregate_annual(raw, codes)
+    fuel = aggregate_fuel(raw, codes)
     rows = sorted(recs.values(), key=lambda r: (r["code"], r["quarter"]))
     failed = [k for k, v in status.items() if isinstance(v, str)]
     if rows:
@@ -211,11 +285,19 @@ def update_dot(root, meta, user_agent, first_year=2022, force=False, refetch_yea
             json.dump(rows, f, indent=0, separators=(",", ":"))
         with open(os.path.join(data_dir, "dot_carriers.json"), "w", encoding="utf-8") as f:
             json.dump(cfg, f, indent=1, ensure_ascii=False)
+        if annual:
+            with open(os.path.join(data_dir, "dot_annual.json"), "w", encoding="utf-8") as f:
+                json.dump(annual, f, indent=0, separators=(",", ":"))
+        if fuel:
+            with open(os.path.join(data_dir, "dot_fuel.json"), "w", encoding="utf-8") as f:
+                json.dump(fuel, f, indent=0, separators=(",", ":"))
     latest = {}
     for r in rows:
         for k, f in (("financial", "labor"), ("traffic", "asm"), ("employment", "fte")):
             if r.get(f) is not None:
                 latest[k] = max(latest.get(k, ""), r["quarter"])
+    latest["headcount_year"] = max((a["year"] for a in annual if a.get("h_total")), default=None)
+    latest["fuel_month"] = max((f["month"] for f in fuel), default=None)
     meta["dot"] = {"at": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
                    "ok": not failed, "failed": failed, "latest": latest, "rows": len(rows)}
     return True

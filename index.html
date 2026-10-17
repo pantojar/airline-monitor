@@ -16,7 +16,7 @@
  --cds-font-size-caption:12px;--cds-font-size-body:14px;--cds-font-size-heading:16px;--cds-font-size-title:30px;--cds-font-weight-medium:600;
  --cds-chart-grid:#ece9e3;--cds-chart-axis:#bdb8ae;--cds-chart-reference:#8a857c;--cds-chart-muted:#c9c4ba;
  --cds-surface-popover:#ffffff;--cds-border:#e4e1da;--cds-shadow-popover:0 4px 16px rgba(0,0,0,.12);--cds-text-secondary:#6b6862;--cds-dur-slow:300ms;
- --c1:#2f6fdb;--c2:#d9822b;--c3:#2e9e8f;--c4:#8e5bd6;--c5:#b8a43a;
+ --c1:#2f6fdb;--c2:#d9822b;--c3:#2e9e8f;--c4:#8e5bd6;--c5:#b8a43a;--c6:#c25b8a;
  color-scheme:light;
 }
 @media (prefers-color-scheme:dark){:root{
@@ -24,7 +24,7 @@
  --color-ok:#5cbf86;--color-warn:#e0a24a;--color-bad:#ef6b5b;
  --cds-chart-grid:#2b2a28;--cds-chart-axis:#55524c;--cds-chart-reference:#8a857c;--cds-chart-muted:#4f4c47;
  --cds-surface-popover:#262624;--cds-border:#3a3936;--cds-shadow-popover:0 4px 16px rgba(0,0,0,.5);--cds-text-secondary:#a19d95;
- --c1:#6e9ef0;--c2:#f0a35a;--c3:#5cc4b5;--c4:#b48cf0;--c5:#d6c45c;
+ --c1:#6e9ef0;--c2:#f0a35a;--c3:#5cc4b5;--c4:#b48cf0;--c5:#d6c45c;--c6:#e48ab0;
  color-scheme:dark;
 }}
 html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
@@ -35,7 +35,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
 <script src="vendor/d3.min.js"></script>
 <script>
 window.dash = (function () {
-  var DEFAULTS = { group: 'All', basis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null };
+  var DEFAULTS = { group: 'All', basis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', pgroup: 'All' };
   var params = Object.assign({}, DEFAULTS), calcs = {}, order = [], res = null, fns = [];
   var DATA = null, state = 'loading';
   function compute() {
@@ -61,10 +61,15 @@ window.dash = (function () {
       get('meta').catch(function () { return {}; }),
       get('dot').catch(function () { return []; }),
       get('dot_carriers').catch(function () { return []; }),
+      get('dot_annual').catch(function () { return []; }),
+      get('dot_fuel').catch(function () { return []; }),
+      get('fuel_spot').catch(function () { return []; }),
+      get('exec_pay').catch(function () { return []; }),
     ]).then(function (v) {
       var today = new Date().toISOString().slice(0, 10);
       var curated = v[2].filter(function (r) { return !(r.kind === 'Upcoming' && r.date < today); });
-      DATA = { financials: v[0], carriers: v[1], news: curated.concat(v[3]), dot: v[5], dot_carriers: v[6], meta: [v[4] || {}] };
+      DATA = { financials: v[0], carriers: v[1], news: curated.concat(v[3]), dot: v[5], dot_carriers: v[6], meta: [v[4] || {}],
+        dot_annual: v[7], dot_fuel: v[8], fuel_spot: v[9].map(function (r) { return { date: r[0], price: r[1] }; }), exec_pay: v[10] };
       res = null; state = 'ok';
       var g = v[4] && v[4].generated ? new Date(v[4].generated) : null;
       asOf(g && !isNaN(g)
@@ -90,7 +95,7 @@ window.dash = (function () {
     params: function () { return Object.assign({}, params); },
     setParams: function (o) { Object.assign(params, o); redraw(); },
     resetParams: function () { params = Object.assign({}, DEFAULTS); redraw(); },
-    colors: ['var(--c1)', 'var(--c2)', 'var(--c3)', 'var(--c4)', 'var(--c5)'],
+    colors: ['var(--c1)', 'var(--c2)', 'var(--c3)', 'var(--c4)', 'var(--c5)', 'var(--c6)'],
     setLink: function (n) { try { history.replaceState(null, '', '#' + n); } catch (e) {} },
     refresh: function () {},
   };
@@ -184,6 +189,7 @@ window.dash = (function () {
     <button class="am-tab" role="tab" data-tab="peers" aria-selected="true">Peer comparison</button>
     <button class="am-tab" role="tab" data-tab="carrier" aria-selected="false">Carrier detail</button>
     <button class="am-tab" role="tab" data-tab="opcarriers" aria-selected="false">Operating carriers (DOT)</button>
+    <button class="am-tab" role="tab" data-tab="pay" aria-selected="false">Pay</button>
     <button class="am-tab" role="tab" data-tab="news" aria-selected="false">News</button>
     <button class="am-tab" role="tab" data-tab="notes" aria-selected="false">Sources &amp; notes</button>
   </nav>
@@ -235,6 +241,27 @@ window.dash = (function () {
       <p class="am-note">Where the fuel line drops out, the carrier didn't tag fuel separately that quarter.</p>
       <div class="am-legend"><span><i class="am-sw" id="sw-labor"></i>Labor</span><span><i class="am-sw" id="sw-fuel"></i>Fuel</span></div>
       <div class="am-multi" id="mult-mix" data-source="qtr"></div>
+    </div>
+
+    <div class="am-card" id="fuel-card">
+      <h2>Jet fuel price</h2>
+      <p class="am-note">Daily U.S. Gulf Coast jet fuel spot price (EIA, via FRED), with the average price U.S. passenger airlines actually paid each month, including taxes, into-plane fees and hedging (DOT Form 41). Dollars per gallon.</p>
+      <div class="am-tiles" id="fuel-tiles" style="margin-bottom:var(--cds-gap-md)">
+        <div class="am-tile"><div class="k" id="ft-spot-k">Spot price</div><div class="v" id="ft-spot">—</div><div class="d" id="ft-spot-d">—</div></div>
+        <div class="am-tile"><div class="k">Year earlier</div><div class="v" id="ft-ya">—</div><div class="d" id="ft-ya-d">—</div></div>
+        <div class="am-tile"><div class="k" id="ft-paid-k">Airlines paid</div><div class="v" id="ft-paid">—</div><div class="d" id="ft-paid-d">—</div></div>
+      </div>
+      <div class="am-bar" style="margin-bottom:var(--cds-gap-sm)">
+        <span id="fuel-range">
+          <button class="am-chip" data-range="1y" aria-pressed="false">1 year</button>
+          <button class="am-chip" data-range="2y" aria-pressed="true">2 years</button>
+          <button class="am-chip" data-range="all" aria-pressed="false">Since 2022</button>
+        </span>
+        <span class="sp"></span>
+        <select class="am-sel" id="fuel-code" aria-label="Carrier paid price" data-source="dot_carriers"></select>
+      </div>
+      <div class="am-legend" id="fuel-legend"></div>
+      <div class="am-wrap am-chart" id="fuel-chart" data-source="fuel_spot dot_fuel"></div>
     </div>
 
     <div class="am-grid2">
@@ -338,6 +365,9 @@ window.dash = (function () {
             <th data-base="casm" data-field="casm_ttm"><button data-sort="casm">CASM ¢</button></th>
             <th class="am-hn" data-base="casmx" data-field="casmx_ttm"><button data-sort="casmx">CASM ex fuel ¢</button></th>
             <th data-base="lcasm" data-field="lcasm_ttm"><button data-sort="lcasm">Labor ¢ per ASM</button></th>
+            <th data-base="trasm" data-field="trasm_ttm"><button data-sort="trasm">TRASM ¢</button></th>
+            <th class="am-hn" data-base="prasm" data-field="prasm_ttm"><button data-sort="prasm">PRASM ¢</button></th>
+            <th data-base="lf" data-field="lf_ttm"><button data-sort="lf">Load factor</button></th>
             <th data-base="fte" data-field="fte_ttm"><button data-sort="fte">FTEs</button></th>
             <th data-base="comp_fte" data-field="comp_fte_ttm"><button data-sort="comp_fte">Labor cost per FTE</button></th>
             <th data-base="cfyoy" data-field="cfyoy_ttm"><button data-sort="cfyoy">Per-FTE YoY</button></th>
@@ -372,10 +402,63 @@ window.dash = (function () {
           <option value="lcasm">Labor cost per ASM (¢)</option>
           <option value="casmx">CASM excluding fuel (¢)</option>
           <option value="lopex">Labor % of operating expense</option>
+          <option value="trasm">Total revenue per ASM (¢)</option>
+          <option value="lf">Load factor</option>
           <option value="fte">Full-time equivalent employees</option>
         </select>
       </div>
       <div class="am-multi" id="mult-dot" data-source="dotq"></div>
+    </div>
+  </section>
+
+  <!-- PAY -->
+  <section class="am-page am-stack" id="pay" hidden>
+    <div class="am-card" id="exec-card">
+      <h2>CEO pay and the median employee</h2>
+      <p class="am-note" id="exec-note">From each company's latest proxy statement. CEO total is the Summary Compensation Table figure used for the SEC-required pay ratio. Compensation actually paid adds the change in value of the CEO's stock awards during the year, so it rises and falls with the share price. Median employee pay is the company's own figure for its middle-paid employee.</p>
+      <div class="am-tbl-box">
+        <table class="am-t" id="exec-table" data-source="exec_pay" data-row-key="ticker,fy">
+          <thead><tr>
+            <th class="l" data-field="ticker">Company</th><th class="l am-hn" data-field="ceo">CEO</th><th class="l" data-field="fy">Year</th>
+            <th data-field="ceo_total">CEO total pay</th><th data-field="cap">Comp. actually paid</th>
+            <th data-field="median">Median employee</th><th data-field="ratio">Pay ratio</th><th class="am-hn" data-field="ceo_chg">CEO pay vs prior year</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <ol class="am-foot" id="exec-foot"></ol>
+    </div>
+
+    <div class="am-grid2">
+      <div class="am-card" id="ratio-card">
+        <h2>CEO pay ratio</h2>
+        <p class="am-note">How many years the median employee would need to work to earn what the CEO was paid in one.</p>
+        <div class="am-wrap am-chart" id="ratio-chart" data-source="exec_pay"></div>
+      </div>
+      <div class="am-card" id="pilot-card">
+        <h2>Average pilot salary</h2>
+        <p class="am-note" id="pilot-note">DOT Form 41: pilot and copilot salaries (Schedule P-5.2) divided by the year's pilot headcount (P-10). Salary only, before benefits, profit sharing paid outside payroll, and per diem. Hiring waves pull the average down, since new pilots start at the bottom of the scale.</p>
+        <div class="am-bar" style="margin-bottom:var(--cds-gap-sm)"><span id="pgroup-chips" data-source="dot_carriers"></span></div>
+        <div class="am-wrap am-chart" id="pilot-chart" data-source="dot_annual"></div>
+      </div>
+    </div>
+
+    <div class="am-card" id="pilot-hist-card">
+      <h2>Average pilot salary by year</h2>
+      <p class="am-note">Same measure for each year DOT has published.</p>
+      <div class="am-tbl-box">
+        <table class="am-t" id="pilot-table" data-source="dot_annual" data-row-key="code">
+          <thead><tr id="pilot-head"></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="am-card" id="workforce-card">
+      <h2>Workforce by employee group</h2>
+      <p class="am-note" id="workforce-note">DOT Schedule P-10 annual headcount. DOT's categories are broad: "Flight attendants &amp; passenger services" is its passenger/general services and administration group plus other flight personnel, where most carriers report flight attendants, and some carriers file the same work under different groups from year to year.</p>
+      <div class="am-legend" id="wf-legend"></div>
+      <div class="am-wrap am-chart" id="wf-chart" data-source="dot_annual"></div>
     </div>
   </section>
 
@@ -405,7 +488,11 @@ window.dash = (function () {
         <li><b>Operating carriers (DOT Form 41).</b> Each airline certificate files its own reports with the Department of Transportation, published by BTS on TranStats. The dashboard uses Schedule P-1.2 (profit and loss), P-6 (salaries by employee group, benefits, fuel), P-1(a) (monthly employees) and T-100 (available seat miles, all services). Figures are summed across DOT reporting regions to a system total. Financial schedules run about one quarter behind SEC filings; BTS publishes Q3 2026 on December 17. The job checks for new DOT data weekly.</li>
         <li><b>Salaries &amp; benefits (DOT)</b> is DOT's total salaries and related fringe benefits, less its "personnel expense" line (training, uniforms, crew travel and the like). That definition reproduces the SEC labor line exactly for single-certificate carriers such as United and Southwest. <b>FTEs</b> are the quarter's average monthly full-time equivalents. <b>Labor cost per FTE</b> is salaries &amp; benefits divided by average FTEs, stated per year.</li>
         <li><b>Summing operating carriers</b> does not reproduce a parent's SEC figures. Revenue a wholly owned regional earns from its parent under a capacity-purchase agreement is counted on both certificates, and the parent's SEC labor line can exclude regional labor (American reports it inside "regional expenses"). Regionals' fuel and some airport costs are typically paid by the mainline partner.</li>
-        <li><b>Not here yet:</b> headcount by employee group (DOT P-10, filed annually).</li>
+        <li><b>Unit revenue and load factor (DOT).</b> TRASM is total operating revenue ÷ available seat miles; PRASM uses scheduled passenger revenue; load factor is revenue passenger miles ÷ available seat miles (T-100, all services). A regional's revenue is set by its contract with its mainline partner, so its unit revenue isn't a market figure.</li>
+        <li><b>Per-seat-mile figures for carriers with regional partners.</b> American, Delta, United and Alaska report the ticket revenue and capacity-purchase payments for flights their regional partners operate, while those flights' seat miles appear on the regional's own report. Their DOT CASM, TRASM and PRASM therefore run above the figures the airlines publish, which use combined mainline and regional seat miles. Labor cost per seat mile is affected less, since regional crews are on the regional's payroll. Southwest, JetBlue and the low-cost carriers have no regional partners and aren't affected.</li>
+        <li><b>Jet fuel.</b> The spot line is the daily U.S. Gulf Coast kerosene-type jet fuel price from the Energy Information Administration, via the St. Louis Fed's FRED service (series DJFUELUSGULF), refreshed each morning. "Airlines paid" is DOT Schedule P-12(a): total fuel cost ÷ gallons for the passenger carriers on the DOT tab, which includes taxes, into-plane fees and hedging results and runs about four months behind.</li>
+        <li><b>CEO pay and pay ratio.</b> From each company's proxy statement (DEF 14A). The job reads the SEC-required pay-ratio disclosure automatically each week (median employee pay, CEO total and the ratio), keeping a CEO figure only when it reproduces the stated ratio. Compensation actually paid comes from the pay-versus-performance table and is entered by hand, since table layouts vary when a company had two CEOs in a year. Companies choose their own method for finding the median employee, so ratios are not strictly comparable across companies.</li>
+        <li><b>Average pilot salary.</b> DOT Schedule P-5.2 pilot and copilot salaries for the year ÷ P-10 pilot headcount. DOT's flight attendant and mechanic pay can't be separated as cleanly (carriers file those salaries and headcounts under different groups), so the dashboard doesn't compute averages for them.</li>
       </ul>
     </div>
     <div class="am-card">
@@ -544,6 +631,25 @@ dash.calc('summary', {
   },
 });
 
+dash.calc('fuelpaid', {
+  title: 'Fuel price paid',
+  description: 'Average price per gallon each month: total fuel cost divided by gallons, for each carrier and for all the U.S. passenger carriers on the dashboard together (code ALL).',
+  inputs: ['dot_fuel'],
+  fn: (dot_fuel) => {
+    const out = [];
+    for (const [month, rs] of d3.group(dot_fuel, (r) => r.month)) {
+      const g = d3.sum(rs, (r) => +r.gal), c = d3.sum(rs, (r) => +r.cost);
+      if (g > 0) out.push({ code: 'ALL', month, price: c / g, carriers: rs.length });
+      for (const r of rs) if (+r.gal > 0) out.push({ code: r.code, month, price: +r.cost / +r.gal });
+    }
+    // drop the latest month if fewer carriers have reported it than usually do
+    const all = out.filter((r) => r.code === 'ALL').sort((a, b) => (a.month < b.month ? -1 : 1));
+    const typical = d3.median(all.slice(-13, -1), (r) => r.carriers) || 0;
+    const keep = new Set(all.filter((r) => r.carriers >= typical * 0.8).map((r) => r.month));
+    return out.filter((r) => r.code !== 'ALL' || keep.has(r.month)).sort((a, b) => (a.month < b.month ? -1 : 1));
+  },
+});
+
 dash.calc('dotq', {
   title: 'DOT quarterly ratios',
   description: 'Per operating carrier and quarter (DOT Form 41): quarter ratios and trailing four-quarter labor cost per FTE, labor cost and CASM excluding fuel per available seat mile, and labor share of operating expense.',
@@ -562,7 +668,7 @@ dash.calc('dotq', {
         for (let i = 0; i < 3; i++) { const prev = qs.filter((x) => nextQ(x) === w[0])[0]; if (!prev) break; w.unshift(prev); }
         const win = w.length === 4 ? w.map((x) => m.get(x)) : null;
         const s = (f) => (win && win.every((x) => num(x[f]) !== null) ? win.reduce((a, x) => a + num(x[f]), 0) : null);
-        const comp4 = s('comp'), opex4 = s('opex'), fuel4 = s('fuel'), asm4 = s('asm'), fte4 = s('fte');
+        const comp4 = s('comp'), opex4 = s('opex'), fuel4 = s('fuel'), asm4 = s('asm'), fte4 = s('fte'), rev4 = s('rev'), rpm4 = s('rpm');
         out.push({
           code, quarter: q,
           comp: num(r.comp), opex: num(r.opex), asm: num(r.asm), fte: num(r.fte),
@@ -571,6 +677,8 @@ dash.calc('dotq', {
           lcasm: comp4 !== null && asm4 ? (comp4 / asm4) * 100 : null,
           casmx: opex4 !== null && fuel4 !== null && asm4 ? ((opex4 - fuel4) / asm4) * 100 : null,
           lopex: comp4 !== null && opex4 ? comp4 / opex4 : null,
+          trasm: rev4 !== null && asm4 ? (rev4 / asm4) * 100 : null,
+          lf: rpm4 !== null && asm4 ? rpm4 / asm4 : null,
         });
       }
     }
@@ -603,6 +711,7 @@ dash.calc('dotpeer', {
       const sum = (w, f) => (full(w, f) ? w.reduce((a, r) => a + num(r[f]), 0) : null);
       const T = (f) => (t4.every(ok) ? sum(t4, f) : null);
       const rev_ttm = T('rev'), opex_ttm = T('opex'), comp_ttm = T('comp'), fuel_ttm = T('fuel'), opinc_ttm = T('opinc'), asm_ttm = T('asm');
+      const rpm_ttm = T('rpm'), paxrev_ttm = T('pax_rev');
       const fte_ttm = full(t4, 'fte') ? sum(t4, 'fte') / 4 : null;
       const comp_prev = sum(p4, 'comp'), fte_prev = full(p4, 'fte') ? sum(p4, 'fte') / 4 : null;
       const ya = lq ? m.get(prevQ(lq, 4)) : null;
@@ -643,6 +752,9 @@ dash.calc('dotpeer', {
         cfyoy_lq: cf_lq !== null && cf_ya ? cf_lq / cf_ya - 1 : null, cfyoy_ttm: cf_ttm !== null && cf_prev ? cf_ttm / cf_prev - 1 : null,
         asm_fte_lq: lqv('asm') && lqv('fte') ? (lqv('asm') * 4e3) / lqv('fte') : null,
         asm_fte_ttm: asm_ttm && fte_ttm ? (asm_ttm * 1e3) / fte_ttm : null,
+        trasm_lq: lqv('asm') ? dv(lqv('rev'), lqv('asm')) * 100 : null, trasm_ttm: asm_ttm ? dv(rev_ttm, asm_ttm) * 100 : null,
+        prasm_lq: lqv('asm') ? dv(lqv('pax_rev'), lqv('asm')) * 100 : null, prasm_ttm: asm_ttm && paxrev_ttm !== null ? dv(paxrev_ttm, asm_ttm) * 100 : null,
+        lf_lq: dv(lqv('rpm'), lqv('asm')), lf_ttm: rpm_ttm !== null ? dv(rpm_ttm, asm_ttm) : null,
       };
       SAL.forEach((f, i) => { row[f + '_sh_ttm'] = sT[i]; row[f + '_sh_lq'] = sL[i]; });
       return row;
@@ -737,7 +849,7 @@ dash.calc('dotpeer', {
 
   // ---------- operating carriers (DOT) controls ----------
   let dSortCol = 'comp', dSortDir = -1;
-  const DBASED = new Set(['rev', 'opm', 'comp', 'lopex', 'casm', 'casmx', 'lcasm', 'fte', 'comp_fte', 'cfyoy', 'asm_fte']);
+  const DBASED = new Set(['rev', 'opm', 'comp', 'lopex', 'casm', 'casmx', 'lcasm', 'fte', 'comp_fte', 'cfyoy', 'asm_fte', 'trasm', 'prasm', 'lf']);
   root.querySelectorAll('#dbasis-chips .am-chip').forEach((b) => b.addEventListener('click', () => dash.setParams({ basis: b.dataset.basis })));
   const dinact = document.getElementById('dinactive');
   dinact.addEventListener('change', () => dash.setParams({ dinactive: dinact.checked }));
@@ -988,6 +1100,93 @@ dash.calc('dotpeer', {
     el.textContent = text; el.classList.remove('dash-skeleton');
   }
 
+  // ---------- fuel ----------
+  root.querySelectorAll('#fuel-range .am-chip').forEach((b) => b.addEventListener('click', () => dash.setParams({ fuelrange: b.dataset.range })));
+  const fuelSel = document.getElementById('fuel-code');
+  fuelSel.addEventListener('change', () => dash.setParams({ fuelcode: fuelSel.value }));
+  const usd = (v) => (bad(v) ? '—' : '$' + d3.format('.2f')(v));
+  const mfmt = (m) => d3.utcFormat('%b %Y')(new Date(m + '-15T00:00:00Z'));
+
+  function fuelChart(box, spot, paid, extra, extraName, from) {
+    clearSvg(box);
+    const S = spot.filter((d) => d.date >= from).map((d) => ({ t: new Date(d.date + 'T00:00:00Z'), v: d.price }));
+    const mid = (m) => new Date(m + '-15T00:00:00Z');
+    const A = paid.filter((d) => d.month + '-15' >= from).map((d) => ({ t: mid(d.month), v: d.price, m: d.month }));
+    const B = extra ? extra.filter((d) => d.month + '-15' >= from).map((d) => ({ t: mid(d.month), v: d.price, m: d.month })) : [];
+    if (!S.length) return;
+    const W = Math.max(300, box.clientWidth), H = 300;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).style('display', 'block');
+    const all = [...S, ...A, ...B].map((d) => d.v);
+    const y = d3.scaleLinear([Math.min(0, d3.min(all)), d3.max(all) * 1.08], [H - 22, 8]).nice();
+    const ticks = y.ticks(5);
+    const m = { l: Math.ceil(d3.max(ticks, (t) => textW(svg, usd(t)))) + 8, r: 8 };
+    const x = d3.scaleUtc([S[0].t, d3.max([S[S.length - 1].t, A.length ? A[A.length - 1].t : S[0].t])], [m.l, W - m.r]);
+    svg.selectAll('line.gr').data(ticks).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', (t) => y(t)).attr('y2', (t) => y(t)).attr('stroke', 'var(--cds-chart-grid)');
+    svg.selectAll('text.tk').data(ticks).join('text').attr('x', m.l - 6).attr('y', (t) => y(t) + 4).attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(usd);
+    const xt = x.ticks(W < 520 ? 4 : 8);
+    svg.selectAll('text.xt').data(xt).join('text').attr('x', (t) => x(t)).attr('y', H - 5).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(d3.utcFormat("%b '%y"));
+    const line = (data, color, w) => svg.append('path').datum(data).attr('fill', 'none').attr('stroke', color).attr('stroke-width', w).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round')
+      .attr('d', d3.line().x((d) => x(d.t)).y((d) => y(d.v)));
+    line(S, dash.colors[0], 1.5);
+    line(A, dash.colors[1], 2);
+    svg.selectAll('circle.pa').data(A).join('circle').attr('cx', (d) => x(d.t)).attr('cy', (d) => y(d.v)).attr('r', 2.5).attr('fill', dash.colors[1]);
+    if (B.length) { line(B, dash.colors[2], 2); svg.selectAll('circle.pb').data(B).join('circle').attr('cx', (d) => x(d.t)).attr('cy', (d) => y(d.v)).attr('r', 2.5).attr('fill', dash.colors[2]); }
+    const last = S[S.length - 1];
+    svg.append('circle').attr('cx', x(last.t)).attr('cy', y(last.v)).attr('r', 3).attr('fill', dash.colors[0]);
+    const tp = tip(box);
+    const rule = svg.append('line').attr('y1', 8).attr('y2', H - 22).attr('stroke', 'var(--cds-chart-axis)').attr('opacity', 0);
+    const bis = d3.bisector((d) => d.t).center;
+    svg.append('rect').attr('x', m.l).attr('y', 0).attr('width', W - m.l - m.r).attr('height', H).attr('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const [mx, my] = d3.pointer(ev); const t = x.invert(mx);
+        const s0 = S[bis(S, t)]; const mo = d3.utcFormat('%Y-%m')(s0.t);
+        const a0 = A.find((d) => d.m === mo), b0 = B.find((d) => d.m === mo);
+        rule.attr('x1', x(s0.t)).attr('x2', x(s0.t)).attr('opacity', 1);
+        const sc = box.clientWidth / W;
+        const lines = [{ color: dash.colors[0], name: 'Spot', value: usd(s0.v) }];
+        if (a0) lines.push({ color: dash.colors[1], name: 'Airlines paid (' + mfmt(mo) + ')', value: usd(a0.v) });
+        if (b0) lines.push({ color: dash.colors[2], name: extraName + ' paid', value: usd(b0.v) });
+        tp.show(mx * sc, my * sc, d3.utcFormat('%b %-d, %Y')(s0.t), lines);
+      })
+      .on('pointerleave', () => { rule.attr('opacity', 0); tp.hide(); });
+  }
+
+  // ---------- generic 100% stacked bars ----------
+  function stack100(box, rows, groups, valFn, tipTitle) {
+    clearSvg(box);
+    const data = rows.filter((r) => groups.some(([g]) => valFn(r, g) > 0));
+    if (!data.length) return;
+    const tot = (r) => groups.reduce((a, [g]) => a + (valFn(r, g) || 0), 0);
+    data.sort((a, b) => (valFn(b, groups[0][0]) / tot(b)) - (valFn(a, groups[0][0]) / tot(a)));
+    const W = Math.max(280, box.clientWidth), band = 24, H = data.length * band + 22;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).style('display', 'block');
+    const lab = Math.max(...data.map((r) => textW(svg, r.name))) + 10;
+    const x = d3.scaleLinear([0, 1], [lab, W - 6]);
+    const y = d3.scaleBand(data.map((r) => r.code), [4, H - 18]).paddingInner(0.3);
+    [0, 0.25, 0.5, 0.75, 1].forEach((t) => {
+      svg.append('line').attr('x1', x(t)).attr('x2', x(t)).attr('y1', 0).attr('y2', H - 16).attr('stroke', 'var(--cds-chart-grid)');
+      svg.append('text').attr('x', x(t)).attr('y', H - 3).attr('text-anchor', t === 0 ? 'start' : t === 1 ? 'end' : 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(d3.format('.0%')(t));
+    });
+    const tp = tip(box);
+    for (const r of data) {
+      const T = tot(r);
+      svg.append('text').attr('x', lab - 8).attr('y', y(r.code) + y.bandwidth() / 2 + 4).attr('text-anchor', 'end').attr('fill', 'var(--color-fg)').style('font-size', 'var(--cds-font-size-caption)').text(r.name);
+      let acc = 0;
+      groups.forEach(([g], i) => {
+        const v = (valFn(r, g) || 0) / T;
+        svg.append('rect').attr('x', x(acc)).attr('y', y(r.code)).attr('width', Math.max(0, x(acc + v) - x(acc) - (v > 0.004 ? 1 : 0))).attr('height', y.bandwidth()).attr('fill', dash.colors[i]);
+        acc += v;
+      });
+      svg.append('rect').attr('x', 0).attr('y', y(r.code) - 2).attr('width', W).attr('height', y.bandwidth() + 4).attr('fill', 'transparent')
+        .on('pointermove', (ev) => { const sc = box.clientWidth / W; const [mx, my] = d3.pointer(ev);
+          tp.show(mx * sc, my * sc, tipTitle(r, T), groups.map(([g, n], i) => ({ color: dash.colors[i], name: n, value: d3.format(',')(valFn(r, g) || 0) + ' (' + pct((valFn(r, g) || 0) / T) + ')' }))); })
+        .on('pointerleave', () => tp.hide());
+    }
+  }
+
+  // ---------- pay controls ----------
+  const WFG = [['h_pilots', 'Pilots'], ['h_cabin', 'Flight attendants & passenger services'], ['h_handling', 'Aircraft & traffic handling'], ['h_maint', 'Maintenance'], ['h_mgmt', 'General management'], ['h_other', 'Other']];
+
   // ---------- main draw ----------
   function draw() {
     const P = dash.params();
@@ -1074,12 +1273,13 @@ dash.calc('dotpeer', {
           const op = r[k('opm')];
           tr.append(nm, td(r.parent === 'Private' ? 'Private' : r.parent, 'l am-hn'), td(r.latest ? ql(r.latest) : '—', 'l'),
             td(fmtM(r[k('rev')])), td(pct(op), op < 0 ? 'am-neg' : ''), td(fmtM(r[k('comp')])), td(pct(r[k('lopex')])),
-            td(fmtC(r[k('casm')])), td(fmtC(r[k('casmx')]), 'am-hn'), td(fmtC(r[k('lcasm')])), td(fmtN(r[k('fte')])),
+            td(fmtC(r[k('casm')])), td(fmtC(r[k('casmx')]), 'am-hn'), td(fmtC(r[k('lcasm')])),
+            td(fmtC(r[k('trasm')])), td(fmtC(r[k('prasm')]), 'am-hn'), td(pct(r[k('lf')])), td(fmtN(r[k('fte')])),
             td(fmtK(r[k('comp_fte')])), td(sgn(r[k('cfyoy')])), td(fmtN(r[k('asm_fte')]), 'am-hn'));
           return tr;
         }));
         const dl = d3.max(dpeer.data, (r) => r.latest);
-        document.getElementById('dot-note').textContent = 'DOT Form 41 reports through ' + ql(dl) + ', one row per airline certificate, so wholly owned regionals such as Envoy, PSA, Piedmont, Endeavor and Horizon appear on their own. $ millions. Salaries & benefits use the same definition as the SEC labor line. Per-FTE figures are annual. A regional\'s revenue is set by its contract with its mainline partner, so compare regionals on costs rather than margins. Click a row to highlight that carrier in the trend chart.';
+        document.getElementById('dot-note').textContent = 'DOT Form 41 reports through ' + ql(dl) + ', one row per airline certificate, so wholly owned regionals such as Envoy, PSA, Piedmont, Endeavor and Horizon appear on their own. $ millions. Salaries & benefits use the same definition as the SEC labor line. Per-FTE figures are annual. A regional\'s revenue is set by its contract with its mainline partner, so compare regionals on costs rather than margins. American, Delta, United and Alaska book revenue and contract costs for flights their regional partners operate, but those seat miles count on the regional\'s report, so their per-seat-mile figures run above what the airlines publish. Click a row to highlight that carrier in the trend chart.';
         hbar(document.getElementById('lcasm-chart'), rows, (r) => r[k('lcasm')], (v) => d3.format('.2f')(v) + '¢',
           (r) => [{ name: 'Labor ¢ per ASM', value: fmtC(r[k('lcasm')]) + '¢' }, { name: 'CASM ex fuel', value: fmtC(r[k('casmx')]) + '¢' }, { name: 'Labor cost per FTE', value: fmtK(r[k('comp_fte')]) }]);
         document.getElementById('salmix-legend').replaceChildren(...SALG.map(([, n], i) => { const s = document.createElement('span'); const w = document.createElement('i'); w.className = 'am-sw'; w.style.background = dash.colors[i]; s.append(w, document.createTextNode(n)); return s; }));
@@ -1090,6 +1290,8 @@ dash.calc('dotpeer', {
           lcasm: { label: 'Labor cost per ASM', tick: (v) => d3.format('.1f')(v) + '¢', fmt: (v) => (bad(v) ? '—' : d3.format('.2f')(v) + '¢'), zero: true },
           casmx: { label: 'CASM excluding fuel', tick: (v) => d3.format('.0f')(v) + '¢', fmt: (v) => (bad(v) ? '—' : d3.format('.2f')(v) + '¢'), zero: true },
           lopex: { label: 'Labor % of operating expense', tick: d3.format('.0%'), fmt: pct, zero: true },
+          trasm: { label: 'Total revenue per ASM', tick: (v) => d3.format('.0f')(v) + '¢', fmt: (v) => (bad(v) ? '—' : d3.format('.2f')(v) + '¢'), zero: true },
+          lf: { label: 'Load factor', tick: d3.format('.0%'), fmt: pct, zero: false },
           fte: { label: 'Full-time equivalent employees', tick: (v) => d3.format('.2~s')(v), fmt: (v) => (bad(v) ? '—' : d3.format(',.0f')(v)), zero: true },
         };
         const mk = MET[P.dmetric] ? P.dmetric : 'comp_fte', M = MET[mk];
@@ -1125,6 +1327,102 @@ dash.calc('dotpeer', {
       } else if (dpeer.status === 'ok') {
         tb.replaceChildren();
         document.getElementById('dot-note').textContent = 'DOT data has not loaded yet. It is added by the weekly refresh.';
+      }
+    }
+
+    // ---------- fuel (peer page) ----------
+    const fspot = dash.data('fuel_spot'), fpaid = dash.data('fuelpaid');
+    if (tab === 'peers' && fspot.status === 'ok' && fpaid.status === 'ok' && fspot.data.length) {
+      const range = P.fuelrange || '2y';
+      root.querySelectorAll('#fuel-range .am-chip').forEach((b) => b.setAttribute('aria-pressed', String(range === b.dataset.range)));
+      const lastD = fspot.data[fspot.data.length - 1].date;
+      const back = (yrs) => { const d = new Date(lastD + 'T00:00:00Z'); d.setUTCFullYear(d.getUTCFullYear() - yrs); return d.toISOString().slice(0, 10); };
+      const from = range === '1y' ? back(1) : range === '2y' ? back(2) : '2000-01-01';
+      const ind = fpaid.data.filter((r) => r.code === 'ALL');
+      const codes = [...new Set(fpaid.data.filter((r) => r.code !== 'ALL').map((r) => r.code))];
+      const nm = new Map((dcar.status === 'ok' ? dcar.data : []).map((c) => [c.code, c.name]));
+      if (fuelSel.options.length !== codes.length + 1) fuelSel.replaceChildren(new Option('Compare a carrier…', ''), ...codes.sort((a, b) => (nm.get(a) || a).localeCompare(nm.get(b) || b)).map((c) => new Option((nm.get(c) || c) + ' (' + c + ')', c)));
+      fuelSel.value = P.fuelcode || '';
+      const extra = P.fuelcode ? fpaid.data.filter((r) => r.code === P.fuelcode) : null;
+      const xname = P.fuelcode ? (nm.get(P.fuelcode) || P.fuelcode) : '';
+      fuelChart(document.getElementById('fuel-chart'), fspot.data, ind, extra, xname, from);
+      const lg = [['Gulf Coast spot (daily)', 0], ['U.S. passenger airlines paid (monthly)', 1]].concat(extra ? [[xname + ' paid (monthly)', 2]] : []);
+      document.getElementById('fuel-legend').replaceChildren(...lg.map(([n, i]) => { const sp = document.createElement('span'); const w = document.createElement('i'); w.className = 'am-sw'; w.style.background = dash.colors[i]; sp.append(w, document.createTextNode(n)); return sp; }));
+      const L = fspot.data[fspot.data.length - 1];
+      const ya = fspot.data.filter((d) => d.date <= back(1)).pop();
+      document.getElementById('ft-spot').textContent = usd(L.price);
+      document.getElementById('ft-spot-d').textContent = d3.utcFormat('%b %-d, %Y')(new Date(L.date + 'T00:00:00Z'));
+      document.getElementById('ft-ya').textContent = ya ? usd(ya.price) : '—';
+      document.getElementById('ft-ya-d').textContent = ya ? 'Spot now ' + sgn(L.price / ya.price - 1) + ' vs ' + d3.utcFormat('%b %-d, %Y')(new Date(ya.date + 'T00:00:00Z')) : '—';
+      const lp = ind[ind.length - 1];
+      const lpy = lp ? ind.find((r) => r.month === (+lp.month.slice(0, 4) - 1) + lp.month.slice(4)) : null;
+      document.getElementById('ft-paid').textContent = lp ? usd(lp.price) : '—';
+      document.getElementById('ft-paid-k').textContent = lp ? 'Airlines paid, ' + mfmt(lp.month) : 'Airlines paid';
+      document.getElementById('ft-paid-d').textContent = lp && lpy ? sgn(lp.price / lpy.price - 1) + ' vs ' + mfmt(lpy.month) : '—';
+    }
+
+    // ---------- pay tab ----------
+    if (tab === 'pay') {
+      const ex = dash.data('exec_pay'), ann = dash.data('dot_annual');
+      if (ex.status === 'ok') {
+        const names = new Map((car.status === 'ok' ? car.data : []).map((c) => [c.ticker, c.carrier]));
+        const latest = d3.rollups(ex.data.filter((r) => !bad(r.ratio)), (v) => v.sort((a, b) => b.fy - a.fy), (r) => r.ticker)
+          .map(([t, v]) => { const cur = v[0], prev = v.find((x) => x.fy === cur.fy - 1); return Object.assign({}, cur, { prev, name: names.get(t) || t, code: t }); })
+          .sort((a, b) => b.ratio - a.ratio);
+        const foot = latest.filter((r) => r.note || (r.source && !/verified/.test(r.source)));
+        const fi = new Map(foot.map((r, i) => [r.ticker, i + 1]));
+        document.getElementById('exec-foot').replaceChildren(...foot.map((r, i) => {
+          const li = document.createElement('li'); li.value = i + 1; const b = document.createElement('b'); b.textContent = r.name + '. ';
+          li.append(b, document.createTextNode([r.note, r.source && !/verified/.test(r.source) ? 'Read automatically from the proxy filed ' + r.filed + '; not yet checked by hand.' : ''].filter(Boolean).join(' '))); return li;
+        }));
+        const fmtD = (v) => (bad(v) ? '—' : (v < 0 ? '−$' : '$') + d3.format(',.0f')(Math.abs(v)));
+        const fmtMM = (v) => (bad(v) ? '—' : (v < 0 ? '−$' : '$') + d3.format(',.1f')(Math.abs(v) / 1e6) + 'M');
+        document.querySelector('#exec-table tbody').replaceChildren(...latest.map((r) => {
+          const tr = document.createElement('tr'); tr.dataset.key = r.ticker + ',' + r.fy;
+          const n = td(r.name, 'l');
+          if (fi.has(r.ticker)) { const f = document.createElement('sup'); f.textContent = ' ' + fi.get(r.ticker); f.style.color = 'var(--color-fg-muted)'; n.append(f); }
+          if (r.url) { n.title = 'Proxy filed ' + r.filed; }
+          const chg = r.prev && r.prev.ceo_total ? r.ceo_total / r.prev.ceo_total - 1 : null;
+          tr.append(n, td(r.ceo || '—', 'l am-hn'), td(String(r.fy), 'l'), td(fmtMM(r.ceo_total)), td(fmtMM(r.cap), r.cap < 0 ? 'am-neg' : ''),
+            td(fmtD(r.median)), td(d3.format(',.0f')(r.ratio) + ' : 1'), td(sgn(chg), 'am-hn'));
+          return tr;
+        }));
+        hbar(document.getElementById('ratio-chart'), latest.map((r) => Object.assign({}, r, { group: '' })), (r) => r.ratio, (v) => d3.format(',.0f')(v) + ' : 1',
+          (r) => [{ name: 'CEO total pay', value: fmtMM(r.ceo_total) }, { name: 'Median employee', value: fmtD(r.median) }, { name: 'Fiscal year', value: String(r.fy) }]);
+      }
+      if (ann.status === 'ok' && dcar.status === 'ok') {
+        const info = new Map(dcar.data.map((c) => [c.code, c]));
+        const groups = ['All', ...new Set(dcar.data.map((c) => c.group))];
+        document.getElementById('pgroup-chips').replaceChildren(...groups.map((g) => {
+          const b = document.createElement('button'); b.className = 'am-chip'; b.textContent = g === 'All' ? 'All carriers' : g; b.style.marginRight = '6px';
+          b.setAttribute('aria-pressed', String((P.pgroup || 'All') === g)); b.addEventListener('click', () => dash.setParams({ pgroup: g })); return b;
+        }));
+        const ly = d3.max(ann.data.filter((r) => r.pilot_avg), (r) => r.year);
+        const cur = new Set((dpeer.status === 'ok' ? dpeer.data : []).filter((r) => r.current).map((r) => r.code));
+        const okC = (c) => info.has(c) && cur.has(c) && (!P.pgroup || P.pgroup === 'All' || info.get(c).group === P.pgroup);
+        const byC = d3.group(ann.data, (r) => r.code);
+        const prow = [...byC].filter(([c]) => okC(c)).map(([c, v]) => {
+          const m = new Map(v.map((r) => [r.year, r])); const cur = m.get(ly), prev = m.get(ly - 1);
+          return { code: c, name: info.get(c).name, group: info.get(c).group, cur, prev, years: m, val: cur && cur.pilot_avg };
+        }).filter((r) => r.val && r.cur.h_pilots >= 100);
+        hbar(document.getElementById('pilot-chart'), prow, (r) => r.val, (v) => '$' + d3.format(',.0f')(v / 1000) + 'K',
+          (r) => [{ name: ly + ' average', value: '$' + d3.format(',.0f')(r.val) }, { name: 'Change vs ' + (ly - 1), value: r.prev && r.prev.pilot_avg ? sgn(r.val / r.prev.pilot_avg - 1) : '—' }, { name: 'Pilots', value: d3.format(',')(r.cur.h_pilots) }]);
+        const yrs = [...new Set(ann.data.filter((r) => r.pilot_avg).map((r) => r.year))].sort();
+        const head = document.getElementById('pilot-head');
+        const th = (t, cls, f) => { const e = document.createElement('th'); if (cls) e.className = cls; e.textContent = t; if (f) e.dataset.field = f; return e; };
+        head.replaceChildren(th('Carrier', 'l', 'code'), ...yrs.map((y) => th(String(y), '', 'pilot_avg')), th('Change ' + (ly - 1) + '–' + String(ly).slice(2)), th('Pilots ' + ly, 'am-hn', 'h_pilots'));
+        document.querySelector('#pilot-table tbody').replaceChildren(...prow.sort((a, b) => b.val - a.val).map((r) => {
+          const tr = document.createElement('tr'); tr.dataset.key = r.code;
+          tr.append(td(r.name + ' (' + r.code + ')', 'l'), ...yrs.map((y) => td(r.years.get(y) && r.years.get(y).pilot_avg ? '$' + d3.format(',.0f')(r.years.get(y).pilot_avg) : '—')),
+            td(r.prev && r.prev.pilot_avg ? sgn(r.val / r.prev.pilot_avg - 1) : '—'), td(d3.format(',')(r.cur.h_pilots), 'am-hn'));
+          return tr;
+        }));
+        document.getElementById('pilot-note').textContent = 'DOT Form 41, ' + ly + ': pilot and copilot salaries (Schedule P-5.2) divided by the year\'s pilot headcount (P-10). Salary only, before benefits, profit sharing paid outside payroll and per diem. Hiring waves pull the average down, since new pilots start at the bottom of the scale.';
+        const hy = d3.max(ann.data.filter((r) => r.h_total), (r) => r.year);
+        const wrows = [...byC].filter(([c]) => okC(c)).map(([c, v]) => {
+          const r = v.find((x) => x.year === hy); return r ? Object.assign({ name: info.get(c).name }, r) : null; }).filter(Boolean);
+        document.getElementById('wf-legend').replaceChildren(...WFG.map(([, n], i) => { const sp = document.createElement('span'); const w = document.createElement('i'); w.className = 'am-sw'; w.style.background = dash.colors[i]; sp.append(w, document.createTextNode(n)); return sp; }));
+        stack100(document.getElementById('wf-chart'), wrows, WFG, (r, g) => r[g], (r, T) => r.name + ' · ' + hy + ' · ' + d3.format(',')(T) + ' employees');
       }
     }
 
