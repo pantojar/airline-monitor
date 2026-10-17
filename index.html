@@ -30,7 +30,8 @@
 html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
 #dash-root{max-width:1280px;margin:0 auto;padding:28px 16px 48px}
 #dash-root .am-asof{margin:4px 0 0;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
-#dash-root .dash-skeleton{color:transparent;background:var(--cds-chart-grid);border-radius:4px}</style>
+#dash-root .dash-skeleton{color:transparent;background:var(--cds-chart-grid);border-radius:4px}
+#dash-root [hidden]{display:none !important}</style>
 <script src="vendor/d3.min.js"></script>
 <script>
 window.dash = (function () {
@@ -47,6 +48,7 @@ window.dash = (function () {
   function redraw() { fns.forEach(function (f) { try { f(); } catch (e) { console.error(e); } }); }
   var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(redraw, 150); });
   function get(n) {
+    if (window.__EMBED && window.__EMBED[n] !== undefined) return Promise.resolve(window.__EMBED[n]);
     return fetch('data/' + n + '.json?t=' + Math.floor(Date.now() / 60000), { cache: 'no-store' })
       .then(function (r) { if (!r.ok) throw new Error(n + ' ' + r.status); return r.json(); });
   }
