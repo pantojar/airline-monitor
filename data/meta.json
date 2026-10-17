@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-17T17:28:11Z",
+  "at": "2026-10-17T18:49:29Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -113,20 +113,35 @@
    }
   }
  },
- "generated": "2026-10-17T17:29:20Z",
+ "generated": "2026-10-17T18:51:59Z",
  "news": {
-  "at": "2026-10-17T17:28:34Z",
+  "at": "2026-10-17T18:49:51Z",
   "items": 75,
   "errors": []
  },
  "dot": {
-  "ok": true,
-  "failed": [],
+  "at": "2026-10-17T18:51:59Z",
+  "ok": false,
+  "failed": [
+   "p10_2026"
+  ],
   "latest": {
    "financial": "2026-06",
    "traffic": "2026-06",
-   "employment": "2026-06"
+   "employment": "2026-06",
+   "headcount_year": 2025,
+   "fuel_month": "2026-06"
   },
   "rows": 430
+ },
+ "fuel_spot": {
+  "at": "2026-10-17T18:49:52Z",
+  "latest": "2026-10-14",
+  "rows": 1193
+ },
+ "exec_pay": {
+  "at": "2026-10-17T18:50:04Z",
+  "rows": 20,
+  "errors": []
  }
 }
