@@ -121,10 +121,8 @@
  },
  "dot": {
   "at": "2026-10-17T18:51:59Z",
-  "ok": false,
-  "failed": [
-   "p10_2026"
-  ],
+  "ok": true,
+  "failed": [],
   "latest": {
    "financial": "2026-06",
    "traffic": "2026-06",

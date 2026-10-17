@@ -260,7 +260,9 @@ def update_dot(root, meta, user_agent, first_year=2022, force=False, refetch_yea
     ts = TranStats(user_agent)
     status = {}
     for table in TABLES:
-        for y in years:
+        # P-10 is filed once a year, after year end: the current year never exists yet
+        tyears = [y for y in years if not (TABLES[table]["period"] == "year" and y >= this_year)]
+        for y in tyears:
             key = f"{table}_{y}"
             if key in cache and y < this_year - (refetch_years - 1):
                 continue  # settled history: reuse
