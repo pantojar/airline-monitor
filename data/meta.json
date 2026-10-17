@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-17T10:37:35Z",
+  "at": "2026-10-17T17:28:11Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -113,13 +113,21 @@
    }
   }
  },
- "generated": "2026-10-17T10:37:57Z",
+ "generated": "2026-10-17T17:29:20Z",
  "news": {
-  "at": "2026-10-17T10:37:57Z",
+  "at": "2026-10-17T17:28:34Z",
   "items": 75,
   "errors": []
  },
  "dot": {
-  "seeded": "2026-10-17 from TranStats downloads; first scheduled run refreshes 2025-2026"
+  "at": "2026-10-17T17:29:20Z",
+  "ok": true,
+  "failed": [],
+  "latest": {
+   "financial": "2026-06",
+   "traffic": "2026-06",
+   "employment": "2026-06"
+  },
+  "rows": 430
  }
 }
