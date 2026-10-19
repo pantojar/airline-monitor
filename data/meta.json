@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-19T13:28:37Z",
+  "at": "2026-10-19T13:47:04Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -113,9 +113,9 @@
    }
   }
  },
- "generated": "2026-10-19T13:44:00Z",
+ "generated": "2026-10-19T13:54:58Z",
  "news": {
-  "at": "2026-10-19T13:29:00Z",
+  "at": "2026-10-19T13:47:26Z",
   "items": 76,
   "errors": []
  },
@@ -133,7 +133,7 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-19T13:29:01Z",
+  "at": "2026-10-19T13:47:27Z",
   "latest": "2026-10-14",
   "rows": 1193
  },
@@ -143,6 +143,7 @@
   "errors": []
  },
  "labor": {
+  "at": "2026-10-19T13:54:58Z",
   "groups": 96,
   "errors": [],
   "union_sites": [
@@ -158,6 +159,7 @@
     "name": "IAM District 142",
     "url": "https://www.iam142.org",
     "groups": 6,
+    "error": "posts: URLError; media: URLError; /feed/: URLError; /rss: URLError; /rss.xml: URLError; /feed: URLError",
     "method": null,
     "items": 0,
     "pdfs_read": 0
@@ -168,7 +170,7 @@
     "groups": 22,
     "method": "wp-posts,wp-media",
     "items": 276,
-    "pdfs_read": 3
+    "pdfs_read": 0
    },
    {
     "name": "AFA-CWA",
@@ -182,6 +184,7 @@
     "name": "AFA United",
     "url": "https://www.unitedafa.org",
     "groups": 1,
+    "error": "posts: HTTP 406; media: HTTP 406; /feed/: HTTP 404; /rss: HTTP 404; /rss.xml: HTTP 404; /feed: HTTP 404",
     "method": null,
     "items": 0,
     "pdfs_read": 0
@@ -190,6 +193,7 @@
     "name": "APFA",
     "url": "https://www.apfa.org",
     "groups": 1,
+    "error": "posts: HTTP 403; media: HTTP 403; /feed/: HTTP 403; /rss: HTTP 403; /rss.xml: HTTP 403; /feed: HTTP 403",
     "method": null,
     "items": 0,
     "pdfs_read": 0
@@ -198,6 +202,7 @@
     "name": "ALPA",
     "url": "https://www.alpa.org",
     "groups": 10,
+    "error": "posts: HTTP 403; media: HTTP 403; /feed/: HTTP 403; /rss: HTTP 403; /rss.xml: HTTP 403; /feed: HTTP 403",
     "method": null,
     "items": 0,
     "pdfs_read": 0
@@ -206,6 +211,7 @@
     "name": "Allied Pilots Association",
     "url": "https://www.alliedpilots.org",
     "groups": 1,
+    "error": "posts: JSONDecodeError; media: JSONDecodeError; /feed/: HTTP 4; /rss: HTTP 4; /rss.xml: HTTP 404; /feed: HTTP 4",
     "method": null,
     "items": 0,
     "pdfs_read": 0
@@ -214,6 +220,7 @@
     "name": "SWAPA",
     "url": "https://www.swapa.org",
     "groups": 1,
+    "error": "posts: HTTP 404; media: HTTP 404; /feed/: HTTP 404; /rss: HTTP 404; /rss.xml: HTTP 404; /feed: HTTP 404",
     "method": null,
     "items": 0,
     "pdfs_read": 0
@@ -232,12 +239,13 @@
     "groups": 26,
     "method": "wp-posts,wp-media",
     "items": 148,
-    "pdfs_read": 3
+    "pdfs_read": 0
    },
    {
     "name": "TWU Local 556",
     "url": "https://www.twu556.org",
     "groups": 5,
+    "error": "posts: HTTP 401; media: HTTP 401; /feed/: HTTP 17; /rss: HTTP 17; /rss.xml: HTTP 404; /feed: HTTP 17",
     "method": null,
     "items": 0,
     "pdfs_read": 0
@@ -246,6 +254,7 @@
     "name": "TWU Local 555",
     "url": "https://www.twu555.org",
     "groups": 5,
+    "error": "posts: HTTP 429; media: HTTP 429; /feed/: HTTP 429; /rss: HTTP 429; /rss.xml: HTTP 429; /feed: HTTP 429",
     "method": null,
     "items": 0,
     "pdfs_read": 0
@@ -254,6 +263,7 @@
     "name": "AMFA",
     "url": "https://www.amfanational.org",
     "groups": 5,
+    "error": "posts: HTTP 404; media: HTTP 404; /feed/: HTTP 404; /rss: HTTP 404; /rss.xml: HTTP 404; /feed: HTTP 404",
     "method": null,
     "items": 0,
     "pdfs_read": 0
@@ -262,6 +272,7 @@
     "name": "CWA",
     "url": "https://cwa-union.org",
     "groups": 4,
+    "error": "posts: HTTP 404; media: HTTP 404; /feed/: HTTP 404; /rss: HTTP 404; /rss.xml: HTTP 404; /feed: HTTP 404",
     "method": null,
     "items": 0,
     "pdfs_read": 0
@@ -270,6 +281,7 @@
     "name": "PAFCA",
     "url": "https://www.pafca.org",
     "groups": 3,
+    "error": "posts: HTTP 404; media: HTTP 404; /feed/: HTTP 429; /rss: HTTP 429; /rss.xml: HTTP 429; /feed: HTTP 429",
     "method": null,
     "items": 0,
     "pdfs_read": 0
