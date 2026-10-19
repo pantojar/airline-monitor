@@ -1550,7 +1550,11 @@ dash.calc('dotpeer', {
       document.querySelector('#usrc-table tbody').replaceChildren(...rep.filter((x) => x.name).map((x) => {
         const tr = document.createElement('tr');
         const n = td('', 'l'); const a = document.createElement('a'); a.href = x.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = x.name; a.style.color = 'inherit'; n.append(a);
-        const how = x.method ? x.method.replace('wp-posts', 'posts').replace('wp-media', 'PDF uploads').replace(/rss .*/, 'RSS feed') : 'Unavailable';
+        const why = (e) => /HTTP (401|403|406|429)/.test(e || '') ? 'Unavailable: site blocks automated readers'
+          : /URLError|Timeout/.test(e || '') ? 'Unavailable: site did not respond'
+          : 'Unavailable: no news feed found';
+        const how = x.method === 'deferred' ? 'Carried over from last read'
+          : x.method ? x.method.replace('wp-posts', 'posts').replace('wp-media', 'PDF uploads').replace(/rss .*/, 'RSS feed') : why(x.error);
         tr.append(n, td(how, 'l'), td(x.method ? d3.format(',')(x.items) : '—'), td(String(x.groups)), td(String(evCount.get(x.name) || 0)));
         if (!x.method) tr.className = 'off';
         return tr;
