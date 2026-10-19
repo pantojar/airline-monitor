@@ -1,0 +1,18 @@
+[
+ {"name": "IAM District 141", "url": "https://iam141.org", "unions": ["\\bIAM\\b", "Machinists"], "carriers": ["UAL", "ALK"]},
+ {"name": "IAM District 142", "url": "https://www.iam142.org", "unions": ["\\bIAM\\b", "Machinists"], "carriers": ["ALK", "LUV"]},
+ {"name": "IAM (international)", "url": "https://www.goiam.org", "unions": ["\\bIAM\\b", "Machinists"], "carriers": ["UAL", "ALK", "LUV", "AAL"]},
+ {"name": "AFA-CWA", "url": "https://www.afacwa.org", "unions": ["\\bAFA\\b", "Association of Flight Attendants"], "carriers": ["UAL", "ALK", "AAL", "DAL", "ULCC", "RJET"]},
+ {"name": "AFA United", "url": "https://www.unitedafa.org", "unions": ["\\bAFA\\b", "Association of Flight Attendants"], "carriers": ["UAL"]},
+ {"name": "APFA", "url": "https://www.apfa.org", "unions": ["\\bAPFA\\b"], "carriers": ["AAL"]},
+ {"name": "ALPA", "url": "https://www.alpa.org", "unions": ["\\bALPA\\b", "Air Line Pilots"], "carriers": ["DAL", "UAL", "ALK", "JBLU", "ULCC", "AAL", "RJET"]},
+ {"name": "Allied Pilots Association", "url": "https://www.alliedpilots.org", "unions": ["\\bAPA\\b", "Allied Pilots"], "carriers": ["AAL"]},
+ {"name": "SWAPA", "url": "https://www.swapa.org", "unions": ["SWAPA"], "carriers": ["LUV"]},
+ {"name": "Teamsters", "url": "https://teamster.org", "unions": ["\\bIBT\\b", "Teamsters"], "carriers": ["UAL", "ALK", "ULCC", "ALGT", "RJET", "LUV", "AAL"]},
+ {"name": "TWU", "url": "https://www.twu.org", "unions": ["\\bTWU\\b", "Transport Workers"], "carriers": ["LUV", "AAL", "JBLU", "ALK", "ULCC", "RJET"]},
+ {"name": "TWU Local 556", "url": "https://www.twu556.org", "unions": ["\\bTWU\\b", "Transport Workers"], "carriers": ["LUV"]},
+ {"name": "TWU Local 555", "url": "https://www.twu555.org", "unions": ["\\bTWU\\b", "Transport Workers"], "carriers": ["LUV"]},
+ {"name": "AMFA", "url": "https://www.amfanational.org", "unions": ["\\bAMFA\\b", "Aircraft Mechanics Fraternal"], "carriers": ["LUV", "ALK"]},
+ {"name": "CWA", "url": "https://cwa-union.org", "unions": ["\\bCWA\\b", "Communications Workers"], "carriers": ["AAL"]},
+ {"name": "PAFCA", "url": "https://www.pafca.org", "unions": ["PAFCA", "Flight Control"], "carriers": ["UAL", "AAL", "DAL"]}
+]

@@ -473,12 +473,12 @@ window.dash = (function () {
   <section class="am-page am-stack" id="labor" hidden>
     <div class="am-card" id="labor-sum-card">
       <h2>Union contracts</h2>
-      <p class="am-note" id="labor-note">Groups, unions, headcount and amendable dates come from each carrier's latest 10-K. Status comes from the company's latest 10-Q when it reports a ratification, and otherwise from the most recent news headline naming the carrier, the craft and a bargaining milestone. All of it updates automatically; follow the links to check a status.</p>
+      <p class="am-note" id="labor-note">Groups, unions, headcount and amendable dates come from each carrier's latest 10-K. Status is the most recent dated event from four automatic sources: the unions' own websites (announcements and posted PDFs, read group by group), the company's 10-Q, 10-K footnotes, and news headlines naming the carrier, the craft and a milestone. Follow the links to check a status.</p>
       <div class="am-tiles" id="labor-tiles">
         <div class="am-tile"><div class="k">Represented groups tracked</div><div class="v" id="lt-groups">—</div><div class="d" id="lt-groups-d">—</div></div>
         <div class="am-tile"><div class="k">Past amendable date</div><div class="v" id="lt-open">—</div><div class="d" id="lt-open-d">—</div></div>
-        <div class="am-tile"><div class="k">Mediation, pickets or strike votes</div><div class="v" id="lt-hot">—</div><div class="d">From news in the past year</div></div>
-        <div class="am-tile"><div class="k">Ratified in the past year</div><div class="v" id="lt-rat">—</div><div class="d">From 10-Qs and news</div></div>
+        <div class="am-tile"><div class="k">Rejected, mediation, pickets or strike votes</div><div class="v" id="lt-hot">—</div><div class="d">Latest status, past year</div></div>
+        <div class="am-tile"><div class="k">Ratified in the past year</div><div class="v" id="lt-rat">—</div><div class="d">Unions, 10-Qs and news</div></div>
       </div>
     </div>
 
@@ -503,6 +503,17 @@ window.dash = (function () {
             <th class="l" data-field="carrier">Carrier</th><th class="l" data-field="group">Group</th><th class="l am-hn" data-field="union">Union</th>
             <th data-field="employees">Employees</th><th class="l" data-field="amendable_text">Amendable</th><th class="l" data-field="status">Status</th><th class="l w" data-field="news">Latest source</th>
           </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="am-card" id="usrc-card">
+      <h2>Union websites read</h2>
+      <p class="am-note">Checked weekly. Sites that block automated reading, or don't publish in a readable form, show as unavailable; their news still reaches the tracker through headlines.</p>
+      <div class="am-tbl-box">
+        <table class="am-t" id="usrc-table" data-source="meta">
+          <thead><tr><th class="l">Site</th><th class="l">Read via</th><th>Items, past year</th><th>Groups it covers</th><th>Status events found</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -546,7 +557,7 @@ window.dash = (function () {
         <li><b>Jet fuel.</b> The spot line is the daily U.S. Gulf Coast kerosene-type jet fuel price from the Energy Information Administration, via the St. Louis Fed's FRED service (series DJFUELUSGULF), refreshed each morning. "Airlines paid" is DOT Schedule P-12(a): total fuel cost ÷ gallons for the passenger carriers on the DOT tab, which includes taxes, into-plane fees and hedging results and runs about four months behind.</li>
         <li><b>CEO pay and pay ratio.</b> From each company's proxy statement (DEF 14A). The job reads the SEC-required pay-ratio disclosure automatically each week (median employee pay, CEO total and the ratio), keeping a CEO figure only when it reproduces the stated ratio. Compensation actually paid comes from the pay-versus-performance table and is entered by hand, since table layouts vary when a company had two CEOs in a year. Companies choose their own method for finding the median employee, so ratios are not strictly comparable across companies.</li>
         <li><b>Average pilot salary.</b> DOT Schedule P-5.2 pilot and copilot salaries for the year ÷ P-10 pilot headcount. DOT's flight attendant and mechanic pay can't be separated as cleanly (carriers file those salaries and headcounts under different groups), so the dashboard doesn't compute averages for them.</li>
-        <li><b>Bargaining tracker.</b> Represented groups, unions, headcounts and amendable dates are read automatically from the union table in each carrier's latest 10-K (checked weekly, re-read when a new 10-K is filed). Allegiant, Republic and SkyWest describe their contracts in prose, so their 10-K sentences are quoted instead. Status: a ratification reported in the company's latest 10-Q is used when it's the most recent event; otherwise a weekly news search for each group that is open or amendable within 18 months takes the most recent headline from the past year that names the carrier, the craft and a milestone (ratified, rejected, tentative agreement, mediation, release request, strike vote, picketing, negotiations). Headline matching can misread a story, so every status links to its source. Amendable dates given only as a year are treated as open from January 1 of the following year.</li>
+        <li><b>Bargaining tracker.</b> Represented groups, unions, headcounts and amendable dates are read automatically from the union table in each carrier's latest 10-K (checked weekly, re-read when a new 10-K is filed). Allegiant, Republic and SkyWest describe their contracts in prose, so their 10-K sentences are quoted instead. Status is the most recent dated event across four sources. Union websites listed on the Bargaining tab are read weekly: recent posts and uploaded announcement PDFs are split into clauses, and a clause naming a tracked group and a milestone (for example "Fleet Service, Passenger Service, and Central Load Planners did not ratify") sets that group's status. A ratification in the company's latest 10-Q and status stated in 10-K footnotes are used too. Otherwise a weekly news search for each group that is open or amendable within 18 months takes the most recent headline from the past year that names the carrier, the craft and a milestone (ratified, rejected, tentative agreement, mediation, release request, strike vote, picketing, negotiations). Headline matching can misread a story, so every status links to its source. Amendable dates given only as a year are treated as open from January 1 of the following year.</li>
       </ul>
     </div>
     <div class="am-card">
@@ -1500,6 +1511,7 @@ dash.calc('dotpeer', {
       document.getElementById('lt-open').textContent = d3.format(',')(op.length);
       document.getElementById('lt-open-d').textContent = d3.format(',')(d3.sum(op, (r) => r.employees || 0)) + ' employees';
       document.getElementById('lt-hot').textContent = d3.format(',')(base.filter((r) => ['In mediation', 'Seeking release', 'Strike vote', 'Picketing', 'Contract rejected'].includes(r.status) && recent(r)).length);
+      document.getElementById('labor-note').title = '';
       document.getElementById('lt-rat').textContent = d3.format(',')(base.filter((r) => r.status === 'Ratified' && recent(r)).length);
       // legend and calendar
       const cats = [...new Map(Object.values(LCAT).map((v) => [v[0], v[1]]))];
@@ -1511,20 +1523,36 @@ dash.calc('dotpeer', {
       document.querySelector('#labor-table tbody').replaceChildren(...sorted.map((r) => {
         const tr = document.createElement('tr'); tr.dataset.key = [r.ticker, r.unit || '', r.group].join(',');
         const st = td('', 'l'); const pill = document.createElement('span'); pill.className = 'am-pill'; pill.style.color = lcat(r.status)[1];
-        const link = r.status_source === '10-Q' ? r.filing_url : r.news ? r.news.url : null;
+        const link = r.status_source === 'union' && r.union_event ? r.union_event.url : r.status_source === '10-Q' ? r.filing_url : r.news ? r.news.url : null;
         if (link && /^https:\/\//.test(link)) { const a = document.createElement('a'); a.href = link; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = r.status; pill.append(a); } else pill.textContent = r.status;
         st.append(pill);
         if (r.status_date && r.status_source !== '10-K') { const d = document.createElement('span'); d.style.color = 'var(--color-fg-muted)'; d.style.marginLeft = '6px';
-          d.textContent = (r.status_date.length === 7 ? d3.utcFormat('%b %Y')(new Date(r.status_date + '-15T00:00:00Z')) : d3.utcFormat('%b %-d, %Y')(new Date(r.status_date + 'T00:00:00Z'))) + ' · ' + (r.status_source === '10-Q' ? '10-Q' : 'news');
+          d.textContent = (r.status_date.length === 7 ? d3.utcFormat('%b %Y')(new Date(r.status_date + '-15T00:00:00Z')) : d3.utcFormat('%b %-d, %Y')(new Date(r.status_date.slice(0, 10) + 'T00:00:00Z'))) + ' · ' + (r.status_source === 'union' && r.union_event ? r.union_event.source : r.status_source === '10-Q' ? '10-Q' : r.status_source === '10-K' ? '10-K' : 'news');
           st.append(d); }
         const src = td('', 'l w');
-        if (r.status_source === '10-Q' && r.filing_quote) src.textContent = '“' + r.filing_quote.slice(0, 220) + (r.filing_quote.length > 220 ? '…' : '') + '”';
+        if (r.status_source === 'union' && r.union_event) { const e = r.union_event; const a = document.createElement('a'); a.href = e.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = e.title; a.style.color = 'inherit';
+          const q = document.createElement('div'); q.style.color = 'var(--color-fg-muted)'; q.textContent = '“' + e.quote.slice(0, 220) + (e.quote.length > 220 ? '…' : '') + '”';
+          src.append(a, q); }
+        else if (r.status_source === '10-Q' && r.filing_quote) src.textContent = '“' + r.filing_quote.slice(0, 220) + (r.filing_quote.length > 220 ? '…' : '') + '”';
         else if (r.news) { const a = document.createElement('a'); a.href = r.news.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = r.news.title; a.style.color = 'inherit';
           const m = document.createElement('span'); m.style.color = 'var(--color-fg-muted)'; m.textContent = ' — ' + (r.news.source || '');
           src.append(a, m); }
         else if (r.footnote) src.textContent = r.footnote;
         if (r.open && r.status !== 'Ratified') tr.style.fontWeight = 'var(--cds-font-weight-medium)';
         tr.append(td(r.carrier, 'l'), td(r.group, 'l'), td(r.union || '—', 'l am-hn'), td(r.employees ? d3.format(',')(r.employees) : '—'), td(amText(r), 'l'), st, src);
+        return tr;
+      }));
+      // union sites
+      const meta0 = dash.data('meta');
+      const rep = meta0.status === 'ok' && meta0.data[0] && meta0.data[0].labor ? (meta0.data[0].labor.union_sites || []) : [];
+      const evCount = new Map();
+      all.forEach((r) => (r.union_events || []).forEach((e) => evCount.set(e.source, (evCount.get(e.source) || 0) + 1)));
+      document.querySelector('#usrc-table tbody').replaceChildren(...rep.filter((x) => x.name).map((x) => {
+        const tr = document.createElement('tr');
+        const n = td('', 'l'); const a = document.createElement('a'); a.href = x.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = x.name; a.style.color = 'inherit'; n.append(a);
+        const how = x.method ? x.method.replace('wp-posts', 'posts').replace('wp-media', 'PDF uploads').replace(/rss .*/, 'RSS feed') : 'Unavailable';
+        tr.append(n, td(how, 'l'), td(x.method ? d3.format(',')(x.items) : '—'), td(String(x.groups)), td(String(evCount.get(x.name) || 0)));
+        if (!x.method) tr.className = 'off';
         return tr;
       }));
       // disclosures

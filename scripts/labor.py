@@ -361,7 +361,7 @@ def update_labor(root, meta, ua, carriers, force=False):
                         unit, group = (k if k not in (t,) else unit), group[len(a["prefix"]) + 1:]
                         break
             carrier = aliases[unit] if unit not in (None, "Mainline") and unit in aliases else aliases.get(t, {"name": unit or t})
-            row = dict(g, ticker=t, unit=unit, group=group[:1].upper() + group[1:], carrier=carrier["name"])
+            row = dict(g, ticker=t, unit=unit, group=group[:1].upper() + group[1:], group_raw=g["group"], carrier=carrier["name"])
             amend = g.get("amendable") or ""
             cut = today.isoformat()[:len(amend)] if amend else ""
             row["open"] = bool(amend) and (amend < cut if g.get("precision") != "year" else amend < str(today.year))
@@ -435,11 +435,29 @@ def update_labor(root, meta, ua, carriers, force=False):
                         row["status"], row["status_source"], row["status_date"], row["filing_quote"], row["filing_url"] = "Ratified", "10-Q", ym, sent, tq.get("url")
                         break
                 groups.append(row)
+    # union websites: dated, group-level announcements; the newest event across all sources sets the status
+    import unions
+    try:
+        uevents, ureport = unions.collect(root, groups, ua, aliases)
+    except Exception as e:  # noqa: BLE001
+        uevents, ureport = {}, [{"error": f"{type(e).__name__}: {e}"[:200]}]
+        errors.append("union sites: " + type(e).__name__)
+    rank = {"union": 3, "10-Q": 2, "news": 1, "10-K": 0}
+    for row in groups:
+        evs = uevents.get((row["ticker"], row.get("unit"), row["group"])) or uevents.get((row["ticker"], row.get("unit"), row.get("group_raw", ""))) or []
+        if not evs:
+            continue
+        row["union_events"] = evs[:4]
+        e = evs[0]
+        cur = (row.get("status_date") or "")[:10]
+        if e["date"] >= cur[:len(e["date"])] or rank["union"] > rank.get(row.get("status_source"), 0) and e["date"][:7] >= cur[:7]:
+            row["status"], row["status_source"], row["status_date"] = e["status"], "union", e["date"]
+            row["union_event"] = e
     out = {"generated": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
            "companies": companies, "groups": groups}
     with open(path, "w", encoding="utf-8") as f:
         json.dump(out, f, indent=1, ensure_ascii=False)
-    meta["labor"] = {"at": out["generated"], "groups": len(groups), "errors": errors}
+    meta["labor"] = {"at": out["generated"], "groups": len(groups), "errors": errors, "union_sites": ureport}
     return True
 
 

@@ -1,22 +1,116 @@
 {
- "AAL": {"name": "American Airlines", "query": "\"American Airlines\"", "match": "American"},
- "Envoy": {"name": "Envoy Air", "query": "\"Envoy Air\" OR \"Envoy\"", "match": "Envoy", "prefix": "Envoy"},
- "Piedmont": {"name": "Piedmont Airlines", "query": "\"Piedmont Airlines\"", "match": "Piedmont", "prefix": "Piedmont"},
- "PSA": {"name": "PSA Airlines", "query": "\"PSA Airlines\"", "match": "PSA", "prefix": "PSA"},
- "DAL": {"name": "Delta Air Lines", "query": "\"Delta Air Lines\" OR \"Delta\"", "match": "Delta", "prefix": "Delta"},
- "Endeavor": {"name": "Endeavor Air", "query": "\"Endeavor Air\"", "match": "Endeavor", "prefix": "Endeavor"},
- "UAL": {"name": "United Airlines", "query": "\"United Airlines\"", "match": "United"},
- "United Airlines, Inc.": {"name": "United Airlines", "query": "\"United Airlines\"", "match": "United"},
- "United Ground Express, Inc.": {"name": "United Ground Express", "query": "\"United Ground Express\"", "match": "United Ground Express"},
- "LUV": {"name": "Southwest Airlines", "query": "\"Southwest Airlines\"", "match": "Southwest", "prefix": "Southwest"},
- "ALK": {"name": "Alaska Airlines", "query": "\"Alaska Airlines\"", "match": "Alaska"},
- "Alaska": {"name": "Alaska Airlines", "query": "\"Alaska Airlines\"", "match": "Alaska"},
- "Hawaiian": {"name": "Hawaiian Airlines", "query": "\"Hawaiian Airlines\"", "match": "Hawaiian"},
- "Horizon": {"name": "Horizon Air", "query": "\"Horizon Air\"", "match": "Horizon"},
- "McGee Air Services": {"name": "McGee Air Services", "query": "\"McGee Air Services\"", "match": "McGee"},
- "JBLU": {"name": "JetBlue Airways", "query": "JetBlue", "match": "JetBlue"},
- "ULCC": {"name": "Frontier Airlines", "query": "\"Frontier Airlines\"", "match": "Frontier"},
- "ALGT": {"name": "Allegiant Air", "query": "Allegiant", "match": "Allegiant"},
- "RJET": {"name": "Republic Airways", "query": "\"Republic Airways\" OR \"Mesa Airlines\"", "match": "Republic|Mesa"},
- "SKYW": {"name": "SkyWest Airlines", "query": "SkyWest", "match": "SkyWest"}
+ "AAL": {
+  "name": "American Airlines",
+  "query": "\"American Airlines\"",
+  "match": "American"
+ },
+ "Envoy": {
+  "name": "Envoy Air",
+  "query": "\"Envoy Air\" OR \"Envoy\"",
+  "match": "Envoy",
+  "prefix": "Envoy",
+  "parent": "AAL"
+ },
+ "Piedmont": {
+  "name": "Piedmont Airlines",
+  "query": "\"Piedmont Airlines\"",
+  "match": "Piedmont",
+  "prefix": "Piedmont",
+  "parent": "AAL"
+ },
+ "PSA": {
+  "name": "PSA Airlines",
+  "query": "\"PSA Airlines\"",
+  "match": "PSA",
+  "prefix": "PSA",
+  "parent": "AAL"
+ },
+ "DAL": {
+  "name": "Delta Air Lines",
+  "query": "\"Delta Air Lines\" OR \"Delta\"",
+  "match": "Delta",
+  "prefix": "Delta"
+ },
+ "Endeavor": {
+  "name": "Endeavor Air",
+  "query": "\"Endeavor Air\"",
+  "match": "Endeavor",
+  "prefix": "Endeavor",
+  "parent": "DAL"
+ },
+ "UAL": {
+  "name": "United Airlines",
+  "query": "\"United Airlines\"",
+  "match": "United"
+ },
+ "United Airlines, Inc.": {
+  "name": "United Airlines",
+  "query": "\"United Airlines\"",
+  "match": "United"
+ },
+ "United Ground Express, Inc.": {
+  "name": "United Ground Express",
+  "query": "\"United Ground Express\"",
+  "match": "United Ground Express|\\bUGE\\b",
+  "parent": "UAL"
+ },
+ "LUV": {
+  "name": "Southwest Airlines",
+  "query": "\"Southwest Airlines\"",
+  "match": "Southwest",
+  "prefix": "Southwest"
+ },
+ "ALK": {
+  "name": "Alaska Airlines",
+  "query": "\"Alaska Airlines\"",
+  "match": "Alaska"
+ },
+ "Alaska": {
+  "name": "Alaska Airlines",
+  "query": "\"Alaska Airlines\"",
+  "match": "Alaska"
+ },
+ "Hawaiian": {
+  "name": "Hawaiian Airlines",
+  "query": "\"Hawaiian Airlines\"",
+  "match": "Hawaiian",
+  "parent": "ALK"
+ },
+ "Horizon": {
+  "name": "Horizon Air",
+  "query": "\"Horizon Air\"",
+  "match": "Horizon",
+  "parent": "ALK"
+ },
+ "McGee Air Services": {
+  "name": "McGee Air Services",
+  "query": "\"McGee Air Services\"",
+  "match": "McGee",
+  "parent": "ALK"
+ },
+ "JBLU": {
+  "name": "JetBlue Airways",
+  "query": "JetBlue",
+  "match": "JetBlue"
+ },
+ "ULCC": {
+  "name": "Frontier Airlines",
+  "query": "\"Frontier Airlines\"",
+  "match": "Frontier"
+ },
+ "ALGT": {
+  "name": "Allegiant Air",
+  "query": "Allegiant",
+  "match": "Allegiant"
+ },
+ "RJET": {
+  "name": "Republic Airways",
+  "query": "\"Republic Airways\" OR \"Mesa Airlines\"",
+  "match": "Republic|Mesa"
+ },
+ "SKYW": {
+  "name": "SkyWest Airlines",
+  "query": "SkyWest",
+  "match": "SkyWest"
+ }
 }
