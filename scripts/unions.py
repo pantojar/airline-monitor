@@ -319,9 +319,9 @@ def events_for(item, groups, site, aliases):
             if dedicated:
                 ok = not re.search(OTHER_CARRIERS, clause, re.I) or names_own(clause)
             elif re.search(OTHER_CARRIERS, title, re.I) and not names_own(title):
-                # the item is about another airline (often a sister carrier: "Horizon AFA ...");
-                # count it only where a sentence is about this airline alone
-                ok = names_own(clause) and not re.search(OTHER_CARRIERS, re.sub(own_rx, " ", clause, flags=re.I), re.I)
+                # the item is about another airline (often a sister carrier: "Horizon AFA ..."), even where a
+                # sentence mentions this one ("... as part of Alaska Air Group")
+                ok = False
             elif re.search(OTHER_CARRIERS, clause, re.I):
                 ok = names_own(clause)
             else:
