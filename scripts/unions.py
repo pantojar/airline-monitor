@@ -318,6 +318,10 @@ def events_for(item, groups, site, aliases):
                 continue
             if dedicated:
                 ok = not re.search(OTHER_CARRIERS, clause, re.I) or names_own(clause)
+            elif re.search(OTHER_CARRIERS, title, re.I) and not names_own(title):
+                # the item is about another airline (often a sister carrier: "Horizon AFA ...");
+                # count it only where a sentence is about this airline alone
+                ok = names_own(clause) and not re.search(OTHER_CARRIERS, re.sub(own_rx, " ", clause, flags=re.I), re.I)
             elif re.search(OTHER_CARRIERS, clause, re.I):
                 ok = names_own(clause)
             else:
