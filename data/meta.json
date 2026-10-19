@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-19T13:11:01Z",
+  "at": "2026-10-19T13:28:37Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -113,9 +113,9 @@
    }
   }
  },
- "generated": "2026-10-19T13:13:00Z",
+ "generated": "2026-10-19T13:44:00Z",
  "news": {
-  "at": "2026-10-19T13:11:24Z",
+  "at": "2026-10-19T13:29:00Z",
   "items": 76,
   "errors": []
  },
@@ -133,7 +133,7 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-19T13:11:24Z",
+  "at": "2026-10-19T13:29:01Z",
   "latest": "2026-10-14",
   "rows": 1193
  },
@@ -143,7 +143,138 @@
   "errors": []
  },
  "labor": {
+  "at": "2026-10-19T13:44:00Z",
   "groups": 96,
-  "errors": []
+  "errors": [],
+  "union_sites": [
+   {
+    "name": "IAM District 141",
+    "url": "https://iam141.org",
+    "groups": 13,
+    "method": "wp-posts,wp-media",
+    "items": 202,
+    "pdfs_read": 40
+   },
+   {
+    "name": "IAM District 142",
+    "url": "https://www.iam142.org",
+    "groups": 6,
+    "method": null,
+    "items": 0,
+    "pdfs_read": 0
+   },
+   {
+    "name": "IAM (international)",
+    "url": "https://www.goiam.org",
+    "groups": 22,
+    "method": "wp-posts,wp-media",
+    "items": 276,
+    "pdfs_read": 3
+   },
+   {
+    "name": "AFA-CWA",
+    "url": "https://www.afacwa.org",
+    "groups": 9,
+    "method": "wp-posts",
+    "items": 200,
+    "pdfs_read": 0
+   },
+   {
+    "name": "AFA United",
+    "url": "https://www.unitedafa.org",
+    "groups": 1,
+    "method": null,
+    "items": 0,
+    "pdfs_read": 0
+   },
+   {
+    "name": "APFA",
+    "url": "https://www.apfa.org",
+    "groups": 1,
+    "method": null,
+    "items": 0,
+    "pdfs_read": 0
+   },
+   {
+    "name": "ALPA",
+    "url": "https://www.alpa.org",
+    "groups": 10,
+    "method": null,
+    "items": 0,
+    "pdfs_read": 0
+   },
+   {
+    "name": "Allied Pilots Association",
+    "url": "https://www.alliedpilots.org",
+    "groups": 1,
+    "method": null,
+    "items": 0,
+    "pdfs_read": 0
+   },
+   {
+    "name": "SWAPA",
+    "url": "https://www.swapa.org",
+    "groups": 1,
+    "method": null,
+    "items": 0,
+    "pdfs_read": 0
+   },
+   {
+    "name": "Teamsters",
+    "url": "https://teamster.org",
+    "groups": 14,
+    "method": "rss /feed/",
+    "items": 12,
+    "pdfs_read": 0
+   },
+   {
+    "name": "TWU",
+    "url": "https://www.twu.org",
+    "groups": 26,
+    "method": "wp-posts,wp-media",
+    "items": 148,
+    "pdfs_read": 3
+   },
+   {
+    "name": "TWU Local 556",
+    "url": "https://www.twu556.org",
+    "groups": 5,
+    "method": null,
+    "items": 0,
+    "pdfs_read": 0
+   },
+   {
+    "name": "TWU Local 555",
+    "url": "https://www.twu555.org",
+    "groups": 5,
+    "method": null,
+    "items": 0,
+    "pdfs_read": 0
+   },
+   {
+    "name": "AMFA",
+    "url": "https://www.amfanational.org",
+    "groups": 5,
+    "method": null,
+    "items": 0,
+    "pdfs_read": 0
+   },
+   {
+    "name": "CWA",
+    "url": "https://cwa-union.org",
+    "groups": 4,
+    "method": null,
+    "items": 0,
+    "pdfs_read": 0
+   },
+   {
+    "name": "PAFCA",
+    "url": "https://www.pafca.org",
+    "groups": 3,
+    "method": null,
+    "items": 0,
+    "pdfs_read": 0
+   }
+  ]
  }
 }

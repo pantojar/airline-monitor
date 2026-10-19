@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-19T13:13:00Z",
+ "generated": "2026-10-19T13:44:00Z",
  "companies": {
   "DAL": {
    "ticker": "DAL",
@@ -1107,6 +1107,7 @@
    "precision": "day",
    "footnote": null,
    "ticker": "DAL",
+   "group_raw": "Delta Pilots",
    "carrier": "Delta Air Lines",
    "open": false,
    "craft": "pilots",
@@ -1130,6 +1131,7 @@
    "precision": "day",
    "footnote": null,
    "ticker": "DAL",
+   "group_raw": "Delta Flight Superintendents (Dispatchers)",
    "carrier": "Delta Air Lines",
    "open": false,
    "craft": "dispatchers",
@@ -1146,6 +1148,7 @@
    "precision": "day",
    "footnote": null,
    "ticker": "DAL",
+   "group_raw": "Endeavor Pilots",
    "carrier": "Endeavor Air",
    "open": false,
    "craft": "pilots",
@@ -1162,11 +1165,33 @@
    "precision": "day",
    "footnote": null,
    "ticker": "DAL",
+   "group_raw": "Endeavor Flight Attendants",
    "carrier": "Endeavor Air",
    "open": false,
    "craft": "flight attendants",
-   "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status": "Picketing",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "Picketing",
+     "date": "2026-03-13",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "53rd Board of Directors Convention Wrapped",
+     "url": "https://afacwa.org/53rd-board-of-directors-convention-wrapped/",
+     "quote": "The Board joined Horizon AFA Flight Attendants on the picket line at Portland International Airport on Monday to demand a fair Contract."
+    }
+   ],
+   "status_date": "2026-03-13",
+   "union_event": {
+    "status": "Picketing",
+    "date": "2026-03-13",
+    "source": "AFA-CWA",
+    "kind": "union",
+    "title": "53rd Board of Directors Convention Wrapped",
+    "url": "https://afacwa.org/53rd-board-of-directors-convention-wrapped/",
+    "quote": "The Board joined Horizon AFA Flight Attendants on the picket line at Portland International Airport on Monday to demand a fair Contract."
+   }
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1178,20 +1203,68 @@
    "precision": "month",
    "footnote": null,
    "ticker": "UAL",
+   "group_raw": "Flight Attendants",
    "carrier": "United Airlines",
    "open": true,
    "craft": "flight attendants",
    "status": "Ratified",
-   "status_source": "10-Q",
+   "status_source": "union",
    "news": {
     "title": "Senior United Flight Attendants Land $100 Hr As New Contract Ratified",
     "date": "2026-05-14",
     "source": "Open Jaw",
     "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNVDFxdkpYNEpxMGEtcC03TkVNTU1EOGxzNG1nWFFLU3ZscGdMZHdGaHM2WHlTcTc3M1JFVjdoNUtXM1BRNF90cUJHVEhVejJwcWM3bVBhbExoZlJKNkZsSm9oUlhHUWM3QWhTUWFqVUpfbmo1dXl1eDNoVktka0NzS0RVQzhJMFRzVTBtc0kteDMzenBIOWFqekdjd0JhVjJVVEMzTGhIZG03Tlk2U2g3UkpuenhRaU03?oc=5"
    },
-   "status_date": "2026-05",
+   "status_date": "2026-05-12",
    "filing_quote": "In May 2026, the Company's flight attendants, represented by the Association of Flight Attendants (\"AFA\"), ratified a five-year agreement, effective May 31, 2026, with the Company that includes improvements with respect to scheduling, reserve requirements and other quality of life improvements, as well as pay rate increases.",
-   "filing_url": "https://www.sec.gov/Archives/edgar/data/100517/000010051726000139/ual-20260630.htm"
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/100517/000010051726000139/ual-20260630.htm",
+   "union_events": [
+    {
+     "status": "Ratified",
+     "date": "2026-05-12",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "United Flight Attendants Ratify New Contract",
+     "url": "https://afacwa.org/united-flight-attendants-ratify-new-contract/",
+     "quote": "United Flight Attendants Ratify New Contract."
+    },
+    {
+     "status": "Tentative agreement",
+     "date": "2026-03-26",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "United Flight Attendants Reach Tentative Agreement",
+     "url": "https://afacwa.org/united-flight-attendants-reach-tentative-agreement/",
+     "quote": "United Flight Attendants Reach Tentative Agreement."
+    },
+    {
+     "status": "Picketing",
+     "date": "2026-03-20",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "United AFA Keeps the Pressure On Management as Negotiations Come to DC Next Week",
+     "url": "https://afacwa.org/united-afa-keeps-the-pressure-on-management-as-negotiations-come-to-dc-next-week/",
+     "quote": "United Flight Attendants held a pop up picket across Washington, D.C."
+    },
+    {
+     "status": "Picketing",
+     "date": "2026-02-13",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "Horizon Flight Attendants Hold Pop-Up Picket",
+     "url": "https://afacwa.org/horizon-flight-attendants-hold-pop-up-picket/",
+     "quote": "Horizon Flight Attendants Hold Pop-Up Picket."
+    }
+   ],
+   "union_event": {
+    "status": "Ratified",
+    "date": "2026-05-12",
+    "source": "AFA-CWA",
+    "kind": "union",
+    "title": "United Flight Attendants Ratify New Contract",
+    "url": "https://afacwa.org/united-flight-attendants-ratify-new-contract/",
+    "quote": "United Flight Attendants Ratify New Contract."
+   }
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1203,11 +1276,51 @@
    "precision": "month",
    "footnote": null,
    "ticker": "UAL",
+   "group_raw": "Fleet Service",
    "carrier": "United Airlines",
    "open": true,
    "craft": "fleet service",
-   "status": "Past amendable date",
-   "status_source": "10-K"
+   "status": "Contract rejected",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "Contract rejected",
+     "date": "2026-06-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Ratification.Results.JUN2026",
+     "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+     "quote": "Fleet Service, Passenger Service, and Central Load Planners did not ratify their tentative agreements."
+    },
+    {
+     "status": "Tentative agreement",
+     "date": "2026-05-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Fleet Service Employees Tentative Agreement 2026 All Markup",
+     "url": "https://iam141.org/wp-content/uploads/2026/05/Fleet-Service-Employees-Tentative-Agreement-2026_All-Markup.pdf",
+     "quote": "Fleet Service Employees Tentative Agreement 2026 All Markup."
+    },
+    {
+     "status": "In negotiations",
+     "date": "2025-09-16",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "United Airlines Negotiations Update for September 16, 2025",
+     "url": "https://iam141.org/united-airlines-negotiations-update-for-september-16-2025/",
+     "quote": "Passenger and Fleet Service Negotiations for the Passenger Service and Fleet Service contracts continued to center on Article 4 issues, particularly outage relief."
+    }
+   ],
+   "status_date": "2026-06-26",
+   "union_event": {
+    "status": "Contract rejected",
+    "date": "2026-06-26",
+    "source": "IAM District 141",
+    "kind": "union",
+    "title": "Ratification.Results.JUN2026",
+    "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+    "quote": "Fleet Service, Passenger Service, and Central Load Planners did not ratify their tentative agreements."
+   }
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1219,6 +1332,7 @@
    "precision": "month",
    "footnote": null,
    "ticker": "UAL",
+   "group_raw": "Pilots",
    "carrier": "United Airlines",
    "open": false,
    "craft": "pilots",
@@ -1235,11 +1349,60 @@
    "precision": "month",
    "footnote": null,
    "ticker": "UAL",
+   "group_raw": "Passenger Service",
    "carrier": "United Airlines",
    "open": true,
    "craft": "passenger service",
-   "status": "Past amendable date",
-   "status_source": "10-K"
+   "status": "Contract rejected",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "Contract rejected",
+     "date": "2026-06-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Ratification.Results.JUN2026",
+     "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+     "quote": "Fleet Service, Passenger Service, and Central Load Planners did not ratify their tentative agreements."
+    },
+    {
+     "status": "In mediation",
+     "date": "2026-05-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Central Load Planner Employees Tentative Agreement 2026 All Markup",
+     "url": "https://iam141.org/wp-content/uploads/2026/05/Central-Load-Planner-Employees-Tentative-Agreement-2026_All-Markup.pdf",
+     "quote": "(referred to in this Agreement as the “Company”) and the International Association of Machinists & Aerospace Workers (referred to in this Agreement as the “Union”) representing the Central Load Planners (“CLP”) workgroup within the craft or class of Passenger Service Employees as certified by the National Mediation Board in Case R-7313 on March 8, 2012."
+    },
+    {
+     "status": "Tentative agreement",
+     "date": "2026-05-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Passenger Service Employees Tentative Agreement 2026 All Markup",
+     "url": "https://iam141.org/wp-content/uploads/2026/05/Passenger-Service-Employees-Tentative-Agreement-2026_All-Markup.pdf",
+     "quote": "Passenger Service Employees Tentative Agreement 2026 All Markup."
+    },
+    {
+     "status": "In negotiations",
+     "date": "2025-09-16",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "United Airlines Negotiations Update for September 16, 2025",
+     "url": "https://iam141.org/united-airlines-negotiations-update-for-september-16-2025/",
+     "quote": "Passenger and Fleet Service Negotiations for the Passenger Service and Fleet Service contracts continued to center on Article 4 issues, particularly outage relief."
+    }
+   ],
+   "status_date": "2026-06-26",
+   "union_event": {
+    "status": "Contract rejected",
+    "date": "2026-06-26",
+    "source": "IAM District 141",
+    "kind": "union",
+    "title": "Ratification.Results.JUN2026",
+    "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+    "quote": "Fleet Service, Passenger Service, and Central Load Planners did not ratify their tentative agreements."
+   }
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1251,6 +1414,7 @@
    "precision": "month",
    "footnote": null,
    "ticker": "UAL",
+   "group_raw": "Technicians",
    "carrier": "United Airlines",
    "open": true,
    "craft": "mechanics",
@@ -1274,11 +1438,51 @@
    "precision": "month",
    "footnote": null,
    "ticker": "UAL",
+   "group_raw": "Storekeepers",
    "carrier": "United Airlines",
    "open": true,
    "craft": null,
-   "status": "Past amendable date",
-   "status_source": "10-K"
+   "status": "Ratified",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "Ratified",
+     "date": "2026-08-19",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Storekeeper Employees Agreement 2026-2031 Ratified",
+     "url": "https://iam141.org/wp-content/uploads/2026/08/Storekeeper-Employees-Agreement-2026-2031_Ratified.pdf",
+     "quote": "Storekeeper Employees Agreement 2026-2031 Ratified."
+    },
+    {
+     "status": "Ratified",
+     "date": "2026-06-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Ratification.Results.JUN2026",
+     "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+     "quote": "Fleet Technical Instructors & Related, Maintenance Instructors, Security Officers and Storekeepers ratified their tentative agreements."
+    },
+    {
+     "status": "Tentative agreement",
+     "date": "2026-05-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Storekeeper Employees Tentative Agreement 2026 All Markup",
+     "url": "https://iam141.org/wp-content/uploads/2026/05/Storekeeper-Employees-Tentative-Agreement-2026_All-Markup.pdf",
+     "quote": "Storekeeper Employees Tentative Agreement 2026 All Markup."
+    }
+   ],
+   "status_date": "2026-08-19",
+   "union_event": {
+    "status": "Ratified",
+    "date": "2026-08-19",
+    "source": "IAM District 141",
+    "kind": "union",
+    "title": "Storekeeper Employees Agreement 2026-2031 Ratified",
+    "url": "https://iam141.org/wp-content/uploads/2026/08/Storekeeper-Employees-Agreement-2026-2031_Ratified.pdf",
+    "quote": "Storekeeper Employees Agreement 2026-2031 Ratified."
+   }
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1290,6 +1494,7 @@
    "precision": "month",
    "footnote": null,
    "ticker": "UAL",
+   "group_raw": "Dispatchers",
    "carrier": "United Airlines",
    "open": true,
    "craft": "dispatchers",
@@ -1306,11 +1511,51 @@
    "precision": "month",
    "footnote": null,
    "ticker": "UAL",
+   "group_raw": "Fleet Tech Instructors",
    "carrier": "United Airlines",
    "open": true,
    "craft": "fleet service",
-   "status": "Past amendable date",
-   "status_source": "10-K"
+   "status": "Ratified",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "Ratified",
+     "date": "2026-08-19",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Fleet Technical Instructors and Related Employees Agreement 2026-2031 Ratified",
+     "url": "https://iam141.org/wp-content/uploads/2026/08/Fleet-Technical-Instructors-and-Related-Employees-Agreement-2026-2031_Ratified.pdf",
+     "quote": "Fleet Technical Instructors and Related Employees Agreement 2026-2031 Ratified."
+    },
+    {
+     "status": "Ratified",
+     "date": "2026-06-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Ratification.Results.JUN2026",
+     "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+     "quote": "Fleet Technical Instructors & Related, Maintenance Instructors, Security Officers and Storekeepers ratified their tentative agreements."
+    },
+    {
+     "status": "Tentative agreement",
+     "date": "2026-05-28",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Fleet Technical Instructors and Related Employees Tentative Agreement 2026 All Markup-2",
+     "url": "https://iam141.org/wp-content/uploads/2026/05/Fleet-Technical-Instructors-and-Related-Employees-Tentative-Agreement-2026_All-Markup-2.pdf",
+     "quote": "Fleet Technical Instructors and Related Employees Tentative Agreement 2026 All Markup-2."
+    }
+   ],
+   "status_date": "2026-08-19",
+   "union_event": {
+    "status": "Ratified",
+    "date": "2026-08-19",
+    "source": "IAM District 141",
+    "kind": "union",
+    "title": "Fleet Technical Instructors and Related Employees Agreement 2026-2031 Ratified",
+    "url": "https://iam141.org/wp-content/uploads/2026/08/Fleet-Technical-Instructors-and-Related-Employees-Agreement-2026-2031_Ratified.pdf",
+    "quote": "Fleet Technical Instructors and Related Employees Agreement 2026-2031 Ratified."
+   }
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1322,6 +1567,7 @@
    "precision": "month",
    "footnote": null,
    "ticker": "UAL",
+   "group_raw": "Technical Operations Maintenance Planners",
    "carrier": "United Airlines",
    "open": false,
    "craft": null,
@@ -1338,6 +1584,7 @@
    "precision": "month",
    "footnote": null,
    "ticker": "UAL",
+   "group_raw": "Technical Operations Maintenance Controllers",
    "carrier": "United Airlines",
    "open": false,
    "craft": null,
@@ -1354,11 +1601,51 @@
    "precision": "month",
    "footnote": null,
    "ticker": "UAL",
+   "group_raw": "Load Planners",
    "carrier": "United Airlines",
    "open": true,
    "craft": null,
-   "status": "Past amendable date",
-   "status_source": "10-K"
+   "status": "Contract rejected",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "Contract rejected",
+     "date": "2026-06-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Ratification.Results.JUN2026",
+     "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+     "quote": "Fleet Service, Passenger Service, and Central Load Planners did not ratify their tentative agreements."
+    },
+    {
+     "status": "Tentative agreement",
+     "date": "2026-05-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Central Load Planner Employees Tentative Agreement 2026 All Markup",
+     "url": "https://iam141.org/wp-content/uploads/2026/05/Central-Load-Planner-Employees-Tentative-Agreement-2026_All-Markup.pdf",
+     "quote": "Central Load Planner Employees Tentative Agreement 2026 All Markup."
+    },
+    {
+     "status": "Tentative agreement",
+     "date": "2025-09-16",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "United Airlines Negotiations Update for September 16, 2025",
+     "url": "https://iam141.org/united-airlines-negotiations-update-for-september-16-2025/",
+     "quote": "Central Load Planners For the CLP contract, we reached a tentative agreement on Article 1 (Qualifications, Positions and Vacancies) that better honors seniority when bidding Lead vacancies or Charter Desk work."
+    }
+   ],
+   "status_date": "2026-06-26",
+   "union_event": {
+    "status": "Contract rejected",
+    "date": "2026-06-26",
+    "source": "IAM District 141",
+    "kind": "union",
+    "title": "Ratification.Results.JUN2026",
+    "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+    "quote": "Fleet Service, Passenger Service, and Central Load Planners did not ratify their tentative agreements."
+   }
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1370,11 +1657,51 @@
    "precision": "month",
    "footnote": null,
    "ticker": "UAL",
+   "group_raw": "Maintenance Instructors",
    "carrier": "United Airlines",
    "open": true,
    "craft": null,
-   "status": "Past amendable date",
-   "status_source": "10-K"
+   "status": "Ratified",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "Ratified",
+     "date": "2026-08-19",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Maintenance Instructor Employees Agreement 2026-2031 Ratified",
+     "url": "https://iam141.org/wp-content/uploads/2026/08/Maintenance-Instructor-Employees-Agreement-2026-2031_Ratified.pdf",
+     "quote": "Maintenance Instructor Employees Agreement 2026-2031 Ratified."
+    },
+    {
+     "status": "Ratified",
+     "date": "2026-06-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Ratification.Results.JUN2026",
+     "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+     "quote": "Fleet Technical Instructors & Related, Maintenance Instructors, Security Officers and Storekeepers ratified their tentative agreements."
+    },
+    {
+     "status": "Tentative agreement",
+     "date": "2026-05-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Maintenance Instructor Employees Tentative Agreement 2026 All Markup",
+     "url": "https://iam141.org/wp-content/uploads/2026/05/Maintenance-Instructor-Employees-Tentative-Agreement-2026_All-Markup.pdf",
+     "quote": "Maintenance Instructor Employees Tentative Agreement 2026 All Markup."
+    }
+   ],
+   "status_date": "2026-08-19",
+   "union_event": {
+    "status": "Ratified",
+    "date": "2026-08-19",
+    "source": "IAM District 141",
+    "kind": "union",
+    "title": "Maintenance Instructor Employees Agreement 2026-2031 Ratified",
+    "url": "https://iam141.org/wp-content/uploads/2026/08/Maintenance-Instructor-Employees-Agreement-2026-2031_Ratified.pdf",
+    "quote": "Maintenance Instructor Employees Agreement 2026-2031 Ratified."
+   }
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1386,11 +1713,51 @@
    "precision": "month",
    "footnote": null,
    "ticker": "UAL",
+   "group_raw": "Security Officers",
    "carrier": "United Airlines",
    "open": true,
    "craft": null,
-   "status": "Past amendable date",
-   "status_source": "10-K"
+   "status": "Ratified",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "Ratified",
+     "date": "2026-08-19",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Security Officer Employees Agreement 2026-2031 Ratified",
+     "url": "https://iam141.org/wp-content/uploads/2026/08/Security-Officer-Employees-Agreement-2026-2031_Ratified.pdf",
+     "quote": "Security Officer Employees Agreement 2026-2031 Ratified."
+    },
+    {
+     "status": "Ratified",
+     "date": "2026-06-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Ratification.Results.JUN2026",
+     "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+     "quote": "Fleet Technical Instructors & Related, Maintenance Instructors, Security Officers and Storekeepers ratified their tentative agreements."
+    },
+    {
+     "status": "Tentative agreement",
+     "date": "2026-05-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Security Officer Employees Tentative Agreement 2026 All Markup",
+     "url": "https://iam141.org/wp-content/uploads/2026/05/Security-Officer-Employees-Tentative-Agreement-2026_All-Markup.pdf",
+     "quote": "Security Officer Employees Tentative Agreement 2026 All Markup."
+    }
+   ],
+   "status_date": "2026-08-19",
+   "union_event": {
+    "status": "Ratified",
+    "date": "2026-08-19",
+    "source": "IAM District 141",
+    "kind": "union",
+    "title": "Security Officer Employees Agreement 2026-2031 Ratified",
+    "url": "https://iam141.org/wp-content/uploads/2026/08/Security-Officer-Employees-Agreement-2026-2031_Ratified.pdf",
+    "quote": "Security Officer Employees Agreement 2026-2031 Ratified."
+   }
   },
   {
    "unit": "United Ground Express, Inc.",
@@ -1402,6 +1769,7 @@
    "precision": "month",
    "footnote": null,
    "ticker": "UAL",
+   "group_raw": "Passenger Service",
    "carrier": "United Ground Express",
    "open": true,
    "craft": "passenger service",
@@ -1418,6 +1786,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Pilots",
    "carrier": "American Airlines",
    "open": false,
    "craft": "pilots",
@@ -1441,6 +1810,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Flight Attendants",
    "carrier": "American Airlines",
    "open": false,
    "craft": "flight attendants",
@@ -1457,6 +1827,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Passenger Service",
    "carrier": "American Airlines",
    "open": false,
    "craft": "passenger service",
@@ -1473,6 +1844,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Mechanics and Related",
    "carrier": "American Airlines",
    "open": false,
    "craft": "mechanics",
@@ -1489,6 +1861,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Fleet Service",
    "carrier": "American Airlines",
    "open": false,
    "craft": "fleet service",
@@ -1505,6 +1878,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Stock Clerks",
    "carrier": "American Airlines",
    "open": false,
    "craft": null,
@@ -1521,6 +1895,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Flight Simulator Engineers",
    "carrier": "American Airlines",
    "open": false,
    "craft": null,
@@ -1537,6 +1912,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Maintenance Control Technicians",
    "carrier": "American Airlines",
    "open": false,
    "craft": "mechanics",
@@ -1553,6 +1929,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Maintenance Training Instructors",
    "carrier": "American Airlines",
    "open": false,
    "craft": "mechanics",
@@ -1569,6 +1946,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Dispatchers",
    "carrier": "American Airlines",
    "open": true,
    "craft": "dispatchers",
@@ -1585,6 +1963,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Flight Crew Training Instructors",
    "carrier": "American Airlines",
    "open": false,
    "craft": null,
@@ -1601,6 +1980,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Pilots",
    "carrier": "Envoy Air",
    "open": false,
    "craft": "pilots",
@@ -1617,6 +1997,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Flight Attendants",
    "carrier": "Envoy Air",
    "open": false,
    "craft": "flight attendants",
@@ -1633,6 +2014,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Ground School Instructors",
    "carrier": "Envoy Air",
    "open": false,
    "craft": null,
@@ -1649,6 +2031,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Mechanics and Related",
    "carrier": "Envoy Air",
    "open": false,
    "craft": "mechanics",
@@ -1665,6 +2048,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Stock Clerks",
    "carrier": "Envoy Air",
    "open": false,
    "craft": null,
@@ -1681,6 +2065,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Simulator Instructors",
    "carrier": "Envoy Air",
    "open": false,
    "craft": null,
@@ -1697,6 +2082,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Fleet Service",
    "carrier": "Envoy Air",
    "open": false,
    "craft": "fleet service",
@@ -1713,11 +2099,33 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Dispatchers",
    "carrier": "Envoy Air",
    "open": true,
    "craft": "dispatchers",
-   "status": "Past amendable date",
-   "status_source": "10-K"
+   "status": "Contract rejected",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "Contract rejected",
+     "date": "2026-02-26",
+     "source": "TWU",
+     "kind": "union",
+     "title": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises",
+     "url": "https://www.twu.org/jetblue-air-dispatchers-vote-to-join-the-twu-and-reject-managements-empty-promises/",
+     "quote": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises."
+    }
+   ],
+   "status_date": "2026-02-26",
+   "union_event": {
+    "status": "Contract rejected",
+    "date": "2026-02-26",
+    "source": "TWU",
+    "kind": "union",
+    "title": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises",
+    "url": "https://www.twu.org/jetblue-air-dispatchers-vote-to-join-the-twu-and-reject-managements-empty-promises/",
+    "quote": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises."
+   }
   },
   {
    "unit": "Envoy",
@@ -1729,6 +2137,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Passenger Service",
    "carrier": "Envoy Air",
    "open": false,
    "craft": "passenger service",
@@ -1745,6 +2154,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Pilots",
    "carrier": "Piedmont Airlines",
    "open": false,
    "craft": "pilots",
@@ -1761,6 +2171,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Flight Attendants",
    "carrier": "Piedmont Airlines",
    "open": false,
    "craft": "flight attendants",
@@ -1777,6 +2188,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Mechanics and Related",
    "carrier": "Piedmont Airlines",
    "open": false,
    "craft": "mechanics",
@@ -1793,6 +2205,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Stock Clerks",
    "carrier": "Piedmont Airlines",
    "open": false,
    "craft": null,
@@ -1809,6 +2222,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Fleet and Passenger Service",
    "carrier": "Piedmont Airlines",
    "open": true,
    "craft": "fleet service",
@@ -1825,6 +2239,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Dispatchers",
    "carrier": "Piedmont Airlines",
    "open": false,
    "craft": "dispatchers",
@@ -1841,6 +2256,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Pilots",
    "carrier": "PSA Airlines",
    "open": false,
    "craft": "pilots",
@@ -1857,18 +2273,66 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Flight Attendants",
    "carrier": "PSA Airlines",
    "open": true,
    "craft": "flight attendants",
-   "status": "Picketing",
-   "status_source": "news",
+   "status": "In negotiations",
+   "status_source": "union",
    "news": {
     "title": "PSA Flight Attendants Picket Grand Opening of New PSA Airlines HQ",
     "date": "2026-09-01",
     "source": "Association of Flight Attendants-CWA",
     "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQRGRWZlNUOEJ5TllEem03S3J4a1lFZTItWFVOR1llSktraXpPd0pTYTFEVFdpRFZmMnYwUFdfai0tQWQtZDdvV1BTT2FicVNoWTNFYVZKTFc2LWxlNUV4aUc2Y3RsZ2ZkVFpGWlNYTlBrYkJIZ05hcnpIeE14VDgzbHJQTjk4RllEYnpPeWF3?oc=5"
    },
-   "status_date": "2026-09-01"
+   "status_date": "2026-10-16",
+   "union_events": [
+    {
+     "status": "In negotiations",
+     "date": "2026-10-16",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "AFA PSA Flight Attendants Are Seeing Red",
+     "url": "https://afacwa.org/afa-psa-flight-attendants-are-seeing-red/",
+     "quote": "AFA PSA Flight Attendants are wearing their Contract Now lanyards en masse to show management they stand behind their negotiators and won’t accept insulting, demoralizing proposals at the negotiating table."
+    },
+    {
+     "status": "Tentative agreement",
+     "date": "2026-02-19",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "PSA Flight Attendants Reach Tentative Agreement",
+     "url": "https://afacwa.org/psa-tentative-agreement-2026/",
+     "quote": "PSA Flight Attendants Reach Tentative Agreement."
+    },
+    {
+     "status": "In negotiations",
+     "date": "2026-02-07",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "AFA on the Hill: Labor Caucus Roundtable & United AFA Government Affairs Training",
+     "url": "https://afacwa.org/afa-on-the-hill-labor-caucus-roundtable-united-afa-government-affairs-training/",
+     "quote": "We discussed a wide range of topics, including contract negotiations – especially at United and PSA, where management continues to delay the contract Flight Attendants have earned."
+    },
+    {
+     "status": "Picketing",
+     "date": "2026-01-09",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "PSA Flight Attendants Picket Grand Opening of New PSA Airlines HQ",
+     "url": "https://afacwa.org/psa-flight-attendants-picket-grand-opening-of-new-psa-airlines-hq/",
+     "quote": "PSA Flight Attendants Picket Grand Opening of New PSA Airlines HQ."
+    }
+   ],
+   "union_event": {
+    "status": "In negotiations",
+    "date": "2026-10-16",
+    "source": "AFA-CWA",
+    "kind": "union",
+    "title": "AFA PSA Flight Attendants Are Seeing Red",
+    "url": "https://afacwa.org/afa-psa-flight-attendants-are-seeing-red/",
+    "quote": "AFA PSA Flight Attendants are wearing their Contract Now lanyards en masse to show management they stand behind their negotiators and won’t accept insulting, demoralizing proposals at the negotiating table."
+   }
   },
   {
    "unit": "PSA",
@@ -1880,6 +2344,7 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Mechanics and Related",
    "carrier": "PSA Airlines",
    "open": false,
    "craft": "mechanics",
@@ -1896,6 +2361,7 @@
    "precision": null,
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Stock Clerks",
    "carrier": "PSA Airlines",
    "open": false,
    "craft": null,
@@ -1912,6 +2378,7 @@
    "precision": null,
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Flight Crew Training Instructors",
    "carrier": "PSA Airlines",
    "open": false,
    "craft": null,
@@ -1928,11 +2395,33 @@
    "precision": "year",
    "footnote": null,
    "ticker": "AAL",
+   "group_raw": "Dispatchers",
    "carrier": "PSA Airlines",
    "open": false,
    "craft": "dispatchers",
-   "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status": "Contract rejected",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "Contract rejected",
+     "date": "2026-02-26",
+     "source": "TWU",
+     "kind": "union",
+     "title": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises",
+     "url": "https://www.twu.org/jetblue-air-dispatchers-vote-to-join-the-twu-and-reject-managements-empty-promises/",
+     "quote": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises."
+    }
+   ],
+   "status_date": "2026-02-26",
+   "union_event": {
+    "status": "Contract rejected",
+    "date": "2026-02-26",
+    "source": "TWU",
+    "kind": "union",
+    "title": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises",
+    "url": "https://www.twu.org/jetblue-air-dispatchers-vote-to-join-the-twu-and-reject-managements-empty-promises/",
+    "quote": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises."
+   }
   },
   {
    "unit": null,
@@ -1944,6 +2433,7 @@
    "precision": "month",
    "footnote": null,
    "ticker": "LUV",
+   "group_raw": "Southwest Pilots",
    "carrier": "Southwest Airlines",
    "open": false,
    "craft": "pilots",
@@ -1960,6 +2450,7 @@
    "precision": "month",
    "footnote": null,
    "ticker": "LUV",
+   "group_raw": "Southwest Flight Attendants",
    "carrier": "Southwest Airlines",
    "open": false,
    "craft": "flight attendants",
@@ -1976,6 +2467,7 @@
    "precision": "month",
    "footnote": null,
    "ticker": "LUV",
+   "group_raw": "Southwest Material Specialists (formerly known as Stock Clerks)",
    "carrier": "Southwest Airlines",
    "open": false,
    "craft": null,
@@ -1992,6 +2484,7 @@
    "precision": "month",
    "footnote": null,
    "ticker": "LUV",
+   "group_raw": "Southwest Ramp, Operations, Provisioning, Freight Agents",
    "carrier": "Southwest Airlines",
    "open": false,
    "craft": "fleet service",
@@ -2008,6 +2501,7 @@
    "precision": "month",
    "footnote": null,
    "ticker": "LUV",
+   "group_raw": "Southwest Flight Simulator Technicians",
    "carrier": "Southwest Airlines",
    "open": false,
    "craft": "mechanics",
@@ -2024,6 +2518,7 @@
    "precision": "month",
    "footnote": null,
    "ticker": "LUV",
+   "group_raw": "Southwest Flight Crew Training Instructors",
    "carrier": "Southwest Airlines",
    "open": false,
    "craft": null,
@@ -2040,11 +2535,33 @@
    "precision": "month",
    "footnote": null,
    "ticker": "LUV",
+   "group_raw": "Southwest Dispatchers",
    "carrier": "Southwest Airlines",
    "open": false,
    "craft": "dispatchers",
-   "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status": "Contract rejected",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "Contract rejected",
+     "date": "2026-02-26",
+     "source": "TWU",
+     "kind": "union",
+     "title": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises",
+     "url": "https://www.twu.org/jetblue-air-dispatchers-vote-to-join-the-twu-and-reject-managements-empty-promises/",
+     "quote": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises."
+    }
+   ],
+   "status_date": "2026-02-26",
+   "union_event": {
+    "status": "Contract rejected",
+    "date": "2026-02-26",
+    "source": "TWU",
+    "kind": "union",
+    "title": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises",
+    "url": "https://www.twu.org/jetblue-air-dispatchers-vote-to-join-the-twu-and-reject-managements-empty-promises/",
+    "quote": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises."
+   }
   },
   {
    "unit": null,
@@ -2056,6 +2573,7 @@
    "precision": "month",
    "footnote": null,
    "ticker": "LUV",
+   "group_raw": "Southwest Aircraft Appearance Technicians",
    "carrier": "Southwest Airlines",
    "open": false,
    "craft": "mechanics",
@@ -2072,6 +2590,7 @@
    "precision": "month",
    "footnote": null,
    "ticker": "LUV",
+   "group_raw": "Southwest Mechanics & Related Employees",
    "carrier": "Southwest Airlines",
    "open": false,
    "craft": "mechanics",
@@ -2088,6 +2607,7 @@
    "precision": "month",
    "footnote": null,
    "ticker": "LUV",
+   "group_raw": "Southwest Facilities Maintenance Technicians",
    "carrier": "Southwest Airlines",
    "open": false,
    "craft": "mechanics",
@@ -2104,6 +2624,7 @@
    "precision": "month",
    "footnote": null,
    "ticker": "LUV",
+   "group_raw": "Southwest Customer Service Agents, Customer Representatives, and Source of Support Representatives",
    "carrier": "Southwest Airlines",
    "open": false,
    "craft": "passenger service",
@@ -2120,6 +2641,7 @@
    "precision": "month",
    "footnote": null,
    "ticker": "LUV",
+   "group_raw": "Southwest Meteorologists",
    "carrier": "Southwest Airlines",
    "open": false,
    "craft": null,
@@ -2136,6 +2658,7 @@
    "precision": "day",
    "footnote": null,
    "ticker": "ALK",
+   "group_raw": "Pilots",
    "carrier": "Alaska Airlines",
    "open": false,
    "craft": "pilots",
@@ -2152,6 +2675,7 @@
    "precision": "day",
    "footnote": null,
    "ticker": "ALK",
+   "group_raw": "Flight attendants",
    "carrier": "Alaska Airlines",
    "open": false,
    "craft": "flight attendants",
@@ -2168,6 +2692,7 @@
    "precision": "day",
    "footnote": null,
    "ticker": "ALK",
+   "group_raw": "Ramp service and stock clerks",
    "carrier": "Alaska Airlines",
    "open": true,
    "craft": "fleet service",
@@ -2184,6 +2709,7 @@
    "precision": "day",
    "footnote": null,
    "ticker": "ALK",
+   "group_raw": "Clerical, office and passenger service",
    "carrier": "Alaska Airlines",
    "open": true,
    "craft": "passenger service",
@@ -2200,6 +2726,7 @@
    "precision": "day",
    "footnote": null,
    "ticker": "ALK",
+   "group_raw": "Technicians and related",
    "carrier": "Alaska Airlines",
    "open": false,
    "craft": "mechanics",
@@ -2216,11 +2743,33 @@
    "precision": "day",
    "footnote": null,
    "ticker": "ALK",
+   "group_raw": "Dispatchers",
    "carrier": "Alaska Airlines",
    "open": false,
    "craft": "dispatchers",
-   "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status": "Contract rejected",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "Contract rejected",
+     "date": "2026-02-26",
+     "source": "TWU",
+     "kind": "union",
+     "title": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises",
+     "url": "https://www.twu.org/jetblue-air-dispatchers-vote-to-join-the-twu-and-reject-managements-empty-promises/",
+     "quote": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises."
+    }
+   ],
+   "status_date": "2026-02-26",
+   "union_event": {
+    "status": "Contract rejected",
+    "date": "2026-02-26",
+    "source": "TWU",
+    "kind": "union",
+    "title": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises",
+    "url": "https://www.twu.org/jetblue-air-dispatchers-vote-to-join-the-twu-and-reject-managements-empty-promises/",
+    "quote": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises."
+   }
   },
   {
    "unit": "Hawaiian",
@@ -2232,6 +2781,7 @@
    "precision": "day",
    "footnote": null,
    "ticker": "ALK",
+   "group_raw": "Pilots",
    "carrier": "Hawaiian Airlines",
    "open": false,
    "craft": "pilots",
@@ -2248,11 +2798,51 @@
    "precision": "day",
    "footnote": null,
    "ticker": "ALK",
+   "group_raw": "Flight attendants",
    "carrier": "Hawaiian Airlines",
    "open": false,
    "craft": "flight attendants",
-   "status": "Contract in effect",
-   "status_source": "10-K"
+   "status": "Picketing",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "Picketing",
+     "date": "2026-10-16",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "Horizon AFA Flight Attendants Picket Across the System",
+     "url": "https://afacwa.org/horizon-afa-flight-attendants-picket-across-the-system/",
+     "quote": "Horizon AFA Flight Attendants Picket Across the System."
+    },
+    {
+     "status": "In negotiations",
+     "date": "2026-06-22",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "Horizon AFA Flight Attendants Vote 99.8% to Authorize Strike",
+     "url": "https://afacwa.org/horizon-afa-flight-attendants-vote-99-8-to-authorize-strike/",
+     "quote": "Earlier this week, Horizon AFA Flight Attendants voted 99.8% to authorize a strike – sending a clear message that Flight Attendants are ready to do whatever it takes to back up our negotiators."
+    },
+    {
+     "status": "In mediation",
+     "date": "2026-06-16",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "Horizon Flight Attendants at Alaska Air Group Vote 99.8% to Authorize a Strike",
+     "url": "https://afacwa.org/hzn-strike-vote/",
+     "quote": "But Horizon management seems uninterested in resolving this dispute or showing the slightest concern for frontline workers who can’t afford rent or other basic life necessities.’ Horizon Flight Attendants filed for federal mediation in January 2025."
+    }
+   ],
+   "status_date": "2026-10-16",
+   "union_event": {
+    "status": "Picketing",
+    "date": "2026-10-16",
+    "source": "AFA-CWA",
+    "kind": "union",
+    "title": "Horizon AFA Flight Attendants Picket Across the System",
+    "url": "https://afacwa.org/horizon-afa-flight-attendants-picket-across-the-system/",
+    "quote": "Horizon AFA Flight Attendants Picket Across the System."
+   }
   },
   {
    "unit": "Hawaiian",
@@ -2264,6 +2854,7 @@
    "precision": "day",
    "footnote": null,
    "ticker": "ALK",
+   "group_raw": "Technicians and related",
    "carrier": "Hawaiian Airlines",
    "open": false,
    "craft": "mechanics",
@@ -2280,6 +2871,7 @@
    "precision": "day",
    "footnote": null,
    "ticker": "ALK",
+   "group_raw": "Clerical",
    "carrier": "Hawaiian Airlines",
    "open": false,
    "craft": "passenger service",
@@ -2296,11 +2888,33 @@
    "precision": "day",
    "footnote": null,
    "ticker": "ALK",
+   "group_raw": "Dispatchers",
    "carrier": "Hawaiian Airlines",
    "open": false,
    "craft": "dispatchers",
-   "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status": "Contract rejected",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "Contract rejected",
+     "date": "2026-02-26",
+     "source": "TWU",
+     "kind": "union",
+     "title": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises",
+     "url": "https://www.twu.org/jetblue-air-dispatchers-vote-to-join-the-twu-and-reject-managements-empty-promises/",
+     "quote": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises."
+    }
+   ],
+   "status_date": "2026-02-26",
+   "union_event": {
+    "status": "Contract rejected",
+    "date": "2026-02-26",
+    "source": "TWU",
+    "kind": "union",
+    "title": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises",
+    "url": "https://www.twu.org/jetblue-air-dispatchers-vote-to-join-the-twu-and-reject-managements-empty-promises/",
+    "quote": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises."
+   }
   },
   {
    "unit": "Horizon",
@@ -2312,17 +2926,38 @@
    "precision": "day",
    "footnote": "Negotiations with IBT, AFA, and TWU for updated collective bargaining agreements are ongoing as of the date of this filing. A mediator from the National Mediation Board is participating in negotiations with AFA and TWU. McGee Air Services' union contract at December 31, 2025 was as follows:",
    "ticker": "ALK",
+   "group_raw": "Pilots",
    "carrier": "Horizon Air",
    "open": true,
    "craft": "pilots",
    "status": "Picketing",
-   "status_source": "news",
+   "status_source": "union",
    "status_date": "2026-10-15",
    "news": {
     "title": "Teamsters Pilots at Horizon Air Hold Informational Pickets",
     "date": "2026-10-15",
     "source": "International Brotherhood of Teamsters",
     "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQSW1rdl95SXJMSGdueWF5UjJPb3JwZDhYd2FHcDVEQ2JoQUluLV9ndlpDUEswNG9YUWE2TWd3b0w1UHNJcDdOX2NfVjBpVVFtalJwdUtXTGN3ZHNvV2xqNkpBZVFhVjZGejhnYnpxQU9rYlFTZVJyT1BjNWt1ZW9Db2J2U2tTdE9SSjBwdjhtUjhoZw?oc=5"
+   },
+   "union_events": [
+    {
+     "status": "Picketing",
+     "date": "2026-10-15",
+     "source": "Teamsters",
+     "kind": "union",
+     "title": "Teamsters Pilots at Horizon Air Hold Informational Pickets",
+     "url": "https://teamster.org/2026/10/teamsters-pilots-at-horizon-air-hold-informational-pickets/",
+     "quote": "Teamsters Pilots at Horizon Air Hold Informational Pickets."
+    }
+   ],
+   "union_event": {
+    "status": "Picketing",
+    "date": "2026-10-15",
+    "source": "Teamsters",
+    "kind": "union",
+    "title": "Teamsters Pilots at Horizon Air Hold Informational Pickets",
+    "url": "https://teamster.org/2026/10/teamsters-pilots-at-horizon-air-hold-informational-pickets/",
+    "quote": "Teamsters Pilots at Horizon Air Hold Informational Pickets."
    }
   },
   {
@@ -2335,17 +2970,65 @@
    "precision": "day",
    "footnote": "Negotiations with IBT, AFA, and TWU for updated collective bargaining agreements are ongoing as of the date of this filing. A mediator from the National Mediation Board is participating in negotiations with AFA and TWU. McGee Air Services' union contract at December 31, 2025 was as follows:",
    "ticker": "ALK",
+   "group_raw": "Flight attendants",
    "carrier": "Horizon Air",
    "open": true,
    "craft": "flight attendants",
    "status": "Picketing",
-   "status_source": "news",
+   "status_source": "union",
    "status_date": "2026-10-16",
    "news": {
     "title": "Horizon AFA Flight Attendants Picket Across the System",
     "date": "2026-10-16",
     "source": "Association of Flight Attendants-CWA",
     "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFB2T2JvRTg3N0lVMGlpbTJRaWtTUXhYQ3RNNkVaLTBBV2tXeG9KbFJ3ZURmVFUzWnlfd3V0Q0pITFhtOFhtdXdpT3YwanZRdUxwdTB0NFBtNkpZNE40VWNpV1haazlLV2MtRVUzajRVbTN2V0ZTODZMc016S1l1UEk?oc=5"
+   },
+   "union_events": [
+    {
+     "status": "Picketing",
+     "date": "2026-10-16",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "Horizon AFA Flight Attendants Picket Across the System",
+     "url": "https://afacwa.org/horizon-afa-flight-attendants-picket-across-the-system/",
+     "quote": "Horizon AFA Flight Attendants Picket Across the System."
+    },
+    {
+     "status": "Picketing",
+     "date": "2026-10-09",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "Turn Out for Horizon and Frontier Flight Attendant Pickets",
+     "url": "https://afacwa.org/turn-out-for-horizon-and-frontier-flight-attendant-pickets/",
+     "quote": "Turn Out for Horizon and Frontier Flight Attendant Pickets."
+    },
+    {
+     "status": "Picketing",
+     "date": "2026-10-02",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "Coming Up: Horizon AFA Picket",
+     "url": "https://afacwa.org/coming-up-horizon-afa-picket/",
+     "quote": "Horizon AFA Flight Attendants are gearing up for their next picketing event – and this time, they’re bringing the action to every Horizon base."
+    },
+    {
+     "status": "Picketing",
+     "date": "2026-09-18",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "AFA Frontier Flight Attendants Picket in Denver",
+     "url": "https://afacwa.org/afa-frontier-flight-attendants-picket-in-denver/",
+     "quote": "AFA Frontier Flight Attendants Picket in Denver."
+    }
+   ],
+   "union_event": {
+    "status": "Picketing",
+    "date": "2026-10-16",
+    "source": "AFA-CWA",
+    "kind": "union",
+    "title": "Horizon AFA Flight Attendants Picket Across the System",
+    "url": "https://afacwa.org/horizon-afa-flight-attendants-picket-across-the-system/",
+    "quote": "Horizon AFA Flight Attendants Picket Across the System."
    }
   },
   {
@@ -2358,6 +3041,7 @@
    "precision": "day",
    "footnote": null,
    "ticker": "ALK",
+   "group_raw": "Mechanics and related classifications",
    "carrier": "Horizon Air",
    "open": false,
    "craft": "mechanics",
@@ -2374,12 +3058,33 @@
    "precision": "day",
    "footnote": "Negotiations with IBT, AFA, and TWU for updated collective bargaining agreements are ongoing as of the date of this filing. A mediator from the National Mediation Board is participating in negotiations with AFA and TWU. McGee Air Services' union contract at December 31, 2025 was as follows:",
    "ticker": "ALK",
+   "group_raw": "Dispatchers",
    "carrier": "Horizon Air",
    "open": true,
    "craft": "dispatchers",
-   "status": "In mediation",
-   "status_source": "10-K",
-   "status_date": "2026-02-12"
+   "status": "Contract rejected",
+   "status_source": "union",
+   "status_date": "2026-02-26",
+   "union_events": [
+    {
+     "status": "Contract rejected",
+     "date": "2026-02-26",
+     "source": "TWU",
+     "kind": "union",
+     "title": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises",
+     "url": "https://www.twu.org/jetblue-air-dispatchers-vote-to-join-the-twu-and-reject-managements-empty-promises/",
+     "quote": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises."
+    }
+   ],
+   "union_event": {
+    "status": "Contract rejected",
+    "date": "2026-02-26",
+    "source": "TWU",
+    "kind": "union",
+    "title": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises",
+    "url": "https://www.twu.org/jetblue-air-dispatchers-vote-to-join-the-twu-and-reject-managements-empty-promises/",
+    "quote": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises."
+   }
   },
   {
    "unit": "McGee Air Services",
@@ -2391,6 +3096,7 @@
    "precision": "day",
    "footnote": null,
    "ticker": "ALK",
+   "group_raw": "Fleet and ramp service",
    "carrier": "McGee Air Services",
    "open": false,
    "craft": "fleet service",
@@ -2407,6 +3113,7 @@
    "precision": "day",
    "footnote": null,
    "ticker": "JBLU",
+   "group_raw": "Pilots",
    "carrier": "JetBlue Airways",
    "open": true,
    "craft": "pilots",
@@ -2423,6 +3130,7 @@
    "precision": null,
    "footnote": null,
    "ticker": "JBLU",
+   "group_raw": "Pilot instructors",
    "carrier": "JetBlue Airways",
    "open": false,
    "craft": "pilots",
@@ -2439,6 +3147,7 @@
    "precision": "day",
    "footnote": null,
    "ticker": "JBLU",
+   "group_raw": "Inflight",
    "carrier": "JetBlue Airways",
    "open": false,
    "craft": "flight attendants",
@@ -2455,6 +3164,7 @@
    "precision": "month",
    "footnote": "ALPA filed for mediation through the National Mediation Board (the “NMB”) in January 2024, and the parties are meeting regularly as part of the mediation process. Pursuant to the U.S. Railway Labor Act (the “RLA”), the parties continue to be bound by the existing agreements as negotiations continue.",
    "ticker": "ULCC",
+   "group_raw": "Pilots",
    "carrier": "Frontier Airlines",
    "open": true,
    "craft": "pilots",
@@ -2472,17 +3182,65 @@
    "precision": "month",
    "footnote": "AFA-CWA filed for mediation through the NMB in October 2024, and the parties are meeting monthly as part of the mediation process, with the first meeting held in February 2025. Pursuant to the RLA, the parties continue to be bound by the existing agreements as negotiations continue.",
    "ticker": "ULCC",
+   "group_raw": "Flight Attendants",
    "carrier": "Frontier Airlines",
    "open": true,
    "craft": "flight attendants",
    "status": "Picketing",
-   "status_source": "news",
-   "status_date": "2026-09-12",
+   "status_source": "union",
+   "status_date": "2026-10-09",
    "news": {
     "title": "Flight Attendants rally at Frontier Airlines headquarters as contract fight continues",
     "date": "2026-09-12",
     "source": "Fight Back! News",
     "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQb2M0Y3QxMndFTzJrVmlVeW5qTTBQWGZyd0NwSEhBWlNhZ0xWdm41ZERCOERwcGw3ODZNYWpibUo5SUxPaWRiY1Ztdkp2ejI2anEyUEZ3cHBWUHZrUnNXOTZlYXh1RzRMSG9PUHA1aUdVX3A5Z3hOSmVRYldWRFFvWGw3NndlUEhzb1h1R3dBUm5jalc2V252SGVtaVVBYnFjWEJoM2EyT2RXT1hla1VZ?oc=5"
+   },
+   "union_events": [
+    {
+     "status": "Picketing",
+     "date": "2026-10-09",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "Turn Out for Horizon and Frontier Flight Attendant Pickets",
+     "url": "https://afacwa.org/turn-out-for-horizon-and-frontier-flight-attendant-pickets/",
+     "quote": "Turn Out for Horizon and Frontier Flight Attendant Pickets."
+    },
+    {
+     "status": "Picketing",
+     "date": "2026-09-26",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "Day in the Life of an AFA Frontier Flight Attendant",
+     "url": "https://afacwa.org/day-in-the-life-of-an-afa-frontier-flight-attendant/",
+     "quote": "Join AFA Frontier Flight Attendants on Monday, October 26 in PHL for a Claws Out, Contract Now picket to show management we won’t stop until we have a Contract that reflects our worth."
+    },
+    {
+     "status": "Picketing",
+     "date": "2026-09-18",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "AFA Frontier Flight Attendants Picket in Denver",
+     "url": "https://afacwa.org/afa-frontier-flight-attendants-picket-in-denver/",
+     "quote": "AFA Frontier Flight Attendants Picket in Denver."
+    },
+    {
+     "status": "Picketing",
+     "date": "2026-08-29",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "Two Weeks Out: AFA Frontier Picket",
+     "url": "https://afacwa.org/two-weeks-out-afa-frontier-picket/",
+     "quote": "Join AFA Frontier Flight Attendants for their Claws Out, Contract Now picket at Frontier Airlines HQ!"
+    }
+   ],
+   "union_event": {
+    "status": "Picketing",
+    "date": "2026-10-09",
+    "source": "AFA-CWA",
+    "kind": "union",
+    "title": "Turn Out for Horizon and Frontier Flight Attendant Pickets",
+    "url": "https://afacwa.org/turn-out-for-horizon-and-frontier-flight-attendant-pickets/",
+    "quote": "Turn Out for Horizon and Frontier Flight Attendant Pickets."
    }
   },
   {
@@ -2495,6 +3253,7 @@
    "precision": "month",
    "footnote": "Our collective bargaining agreements with our aircraft technicians, represented by IBT, were still amendable as of December 31, 2025. Pursuant to the RLA, the parties continue to be bound by the existing agreements as negotiations continue.",
    "ticker": "ULCC",
+   "group_raw": "Aircraft Technicians",
    "carrier": "Frontier Airlines",
    "open": true,
    "craft": "mechanics",
@@ -2518,6 +3277,7 @@
    "precision": "month",
    "footnote": null,
    "ticker": "ULCC",
+   "group_raw": "Aircraft Appearance Agents",
    "carrier": "Frontier Airlines",
    "open": false,
    "craft": "passenger service",
@@ -2534,11 +3294,33 @@
    "precision": "month",
    "footnote": null,
    "ticker": "ULCC",
+   "group_raw": "Dispatchers",
    "carrier": "Frontier Airlines",
    "open": false,
    "craft": "dispatchers",
-   "status": "Contract in effect",
-   "status_source": "10-K"
+   "status": "Contract rejected",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "Contract rejected",
+     "date": "2026-02-26",
+     "source": "TWU",
+     "kind": "union",
+     "title": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises",
+     "url": "https://www.twu.org/jetblue-air-dispatchers-vote-to-join-the-twu-and-reject-managements-empty-promises/",
+     "quote": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises."
+    }
+   ],
+   "status_date": "2026-02-26",
+   "union_event": {
+    "status": "Contract rejected",
+    "date": "2026-02-26",
+    "source": "TWU",
+    "kind": "union",
+    "title": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises",
+    "url": "https://www.twu.org/jetblue-air-dispatchers-vote-to-join-the-twu-and-reject-managements-empty-promises/",
+    "quote": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises."
+   }
   },
   {
    "unit": null,
@@ -2550,6 +3332,7 @@
    "precision": "month",
    "footnote": "Effective as of November 7, 2025, we entered into a new five-year agreement with our material specialists.",
    "ticker": "ULCC",
+   "group_raw": "Material Specialists",
    "carrier": "Frontier Airlines",
    "open": false,
    "craft": null,
@@ -2566,6 +3349,7 @@
    "precision": "month",
    "footnote": "Effective as of December 10, 2025, we entered into a new five-year agreement with our maintenance controllers.",
    "ticker": "ULCC",
+   "group_raw": "Maintenance Controllers",
    "carrier": "Frontier Airlines",
    "open": false,
    "craft": null,
