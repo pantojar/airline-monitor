@@ -17,6 +17,7 @@ Outputs (all in data/):
   dot_fuel.json     DOT monthly fuel gallons and cost by carrier
   fuel_spot.json    daily Gulf Coast jet fuel spot price (FRED DJFUELUSGULF)
   exec_pay.json     CEO pay, median employee pay and pay ratio from proxy statements (see scripts/proxy.py)
+  labor.json        union contracts from 10-Ks, labor sentences from 10-Qs, and news-based status (see scripts/labor.py)
   meta.json         when each part last refreshed and anything that failed
 
 A failed fetch never wipes good data: the previous rows for that carrier are kept.
@@ -36,6 +37,7 @@ import xml.etree.ElementTree as ET
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import dot  # noqa: E402
 import proxy  # noqa: E402
+import labor  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG = os.path.join(ROOT, "config")
@@ -384,6 +386,11 @@ def main(argv):
         except Exception as e:  # noqa: BLE001
             meta.setdefault("exec_pay", {})["error"] = f"{type(e).__name__}: {e}"[:300]
             print(f"[warn] exec pay: {e}", file=sys.stderr)
+        try:
+            labor.update_labor(ROOT, meta, user_agent(), listed, force="--force-labor" in argv or os.environ.get("FORCE_DOT") == "true")
+        except Exception as e:  # noqa: BLE001
+            meta.setdefault("labor", {})["error"] = f"{type(e).__name__}: {e}"[:300]
+            print(f"[warn] labor: {e}", file=sys.stderr)
     if "--sec-only" not in argv and "--news-only" not in argv and "--no-dot" not in argv:
         try:
             dot.update_dot(ROOT, meta, user_agent(), force="--force-dot" in argv or os.environ.get("FORCE_DOT") == "true")
