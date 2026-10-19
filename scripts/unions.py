@@ -78,9 +78,10 @@ def status_of(clause):
 # ---------------------------------------------------------------- fetching
 class Fetch:
     def __init__(self, ua):
-        self.ua = ua
+        # the conventional form for automated readers, which many site firewalls let through
+        self.ua = "Mozilla/5.0 (compatible; " + ua.replace(" ", "/", 1) + ")"
 
-    def get(self, url, accept="*/*", timeout=60, limit=8_000_000):
+    def get(self, url, accept="*/*", timeout=25, limit=8_000_000):
         req = urllib.request.Request(url, headers={"User-Agent": self.ua, "Accept": accept, "Accept-Encoding": "identity"})
         with urllib.request.urlopen(req, timeout=timeout) as r:
             data = r.read(limit + 1)
@@ -95,16 +96,23 @@ def pdf_text(data, max_pages=12):
     return clean(" ".join((p.extract_text() or "") for p in rd.pages[:max_pages]))
 
 
+def _err(e):
+    code = getattr(e, "code", None)
+    return f"HTTP {code}" if code else type(e).__name__
+
+
 def list_items(f, site, since):
     """Return (method, [{date, title, url, kind, text?}])"""
     base = site["url"].rstrip("/")
-    items, methods = [], []
+    items, methods, tried = [], [], []
     after = since + "T00:00:00"
     for page in range(1, 5):
         try:
             data, _ = f.get(f"{base}/wp-json/wp/v2/posts?per_page=50&page={page}&after={after}&_fields=date,link,title,content", "application/json")
             got = json.loads(data)
-        except Exception:  # noqa: BLE001
+        except Exception as e:  # noqa: BLE001
+            if page == 1:
+                tried.append("posts: " + _err(e))
             break
         if not isinstance(got, list) or not got:
             break
@@ -119,7 +127,9 @@ def list_items(f, site, since):
         try:
             data, _ = f.get(f"{base}/wp-json/wp/v2/media?mime_type=application/pdf&per_page=100&page={page}&after={after}&_fields=date,source_url,title", "application/json")
             got = json.loads(data)
-        except Exception:  # noqa: BLE001
+        except Exception as e:  # noqa: BLE001
+            if page == 1:
+                tried.append("media: " + _err(e))
             break
         if not isinstance(got, list) or not got:
             break
@@ -145,41 +155,57 @@ def list_items(f, site, since):
                                   "text": clean(it.findtext("{http://purl.org/rss/1.0/modules/content/}encoded") or it.findtext("description") or "")[:30000]})
                 methods.append("rss " + path)
                 break
-            except Exception:  # noqa: BLE001
+            except Exception as e:  # noqa: BLE001
+                tried.append(path + ": " + _err(e))
                 continue
-    return ",".join(methods) or None, items
+    return ",".join(methods) or None, items, tried
 
 
 # ---------------------------------------------------------------- events
+OTHER_CARRIERS = r"Air Canada|WestJet|Air Wisconsin|Spirit|Breeze|Avelo|Sun Country|GoJet|CommuteAir|Atlas Air|FedEx|\bUPS\b|Kalitta|Omni Air|Amerijet|Silver Airways|Cape Air|Hawaiian|Horizon|Envoy|Piedmont|\bPSA\b|Endeavor|Mesa|SkyWest|Republic|Frontier|JetBlue|Allegiant|Alaska|Southwest|Delta|American|United"
+
+
 def events_for(item, groups, site, aliases):
-    """groups: tracked rows this site may speak for. Returns [(row_key, event)]."""
+    """groups: tracked rows this site may speak for. Returns [(row_key, event)].
+    A clause that names any airline only counts for the airlines it names; a clause that names none
+    counts for the airline named in the item's title (or the site's only airline)."""
     text = item["title"] + ". " + (item.get("text") or "")
     if not ANNOUNCE_RE.search(text):
         return []
-    # which units does the item address? a subsidiary named in the title wins
+    title = item["title"]
     out = []
     for g in groups:
         unit = g.get("unit")
         unit_alias = aliases.get(unit) if unit not in (None, "Mainline") else None
-        parent_alias = aliases.get(g["ticker"], {})
-        sub_rx = "|".join(a["match"] for k, a in aliases.items() if a.get("parent") == g["ticker"] and a.get("match"))
-        if unit_alias and unit_alias.get("parent"):
-            if not re.search(unit_alias["match"], text, re.I):
-                continue
-        else:
-            if sub_rx and re.search(sub_rx, item["title"], re.I):
-                continue  # the item is about a subsidiary, not mainline
-            if len(site.get("carriers", [])) > 1 and parent_alias.get("match") and not re.search(parent_alias["match"], text, re.I):
-                continue
+        is_sub = bool(unit_alias and unit_alias.get("parent"))
+        own_rx = unit_alias["match"] if is_sub else aliases.get(g["ticker"], {}).get("match", g["ticker"])
+        subs_rx = "|".join(a["match"] for a in aliases.values() if a.get("parent") == g["ticker"] and a.get("match"))
+        single = len(site.get("carriers", [])) == 1
+
+        def names_own(t):
+            if not re.search(own_rx, t, re.I):
+                return False
+            if not is_sub and subs_rx:
+                # "United Ground Express" also contains "United": mainline only if the parent is named outside the subsidiary's name
+                stripped = re.sub(subs_rx, " ", t, flags=re.I)
+                return bool(re.search(own_rx, stripped, re.I))
+            return True
+
         toks = group_tokens(g["group"])
         best = None
         for clause in CLAUSE_SPLIT.split(text):
             if len(clause) > 900 or not clause_names_group(clause, toks):
                 continue
             st = status_of(clause)
-            if st:
+            if not st:
+                continue
+            if re.search(OTHER_CARRIERS, clause, re.I):
+                ok = names_own(clause)
+            else:
+                ok = names_own(title) or (single and not (subs_rx and not is_sub and re.search(subs_rx, title, re.I)) and (not is_sub or re.search(own_rx, text, re.I)))
+            if ok:
                 best = (st, clause.strip())
-                break  # first clause in the document is usually the headline result
+                break
         if best:
             out.append(((g["ticker"], g.get("unit"), g["group"]),
                         {"status": best[0], "date": item["date"], "source": site["name"], "kind": "union",
@@ -187,7 +213,7 @@ def events_for(item, groups, site, aliases):
     return out
 
 
-def collect(root, groups, ua, aliases, since_days=400):
+def collect(root, groups, ua, aliases, since_days=400, budget_s=600):
     """Return ({row_key: [events]}, site_report)."""
     cfg = json.load(open(os.path.join(root, "config", "labor_sources.json"), encoding="utf-8"))
     cache_path = os.path.join(root, "data", "union_cache.json")
@@ -198,12 +224,23 @@ def collect(root, groups, ua, aliases, since_days=400):
     since = (dt.date.today() - dt.timedelta(days=since_days)).isoformat()
     f = Fetch(ua)
     found, report = {}, []
+    t0 = time.time()
     for site in cfg:
+        if time.time() - t0 > budget_s:
+            # out of time this run: reuse what earlier runs found for this site
+            for k, v in cache.items():
+                if v.get("site") == site["name"]:
+                    for kk, e in v.get("events", []):
+                        found.setdefault(tuple(kk), []).append(e)
+            report.append({"name": site["name"], "url": site["url"], "method": "deferred", "items": 0, "groups": 0})
+            continue
         rel = [g for g in groups if g["ticker"] in site["carriers"]
                and any(re.search(u, g.get("union") or "", re.I) for u in site["unions"])]
         rep = {"name": site["name"], "url": site["url"], "groups": len(rel)}
         try:
-            method, items = list_items(f, site, since)
+            method, items, tried = list_items(f, site, since)
+            if not method:
+                rep["error"] = "; ".join(tried)[:200]
         except Exception as e:  # noqa: BLE001
             method, items = None, []
             rep["error"] = f"{type(e).__name__}"
@@ -218,7 +255,7 @@ def collect(root, groups, ua, aliases, since_days=400):
                     if not ANNOUNCE_RE.search(it["title"]) or (CONTRACT_DOC_RE.search(it["title"]) and not re.search(r"ratif|reject|tentative|\bTA\b", it["title"], re.I)):
                         cache[key] = {"date": it["date"], "skipped": True, "events": []}
                         continue
-                    if nread >= 40:
+                    if nread >= 40 or time.time() - t0 > budget_s:
                         continue  # read the rest next week
                     try:
                         data, _ = f.get(key, "application/pdf", limit=6_000_000)
@@ -229,7 +266,7 @@ def collect(root, groups, ua, aliases, since_days=400):
                         cache[key] = {"date": it["date"], "error": type(e).__name__, "events": []}
                         continue
                 evs = [[list(k), e] for k, e in events_for(it, rel, site, aliases)]
-                cache[key] = {"date": it["date"], "title": it["title"][:200], "events": evs}
+                cache[key] = {"date": it["date"], "title": it["title"][:200], "events": evs, "site": site["name"]}
             for k, e in evs:
                 found.setdefault(tuple(k), []).append(e)
         rep["pdfs_read"] = nread
