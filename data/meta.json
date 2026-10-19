@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-19T14:15:28Z",
+  "at": "2026-10-19T14:20:13Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -113,9 +113,9 @@
    }
   }
  },
- "generated": "2026-10-19T14:19:27Z",
+ "generated": "2026-10-19T14:23:50Z",
  "news": {
-  "at": "2026-10-19T14:15:51Z",
+  "at": "2026-10-19T14:20:35Z",
   "items": 76,
   "errors": []
  },
@@ -133,7 +133,7 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-19T14:15:55Z",
+  "at": "2026-10-19T14:20:36Z",
   "latest": "2026-10-14",
   "rows": 1193
  },
@@ -143,6 +143,7 @@
   "errors": []
  },
  "labor": {
+  "at": "2026-10-19T14:23:50Z",
   "groups": 96,
   "errors": [],
   "union_sites": [
@@ -277,7 +278,7 @@
     "name": "PAFCA",
     "url": "https://www.pafca.org",
     "groups": 3,
-    "error": "posts: HTTP 404; media: HTTP 404; /feed/: HTTP 429; /rss: HTTP 404; /rss.xml: HTTP 400; /feed: HTTP 429",
+    "error": "posts: HTTP 404; media: HTTP 404; /feed/: HTTP 429; /rss: HTTP 429; /rss.xml: HTTP 429; /feed: HTTP 429",
     "method": null,
     "items": 0,
     "pdfs_read": 0

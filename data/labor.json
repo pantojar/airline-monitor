@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-19T14:19:27Z",
+ "generated": "2026-10-19T14:23:50Z",
  "companies": {
   "DAL": {
    "ticker": "DAL",
@@ -1282,12 +1282,21 @@
     },
     {
      "status": "In negotiations",
-     "date": "2025-09-16",
+     "date": "2025-12-22",
      "source": "IAM District 141",
      "kind": "union",
-     "title": "United Airlines Negotiations Update for September 16, 2025",
-     "url": "https://iam141.org/united-airlines-negotiations-update-for-september-16-2025/",
-     "quote": "Passenger and Fleet Service Negotiations for the Passenger Service and Fleet Service contracts continued to center on Article 4 issues, particularly outage relief."
+     "title": "UA Negotiation Update 23 December 2025",
+     "url": "https://iam141.org/wp-content/uploads/2025/12/UA-Negotiation-Update-23-December-2025.pdf",
+     "quote": "Passenger Service and Fleet Service Contract Update Negotiations continued to center on overtime, specifically the Company’s use of mandatory overtime."
+    },
+    {
+     "status": "In negotiations",
+     "date": "2025-11-11",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "UA.Negotiations.Update",
+     "url": "https://iam141.org/wp-content/uploads/2025/11/UA.Negotiations.Update-2.pdf",
+     "quote": "This was our least productive session to date for Passenger Service and Fleet, as United’s negotiating team asserted they do not have to adhere to our current contract, let alone negotiate new language to hold United’s front-line management more accountable when declaring mandatory overtime."
     }
    ],
    "status_date": "2026-06-26",
@@ -1355,12 +1364,21 @@
     },
     {
      "status": "In negotiations",
-     "date": "2025-09-16",
+     "date": "2025-12-22",
      "source": "IAM District 141",
      "kind": "union",
-     "title": "United Airlines Negotiations Update for September 16, 2025",
-     "url": "https://iam141.org/united-airlines-negotiations-update-for-september-16-2025/",
-     "quote": "Passenger and Fleet Service Negotiations for the Passenger Service and Fleet Service contracts continued to center on Article 4 issues, particularly outage relief."
+     "title": "UA Negotiation Update 23 December 2025",
+     "url": "https://iam141.org/wp-content/uploads/2025/12/UA-Negotiation-Update-23-December-2025.pdf",
+     "quote": "Passenger Service and Fleet Service Contract Update Negotiations continued to center on overtime, specifically the Company’s use of mandatory overtime."
+    },
+    {
+     "status": "In negotiations",
+     "date": "2025-11-11",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "UA.Negotiations.Update",
+     "url": "https://iam141.org/wp-content/uploads/2025/11/UA.Negotiations.Update-2.pdf",
+     "quote": "This was our least productive session to date for Passenger Service and Fleet, as United’s negotiating team asserted they do not have to adhere to our current contract, let alone negotiate new language to hold United’s front-line management more accountable when declaring mandatory overtime."
     }
    ],
    "status_date": "2026-06-26",
@@ -1523,6 +1541,15 @@
      "title": "Fleet Technical Instructors and Related Employees Tentative Agreement 2026 All Markup-2",
      "url": "https://iam141.org/wp-content/uploads/2026/05/Fleet-Technical-Instructors-and-Related-Employees-Tentative-Agreement-2026_All-Markup-2.pdf",
      "quote": "Fleet Technical Instructors and Related Employees Tentative Agreement 2026 All Markup-2."
+    },
+    {
+     "status": "In negotiations",
+     "date": "2026-03-02",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "UA Negotiation Update 03 March 2026",
+     "url": "https://iam141.org/wp-content/uploads/2026/03/UA-Negotiation-Update-03-March-2026.pdf",
+     "quote": "The Fleet Technical Instructors and Related (FTI & Related) Negotiating Committee made incremental progress on Article 4 issues."
     }
    ],
    "status_date": "2026-08-19",
@@ -1613,6 +1640,15 @@
      "title": "United Airlines Negotiations Update for September 16, 2025",
      "url": "https://iam141.org/united-airlines-negotiations-update-for-september-16-2025/",
      "quote": "Central Load Planners For the CLP contract, we reached a tentative agreement on Article 1 (Qualifications, Positions and Vacancies) that better honors seniority when bidding Lead vacancies or Charter Desk work."
+    },
+    {
+     "status": "Tentative agreement",
+     "date": "2025-09-16",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "16 September.3.UA Negotiations Update",
+     "url": "https://iam141.org/wp-content/uploads/2025/09/16-September.3.UA-Negotiations-Update.pdf",
+     "quote": "Central Load Planners For the CLP contract, we reached a tentative agreement on Article 1 (Qualifications, Positions and Vacancies) that better honors seniority when bidding Lead vacancies or C harter Desk work."
     }
    ],
    "status_date": "2026-06-26",
@@ -1669,6 +1705,15 @@
      "title": "Maintenance Instructor Employees Tentative Agreement 2026 All Markup",
      "url": "https://iam141.org/wp-content/uploads/2026/05/Maintenance-Instructor-Employees-Tentative-Agreement-2026_All-Markup.pdf",
      "quote": "Maintenance Instructor Employees Tentative Agreement 2026 All Markup."
+    },
+    {
+     "status": "In negotiations",
+     "date": "2025-12-22",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "UA Negotiation Update 23 December 2025",
+     "url": "https://iam141.org/wp-content/uploads/2025/12/UA-Negotiation-Update-23-December-2025.pdf",
+     "quote": "Maintenance Instructor Contract Update Negotiations focused on Articles One, Four, Eight, and Eleven."
     }
    ],
    "status_date": "2026-08-19",
@@ -1725,6 +1770,15 @@
      "title": "Security Officer Employees Tentative Agreement 2026 All Markup",
      "url": "https://iam141.org/wp-content/uploads/2026/05/Security-Officer-Employees-Tentative-Agreement-2026_All-Markup.pdf",
      "quote": "Security Officer Employees Tentative Agreement 2026 All Markup."
+    },
+    {
+     "status": "In negotiations",
+     "date": "2025-10-13",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "14.1.October.2025.UA Negotiations Update 3.22.26?PM",
+     "url": "https://iam141.org/wp-content/uploads/2025/10/14.1.October.2025.UA-Negotiations-Update-3.22.26-PM.pdf",
+     "quote": "For the Security Officer contract, negotiations focused on clarifying and reaching a shared understanding of existing contract language regarding badge control work."
     }
    ],
    "status_date": "2026-08-19",
@@ -2342,15 +2396,6 @@
      "quote": "PSA Flight Attendants Reach Tentative Agreement."
     },
     {
-     "status": "In negotiations",
-     "date": "2026-02-07",
-     "source": "AFA-CWA",
-     "kind": "union",
-     "title": "AFA on the Hill: Labor Caucus Roundtable & United AFA Government Affairs Training",
-     "url": "https://afacwa.org/afa-on-the-hill-labor-caucus-roundtable-united-afa-government-affairs-training/",
-     "quote": "We discussed a wide range of topics, including contract negotiations – especially at United and PSA, where management continues to delay the contract Flight Attendants have earned."
-    },
-    {
      "status": "Picketing",
      "date": "2026-01-09",
      "source": "AFA-CWA",
@@ -2358,6 +2403,15 @@
      "title": "PSA Flight Attendants Picket Grand Opening of New PSA Airlines HQ",
      "url": "https://afacwa.org/psa-flight-attendants-picket-grand-opening-of-new-psa-airlines-hq/",
      "quote": "PSA Flight Attendants Picket Grand Opening of New PSA Airlines HQ."
+    },
+    {
+     "status": "Picketing",
+     "date": "2025-12-19",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "PSA Flight Attendants Demand a Living Wage Contract NOW",
+     "url": "https://afacwa.org/psa-flight-attendants-demand-a-living-wage-contract-now/",
+     "quote": "Flight Attendants and allies picketed at CLT, DAY, DCA, DFW, and PHL, demanding that management deliver a living-wage contract now."
     }
    ],
    "union_event": {
@@ -2747,15 +2801,6 @@
    "union_events": [
     {
      "status": "Strike vote",
-     "date": "2026-06-22",
-     "source": "AFA-CWA",
-     "kind": "union",
-     "title": "Horizon AFA Flight Attendants Vote 99.8% to Authorize Strike",
-     "url": "https://afacwa.org/horizon-afa-flight-attendants-vote-99-8-to-authorize-strike/",
-     "quote": "Flight Attendants deserve a living wage contract now.” In the news: Horizon Air flight attendants authorize a strike, seek higher pay raise , Seattle Times Flight attendants employed by Alaska Airlines vote to go on strike , Alaska News Source Horizon Air flight attendants vote to authorize strikes amid stalled contract negotiations , Oregon Live View TV coverage here View photos from the picket l"
-    },
-    {
-     "status": "Strike vote",
      "date": "2026-05-09",
      "source": "AFA-CWA",
      "kind": "union",
@@ -2764,15 +2809,15 @@
      "quote": "With a strike vote later this month, Flight Attendants are making clear to management that they’re demanding a Contract that recognizes the incredible work they do as part of Alaska Air Group."
     }
    ],
-   "status_date": "2026-06-22",
+   "status_date": "2026-05-09",
    "union_event": {
     "status": "Strike vote",
-    "date": "2026-06-22",
+    "date": "2026-05-09",
     "source": "AFA-CWA",
     "kind": "union",
-    "title": "Horizon AFA Flight Attendants Vote 99.8% to Authorize Strike",
-    "url": "https://afacwa.org/horizon-afa-flight-attendants-vote-99-8-to-authorize-strike/",
-    "quote": "Flight Attendants deserve a living wage contract now.” In the news: Horizon Air flight attendants authorize a strike, seek higher pay raise , Seattle Times Flight attendants employed by Alaska Airlines vote to go on strike , Alaska News Source Horizon Air flight attendants vote to authorize strikes amid stalled contract negotiations , Oregon Live View TV coverage here View photos from the picket l"
+    "title": "ICYMI: Horizon AFA Flight Attendants Picket at SeaTac",
+    "url": "https://afacwa.org/icymi-horizon-afa-flight-attendants-picket-at-seatac/",
+    "quote": "With a strike vote later this month, Flight Attendants are making clear to management that they’re demanding a Contract that recognizes the incredible work they do as part of Alaska Air Group."
    }
   },
   {
