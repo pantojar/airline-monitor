@@ -61,9 +61,26 @@ def group_tokens(group):
     return toks[:2]
 
 
+# other names unions use for the same craft as the 10-K
+ALT_NAMES = [
+    (r"stock clerk|material specialist|storekeeper", ["store"]),
+    (r"mechanic|technician", ["mechanic"]),
+]
+
+
+def group_alternates(group):
+    out = [group_tokens(group)]
+    for rx, toks in ALT_NAMES:
+        if re.search(rx, group, re.I):
+            out.append(toks)
+    return out
+
+
 def clause_names_group(clause, toks):
     if not toks:
         return False
+    if isinstance(toks[0], list):
+        return any(clause_names_group(clause, t) for t in toks)
     words = re.findall(r"[a-z]+", clause.lower())
     return all(any(w.startswith(t) for w in words) for t in toks)
 
@@ -179,6 +196,8 @@ def events_for(item, groups, site, aliases):
         unit_alias = aliases.get(unit) if unit not in (None, "Mainline") else None
         is_sub = bool(unit_alias and unit_alias.get("parent"))
         own_rx = unit_alias["match"] if is_sub else aliases.get(g["ticker"], {}).get("match", g["ticker"])
+        if not is_sub and site.get("names", {}).get(g["ticker"]):
+            own_rx += "|" + site["names"][g["ticker"]]  # names the site uses for that airline's groups, e.g. "TWU-IAM Association"
         subs_rx = "|".join(a["match"] for a in aliases.values() if a.get("parent") == g["ticker"] and a.get("match"))
         single = len(site.get("carriers", [])) == 1
 
@@ -191,7 +210,7 @@ def events_for(item, groups, site, aliases):
                 return bool(re.search(own_rx, stripped, re.I))
             return True
 
-        toks = group_tokens(g["group"])
+        toks = group_alternates(g["group"])
         best = None
         for clause in CLAUSE_SPLIT.split(text):
             if len(clause) > 900 or not clause_names_group(clause, toks):

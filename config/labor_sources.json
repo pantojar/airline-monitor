@@ -1,6 +1,6 @@
 [
  {"name": "IAM District 141", "url": "https://iam141.org", "unions": ["\\bIAM\\b", "Machinists"], "carriers": ["UAL", "ALK"]},
- {"name": "IAM District 142", "url": "https://www.iam142.org", "unions": ["\\bIAM\\b", "Machinists"], "carriers": ["ALK", "LUV"]},
+ {"name": "IAM District 142", "url": "https://atd142.org", "unions": ["\\bIAM\\b", "Machinists"], "carriers": ["ALK", "LUV", "AAL"], "names": {"AAL": "TWU-IAM|TechOps Association"}},
  {"name": "IAM (international)", "url": "https://www.goiam.org", "unions": ["\\bIAM\\b", "Machinists"], "carriers": ["UAL", "ALK", "LUV", "AAL"]},
  {"name": "AFA-CWA", "url": "https://www.afacwa.org", "unions": ["\\bAFA\\b", "Association of Flight Attendants"], "carriers": ["UAL", "ALK", "AAL", "DAL", "ULCC", "RJET"]},
  {"name": "AFA United", "url": "https://www.unitedafa.org", "unions": ["\\bAFA\\b", "Association of Flight Attendants"], "carriers": ["UAL"]},
@@ -9,7 +9,7 @@
  {"name": "Allied Pilots Association", "url": "https://www.alliedpilots.org", "unions": ["\\bAPA\\b", "Allied Pilots"], "carriers": ["AAL"]},
  {"name": "SWAPA", "url": "https://www.swapa.org", "unions": ["SWAPA"], "carriers": ["LUV"]},
  {"name": "Teamsters", "url": "https://teamster.org", "unions": ["\\bIBT\\b", "Teamsters"], "carriers": ["UAL", "ALK", "ULCC", "ALGT", "RJET", "LUV", "AAL"]},
- {"name": "TWU", "url": "https://www.twu.org", "unions": ["\\bTWU\\b", "Transport Workers"], "carriers": ["LUV", "AAL", "JBLU", "ALK", "ULCC", "RJET"]},
+ {"name": "TWU", "url": "https://www.twu.org", "names": {"AAL": "TWU-IAM|TechOps Association"}, "unions": ["\\bTWU\\b", "Transport Workers"], "carriers": ["LUV", "AAL", "JBLU", "ALK", "ULCC", "RJET"]},
  {"name": "TWU Local 556", "url": "https://www.twu556.org", "unions": ["\\bTWU\\b", "Transport Workers"], "carriers": ["LUV"]},
  {"name": "TWU Local 555", "url": "https://www.twu555.org", "unions": ["\\bTWU\\b", "Transport Workers"], "carriers": ["LUV"]},
  {"name": "AMFA", "url": "https://www.amfanational.org", "unions": ["\\bAMFA\\b", "Aircraft Mechanics Fraternal"], "carriers": ["LUV", "ALK"]},
