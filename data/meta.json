@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-19T14:25:01Z",
+  "at": "2026-10-19T15:27:54Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -113,9 +113,9 @@
    }
   }
  },
- "generated": "2026-10-19T14:27:43Z",
+ "generated": "2026-10-19T15:37:13Z",
  "news": {
-  "at": "2026-10-19T14:25:25Z",
+  "at": "2026-10-19T15:28:17Z",
   "items": 76,
   "errors": []
  },
@@ -133,7 +133,7 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-19T14:25:25Z",
+  "at": "2026-10-19T15:28:17Z",
   "latest": "2026-10-14",
   "rows": 1193
  },
@@ -143,6 +143,7 @@
   "errors": []
  },
  "labor": {
+  "at": "2026-10-19T15:37:13Z",
   "groups": 96,
   "errors": [],
   "union_sites": [
@@ -160,7 +161,7 @@
     "groups": 14,
     "method": "wp-posts,wp-media",
     "items": 598,
-    "pdfs_read": 16
+    "pdfs_read": 0
    },
    {
     "name": "IAM (international)",
@@ -182,9 +183,8 @@
     "name": "AFA United",
     "url": "https://www.unitedafa.org",
     "groups": 1,
-    "error": "posts: HTTP 406; media: HTTP 406; /feed/: HTTP 404; /rss: HTTP 404; /rss.xml: HTTP 404; /feed: HTTP 404",
-    "method": null,
-    "items": 0,
+    "method": "rss /news/rss.xml",
+    "items": 10,
     "pdfs_read": 0
    },
    {
@@ -271,15 +271,6 @@
     "groups": 4,
     "method": "html list",
     "items": 20,
-    "pdfs_read": 0
-   },
-   {
-    "name": "PAFCA",
-    "url": "https://www.pafca.org",
-    "groups": 3,
-    "error": "posts: HTTP 404; media: HTTP 404; /feed/: HTTP 404; /rss: HTTP 429; /rss.xml: HTTP 429; /feed: HTTP 429",
-    "method": null,
-    "items": 0,
     "pdfs_read": 0
    }
   ]
