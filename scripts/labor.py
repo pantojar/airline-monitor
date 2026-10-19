@@ -126,7 +126,39 @@ def parse_union_tables(doc):
 SENT_RE = re.compile(r"(?<=[.!?])\s+(?=[A-Z(])")
 
 
-BOILER_RE = re.compile(r"under the RLA|must notify|self-help|if either party|after receipt of such notice|cooling[- ]off period that must|could (adversely|materially)|may be unable|there can be no assurance|risk", re.I)
+BOILER_RE = re.compile(r"under the RLA|must notify|self-help|if either party|after receipt of such notice|cooling[- ]off period that must|could (adversely|materially)|may be unable|there can be no assurance|risk|forward-looking|prospects of|vested|401\(k\)|non-elective", re.I)
+
+
+def tidy(sentences):
+    """Drop table fragments and duplicates from quoted filing text."""
+    out = []
+    for s in sentences or []:
+        if len(re.findall(r"\b\d[\d,.]*\b", s)) > 8 or BOILER_RE.search(s):
+            continue
+        if not any(s in o or o in s for o in out):
+            out.append(s)
+    return out
+
+
+SUBSIDIARY_WORDS = r"Envoy|PSA|Piedmont|Endeavor|Horizon|Hawaiian|McGee|United Ground Express|Mesa"
+MONTH_DATE_RE = re.compile(r"\b(?:in|on)\s+(January|February|March|April|May|June|July|August|September|October|November|December)(?:\s+(\d{1,2}),)?\s+(\d{4})", re.I)
+
+
+def ratifications(sentences):
+    """[(craft, unit_word or None, 'YYYY-MM', sentence)] for 10-Q sentences reporting a ratified agreement."""
+    out = []
+    for s in sentences or []:
+        if not re.search(r"ratif", s, re.I) or re.search(r"tentative agreement (?:was|were) rejected|failed to ratify|did not ratify", s, re.I):
+            continue
+        m = MONTH_DATE_RE.search(s)
+        if not m:
+            continue
+        ym = f"{m.group(3)}-{MONTHS[m.group(1).lower()]:02d}"
+        unit = re.search(SUBSIDIARY_WORDS, s)
+        for craft, rx, _ in CRAFTS:
+            if re.search(rx, s, re.I):
+                out.append((craft, unit.group(0) if unit else None, ym, s))
+    return out
 CRAFT_WORD_RE = re.compile(r"pilot|flight attendant|mechanic|technician|union|collective bargaining|CBA|employee group|dispatcher|fleet service|agents|crew|labor association", re.I)
 
 
@@ -165,12 +197,29 @@ STATUS_RULES = [  # (status, pattern) checked in order on a headline
     ("Ratified", r"ratif(y|ied|ies|ication)|approve[sd]? (new )?(contract|deal|agreement)"),
     ("Tentative agreement", r"tentative (agreement|deal)|agreement in principle|reach(es|ed)? (a )?(deal|agreement)|\bTA\b"),
     ("Strike vote", r"strike (vote|authori[sz]ation)|vote[sd]? to (authori[sz]e|strike)"),
-    ("Seeking release", r"release|cooling[- ]off|proffer"),
+    ("Seeking release", r"request(s|ed|ing)? (a )?release|release from (the )?(NMB|mediation)|cooling[- ]off|proffer"),
     ("In mediation", r"mediat|\bNMB\b|national mediation board"),
     ("Picketing", r"picket|rall(y|ies)|protest"),
-    ("In negotiations", r"negotiat|talks|bargain|contract"),
+    ("In negotiations", r"negotiat|\btalks\b|bargain"),
 ]
 UNIT_NAMES = {"Mainline": None}
+
+
+def status_from_footnote(footnote, union):
+    """Apply the status rules to a 10-K footnote, sentence by sentence. A sentence that names unions
+    must name this row's union for its status to apply."""
+    if not footnote:
+        return None
+    acr = re.findall(r"\(\s*[“\"]?([A-Z][A-Z\-]{1,9})[”\"]?\s*\)", union or "") or ([union] if union and len(union) <= 8 else [])
+    for status, rx in STATUS_RULES:
+        for sent in SENT_RE.split(footnote):
+            if not re.search(rx, sent, re.I):
+                continue
+            named = re.findall(r"\b(ALPA|AFA|TWU|IBT|IAM|AMFA|CWA|APFA|PAFCA|SWAPA|APA)\b", sent)
+            if named and not any(a.split("-")[0] in named for a in acr):
+                continue
+            return status
+    return None
 
 
 def craft_of(group):
@@ -285,12 +334,16 @@ def update_labor(root, meta, ua, carriers, force=False):
                     doc = _get(url, ua)
                     time.sleep(0.5)
                     rec["tenq"] = {"accession": q["accession"], "filed": q["filed"], "url": url,
-                                   "sentences": labor_sentences(doc, r"ratif|tentative agreement|mediat|national mediation board|negotiat|amendable|collective bargaining agreement", 6)}
+                                   "sentences": tidy(labor_sentences(doc, r"ratif|tentative agreement|mediat|national mediation board|negotiat|amendable|represented by|voted", 10))[:6]}
                 except Exception as e:  # noqa: BLE001
                     errors.append(f"{t}: 10-Q {type(e).__name__}")
                     if old.get("tenq"):
                         rec["tenq"] = old["tenq"]
         companies[t] = rec
+
+    for rec in companies.values():
+        if rec.get("tenq"):
+            rec["tenq"]["sentences"] = tidy(rec["tenq"].get("sentences"))
 
     # one row per group, with news-based status
     today = dt.date.today()
@@ -316,6 +369,9 @@ def update_labor(root, meta, ua, carriers, force=False):
             row["craft"] = craft
             row["status"] = "Past amendable date" if row["open"] else ("Amendable within a year" if soon else ("Contract in effect" if amend else "Not stated"))
             row["status_source"] = "10-K"
+            fs = status_from_footnote(g.get("footnote"), g.get("union"))
+            if fs and fs != "Ratified":
+                row["status"], row["status_date"] = fs, (rec.get("tenk") or {}).get("filed")
             if craft and carrier.get("query") and (row["open"] or soon or (amend and amend <= horizon)):
                 key = (carrier["query"], craft)
                 if key not in news_cache:
@@ -333,8 +389,21 @@ def update_labor(root, meta, ua, carriers, force=False):
                             row[f] = pr.get(f)
                 else:
                     st, it = status_from_news(items, carrier["match"], craft_rx)
-                    if st:
+                    if st and it["date"] >= (row.get("status_date") or ""):
                         row["status"], row["status_source"], row["news"] = st, "news", it
+            # the company's own 10-Q report of a ratification wins unless a later headline says otherwise
+            tq = rec.get("tenq") or {}
+            unit_word = None if unit in (None, "Mainline", "Alaska", "United Airlines, Inc.") else unit.split()[0]
+            for craft_r, uw, ym, sent in ratifications(tq.get("sentences")):
+                if craft_r != craft or (uw or None) != (unit_word if unit_word in re.findall(SUBSIDIARY_WORDS, sent) else None):
+                    continue
+                news_date = (row.get("news") or {}).get("date", "")
+                if not news_date or ym >= news_date[:7] or row["status"] in ("In negotiations", "Picketing"):
+                    row["status"], row["status_source"], row["status_date"], row["filing_quote"] = "Ratified", "10-Q", ym, sent
+                    row["filing_url"] = tq.get("url")
+                break
+            if row.get("news"):
+                row["status_date"] = row.get("status_date") or row["news"]["date"]
             groups.append(row)
         # companies that describe contracts in prose: one row per craft the prose mentions, status from news only
         prose = (rec.get("tenk") or {}).get("prose") or []
@@ -358,7 +427,12 @@ def update_labor(root, meta, ua, carriers, force=False):
                             news_cache[key] = []
                     st, it = status_from_news(news_cache[key] or [], carrier["match"], craft_rx)
                     if st:
-                        row["status"], row["status_source"], row["news"] = st, "news", it
+                        row["status"], row["status_source"], row["news"], row["status_date"] = st, "news", it, it["date"]
+                tq = rec.get("tenq") or {}
+                for craft_r, uw, ym, sent in ratifications(tq.get("sentences")):
+                    if craft_r == craft and ym >= (row.get("status_date") or "")[:7]:
+                        row["status"], row["status_source"], row["status_date"], row["filing_quote"], row["filing_url"] = "Ratified", "10-Q", ym, sent, tq.get("url")
+                        break
                 groups.append(row)
     out = {"generated": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
            "companies": companies, "groups": groups}

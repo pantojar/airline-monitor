@@ -35,7 +35,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
 <script src="vendor/d3.min.js"></script>
 <script>
 window.dash = (function () {
-  var DEFAULTS = { group: 'All', basis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', pgroup: 'All' };
+  var DEFAULTS = { group: 'All', basis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', pgroup: 'All', lcarrier: 'All', lopen: false };
   var params = Object.assign({}, DEFAULTS), calcs = {}, order = [], res = null, fns = [];
   var DATA = null, state = 'loading';
   function compute() {
@@ -65,11 +65,13 @@ window.dash = (function () {
       get('dot_fuel').catch(function () { return []; }),
       get('fuel_spot').catch(function () { return []; }),
       get('exec_pay').catch(function () { return []; }),
+      get('labor').catch(function () { return { groups: [], companies: {} }; }),
     ]).then(function (v) {
       var today = new Date().toISOString().slice(0, 10);
       var curated = v[2].filter(function (r) { return !(r.kind === 'Upcoming' && r.date < today); });
       DATA = { financials: v[0], carriers: v[1], news: curated.concat(v[3]), dot: v[5], dot_carriers: v[6], meta: [v[4] || {}],
-        dot_annual: v[7], dot_fuel: v[8], fuel_spot: v[9].map(function (r) { return { date: r[0], price: r[1] }; }), exec_pay: v[10] };
+        dot_annual: v[7], dot_fuel: v[8], fuel_spot: v[9].map(function (r) { return { date: r[0], price: r[1] }; }), exec_pay: v[10],
+        labor_groups: v[11].groups || [], labor_companies: Object.values(v[11].companies || {}), labor_meta: [{ generated: v[11].generated }] };
       res = null; state = 'ok';
       var g = v[4] && v[4].generated ? new Date(v[4].generated) : null;
       asOf(g && !isNaN(g)
@@ -167,6 +169,10 @@ window.dash = (function () {
 #dash-root .am-fail{display:flex;align-items:center;justify-content:center;gap:6px;min-height:120px;color:var(--color-fg-muted);font-size:var(--cds-font-size-caption)}
 #dash-root .am-fail::before{content:'';width:.375rem;height:.375rem;border-radius:50%;background:var(--color-bad)}
 #dash-root .am-chart{min-height:300px}
+#dash-root .am-pill{display:inline-block;border-radius:999px;padding:1px 8px;font-size:var(--cds-font-size-caption);border:1px solid currentColor;white-space:nowrap}
+#dash-root .am-pill a{color:inherit;text-decoration:none}
+#dash-root .am-quote{border-left:3px solid var(--color-border-line);padding:2px 0 2px 10px;margin:6px 0;color:var(--color-fg-muted);font-size:var(--cds-font-size-body)}
+#dash-root .am-disc h3{font-size:var(--cds-font-size-body);font-weight:var(--cds-font-weight-medium);margin:var(--cds-gap-md) 0 2px}
 #dash-root .am-foot{margin:var(--cds-gap-sm) 0 0;padding-left:1.2rem;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);line-height:1.5}
 #dash-root .am-foot b{color:var(--color-fg);font-weight:var(--cds-font-weight-medium)}
 @media (max-width:700px){#dash-root .am-hn{display:none}}
@@ -190,6 +196,7 @@ window.dash = (function () {
     <button class="am-tab" role="tab" data-tab="carrier" aria-selected="false">Carrier detail</button>
     <button class="am-tab" role="tab" data-tab="opcarriers" aria-selected="false">Operating carriers (DOT)</button>
     <button class="am-tab" role="tab" data-tab="pay" aria-selected="false">Pay</button>
+    <button class="am-tab" role="tab" data-tab="labor" aria-selected="false">Bargaining</button>
     <button class="am-tab" role="tab" data-tab="news" aria-selected="false">News</button>
     <button class="am-tab" role="tab" data-tab="notes" aria-selected="false">Sources &amp; notes</button>
   </nav>
@@ -462,6 +469,52 @@ window.dash = (function () {
     </div>
   </section>
 
+  <!-- BARGAINING -->
+  <section class="am-page am-stack" id="labor" hidden>
+    <div class="am-card" id="labor-sum-card">
+      <h2>Union contracts</h2>
+      <p class="am-note" id="labor-note">Groups, unions, headcount and amendable dates come from each carrier's latest 10-K. Status comes from the company's latest 10-Q when it reports a ratification, and otherwise from the most recent news headline naming the carrier, the craft and a bargaining milestone. All of it updates automatically; follow the links to check a status.</p>
+      <div class="am-tiles" id="labor-tiles">
+        <div class="am-tile"><div class="k">Represented groups tracked</div><div class="v" id="lt-groups">—</div><div class="d" id="lt-groups-d">—</div></div>
+        <div class="am-tile"><div class="k">Past amendable date</div><div class="v" id="lt-open">—</div><div class="d" id="lt-open-d">—</div></div>
+        <div class="am-tile"><div class="k">Mediation, pickets or strike votes</div><div class="v" id="lt-hot">—</div><div class="d">From news in the past year</div></div>
+        <div class="am-tile"><div class="k">Ratified in the past year</div><div class="v" id="lt-rat">—</div><div class="d">From 10-Qs and news</div></div>
+      </div>
+    </div>
+
+    <div class="am-bar">
+      <select class="am-sel" id="lcarrier" aria-label="Carrier" data-source="labor_groups"></select>
+      <label class="am-chk"><input type="checkbox" id="lopen"> Past amendable date or active news only</label>
+    </div>
+
+    <div class="am-card" id="cal-card">
+      <h2>Contract calendar</h2>
+      <p class="am-note">Each dot is a represented group at its amendable date, sized by headcount and colored by status. The line marks today. Groups to its left are open for negotiation.</p>
+      <div class="am-legend" id="cal-legend"></div>
+      <div class="am-wrap am-chart" id="cal-chart" data-source="labor_groups"></div>
+    </div>
+
+    <div class="am-card" id="ltable-card">
+      <h2>All represented groups</h2>
+      <p class="am-note">Open contracts first, oldest amendable date at the top. Click a status to open its source.</p>
+      <div class="am-tbl-box">
+        <table class="am-t" id="labor-table" data-source="labor_groups" data-row-key="ticker,unit,group">
+          <thead><tr>
+            <th class="l" data-field="carrier">Carrier</th><th class="l" data-field="group">Group</th><th class="l am-hn" data-field="union">Union</th>
+            <th data-field="employees">Employees</th><th class="l" data-field="amendable_text">Amendable</th><th class="l" data-field="status">Status</th><th class="l w" data-field="news">Latest source</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="am-card am-prose" id="disc-card">
+      <h2>What the companies say</h2>
+      <p class="am-note">Quoted from each company's latest 10-Q (and, where the 10-K has no union table, its 10-K). Text is as filed.</p>
+      <div id="disc-list" data-source="labor_companies"></div>
+    </div>
+  </section>
+
   <!-- NEWS -->
   <section class="am-page am-stack" id="news" hidden>
     <div class="am-bar"><span id="tag-chips" data-source="news"></span></div>
@@ -493,6 +546,7 @@ window.dash = (function () {
         <li><b>Jet fuel.</b> The spot line is the daily U.S. Gulf Coast kerosene-type jet fuel price from the Energy Information Administration, via the St. Louis Fed's FRED service (series DJFUELUSGULF), refreshed each morning. "Airlines paid" is DOT Schedule P-12(a): total fuel cost ÷ gallons for the passenger carriers on the DOT tab, which includes taxes, into-plane fees and hedging results and runs about four months behind.</li>
         <li><b>CEO pay and pay ratio.</b> From each company's proxy statement (DEF 14A). The job reads the SEC-required pay-ratio disclosure automatically each week (median employee pay, CEO total and the ratio), keeping a CEO figure only when it reproduces the stated ratio. Compensation actually paid comes from the pay-versus-performance table and is entered by hand, since table layouts vary when a company had two CEOs in a year. Companies choose their own method for finding the median employee, so ratios are not strictly comparable across companies.</li>
         <li><b>Average pilot salary.</b> DOT Schedule P-5.2 pilot and copilot salaries for the year ÷ P-10 pilot headcount. DOT's flight attendant and mechanic pay can't be separated as cleanly (carriers file those salaries and headcounts under different groups), so the dashboard doesn't compute averages for them.</li>
+        <li><b>Bargaining tracker.</b> Represented groups, unions, headcounts and amendable dates are read automatically from the union table in each carrier's latest 10-K (checked weekly, re-read when a new 10-K is filed). Allegiant, Republic and SkyWest describe their contracts in prose, so their 10-K sentences are quoted instead. Status: a ratification reported in the company's latest 10-Q is used when it's the most recent event; otherwise a weekly news search for each group that is open or amendable within 18 months takes the most recent headline from the past year that names the carrier, the craft and a milestone (ratified, rejected, tentative agreement, mediation, release request, strike vote, picketing, negotiations). Headline matching can misread a story, so every status links to its source. Amendable dates given only as a year are treated as open from January 1 of the following year.</li>
       </ul>
     </div>
     <div class="am-card">
@@ -1187,6 +1241,70 @@ dash.calc('dotpeer', {
   // ---------- pay controls ----------
   const WFG = [['h_pilots', 'Pilots'], ['h_cabin', 'Flight attendants & passenger services'], ['h_handling', 'Aircraft & traffic handling'], ['h_maint', 'Maintenance'], ['h_mgmt', 'General management'], ['h_other', 'Other']];
 
+  // ---------- bargaining ----------
+  const lsel = document.getElementById('lcarrier');
+  lsel.addEventListener('change', () => dash.setParams({ lcarrier: lsel.value }));
+  const lopen = document.getElementById('lopen');
+  lopen.addEventListener('change', () => dash.setParams({ lopen: lopen.checked }));
+  const LCAT = {
+    'Contract rejected': ['Rejected / dispute', 'var(--color-bad)'], 'Strike vote': ['Rejected / dispute', 'var(--color-bad)'],
+    'Seeking release': ['Mediation / release', 'var(--c4)'], 'In mediation': ['Mediation / release', 'var(--c4)'],
+    'Picketing': ['Picketing', 'var(--c6)'], 'In negotiations': ['Negotiating', 'var(--color-warn)'], 'Past amendable date': ['Open, no recent news', 'var(--c2)'],
+    'Tentative agreement': ['Tentative agreement', 'var(--c1)'], 'Ratified': ['Ratified', 'var(--color-ok)'],
+    'Amendable within a year': ['Amendable within a year', 'var(--c5)'], 'Contract in effect': ['Contract in effect', 'var(--cds-chart-muted)'],
+  };
+  const lcat = (st) => LCAT[st] || ['Other', 'var(--cds-chart-muted)'];
+  const amDate = (r) => {
+    if (!r.amendable) return null;
+    const a = r.amendable;
+    // a year alone means "sometime that year"; plot it mid-year
+    return new Date((a.length === 4 ? a + '-07-01' : a.length === 7 ? a + '-15' : a) + 'T00:00:00Z');
+  };
+  const amText = (r) => {
+    if (!r.amendable) return r.amendable_text || '—';
+    const a = r.amendable;
+    return a.length === 4 ? a : a.length === 7 ? d3.utcFormat('%b %Y')(new Date(a + '-15T00:00:00Z')) : d3.utcFormat('%b %-d, %Y')(new Date(a + 'T00:00:00Z'));
+  };
+
+  function calendar(box, rows) {
+    clearSvg(box);
+    const data = rows.filter((r) => amDate(r));
+    if (!data.length) return;
+    const carriers = [...new Set(data.map((r) => r.carrier))];
+    const W = Math.max(320, box.clientWidth), band = 30, H = carriers.length * band + 30;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).style('display', 'block');
+    const lab = Math.max(...carriers.map((c) => textW(svg, c))) + 12;
+    const now = new Date();
+    const ext = d3.extent([...data.map(amDate), now]);
+    const x = d3.scaleUtc([d3.utcYear.floor(ext[0]), d3.utcYear.ceil(ext[1])], [lab + 8, W - 12]);
+    const y = d3.scaleBand(carriers, [4, H - 24]).paddingInner(0.2);
+    const r = d3.scaleSqrt([0, d3.max(data, (d) => d.employees || 0) || 1], [3, 13]);
+    x.ticks(d3.utcYear.every(1)).forEach((t) => {
+      svg.append('line').attr('x1', x(t)).attr('x2', x(t)).attr('y1', 0).attr('y2', H - 22).attr('stroke', 'var(--cds-chart-grid)');
+      svg.append('text').attr('x', x(t)).attr('y', H - 6).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(d3.utcFormat('%Y')(t));
+    });
+    carriers.forEach((c) => {
+      svg.append('text').attr('x', lab).attr('y', y(c) + y.bandwidth() / 2 + 4).attr('text-anchor', 'end').attr('fill', 'var(--color-fg)').style('font-size', 'var(--cds-font-size-caption)').text(c);
+      svg.append('line').attr('x1', lab + 8).attr('x2', W - 12).attr('y1', y(c) + y.bandwidth() / 2).attr('y2', y(c) + y.bandwidth() / 2).attr('stroke', 'var(--cds-chart-grid)');
+    });
+    svg.append('line').attr('x1', x(now)).attr('x2', x(now)).attr('y1', 0).attr('y2', H - 22).attr('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 3');
+    svg.append('text').attr('x', x(now) + 4).attr('y', 10).attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text('Today');
+    const tp = tip(box);
+    const byRow = d3.group(data, (d) => d.carrier);
+    for (const [c, ds] of byRow) {
+      ds.sort((a, b) => (b.employees || 0) - (a.employees || 0)).forEach((d, i) => {
+        const cy = y(c) + y.bandwidth() / 2 + ((i % 3) - 1) * 4;
+        svg.append('circle').attr('cx', x(amDate(d))).attr('cy', cy).attr('r', r(d.employees || 0)).attr('fill', lcat(d.status)[1]).attr('fill-opacity', 0.75)
+          .attr('stroke', 'var(--color-panel)').attr('stroke-width', 1)
+          .on('pointermove', (ev) => { const sc = box.clientWidth / W; const [mx, my] = d3.pointer(ev, svg.node());
+            tp.show(mx * sc, my * sc, d.carrier + ' · ' + d.group, [
+              { name: 'Union', value: (d.union || '—').slice(0, 48) }, { name: 'Employees', value: d.employees ? d3.format(',')(d.employees) : '—' },
+              { name: 'Amendable', value: amText(d) }, { color: lcat(d.status)[1], name: 'Status', value: d.status + (d.status_date ? ' · ' + d.status_date.slice(0, 7) : '') }]); })
+          .on('pointerleave', () => tp.hide());
+      });
+    }
+  }
+
   // ---------- main draw ----------
   function draw() {
     const P = dash.params();
@@ -1359,6 +1477,76 @@ dash.calc('dotpeer', {
       document.getElementById('ft-paid').textContent = lp ? usd(lp.price) : '—';
       document.getElementById('ft-paid-k').textContent = lp ? 'Airlines paid, ' + mfmt(lp.month) : 'Airlines paid';
       document.getElementById('ft-paid-d').textContent = lp && lpy ? sgn(lp.price / lpy.price - 1) + ' vs ' + mfmt(lpy.month) : '—';
+    }
+
+    // ---------- bargaining tab ----------
+    const lg = dash.data('labor_groups'), lc = dash.data('labor_companies');
+    if (tab === 'labor' && lg.status === 'ok') {
+      const all = lg.data;
+      const carriers = [...new Set(all.map((r) => r.carrier))].sort();
+      if (lsel.options.length !== carriers.length + 1) lsel.replaceChildren(new Option('All carriers', 'All'), ...carriers.map((c) => new Option(c, c)));
+      lsel.value = P.lcarrier || 'All';
+      lopen.checked = P.lopen === true;
+      const recent = (r) => r.status_date && (Date.now() - new Date(r.status_date.length === 7 ? r.status_date + '-15' : r.status_date)) < 365 * 864e5;
+      const active = (r) => r.open || (r.status_source !== '10-K' && recent(r) && r.status !== 'Ratified');
+      let rows = all.filter((r) => (P.lcarrier || 'All') === 'All' || r.carrier === P.lcarrier);
+      if (P.lopen) rows = rows.filter(active);
+      // tiles (respect the carrier filter, not the open-only toggle)
+      const base = all.filter((r) => (P.lcarrier || 'All') === 'All' || r.carrier === P.lcarrier);
+      const tbl = base.filter((r) => !r.prose);
+      const op = tbl.filter((r) => r.open && r.status !== 'Ratified');
+      document.getElementById('lt-groups').textContent = d3.format(',')(tbl.length);
+      document.getElementById('lt-groups-d').textContent = d3.format(',')(d3.sum(tbl, (r) => r.employees || 0)) + ' employees';
+      document.getElementById('lt-open').textContent = d3.format(',')(op.length);
+      document.getElementById('lt-open-d').textContent = d3.format(',')(d3.sum(op, (r) => r.employees || 0)) + ' employees';
+      document.getElementById('lt-hot').textContent = d3.format(',')(base.filter((r) => ['In mediation', 'Seeking release', 'Strike vote', 'Picketing', 'Contract rejected'].includes(r.status) && recent(r)).length);
+      document.getElementById('lt-rat').textContent = d3.format(',')(base.filter((r) => r.status === 'Ratified' && recent(r)).length);
+      // legend and calendar
+      const cats = [...new Map(Object.values(LCAT).map((v) => [v[0], v[1]]))];
+      document.getElementById('cal-legend').replaceChildren(...cats.map(([n, c]) => { const sp = document.createElement('span'); const w = document.createElement('i'); w.className = 'am-sw'; w.style.background = c; w.style.borderRadius = '50%'; sp.append(w, document.createTextNode(n)); return sp; }));
+      calendar(document.getElementById('cal-chart'), rows.filter((r) => !r.prose));
+      // table
+      const ord = (r) => (r.open ? 0 : r.prose ? 2 : 1);
+      const sorted = rows.slice().sort((a, b) => ord(a) - ord(b) || String(a.amendable || '9999').localeCompare(String(b.amendable || '9999')) || (b.employees || 0) - (a.employees || 0));
+      document.querySelector('#labor-table tbody').replaceChildren(...sorted.map((r) => {
+        const tr = document.createElement('tr'); tr.dataset.key = [r.ticker, r.unit || '', r.group].join(',');
+        const st = td('', 'l'); const pill = document.createElement('span'); pill.className = 'am-pill'; pill.style.color = lcat(r.status)[1];
+        const link = r.status_source === '10-Q' ? r.filing_url : r.news ? r.news.url : null;
+        if (link && /^https:\/\//.test(link)) { const a = document.createElement('a'); a.href = link; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = r.status; pill.append(a); } else pill.textContent = r.status;
+        st.append(pill);
+        if (r.status_date && r.status_source !== '10-K') { const d = document.createElement('span'); d.style.color = 'var(--color-fg-muted)'; d.style.marginLeft = '6px';
+          d.textContent = (r.status_date.length === 7 ? d3.utcFormat('%b %Y')(new Date(r.status_date + '-15T00:00:00Z')) : d3.utcFormat('%b %-d, %Y')(new Date(r.status_date + 'T00:00:00Z'))) + ' · ' + (r.status_source === '10-Q' ? '10-Q' : 'news');
+          st.append(d); }
+        const src = td('', 'l w');
+        if (r.status_source === '10-Q' && r.filing_quote) src.textContent = '“' + r.filing_quote.slice(0, 220) + (r.filing_quote.length > 220 ? '…' : '') + '”';
+        else if (r.news) { const a = document.createElement('a'); a.href = r.news.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = r.news.title; a.style.color = 'inherit';
+          const m = document.createElement('span'); m.style.color = 'var(--color-fg-muted)'; m.textContent = ' — ' + (r.news.source || '');
+          src.append(a, m); }
+        else if (r.footnote) src.textContent = r.footnote;
+        if (r.open) tr.style.fontWeight = 'var(--cds-font-weight-medium)';
+        tr.append(td(r.carrier, 'l'), td(r.group, 'l'), td(r.union || '—', 'l am-hn'), td(r.employees ? d3.format(',')(r.employees) : '—'), td(amText(r), 'l'), st, src);
+        return tr;
+      }));
+      // disclosures
+      if (lc.status === 'ok') {
+        const names = new Map((car.status === 'ok' ? car.data : []).map((c) => [c.ticker, c.carrier]));
+        const box = document.getElementById('disc-list');
+        const wanted = (P.lcarrier || 'All') === 'All' ? null : new Set(all.filter((r) => r.carrier === P.lcarrier).map((r) => r.ticker));
+        box.replaceChildren(...lc.data.filter((c) => !wanted || wanted.has(c.ticker)).map((c) => {
+          const d = document.createElement('div'); d.className = 'am-disc';
+          const h = document.createElement('h3'); h.textContent = names.get(c.ticker) || c.ticker; d.append(h);
+          const add = (label, f, quotes) => {
+            if (!f || !quotes || !quotes.length) return;
+            const p = document.createElement('div'); p.className = 'am-note'; p.style.margin = '0';
+            const a = document.createElement('a'); a.href = f.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = label + ' filed ' + f.filed; a.style.color = 'inherit';
+            p.append(a); d.append(p);
+            quotes.forEach((q) => { const b = document.createElement('div'); b.className = 'am-quote'; b.textContent = q; d.append(b); });
+          };
+          add('10-Q', c.tenq, c.tenq && c.tenq.sentences);
+          add('10-K', c.tenk, c.tenk && c.tenk.prose);
+          return d.childElementCount > 1 ? d : null;
+        }).filter(Boolean));
+      }
     }
 
     // ---------- pay tab ----------
