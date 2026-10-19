@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-19T14:04:29Z",
+ "generated": "2026-10-19T14:13:25Z",
  "companies": {
   "DAL": {
    "ticker": "DAL",
@@ -1259,9 +1259,27 @@
    "carrier": "United Airlines",
    "open": true,
    "craft": "fleet service",
-   "status": "In negotiations",
+   "status": "Contract rejected",
    "status_source": "union",
    "union_events": [
+    {
+     "status": "Contract rejected",
+     "date": "2026-06-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Ratification.Results.JUN2026",
+     "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+     "quote": "Fleet Service, Passenger Service, and Central Load Planners did not ratify their tentative agreements."
+    },
+    {
+     "status": "Tentative agreement",
+     "date": "2026-05-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Fleet Service Employees Tentative Agreement 2026 All Markup",
+     "url": "https://iam141.org/wp-content/uploads/2026/05/Fleet-Service-Employees-Tentative-Agreement-2026_All-Markup.pdf",
+     "quote": "Fleet Service Employees Tentative Agreement 2026 All Markup."
+    },
     {
      "status": "In negotiations",
      "date": "2025-09-16",
@@ -1272,15 +1290,15 @@
      "quote": "Passenger and Fleet Service Negotiations for the Passenger Service and Fleet Service contracts continued to center on Article 4 issues, particularly outage relief."
     }
    ],
-   "status_date": "2025-09-16",
+   "status_date": "2026-06-26",
    "union_event": {
-    "status": "In negotiations",
-    "date": "2025-09-16",
+    "status": "Contract rejected",
+    "date": "2026-06-26",
     "source": "IAM District 141",
     "kind": "union",
-    "title": "United Airlines Negotiations Update for September 16, 2025",
-    "url": "https://iam141.org/united-airlines-negotiations-update-for-september-16-2025/",
-    "quote": "Passenger and Fleet Service Negotiations for the Passenger Service and Fleet Service contracts continued to center on Article 4 issues, particularly outage relief."
+    "title": "Ratification.Results.JUN2026",
+    "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+    "quote": "Fleet Service, Passenger Service, and Central Load Planners did not ratify their tentative agreements."
    }
   },
   {
@@ -1314,9 +1332,27 @@
    "carrier": "United Airlines",
    "open": true,
    "craft": "passenger service",
-   "status": "In negotiations",
+   "status": "Contract rejected",
    "status_source": "union",
    "union_events": [
+    {
+     "status": "Contract rejected",
+     "date": "2026-06-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Ratification.Results.JUN2026",
+     "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+     "quote": "Fleet Service, Passenger Service, and Central Load Planners did not ratify their tentative agreements."
+    },
+    {
+     "status": "Tentative agreement",
+     "date": "2026-05-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Passenger Service Employees Tentative Agreement 2026 All Markup",
+     "url": "https://iam141.org/wp-content/uploads/2026/05/Passenger-Service-Employees-Tentative-Agreement-2026_All-Markup.pdf",
+     "quote": "Passenger Service Employees Tentative Agreement 2026 All Markup."
+    },
     {
      "status": "In negotiations",
      "date": "2025-09-16",
@@ -1327,15 +1363,15 @@
      "quote": "Passenger and Fleet Service Negotiations for the Passenger Service and Fleet Service contracts continued to center on Article 4 issues, particularly outage relief."
     }
    ],
-   "status_date": "2025-09-16",
+   "status_date": "2026-06-26",
    "union_event": {
-    "status": "In negotiations",
-    "date": "2025-09-16",
+    "status": "Contract rejected",
+    "date": "2026-06-26",
     "source": "IAM District 141",
     "kind": "union",
-    "title": "United Airlines Negotiations Update for September 16, 2025",
-    "url": "https://iam141.org/united-airlines-negotiations-update-for-september-16-2025/",
-    "quote": "Passenger and Fleet Service Negotiations for the Passenger Service and Fleet Service contracts continued to center on Article 4 issues, particularly outage relief."
+    "title": "Ratification.Results.JUN2026",
+    "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+    "quote": "Fleet Service, Passenger Service, and Central Load Planners did not ratify their tentative agreements."
    }
   },
   {
@@ -1376,8 +1412,56 @@
    "carrier": "United Airlines",
    "open": true,
    "craft": null,
-   "status": "Past amendable date",
-   "status_source": "10-K"
+   "status": "Ratified",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "Ratified",
+     "date": "2026-08-19",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Storekeeper Employees Agreement 2026-2031 Ratified",
+     "url": "https://iam141.org/wp-content/uploads/2026/08/Storekeeper-Employees-Agreement-2026-2031_Ratified.pdf",
+     "quote": "Storekeeper Employees Agreement 2026-2031 Ratified."
+    },
+    {
+     "status": "Ratified",
+     "date": "2026-06-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Ratification.Results.JUN2026",
+     "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+     "quote": "Fleet Technical Instructors & Related, Maintenance Instructors, Security Officers and Storekeepers ratified their tentative agreements."
+    },
+    {
+     "status": "In negotiations",
+     "date": "2026-06-04",
+     "source": "IAM (international)",
+     "kind": "union",
+     "title": "Apple Under Fire: Congressional Labor Caucus Calls for NLRB Investigation into Tech Giant’s Treatment of Unionized Towson Workers",
+     "url": "https://www.goiam.org/news/apple-under-fire-congressional-labor-caucus-calls-for-nlrb-investigation-into-tech-giants-treatment-of-unionized-towson-workers/",
+     "quote": "“The Towson, Maryland location was the first Apple store in the country to unionize and secure a negotiated collective bargaining agreement with the company,” the letter to NLRB General Counsel Crystal Carey states ."
+    },
+    {
+     "status": "Tentative agreement",
+     "date": "2026-05-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Storekeeper Employees Tentative Agreement 2026 All Markup",
+     "url": "https://iam141.org/wp-content/uploads/2026/05/Storekeeper-Employees-Tentative-Agreement-2026_All-Markup.pdf",
+     "quote": "Storekeeper Employees Tentative Agreement 2026 All Markup."
+    }
+   ],
+   "status_date": "2026-08-19",
+   "union_event": {
+    "status": "Ratified",
+    "date": "2026-08-19",
+    "source": "IAM District 141",
+    "kind": "union",
+    "title": "Storekeeper Employees Agreement 2026-2031 Ratified",
+    "url": "https://iam141.org/wp-content/uploads/2026/08/Storekeeper-Employees-Agreement-2026-2031_Ratified.pdf",
+    "quote": "Storekeeper Employees Agreement 2026-2031 Ratified."
+   }
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1410,37 +1494,46 @@
    "carrier": "United Airlines",
    "open": true,
    "craft": "fleet service",
-   "status": "In mediation",
+   "status": "Ratified",
    "status_source": "union",
    "union_events": [
     {
-     "status": "In mediation",
+     "status": "Ratified",
      "date": "2026-08-19",
      "source": "IAM District 141",
      "kind": "union",
      "title": "Fleet Technical Instructors and Related Employees Agreement 2026-2031 Ratified",
      "url": "https://iam141.org/wp-content/uploads/2026/08/Fleet-Technical-Instructors-and-Related-Employees-Agreement-2026-2031_Ratified.pdf",
-     "quote": "and The International Association of Machinists and Aerospace Workers (IAMAW) covering Fleet Technical Instructors and Related Employees 2026 - 2031 2026 – 2031 FLEET TECHNICAL INSTRUCTORS & RELATED EMPLOYEES AGREEMENT i 2026 – 2031 FLEET TECHNICAL INSTRUCTORS & RELATED EMPLOYEES AGREEMENT ii PREAMBLE This Agreement is made and entered into in accordance with the provisions of Title II of the Rail"
+     "quote": "Fleet Technical Instructors and Related Employees Agreement 2026-2031 Ratified."
     },
     {
-     "status": "In mediation",
+     "status": "Ratified",
+     "date": "2026-06-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Ratification.Results.JUN2026",
+     "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+     "quote": "Fleet Technical Instructors & Related, Maintenance Instructors, Security Officers and Storekeepers ratified their tentative agreements."
+    },
+    {
+     "status": "Tentative agreement",
      "date": "2026-05-28",
      "source": "IAM District 141",
      "kind": "union",
      "title": "Fleet Technical Instructors and Related Employees Tentative Agreement 2026 All Markup-2",
      "url": "https://iam141.org/wp-content/uploads/2026/05/Fleet-Technical-Instructors-and-Related-Employees-Tentative-Agreement-2026_All-Markup-2.pdf",
-     "quote": "and The International Association of Machinists and Aerospace Workers (IAMAW) covering Fleet Technical Instructors and Related Employees 2026 - 2031 2026 – 2031 FLEET TECHNICAL INSTRUCTORS & RELATED EMPLOYEES AGREEMENT i 2026 – 2031 FLEET TECHNICAL INSTRUCTORS & RELATED EMPLOYEES AGREEMENT ii PREAMBLE This Agreement is made and entered into in accordance with the provisions of Title II of the Rail"
+     "quote": "Fleet Technical Instructors and Related Employees Tentative Agreement 2026 All Markup-2."
     }
    ],
    "status_date": "2026-08-19",
    "union_event": {
-    "status": "In mediation",
+    "status": "Ratified",
     "date": "2026-08-19",
     "source": "IAM District 141",
     "kind": "union",
     "title": "Fleet Technical Instructors and Related Employees Agreement 2026-2031 Ratified",
     "url": "https://iam141.org/wp-content/uploads/2026/08/Fleet-Technical-Instructors-and-Related-Employees-Agreement-2026-2031_Ratified.pdf",
-    "quote": "and The International Association of Machinists and Aerospace Workers (IAMAW) covering Fleet Technical Instructors and Related Employees 2026 - 2031 2026 – 2031 FLEET TECHNICAL INSTRUCTORS & RELATED EMPLOYEES AGREEMENT i 2026 – 2031 FLEET TECHNICAL INSTRUCTORS & RELATED EMPLOYEES AGREEMENT ii PREAMBLE This Agreement is made and entered into in accordance with the provisions of Title II of the Rail"
+    "quote": "Fleet Technical Instructors and Related Employees Agreement 2026-2031 Ratified."
    }
   },
   {
@@ -1491,9 +1584,27 @@
    "carrier": "United Airlines",
    "open": true,
    "craft": null,
-   "status": "Tentative agreement",
+   "status": "Contract rejected",
    "status_source": "union",
    "union_events": [
+    {
+     "status": "Contract rejected",
+     "date": "2026-06-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Ratification.Results.JUN2026",
+     "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+     "quote": "Fleet Service, Passenger Service, and Central Load Planners did not ratify their tentative agreements."
+    },
+    {
+     "status": "Tentative agreement",
+     "date": "2026-05-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Central Load Planner Employees Tentative Agreement 2026 All Markup",
+     "url": "https://iam141.org/wp-content/uploads/2026/05/Central-Load-Planner-Employees-Tentative-Agreement-2026_All-Markup.pdf",
+     "quote": "Central Load Planner Employees Tentative Agreement 2026 All Markup."
+    },
     {
      "status": "Tentative agreement",
      "date": "2025-09-16",
@@ -1504,15 +1615,15 @@
      "quote": "Central Load Planners For the CLP contract, we reached a tentative agreement on Article 1 (Qualifications, Positions and Vacancies) that better honors seniority when bidding Lead vacancies or Charter Desk work."
     }
    ],
-   "status_date": "2025-09-16",
+   "status_date": "2026-06-26",
    "union_event": {
-    "status": "Tentative agreement",
-    "date": "2025-09-16",
+    "status": "Contract rejected",
+    "date": "2026-06-26",
     "source": "IAM District 141",
     "kind": "union",
-    "title": "United Airlines Negotiations Update for September 16, 2025",
-    "url": "https://iam141.org/united-airlines-negotiations-update-for-september-16-2025/",
-    "quote": "Central Load Planners For the CLP contract, we reached a tentative agreement on Article 1 (Qualifications, Positions and Vacancies) that better honors seniority when bidding Lead vacancies or Charter Desk work."
+    "title": "Ratification.Results.JUN2026",
+    "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+    "quote": "Fleet Service, Passenger Service, and Central Load Planners did not ratify their tentative agreements."
    }
   },
   {
@@ -1529,37 +1640,46 @@
    "carrier": "United Airlines",
    "open": true,
    "craft": null,
-   "status": "In mediation",
+   "status": "Ratified",
    "status_source": "union",
    "union_events": [
     {
-     "status": "In mediation",
+     "status": "Ratified",
      "date": "2026-08-19",
      "source": "IAM District 141",
      "kind": "union",
      "title": "Maintenance Instructor Employees Agreement 2026-2031 Ratified",
      "url": "https://iam141.org/wp-content/uploads/2026/08/Maintenance-Instructor-Employees-Agreement-2026-2031_Ratified.pdf",
-     "quote": "and The International Association of Machinists and Aerospace Workers (IAMAW) covering Maintenance Instructor Employees 2026 – 2031 2026 – 2031 MAINTENANCE INSTRUCTOR EMPLOYEE S AGREEMENT i 2026 – 2031 MAINTENANCE INSTRUCTOR EMPLOYEE S AGREEMENT ii PREAMBLE This Agreement is made and entered into in accordance with the provisions of Title II of the Railway Labor Act, as amended, by and between Uni"
+     "quote": "Maintenance Instructor Employees Agreement 2026-2031 Ratified."
     },
     {
-     "status": "In mediation",
+     "status": "Ratified",
+     "date": "2026-06-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Ratification.Results.JUN2026",
+     "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+     "quote": "Fleet Technical Instructors & Related, Maintenance Instructors, Security Officers and Storekeepers ratified their tentative agreements."
+    },
+    {
+     "status": "Tentative agreement",
      "date": "2026-05-26",
      "source": "IAM District 141",
      "kind": "union",
      "title": "Maintenance Instructor Employees Tentative Agreement 2026 All Markup",
      "url": "https://iam141.org/wp-content/uploads/2026/05/Maintenance-Instructor-Employees-Tentative-Agreement-2026_All-Markup.pdf",
-     "quote": "and The International Association of Machinists and Aerospace Workers (IAMAW) covering Maintenance Instructor Employees 2026 – 2031 2026 – 2031 MAINTENANCE INSTRUCTOR EMPLOYEES AGREEMENT i 2026 – 2031 MAINTENANCE INSTRUCTOR EMPLOYEES AGREEMENT ii PREAMBLE This Agreement is made and entered into in accordance with the provisions of Title II of the Railway Labor Act, as amended, by and between Unite"
+     "quote": "Maintenance Instructor Employees Tentative Agreement 2026 All Markup."
     }
    ],
    "status_date": "2026-08-19",
    "union_event": {
-    "status": "In mediation",
+    "status": "Ratified",
     "date": "2026-08-19",
     "source": "IAM District 141",
     "kind": "union",
     "title": "Maintenance Instructor Employees Agreement 2026-2031 Ratified",
     "url": "https://iam141.org/wp-content/uploads/2026/08/Maintenance-Instructor-Employees-Agreement-2026-2031_Ratified.pdf",
-    "quote": "and The International Association of Machinists and Aerospace Workers (IAMAW) covering Maintenance Instructor Employees 2026 – 2031 2026 – 2031 MAINTENANCE INSTRUCTOR EMPLOYEE S AGREEMENT i 2026 – 2031 MAINTENANCE INSTRUCTOR EMPLOYEE S AGREEMENT ii PREAMBLE This Agreement is made and entered into in accordance with the provisions of Title II of the Railway Labor Act, as amended, by and between Uni"
+    "quote": "Maintenance Instructor Employees Agreement 2026-2031 Ratified."
    }
   },
   {
@@ -1576,8 +1696,47 @@
    "carrier": "United Airlines",
    "open": true,
    "craft": null,
-   "status": "Past amendable date",
-   "status_source": "10-K"
+   "status": "Ratified",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "Ratified",
+     "date": "2026-08-19",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Security Officer Employees Agreement 2026-2031 Ratified",
+     "url": "https://iam141.org/wp-content/uploads/2026/08/Security-Officer-Employees-Agreement-2026-2031_Ratified.pdf",
+     "quote": "Security Officer Employees Agreement 2026-2031 Ratified."
+    },
+    {
+     "status": "Ratified",
+     "date": "2026-06-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Ratification.Results.JUN2026",
+     "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
+     "quote": "Fleet Technical Instructors & Related, Maintenance Instructors, Security Officers and Storekeepers ratified their tentative agreements."
+    },
+    {
+     "status": "Tentative agreement",
+     "date": "2026-05-26",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "Security Officer Employees Tentative Agreement 2026 All Markup",
+     "url": "https://iam141.org/wp-content/uploads/2026/05/Security-Officer-Employees-Tentative-Agreement-2026_All-Markup.pdf",
+     "quote": "Security Officer Employees Tentative Agreement 2026 All Markup."
+    }
+   ],
+   "status_date": "2026-08-19",
+   "union_event": {
+    "status": "Ratified",
+    "date": "2026-08-19",
+    "source": "IAM District 141",
+    "kind": "union",
+    "title": "Security Officer Employees Agreement 2026-2031 Ratified",
+    "url": "https://iam141.org/wp-content/uploads/2026/08/Security-Officer-Employees-Agreement-2026-2031_Ratified.pdf",
+    "quote": "Security Officer Employees Agreement 2026-2031 Ratified."
+   }
   },
   {
    "unit": "United Ground Express, Inc.",
@@ -1736,8 +1895,29 @@
    "carrier": "American Airlines",
    "open": false,
    "craft": "mechanics",
-   "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status": "In negotiations",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "In negotiations",
+     "date": "2026-07-03",
+     "source": "IAM District 142",
+     "kind": "union",
+     "title": "TWU-IAM Association M&R Membership Bulletin – July 3, 2026",
+     "url": "https://atd142.org/twu-iam-association-mr-membership-bulletin-july-3-2026/",
+     "quote": "July 3, 2026 TWU/IAM Association M&R Membership Bulletin Negotiations Committees Meet to Prepare for Upcoming Bargaining Brothers and Sisters, The TWU/IAM Association Negotiating Committee met this week in Phoenix, Arizona, with the negotiations subcommittees representing our Maintenance & Related (M&R), Maintenance Control Technicians (MCT), Maintenance Training Specialists (MTS), and Material Lo"
+    }
+   ],
+   "status_date": "2026-07-03",
+   "union_event": {
+    "status": "In negotiations",
+    "date": "2026-07-03",
+    "source": "IAM District 142",
+    "kind": "union",
+    "title": "TWU-IAM Association M&R Membership Bulletin – July 3, 2026",
+    "url": "https://atd142.org/twu-iam-association-mr-membership-bulletin-july-3-2026/",
+    "quote": "July 3, 2026 TWU/IAM Association M&R Membership Bulletin Negotiations Committees Meet to Prepare for Upcoming Bargaining Brothers and Sisters, The TWU/IAM Association Negotiating Committee met this week in Phoenix, Arizona, with the negotiations subcommittees representing our Maintenance & Related (M&R), Maintenance Control Technicians (MCT), Maintenance Training Specialists (MTS), and Material Lo"
+   }
   },
   {
    "unit": "Mainline",
@@ -1753,8 +1933,29 @@
    "carrier": "American Airlines",
    "open": false,
    "craft": "mechanics",
-   "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status": "In negotiations",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "In negotiations",
+     "date": "2026-07-03",
+     "source": "IAM District 142",
+     "kind": "union",
+     "title": "TWU-IAM Association M&R Membership Bulletin – July 3, 2026",
+     "url": "https://atd142.org/twu-iam-association-mr-membership-bulletin-july-3-2026/",
+     "quote": "July 3, 2026 TWU/IAM Association M&R Membership Bulletin Negotiations Committees Meet to Prepare for Upcoming Bargaining Brothers and Sisters, The TWU/IAM Association Negotiating Committee met this week in Phoenix, Arizona, with the negotiations subcommittees representing our Maintenance & Related (M&R), Maintenance Control Technicians (MCT), Maintenance Training Specialists (MTS), and Material Lo"
+    }
+   ],
+   "status_date": "2026-07-03",
+   "union_event": {
+    "status": "In negotiations",
+    "date": "2026-07-03",
+    "source": "IAM District 142",
+    "kind": "union",
+    "title": "TWU-IAM Association M&R Membership Bulletin – July 3, 2026",
+    "url": "https://atd142.org/twu-iam-association-mr-membership-bulletin-july-3-2026/",
+    "quote": "July 3, 2026 TWU/IAM Association M&R Membership Bulletin Negotiations Committees Meet to Prepare for Upcoming Bargaining Brothers and Sisters, The TWU/IAM Association Negotiating Committee met this week in Phoenix, Arizona, with the negotiations subcommittees representing our Maintenance & Related (M&R), Maintenance Control Technicians (MCT), Maintenance Training Specialists (MTS), and Material Lo"
+   }
   },
   {
    "unit": "Mainline",
@@ -2164,8 +2365,56 @@
    "carrier": "PSA Airlines",
    "open": false,
    "craft": null,
-   "status": "Not stated",
-   "status_source": "10-K"
+   "status": "In negotiations",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "In negotiations",
+     "date": "2026-10-09",
+     "source": "IAM District 142",
+     "kind": "union",
+     "title": "IAM/PSA Airlines Stores Negotiations Update",
+     "url": "https://atd142.org/iam-psa-airlines-stores-negotiations-update-15/",
+     "quote": "IAM/PSA Airlines Stores Negotiations Update."
+    },
+    {
+     "status": "In negotiations",
+     "date": "2026-10-09",
+     "source": "IAM District 142",
+     "kind": "union",
+     "title": "193-OH IAM PSA Stores Negotiations Update",
+     "url": "https://atd142.org/wp-content/uploads/2026/10/193-OH_IAM-PSA-Stores-Negotiations-Update.pdf",
+     "quote": "193-OH IAM PSA Stores Negotiations Update."
+    },
+    {
+     "status": "In negotiations",
+     "date": "2026-09-14",
+     "source": "IAM District 142",
+     "kind": "union",
+     "title": "IAM/PSA Airlines Stores Negotiations Update",
+     "url": "https://atd142.org/iam-psa-airlines-stores-negotiations-update-14/",
+     "quote": "IAM/PSA Airlines Stores Negotiations Update."
+    },
+    {
+     "status": "In negotiations",
+     "date": "2026-08-21",
+     "source": "IAM District 142",
+     "kind": "union",
+     "title": "IAM/PSA Airlines Stores Negotiations Update",
+     "url": "https://atd142.org/iam-psa-airlines-stores-negotiations-update-13/",
+     "quote": "IAM/PSA Airlines Stores Negotiations Update."
+    }
+   ],
+   "status_date": "2026-10-09",
+   "union_event": {
+    "status": "In negotiations",
+    "date": "2026-10-09",
+    "source": "IAM District 142",
+    "kind": "union",
+    "title": "IAM/PSA Airlines Stores Negotiations Update",
+    "url": "https://atd142.org/iam-psa-airlines-stores-negotiations-update-15/",
+    "quote": "IAM/PSA Airlines Stores Negotiations Update."
+   }
   },
   {
    "unit": "PSA",
@@ -2351,8 +2600,29 @@
    "carrier": "Southwest Airlines",
    "open": false,
    "craft": "mechanics",
-   "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status": "In negotiations",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "In negotiations",
+     "date": "2026-08-24",
+     "source": "AMFA",
+     "kind": "union",
+     "title": "AMFA-SWA AMT Negotiations Update #1",
+     "url": "https://www.amfanational.org/?zone=/unionactive/view_article.cfm&HomeID=1009673",
+     "quote": "AMFA-SWA AMT Negotiations Update #1."
+    }
+   ],
+   "status_date": "2026-08-24",
+   "union_event": {
+    "status": "In negotiations",
+    "date": "2026-08-24",
+    "source": "AMFA",
+    "kind": "union",
+    "title": "AMFA-SWA AMT Negotiations Update #1",
+    "url": "https://www.amfanational.org/?zone=/unionactive/view_article.cfm&HomeID=1009673",
+    "quote": "AMFA-SWA AMT Negotiations Update #1."
+   }
   },
   {
    "unit": null,

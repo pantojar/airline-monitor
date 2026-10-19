@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-19T13:56:32Z",
+  "at": "2026-10-19T14:09:27Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -113,9 +113,9 @@
    }
   }
  },
- "generated": "2026-10-19T14:04:29Z",
+ "generated": "2026-10-19T14:13:25Z",
  "news": {
-  "at": "2026-10-19T13:56:55Z",
+  "at": "2026-10-19T14:09:50Z",
   "items": 76,
   "errors": []
  },
@@ -133,7 +133,7 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-19T13:56:56Z",
+  "at": "2026-10-19T14:09:51Z",
   "latest": "2026-10-14",
   "rows": 1193
  },
@@ -143,6 +143,7 @@
   "errors": []
  },
  "labor": {
+  "at": "2026-10-19T14:13:25Z",
   "groups": 96,
   "errors": [],
   "union_sites": [
@@ -156,12 +157,11 @@
    },
    {
     "name": "IAM District 142",
-    "url": "https://www.iam142.org",
-    "groups": 6,
-    "error": "posts: URLError; media: URLError; /feed/: URLError; /rss: URLError; /rss.xml: URLError; /feed: URLError",
-    "method": null,
-    "items": 0,
-    "pdfs_read": 0
+    "url": "https://atd142.org",
+    "groups": 14,
+    "method": "wp-posts,wp-media",
+    "items": 598,
+    "pdfs_read": 40
    },
    {
     "name": "IAM (international)",
@@ -219,7 +219,7 @@
     "name": "SWAPA",
     "url": "https://www.swapa.org",
     "groups": 1,
-    "error": "posts: HTTP 404; media: HTTP 404; /feed/: HTTP 404; /rss: HTTP 404; /rss.xml: HTTP 404; /feed: HTTP 404",
+    "error": "list: no news links found",
     "method": null,
     "items": 0,
     "pdfs_read": 0
@@ -262,19 +262,17 @@
     "name": "AMFA",
     "url": "https://www.amfanational.org",
     "groups": 5,
-    "error": "posts: HTTP 404; media: HTTP 404; /feed/: HTTP 404; /rss: HTTP 404; /rss.xml: HTTP 404; /feed: HTTP 404",
-    "method": null,
-    "items": 0,
-    "pdfs_read": 0
+    "method": "html list",
+    "items": 67,
+    "pdfs_read": 2
    },
    {
     "name": "CWA",
     "url": "https://cwa-union.org",
     "groups": 4,
-    "error": "posts: HTTP 404; media: HTTP 404; /feed/: HTTP 404; /rss: HTTP 404; /rss.xml: HTTP 404; /feed: HTTP 404",
-    "method": null,
-    "items": 0,
-    "pdfs_read": 0
+    "method": "html list",
+    "items": 20,
+    "pdfs_read": 2
    },
    {
     "name": "PAFCA",
