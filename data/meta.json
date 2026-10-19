@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-19T14:20:13Z",
+  "at": "2026-10-19T14:25:01Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -113,9 +113,9 @@
    }
   }
  },
- "generated": "2026-10-19T14:23:50Z",
+ "generated": "2026-10-19T14:27:43Z",
  "news": {
-  "at": "2026-10-19T14:20:35Z",
+  "at": "2026-10-19T14:25:25Z",
   "items": 76,
   "errors": []
  },
@@ -133,7 +133,7 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-19T14:20:36Z",
+  "at": "2026-10-19T14:25:25Z",
   "latest": "2026-10-14",
   "rows": 1193
  },
@@ -143,6 +143,7 @@
   "errors": []
  },
  "labor": {
+  "at": "2026-10-19T14:27:43Z",
   "groups": 96,
   "errors": [],
   "union_sites": [
@@ -152,7 +153,7 @@
     "groups": 13,
     "method": "wp-posts,wp-media",
     "items": 202,
-    "pdfs_read": 40
+    "pdfs_read": 0
    },
    {
     "name": "IAM District 142",
@@ -160,7 +161,7 @@
     "groups": 14,
     "method": "wp-posts,wp-media",
     "items": 598,
-    "pdfs_read": 40
+    "pdfs_read": 16
    },
    {
     "name": "IAM (international)",
@@ -277,7 +278,7 @@
     "name": "PAFCA",
     "url": "https://www.pafca.org",
     "groups": 3,
-    "error": "posts: HTTP 404; media: HTTP 404; /feed/: HTTP 429; /rss: HTTP 429; /rss.xml: HTTP 429; /feed: HTTP 429",
+    "error": "posts: HTTP 404; media: HTTP 404; /feed/: HTTP 404; /rss: HTTP 429; /rss.xml: HTTP 429; /feed: HTTP 429",
     "method": null,
     "items": 0,
     "pdfs_read": 0

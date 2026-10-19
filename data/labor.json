@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-19T14:23:50Z",
+ "generated": "2026-10-19T14:27:43Z",
  "companies": {
   "DAL": {
    "ticker": "DAL",
@@ -1287,7 +1287,7 @@
      "kind": "union",
      "title": "UA Negotiation Update 23 December 2025",
      "url": "https://iam141.org/wp-content/uploads/2025/12/UA-Negotiation-Update-23-December-2025.pdf",
-     "quote": "Passenger Service and Fleet Service Contract Update Negotiations continued to center on overtime, specifically the Company’s use of mandatory overtime."
+     "quote": "Passenger Service and Fleet Service Contract Update Negotiations continued to center on overtime, specifically the Company’s use of mandatory overtime.;"
     },
     {
      "status": "In negotiations",
@@ -1296,7 +1296,7 @@
      "kind": "union",
      "title": "UA.Negotiations.Update",
      "url": "https://iam141.org/wp-content/uploads/2025/11/UA.Negotiations.Update-2.pdf",
-     "quote": "This was our least productive session to date for Passenger Service and Fleet, as United’s negotiating team asserted they do not have to adhere to our current contract, let alone negotiate new language to hold United’s front-line management more accountable when declaring mandatory overtime."
+     "quote": "This was our least productive session to date for Passenger Service and Fleet, as United’s negotiating team asserted they do not have to adhere to our current contract, let alone negotiate new language to hold United’s front-line management more accountable when declaring mandatory overtime.;"
     }
    ],
    "status_date": "2026-06-26",
@@ -1369,7 +1369,7 @@
      "kind": "union",
      "title": "UA Negotiation Update 23 December 2025",
      "url": "https://iam141.org/wp-content/uploads/2025/12/UA-Negotiation-Update-23-December-2025.pdf",
-     "quote": "Passenger Service and Fleet Service Contract Update Negotiations continued to center on overtime, specifically the Company’s use of mandatory overtime."
+     "quote": "Passenger Service and Fleet Service Contract Update Negotiations continued to center on overtime, specifically the Company’s use of mandatory overtime.;"
     },
     {
      "status": "In negotiations",
@@ -1378,7 +1378,7 @@
      "kind": "union",
      "title": "UA.Negotiations.Update",
      "url": "https://iam141.org/wp-content/uploads/2025/11/UA.Negotiations.Update-2.pdf",
-     "quote": "This was our least productive session to date for Passenger Service and Fleet, as United’s negotiating team asserted they do not have to adhere to our current contract, let alone negotiate new language to hold United’s front-line management more accountable when declaring mandatory overtime."
+     "quote": "This was our least productive session to date for Passenger Service and Fleet, as United’s negotiating team asserted they do not have to adhere to our current contract, let alone negotiate new language to hold United’s front-line management more accountable when declaring mandatory overtime.;"
     }
    ],
    "status_date": "2026-06-26",
@@ -1549,7 +1549,7 @@
      "kind": "union",
      "title": "UA Negotiation Update 03 March 2026",
      "url": "https://iam141.org/wp-content/uploads/2026/03/UA-Negotiation-Update-03-March-2026.pdf",
-     "quote": "The Fleet Technical Instructors and Related (FTI & Related) Negotiating Committee made incremental progress on Article 4 issues."
+     "quote": "The Fleet Technical Instructors and Related (FTI & Related) Negotiating Committee made incremental progress on Article 4 issues.;"
     }
    ],
    "status_date": "2026-08-19",
@@ -1648,7 +1648,7 @@
      "kind": "union",
      "title": "16 September.3.UA Negotiations Update",
      "url": "https://iam141.org/wp-content/uploads/2025/09/16-September.3.UA-Negotiations-Update.pdf",
-     "quote": "Central Load Planners For the CLP contract, we reached a tentative agreement on Article 1 (Qualifications, Positions and Vacancies) that better honors seniority when bidding Lead vacancies or C harter Desk work."
+     "quote": "Central Load Planners For the CLP contract, we reached a tentative agreement on Article 1 (Qualifications, Positions and Vacancies) that better honors seniority when bidding Lead vacancies or C harter Desk work.;"
     }
    ],
    "status_date": "2026-06-26",
@@ -1713,7 +1713,7 @@
      "kind": "union",
      "title": "UA Negotiation Update 23 December 2025",
      "url": "https://iam141.org/wp-content/uploads/2025/12/UA-Negotiation-Update-23-December-2025.pdf",
-     "quote": "Maintenance Instructor Contract Update Negotiations focused on Articles One, Four, Eight, and Eleven."
+     "quote": "Maintenance Instructor Contract Update Negotiations focused on Articles One, Four, Eight, and Eleven.;"
     }
    ],
    "status_date": "2026-08-19",
@@ -1778,7 +1778,7 @@
      "kind": "union",
      "title": "14.1.October.2025.UA Negotiations Update 3.22.26?PM",
      "url": "https://iam141.org/wp-content/uploads/2025/10/14.1.October.2025.UA-Negotiations-Update-3.22.26-PM.pdf",
-     "quote": "For the Security Officer contract, negotiations focused on clarifying and reaching a shared understanding of existing contract language regarding badge control work."
+     "quote": "For the Security Officer contract, negotiations focused on clarifying and reaching a shared understanding of existing contract language regarding badge control work.;"
     }
    ],
    "status_date": "2026-08-19",
@@ -2796,29 +2796,8 @@
    "carrier": "Alaska Airlines",
    "open": false,
    "craft": "flight attendants",
-   "status": "Strike vote",
-   "status_source": "union",
-   "union_events": [
-    {
-     "status": "Strike vote",
-     "date": "2026-05-09",
-     "source": "AFA-CWA",
-     "kind": "union",
-     "title": "ICYMI: Horizon AFA Flight Attendants Picket at SeaTac",
-     "url": "https://afacwa.org/icymi-horizon-afa-flight-attendants-picket-at-seatac/",
-     "quote": "With a strike vote later this month, Flight Attendants are making clear to management that they’re demanding a Contract that recognizes the incredible work they do as part of Alaska Air Group."
-    }
-   ],
-   "status_date": "2026-05-09",
-   "union_event": {
-    "status": "Strike vote",
-    "date": "2026-05-09",
-    "source": "AFA-CWA",
-    "kind": "union",
-    "title": "ICYMI: Horizon AFA Flight Attendants Picket at SeaTac",
-    "url": "https://afacwa.org/icymi-horizon-afa-flight-attendants-picket-at-seatac/",
-    "quote": "With a strike vote later this month, Flight Attendants are making clear to management that they’re demanding a Contract that recognizes the incredible work they do as part of Alaska Air Group."
-   }
+   "status": "Contract in effect",
+   "status_source": "10-K"
   },
   {
    "unit": "Alaska",
