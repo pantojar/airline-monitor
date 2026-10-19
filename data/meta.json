@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-19T13:47:04Z",
+  "at": "2026-10-19T13:56:32Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -113,9 +113,9 @@
    }
   }
  },
- "generated": "2026-10-19T13:54:58Z",
+ "generated": "2026-10-19T14:04:29Z",
  "news": {
-  "at": "2026-10-19T13:47:26Z",
+  "at": "2026-10-19T13:56:55Z",
   "items": 76,
   "errors": []
  },
@@ -133,7 +133,7 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-19T13:47:27Z",
+  "at": "2026-10-19T13:56:56Z",
   "latest": "2026-10-14",
   "rows": 1193
  },
@@ -143,6 +143,7 @@
   "errors": []
  },
  "labor": {
+  "at": "2026-10-19T14:04:29Z",
   "groups": 96,
   "errors": [],
   "union_sites": [
@@ -169,7 +170,7 @@
     "groups": 22,
     "method": "wp-posts,wp-media",
     "items": 276,
-    "pdfs_read": 0
+    "pdfs_read": 3
    },
    {
     "name": "AFA-CWA",
@@ -238,7 +239,7 @@
     "groups": 26,
     "method": "wp-posts,wp-media",
     "items": 148,
-    "pdfs_read": 0
+    "pdfs_read": 3
    },
    {
     "name": "TWU Local 556",
