@@ -3,7 +3,7 @@
  {"name": "IAM District 142", "url": "https://atd142.org", "unions": ["\\bIAM\\b", "Machinists"], "carriers": ["ALK", "LUV", "AAL"], "names": {"AAL": "TWU-IAM|TechOps Association"}},
  {"name": "IAM (international)", "url": "https://www.goiam.org", "unions": ["\\bIAM\\b", "Machinists"], "carriers": ["UAL", "ALK", "LUV", "AAL"]},
  {"name": "AFA-CWA", "url": "https://www.afacwa.org", "unions": ["\\bAFA\\b", "Association of Flight Attendants"], "carriers": ["UAL", "ALK", "AAL", "DAL", "ULCC", "RJET"]},
- {"name": "AFA United", "url": "https://www.unitedafa.org", "unions": ["\\bAFA\\b", "Association of Flight Attendants"], "carriers": ["UAL"]},
+ {"name": "AFA United", "url": "https://www.unitedafa.org", "unions": ["\\bAFA\\b", "Association of Flight Attendants"], "carriers": ["UAL"], "feeds": ["/news/rss.xml"], "craft": "flight att"},
  {"name": "APFA", "url": "https://www.apfa.org", "unions": ["\\bAPFA\\b"], "carriers": ["AAL"]},
  {"name": "ALPA", "url": "https://www.alpa.org", "unions": ["\\bALPA\\b", "Air Line Pilots"], "carriers": ["DAL", "UAL", "ALK", "JBLU", "ULCC", "AAL", "RJET"], "list": ["https://www.alpa.org/press-room"], "link": "(?i)alpa\\.org/press-room/20\\d\\d/\\d\\d/"},
  {"name": "Allied Pilots Association", "url": "https://www.alliedpilots.org", "unions": ["\\bAPA\\b", "Allied Pilots"], "carriers": ["AAL"]},
@@ -13,6 +13,5 @@
  {"name": "TWU Local 556", "url": "https://www.twu556.org", "unions": ["\\bTWU\\b", "Transport Workers"], "carriers": ["LUV"]},
  {"name": "TWU Local 555", "url": "https://www.twu555.org", "unions": ["\\bTWU\\b", "Transport Workers"], "carriers": ["LUV"]},
  {"name": "AMFA", "url": "https://www.amfanational.org", "unions": ["\\bAMFA\\b", "Aircraft Mechanics Fraternal"], "carriers": ["LUV", "ALK"], "list": ["https://www.amfanational.org/?zone=/unionactive/view_page.cfm&page=Latest20News"], "link": "view_article\\.cfm&HomeID=\\d+", "names": {"LUV": "SWA"}},
- {"name": "CWA", "url": "https://cwa-union.org", "unions": ["\\bCWA\\b", "Communications Workers"], "carriers": ["AAL"], "list": ["https://cwa-union.org/news/all", "https://cwa-union.org/news/all?page=1", "https://cwa-union.org/news/all?page=2", "https://cwa-union.org/news/all?page=3"], "link": "cwa-union\\.org/(index%2Ephp/)?news/(?!all\\b)[a-z0-9][^?#]*$"},
- {"name": "PAFCA", "url": "https://www.pafca.org", "unions": ["PAFCA", "Flight Control"], "carriers": ["UAL", "AAL", "DAL"]}
+ {"name": "CWA", "url": "https://cwa-union.org", "unions": ["\\bCWA\\b", "Communications Workers"], "carriers": ["AAL"], "list": ["https://cwa-union.org/news/all", "https://cwa-union.org/news/all?page=1", "https://cwa-union.org/news/all?page=2", "https://cwa-union.org/news/all?page=3"], "link": "cwa-union\\.org/(index%2Ephp/)?news/(?!all\\b)[a-z0-9][^?#]*$"}
 ]

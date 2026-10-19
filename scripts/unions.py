@@ -25,6 +25,7 @@ import os
 import re
 import time
 import urllib.parse
+import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
 
@@ -103,14 +104,32 @@ class Fetch:
     def __init__(self, ua):
         # the conventional form for automated readers, which many site firewalls let through
         self.ua = "Mozilla/5.0 (compatible; " + ua.replace(" ", "/", 1) + ")"
+        self.last = {}
 
     def get(self, url, accept="*/*", timeout=25, limit=8_000_000):
-        req = urllib.request.Request(url, headers={"User-Agent": self.ua, "Accept": accept, "Accept-Encoding": "identity"})
-        with urllib.request.urlopen(req, timeout=timeout) as r:
-            data = r.read(limit + 1)
-            if len(data) > limit:
-                raise ValueError("too large")
-            return data, r.headers.get("Content-Type", "")
+        host = urllib.parse.urlsplit(url).netloc
+        for attempt in range(3):
+            # be polite: space requests to the same site, and back off when it says "too many requests"
+            wait = self.last.get(host, 0) + 1.5 - time.time()
+            if wait > 0:
+                time.sleep(wait)
+            self.last[host] = time.time()
+            req = urllib.request.Request(url, headers={"User-Agent": self.ua, "Accept": accept + ", */*;q=0.1", "Accept-Encoding": "identity"})
+            try:
+                with urllib.request.urlopen(req, timeout=timeout) as r:
+                    data = r.read(limit + 1)
+                    if len(data) > limit:
+                        raise ValueError("too large")
+                    return data, r.headers.get("Content-Type", "")
+            except urllib.error.HTTPError as e:
+                if e.code == 429 and attempt < 2:
+                    try:
+                        delay = min(60, int(e.headers.get("Retry-After") or 0)) or 20 * (attempt + 1)
+                    except ValueError:
+                        delay = 20 * (attempt + 1)
+                    time.sleep(delay)
+                    continue
+                raise
 
 
 def pdf_text(data, max_pages=12):
@@ -189,7 +208,7 @@ def list_items(f, site, since):
     base = site["url"].rstrip("/")
     items, methods, tried = [], [], []
     after = since + "T00:00:00"
-    for page in range(1, 5):
+    for page in range(1, 5 if not site.get("feeds") else 1):
         try:
             data, _ = f.get(f"{base}/wp-json/wp/v2/posts?per_page=50&page={page}&after={after}&_fields=date,link,title,content", "application/json")
             got = json.loads(data)
@@ -206,7 +225,7 @@ def list_items(f, site, since):
             methods.append("wp-posts")
         if len(got) < 50:
             break
-    for page in range(1, 5):
+    for page in range(1, 5 if not site.get("feeds") else 1):
         try:
             data, _ = f.get(f"{base}/wp-json/wp/v2/media?mime_type=application/pdf&per_page=100&page={page}&after={after}&_fields=date,source_url,title", "application/json")
             got = json.loads(data)
