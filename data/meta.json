@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-19T14:13:47Z",
+  "at": "2026-10-19T14:15:28Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -113,9 +113,9 @@
    }
   }
  },
- "generated": "2026-10-19T14:14:10Z",
+ "generated": "2026-10-19T14:19:27Z",
  "news": {
-  "at": "2026-10-19T14:14:09Z",
+  "at": "2026-10-19T14:15:51Z",
   "items": 76,
   "errors": []
  },
@@ -133,7 +133,7 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-19T14:14:10Z",
+  "at": "2026-10-19T14:15:55Z",
   "latest": "2026-10-14",
   "rows": 1193
  },
@@ -143,6 +143,7 @@
   "errors": []
  },
  "labor": {
+  "at": "2026-10-19T14:19:27Z",
   "groups": 96,
   "errors": [],
   "union_sites": [
@@ -168,7 +169,7 @@
     "groups": 22,
     "method": "wp-posts,wp-media",
     "items": 276,
-    "pdfs_read": 3
+    "pdfs_read": 0
    },
    {
     "name": "AFA-CWA",
@@ -200,7 +201,7 @@
     "name": "ALPA",
     "url": "https://www.alpa.org",
     "groups": 10,
-    "error": "posts: HTTP 403; media: HTTP 403; /feed/: HTTP 403; /rss: HTTP 403; /rss.xml: HTTP 403; /feed: HTTP 403",
+    "error": "list: HTTP 403",
     "method": null,
     "items": 0,
     "pdfs_read": 0
@@ -237,7 +238,7 @@
     "groups": 26,
     "method": "wp-posts,wp-media",
     "items": 148,
-    "pdfs_read": 3
+    "pdfs_read": 0
    },
    {
     "name": "TWU Local 556",
@@ -263,7 +264,7 @@
     "groups": 5,
     "method": "html list",
     "items": 67,
-    "pdfs_read": 2
+    "pdfs_read": 0
    },
    {
     "name": "CWA",
@@ -271,13 +272,13 @@
     "groups": 4,
     "method": "html list",
     "items": 20,
-    "pdfs_read": 2
+    "pdfs_read": 0
    },
    {
     "name": "PAFCA",
     "url": "https://www.pafca.org",
     "groups": 3,
-    "error": "posts: HTTP 404; media: HTTP 404; /feed/: HTTP 429; /rss: HTTP 429; /rss.xml: HTTP 429; /feed: HTTP 429",
+    "error": "posts: HTTP 404; media: HTTP 404; /feed/: HTTP 429; /rss: HTTP 404; /rss.xml: HTTP 400; /feed: HTTP 429",
     "method": null,
     "items": 0,
     "pdfs_read": 0
