@@ -1,6 +1,7 @@
 """Read union websites for bargaining milestones, group by group.
 
-For each site in config/labor_sources.json the job tries, in order:
+For each site in config/labor_sources.json the job reads either the news listing page(s) named in "list"
+(articles linked from it whose address matches "link"), or tries, in order:
   1. WordPress REST API: recent posts (/wp-json/wp/v2/posts) and uploaded PDFs (/wp-json/wp/v2/media)
   2. An RSS feed (/feed/, /rss, /rss.xml)
 PDFs whose titles look like announcements (update, ratification, results, vote, tentative agreement,
@@ -29,6 +30,8 @@ STOP = {"and", "related", "employees", "employee", "of", "the", "&", "other", "c
         "southwest", "delta", "endeavor", "united", "representatives", "agreement", "group"}
 SYNONYMS = {"inflight": "flight attendant", "crewmember": "", "technicians": "technician", "stores": "storekeeper"}
 ANNOUNCE_RE = re.compile(r"update|ratif|result|vote|tentative|\bTA\b|announce|message|bulletin|news|negotiat|mediat|strike|picket|status|reject", re.I)
+AIRLINE_WORDS = re.compile(r"airline|air\b|airways|aviation|flight|pilot|mechanic|technician|\bAMT|dispatch|ramp|fleet|passenger|agent|"
+                           r"stores|cabin|crew|American|Envoy|Piedmont|PSA|United|Delta|Southwest|SWA|Alaska|Hawaiian|Horizon|Frontier|JetBlue", re.I)
 CONTRACT_DOC_RE = re.compile(r"agreement|contract|\bCBA\b|\bLOA\b|letter of agreement", re.I)
 
 STATUS_RULES = [
@@ -64,7 +67,8 @@ def group_tokens(group):
 # other names unions use for the same craft as the 10-K
 ALT_NAMES = [
     (r"stock clerk|material specialist|storekeeper", ["store"]),
-    (r"mechanic|technician", ["mechanic"]),
+    (r"^(mechanic|technician)", ["mechanic"]),
+    (r"^(mechanic|technician)", ["amt"]),
 ]
 
 
@@ -118,8 +122,68 @@ def _err(e):
     return f"HTTP {code}" if code else type(e).__name__
 
 
+MONTHS = {m: i for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"], 1)}
+DATE_RE = re.compile(r"\b(?:(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.? (\d{1,2}),? (20\d\d)"
+                     r"|(\d{1,2})/(\d{1,2})/(20\d\d)|(20\d\d)-(\d\d)-(\d\d))\b", re.I)
+
+
+def find_date(s):
+    m = DATE_RE.search(s or "")
+    if not m:
+        return None
+    try:
+        if m.group(1):
+            return dt.date(int(m.group(3)), MONTHS[m.group(1)[:3].lower()], int(m.group(2))).isoformat()
+        if m.group(4):
+            return dt.date(int(m.group(6)), int(m.group(4)), int(m.group(5))).isoformat()
+        return dt.date(int(m.group(7)), int(m.group(8)), int(m.group(9))).isoformat()
+    except ValueError:
+        return None
+
+
+def page_date(raw, body=None):
+    m = re.search(r'(?:article:published_time|datePublished|dc\.date|"date")["\']?\s*(?:content=|:)\s*["\'](20\d\d-\d\d-\d\d)', raw)
+    return m.group(1) if m else find_date((body or clean(raw))[:3000])
+
+
+def html_list(f, site, since):
+    """News listing pages: links matching site["link"], dated from the text beside each link."""
+    items, tried, seen = [], [], {}
+    for url in site["list"]:
+        try:
+            data, _ = f.get(url, "text/html")
+        except Exception as e:  # noqa: BLE001
+            tried.append("list: " + _err(e))
+            continue
+        raw = data.decode("utf-8", "replace")
+        for m in re.finditer(r'<a\b[^>]*?href=["\']([^"\']+)["\'][^>]*>(.*?)</a>', raw, re.S | re.I):
+            href = urllib.parse.urljoin(url, html.unescape(m.group(1)))
+            if not re.search(site["link"], href) or href.rstrip("/") == url.rstrip("/"):
+                continue
+            title = clean(m.group(2))
+            after = clean(raw[m.end():m.end() + 400])
+            before = clean(raw[max(0, m.start() - 400):m.start()])
+            nxt = re.search(r'<a\b[^>]*href=["\'](?!' + re.escape(m.group(1)) + ')', raw[m.end():m.end() + 400], re.I)
+            if nxt:
+                after = clean(raw[m.end():m.end() + nxt.start()])  # don't borrow the next item's date
+            last_before = [x.group(0) for x in DATE_RE.finditer(before)][-1:]
+            near = after if DATE_RE.search(after) else " ".join(last_before)
+            cur = seen.get(href)
+            if cur is None:
+                cur = seen[href] = {"date": None, "title": "", "url": href, "kind": "page"}
+                items.append(cur)
+            if len(title) > len(cur["title"]) and not re.fullmatch(r"(?i)read more|more|continue reading|learn more", title):
+                cur["title"] = title
+            if not cur["date"]:
+                cur["date"] = find_date(near)
+    items = [i for i in items if len(i["title"]) >= 12 and (i["date"] is None or i["date"] >= since)]
+    return ("html list" if items else None), items, tried or (["list: no news links found"] if not items else [])
+
+
 def list_items(f, site, since):
     """Return (method, [{date, title, url, kind, text?}])"""
+    if site.get("list"):
+        return html_list(f, site, since)
     base = site["url"].rstrip("/")
     items, methods, tried = [], [], []
     after = since + "T00:00:00"
@@ -182,14 +246,42 @@ def list_items(f, site, since):
 OTHER_CARRIERS = r"Air Canada|WestJet|Air Wisconsin|Spirit|Breeze|Avelo|Sun Country|GoJet|CommuteAir|Atlas Air|FedEx|\bUPS\b|Kalitta|Omni Air|Amerijet|Silver Airways|Cape Air|Hawaiian|Horizon|Envoy|Piedmont|\bPSA\b|Endeavor|Mesa|SkyWest|Republic|Frontier|JetBlue|Allegiant|Alaska|Southwest|Delta|American|United"
 
 
+def carrier_counts(text, site, aliases):
+    """How often the document names each airline this site covers (case-sensitive, so "united front" is not United).
+    Mainline counts exclude the subsidiary names that contain them ("United Ground Express")."""
+    out = {}
+    for tk in site.get("carriers", []):
+        subs = [(k, a["match"]) for k, a in aliases.items() if a.get("parent") == tk and a.get("match")]
+        stripped = text
+        for k, m in subs:
+            out[k] = len(re.findall(m, text))
+            stripped = re.sub(m, " ", stripped)
+        m = site.get("names", {}).get(tk)
+        rx = aliases.get(tk, {}).get("match", tk) + ("|" + m if m else "")
+        out[tk] = len(re.findall(rx, stripped))
+    return out
+
+
+def doc_owner(counts):
+    best = sorted(counts.items(), key=lambda kv: -kv[1])
+    if not best or best[0][1] == 0 or (len(best) > 1 and best[1][1] == best[0][1]):
+        return None
+    return best[0][0]
+
+
 def events_for(item, groups, site, aliases):
     """groups: tracked rows this site may speak for. Returns [(row_key, event)].
     A clause that names any airline only counts for the airlines it names; a clause that names none
     counts for the airline named in the item's title (or the site's only airline)."""
-    text = item["title"] + ". " + (item.get("text") or "")
+    title = item["title"]
+    body = item.get("text") or ""
+    counts = item.get("counts") or carrier_counts(title + ". " + body, site, aliases)
+    if CONTRACT_DOC_RE.search(title) and item.get("kind") == "pdf":
+        body = ""  # a contract's own text is full of "mediation" and "Railway Labor Act"; only its title is news
+    text = title + ". " + body
     if not ANNOUNCE_RE.search(text):
         return []
-    title = item["title"]
+    owner = doc_owner(counts)
     out = []
     for g in groups:
         unit = g.get("unit")
@@ -200,6 +292,7 @@ def events_for(item, groups, site, aliases):
             own_rx += "|" + site["names"][g["ticker"]]  # names the site uses for that airline's groups, e.g. "TWU-IAM Association"
         subs_rx = "|".join(a["match"] for a in aliases.values() if a.get("parent") == g["ticker"] and a.get("match"))
         single = len(site.get("carriers", [])) == 1
+        own_key = unit if is_sub else g["ticker"]
 
         def names_own(t):
             if not re.search(own_rx, t, re.I):
@@ -221,7 +314,9 @@ def events_for(item, groups, site, aliases):
             if re.search(OTHER_CARRIERS, clause, re.I):
                 ok = names_own(clause)
             else:
-                ok = names_own(title) or (single and not (subs_rx and not is_sub and re.search(subs_rx, title, re.I)) and (not is_sub or re.search(own_rx, text, re.I)))
+                # no airline in the sentence: go by the title, else by which airline the document is about
+                ok = names_own(title) or (not re.search(OTHER_CARRIERS, title, re.I) and owner == own_key) \
+                    or (single and not (subs_rx and not is_sub and re.search(subs_rx, title, re.I)) and (not is_sub or re.search(own_rx, text, re.I)))
             if ok:
                 best = (st, clause.strip())
                 break
@@ -259,7 +354,8 @@ def collect(root, groups, ua, aliases, since_days=400, budget_s=600):
             # out of time this run: re-match what earlier runs read from this site
             for k, v in cache.items():
                 if v.get("site") == site["name"] and "text" in v:
-                    match({"url": k, "date": v["date"], "title": v.get("title", ""), "text": v["text"]}, rel, site)
+                    match({"url": k, "date": v["date"], "title": v.get("title", ""), "text": v["text"],
+                           "kind": v.get("kind"), "counts": v.get("counts")}, rel, site)
             report.append({"name": site["name"], "url": site["url"], "method": "deferred", "items": 0, "groups": len(rel)})
             continue
         rep = {"name": site["name"], "url": site["url"], "groups": len(rel)}
@@ -272,12 +368,37 @@ def collect(root, groups, ua, aliases, since_days=400, budget_s=600):
             rep["error"] = f"{type(e).__name__}"
         rep["method"], rep["items"] = method, len(items)
         nread = 0
-        for it in sorted(items, key=lambda x: x["date"], reverse=True):
+        for it in sorted(items, key=lambda x: x["date"] or "9999", reverse=True):
             key = it["url"]
             c = cache.get(key)
-            if it["kind"] == "pdf":
-                if c and "text" in c:
-                    it["text"] = c["text"]
+            if it["kind"] == "page":
+                if c and "text" in c and "counts" in c:
+                    it["text"], it["counts"], it["date"] = c["text"], c["counts"], c["date"]
+                elif c and (c.get("skipped") or c.get("error")):
+                    continue
+                else:
+                    if not (ANNOUNCE_RE.search(it["title"]) and (len(site["carriers"]) == 1 or AIRLINE_WORDS.search(it["title"]))):
+                        cache[key] = {"date": it["date"] or dt.date.today().isoformat(), "skipped": True}
+                        continue
+                    if nread >= 25 or time.time() - t0 > budget_s:
+                        continue
+                    try:
+                        data, _ = f.get(key, "text/html", limit=3_000_000)
+                        raw = data.decode("utf-8", "replace")
+                        body = re.search(r"(?is)<(article|main)\b.*?</\1>", raw)
+                        it["text"] = clean(body.group(0) if body else raw)[:30000]
+                        it["date"] = page_date(raw, it["text"] if body else None) or it["date"]  # the article's own date beats the listing's layout
+                        nread += 1
+                        time.sleep(0.5)
+                    except Exception as e:  # noqa: BLE001
+                        cache[key] = {"date": it["date"] or dt.date.today().isoformat(), "error": type(e).__name__}
+                        continue
+                    if not it["date"] or it["date"] < since:
+                        cache[key] = {"date": it["date"] or dt.date.today().isoformat(), "skipped": True}
+                        continue
+            elif it["kind"] == "pdf":
+                if c and "text" in c and "counts" in c:
+                    it["text"], it["counts"] = c["text"], c["counts"]
                 elif c and (c.get("skipped") or c.get("error")):
                     continue
                 else:
@@ -294,7 +415,10 @@ def collect(root, groups, ua, aliases, since_days=400, budget_s=600):
                     except Exception as e:  # noqa: BLE001
                         cache[key] = {"date": it["date"], "error": type(e).__name__}
                         continue
-            cache[key] = {"date": it["date"], "title": it["title"][:200], "site": site["name"], "text": status_text(it.get("text"))}
+            if "counts" not in it:
+                it["counts"] = carrier_counts(it["title"] + ". " + (it.get("text") or ""), site, aliases)
+            cache[key] = {"date": it["date"], "title": it["title"][:200], "site": site["name"], "kind": it["kind"],
+                          "counts": it["counts"], "text": status_text(it.get("text"))}
             match(it, rel, site)
         rep["pdfs_read"] = nread
         report.append(rep)
