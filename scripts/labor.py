@@ -95,6 +95,7 @@ def parse_union_tables(doc):
         units = re.findall(r"([A-Z][A-Za-z.,&\- ]{1,40}?)(?:['’]s|(?<=s)['’])\s+union contract", before)
         unit = re.split(r"\.\s", units[-1])[-1].strip() if units else None
         after = clean(re.split(r"(?i)<table", doc[end:end + 6000])[0])[:1500]
+        after = re.split(r"\s(?:The RLA governs|Under the RLA|The Railway Labor Act)", after)[0]
         notes = {k: v.strip() for k, v in re.findall(r"\((\d{1,2}|[a-z])\)\s+(.+?)(?=\s\((?:\d{1,2}|[a-z])\)\s|$)", after)}
         for r in rows[hi + 1:]:
             if len(r) == 1 and r[0].endswith(":"):
@@ -199,7 +200,7 @@ STATUS_RULES = [  # (status, pattern) checked in order on a headline
     ("Strike vote", r"strike (vote|authori[sz]ation)|vote[sd]? to (authori[sz]e|strike)"),
     ("Seeking release", r"request(s|ed|ing)? (a )?release|release from (the )?(NMB|mediation)|cooling[- ]off|proffer"),
     ("In mediation", r"mediat|\bNMB\b|national mediation board"),
-    ("Picketing", r"picket|rall(y|ies)|protest"),
+    ("Picketing", r"\bpicket|\brall(y|ies)\b|\bprotest"),
     ("In negotiations", r"negotiat|\btalks\b|bargain"),
 ]
 UNIT_NAMES = {"Mainline": None}
@@ -213,7 +214,7 @@ def status_from_footnote(footnote, union):
     acr = re.findall(r"\(\s*[“\"]?([A-Z][A-Z\-]{1,9})[”\"]?\s*\)", union or "") or ([union] if union and len(union) <= 8 else [])
     for status, rx in STATUS_RULES:
         for sent in SENT_RE.split(footnote):
-            if not re.search(rx, sent, re.I):
+            if BOILER_RE.search(sent) or not re.search(rx, sent, re.I):
                 continue
             named = re.findall(r"\b(ALPA|AFA|TWU|IBT|IAM|AMFA|CWA|APFA|PAFCA|SWAPA|APA)\b", sent)
             if named and not any(a.split("-")[0] in named for a in acr):
@@ -390,7 +391,7 @@ def update_labor(root, meta, ua, carriers, force=False):
                 else:
                     st, it = status_from_news(items, carrier["match"], craft_rx)
                     if st and it["date"] >= (row.get("status_date") or ""):
-                        row["status"], row["status_source"], row["news"] = st, "news", it
+                        row["status"], row["status_source"], row["news"], row["status_date"] = st, "news", it, it["date"]
             # the company's own 10-Q report of a ratification wins unless a later headline says otherwise
             tq = rec.get("tenq") or {}
             unit_word = None if unit in (None, "Mainline", "Alaska", "United Airlines, Inc.") else unit.split()[0]
