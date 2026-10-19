@@ -1506,7 +1506,7 @@ dash.calc('dotpeer', {
       document.getElementById('cal-legend').replaceChildren(...cats.map(([n, c]) => { const sp = document.createElement('span'); const w = document.createElement('i'); w.className = 'am-sw'; w.style.background = c; w.style.borderRadius = '50%'; sp.append(w, document.createTextNode(n)); return sp; }));
       calendar(document.getElementById('cal-chart'), rows.filter((r) => !r.prose));
       // table
-      const ord = (r) => (r.open ? 0 : r.prose ? 2 : 1);
+      const ord = (r) => (r.open && r.status !== 'Ratified' ? 0 : r.prose ? 2 : 1);
       const sorted = rows.slice().sort((a, b) => ord(a) - ord(b) || String(a.amendable || '9999').localeCompare(String(b.amendable || '9999')) || (b.employees || 0) - (a.employees || 0));
       document.querySelector('#labor-table tbody').replaceChildren(...sorted.map((r) => {
         const tr = document.createElement('tr'); tr.dataset.key = [r.ticker, r.unit || '', r.group].join(',');
@@ -1523,7 +1523,7 @@ dash.calc('dotpeer', {
           const m = document.createElement('span'); m.style.color = 'var(--color-fg-muted)'; m.textContent = ' — ' + (r.news.source || '');
           src.append(a, m); }
         else if (r.footnote) src.textContent = r.footnote;
-        if (r.open) tr.style.fontWeight = 'var(--cds-font-weight-medium)';
+        if (r.open && r.status !== 'Ratified') tr.style.fontWeight = 'var(--cds-font-weight-medium)';
         tr.append(td(r.carrier, 'l'), td(r.group, 'l'), td(r.union || '—', 'l am-hn'), td(r.employees ? d3.format(',')(r.employees) : '—'), td(amText(r), 'l'), st, src);
         return tr;
       }));
