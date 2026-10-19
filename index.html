@@ -173,6 +173,11 @@ window.dash = (function () {
 #dash-root .am-t tbody tr[data-key]{cursor:pointer}
 #dash-root .am-t th.l,#dash-root .am-t td.l{text-align:left}
 #dash-root .am-t td.w{white-space:normal;min-width:18rem;line-height:1.45}
+#dash-root .am-t td.wg,#dash-root .am-t td.wu{white-space:normal;line-height:1.35;min-width:8rem}
+#dash-root .am-t td.wg{max-width:13rem}
+#dash-root .am-t td.wu{max-width:15rem}
+#dash-root #labor-table td{vertical-align:top}
+#dash-root .am-t td.ws{white-space:normal;min-width:10rem;max-width:15rem;line-height:1.35}
 #dash-root .am-t tr.off td{color:var(--color-fg-muted)}
 #dash-root .am-neg{color:var(--color-bad)}
 #dash-root .am-ib{display:inline-block;height:6px;border-radius:1px;background:var(--cds-chart-muted);margin-right:6px;vertical-align:1px}
@@ -1550,11 +1555,11 @@ dash.calc('dotpeer', {
       const sorted = rows.slice().sort((a, b) => ord(a) - ord(b) || String(a.amendable || '9999').localeCompare(String(b.amendable || '9999')) || (b.employees || 0) - (a.employees || 0));
       document.querySelector('#labor-table tbody').replaceChildren(...sorted.map((r) => {
         const tr = document.createElement('tr'); tr.dataset.key = [r.ticker, r.unit || '', r.group].join(',');
-        const st = td('', 'l'); const pill = document.createElement('span'); pill.className = 'am-pill'; pill.style.color = lcat(r.status)[1];
+        const st = td('', 'l ws'); const pill = document.createElement('span'); pill.className = 'am-pill'; pill.style.color = lcat(r.status)[1];
         const link = r.status_source === 'union' && r.union_event ? r.union_event.url : r.status_source === '10-Q' ? r.filing_url : r.news ? r.news.url : null;
         if (link && /^https:\/\//.test(link)) { const a = document.createElement('a'); a.href = link; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = r.status; pill.append(a); } else pill.textContent = r.status;
         st.append(pill);
-        if (r.status_date && r.status_source !== '10-K') { const d = document.createElement('span'); d.style.color = 'var(--color-fg-muted)'; d.style.marginLeft = '6px';
+        if (r.status_date && r.status_source !== '10-K') { const d = document.createElement('div'); d.style.color = 'var(--color-fg-muted)'; d.style.marginTop = '3px';
           d.textContent = (r.status_date.length === 7 ? d3.utcFormat('%b %Y')(new Date(r.status_date + '-15T00:00:00Z')) : d3.utcFormat('%b %-d, %Y')(new Date(r.status_date.slice(0, 10) + 'T00:00:00Z'))) + ' · ' + (r.status_source === 'union' && r.union_event ? r.union_event.source : r.status_source === '10-Q' ? '10-Q' : r.status_source === '10-K' ? '10-K' : 'news');
           st.append(d); }
         const src = td('', 'l w');
@@ -1567,7 +1572,7 @@ dash.calc('dotpeer', {
           src.append(a, m); }
         else if (r.footnote) src.textContent = r.footnote;
         if (r.open && r.status !== 'Ratified') tr.style.fontWeight = 'var(--cds-font-weight-medium)';
-        tr.append(td(r.carrier, 'l'), td(r.group, 'l'), td(r.union || '—', 'l am-hn'), td(r.employees ? d3.format(',')(r.employees) : '—'), td(amText(r), 'l'), st, src);
+        tr.append(td(r.carrier, 'l'), td(r.group, 'l wg'), td(r.union || '—', 'l am-hn wu'), td(r.employees ? d3.format(',')(r.employees) : '—'), td(amText(r), 'l'), st, src);
         return tr;
       }));
       // union sites
