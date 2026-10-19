@@ -225,17 +225,24 @@ def collect(root, groups, ua, aliases, since_days=400, budget_s=600):
     f = Fetch(ua)
     found, report = {}, []
     t0 = time.time()
+    def status_text(text):
+        # keep only the clauses that carry a status: small enough to cache, and enough to re-match later
+        return "; ".join(c.strip().rstrip(";") for c in CLAUSE_SPLIT.split(text or "") if len(c) <= 900 and status_of(c))[:6000]
+
+    def match(it, rel, site):
+        for k, e in events_for(it, rel, site, aliases):
+            found.setdefault(k, []).append(e)
+
     for site in cfg:
-        if time.time() - t0 > budget_s:
-            # out of time this run: reuse what earlier runs found for this site
-            for k, v in cache.items():
-                if v.get("site") == site["name"]:
-                    for kk, e in v.get("events", []):
-                        found.setdefault(tuple(kk), []).append(e)
-            report.append({"name": site["name"], "url": site["url"], "method": "deferred", "items": 0, "groups": 0})
-            continue
         rel = [g for g in groups if g["ticker"] in site["carriers"]
                and any(re.search(u, g.get("union") or "", re.I) for u in site["unions"])]
+        if time.time() - t0 > budget_s:
+            # out of time this run: re-match what earlier runs read from this site
+            for k, v in cache.items():
+                if v.get("site") == site["name"] and "text" in v:
+                    match({"url": k, "date": v["date"], "title": v.get("title", ""), "text": v["text"]}, rel, site)
+            report.append({"name": site["name"], "url": site["url"], "method": "deferred", "items": 0, "groups": len(rel)})
+            continue
         rep = {"name": site["name"], "url": site["url"], "groups": len(rel)}
         try:
             method, items, tried = list_items(f, site, since)
@@ -248,12 +255,15 @@ def collect(root, groups, ua, aliases, since_days=400, budget_s=600):
         nread = 0
         for it in sorted(items, key=lambda x: x["date"], reverse=True):
             key = it["url"]
-            if key in cache:
-                evs = cache[key].get("events", [])
-            else:
-                if it["kind"] == "pdf":
+            c = cache.get(key)
+            if it["kind"] == "pdf":
+                if c and "text" in c:
+                    it["text"] = c["text"]
+                elif c and (c.get("skipped") or c.get("error")):
+                    continue
+                else:
                     if not ANNOUNCE_RE.search(it["title"]) or (CONTRACT_DOC_RE.search(it["title"]) and not re.search(r"ratif|reject|tentative|\bTA\b", it["title"], re.I)):
-                        cache[key] = {"date": it["date"], "skipped": True, "events": []}
+                        cache[key] = {"date": it["date"], "skipped": True}
                         continue
                     if nread >= 40 or time.time() - t0 > budget_s:
                         continue  # read the rest next week
@@ -263,12 +273,10 @@ def collect(root, groups, ua, aliases, since_days=400, budget_s=600):
                         nread += 1
                         time.sleep(0.5)
                     except Exception as e:  # noqa: BLE001
-                        cache[key] = {"date": it["date"], "error": type(e).__name__, "events": []}
+                        cache[key] = {"date": it["date"], "error": type(e).__name__}
                         continue
-                evs = [[list(k), e] for k, e in events_for(it, rel, site, aliases)]
-                cache[key] = {"date": it["date"], "title": it["title"][:200], "events": evs, "site": site["name"]}
-            for k, e in evs:
-                found.setdefault(tuple(k), []).append(e)
+            cache[key] = {"date": it["date"], "title": it["title"][:200], "site": site["name"], "text": status_text(it.get("text"))}
+            match(it, rel, site)
         rep["pdfs_read"] = nread
         report.append(rep)
     # keep the cache to recent items
