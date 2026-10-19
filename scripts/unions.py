@@ -311,6 +311,8 @@ def events_for(item, groups, site, aliases):
         for clause in CLAUSE_SPLIT.split(text):
             if len(clause) > 900 or not (dedicated or clause_names_group(clause, toks)):
                 continue
+            if re.match(r"\s*(In the news|In the media|Related|See also|Read more)\b", clause, re.I):
+                continue  # a list of other outlets' headlines, not this union's own report
             st = status_of(clause)
             if not st:
                 continue
