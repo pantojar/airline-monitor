@@ -29,6 +29,23 @@ To run it on demand, open the **Actions** tab, choose **Refresh data**, then **R
 | `config/exec_pay.json` | Hand-verified CEO pay figures: name, compensation actually paid, notes (one row per company and fiscal year) |
 | `config/dot_carriers.json` | Operating carriers shown on the DOT tab: DOT code, owner, group, role, and footnotes |
 | `data/news_curated.json` | Hand-written news items with summaries; shown alongside the automatic feed |
+| `config/labor_sources.json` | Union websites the bargaining tracker reads (see below) |
+
+### Adding a union or negotiations website
+
+Add one line to `config/labor_sources.json`. WordPress sites and sites with an RSS feed need only a name, address, the union names it speaks for and the airlines it covers:
+
+```json
+{"name": "IAM District 141", "url": "https://iam141.org", "unions": ["\\bIAM\\b", "Machinists"], "carriers": ["UAL", "ALK"]}
+```
+
+A site that has neither, but has a news page listing articles, also needs `"list"` (the news page) and `"link"` (a pattern the article addresses match). A negotiations site for one group (a pilots' "Contract 2026" site, say) adds `"craft"` (and `"unit"` for a regional or subsidiary), so every milestone it posts counts for that group even when the sentence doesn't name the craft:
+
+```json
+{"name": "Frontier pilots negotiations", "url": "https://example.org", "carriers": ["ULCC"], "craft": "pilot"}
+```
+
+The **Union websites read** table on the Bargaining tab shows, after each weekly run, whether each site could be read and, if not, why.
 
 ## Settings
 

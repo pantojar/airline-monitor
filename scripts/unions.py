@@ -2,6 +2,8 @@
 
 For each site in config/labor_sources.json the job reads either the news listing page(s) named in "list"
 (articles linked from it whose address matches "link"), or tries, in order:
+  (a site with "craft" — and optionally "unit" — is a negotiations site for one group, e.g. a pilots'
+   "Contract 2026" site: every milestone sentence on it counts for that group)
   1. WordPress REST API: recent posts (/wp-json/wp/v2/posts) and uploaded PDFs (/wp-json/wp/v2/media)
   2. An RSS feed (/feed/, /rss, /rss.xml)
 PDFs whose titles look like announcements (update, ratification, results, vote, tentative agreement,
@@ -304,22 +306,29 @@ def events_for(item, groups, site, aliases):
             return True
 
         toks = group_alternates(g["group"])
+        dedicated = bool(site.get("craft"))  # a negotiations site for one group: every milestone sentence is about it
         best = None
         for clause in CLAUSE_SPLIT.split(text):
-            if len(clause) > 900 or not clause_names_group(clause, toks):
+            if len(clause) > 900 or not (dedicated or clause_names_group(clause, toks)):
                 continue
             st = status_of(clause)
             if not st:
                 continue
-            if re.search(OTHER_CARRIERS, clause, re.I):
+            if dedicated:
+                ok = not re.search(OTHER_CARRIERS, clause, re.I) or names_own(clause)
+            elif re.search(OTHER_CARRIERS, clause, re.I):
                 ok = names_own(clause)
             else:
                 # no airline in the sentence: go by the title, else by which airline the document is about
                 ok = names_own(title) or (not re.search(OTHER_CARRIERS, title, re.I) and owner == own_key) \
                     or (single and not (subs_rx and not is_sub and re.search(subs_rx, title, re.I)) and (not is_sub or re.search(own_rx, text, re.I)))
             if ok:
-                best = (st, clause.strip())
-                break
+                # a routine "Negotiations Update" headline shouldn't hide the TA or vote result reported below it
+                rank = [s for s, _ in STATUS_RULES].index(st)
+                if best is None or rank < best[2]:
+                    best = (st, clause.strip(), rank)
+                if rank <= 2:
+                    break
         if best:
             out.append(((g["ticker"], g.get("unit"), g["group"]),
                         {"status": best[0], "date": item["date"], "source": site["name"], "kind": "union",
@@ -349,7 +358,9 @@ def collect(root, groups, ua, aliases, since_days=400, budget_s=600):
 
     for site in cfg:
         rel = [g for g in groups if g["ticker"] in site["carriers"]
-               and any(re.search(u, g.get("union") or "", re.I) for u in site["unions"])]
+               and any(re.search(u, g.get("union") or "", re.I) for u in site.get("unions", [".*"]))
+               and (not site.get("craft") or re.search(site["craft"], g["group"], re.I))
+               and (not site.get("unit") or re.search(site["unit"], g.get("unit") or "Mainline", re.I))]
         if time.time() - t0 > budget_s:
             # out of time this run: re-match what earlier runs read from this site
             for k, v in cache.items():

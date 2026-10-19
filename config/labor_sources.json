@@ -5,7 +5,7 @@
  {"name": "AFA-CWA", "url": "https://www.afacwa.org", "unions": ["\\bAFA\\b", "Association of Flight Attendants"], "carriers": ["UAL", "ALK", "AAL", "DAL", "ULCC", "RJET"]},
  {"name": "AFA United", "url": "https://www.unitedafa.org", "unions": ["\\bAFA\\b", "Association of Flight Attendants"], "carriers": ["UAL"]},
  {"name": "APFA", "url": "https://www.apfa.org", "unions": ["\\bAPFA\\b"], "carriers": ["AAL"]},
- {"name": "ALPA", "url": "https://www.alpa.org", "unions": ["\\bALPA\\b", "Air Line Pilots"], "carriers": ["DAL", "UAL", "ALK", "JBLU", "ULCC", "AAL", "RJET"]},
+ {"name": "ALPA", "url": "https://www.alpa.org", "unions": ["\\bALPA\\b", "Air Line Pilots"], "carriers": ["DAL", "UAL", "ALK", "JBLU", "ULCC", "AAL", "RJET"], "list": ["https://www.alpa.org/press-room"], "link": "(?i)alpa\\.org/press-room/20\\d\\d/\\d\\d/"},
  {"name": "Allied Pilots Association", "url": "https://www.alliedpilots.org", "unions": ["\\bAPA\\b", "Allied Pilots"], "carriers": ["AAL"]},
  {"name": "SWAPA", "url": "https://www.swapa.org", "unions": ["SWAPA"], "carriers": ["LUV"], "list": ["https://www.swapa.org/news/"], "link": "swapa\\.org/news/[^?#]+"},
  {"name": "Teamsters", "url": "https://teamster.org", "unions": ["\\bIBT\\b", "Teamsters"], "carriers": ["UAL", "ALK", "ULCC", "ALGT", "RJET", "LUV", "AAL"]},
