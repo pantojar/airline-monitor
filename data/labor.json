@@ -1,8 +1,56 @@
 {
- "generated": "2026-10-19T13:10:00Z",
+ "generated": "2026-10-19T13:13:00Z",
  "companies": {
   "DAL": {
    "ticker": "DAL",
+   "tenk": {
+    "accession": "0000027904-26-000013",
+    "filed": "2026-02-11",
+    "url": "https://www.sec.gov/Archives/edgar/data/27904/000002790426000013/dal-20251231.htm",
+    "groups": [
+     {
+      "unit": null,
+      "group": "Delta Pilots",
+      "union": "ALPA",
+      "employees": 17260,
+      "amendable_text": "December 31, 2026",
+      "amendable": "2026-12-31",
+      "precision": "day",
+      "footnote": null
+     },
+     {
+      "unit": null,
+      "group": "Delta Flight Superintendents (Dispatchers)",
+      "union": "PAFCA",
+      "employees": 530,
+      "amendable_text": "August 1, 2030",
+      "amendable": "2030-08-01",
+      "precision": "day",
+      "footnote": null
+     },
+     {
+      "unit": null,
+      "group": "Endeavor Pilots",
+      "union": "ALPA",
+      "employees": 1770,
+      "amendable_text": "January 1, 2029",
+      "amendable": "2029-01-01",
+      "precision": "day",
+      "footnote": null
+     },
+     {
+      "unit": null,
+      "group": "Endeavor Flight Attendants",
+      "union": "AFA",
+      "employees": 1910,
+      "amendable_text": "March 31, 2027",
+      "amendable": "2027-03-31",
+      "precision": "day",
+      "footnote": null
+     }
+    ],
+    "prose": []
+   },
    "tenq": {
     "accession": "0000027904-26-000038",
     "filed": "2026-10-09",
@@ -12,6 +60,154 @@
   },
   "UAL": {
    "ticker": "UAL",
+   "tenk": {
+    "accession": "0000100517-26-000023",
+    "filed": "2026-02-12",
+    "url": "https://www.sec.gov/Archives/edgar/data/100517/000010051726000023/ual-20251231.htm",
+    "groups": [
+     {
+      "unit": "United Airlines, Inc.",
+      "group": "Flight Attendants",
+      "union": "Association of Flight Attendants (\"AFA\")",
+      "employees": 28220,
+      "amendable_text": "August 2021",
+      "amendable": "2021-08",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": "United Airlines, Inc.",
+      "group": "Fleet Service",
+      "union": "International Association of Machinists and Aerospace Workers (the \"IAM\")",
+      "employees": 16789,
+      "amendable_text": "May 2025",
+      "amendable": "2025-05",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": "United Airlines, Inc.",
+      "group": "Pilots",
+      "union": "Air Line Pilots Association (\"ALPA\")",
+      "employees": 17126,
+      "amendable_text": "October 2027",
+      "amendable": "2027-10",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": "United Airlines, Inc.",
+      "group": "Passenger Service",
+      "union": "IAM",
+      "employees": 11493,
+      "amendable_text": "May 2025",
+      "amendable": "2025-05",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": "United Airlines, Inc.",
+      "group": "Technicians",
+      "union": "International Brotherhood of Teamsters (the \"IBT\")",
+      "employees": 10599,
+      "amendable_text": "December 2024",
+      "amendable": "2024-12",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": "United Airlines, Inc.",
+      "group": "Storekeepers",
+      "union": "IAM",
+      "employees": 1448,
+      "amendable_text": "May 2025",
+      "amendable": "2025-05",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": "United Airlines, Inc.",
+      "group": "Dispatchers",
+      "union": "Professional Airline Flight Control Association",
+      "employees": 554,
+      "amendable_text": "December 2024",
+      "amendable": "2024-12",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": "United Airlines, Inc.",
+      "group": "Fleet Tech Instructors",
+      "union": "IAM",
+      "employees": 162,
+      "amendable_text": "May 2025",
+      "amendable": "2025-05",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": "United Airlines, Inc.",
+      "group": "Technical Operations Maintenance Planners",
+      "union": "IBT",
+      "employees": 147,
+      "amendable_text": "May 2028",
+      "amendable": "2028-05",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": "United Airlines, Inc.",
+      "group": "Technical Operations Maintenance Controllers",
+      "union": "IBT",
+      "employees": 97,
+      "amendable_text": "November 2026",
+      "amendable": "2026-11",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": "United Airlines, Inc.",
+      "group": "Load Planners",
+      "union": "IAM",
+      "employees": 88,
+      "amendable_text": "May 2025",
+      "amendable": "2025-05",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": "United Airlines, Inc.",
+      "group": "Maintenance Instructors",
+      "union": "IAM",
+      "employees": 53,
+      "amendable_text": "May 2025",
+      "amendable": "2025-05",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": "United Airlines, Inc.",
+      "group": "Security Officers",
+      "union": "IAM",
+      "employees": 50,
+      "amendable_text": "May 2025",
+      "amendable": "2025-05",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": "United Ground Express, Inc.",
+      "group": "Passenger Service",
+      "union": "IAM",
+      "employees": 6727,
+      "amendable_text": "March 2025",
+      "amendable": "2025-03",
+      "precision": "month",
+      "footnote": null
+     }
+    ],
+    "prose": []
+   },
    "tenq": {
     "accession": "0000100517-26-000139",
     "filed": "2026-07-16",
@@ -26,6 +222,334 @@
   },
   "AAL": {
    "ticker": "AAL",
+   "tenk": {
+    "accession": "0000006201-26-000014",
+    "filed": "2026-02-18",
+    "url": "https://www.sec.gov/Archives/edgar/data/6201/000000620126000014/aal-20251231.htm",
+    "groups": [
+     {
+      "unit": "Mainline",
+      "group": "Pilots",
+      "union": "Allied Pilots Association (APA)",
+      "employees": 14970,
+      "amendable_text": "2027",
+      "amendable": "2027",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Mainline",
+      "group": "Flight Attendants",
+      "union": "Association of Professional Flight Attendants (APFA)",
+      "employees": 26400,
+      "amendable_text": "2029",
+      "amendable": "2029",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Mainline",
+      "group": "Passenger Service",
+      "union": "Airline Customer Service Employee Association – Communications Workers of America and International Brotherhood of Teamsters (CWA-IBT)",
+      "employees": 13030,
+      "amendable_text": "2029",
+      "amendable": "2029",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Mainline",
+      "group": "Mechanics and Related",
+      "union": "Transport Workers Union and International Association of Machinists & Aerospace Workers (TWU-IAM Association)",
+      "employees": 13040,
+      "amendable_text": "2027",
+      "amendable": "2027",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Mainline",
+      "group": "Fleet Service",
+      "union": "TWU-IAM Association",
+      "employees": 19460,
+      "amendable_text": "2027",
+      "amendable": "2027",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Mainline",
+      "group": "Stock Clerks",
+      "union": "TWU-IAM Association",
+      "employees": 2090,
+      "amendable_text": "2027",
+      "amendable": "2027",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Mainline",
+      "group": "Flight Simulator Engineers",
+      "union": "TWU-IAM Association",
+      "employees": 150,
+      "amendable_text": "2030",
+      "amendable": "2030",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Mainline",
+      "group": "Maintenance Control Technicians",
+      "union": "TWU-IAM Association",
+      "employees": 190,
+      "amendable_text": "2027",
+      "amendable": "2027",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Mainline",
+      "group": "Maintenance Training Instructors",
+      "union": "TWU-IAM Association",
+      "employees": 100,
+      "amendable_text": "2027",
+      "amendable": "2027",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Mainline",
+      "group": "Dispatchers",
+      "union": "Professional Airline Flight Control Association (PAFCA)",
+      "employees": 570,
+      "amendable_text": "2025",
+      "amendable": "2025",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Mainline",
+      "group": "Flight Crew Training Instructors",
+      "union": "Transport Workers Union (TWU)",
+      "employees": 350,
+      "amendable_text": "2031",
+      "amendable": "2031",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Envoy",
+      "group": "Pilots",
+      "union": "Air Line Pilots Associations (ALPA)",
+      "employees": 2330,
+      "amendable_text": "2029",
+      "amendable": "2029",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Envoy",
+      "group": "Flight Attendants",
+      "union": "Association of Flight Attendants-CWA (AFA)",
+      "employees": 2350,
+      "amendable_text": "2026",
+      "amendable": "2026",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Envoy",
+      "group": "Ground School Instructors",
+      "union": "TWU",
+      "employees": 10,
+      "amendable_text": "2027",
+      "amendable": "2027",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Envoy",
+      "group": "Mechanics and Related",
+      "union": "TWU",
+      "employees": 1370,
+      "amendable_text": "2027",
+      "amendable": "2027",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Envoy",
+      "group": "Stock Clerks",
+      "union": "TWU",
+      "employees": 140,
+      "amendable_text": "2027",
+      "amendable": "2027",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Envoy",
+      "group": "Simulator Instructors",
+      "union": "TWU",
+      "employees": 20,
+      "amendable_text": "2026",
+      "amendable": "2026",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Envoy",
+      "group": "Fleet Service",
+      "union": "TWU",
+      "employees": 4300,
+      "amendable_text": "2026",
+      "amendable": "2026",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Envoy",
+      "group": "Dispatchers",
+      "union": "TWU",
+      "employees": 90,
+      "amendable_text": "2025",
+      "amendable": "2025",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Envoy",
+      "group": "Passenger Service",
+      "union": "Communications Workers of America (CWA)",
+      "employees": 7730,
+      "amendable_text": "2026",
+      "amendable": "2026",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Piedmont",
+      "group": "Pilots",
+      "union": "ALPA",
+      "employees": 840,
+      "amendable_text": "2029",
+      "amendable": "2029",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Piedmont",
+      "group": "Flight Attendants",
+      "union": "AFA",
+      "employees": 400,
+      "amendable_text": "2026",
+      "amendable": "2026",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Piedmont",
+      "group": "Mechanics and Related",
+      "union": "International Brotherhood of Teamsters (IBT)",
+      "employees": 540,
+      "amendable_text": "2026",
+      "amendable": "2026",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Piedmont",
+      "group": "Stock Clerks",
+      "union": "IBT",
+      "employees": 70,
+      "amendable_text": "2026",
+      "amendable": "2026",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Piedmont",
+      "group": "Fleet and Passenger Service",
+      "union": "CWA",
+      "employees": 6750,
+      "amendable_text": "2023",
+      "amendable": "2023",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "Piedmont",
+      "group": "Dispatchers",
+      "union": "IBT",
+      "employees": 40,
+      "amendable_text": "2029",
+      "amendable": "2029",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "PSA",
+      "group": "Pilots",
+      "union": "ALPA",
+      "employees": 1930,
+      "amendable_text": "2028",
+      "amendable": "2028",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "PSA",
+      "group": "Flight Attendants",
+      "union": "AFA",
+      "employees": 1370,
+      "amendable_text": "2023",
+      "amendable": "2023",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "PSA",
+      "group": "Mechanics and Related",
+      "union": "International Association of Machinists & Aerospace Workers (IAM)",
+      "employees": 780,
+      "amendable_text": "2027",
+      "amendable": "2027",
+      "precision": "year",
+      "footnote": null
+     },
+     {
+      "unit": "PSA",
+      "group": "Stock Clerks",
+      "union": "IAM",
+      "employees": 160,
+      "amendable_text": "N/A",
+      "amendable": null,
+      "precision": null,
+      "footnote": null
+     },
+     {
+      "unit": "PSA",
+      "group": "Flight Crew Training Instructors",
+      "union": "TWU",
+      "employees": 50,
+      "amendable_text": "N/A",
+      "amendable": null,
+      "precision": null,
+      "footnote": null
+     },
+     {
+      "unit": "PSA",
+      "group": "Dispatchers",
+      "union": "TWU",
+      "employees": 60,
+      "amendable_text": "2027",
+      "amendable": "2027",
+      "precision": "year",
+      "footnote": null
+     }
+    ],
+    "prose": []
+   },
    "tenq": {
     "accession": "0000006201-26-000052",
     "filed": "2026-07-23",
@@ -35,6 +559,134 @@
   },
   "LUV": {
    "ticker": "LUV",
+   "tenk": {
+    "accession": "0000092380-26-000004",
+    "filed": "2026-02-05",
+    "url": "https://www.sec.gov/Archives/edgar/data/92380/000009238026000004/luv-20251231.htm",
+    "groups": [
+     {
+      "unit": null,
+      "group": "Southwest Pilots",
+      "union": "Southwest Airlines Pilots' Association (“SWAPA”)",
+      "employees": 10321,
+      "amendable_text": "Amendable January 2029",
+      "amendable": "2029-01",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": null,
+      "group": "Southwest Flight Attendants",
+      "union": "Transportation Workers of America, AFL-CIO, Local 556 (“TWU 556”)",
+      "employees": 21197,
+      "amendable_text": "Amendable May 2028",
+      "amendable": "2028-05",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": null,
+      "group": "Southwest Material Specialists (formerly known as Stock Clerks)",
+      "union": "International Brotherhood of Teamsters, Local 19 (“IBT 19”)",
+      "employees": 474,
+      "amendable_text": "Amendable October 2026",
+      "amendable": "2026-10",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": null,
+      "group": "Southwest Ramp, Operations, Provisioning, Freight Agents",
+      "union": "Transport Workers Union Local 555 (“TWU 555”)",
+      "employees": 17565,
+      "amendable_text": "Amendable March 2029",
+      "amendable": "2029-03",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": null,
+      "group": "Southwest Flight Simulator Technicians",
+      "union": "IBT 19",
+      "employees": 53,
+      "amendable_text": "Amendable September 2028",
+      "amendable": "2028-09",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": null,
+      "group": "Southwest Flight Crew Training Instructors",
+      "union": "Transportation Workers of America, AFL-CIO, Local 557 (“TWU 557”)",
+      "employees": 205,
+      "amendable_text": "Amendable January 2027",
+      "amendable": "2027-01",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": null,
+      "group": "Southwest Dispatchers",
+      "union": "Transportation Workers of America, AFL-CIO, Local 550 (“TWU 550”)",
+      "employees": 508,
+      "amendable_text": "Amendable June 2027",
+      "amendable": "2027-06",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": null,
+      "group": "Southwest Aircraft Appearance Technicians",
+      "union": "AMFA",
+      "employees": 209,
+      "amendable_text": "Amendable July 2027",
+      "amendable": "2027-07",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": null,
+      "group": "Southwest Mechanics & Related Employees",
+      "union": "Aircraft Mechanics Fraternal Association (“AMFA”)",
+      "employees": 2999,
+      "amendable_text": "Amendable August 2027",
+      "amendable": "2027-08",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": null,
+      "group": "Southwest Facilities Maintenance Technicians",
+      "union": "AMFA",
+      "employees": 45,
+      "amendable_text": "Amendable November 2027",
+      "amendable": "2027-11",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": null,
+      "group": "Southwest Customer Service Agents, Customer Representatives, and Source of Support Representatives",
+      "union": "International Association of Machinists and Aerospace Workers, AFL-CIO (“IAM 142”)",
+      "employees": 6798,
+      "amendable_text": "Amendable December 2027",
+      "amendable": "2027-12",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": null,
+      "group": "Southwest Meteorologists",
+      "union": "TWU 550",
+      "employees": 15,
+      "amendable_text": "Amendable May 2028",
+      "amendable": "2028-05",
+      "precision": "month",
+      "footnote": null
+     }
+    ],
+    "prose": []
+   },
    "tenq": {
     "accession": "0000092380-26-000077",
     "filed": "2026-07-23",
@@ -46,6 +698,174 @@
   },
   "ALK": {
    "ticker": "ALK",
+   "tenk": {
+    "accession": "0000766421-26-000010",
+    "filed": "2026-02-12",
+    "url": "https://www.sec.gov/Archives/edgar/data/766421/000076642126000010/alk-20251231.htm",
+    "groups": [
+     {
+      "unit": "Alaska",
+      "group": "Pilots",
+      "union": "Air Line Pilots Association, International (ALPA)",
+      "employees": 3360,
+      "amendable_text": "Amendable 3/2/2027",
+      "amendable": "2027-03-02",
+      "precision": "day",
+      "footnote": null
+     },
+     {
+      "unit": "Alaska",
+      "group": "Flight attendants",
+      "union": "Association of Flight Attendants (AFA)",
+      "employees": 7164,
+      "amendable_text": "Amendable 2/28/2028",
+      "amendable": "2028-02-28",
+      "precision": "day",
+      "footnote": null
+     },
+     {
+      "unit": "Alaska",
+      "group": "Ramp service and stock clerks",
+      "union": "International Association of Machinists and Aerospace Workers (IAM)",
+      "employees": 911,
+      "amendable_text": "Amendable 9/27/2026",
+      "amendable": "2026-09-27",
+      "precision": "day",
+      "footnote": null
+     },
+     {
+      "unit": "Alaska",
+      "group": "Clerical, office and passenger service",
+      "union": "IAM",
+      "employees": 5421,
+      "amendable_text": "Amendable 9/27/2026",
+      "amendable": "2026-09-27",
+      "precision": "day",
+      "footnote": null
+     },
+     {
+      "unit": "Alaska",
+      "group": "Technicians and related",
+      "union": "Aircraft Mechanics Fraternal Association (AMFA)",
+      "employees": 1046,
+      "amendable_text": "Amendable 10/17/2028",
+      "amendable": "2028-10-17",
+      "precision": "day",
+      "footnote": null
+     },
+     {
+      "unit": "Alaska",
+      "group": "Dispatchers",
+      "union": "Transport Workers Union of America (TWU)",
+      "employees": 114,
+      "amendable_text": "Amendable 3/24/2027",
+      "amendable": "2027-03-24",
+      "precision": "day",
+      "footnote": null
+     },
+     {
+      "unit": "Hawaiian",
+      "group": "Pilots",
+      "union": "ALPA",
+      "employees": 1242,
+      "amendable_text": "Amendable 3/2/2027",
+      "amendable": "2027-03-02",
+      "precision": "day",
+      "footnote": null
+     },
+     {
+      "unit": "Hawaiian",
+      "group": "Flight attendants",
+      "union": "AFA",
+      "employees": 2507,
+      "amendable_text": "Amendable 2/28/2028",
+      "amendable": "2028-02-28",
+      "precision": "day",
+      "footnote": null
+     },
+     {
+      "unit": "Hawaiian",
+      "group": "Technicians and related",
+      "union": "IAM",
+      "employees": 957,
+      "amendable_text": "Amendable 2/15/2027",
+      "amendable": "2027-02-15",
+      "precision": "day",
+      "footnote": null
+     },
+     {
+      "unit": "Hawaiian",
+      "group": "Clerical",
+      "union": "IAM",
+      "employees": 1679,
+      "amendable_text": "Amendable 2/15/2027",
+      "amendable": "2027-02-15",
+      "precision": "day",
+      "footnote": null
+     },
+     {
+      "unit": "Hawaiian",
+      "group": "Dispatchers",
+      "union": "TWU",
+      "employees": 71,
+      "amendable_text": "Amendable 4/21/2027",
+      "amendable": "2027-04-21",
+      "precision": "day",
+      "footnote": null
+     },
+     {
+      "unit": "Horizon",
+      "group": "Pilots",
+      "union": "International Brotherhood of Teamsters (IBT)",
+      "employees": 662,
+      "amendable_text": "Amendable 12/31/2024",
+      "amendable": "2024-12-31",
+      "precision": "day",
+      "footnote": "Negotiations with IBT, AFA, and TWU for updated collective bargaining agreements are ongoing as of the date of this filing. A mediator from the National Mediation Board is participating in negotiations with AFA and TWU. McGee Air Services' union contract at December 31, 2025 was as follows:"
+     },
+     {
+      "unit": "Horizon",
+      "group": "Flight attendants",
+      "union": "AFA",
+      "employees": 670,
+      "amendable_text": "Amendable 4/30/2024",
+      "amendable": "2024-04-30",
+      "precision": "day",
+      "footnote": "Negotiations with IBT, AFA, and TWU for updated collective bargaining agreements are ongoing as of the date of this filing. A mediator from the National Mediation Board is participating in negotiations with AFA and TWU. McGee Air Services' union contract at December 31, 2025 was as follows:"
+     },
+     {
+      "unit": "Horizon",
+      "group": "Mechanics and related classifications",
+      "union": "AMFA",
+      "employees": 184,
+      "amendable_text": "Amendable 5/10/2029",
+      "amendable": "2029-05-10",
+      "precision": "day",
+      "footnote": null
+     },
+     {
+      "unit": "Horizon",
+      "group": "Dispatchers",
+      "union": "TWU",
+      "employees": 27,
+      "amendable_text": "Amendable 1/29/2026",
+      "amendable": "2026-01-29",
+      "precision": "day",
+      "footnote": "Negotiations with IBT, AFA, and TWU for updated collective bargaining agreements are ongoing as of the date of this filing. A mediator from the National Mediation Board is participating in negotiations with AFA and TWU. McGee Air Services' union contract at December 31, 2025 was as follows:"
+     },
+     {
+      "unit": "McGee Air Services",
+      "group": "Fleet and ramp service",
+      "union": "IAM",
+      "employees": 2897,
+      "amendable_text": "Amendable 7/19/2030",
+      "amendable": "2030-07-19",
+      "precision": "day",
+      "footnote": null
+     }
+    ],
+    "prose": []
+   },
    "tenq": {
     "accession": "0000766421-26-000041",
     "filed": "2026-08-04",
@@ -57,6 +877,44 @@
   },
   "JBLU": {
    "ticker": "JBLU",
+   "tenk": {
+    "accession": "0001158463-26-000007",
+    "filed": "2026-02-12",
+    "url": "https://www.sec.gov/Archives/edgar/data/1158463/000115846326000007/jblu-20251231.htm",
+    "groups": [
+     {
+      "unit": null,
+      "group": "Pilots",
+      "union": "Air Line Pilots Association (ALPA)",
+      "employees": 4251,
+      "amendable_text": "February 1, 2025",
+      "amendable": "2025-02-01",
+      "precision": "day",
+      "footnote": null
+     },
+     {
+      "unit": null,
+      "group": "Pilot instructors",
+      "union": "Transport Workers Union (TWU)",
+      "employees": 24,
+      "amendable_text": "N/A",
+      "amendable": null,
+      "precision": null,
+      "footnote": null
+     },
+     {
+      "unit": null,
+      "group": "Inflight",
+      "union": "Transport Workers Union (TWU)",
+      "employees": 5369,
+      "amendable_text": "December 13, 2026",
+      "amendable": "2026-12-13",
+      "precision": "day",
+      "footnote": null
+     }
+    ],
+    "prose": []
+   },
    "tenq": {
     "accession": "0001158463-26-000075",
     "filed": "2026-07-28",
@@ -71,6 +929,84 @@
   },
   "ULCC": {
    "ticker": "ULCC",
+   "tenk": {
+    "accession": "0001670076-26-000020",
+    "filed": "2026-02-18",
+    "url": "https://www.sec.gov/Archives/edgar/data/1670076/000167007626000020/fron-20251231.htm",
+    "groups": [
+     {
+      "unit": null,
+      "group": "Pilots",
+      "union": "Air Line Pilots Association (“ALPA”)",
+      "employees": null,
+      "amendable_text": "January 2024",
+      "amendable": "2024-01",
+      "precision": "month",
+      "footnote": "ALPA filed for mediation through the National Mediation Board (the “NMB”) in January 2024, and the parties are meeting regularly as part of the mediation process. Pursuant to the U.S. Railway Labor Act (the “RLA”), the parties continue to be bound by the existing agreements as negotiations continue."
+     },
+     {
+      "unit": null,
+      "group": "Flight Attendants",
+      "union": "Association of Flight Attendants (“AFA-CWA”)",
+      "employees": null,
+      "amendable_text": "May 2024",
+      "amendable": "2024-05",
+      "precision": "month",
+      "footnote": "AFA-CWA filed for mediation through the NMB in October 2024, and the parties are meeting monthly as part of the mediation process, with the first meeting held in February 2025. Pursuant to the RLA, the parties continue to be bound by the existing agreements as negotiations continue."
+     },
+     {
+      "unit": null,
+      "group": "Aircraft Technicians",
+      "union": "International Brotherhood of Teamsters (“IBT”)",
+      "employees": null,
+      "amendable_text": "May 2025",
+      "amendable": "2025-05",
+      "precision": "month",
+      "footnote": "Our collective bargaining agreements with our aircraft technicians, represented by IBT, were still amendable as of December 31, 2025. Pursuant to the RLA, the parties continue to be bound by the existing agreements as negotiations continue."
+     },
+     {
+      "unit": null,
+      "group": "Aircraft Appearance Agents",
+      "union": "IBT",
+      "employees": null,
+      "amendable_text": "July 2030",
+      "amendable": "2030-07",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": null,
+      "group": "Dispatchers",
+      "union": "Transport Workers Union (“TWU”)",
+      "employees": null,
+      "amendable_text": "August 2028",
+      "amendable": "2028-08",
+      "precision": "month",
+      "footnote": null
+     },
+     {
+      "unit": null,
+      "group": "Material Specialists",
+      "union": "IBT",
+      "employees": null,
+      "amendable_text": "November 2030",
+      "amendable": "2030-11",
+      "precision": "month",
+      "footnote": "Effective as of November 7, 2025, we entered into a new five-year agreement with our material specialists."
+     },
+     {
+      "unit": null,
+      "group": "Maintenance Controllers",
+      "union": "IBT",
+      "employees": null,
+      "amendable_text": "December 2030",
+      "amendable": "2030-12",
+      "precision": "month",
+      "footnote": "Effective as of December 10, 2025, we entered into a new five-year agreement with our maintenance controllers."
+     }
+    ],
+    "prose": []
+   },
    "tenq": {
     "accession": "0001670076-26-000087",
     "filed": "2026-07-29",
@@ -83,6 +1019,22 @@
   },
   "ALGT": {
    "ticker": "ALGT",
+   "tenk": {
+    "accession": "0001362468-26-000008",
+    "filed": "2026-02-26",
+    "url": "https://www.sec.gov/Archives/edgar/data/1362468/000136246826000008/algt-20251231.htm",
+    "groups": [],
+    "prose": [
+     "Those unions have negotiated separate collective bargaining agreements (“CBAs”) with us covering the rates of pay, rules, and working conditions that apply to those employees.",
+     "The CBAs covering our maintenance technicians and flight attendants do not become amendable until 2028 and 2029, respectively.",
+     "The CBA covering our dispatchers becomes amendable in May 2026 and we have commenced those negotiations.",
+     "The CBA covering our pilots became amendable in 2021 and we are currently engaged in collective bargaining with the representatives of those employees for a successor agreement.",
+     "In the meantime and in recognition of these higher prevailing pilot pay rates, in May 2023, we began to accrue a retention bonus which will become payable to our pilots who remain employed with us when a new collective bargaining agreement is ratified.",
+     "In order to fully integrate the pre-merger represented employee groups at each airline, the combined company may be required to negotiate joint collective bargaining agreements covering the respective combined crafts or classes of employees.",
+     "The process for integrating labor groups in an airline merger is governed by a combination of the Railway Labor Act, which we refer to as the RLA, the McCaskill-Bond Act, and where applicable, the existing provisions of each company’s collective bargaining agreements and union policy.",
+     "Pending operational integration, it is generally necessary to keep the unionized employee groups at each airline separate and apply the terms of the existing collective bargaining agreements unless other terms have been negotiated."
+    ]
+   },
    "tenq": {
     "accession": "0001362468-26-000051",
     "filed": "2026-08-10",
@@ -97,6 +1049,19 @@
   },
   "SKYW": {
    "ticker": "SKYW",
+   "tenk": {
+    "accession": "0001104659-26-016358",
+    "filed": "2026-02-17",
+    "url": "https://www.sec.gov/Archives/edgar/data/793733/000110465926016358/skyw-20251231x10k.htm",
+    "groups": [],
+    "prose": [
+     "Approximately 89.6% of these employees were represented by in-house labor associations that have entered into collective bargaining agreements regarding employee compensation and work rules.",
+     "Moreover, we cannot predict the outcome of any future negotiations relating to union representation or collective bargaining agreements.",
+     "Future collective bargaining agreements involving a national union and our employees may negatively impact our relationship with our employees and have an adverse impact on our operating and financial results.",
+     "Employees Under Collective Bargaining Agreements As of December 31, 2025, the Company had approximately 15,800 employees.",
+     "Although no SkyWest Airlines employees are represented by a national union, the majority of SkyWest Airlines’ employees are covered by a written, stable and binding collective bargaining agreement under the Railway Labor Act, entered into between SkyWest Airlines and long-established labor associations, such as the SkyWest Airlines Pilot Association (“SAPA”)."
+    ]
+   },
    "tenq": {
     "accession": "0001104659-26-086641",
     "filed": "2026-07-24",
@@ -106,6 +1071,20 @@
   },
   "RJET": {
    "ticker": "RJET",
+   "tenk": {
+    "accession": "0001628280-26-019614",
+    "filed": "2026-03-19",
+    "url": "https://www.sec.gov/Archives/edgar/data/810332/000162828026019614/rjet-20251231.htm",
+    "groups": [],
+    "prose": [
+     "Employees and Collective Bargaining Agreement s ( “C BAs”) As of December 31, 2025 , Republic employed approximately 8,400 employees.",
+     "…ood of Teamsters (“IBT”), Local 357 Mesa Airlines Pilots 531 Air Line Pilots Association (“ALPA”), International Republic Airways Flight Attendants 2,232 IBT, Local 135 Mesa Airlines Flight Attendants 567 The Association of Flight Attendants-CWA (“AFA”), AFL-CIO Republic Airways Dispatchers 104 Transport Workers Union of America (“TWU”), Local 592 Collective bargaining agreements between the Company and each of IBT, Local 357; IBT, Local 135; Association of Flight Attendants and TWU, Local 592 become amendable during the year ending December 31, 2027.",
+     "The CBA between Mesa Airlines and ALPA is currently amendable.",
+     "…iabilities that are significantly larger than we currently anticipate and unforeseen increased expenses or delays associated with the Merger, including transition costs to integrate the two businesses that may exceed the costs that we currently anticipate; • maintaining productive and effective employee relationships and achieving cost-competitive collective bargaining agreements that cover the combined union-represented work groups; • the increased scale of our operations resulting from the Merger; • retaining key employees of our company; and • obligations that we will have to counterparties of Mesa that arise as a result of the change in control of Mesa.",
+     "91 Table of Contents Employees under collective bargaining agreements —As of December 31, 2025, the Company employed approximately 8,400 employees.",
+     "Of the Company’s total headcount, approximately 71 % of the employee base is represented by collective bargaining agreements as follows: Employee Group Represented Employees Union Group Republic Airways Pilots 2,490 International Brotherhood of Teamsters (“IBT”), Local 357 Mesa Airlines Pilots 531 Air Line Pilots Association (“ALPA”), International Republic Airways Flight Attendants 2,232 IBT, Local 135 Mesa Airlines Flight Attendants 567 The Association of Flight Attendants-CWA (“AFA”), AFL-CIO Republic Airways Dispa"
+    ]
+   },
    "tenq": {
     "accession": "0001628280-26-051405",
     "filed": "2026-07-31",
@@ -1338,7 +2317,7 @@
    "craft": "pilots",
    "status": "Picketing",
    "status_source": "news",
-   "status_date": "2026-02-12",
+   "status_date": "2026-10-15",
    "news": {
     "title": "Teamsters Pilots at Horizon Air Hold Informational Pickets",
     "date": "2026-10-15",
@@ -1361,7 +2340,7 @@
    "craft": "flight attendants",
    "status": "Picketing",
    "status_source": "news",
-   "status_date": "2026-02-12",
+   "status_date": "2026-10-16",
    "news": {
     "title": "Horizon AFA Flight Attendants Picket Across the System",
     "date": "2026-10-16",
@@ -1498,7 +2477,7 @@
    "craft": "flight attendants",
    "status": "Picketing",
    "status_source": "news",
-   "status_date": "2026-02-18",
+   "status_date": "2026-09-12",
    "news": {
     "title": "Flight Attendants rally at Frontier Airlines headquarters as contract fight continues",
     "date": "2026-09-12",
@@ -1521,7 +2500,7 @@
    "craft": "mechanics",
    "status": "Ratified",
    "status_source": "news",
-   "status_date": "2026-02-18",
+   "status_date": "2026-09-16",
    "news": {
     "title": "Teamsters Frontier Airlines Mechanics Ratify Five-Year Contract With 93% Vote",
     "date": "2026-09-16",
@@ -1585,14 +2564,13 @@
    "amendable_text": "December 2030",
    "amendable": "2030-12",
    "precision": "month",
-   "footnote": "Effective as of December 10, 2025, we entered into a new five-year agreement with our maintenance controllers. The RLA governs our relations with labor organizations. Under the RLA, the collective bargaining agreements generally do not expire, but instead become amendable as of a stated date. If either party wishes to modify the terms of any such agreement, they must notify the other party in the manner agreed to by the parties. Under the RLA, after receipt of such notice, t",
+   "footnote": "Effective as of December 10, 2025, we entered into a new five-year agreement with our maintenance controllers.",
    "ticker": "ULCC",
    "carrier": "Frontier Airlines",
    "open": false,
    "craft": null,
-   "status": "Picketing",
-   "status_source": "10-K",
-   "status_date": "2026-02-18"
+   "status": "Contract in effect",
+   "status_source": "10-K"
   },
   {
    "ticker": "ALGT",
