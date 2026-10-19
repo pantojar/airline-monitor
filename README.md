@@ -10,7 +10,7 @@ A GitHub Actions job (`.github/workflows/update.yml`) runs every morning:
 
 1. `scripts/update.py` pulls each carrier's structured financial data from SEC EDGAR (XBRL company facts) and rebuilds `data/financials.json`.
 2. It collects recent headlines from news feeds into `data/news_feed.json`.
-3. Once a week (or when forced) `scripts/dot.py` downloads DOT Form 41 schedules from BTS TranStats — P-1.2 profit and loss, P-6 expenses by object (salaries by employee group, benefits, fuel), P-1(a) monthly employees, T-100 traffic, P-10 annual headcount by employee group, P-5.2 pilot salaries and P-12(a) monthly fuel cost — and rebuilds `data/dot.json` (carrier-quarters), `data/dot_annual.json` (headcount and average pilot salary by year) and `data/dot_fuel.json` (monthly fuel cost per gallon). Prior years are cached in `data/dot_raw_cache.json`; the current and previous year are re-downloaded to pick up revisions.
+3. Once a week (or when forced) `scripts/dot.py` downloads DOT Form 41 schedules from BTS TranStats — P-1.2 profit and loss, P-6 expenses by object (salaries by employee group, benefits, fuel), P-1(a) monthly employees, T-100 traffic, P-10 annual headcount by employee group, P-5.2 pilot salaries and P-12(a) monthly fuel cost — and rebuilds `data/dot.json` (carrier-quarters), `data/dot_annual.json` (headcount by employee group and year) and `data/dot_fuel.json` (monthly fuel cost per gallon). Prior years are cached in `data/dot_raw_cache.json`; the current and previous year are re-downloaded to pick up revisions.
 4. It downloads the daily U.S. Gulf Coast jet fuel spot price (EIA, via FRED series DJFUELUSGULF) into `data/fuel_spot.json`.
 5. Once a week `scripts/proxy.py` checks each company's two most recent proxy statements (DEF 14A) and reads the CEO pay-ratio disclosure — median employee pay, CEO total and the ratio — into `data/exec_pay.json`. Compensation actually paid and CEO names come from `config/exec_pay.json`, entered by hand from each proxy.
 6. It commits the changed files, and GitHub Pages republishes the site.
@@ -39,10 +39,10 @@ Add one line to `config/labor_sources.json`. WordPress sites and sites with an R
 {"name": "IAM District 141", "url": "https://iam141.org", "unions": ["\\bIAM\\b", "Machinists"], "carriers": ["UAL", "ALK"]}
 ```
 
-A site that has neither, but has a news page listing articles, also needs `"list"` (the news page) and `"link"` (a pattern the article addresses match). A negotiations site for one group (a pilots' "Contract 2026" site, say) adds `"craft"` (and `"unit"` for a regional or subsidiary), so every milestone it posts counts for that group even when the sentence doesn't name the craft:
+A site that has neither, but has a news page listing articles, also needs `"list"` (the news page) and `"link"` (a pattern the article addresses match). A negotiations site for one group (a flight attendants' "Contract 2026" site, say) adds `"craft"` (and `"unit"` for a regional or subsidiary), so every milestone it posts counts for that group even when the sentence doesn't name the craft:
 
 ```json
-{"name": "Frontier pilots negotiations", "url": "https://example.org", "carriers": ["ULCC"], "craft": "pilot"}
+{"name": "Frontier flight attendants negotiations", "url": "https://example.org", "carriers": ["ULCC"], "craft": "flight att"}
 ```
 
 The **Union websites read** table on the Bargaining tab shows, after each weekly run, whether each site could be read and, if not, why.

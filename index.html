@@ -436,34 +436,16 @@ window.dash = (function () {
       <ol class="am-foot" id="exec-foot"></ol>
     </div>
 
-    <div class="am-grid2">
-      <div class="am-card" id="ratio-card">
-        <h2>CEO pay ratio</h2>
-        <p class="am-note">How many years the median employee would need to work to earn what the CEO was paid in one.</p>
-        <div class="am-wrap am-chart" id="ratio-chart" data-source="exec_pay"></div>
-      </div>
-      <div class="am-card" id="pilot-card">
-        <h2>Average pilot salary</h2>
-        <p class="am-note" id="pilot-note">DOT Form 41: pilot and copilot salaries (Schedule P-5.2) divided by the year's pilot headcount (P-10). Salary only, before benefits, profit sharing paid outside payroll, and per diem. Hiring waves pull the average down, since new pilots start at the bottom of the scale.</p>
-        <div class="am-bar" style="margin-bottom:var(--cds-gap-sm)"><span id="pgroup-chips" data-source="dot_carriers"></span></div>
-        <div class="am-wrap am-chart" id="pilot-chart" data-source="dot_annual"></div>
-      </div>
-    </div>
-
-    <div class="am-card" id="pilot-hist-card">
-      <h2>Average pilot salary by year</h2>
-      <p class="am-note">Same measure for each year DOT has published.</p>
-      <div class="am-tbl-box">
-        <table class="am-t" id="pilot-table" data-source="dot_annual" data-row-key="code">
-          <thead><tr id="pilot-head"></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
+    <div class="am-card" id="ratio-card">
+      <h2>CEO pay ratio</h2>
+      <p class="am-note">How many years the median employee would need to work to earn what the CEO was paid in one.</p>
+      <div class="am-wrap am-chart" id="ratio-chart" data-source="exec_pay"></div>
     </div>
 
     <div class="am-card" id="workforce-card">
       <h2>Workforce by employee group</h2>
       <p class="am-note" id="workforce-note">DOT Schedule P-10 annual headcount. DOT's categories are broad: "Flight attendants &amp; passenger services" is its passenger/general services and administration group plus other flight personnel, where most carriers report flight attendants, and some carriers file the same work under different groups from year to year.</p>
+      <div class="am-bar" style="margin-bottom:var(--cds-gap-sm)"><span id="pgroup-chips" data-source="dot_carriers"></span></div>
       <div class="am-legend" id="wf-legend"></div>
       <div class="am-wrap am-chart" id="wf-chart" data-source="dot_annual"></div>
     </div>
@@ -556,7 +538,6 @@ window.dash = (function () {
         <li><b>Per-seat-mile figures for carriers with regional partners.</b> American, Delta, United and Alaska report the ticket revenue and capacity-purchase payments for flights their regional partners operate, while those flights' seat miles appear on the regional's own report. Their DOT CASM, TRASM and PRASM therefore run above the figures the airlines publish, which use combined mainline and regional seat miles. Labor cost per seat mile is affected less, since regional crews are on the regional's payroll. Southwest, JetBlue and the low-cost carriers have no regional partners and aren't affected.</li>
         <li><b>Jet fuel.</b> The spot line is the daily U.S. Gulf Coast kerosene-type jet fuel price from the Energy Information Administration, via the St. Louis Fed's FRED service (series DJFUELUSGULF), refreshed each morning. "Airlines paid" is DOT Schedule P-12(a): total fuel cost ÷ gallons for the passenger carriers on the DOT tab, which includes taxes, into-plane fees and hedging results and runs about four months behind.</li>
         <li><b>CEO pay and pay ratio.</b> From each company's proxy statement (DEF 14A). The job reads the SEC-required pay-ratio disclosure automatically each week (median employee pay, CEO total and the ratio), keeping a CEO figure only when it reproduces the stated ratio. Compensation actually paid comes from the pay-versus-performance table and is entered by hand, since table layouts vary when a company had two CEOs in a year. Companies choose their own method for finding the median employee, so ratios are not strictly comparable across companies.</li>
-        <li><b>Average pilot salary.</b> DOT Schedule P-5.2 pilot and copilot salaries for the year ÷ P-10 pilot headcount. DOT's flight attendant and mechanic pay can't be separated as cleanly (carriers file those salaries and headcounts under different groups), so the dashboard doesn't compute averages for them.</li>
         <li><b>Bargaining tracker.</b> Represented groups, unions, headcounts and amendable dates are read automatically from the union table in each carrier's latest 10-K (checked weekly, re-read when a new 10-K is filed). Allegiant, Republic and SkyWest describe their contracts in prose, so their 10-K sentences are quoted instead. Status is the most recent dated event across four sources. Union websites listed on the Bargaining tab are read weekly: recent posts and uploaded announcement PDFs are split into clauses, and a clause naming a tracked group and a milestone (for example "Fleet Service, Passenger Service, and Central Load Planners did not ratify") sets that group's status. A ratification in the company's latest 10-Q and status stated in 10-K footnotes are used too. Otherwise a weekly news search for each group that is open or amendable within 18 months takes the most recent headline from the past year that names the carrier, the craft and a milestone (ratified, rejected, tentative agreement, mediation, release request, strike vote, picketing, negotiations). Headline matching can misread a story, so every status links to its source. Amendable dates given only as a year are treated as open from January 1 of the following year.</li>
       </ul>
     </div>
@@ -1617,27 +1598,9 @@ dash.calc('dotpeer', {
           const b = document.createElement('button'); b.className = 'am-chip'; b.textContent = g === 'All' ? 'All carriers' : g; b.style.marginRight = '6px';
           b.setAttribute('aria-pressed', String((P.pgroup || 'All') === g)); b.addEventListener('click', () => dash.setParams({ pgroup: g })); return b;
         }));
-        const ly = d3.max(ann.data.filter((r) => r.pilot_avg), (r) => r.year);
         const cur = new Set((dpeer.status === 'ok' ? dpeer.data : []).filter((r) => r.current).map((r) => r.code));
         const okC = (c) => info.has(c) && cur.has(c) && (!P.pgroup || P.pgroup === 'All' || info.get(c).group === P.pgroup);
         const byC = d3.group(ann.data, (r) => r.code);
-        const prow = [...byC].filter(([c]) => okC(c)).map(([c, v]) => {
-          const m = new Map(v.map((r) => [r.year, r])); const cur = m.get(ly), prev = m.get(ly - 1);
-          return { code: c, name: info.get(c).name, group: info.get(c).group, cur, prev, years: m, val: cur && cur.pilot_avg };
-        }).filter((r) => r.val && r.cur.h_pilots >= 100);
-        hbar(document.getElementById('pilot-chart'), prow, (r) => r.val, (v) => '$' + d3.format(',.0f')(v / 1000) + 'K',
-          (r) => [{ name: ly + ' average', value: '$' + d3.format(',.0f')(r.val) }, { name: 'Change vs ' + (ly - 1), value: r.prev && r.prev.pilot_avg ? sgn(r.val / r.prev.pilot_avg - 1) : '—' }, { name: 'Pilots', value: d3.format(',')(r.cur.h_pilots) }]);
-        const yrs = [...new Set(ann.data.filter((r) => r.pilot_avg).map((r) => r.year))].sort();
-        const head = document.getElementById('pilot-head');
-        const th = (t, cls, f) => { const e = document.createElement('th'); if (cls) e.className = cls; e.textContent = t; if (f) e.dataset.field = f; return e; };
-        head.replaceChildren(th('Carrier', 'l', 'code'), ...yrs.map((y) => th(String(y), '', 'pilot_avg')), th('Change ' + (ly - 1) + '–' + String(ly).slice(2)), th('Pilots ' + ly, 'am-hn', 'h_pilots'));
-        document.querySelector('#pilot-table tbody').replaceChildren(...prow.sort((a, b) => b.val - a.val).map((r) => {
-          const tr = document.createElement('tr'); tr.dataset.key = r.code;
-          tr.append(td(r.name + ' (' + r.code + ')', 'l'), ...yrs.map((y) => td(r.years.get(y) && r.years.get(y).pilot_avg ? '$' + d3.format(',.0f')(r.years.get(y).pilot_avg) : '—')),
-            td(r.prev && r.prev.pilot_avg ? sgn(r.val / r.prev.pilot_avg - 1) : '—'), td(d3.format(',')(r.cur.h_pilots), 'am-hn'));
-          return tr;
-        }));
-        document.getElementById('pilot-note').textContent = 'DOT Form 41, ' + ly + ': pilot and copilot salaries (Schedule P-5.2) divided by the year\'s pilot headcount (P-10). Salary only, before benefits, profit sharing paid outside payroll and per diem. Hiring waves pull the average down, since new pilots start at the bottom of the scale.';
         const hy = d3.max(ann.data.filter((r) => r.h_total), (r) => r.year);
         const wrows = [...byC].filter(([c]) => okC(c)).map(([c, v]) => {
           const r = v.find((x) => x.year === hy); return r ? Object.assign({ name: info.get(c).name }, r) : null; }).filter(Boolean);
