@@ -344,25 +344,83 @@ def update_news(meta, per_query=6, keep_days=30, cap=80):
     meta["news"] = {"at": now_iso(), "items": len(items), "errors": errors}
 
 
+def fred_series(sid, since="2022-01-01"):
+    text = http_get(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}&cosd={since}", accept="text/csv").decode("utf-8", "replace")
+    rows = []
+    for line in text.strip().splitlines()[1:]:
+        d, _, v = line.partition(",")
+        try:
+            rows.append([d, round(float(v), 3)])
+        except ValueError:
+            continue  # holidays are blank
+    return rows
+
+
+def eia_daily_diesel(html):
+    """EIA's daily prices page (eia.gov/todayinenergy/prices.php): Gulf Coast low-sulfur diesel close and its date."""
+    m = re.search(r"Wholesale Spot Petroleum Prices,\s*(\d{1,2})/(\d{1,2})/(\d{2})\s*Close", html)
+    i = html.find("Low-Sulfur Diesel")
+    if not m or i < 0:
+        return None
+    block = html[i:i + 1500]
+    g = re.search(r"Gulf Coast\s*</td>\s*<td[^>]*>\s*([\d.]+)", block)
+    if not g:
+        return None
+    d = dt.date(2000 + int(m.group(3)), int(m.group(1)), int(m.group(2))).isoformat()
+    return d, float(g.group(1))
+
+
 def update_fuel_spot(meta):
-    """Daily U.S. Gulf Coast kerosene-type jet fuel spot price ($/gal), EIA via FRED (series DJFUELUSGULF)."""
-    url = "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJFUELUSGULF&cosd=2022-01-01"
+    """Daily U.S. Gulf Coast kerosene-type jet fuel spot price ($/gal).
+
+    The official series is EIA's, via FRED (DJFUELUSGULF). EIA publishes it about once a week, so it runs several
+    days behind. To keep the chart current, days after the last official price are estimated from EIA's daily
+    prices page: that day's Gulf Coast ultra-low-sulfur diesel close plus jet fuel's recent spread to diesel
+    (median of the last 20 days both FRED series cover). Estimates are flagged and replaced once EIA posts the
+    official figure."""
+    info = {}
     try:
-        text = http_get(url, accept="text/csv").decode("utf-8", "replace")
-        rows = []
-        for line in text.strip().splitlines()[1:]:
-            d, _, v = line.partition(",")
-            try:
-                rows.append([d, round(float(v), 3)])
-            except ValueError:
-                continue  # holidays are blank
+        rows = fred_series("DJFUELUSGULF")
         if len(rows) < 100:
             raise ValueError("too few observations")
-        save(os.path.join(DATA, "fuel_spot.json"), rows)
-        meta["fuel_spot"] = {"at": now_iso(), "latest": rows[-1][0], "rows": len(rows)}
+        info = {"at": now_iso(), "latest": rows[-1][0], "rows": len(rows)}
     except Exception as e:  # noqa: BLE001
         meta.setdefault("fuel_spot", {})["error"] = f"{type(e).__name__}: {e}"[:200]
         print(f"[warn] fuel spot: {e}", file=sys.stderr)
+        return
+    # daily diesel closes, kept so a missed morning doesn't lose a day
+    hist_path = os.path.join(DATA, "eia_daily_diesel.json")
+    hist = load(hist_path, {})
+    try:
+        got = eia_daily_diesel(http_get("https://www.eia.gov/todayinenergy/prices.php", accept="text/html").decode("utf-8", "replace"))
+        if got:
+            hist[got[0]] = got[1]
+            info["diesel_close"] = got[0]
+        else:
+            info["estimate_error"] = "EIA daily prices page: diesel price not found"
+    except Exception as e:  # noqa: BLE001
+        info["estimate_error"] = f"EIA daily prices page: {type(e).__name__}"
+    hist = dict(sorted(hist.items())[-90:])
+    save(hist_path, hist)
+    last = rows[-1][0]
+    later = [(d, v) for d, v in hist.items() if d > last]
+    if later:
+        try:
+            ulsd = dict(fred_series("DDFUELUSGULF", (dt.date.fromisoformat(last) - dt.timedelta(days=60)).isoformat()))
+            jet = dict(rows)
+            both = sorted(d for d in jet if d in ulsd)[-20:]
+            if len(both) < 5:
+                raise ValueError("too little overlap")
+            diffs = sorted(jet[d] - ulsd[d] for d in both)
+            spread = diffs[len(diffs) // 2]
+            for d, v in later:
+                rows.append([d, round(v + spread, 3), 1])
+            info["estimated_through"] = later[-1][0]
+            info["spread"] = round(spread, 3)
+        except Exception as e:  # noqa: BLE001
+            info["estimate_error"] = f"jet-diesel spread: {type(e).__name__}: {e}"[:200]
+    save(os.path.join(DATA, "fuel_spot.json"), rows)
+    meta["fuel_spot"] = info
 
 
 def now_iso():

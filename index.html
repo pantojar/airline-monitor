@@ -80,7 +80,7 @@ window.dash = (function () {
       var today = new Date().toISOString().slice(0, 10);
       var curated = v[2].filter(function (r) { return !(r.kind === 'Upcoming' && r.date < today); });
       DATA = { financials: v[0], carriers: v[1], news: curated.concat(v[3]), dot: v[5], dot_carriers: v[6], meta: [v[4] || {}],
-        dot_annual: v[7], dot_fuel: v[8], fuel_spot: v[9].map(function (r) { return { date: r[0], price: r[1] }; }), exec_pay: v[10],
+        dot_annual: v[7], dot_fuel: v[8], fuel_spot: v[9].map(function (r) { return { date: r[0], price: r[1], est: r[2] === 1 }; }), exec_pay: v[10],
         labor_groups: v[11].groups || [], labor_companies: Object.values(v[11].companies || {}), labor_meta: [{ generated: v[11].generated }] };
       res = null; state = 'ok';
       var g = v[4] && v[4].generated ? new Date(v[4].generated) : null;
@@ -304,7 +304,7 @@ window.dash = (function () {
 
     <div class="am-card" id="fuel-card">
       <h2>Jet fuel price</h2>
-      <p class="am-note">Daily U.S. Gulf Coast jet fuel spot price (EIA, via FRED), with the average price U.S. passenger airlines actually paid each month, including taxes, into-plane fees and hedging (DOT Form 41). Dollars per gallon.</p>
+      <p class="am-note">Daily U.S. Gulf Coast jet fuel spot price (EIA, via FRED; the newest days are estimated from EIA's daily diesel price until EIA posts jet fuel, usually within a week), with the average price U.S. passenger airlines actually paid each month, including taxes, into-plane fees and hedging (DOT Form 41). Dollars per gallon.</p>
       <div class="am-tiles" id="fuel-tiles" style="margin-bottom:var(--cds-gap-md)">
         <div class="am-tile"><div class="k" id="ft-spot-k">Spot price</div><div class="v" id="ft-spot">—</div><div class="d" id="ft-spot-d">—</div></div>
         <div class="am-tile"><div class="k">Year earlier</div><div class="v" id="ft-ya">—</div><div class="d" id="ft-ya-d">—</div></div>
@@ -588,7 +588,7 @@ window.dash = (function () {
         <li><b>Summing operating carriers</b> does not reproduce a parent's SEC figures. Revenue a wholly owned regional earns from its parent under a capacity-purchase agreement is counted on both certificates, and the parent's SEC labor line can exclude regional labor (American reports it inside "regional expenses"). Regionals' fuel and some airport costs are typically paid by the mainline partner.</li>
         <li><b>Unit revenue and load factor (DOT).</b> TRASM is total operating revenue ÷ available seat miles; PRASM uses scheduled passenger revenue; load factor is revenue passenger miles ÷ available seat miles (T-100, all services). A regional's revenue is set by its contract with its mainline partner, so its unit revenue isn't a market figure.</li>
         <li><b>Per-seat-mile figures for carriers with regional partners.</b> American, Delta, United and Alaska report the ticket revenue and capacity-purchase payments for flights their regional partners operate, while those flights' seat miles appear on the regional's own report. Their DOT CASM, TRASM and PRASM therefore run above the figures the airlines publish, which use combined mainline and regional seat miles. Labor cost per seat mile is affected less, since regional crews are on the regional's payroll. Southwest, JetBlue and the low-cost carriers have no regional partners and aren't affected.</li>
-        <li><b>Jet fuel.</b> The spot line is the daily U.S. Gulf Coast kerosene-type jet fuel price from the Energy Information Administration, via the St. Louis Fed's FRED service (series DJFUELUSGULF), refreshed each morning. "Airlines paid" is DOT Schedule P-12(a): total fuel cost ÷ gallons for the passenger carriers on the DOT tab, which includes taxes, into-plane fees and hedging results and runs about four months behind.</li>
+        <li><b>Jet fuel.</b> The spot line is the daily U.S. Gulf Coast kerosene-type jet fuel price from the Energy Information Administration, via the St. Louis Fed's FRED service (series DJFUELUSGULF), refreshed each morning. EIA posts that series about once a week, so the days since its latest figure are estimated and drawn dashed: EIA's daily Gulf Coast ultra-low-sulfur diesel close (eia.gov daily prices page) plus jet fuel's typical spread to diesel over the previous 20 trading days (FRED DDFUELUSGULF). Each estimate is replaced by EIA's own figure once it's published. "Airlines paid" is DOT Schedule P-12(a): total fuel cost ÷ gallons for the passenger carriers on the DOT tab, which includes taxes, into-plane fees and hedging results and runs about four months behind.</li>
         <li><b>CEO pay and pay ratio.</b> From each company's proxy statement (DEF 14A). The job reads the SEC-required pay-ratio disclosure automatically each week (median employee pay, CEO total and the ratio), keeping a CEO figure only when it reproduces the stated ratio. Compensation actually paid comes from the pay-versus-performance table and is entered by hand, since table layouts vary when a company had two CEOs in a year. Companies choose their own method for finding the median employee, so ratios are not strictly comparable across companies.</li>
         <li><b>Bargaining tracker.</b> Represented groups, unions, headcounts and amendable dates are read automatically from the union table in each carrier's latest 10-K (checked weekly, re-read when a new 10-K is filed). Allegiant, Republic and SkyWest describe their contracts in prose, so their 10-K sentences are quoted instead. Status is the most recent dated event across four sources. Union websites listed on the Bargaining tab are read weekly: recent posts and uploaded announcement PDFs are split into clauses, and a clause naming a tracked group and a milestone (for example "Fleet Service, Passenger Service, and Central Load Planners did not ratify") sets that group's status. A ratification in the company's latest 10-Q and status stated in 10-K footnotes are used too. Otherwise a weekly news search for each group that is open or amendable within 18 months takes the most recent headline from the past year that names the carrier, the craft and a milestone (ratified, rejected, tentative agreement, mediation, release request, strike vote, picketing, negotiations). Headline matching can misread a story, so every status links to its source. Amendable dates given only as a year are treated as open from January 1 of the following year.</li>
       </ul>
@@ -1207,7 +1207,7 @@ dash.calc('dotpeer', {
 
   function fuelChart(box, spot, paid, extra, extraName, from) {
     clearSvg(box);
-    const S = spot.filter((d) => d.date >= from).map((d) => ({ t: new Date(d.date + 'T00:00:00Z'), v: d.price }));
+    const S = spot.filter((d) => d.date >= from).map((d) => ({ t: new Date(d.date + 'T00:00:00Z'), v: d.price, est: d.est }));
     const mid = (m) => new Date(m + '-15T00:00:00Z');
     const A = paid.filter((d) => d.month + '-15' >= from).map((d) => ({ t: mid(d.month), v: d.price, m: d.month }));
     const B = extra ? extra.filter((d) => d.month + '-15' >= from).map((d) => ({ t: mid(d.month), v: d.price, m: d.month })) : [];
@@ -1225,7 +1225,9 @@ dash.calc('dotpeer', {
     svg.selectAll('text.xt').data(xt).join('text').attr('x', (t) => x(t)).attr('y', H - 5).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(d3.utcFormat("%b '%y"));
     const line = (data, color, w) => svg.append('path').datum(data).attr('fill', 'none').attr('stroke', color).attr('stroke-width', w).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round')
       .attr('d', d3.line().x((d) => x(d.t)).y((d) => y(d.v)));
-    line(S, dash.colors[0], 1.5);
+    const firstEst = S.findIndex((d) => d.est);
+    line(firstEst < 0 ? S : S.slice(0, firstEst), dash.colors[0], 1.5);
+    if (firstEst >= 0) line(S.slice(Math.max(0, firstEst - 1)), dash.colors[0], 1.5).attr('stroke-dasharray', '3 3');
     line(A, dash.colors[1], 2);
     svg.selectAll('circle.pa').data(A).join('circle').attr('cx', (d) => x(d.t)).attr('cy', (d) => y(d.v)).attr('r', 2.5).attr('fill', dash.colors[1]);
     if (B.length) { line(B, dash.colors[2], 2); svg.selectAll('circle.pb').data(B).join('circle').attr('cx', (d) => x(d.t)).attr('cy', (d) => y(d.v)).attr('r', 2.5).attr('fill', dash.colors[2]); }
@@ -1241,7 +1243,7 @@ dash.calc('dotpeer', {
         const a0 = A.find((d) => d.m === mo), b0 = B.find((d) => d.m === mo);
         rule.attr('x1', x(s0.t)).attr('x2', x(s0.t)).attr('opacity', 1);
         const sc = box.clientWidth / W;
-        const lines = [{ color: dash.colors[0], name: 'Spot', value: usd(s0.v) }];
+        const lines = [{ color: dash.colors[0], name: s0.est ? 'Spot (estimate)' : 'Spot', value: usd(s0.v) }];
         if (a0) lines.push({ color: dash.colors[1], name: 'Airlines paid (' + mfmt(mo) + ')', value: usd(a0.v) });
         if (b0) lines.push({ color: dash.colors[2], name: extraName + ' paid', value: usd(b0.v) });
         tp.show(mx * sc, my * sc, d3.utcFormat('%b %-d, %Y')(s0.t), lines);
@@ -1508,12 +1510,13 @@ dash.calc('dotpeer', {
       const extra = P.fuelcode ? fpaid.data.filter((r) => r.code === P.fuelcode) : null;
       const xname = P.fuelcode ? (nm.get(P.fuelcode) || P.fuelcode) : '';
       fuelChart(document.getElementById('fuel-chart'), fspot.data, ind, extra, xname, from);
-      const lg = [['Gulf Coast spot (daily)', 0], ['U.S. passenger airlines paid (monthly)', 1]].concat(extra ? [[xname + ' paid (monthly)', 2]] : []);
+      const lg = [[fspot.data.some((d) => d.est) ? 'Gulf Coast spot (daily; dashed = estimated until EIA posts it)' : 'Gulf Coast spot (daily)', 0], ['U.S. passenger airlines paid (monthly)', 1]].concat(extra ? [[xname + ' paid (monthly)', 2]] : []);
       document.getElementById('fuel-legend').replaceChildren(...lg.map(([n, i]) => { const sp = document.createElement('span'); const w = document.createElement('i'); w.className = 'am-sw'; w.style.background = dash.colors[i]; sp.append(w, document.createTextNode(n)); return sp; }));
       const L = fspot.data[fspot.data.length - 1];
       const ya = fspot.data.filter((d) => d.date <= back(1)).pop();
       document.getElementById('ft-spot').textContent = usd(L.price);
-      document.getElementById('ft-spot-d').textContent = d3.utcFormat('%b %-d, %Y')(new Date(L.date + 'T00:00:00Z'));
+      document.getElementById('ft-spot-d').textContent = d3.utcFormat('%b %-d, %Y')(new Date(L.date + 'T00:00:00Z')) + (L.est ? ', estimated' : '');
+      document.getElementById('ft-spot-k').textContent = L.est ? 'Spot price (estimate)' : 'Spot price';
       document.getElementById('ft-ya').textContent = ya ? usd(ya.price) : '—';
       document.getElementById('ft-ya-d').textContent = ya ? 'Spot now ' + sgn(L.price / ya.price - 1) + ' vs ' + d3.utcFormat('%b %-d, %Y')(new Date(ya.date + 'T00:00:00Z')) : '—';
       const lp = ind[ind.length - 1];

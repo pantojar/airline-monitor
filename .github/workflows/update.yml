@@ -3,6 +3,7 @@ name: Refresh data
 on:
   schedule:
     - cron: "17 10 * * *"   # daily, 6:17 a.m. Eastern (5:17 a.m. in winter)
+    - cron: "50 13 * * 1-5" # weekdays, 9:50 a.m. Eastern: after EIA posts the day's fuel prices (7:30-8:30 a.m.)
   workflow_dispatch:         # "Run workflow" button on the Actions tab
     inputs:
       force_dot:
