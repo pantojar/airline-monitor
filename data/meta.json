@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-21T14:20:56Z",
+  "at": "2026-10-21T20:08:14Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -113,10 +113,10 @@
    }
   }
  },
- "generated": "2026-10-21T14:21:21Z",
+ "generated": "2026-10-21T20:08:37Z",
  "news": {
-  "at": "2026-10-21T14:21:19Z",
-  "items": 75,
+  "at": "2026-10-21T20:08:37Z",
+  "items": 74,
   "errors": []
  },
  "dot": {
@@ -138,7 +138,8 @@
   "rows": 1193,
   "diesel_close": "2026-10-20",
   "estimated_through": "2026-10-20",
-  "spread": -0.288
+  "spread": -0.288,
+  "error": "ValueError: too few observations"
  },
  "exec_pay": {
   "at": "2026-10-17T18:50:04Z",
