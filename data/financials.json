@@ -493,6 +493,23 @@
   "basis": "SEC XBRL"
  },
  {
+  "ticker": "UAL",
+  "carrier": "United Airlines Holdings",
+  "quarter": "2026-09",
+  "rev": 17875.0,
+  "opex": 16429.0,
+  "labor": 4961.0,
+  "fuel": 4843.0,
+  "opinc": 1446.0,
+  "ni": 1029.0,
+  "buyback": 0.0,
+  "div": null,
+  "cash": 6648.0,
+  "sti": 8005.0,
+  "debt": 26398.0,
+  "basis": "SEC XBRL"
+ },
+ {
   "ticker": "AAL",
   "carrier": "American Airlines Group",
   "quarter": "2023-03",
