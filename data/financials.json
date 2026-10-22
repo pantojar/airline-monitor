@@ -986,6 +986,23 @@
   "basis": "SEC XBRL"
  },
  {
+  "ticker": "LUV",
+  "carrier": "Southwest Airlines",
+  "quarter": "2026-09",
+  "rev": 8422.0,
+  "opex": 8043.0,
+  "labor": 3542.0,
+  "fuel": 2152.0,
+  "opinc": 379.0,
+  "ni": 270.0,
+  "buyback": 0.0,
+  "div": 176.0,
+  "cash": 3624.0,
+  "sti": null,
+  "debt": 5887.0,
+  "basis": "SEC XBRL"
+ },
+ {
   "ticker": "ALK",
   "carrier": "Alaska Air Group",
   "quarter": "2023-03",
