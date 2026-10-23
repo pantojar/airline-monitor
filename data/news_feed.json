@@ -1,23 +1,43 @@
 [
  {
   "date": "2026-10-23",
+  "tags": "ALGT",
+  "kind": "Headline",
+  "headline": "Allegiant Air’s Longest Nonstop Routes With The Boeing 737 MAX In 2027",
+  "summary": "",
+  "source": "Simple Flying",
+  "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE0xZllQcUdxMERZeFRQZWZlVVpzSmpYZlQ5aVo0OW9KUDF6c1Nxakt0N3BmNGVZWWxKRlQ3dkFLWVBaeFE1d25QeTZGWDBhb3lGUGFBbk1pWnl5eF9yTGUwYkZHbWtHTGRXR2VBVWhDeGI?oc=5",
+  "id": "f1"
+ },
+ {
+  "date": "2026-10-23",
+  "tags": "SKYW",
+  "kind": "Headline",
+  "headline": "SkyWest, Inc. Estimates – NASDAQ:SKYW",
+  "summary": "",
+  "source": "TradingView",
+  "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9oeG5sMFo5R25keVNBd2pkYWplaFRESVcwel9IOEtSajFhTnpnNFNzSmxsT0E4SUxqaGxhRk90UU5lUXRuUkpGTEZEYTdPSldKQnNPSTIxUGE0ak5majdnTDRocW5zTWgtNTJnXzFNamdyY3Vlanl6Qg?oc=5",
+  "id": "f2"
+ },
+ {
+  "date": "2026-10-23",
+  "tags": "Industry",
+  "kind": "Labor",
+  "headline": "ALPA Gives Porter Pilot Group US$2M to Support Contract Negotiations",
+  "summary": "",
+  "source": "Open Jaw",
+  "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOanpEeUlpeEtaeHYtN3lrTXhNSHh5YXdGY0VCWnM1M3hDbFRWTjJhUlhaU2UxdW1VNnpvLVpTZkJ6ZmlmQ3hLbGtuUkFVV3I3N1dPYmRfSkJUZ0p5SEdKNGMweEhTd3pTMGE4WnBLQ3M1MUIwbHRSbDdTU1JvZ25LN1VaT1BDYXg4QzVfeF9Scm5LeFNFNmRmY2wxQmRPSjl4ZURCWUN1VWpFNVQwclZMek1EcnROQ0U?oc=5",
+  "id": "f3"
+ },
+ {
+  "date": "2026-10-23",
   "tags": "Industry",
   "kind": "Costs",
   "headline": "With jet fuel prices near a record, holiday airfares soar higher",
   "summary": "",
   "source": "NPR",
   "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQZDlIaEpKMHkzT0dYQjZuQ1hwUm9KdXZVTXd6bjZFSloxMF9IX0cwakc3aDFLYV9hcXJkQmM2OUdUdTlubDZDR0pMLUo2eDdPaEo4Wk9uNGFZeUVQNjNDRl9haTlZclBjWjF2VGZJd1BYenB6aHY5QUFDbzVkcV81UQ?oc=5",
-  "id": "f1"
- },
- {
-  "date": "2026-10-23",
-  "tags": "Industry",
-  "kind": "Costs",
-  "headline": "Airlines' new normal: Higher fares, fewer flights",
-  "summary": "",
-  "source": "Axios",
-  "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9nRFptd19qQVFMNG9VQVdOdGFQSnlabmVaem50bkt2VFdGUkg0Mm1icGdoTmJmeExydUNPbk1tSWhTSUllQW4wNkxmdVQyOVFQTDFDYmVzSHNleU9LT0ZlSnMtS1Q1S0xiR1E?oc=5",
-  "id": "f2"
+  "id": "f4"
  },
  {
   "date": "2026-10-22",
@@ -27,7 +47,7 @@
   "summary": "",
   "source": "ABC7 Los Angeles",
   "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOMlFOTzFmME83cnhFOU9URUVRWUd6UDBuNG4wS2tWYjQ3cHBXZ2J4NkhlcjBMYk9CWDNpdWFEWDNhX3pBSWxwRDVPZHplZTk4Rk5GY0RyWUs0eDlBa0JnbG1feFBNblYxUktJTDd1U0lkV1k4bVdJdnAyd1lKc3FFNWZuUlRMaXl0TGVmallmb3Q5ZHRZRkxOUU5sejjSAaIBQVVfeXFMTi1KaUh1c29mNUxodE9teFNNUG1oZ3FzUUpFaXlqN0t0RFFaeXV4SXY2UDlDZ203QnVTTDdLSEdKaXpkYXd1anhYNDU5aExoQVZ5SGRQVDlQS2RYVjNuSmNlNUJEVG5iUjNaOWpwcmZMRFY2N191VjJrQWdrQUdVcmFDR3NTREN4MmoxWERQS2JQNWJiNGllNVV2MGFneTJlZ0hR?oc=5",
-  "id": "f3"
+  "id": "f5"
  },
  {
   "date": "2026-10-22",
@@ -37,7 +57,7 @@
   "summary": "",
   "source": "WSJ",
   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQTU9sdkxBREN3c3E4Znk1ZDM0SFdaVFJKZ3VhalN0RWoyTE9Gc0tZeXRRNVN3QWtqUFYzOVhQQnhXQjRoUnl6d2xBY3dUMUxpUUYxYWdzM20zR3Q1NVpZVWhkWk9naXlFTk9qa0hwYzdWWlVFbnB0cFVFaElTemJzTmwxNGw3d0FXMEttcjFwWjdXRExLZ1ZMdFcxa3F1MmdfUEhfc3BPZFZ0eFIwQ2ZwTklDQ1RVMU9iVVNv?oc=5",
-  "id": "f4"
+  "id": "f6"
  },
  {
   "date": "2026-10-22",
@@ -47,7 +67,7 @@
   "summary": "",
   "source": "CNBC",
   "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNak80bjFjS2pOdmVwM2RueXhEbnJZU1hpMWdZckJMbEgtaEl4b2dTdHV2VkpsVWdvWGFzeW1mVDkzWUVhNUtseWpOSTlaLU44R0JKN196bHQwbEFOT0pWUENEaWF5aGs3TVluYkdGVU5XcENSdE15QldhaTk5Z2ZGddIBhgFBVV95cUxNUXdObGpBeW01bjVUbkhmcHZqU2JXeDJKRUN5U0xvQ2FDRGZHa0J4Vk5KTDk3M2RyaEw3TDFYd0ZrSzh6eUthUENPeE9fQlBUaUtzaUVEckhoMVNNampaVVFaXzBBQ2FiQlh4WjlDeXotZEg5Q1AzNGNfejdITUtveVJCS2tpUQ?oc=5",
-  "id": "f5"
+  "id": "f7"
  },
  {
   "date": "2026-10-22",
@@ -57,7 +77,7 @@
   "summary": "",
   "source": "Barron's",
   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQSVRlLVUzOF9ncU8tSHlfZEd1SDVySTZkSnNYSGNZNTlrbzZNVEZXQWJRdjktbVlxblAxN3YxbDliUTJUeFFoZ2pkYmwxY2NVZWhIUHRsOGlDeWFHeXgwMkxJQXpqVnlFbGRGUmtKVElneTV0SG1FWDRDZ19FMnRqRlhkN05kazg?oc=5",
-  "id": "f6"
+  "id": "f8"
  },
  {
   "date": "2026-10-22",
@@ -67,7 +87,7 @@
   "summary": "",
   "source": "Simple Flying",
   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNcUloekVJTHA4MkxSX1lFQXpsU1NKMXpuMUV2cTdGVndUbkFRa1E3amVreldiblpVcjl4MFBBWDVFcU5fMk5uSnpwVENxaE5UY3lLTVhER1pBNnpUM1hMMlF2V2VrZVlFWWdLMjZ0TjZIWVYzYnd5TmpRc2w1SHQ5bXpUVW5xc3JUOW51YnJXbkNWQ3ZFcHpmUlh6eDNjbDNUQVBxcTlpbEJBY00?oc=5",
-  "id": "f7"
+  "id": "f9"
  },
  {
   "date": "2026-10-22",
@@ -77,7 +97,7 @@
   "summary": "",
   "source": "Bloomberg.com",
   "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOTHB0eDVPSG40ZlNCd3ZZSmhoMWpUZUNjVHAyUW13RE1VX0FaUXFSbWUzTXh0LU5tZkx3R3I0eWU3b0FDX2tUT3BvSHk4LTRObzd1Tmltdy1WZUZLdE41NzIySXlOd2VnRjFxQlg5NWY2OTBVZHhCNEJTUzVRTHdVdTNvclBqRzVDV2ZiMXRUTGZoZUtIUnY4S1BESEZ3eEtkcmRNM0VOdTZNN1pfdVZlV2RwdFQ?oc=5",
-  "id": "f8"
+  "id": "f10"
  },
  {
   "date": "2026-10-22",
@@ -87,7 +107,7 @@
   "summary": "",
   "source": "Yahoo! Finance Canada",
   "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1FOVlHRVJlUHFpUmJTcTZTZDVtLXVNV2RuM29jY1ROUEstUE5QY2hDT1IxN2xMZUs1enZueDlUMTRxc1lSSUhnSnVyTjhWazRPMmc?oc=5",
-  "id": "f9"
+  "id": "f11"
  },
  {
   "date": "2026-10-22",
@@ -97,7 +117,7 @@
   "summary": "",
   "source": "Finviz",
   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQRXA2TWFoNmo2b3loQTNaMGdXRzNqQmRYXzFKQ001QUVhR0g0dDNnQzViVkp1czRkNksxUXIwRTJMNzNHMXctaGRyRjNkZDFBdnlYTHd0TXI2TTBCdVRyLTBBa0ljLXJvTG10WXNnLW9oYTZUZ1JUUEx4S3NFdEt5Mm01emdWREQ2TDBkcGdIU1lGb3F2c21BQnpkSVFudnh4d0NjRWVjWE5aQQ?oc=5",
-  "id": "f10"
+  "id": "f12"
  },
  {
   "date": "2026-10-22",
@@ -107,7 +127,7 @@
   "summary": "",
   "source": "ALPA",
   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOb0hudVdaTUlNUmpXNVNqSUVRbmN5NWN6UWFyUlpTVWdxS3VBcE1rdGtzQ2liYVZWMHlnZ29aVy01M0JwazR0YVJLNVpKcV9mQ09UYlpuR1NELS1YODNacjd6eXdNcUl3MDUyRnVxWnhla0F4UkRhZW1CblV0UW1BRHlKbWJrdko0LU5yMWwzcWlRbkdvZkZXN25uaU5LNHdUVjFJLWNYcUJJUQ?oc=5",
-  "id": "f11"
+  "id": "f13"
  },
  {
   "date": "2026-10-22",
@@ -117,7 +137,7 @@
   "summary": "",
   "source": "Yahoo Finance",
   "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOV214Ql93SmJXRVFwU0NnblpWREdqMThWc0N3RUo3cHJtWEQwRlVCVmdsVTJMdHl1UmQxc2dwTVN3TGZvX1V5NGhicXU4ajJsYVdBSzZMVjdEZVF5OG9pNmU3SEp5Z1VvVHg0dThBeEw2bGlsbVdOU2pPandDRlhEM2xMbHQ2RTZpaUk2b1d0RThaWFRRZ25Qc25VMWFNS1MtamR1bjhyQQ?oc=5",
-  "id": "f12"
+  "id": "f14"
  },
  {
   "date": "2026-10-22",
@@ -127,7 +147,7 @@
   "summary": "",
   "source": "Simple Flying",
   "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE41aWtITjI1NWJ0YnBuaUxuSWxCLVNqNkd3TDc5ekF6aTlqVDY3b1dac3BMOTlnSHdCV0NPV0NSanotTGpvd1lNeVk3VjFMSkhITFc2OHo4ZjFyX0VYOEd3alBZMC1yNWNTS1dhTGUtOGJlRDduWFY1anpYSVRVZw?oc=5",
-  "id": "f13"
+  "id": "f15"
  },
  {
   "date": "2026-10-22",
@@ -137,7 +157,17 @@
   "summary": "",
   "source": "Reuters",
   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQalVWOWpxTXAwZ1M0cmFmTFRxZ2dMRzU0SEIxcVhPVVR4T1I1OUd3MGVtb0d6alVyd2pJakpUUUQxQ1FlMVc2eWVtWHVTQWlIaW84RUhBU0twdnpmTkZfUkxiQlVJWE1TeDNVMk90ZjI2NGNpU2F2Um1TSVJEck91cXZ1OHZmVnpLdWR3SnVicVJNMklNRGdLaXZybHRZYTFTTTNZak9IZEtKRGxPQTFVQUF3?oc=5",
-  "id": "f14"
+  "id": "f16"
+ },
+ {
+  "date": "2026-10-22",
+  "tags": "Industry",
+  "kind": "Costs",
+  "headline": "Airlines' new normal: Higher fares, fewer flights",
+  "summary": "",
+  "source": "Axios",
+  "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9nRFptd19qQVFMNG9VQVdOdGFQSnlabmVaem50bkt2VFdGUkg0Mm1icGdoTmJmeExydUNPbk1tSWhTSUllQW4wNkxmdVQyOVFQTDFDYmVzSHNleU9LT0ZlSnMtS1Q1S0xiR1E?oc=5",
+  "id": "f17"
  },
  {
   "date": "2026-10-22",
@@ -147,7 +177,7 @@
   "summary": "",
   "source": "American Airlines Newsroom",
   "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQVnA3UllBQVlkQ1VkRDR4MEE5NDUtbkRIeTVYU2Z3MEJOMTQxaFZmU2RoVmx6NEcwS3dTMkFpSEc5MEtWNk16cE81ZHB0dGJ2ek5fYllIb3ZSRmFEMVNzQndSYUVIQ0hKc2c2UGJFM2twRzM1cm41aTB2aUpaQ2VZajhiMEx3NkFJZjhoTFg0Mkwxd2ZLWE1YU044UnMydXVaaHYtaHZtY1g5M1JZWTR0VWZJZDNEVUE1UTMwNWFGTXpyeDNjNC03SW1tazIwQQ?oc=5",
-  "id": "f15"
+  "id": "f18"
  },
  {
   "date": "2026-10-21",
@@ -157,7 +187,7 @@
   "summary": "",
   "source": "Latham & Watkins LLP",
   "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNUUduSnRhSzhXTjBfbThNdDhaR2ppa1laN3ZFb2pyU0V0WG9MSDdrUWN5bGdXYnBUYjRHdWhyaHVwZHlzTDg4Qi1ZdC1SLW1MN2FrRjE4V242Q04yeFBsV1BPN2VfbjEyMEhkMFhyODl5TEQyTGdoY0RHQXFvb1N5T0xxRlBQZ0hXSk0zckRhMFl0REU?oc=5",
-  "id": "f16"
+  "id": "f19"
  },
  {
   "date": "2026-10-21",
@@ -167,7 +197,7 @@
   "summary": "",
   "source": "CNBC",
   "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQZGpGLWN1Z0ZQZ1FZY3cyX0pWV1VhR1RLX1VPc3RBc01FLTJ2eGNrZFRnVUcxeTI4Vmxpd2xRbEU3R21DaWVISUx2MG94eVNNM0M2MTdyRDNjLW55b1R5dEIyTUc3X0Z2YzVTbGotZzFMVUtlVGpCLXRvOEZ3YlpvMS1R0gGHAUFVX3lxTE0yb2tWUWlZV1VRWFZUeVJtWHRnaVU0ckFOSWFsU3pWLWMzdU1zRGhFa0hLLS1pMFpELXpfZHhyZVk5OXhNVTZBb3RRd3BQc2h2YmxiOFFxRkw0YUdmdkdsdUZ0ejdlRWNadDZic3B5c0tHX0ZHYlRBSlVIUDZFOTVFcm9adjZKZw?oc=5",
-  "id": "f17"
+  "id": "f20"
  },
  {
   "date": "2026-10-21",
@@ -177,7 +207,7 @@
   "summary": "",
   "source": "Reuters",
   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNSnJId1FFNzhweDNmbDMybnA4N21ETWMtMW5nYjY3Njc0WDQtcFduODFKRzVFZEVnUGJDS2piYnRFSE9CbDU2eldCbl82eGhDMVBIM3BKaDltUndGWXhQbnRQS2Jyb05tcFhoaWx0U1ZmZThEMUpuNzFLUWVPRDBqTTZhUko1bGIzblpMMjZYMnh0M1NGZWJnVDgxZHFnX29KcmVEcUJQSFR2Zw?oc=5",
-  "id": "f18"
+  "id": "f21"
  },
  {
   "date": "2026-10-21",
@@ -187,7 +217,7 @@
   "summary": "",
   "source": "KIRO 7 News Seattle",
   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQOWVlWVY1YzZOWWc1MUFFN09ldHVtUklqQU5qWE9lVlRVb2xqWkRMNzNvLVdoVVhuaGwtdEV0OTdISzlTMW50SlBiMmp2bFFyVTVacGVPTEZ6QUpUY0lyc0lORVJzWW9MUTF1UWFlZHpvbHBIUUFWWlljeENfeEtpYlI1WEc0UXQzZTBINzZkQmcyb0RrYzFBdEhFbGtjazkyX1owX09hYzZPWHZIazNLbkJNTVhnelplbE5n0gHPAUFVX3lxTE5Ya0tBNmdSc19QeGtXMHpnd1IyUlA5ejVwcFhEQWtKa0RhNW9uQ3ZTVFRKcnd3YzREOE8xeTJwQ3RIMzA1d3VlMG82N0lzUFhHN2Q1cnBZMG45MFF2OVZFbUV4QXpCZzVSN0VnU29SeUYtQU96VDF4LXlvTnlYV2NvajdDcUlGdlRWWnN4MUpBNmdQX0x5TVlYMkVOakVnU0VYeE51bC02QWtlSVQ5RmwwejR6ZVp0TTN5TjJrOFpvcmtSTklkZ2x6QlJVZk5nQQ?oc=5",
-  "id": "f19"
+  "id": "f22"
  },
  {
   "date": "2026-10-21",
@@ -197,7 +227,7 @@
   "summary": "",
   "source": "STLtoday.com",
   "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNNEp2aHBwTzZ4X1pRT0VtbTNjRzlaM05GeDNOWWhjMmxkR3QxWlU5ZHNxM2hfQjZGSzV2NzI5TWhDQUlBZ1FkVjM4U082M0hCWXFpZ3JoYUJtdmNfeVZ6cW1JemJibG5jdGlmcVJOV1U4SzN4X3gyRFVFb2JpbzFQZG1lU0s2cS1ON2c?oc=5",
-  "id": "f20"
+  "id": "f23"
  },
  {
   "date": "2026-10-21",
@@ -207,7 +237,7 @@
   "summary": "",
   "source": "Aviation A2Z",
   "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQR0lCYm1hZUpmVjlHVDdSZ2Vmc3EyVmZjWjBuRjl6X1ZlX0F0VmQ5VUJhajZwd1NxaVNsbDhFSHB6cUhneVVNSEo4b2RwMzhEeXJJNmdCQjNsb1lEdXo2ZE16R1M4ZE05MFB0TEZrSjVQa0FERm92OGRiT01KNmtIN21uMXFqTUtHejFwV3laLVZNMVR6OC13?oc=5",
-  "id": "f21"
+  "id": "f24"
  },
  {
   "date": "2026-10-21",
@@ -217,7 +247,7 @@
   "summary": "",
   "source": "FlightGlobal",
   "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPa0d2bFRDeHBVWnNqbDBpUG5xNlVyeUhTQ1pxTTgtMFRUMFVabnNlQkxMaC01Y1dsQ2xBMGFnX1R4UXBMcmVBdXhBam50c1gyVVZmWVdNdXN6ZWVMTW5VYmtpMURTZVBHZlJ4UWhSVDN1WDVDNGt2cV9rLW0wZnBfNHFERVh3eFNsRmJkdmxHa0c2TWdaREZLZHBtWUxlTy1GZzVqX25CSUZwRERlVkQtUG9yNi0?oc=5",
-  "id": "f22"
+  "id": "f25"
  },
  {
   "date": "2026-10-20",
@@ -227,7 +257,7 @@
   "summary": "",
   "source": "Reuters",
   "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQamVzdE52ZkRRLW1EdjMwNmI3YjV5T3ZIQTFiLWJ1MTZaUE90NWZ5d1RwTDRCWHF4MXpSa0paRlctMFRERG84OF84aWdBdEJYclZONkQ1cVNma0hNd3VjV2dYT25tOG1zZXNFdExMdXJyLVFyNExQdjFuMW9qdS1KSnI5V2FpQUdNNWZuSXBydGFZRl8xODlDWGh3VWdFTjZhTG85b3BoZi1hMmJPQ0NCUjdURkFOVnhRWmpXbnR2dXJydw?oc=5",
-  "id": "f23"
+  "id": "f26"
  },
  {
   "date": "2026-10-20",
@@ -237,7 +267,7 @@
   "summary": "",
   "source": "CNBC",
   "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBLMVhhMlVReDFPbkRjZlAzMmFUNE1pNXVMaWNrNUJvRXRZSHZLbDZSTVZ6a2xJS0lHbndqd1h4UkNqN09sWFF2UGdpWGxtdGlRYlpZbmtCNzNrYVBTZHdrWFlQaFNEUkhVRURNNWJZTUZQblBIZzZ4aTRfUFYyd9IBgwFBVV95cUxOblZ4MmZEY2lsdDdMOXpkX19kemhaTFNneWwtNndKNEQ5R0x5UFNud203SHk0czU3dGdwZFlrT3ZhOS1FWjFTbFNsS0g3NktoREd3LWRMd0twcXBhS3FJajI4ZllnRXlEU1hiUF9ITktoYWFQU0xJY1lNMG1LTndfNF9pQQ?oc=5",
-  "id": "f24"
+  "id": "f27"
  },
  {
   "date": "2026-10-20",
@@ -247,7 +277,7 @@
   "summary": "",
   "source": "Yahoo Finance",
   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQYmE3WFhZbmVOZ1F0RUlfbHRRX3pYbVFfaW8zTE5IVW9SM1BKYmVPLWtqSDhMYjJOU3FybTdpTkt6UXc5Si1FQS15MmxUbFNXN2JxV0tWMzd2VlRTM0tlV2tuQmpvSDEzZzVmT2JlM0UxRFA0UG1VRnVIZUJOd21RYnZZMUFQcWY3X0R5Z2hMc3hldFVmME0xM1BxRFhLaDhXN3pQY1B5SlBmMnBEbW5udHVzOA?oc=5",
-  "id": "f25"
+  "id": "f28"
  },
  {
   "date": "2026-10-20",
@@ -257,7 +287,7 @@
   "summary": "",
   "source": "Maui Now",
   "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPSHg1N2dsbjJLUjJsWUM5Q1VzeUJremQ0WmpfZ3hhWS1HOGJaUk1aSEtHYmltOU92OGU4dHk5S0FtbmFNb0diUFo4Wmlvb3ZDSE1oSmtfejJ6RTBrZmtoaWNrbkpuMmZwLXFzNlA4TVMtdlNKVThLajliVXRtQzF3UUpxd3dneGFLWHcxOVZZb1F0Q01GaGNLNWVDWUlTWS13MEZOWnlVbEFXUVdjNVNDY2xWU3QxS1BDSlhTLU5zU3ozVFJkZmc?oc=5",
-  "id": "f26"
+  "id": "f29"
  },
  {
   "date": "2026-10-20",
@@ -267,7 +297,7 @@
   "summary": "",
   "source": "FOX 13 Seattle",
   "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPTzdQd202OWpZeGMzdElpQWxGbmhidXh6WTJwbXRaRjBxeEFteFBsSzRlYktDbFphamI5Z05Jb2dBZHoyRnZjekVjN0VMVjk3WkI2c1cxbUV6VXFrZzFZTElKYWV6dnk3NXd3dnlSMDFVZTBua0FsMkdsM2hPNkpjTkMweU9kNDMzTlBLOXBCNNIBlAFBVV95cUxOVHBhMWxuS19XUHlKTnB5b0p2YjJqS1cxQlJiWl82ZEhLQ2dsU0dQYkFJWjJqblRSRVZMd3Q0SlVoWUxTTEszWmpqVUNLOXlRc2JTWW1jdUlsNS1rZmJPQkNGZVRuY1BQQVRGNWxiUGxtSGlvSUdQSXpTVU1iLWp5cGlBUnJBbkQzX2t0d09CSWZXclpJ?oc=5",
-  "id": "f27"
+  "id": "f30"
  },
  {
   "date": "2026-10-20",
@@ -277,7 +307,7 @@
   "summary": "",
   "source": "Yahoo Creators",
   "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPUXVzeWNSV1VRa3pRWE0wMjlVQWN2REJLUWFBN1psVGUxVzllNlZHT3ZBMWx4TjNqeXRDTXdmV3RmTG1LVjB3bUNlM00tMnF3U1FGdVg2VVpWd2F4c2RLRFEtSkFQTWRLR0Nlb3UwdG5uWXlqaHoxbWhNY1pMTnR2UmlPTVluT1VUT3hLZHc0TkU3M3RMdjItUjRuTXprUVlELTZ3U05VRkxRLVo4UEhldjlmdlI0SkJMUEw2SmUzN1h4N0d4dE5qRXFmY2FtQTBSS2U2YUhnREY?oc=5",
-  "id": "f28"
+  "id": "f31"
  },
  {
   "date": "2026-10-20",
@@ -287,7 +317,7 @@
   "summary": "",
   "source": "People.com",
   "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOdGVpV1dWN2dFSlZ0a2tjaXMwamctY3RZUlFFN2d1LVk3clZBa2VzZG92MjJYbThLeVZQY3pLc3RTT05KaVd1N0xwbTZ5bUpwWk5VWGplWDZLZjNpR3djOHRadk9pcnNraTJFVVduS2Q4ZmJlLXBvZFhRRGQ2bllSdVI2QlhoNU9vVXFaMEpic1hZa3ZuZUF6VW81R0h2SG12MjQzVW9n?oc=5",
-  "id": "f29"
+  "id": "f32"
  },
  {
   "date": "2026-10-20",
@@ -297,7 +327,7 @@
   "summary": "",
   "source": "Travel + Leisure",
   "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOeWVHS1NlX21ub0lyX2FmVmlQam95S0t1cy1Ia1ZiRHhHU21zaGo4anlEbnR4eTdwYnI3anFpQXFzSnJranR4UTdSbGlHMktiQ1FZYm1Ja2lWZDlUVEJVMkR1aEZhWXZnY2VpS2RuUEk4eW50TDlsSUQ1VzNTRGdxY0U3YzVjd1NWbVY5VmViNmJRMDBSWENFNDVtQ1g?oc=5",
-  "id": "f30"
+  "id": "f33"
  },
  {
   "date": "2026-10-20",
@@ -307,17 +337,7 @@
   "summary": "",
   "source": "Simple Flying",
   "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPZ0N6VDEyQjd6b1hkQ25DNGI0VjFQOEJQTDF6M3E5VFZiTjhWZTlqUzVhYkJrU1hUdE5DcG9McGFfaDFVYkpwMkFXYlZRMjFoa01fZ2lmUXREYjRGRUN2SktiVGtyRzl0djJDd0RoN3JLREdOS0tPR3RzLS1GRmdWUkFuWHo3bkgxZGl3?oc=5",
-  "id": "f31"
- },
- {
-  "date": "2026-10-20",
-  "tags": "SKYW",
-  "kind": "Headline",
-  "headline": "SkyWest, Inc. (SKYW) is Attracting Investor Attention: Here is What You Should Know",
-  "summary": "",
-  "source": "Yahoo Finance",
-  "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOdV95ZGFDc2tiRFJkc3d4SzdaRVJZcmdJYVFiX2VmSk04RS10cDU4emdyRlpCd2piREpPVUlLZ0pMZXVJOFJOMkJGVUVBbGo2aFBtbTRpZWpOU3FxZkVfVXdYbUxYcUp3dkxTbWpRS1FEdktJTEhmMUI1TUFIWGZqSWxXRXNkQUxxaWJPYVlJUVVnRXlOa3BiSlFFRVJYT2swTmZJ?oc=5",
-  "id": "f32"
+  "id": "f34"
  },
  {
   "date": "2026-10-20",
@@ -327,7 +347,7 @@
   "summary": "",
   "source": "The Aviation Hub",
   "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5MbVN1SnhtTFE0bjJSa0ctRFpaQS1jVmN4NVQyMEZJYUt5MWJvcFptSHhvN1FEUXk1TEdwNmRiSzRNNmFWVTQzT05rYjN5c1FkemxUZnZlM3VHS2poa1dxU05zSGkyQlFrMG9ianVoQmktS0NDVTBvbkVR?oc=5",
-  "id": "f33"
+  "id": "f35"
  },
  {
   "date": "2026-10-20",
@@ -337,7 +357,7 @@
   "summary": "",
   "source": "One Mile at a Time",
   "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNOG9OZmJnTV9weF85UGEzdENPZnJuV2hiazI4b0k3RVAxZTVnY2ZxNEk5elZVZTFTMV9xUDBrcS0tclE3R2lObk5mYkVxektWY2gxTG9GUEtOeExYZ1FWR1dDRmthcFRNM09vXzR2NUJBT19uekJmSm1QaHpqZDhHNDZOV3pzR1duOU5NM2gxYXJFY2FKdmExUG1kM1lhV0dv?oc=5",
-  "id": "f34"
+  "id": "f36"
  },
  {
   "date": "2026-10-20",
@@ -347,7 +367,7 @@
   "summary": "",
   "source": "Forbes",
   "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNN280cDBDVUQtLU5wLW1IWUF2VFpOYUo2TVJWOTY3NHNBcU5RZ2Y1eVB0Wnp0Nk5oSEQ5clg3Nk5fQVNhRUQzYjNDUnA2cTFmam5iQUVVTmFPSUhETWNDT0FRR0JxV0pYb1d5SXpqUnNNTFdlZTl2Q1RDcFpZem4wLWdUY0pjdGlvckNnc1hkLXlLaVZwbUhadW9VVXdFZnZJZXVJX1JB?oc=5",
-  "id": "f35"
+  "id": "f37"
  },
  {
   "date": "2026-10-20",
@@ -357,7 +377,7 @@
   "summary": "",
   "source": "CNBC",
   "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNb0hOTXd2ZVNfUjYzdzd6dmNVbmE1REdSUnpTYnNJdG8wVFppRjRUVjJ4ZFNjdE5DQ0ZlSVpNQWZlZlpUTGtvNFVsazQtUU4wOXNkVW1jNG9wV2xMdVBMSkM3U2ViTk9RajVZaVNKamVHNTRYbm54blNnTVpmUmFKY01vSml5NU02UHE0dWV4Mzhad2JhQzlzcUh3MzJnZ0xSM3lzeEs5bGZ6Zkp2c0J3VzRsZkZQWWhmMWIxYTFwUHMtWjRBQUtOSVY1R2dNVTF1cnlPMA?oc=5",
-  "id": "f36"
+  "id": "f38"
  },
  {
   "date": "2026-10-20",
@@ -367,7 +387,7 @@
   "summary": "",
   "source": "Crain's Chicago Business",
   "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOYXRFaHVRZDNjTFllR19oenFqYVF3aXZvNTlYVmdfUVBVZVh1dDZYTy0wT1NJNG03Ml9DN09XU01ocUFVMTNBNDlyUW12Mi1SbjVHQm9yU2VDWHhkeDBkSVJMQi1hZVBuMnRTa3FpeVZZVXVza0Qzckl4VVozTXZLc1g1ckFwR0kxYTQ2MEdlQi0yYlBscE55SXItck9jby1kSHc?oc=5",
-  "id": "f37"
+  "id": "f39"
  },
  {
   "date": "2026-10-20",
@@ -377,7 +397,7 @@
   "summary": "",
   "source": "Yahoo Finance",
   "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNbmgyZXAtdFN4d01xMDk1QVhaUnVraFRpampxUFRMc3VlZnFlU1p3NXZ1eXJfU2JOVTluWjFaS0duR3pKSUdrd2VlTEw3cVFhc2NzZEx2ODVYN2FBcm5GNHNNTk5xYWl1VU1pMnV4QjVmeUxselpsNE9YVTBuSDl0Z3lZVkItNlRkWEJWd0RIR1FyMnFrS2t2bEZkc2d5Y2s?oc=5",
-  "id": "f38"
+  "id": "f40"
  },
  {
   "date": "2026-10-20",
@@ -387,7 +407,7 @@
   "summary": "",
   "source": "WSJ",
   "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQZDdGY09YTDBjVnZhSFhJMldwckJJd05yekJSV3l3WFgtSzdZRHBZeVFyaHptNmhxb3VFajlzdGxZeVRBbXY1M3B3SGlIcUxlQ01IazRxM1dJMDlmb3JFaGFfclJhbm51dkRPUFpTejBqcjdSX2s2c0owem4zdHhuUEJ5cVQwbTZOTkNmaUZvWUd6SVBLdWNLbUw0MXk5bTRKOU1ITVpaR0ZjZ1Qw?oc=5",
-  "id": "f39"
+  "id": "f41"
  },
  {
   "date": "2026-10-20",
@@ -397,17 +417,17 @@
   "summary": "",
   "source": "Investing.com",
   "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNZG5jZEROamhERDYwZzJMdkR2M2JEQmtIRDlSekc2Wng1R0pJOEo4REhwd0JxT3ZmclB1TmpNN3E1YXZJNGU4N3o1VjlYVDU4SUVockdRTlpzYzQ0alVkM040djIyd2hNTUExRnNuRm9QR3NKOEdta3B6VHlGZ0w1Mm54MVEtUGhERnEzQ0NEZjRFc2ZhWUpzcFRSUENqbTl1N2xLclhlVmQ2MnN6Vmpv?oc=5",
-  "id": "f40"
+  "id": "f42"
  },
  {
   "date": "2026-10-19",
-  "tags": "UAL",
+  "tags": "DAL",
   "kind": "Headline",
-  "headline": "$32 million CEO lectures America on income inequality",
+  "headline": "Delta Air Lines Expands Boston Flights for Spring Break Demand",
   "summary": "",
-  "source": "Fox Business",
-  "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxORHNGV3VibVNVSFVHdmoxTDBKMFVmcDkzZnIwWlBnV2lQTTlqQ2toelZ1OGV6eF9CeWY4X0h6dFdjZm9qbzVtZUxzX1FfR0VJdzM2UXB1cXZvNXlucWU5Qkw5WlFXRFB0VkF6UmRMUi1wRXhFRWdVYWFEejVUY1pQclBrUWx6dzc3bW1uYjYwVXRkelN0cHA1NNIBngFBVV95cUxQeG1YVUhKZXZpQU1NYXhBQ0o4NzNmeHFwZjBtNG1ReHBWV2Vmbk04Nzdhc0plU3EtQS1lSi1hOF9FTzc1clgxaFJ0T25kRzVnU2pvc0p0U3FPbENKbmF0OUgwbFBBTnBibkcxbS02Q055OUNBbDYyVmQyWFdUZDJsdGpjN0ttaXVWNG9YRXVCaDZmYjByM05UdmpvSmF1QQ?oc=5",
-  "id": "f41"
+  "source": "Yahoo Finance",
+  "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxORHFaVnY4bFpGMHRkc1FZZU9RUllTUWZPcjlEZEo1bHMwQ0YydXJ0S2FFTmlPSnpuSnJuRDZhUGwxcHozbTBnSGpMRWJOR2F3ZUVmZnptVnZEblJBNnRqRDZkbkJRTDItREM5TVFaVVZwcnlkQTY0YlNwT21kQ295UXNvRkpDZEpKMm83RmlLazYzeUpYRG5NOWNGNA?oc=5",
+  "id": "f43"
  },
  {
   "date": "2026-10-19",
@@ -417,7 +437,7 @@
   "summary": "",
   "source": "St. Louis Economic Development Partnership",
   "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE94TXAxaXRyclMxdG5hQ1pZcXZpdFprTHBPYUpaTW85TUhTVTJwT0VPcnVQbTVsTktWcFhtWFR4Z2YwMFRqbXBhMy1iR2JQRzl1TjR2LU56NS1IenFSNWpWMFY3SC1GZ3dienpkcQ?oc=5",
-  "id": "f42"
+  "id": "f44"
  },
  {
   "date": "2026-10-19",
@@ -427,7 +447,7 @@
   "summary": "",
   "source": "TradingView",
   "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPSFN3VTk3MGFCU2NRVEdrckF3QjVieUpFY0JGbmhzTmE4RXFjLWp3WjNBN3FYNUJmUUxIamdDQnVoRU5abllQTXA4YjdkdXR2MzY5THRTSVFqamFhTVM0clRhcW92bDF3a28zRTl2Yjc0bkFITTVGNl91M2gtMFpvVzNJUHkyRl9IX0lvWmpNWUNzRGIyTk1GbjlnUlBqYXJoSThjYzUyTG5QNzZ1ZjVsNDhuSERuN0pwR3RkRWZYR1lVV1RFc3hR?oc=5",
-  "id": "f43"
+  "id": "f45"
  },
  {
   "date": "2026-10-19",
@@ -437,7 +457,17 @@
   "summary": "",
   "source": "The Natchez Democrat",
   "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNcWdOcmM3ck9iS0QwejZ3d2oxMmNjVzNWc0Y2Sk9TdER2UUI2ZXhlZDFpZTBXQlhoWVBRQktiMlA2YmVYZ0hoZGxsd0E1Wk5CZkp2MmpPT1lYSjBPRVk1b0ZyUVFiMnJVcUNRMnRGWDI0MGcySHJHUzE5X3c5SjUzWGpHLVZHd3ZfUEQ3Y0w3bnpDak9nNkVYMGJLQ1VlUUowMElaenZIVDYwMERSVjl0Ym1ZVndHR2J2aElqUUJLeG5ZQ0dQMDFZ?oc=5",
-  "id": "f44"
+  "id": "f46"
+ },
+ {
+  "date": "2026-10-18",
+  "tags": "UAL",
+  "kind": "Headline",
+  "headline": "United’s C.E.O. Says It Should Cost More Not to Sit in the Middle Seat",
+  "summary": "",
+  "source": "The New York Times",
+  "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPNUx1M21iLTBoZHVURWstS3djUTU0czFYNU5UeVhaNW1OTVdqeVpZZjh4M1pOU0tVMGRsS0FMMVpyYlhJWXJQb3JmZ05QLXcxVFd0bXJfSHRLNk1JVWdNM0M2N3NYYkZjTS0zVXAySXhuLVVaVXdXYko1TW5ocUk3ck1B?oc=5",
+  "id": "f47"
  },
  {
   "date": "2026-10-18",
@@ -447,7 +477,7 @@
   "summary": "",
   "source": "ABC7 Los Angeles",
   "url": "https://news.google.com/rss/articles/CBMi_gpBVV95cUxPc0xUTGdqcjhJZFJVM3V6OVQyRXA1dG9BSnk4MVdKRXUxZHM1cmlBQllrd1N3NUhXazAxMk15NWlWakVzRHRBQXZXTllDS0ZXcmNmV05COE1uVTJ6a0pocFQwdzc2b1RwNDVpRDVsZ2ZrTFYzUzAyZW5ZcV8wSmFKNkJCWUNnNEpDUjV1TG1pM044dXBLTzQ4QjFXOGZkbnNpWFUyYXZtVGdsLXRxUll2OXVwVVBuVG9SNW1nNGEyem5EY3llYWZWa2RUVGZLLVZLUDhzRnJBejlZbEJvZVRUQWRWaEt3U05VWk52X0ZGU2FPbFhlbEN2RDg2ZnFROVY4bThhWWU2N09oeEVDNzJaU015bDlEYmdSTTNtbFE4ZmY4eEhKTDdGVXlaM3NGYjZkQW9mN3J5ZUNWVFNVMGlnN21pdE4yQl9XRHp2LXFmSmU3YVNJeXFUakpuNDY3MzE4RlpNSFhqVFU4Rk5qbzFiajJPOGE2SFFMcm4wc0RyZUlfUGFFeXFWdldzRDc4elRlT2x3TDl3ZnMxQzJlcjA1eGZZLWdZb1IxaDRPUERMWkFDU3o1eWg4V3h2aDZ3eUttRTJrYVJxYXlQWTZNM1lnT2pQOV9RV3hZMWFFWDZWQTFoWEVocjJRR3FQc20xN1JOUUh6ZVRZeVNYV2YtNEF1Snhva0lrblluczNMaHFTejFfM3lUUjlOS0xXOFhCY3czRnlub0FiaThZY0ZHWThFcnExSTZjem0tN01DcjJmb1l5VGlkbVRWNTR6NEx1VG14Z2RoeG1QWW1qUlZDaFZaemw2QThKb01nY2k3dEJVN0FpenNVdXZpd09qVG5WdUl1dnpWMWpJQzh5ZFBOU2FFd084YzlWSTltVGtIMm5NeURHd2FhSmduSWYydGJVeWRzM2c5dHl4MWYxWlFqN21rb1JYbmpzZm56U1ZhMWsydXRGRW5IQmlVNFZLZlBlbEV1ek9xd0FFUkluTGJlcVBSdzdLZlJSUnFiellSYlpJVlZ1dDM1MG9aMUMxT1VJenpSVUhJakVWcWNzTXdNLXdONnRmZ05HMFBfd0NuWUw0T0puM1VZeXVtcjVFaDQ4b0dzMHhPYW9QNnVydHNhUGxUcFlrUTdlWTZoajhhWm0tU1dKbDNhTEpGeWJIN3ZzY2trc1lkOXJHSVVPejhmT1hHVmtVSjhVRnQ2RkFESEZPVEJxcWkzcFo2ODV2VWRzNmx6Vi1qWmRjajByQ3NOVm5KcnN1M21wQjJzQ1BGV0dfaXl1YmNpWk5EU0otd0dOeGtGQmVzcTFqMllRQ2tOb1RHeTlSV1J0MExtd013QlkxTXBxQzVDVTV5UzhaZmZCSl92X0VCRnhXQWhhcl9NSzNxQ3lTZ2pHbW5yWnFIbm5BY0dvdFVTRXVsOWVoaThXQWRJYlQ4NFRRUzA4UDVjalBOcFk5SFN2SDZiVDQyeS0zWDJub1NQSE5zZTBkb3FEcXVycDhIbVR5aExzeTJPdER2SC1xZFVaM0UzNmF5dW1nRXdKTGxadzZ0N0MwLWlSUEgzYzVZdXV3bnhaLXBqbjRGcTd3cXl2ZUcyM2VhenlDbG5ob0EtdEhKbmJOYzk5SWQtbVlYX3NiYzV0Y1NoZ2lOOTFGM3dfcXJmUlBSTUJiRGdkWDFHNUpFSWlwdk1zX1FFWGZyMTJMYmZHNVlTcTZidWhrVzkwTUsyY2R0Mi1sQXE3NnpGREpmUGQxRDFTLU5lRkpTenRPTkR3ejNOM3k0Wmw3NFppVk90TUc4NFhsZm5xU19qZk1HcDFsZW5VQS1mTHBwRk5oclRkMVFCV2MwSkdSZEVlcE9kMV9QYXNqTVoyT3lDZ0RxbUU1R0ctZ9IBkAFBVV95cUxQN0J3YXhEcGNINFBxbDRSNzhlZGQ3XzFQWUxaTUJFOWlCUGJsNzdvN0N2aHc4dFNBeno1YW9jMkdRdkI2VnRMT2huVloxOUN3SXpoRExSOUFuVkxnYVFoa2ltbWw0V0NYanhXckl2NmNTOGRFMjg5a1d1bGFVQ3dsSlRFR1Nyc1J1RWdoRVdJVi0?oc=5",
-  "id": "f45"
+  "id": "f48"
  },
  {
   "date": "2026-10-18",
@@ -457,7 +487,7 @@
   "summary": "",
   "source": "qz.com",
   "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBPTFVNanJSMVpQTVdlRVUyNGNlV3VKdTFYSUdpYnRydURTczRQdTI0dVk4ekVlbk5CajAtRlQteER6dUVaakZOOFY3RDZqRmZPRmdpdEdlaVpBRms0eFNZ?oc=5",
-  "id": "f46"
+  "id": "f49"
  },
  {
   "date": "2026-10-18",
@@ -467,7 +497,7 @@
   "summary": "",
   "source": "Simple Flying",
   "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPbG84ZHYxMmx5MHprd3lNVTUxT0dnZDFSMmxWY2pyeERmMGZxeXJELTJDdG1HQVcxOEp4eGxYdFV4MlBsNlhSUzhzT2M3c3B2c3Q2Xzl2MnBrcGYzT0tOTExJdXZ4MDZpNkZJMW1qRHdRMTYySVpKZmt2LVY2b1ljSzRkUXVUdVExemRN?oc=5",
-  "id": "f47"
+  "id": "f50"
  },
  {
   "date": "2026-10-18",
@@ -477,7 +507,7 @@
   "summary": "",
   "source": "PYOK",
   "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxQRDZYS2FrS1pUUGxTTEpLbEJDREJyMGt2TE5pdUQzeEU3RFZDbFNLLWg0TXViRFJFdEZITENrUG0ySUNLdDdCTGxGWFBKa1didTZTUVVVMnJ0U0ZpQjdLdEZFTDFrZmFBZlBfSVNyQmR5WFNPWS1keU14RERqaGFFWVFXX2tkNFNmNkZGOEVlbjY4emV4RTJ5SXA3eGU1cFE4Q1NhclNGSW9xbERYQTRDaWhCRXZBWnN1MUFpSVM2S05Fdi1janNzWE1WVlZIc1IzWnBaVGpqdHA2V1VvWDFJV01hbHZlNzFhYlBBQTJMNDI0MjNrUmpj?oc=5",
-  "id": "f48"
+  "id": "f51"
  },
  {
   "date": "2026-10-17",
@@ -487,7 +517,7 @@
   "summary": "",
   "source": "TravelPulse",
   "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPSE5QRHplQTRaUjlrVEQ1MEIxeXNjOVNocFBVMHVSQVNjdmczbHFncHZCeUVySzh6LVNydHdqTlBoYVc2djFud3JKMVVwS0RHc1BROVN0cTU5SmtGOWRyM0ZUZVpuWnRuejI1Rnh1aGlGd2hRSEwyRzRPNTRpT214OC1DVkJJdUFqaUtxdXpMdVc4YVA0Q1U1VlliMmJZWWZ1VFhKZTd6SERuOWxRVDlyd2hJekw4TWtyQ3J5YXY5UkRyRFZlYWZFM1JiNzg?oc=5",
-  "id": "f49"
+  "id": "f52"
  },
  {
   "date": "2026-10-17",
@@ -497,7 +527,7 @@
   "summary": "",
   "source": "Hawaii News Now",
   "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQSWZRZzQxNnF3N2xWX1JMS3cxLVZ5TTVXOHgwTENERDVZaWN6SWI4TUh3cFZVcFJpa19hTkZOM3lfOG9xQzNXdXl3ZmVCQ0piak1RNEswaFNabnVYbzBCMVpZcmZxSkIxR0hPMHRtb1luS0NzN1RrMWI0MHBtUTlxV0dTcXpTUHJrY2xEYXByTDM4MDU1eVZnZS12LVphZjNQUHRVaQ?oc=5",
-  "id": "f50"
+  "id": "f53"
  },
  {
   "date": "2026-10-16",
@@ -507,7 +537,7 @@
   "summary": "",
   "source": "Simple Flying",
   "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQcVJLTUNzNUVDNXhDb0VQdElJOEdmX25HaVpodnFQc1Rlc3pPVUFyRXRMaEhjR3JtVXMwUUoyMWV3MG5pVDFKV1F3M3lxclRaQXB6Y29mZFkyaVJaaXdXT2lJRXh1QzZUTXBtN1Q3bWg4eDBZbm01MUZBYUlCY1hESw?oc=5",
-  "id": "f51"
+  "id": "f54"
  },
  {
   "date": "2026-10-16",
@@ -517,7 +547,7 @@
   "summary": "",
   "source": "American Airlines Newsroom",
   "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQdlEzTl9LSkEtUjAwMGRJS2JWbWYxMlNjWWNSbmtoX0FraW4tZm8wQk9pQl83ZlBFZzFxaTItNzNxY25qbDVtM043RkdibHpJMmdyanBib0RJeS13NVMtVFlTWENxY1MzQkUydC1fUnBOcmtNbGZhR0I1T0pHM180WE45ck9zNlhGV0VITHZDekhxdnNwOEtDdVBuMzc3Nm9Ec2pBRktxTWstd1RDRmZSc0E4dC1YMmIwSS1PT0JEbUZXNVd1aV9CeGdYemJCLWJYaVBublF4azB1dnJU?oc=5",
-  "id": "f52"
+  "id": "f55"
  },
  {
   "date": "2026-10-16",
@@ -527,7 +557,7 @@
   "summary": "",
   "source": "Association of Flight Attendants-CWA",
   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBtSTF3NEU2OFdFaWFiMU9oYkY3M01Fa1NMdnFwRkx0b0xoa2ZsbG1ZMWJORmZaeWFHc21aaDhmSE5RMWpRU3VhS1BsbkVSNlZLeGVKVWJHYXNVUFFvVzlEU0Y5ZlVER1VlM2tj?oc=5",
-  "id": "f53"
+  "id": "f56"
  },
  {
   "date": "2026-10-15",
@@ -537,7 +567,7 @@
   "summary": "",
   "source": "Reuters",
   "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPRUFoT1N0RFlRaWtTcVBTYnBlZ0JhX0tlM0k5OEhqOGNWODdaUTQ0SWtubF83dnZfbTNsYXJGbWd2SFQ2TjdOR1Rzai1oamVNMWVOeThOWTBzX0Z3Qzh3clJBYkRMLTdiWE1Za3JIZ1I5RS12d3pjdTlMOTVUT2lJSG5udVEzWEh0cVdtbFVLRTFlSldEaXF0SjhCRXB5X1FhZlI0eFZyZWZURE1vWFBCeWZpZVd1bmJGb1p5SDBB?oc=5",
-  "id": "f54"
+  "id": "f57"
  },
  {
   "date": "2026-10-15",
@@ -547,7 +577,7 @@
   "summary": "",
   "source": "NerdWallet",
   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQeGFSY1hYZV9rNEpQLWJTRW9VaWtlaEZYYTdPSEl2RUd6ZjNydDFEVWdpVlE1QWFGMDhROHBienJVdk1NY3JnSlplSm82eG9IaFBMU3RqYTJteXV5ZWpkX1M1OXdtaW8ycnJmT1BCSy13dk8wT0owdDlmeVNfTlVTU3I2a20?oc=5",
-  "id": "f55"
+  "id": "f58"
  },
  {
   "date": "2026-10-15",
@@ -557,7 +587,7 @@
   "summary": "",
   "source": "International Brotherhood of Teamsters",
   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQSW1rdl95SXJMSGdueWF5UjJPb3JwZDhYd2FHcDVEQ2JoQUluLV9ndlpDUEswNG9YUWE2TWd3b0w1UHNJcDdOX2NfVjBpVVFtalJwdUtXTGN3ZHNvV2xqNkpBZVFhVjZGejhnYnpxQU9rYlFTZVJyT1BjNWt1ZW9Db2J2U2tTdE9SSjBwdjhtUjhoZw?oc=5",
-  "id": "f56"
+  "id": "f59"
  },
  {
   "date": "2026-10-15",
@@ -567,7 +597,7 @@
   "summary": "",
   "source": "CNBC",
   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9iWXFmRjgxT2s3Vk9fLW1DQ2JHN1JjMDBTTHJNN2dmMzczMzRoUmlhYXQ2V3E0ZUxHUS0zdzRMS3ZJZFJ6UDdGZXZiWWQ5R2lLa0J5cUU1c0pQUElONlJYV1VhcGJGMjh6WVZnWUcxdlNPZ0t50gF6QVVfeXFMTl94anc1LVFfUE81UUZtWHJ1bDJxdGt5NmFWRUlTWXdYYjk1MXNCWjVxZDBpbUNaSjJzaUdZZV9nRmFOcWRCSENfZzBBR0FVbGZrNUhTV1lLc2hGU0xDQ1hySHVFWWdvU05QQ1ZVYkROeDVtZ0Mwb2ZLaHc?oc=5",
-  "id": "f57"
+  "id": "f60"
  },
  {
   "date": "2026-10-15",
@@ -577,7 +607,7 @@
   "summary": "",
   "source": "9News",
   "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQajdhekJ5anRmWThTZXI1Q19ZOWVEMS1rR2pDYmlHcWV2NjJnNkZ6U0JwSEd0TFlTbFQzZk1DaGxiSWwwT2pTbm15QXhIUEtOaldnSnI1VVptRWxWV1B3eW9kRHBhQmR0NDV3aEMxOEJHeENTYWdjR2ROcnlIMl9ESFMxakhMbHpRTEdUWnVSakF6YkdXRXR1X3ZnWndxaVRQOHRQZkVDX00tMFIwOXloSDczbGlPbzRuUnlmUVJ4R2NWSGdQbnZCcEhKN3J1YVk4MHNtTjkwbjlUOW9NRTlRMG9n?oc=5",
-  "id": "f58"
+  "id": "f61"
  },
  {
   "date": "2026-10-15",
@@ -587,7 +617,7 @@
   "summary": "",
   "source": "TheStreet",
   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPTVk3bHJGeTlhc0lWTXY4cXNfT0I0Z3Q3WFlhMDAwcmFUUG9BSDREcFVIWDVob2x0MHhoTHg3RS1BTW0yc3JCLXIzbU52RndJRjRwcFFQWmxYb0RsY2U3ZGctcWlRZXdHSFJkVFBOeG5mTGQxRmh2RTNYc05uZ2RveF93VHZfMnFRNzFtczZiZE4?oc=5",
-  "id": "f59"
+  "id": "f62"
  },
  {
   "date": "2026-10-15",
@@ -597,7 +627,7 @@
   "summary": "",
   "source": "KCRG",
   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNZ1JMcUt2VHFoWGVreVN5YldDVTVrVjNsSkROVGFpVDNsRGFHc1NZNGdHZlpzN3kzczZYNk9wSzNHWVRBMnNocnB4a05ZWUphaWh1U3J0ZTBoSUtuenp0Sm1Ddk5LRE5HWGNaeWh6bFZPTl9EYk9YT1hlc3NkaHBiOWV1LWdMQmhkTjhaSEQ1akpBUHhJQXh4MXhHdWRTOHNFNTY5Z21nUzR4alZyREdnMmZUQW5hT2QxYmUw0gHPAUFVX3lxTE1PcVNLazNNTkd3bV9yTXdzSUdiSWpnenRJb2lCS01nWmMtblFsa0R0eExaMnJ5em8yYktoUUQydnBxUnRQSXUwMDJwSjhRTWMwWmlDWVRlUXBiUXAwbDctaG1kS1RPWjZkT0lRVmNzZ0h6cGZ0TlAwMnVMLXpxbnBxQTdMNUdLUzRKVUxhMWNZM2JHQ2NhMnNLd3lsTkc2QjczbExwYmNJcFMxYm1aQW1FQ1BtdXhIZEdJTjJ1TEFvQWhfWDVLbXAtNG42aWY1aw?oc=5",
-  "id": "f60"
+  "id": "f63"
  },
  {
   "date": "2026-10-15",
@@ -607,7 +637,7 @@
   "summary": "",
   "source": "KRDO",
   "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPQnhVOTMtRU9PQkQxZlVYc0RBVkdWTXJPUmJLOU43NWRnWjVfejlIa0tyUzZJOFNXeVFpVkhGQVRER3BLd1hLbVhQVjRka3U1WmVRSXlHS3l5blJtRVg2bXhRaTlXb0hQaW4yS3FKMTdKSnR5MVh0QTA5VDBFNFB2bF9FSC05Z21fZ2JMWjU0NjJ6M2g5Y3FFbHNIWVo0Q2lHV0lKNg?oc=5",
-  "id": "f61"
+  "id": "f64"
  },
  {
   "date": "2026-10-14",
@@ -617,7 +647,7 @@
   "summary": "",
   "source": "USA Today",
   "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOV0JIS1lWVlZRTGFLWWxieE1JOVBOV3UtY3lPeG96MWFXR3ZaaTRtd2ZZZlRHZG82bjhFYkJZb1RyM0lxNkZyRHRmV09EUWtMMzRjVTlTdlQyYXJuWEFhZDBLN29FZko1bmxFQ3hoc0d2SHFBVVA1Z3dyaERURmo4VjFNSFdfa3ZYanc4a1RURmpCNnZzZ0hrWmh4aDRKZUk?oc=5",
-  "id": "f62"
+  "id": "f65"
  },
  {
   "date": "2026-10-14",
@@ -627,7 +657,7 @@
   "summary": "",
   "source": "News12 | New Jersey",
   "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNbENXWTBMZ01QRUZnN3hJMFB3aERiTGd4VUZkNm1JR0JlZS1tTnk1ZFlVeGJLZm9QTlA2Z1ZndHBrOHFWMVRHSXd4MnBQM1gzNkhCN2V1cUxsWmxFOFgzcEVCQ3A3a1JXc0RzNk95SUgzSVpiSDBiMWtrcExRbVJJNVRnN3RUYmdmdG0xUzU2TUY1c1pGczd2dnhJZ0E4Ny1PdEtjckdJMG4xWmE0YlFhd2VkVVI0N0NMTUF2dTBpeWlkS0Vza0hYNG1xbngtdlVrZERxdDdBLU8?oc=5",
-  "id": "f63"
+  "id": "f66"
  },
  {
   "date": "2026-10-14",
@@ -637,7 +667,7 @@
   "summary": "",
   "source": "Sioux City Journal",
   "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPcFlmQlpydkphcG1kaHA5c19JYzIzR1hpek1HWGFfYzR0eDNiVU02TlFOVmhoS2FYdnpzZ2Z6aFNMWnZDbmhqV2NxeFcyRC1SYzhueGpaNkRySjgtQXpjLWtUNnY5LU81Z09RbU13bk02UVFmUUFXVHZSVXAyZmpya0VjSU9TRzRlYzJMTDJnNXJDNjh5bEJJdk9HU3RlZHZIbjBWZUc5ZEc5MmhrOFE?oc=5",
-  "id": "f64"
+  "id": "f67"
  },
  {
   "date": "2026-10-14",
@@ -647,7 +677,7 @@
   "summary": "",
   "source": "TradingView",
   "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPUEdQSjhhWXpFRUQ4bEVyT0hrNl9HWFpmbVFGMkd1bmFvYnRtQ1NrZm5ULWFxZUNRaWpyUl9PTjFLRERGWDJ0S2VmajBuVmYtMEJ6VnhsMU9OVFE2cVpsVVZ2ZXlvcHFOZmE4ZFh5aVk5MmxLMGZhaDFhS2RSYmczUEsxZGZIeTdKRHl3UmZIOGlLSENDbmQ0OEIyTGhUV3hrb2VURWJqblVTWXJDTE5hREpSR1RfdVhzdUFRZEpkb0g?oc=5",
-  "id": "f65"
+  "id": "f68"
  },
  {
   "date": "2026-10-14",
@@ -657,7 +687,7 @@
   "summary": "",
   "source": "OnLabor",
   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE02YlZvSHhwcDdSNFNXYVd2aUFjdGpRSzRzREw4SGEzTFlSWmVhekNvaUJTUFZhQ09XdENodTRSbGt5SmlDSjdtLUR0VW5DNHJJRGVDMEoyWjlWVFdEZTkzSEFmQ0VQdWowQU1ldXZWWV9mejRGM2I0?oc=5",
-  "id": "f66"
+  "id": "f69"
  },
  {
   "date": "2026-10-14",
@@ -667,17 +697,7 @@
   "summary": "",
   "source": "FOX 13 Seattle",
   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBqbGEtdEltaXBTbm5aMVRtQW5XOEh0YUM0ZTN2ZHVBZnh0Y25CSEEyenl2NHBfaEVxMm80cjkxaFRwUE9FQUVSN25ORE4zdm1VZGdHLUlEQ2dnZl84RHc3ZkhSdHdLZnFqckpFbEtrY01BWllnOVI00gF8QVVfeXFMUDdIdEJFUVljQnQtU29PVFhIbTE5aXNpUTNDZEU2YjRpbTBwWG9ZYWtUTy1mdG9KeDc1bGQxMTBDVFZoSkZVYTczV2J3blJTVnBOb3oybEFIQXFqNHotV2JSMVZiV3FXa3N1S2k4S1kxbHpRR3FTRjhacDYxbg?oc=5",
-  "id": "f67"
- },
- {
-  "date": "2026-10-13",
-  "tags": "DAL",
-  "kind": "Headline",
-  "headline": "Delta Air Lines will exit an entire market until March 2027",
-  "summary": "",
-  "source": "TheStreet",
-  "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOamlNZE5WSm16ZmpYRU0ybUpzOGk5cFdESHA4b3dXLUYzVFVNaWwtZGJWYWdPdndjWkRBVU1zWVQ3Y0VIekxoTzlkSkg1Nl9jNkJLbjRaM0pPMmk3X0hYZ1pDVndXNTRBa3J4YWhOV0FoTEhqa0JfNUx1bUJEdjA5THEyc3dZSnJwdVE5LTVUZkY?oc=5",
-  "id": "f68"
+  "id": "f70"
  },
  {
   "date": "2026-10-13",
@@ -687,7 +707,7 @@
   "summary": "",
   "source": "NerdWallet",
   "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPbGl6ZVlscWRmbGFUYXJ3QjRkWm9VZF9zM2Q1dWxkRWRtaGtPOXBZemM0RUh1U1NKZmNiVUI5NkdGZlJRS2hxX20tSGJPSkR1NHFHdURxa1VueF9zV2dzM0JGZkNqZEdsR2JqSktFNU93WXNRazZVdWxpSjlBbVhvVzdESVRaNkU5cXl2Q0VpNEJfUTRLX25NaER3?oc=5",
-  "id": "f69"
+  "id": "f71"
  },
  {
   "date": "2026-10-13",
@@ -697,7 +717,7 @@
   "summary": "",
   "source": "Aviation Week",
   "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQa25GdWJlOFVvaWJtMlF3d0ZOdHlWWGV2U0U0b3JjRkNsTlhvLXlQMnMtaEF4Yy01S1NKU2VCU2pTTXFGZXhGOUo3Qzhxblh5U0J6aDBHR0J2eTNfWE41eFVVb1BKOXZRMWNLckdsUENlXzZiWnQ3NmxHTThmclUzcGY0cUNielhnQlRBUXBXSkp0RTEycGc?oc=5",
-  "id": "f70"
+  "id": "f72"
  },
  {
   "date": "2026-10-13",
@@ -707,7 +727,7 @@
   "summary": "",
   "source": "Runway Girl",
   "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOb25tYVZIMUJsUFN3QURGcTJ6NDFZQnJzeFhBMHFCZWRBNGthRkRRcXBoeFRLd2ZFcXVCMU9BNlhDckJzRnJSdUtXTl83aWpQQ3U3V0ppTmdGenBBRTNiSEo2TTFBYndRWnJDdERzZHM4WUZ1RV9sY29RdklJM01iYWJFWkZweUw1NnljRkx0QVBaZmc?oc=5",
-  "id": "f71"
+  "id": "f73"
  },
  {
   "date": "2026-10-13",
@@ -717,17 +737,7 @@
   "summary": "",
   "source": "Aero South Pacific",
   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPLWNENlAwaDBqSW91akxFWkpYLW1aUGxtd2JxdURKdlhlTjI3dF9sSU9QQVYxb0xwMEZtWERFMi1vNWIwNDUxRmdUNDlHd0M1VHM5aUlFNGdySTRXbGJCUnAxallaR3FBN3dkRDRUaTNaU3pfaS1ySlhOdWdGYjRuaDZuVQ?oc=5",
-  "id": "f72"
- },
- {
-  "date": "2026-10-13",
-  "tags": "Industry",
-  "kind": "Labor",
-  "headline": "After the Towers Fell",
-  "summary": "",
-  "source": "ALPA",
-  "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE05bHBYWEFCbHF1MzFtSk5ldmhBVXFSVkN1ZjdDUVJ0V29uLWN3SnZsNjdwZ05pa0llTXNFT3Q0UWpwLU9VRkZXM3RoOThwZjFqYVdmN01WWWFmWXh2bS1jMld0V01aMDVWRVJz?oc=5",
-  "id": "f73"
+  "id": "f74"
  },
  {
   "date": "2026-10-13",
@@ -737,7 +747,7 @@
   "summary": "",
   "source": "Skies Mag",
   "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOczBpNGlNVGtyR0E2MXp3TVhLbXV4dXB1N3FCVTZiU2xqWXVnc0FWVm5BWjI0WXJZTWhWSWR2MmE0eE9NVWRoREdVd0Y5clJoaXVIbzNnV3ZHWnlweG9XS2gzYUtqWHBWdWk0Q3NMZmxJdlhyRjlkenZteFNhcFpxbThzQXYtUHhxcTdKcXZHOHBOdWQ2VFEtX9IBngFBVV95cUxOU0l6bW53VFlTMGlWN3RBNXhidk9PMVA0TzhoUThXeV9TUjZsenduLUZHT1dZdW5pZ09TeGZnTUNyT2ZSMmN5eGdhbnBzekhIMTJ1XzdNbUIyMXl2bHdlVGFwLVZMQi1lNmJCQmVQQzNtQkM2OWhiYkx5eFl1cHV2VnB2TlJIM2E2MjdTcGJrQ3VGak9BMHpQcWxyQjNvUQ?oc=5",
-  "id": "f74"
+  "id": "f75"
  },
  {
   "date": "2026-10-12",
@@ -747,7 +757,7 @@
   "summary": "",
   "source": "CNBC",
   "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBqSVRsTUxBeUVQXzZTT01heGc5cUxHa1BHT2NpRkNIRGFNWUd5bG56WDZnMktHS2k2RDl4MGNFUlZWVjRxQk1iQjE2TVhESVZocTZkMjRuamFrNjNWQmJvTmJ4QlhYd2ZCOE1oMFZYNUw2MGptUDJkU1F3ONIBgAFBVV95cUxOZ0UyMGZTU3FPQUdMalVRaV9kenFCQl9yVUFpdmFEY2xtbDAxQlRWVXFadHpCZ0kxdE95NnFwMzIzS0dFRlFSNENnZlE5ZXBvZXJlT0twVXZqMzJacHo2Rmx0Q3Z2RW1tdHZnc283aXRjWGF5ZjJxZFJCd0hmZFM4cg?oc=5",
-  "id": "f75"
+  "id": "f76"
  },
  {
   "date": "2026-10-12",
@@ -757,7 +767,7 @@
   "summary": "",
   "source": "The New York Times",
   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPTHZWUk8wMXNWMnEzdDlqQjIxdHZtZ0FlQkxMcC1PUjZIQ0hZUHYtcnQ3ZEFTeE5QbXBmeExVTHZxTUdvdzN4TUNUMW5xRVRaMWNWVUk1TWlreGxpaFBBVW1FLXI5MktHSEw0UGdJZUJBbzJMb3RBdEZ5UzdmTU41eFhsaUU?oc=5",
-  "id": "f76"
+  "id": "f77"
  },
  {
   "date": "2026-10-12",
@@ -767,7 +777,7 @@
   "summary": "",
   "source": "Yahoo Finance",
   "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNaFlCc3NMbkRscmZ2TFFaWi1KaFhESjIycWZCN2NDWm0wdEF0dU9UX0c3SXZveGZnckptTWt3UWVIR1lLLWp2eVdlQlJSaUdHdHZvZUdxMERtc0tiaVdJbFJPVWxmVmVDbUJjbHVfRmRicmdHNzNzZkd3MDJMdlJjUHZKSjlSYnpZakFtVUotZFIzMzRjbzhUQVlwaUs5dw?oc=5",
-  "id": "f77"
+  "id": "f78"
  },
  {
   "date": "2026-10-12",
@@ -777,7 +787,7 @@
   "summary": "",
   "source": "The Owensboro Times",
   "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPZElVVEJkaUJQUFN6N1pHUFl1X2dqam9GZERRdEJMMDR6T2d5eTNlczU5NFF2c1ZBOThVWXo2UVFVaW91dWV1aEVWM3UyNTJncExoV3hJYVpNTkwzN0EwMzM5MlJjYVB0RnBCQnU4Z2xtMzF5Z3oxazNhRW50WXc1U21HMXlOVWp1ZFlwZk9NbFA1NHV1bFd6anhnN0V0Y2haMEdHTnM5SG14YVRKY1pxR1dsMExhdFZCMzRHQkJEejZxTEszRmNXZXNRWkdGOHMy?oc=5",
-  "id": "f78"
+  "id": "f79"
  },
  {
   "date": "2026-10-10",
@@ -787,16 +797,6 @@
   "summary": "",
   "source": "Juneau Empire",
   "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPdzRJaVpXTHZIYU9Da1dqSVlOUlJIWEozTjhvcnN0RHRSLWVSSVdXY3ZrbHJjQ3VuM3A2djEzZzNNc2NWbVNrUW4zcHptbGNWVDhUSEdmcFNIWl83eEJMMjMzczEyZW1WM1JYc0lqUkd0a0V1UXFkbWRpOHZkelZLMkpDU09sWTh3VUgySXlMZElXakVwU3NCN2h3ZmtWUF9DQTB3?oc=5",
-  "id": "f79"
- },
- {
-  "date": "2026-10-10",
-  "tags": "ALGT",
-  "kind": "Headline",
-  "headline": "The Real Reason Why Allegiant Air Still Flies To So Many Secondary Airports",
-  "summary": "",
-  "source": "Simple Flying",
-  "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1wdmp1STFLc1ZPMEZGTmZTVGpiX290YzRMcWVhbzVUb0pnMmtRQ0R2eHUzc0hmT21XTEhtZndaVEt2bnNSUlF5VmlCVWVHcXBQOFA3ekJVcWlwS2NvaTNGZUlFRlJkRFlONEZfVDZCZWtoLUxzMFE?oc=5",
   "id": "f80"
  }
 ]

@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-23T10:39:56Z",
+  "at": "2026-10-23T14:23:07Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -113,9 +113,9 @@
    }
   }
  },
- "generated": "2026-10-23T10:40:19Z",
+ "generated": "2026-10-23T14:23:32Z",
  "news": {
-  "at": "2026-10-23T10:40:18Z",
+  "at": "2026-10-23T14:23:31Z",
   "items": 80,
   "errors": []
  },
@@ -133,11 +133,11 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-23T10:40:19Z",
+  "at": "2026-10-23T14:23:32Z",
   "latest": "2026-10-20",
   "rows": 1197,
-  "diesel_close": "2026-10-21",
-  "estimated_through": "2026-10-21",
+  "diesel_close": "2026-10-22",
+  "estimated_through": "2026-10-22",
   "spread": -0.288
  },
  "exec_pay": {
