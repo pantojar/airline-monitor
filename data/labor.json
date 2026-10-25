@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-19T15:37:13Z",
+ "generated": "2026-10-25T21:32:15Z",
  "companies": {
   "DAL": {
    "ticker": "DAL",
@@ -209,14 +209,16 @@
     "prose": []
    },
    "tenq": {
-    "accession": "0000100517-26-000139",
-    "filed": "2026-07-16",
-    "url": "https://www.sec.gov/Archives/edgar/data/100517/000010051726000139/ual-20260630.htm",
+    "accession": "0000100517-26-000186",
+    "filed": "2026-10-21",
+    "url": "https://www.sec.gov/Archives/edgar/data/100517/000010051726000186/ual-20260930.htm",
     "sentences": [
-     "In May 2026, the Company's flight attendants, represented by the Association of Flight Attendants (\"AFA\"), ratified a five-year agreement, effective May 31, 2026, with the Company that includes improvements with respect to scheduling, reserve requirements and other quality of life improvements, as well as pay rate increases.",
-     "During the three and six months ended June 30, 2025, the Company recorded a $ 561 million special charge in connection with the then-existing tentative agreement with its flight attendants represented by the AFA.",
-     "…lion, or 6.2%, in the second quarter of 2026 as compared to the year-ago period, primarily due to increased pay as a result of the increase in flying activity, a 5.6% increase in headcount and pay rate increases for various eligible employee groups, most recently the employees represented by the Association of Flight Attendants (\"AFA\") per the new collective bargaining agreement.",
-     "…nd related costs increased $680 million, or 7.9%, in the first six months of 2026 as compared to the year-ago period, primarily due to increased pay as a result of the increase in flying activity, a 5.6% increase in headcount and pay rate increases for various eligible employee groups, most recently the employees represented by the AFA per the new collective bargaining agreement."
+     "In May 2026, the Company's flight attendants, represented by the Association of Flight Attendants (\"AFA\"), ratified a five-year agreement, effective May 31, 2026, with the Company that included improvements with respect to scheduling, reserve requirements and other quality of life improvements, as well as pay rate increases.",
+     "During the nine months ended September 30, 2025, the Company recorded a $ 561 million special charge in connection with the then-existing tentative agreement with its flight attendants represented by the AFA.",
+     "Salaries and related costs increased $406 million, or 8.9%, in the third quarter of 2026 as compared to the year-ago period, primarily due to increased pay as a result of the increase in flying activity, a 5.4% increase in headcount and pay rate increases for various eligible employee groups, including employees represented by the Association of Flight Attendants (\"AFA\") pursuant to the collective bargaining agreement that was ratified in May 2026.",
+     "…of 2026 as compared to the year-ago period, primarily due to increased pay as a result of the increase in flying activity, a 5.4% increase in headcount and pay rate increases for various eligible employee groups, including employees represented by the Association of Flight Attendants (\"AFA\") pursuant to the collective bargaining agreement that was ratified in May 2026.",
+     "…n, or 8.3%, in the first nine months of 2026 as compared to the year-ago period, primarily due to increased pay as a result of the increase in flying activity, a 5.4% increase in headcount and pay rate increases for various eligible employee groups, including employees represented by the AFA pursuant to the collective bargaining agreement that was ratified in May 2026.",
+     "Cash flows provided by operating activities decreased $271 million in the first nine months of 2026 as compared to the year-ago period, primarily due to a net change in various working capital items, primarily the one-time payment related to the flight attendant contract ratification, partially offset by an increase in advance ticket sales."
     ]
    }
   },
@@ -551,9 +553,9 @@
     "prose": []
    },
    "tenq": {
-    "accession": "0000006201-26-000052",
-    "filed": "2026-07-23",
-    "url": "https://www.sec.gov/Archives/edgar/data/6201/000000620126000052/aal-20260630.htm",
+    "accession": "0000006201-26-000065",
+    "filed": "2026-10-22",
+    "url": "https://www.sec.gov/Archives/edgar/data/6201/000000620126000065/aal-20260930.htm",
     "sentences": []
    }
   },
@@ -688,12 +690,10 @@
     "prose": []
    },
    "tenq": {
-    "accession": "0000092380-26-000077",
-    "filed": "2026-07-23",
-    "url": "https://www.sec.gov/Archives/edgar/data/92380/000009238026000077/luv-20260630.htm",
-    "sentences": [
-     "On April 7, 2026, the Company's 34 Network Operations Control Customer Planners represented by the International Association of Machinists and Aerospace Workers (\"IAM\") voted to ratify the tentative agreement reached on March 27, 2026, as part of the accretion process to join an existing IAM-represented collective bargaining unit."
-    ]
+    "accession": "0000092380-26-000107",
+    "filed": "2026-10-22",
+    "url": "https://www.sec.gov/Archives/edgar/data/92380/000009238026000107/luv-20260930.htm",
+    "sentences": []
    }
   },
   "ALK": {
@@ -1195,8 +1195,8 @@
     "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNVDFxdkpYNEpxMGEtcC03TkVNTU1EOGxzNG1nWFFLU3ZscGdMZHdGaHM2WHlTcTc3M1JFVjdoNUtXM1BRNF90cUJHVEhVejJwcWM3bVBhbExoZlJKNkZsSm9oUlhHUWM3QWhTUWFqVUpfbmo1dXl1eDNoVktka0NzS0RVQzhJMFRzVTBtc0kteDMzenBIOWFqekdjd0JhVjJVVEMzTGhIZG03Tlk2U2g3UkpuenhRaU03?oc=5"
    },
    "status_date": "2026-05-12",
-   "filing_quote": "In May 2026, the Company's flight attendants, represented by the Association of Flight Attendants (\"AFA\"), ratified a five-year agreement, effective May 31, 2026, with the Company that includes improvements with respect to scheduling, reserve requirements and other quality of life improvements, as well as pay rate increases.",
-   "filing_url": "https://www.sec.gov/Archives/edgar/data/100517/000010051726000139/ual-20260630.htm",
+   "filing_quote": "In May 2026, the Company's flight attendants, represented by the Association of Flight Attendants (\"AFA\"), ratified a five-year agreement, effective May 31, 2026, with the Company that included improvements with respect to scheduling, reserve requirements and other quality of life improvements, as well as pay rate increases.",
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/100517/000010051726000186/ual-20260930.htm",
    "union_events": [
     {
      "status": "Ratified",
@@ -1452,15 +1452,6 @@
      "quote": "Fleet Technical Instructors & Related, Maintenance Instructors, Security Officers and Storekeepers ratified their tentative agreements.;"
     },
     {
-     "status": "In negotiations",
-     "date": "2026-06-04",
-     "source": "IAM (international)",
-     "kind": "union",
-     "title": "Apple Under Fire: Congressional Labor Caucus Calls for NLRB Investigation into Tech Giant’s Treatment of Unionized Towson Workers",
-     "url": "https://www.goiam.org/news/apple-under-fire-congressional-labor-caucus-calls-for-nlrb-investigation-into-tech-giants-treatment-of-unionized-towson-workers/",
-     "quote": "“The Towson, Maryland location was the first Apple store in the country to unionize and secure a negotiated collective bargaining agreement with the company,” the letter to NLRB General Counsel Crystal Carey states ."
-    },
-    {
      "status": "Tentative agreement",
      "date": "2026-05-26",
      "source": "IAM District 141",
@@ -1468,6 +1459,15 @@
      "title": "Storekeeper Employees Tentative Agreement 2026 All Markup",
      "url": "https://iam141.org/wp-content/uploads/2026/05/Storekeeper-Employees-Tentative-Agreement-2026_All-Markup.pdf",
      "quote": "Storekeeper Employees Tentative Agreement 2026 All Markup."
+    },
+    {
+     "status": "Tentative agreement",
+     "date": "2025-12-22",
+     "source": "IAM District 141",
+     "kind": "union",
+     "title": "UA Negotiation Update 23 December 2025",
+     "url": "https://iam141.org/wp-content/uploads/2025/12/UA-Negotiation-Update-23-December-2025.pdf",
+     "quote": "Although no tentative agreements were reached, we had very constructive and positive discussions regarding job preferencing and the triggers for bringing Storekeepers into a station where we are not currently performing work, as outlined in Article One of the agreement.;"
     }
    ],
    "status_date": "2026-08-19",
@@ -1631,24 +1631,6 @@
      "title": "Central Load Planner Employees Tentative Agreement 2026 All Markup",
      "url": "https://iam141.org/wp-content/uploads/2026/05/Central-Load-Planner-Employees-Tentative-Agreement-2026_All-Markup.pdf",
      "quote": "Central Load Planner Employees Tentative Agreement 2026 All Markup."
-    },
-    {
-     "status": "Tentative agreement",
-     "date": "2025-09-16",
-     "source": "IAM District 141",
-     "kind": "union",
-     "title": "United Airlines Negotiations Update for September 16, 2025",
-     "url": "https://iam141.org/united-airlines-negotiations-update-for-september-16-2025/",
-     "quote": "Central Load Planners For the CLP contract, we reached a tentative agreement on Article 1 (Qualifications, Positions and Vacancies) that better honors seniority when bidding Lead vacancies or Charter Desk work."
-    },
-    {
-     "status": "Tentative agreement",
-     "date": "2025-09-16",
-     "source": "IAM District 141",
-     "kind": "union",
-     "title": "16 September.3.UA Negotiations Update",
-     "url": "https://iam141.org/wp-content/uploads/2025/09/16-September.3.UA-Negotiations-Update.pdf",
-     "quote": "Central Load Planners For the CLP contract, we reached a tentative agreement on Article 1 (Qualifications, Positions and Vacancies) that better honors seniority when bidding Lead vacancies or C harter Desk work.;"
     }
    ],
    "status_date": "2026-06-26",
@@ -2197,8 +2179,15 @@
    "carrier": "Envoy Air",
    "open": false,
    "craft": "fleet service",
-   "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status": "In negotiations",
+   "status_source": "news",
+   "news": {
+    "title": "Trump envoy salutes ‘humanitari­an’ Putin as talks to win peace ramp up",
+    "date": "2026-10-22",
+    "source": "PressReader",
+    "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE05WklRcm1RQTVlUk9nMW1QWndNZUs0VG9hVGVMWU5nVm1JTVVfMVJqVDhHSDMxNU1jRW5ueFFaam9yRHN2QVpoOC1IUEZ0VlJBbGJ1SHNhOVBQa2E1MV9Rdmo5c1hLd0NsWEJaOElJT0RGZw?oc=5"
+   },
+   "status_date": "2026-10-22"
   },
   {
    "unit": "Envoy",
@@ -2796,8 +2785,15 @@
    "carrier": "Alaska Airlines",
    "open": false,
    "craft": "flight attendants",
-   "status": "Contract in effect",
-   "status_source": "10-K"
+   "status": "Strike vote",
+   "status_source": "news",
+   "news": {
+    "title": "Regional Flight Attendants At Alaska Airlines Expect Strike Vote 'Sooner Rather Than Later' As Contract Talks Drag On",
+    "date": "2025-12-30",
+    "source": "PYOK",
+    "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxON1ZIWWVCWWJ3SmZhTGlBVVdlRG9LX2xOd1pqbVY4WGdtclFVT085TTNnelBNaWNBN293Sm92RmUzWFNTR1Y0Q2Y5Q2NJRzBfN1M1N2dULWhTYVg5WEJneElhR1F4NmhYWG9JZ01TQk9nUUY5T25zalZseWNGYkdHcVd4d3lzUk16TmcwTXdfczBYNU9BZXlLaXlNbkdjSEJ4encyR3hkdmhqTV9ZWXdaNVpEcGEwUFNxV0U2NEduaFU2RDJjemhzMjB1NzhnX2g2TWc1SUUtc25wd0JDNEN4czNnUzkxYmoxZjhaVzMwRWNtZzRw?oc=5"
+   },
+   "status_date": "2025-12-30"
   },
   {
    "unit": "Alaska",
@@ -3204,7 +3200,7 @@
    "craft": "flight attendants",
    "status": "Picketing",
    "status_source": "union",
-   "status_date": "2026-10-09",
+   "status_date": "2026-10-23",
    "news": {
     "title": "Flight Attendants rally at Frontier Airlines headquarters as contract fight continues",
     "date": "2026-09-12",
@@ -3212,6 +3208,15 @@
     "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQb2M0Y3QxMndFTzJrVmlVeW5qTTBQWGZyd0NwSEhBWlNhZ0xWdm41ZERCOERwcGw3ODZNYWpibUo5SUxPaWRiY1Ztdkp2ejI2anEyUEZ3cHBWUHZrUnNXOTZlYXh1RzRMSG9PUHA1aUdVX3A5Z3hOSmVRYldWRFFvWGw3NndlUEhzb1h1R3dBUm5jalc2V252SGVtaVVBYnFjWEJoM2EyT2RXT1hla1VZ?oc=5"
    },
    "union_events": [
+    {
+     "status": "Picketing",
+     "date": "2026-10-23",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "3 Days Out: AFA Frontier Picket at PHL",
+     "url": "https://afacwa.org/3-days-out-afa-frontier-picket-at-phl/",
+     "quote": "Your support during the picket will show management that Frontier Flight Attendants won’t accept anything less than industry standards."
+    },
     {
      "status": "Picketing",
      "date": "2026-10-09",
@@ -3238,25 +3243,16 @@
      "title": "AFA Frontier Flight Attendants Picket in Denver",
      "url": "https://afacwa.org/afa-frontier-flight-attendants-picket-in-denver/",
      "quote": "AFA Frontier Flight Attendants Picket in Denver."
-    },
-    {
-     "status": "Picketing",
-     "date": "2026-08-29",
-     "source": "AFA-CWA",
-     "kind": "union",
-     "title": "Two Weeks Out: AFA Frontier Picket",
-     "url": "https://afacwa.org/two-weeks-out-afa-frontier-picket/",
-     "quote": "Join AFA Frontier Flight Attendants for their Claws Out, Contract Now picket at Frontier Airlines HQ!"
     }
    ],
    "union_event": {
     "status": "Picketing",
-    "date": "2026-10-09",
+    "date": "2026-10-23",
     "source": "AFA-CWA",
     "kind": "union",
-    "title": "Turn Out for Horizon and Frontier Flight Attendant Pickets",
-    "url": "https://afacwa.org/turn-out-for-horizon-and-frontier-flight-attendant-pickets/",
-    "quote": "Turn Out for Horizon and Frontier Flight Attendant Pickets."
+    "title": "3 Days Out: AFA Frontier Picket at PHL",
+    "url": "https://afacwa.org/3-days-out-afa-frontier-picket-at-phl/",
+    "quote": "Your support during the picket will show management that Frontier Flight Attendants won’t accept anything less than industry standards."
    }
   },
   {
@@ -3273,15 +3269,9 @@
    "carrier": "Frontier Airlines",
    "open": true,
    "craft": "mechanics",
-   "status": "Ratified",
-   "status_source": "news",
-   "status_date": "2026-09-16",
-   "news": {
-    "title": "Teamsters Frontier Airlines Mechanics Ratify Five-Year Contract With 93% Vote",
-    "date": "2026-09-16",
-    "source": "TradingView",
-    "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPdGZISmdSSkdmcVA0WUtwTXZVcW1HajV2VF9sRFk2enZuaHJEd3pia0FxSGZGZ1BneDJaRU9sNEFXbU5EcEdVR3pLMHVRZ3JadE5DWVJRMWNiajhDaTdjZU1EV0xuNXNNT0dEQkZ5VWVCX2dMblV2TFZodFpXT2hmNXh2Qzdsa2NhZVRaMVFZSFp4Y0dxWnBaVlFmVVE3ZU94bEV6c3YxVWU2S0x4dUZwTlZpTWtVU1pfRDdGZ2dTZEpmUVpfVFg0aHVfZEQxbC1aeHYwbktndnJRbm1KRXJR?oc=5"
-   }
+   "status": "In negotiations",
+   "status_source": "10-K",
+   "status_date": "2026-02-18"
   },
   {
    "unit": null,

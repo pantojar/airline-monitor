@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-25T10:39:33Z",
+  "at": "2026-10-25T21:22:47Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -113,9 +113,9 @@
    }
   }
  },
- "generated": "2026-10-25T10:39:57Z",
+ "generated": "2026-10-25T21:32:15Z",
  "news": {
-  "at": "2026-10-25T10:39:56Z",
+  "at": "2026-10-25T21:23:10Z",
   "items": 80,
   "errors": []
  },
@@ -133,7 +133,7 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-25T10:39:56Z",
+  "at": "2026-10-25T21:23:10Z",
   "latest": "2026-10-20",
   "rows": 1197,
   "diesel_close": "2026-10-22",
@@ -146,7 +146,7 @@
   "errors": []
  },
  "labor": {
-  "at": "2026-10-19T15:37:13Z",
+  "at": "2026-10-25T21:32:15Z",
   "groups": 96,
   "errors": [],
   "union_sites": [
@@ -155,7 +155,7 @@
     "url": "https://iam141.org",
     "groups": 13,
     "method": "wp-posts,wp-media",
-    "items": 202,
+    "items": 204,
     "pdfs_read": 0
    },
    {
@@ -163,8 +163,8 @@
     "url": "https://atd142.org",
     "groups": 14,
     "method": "wp-posts,wp-media",
-    "items": 598,
-    "pdfs_read": 0
+    "items": 599,
+    "pdfs_read": 3
    },
    {
     "name": "IAM (international)",
@@ -239,7 +239,7 @@
     "url": "https://www.twu.org",
     "groups": 26,
     "method": "wp-posts,wp-media",
-    "items": 148,
+    "items": 104,
     "pdfs_read": 0
    },
    {
@@ -274,7 +274,7 @@
     "groups": 4,
     "method": "html list",
     "items": 20,
-    "pdfs_read": 0
+    "pdfs_read": 4
    }
   ]
  }
