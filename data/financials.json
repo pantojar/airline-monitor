@@ -1479,6 +1479,23 @@
   "basis": "SEC XBRL"
  },
  {
+  "ticker": "JBLU",
+  "carrier": "JetBlue Airways",
+  "quarter": "2026-09",
+  "rev": 2812.0,
+  "opex": 2956.0,
+  "labor": 946.0,
+  "fuel": 868.0,
+  "opinc": -144.0,
+  "ni": -257.0,
+  "buyback": null,
+  "div": null,
+  "cash": 1258.0,
+  "sti": null,
+  "debt": 8393.0,
+  "basis": "SEC XBRL"
+ },
+ {
   "ticker": "ULCC",
   "carrier": "Frontier Group Holdings",
   "quarter": "2023-03",
