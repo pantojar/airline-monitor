@@ -350,6 +350,10 @@ def update_labor(root, meta, ua, carriers, force=False):
     today = dt.date.today()
     horizon = (today + dt.timedelta(days=548)).isoformat()
     groups, news_cache = [], {}
+    try:
+        manual = json.load(open(os.path.join(root, "config", "labor_groups_manual.json"), encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError):
+        manual = []
     for t, rec in companies.items():
         for g in (rec.get("tenk") or {}).get("groups", []):
             unit = g.get("unit")
@@ -409,6 +413,7 @@ def update_labor(root, meta, ua, carriers, force=False):
         # companies that describe contracts in prose: one row per craft the prose mentions, status from news only
         prose = (rec.get("tenk") or {}).get("prose") or []
         if prose and not (rec.get("tenk") or {}).get("groups"):
+            manual_rows = {m["craft"]: m for m in manual if m["ticker"] == t}
             carrier = aliases.get(t, {"name": t})
             text = " ".join(prose)
             for craft, craft_rx, craft_q in CRAFTS:
@@ -417,7 +422,20 @@ def update_labor(root, meta, ua, carriers, force=False):
                 row = {"ticker": t, "unit": None, "group": craft[:1].upper() + craft[1:], "union": "", "employees": None,
                        "amendable_text": "See 10-K text", "amendable": None, "precision": None, "footnote": None,
                        "carrier": carrier["name"], "craft": craft, "open": None, "status": "See 10-K text", "status_source": "10-K", "prose": True}
-                if carrier.get("query"):
+                m = manual_rows.get(craft)
+                if m:
+                    # hand-entered from the contracts themselves (config/labor_groups_manual.json)
+                    amend = m.get("amendable") or ""
+                    row.update(union=m.get("union", ""), amendable=amend or None, precision={4: "year", 7: "month"}.get(len(amend), "day") if amend else None,
+                               amendable_text=None if amend else "Not stated", employees=m.get("employees"), prose=False, manual=True)
+                    if amend:
+                        row["open"] = amend < today.isoformat()[:len(amend)]
+                        soon = not row["open"] and amend[:7] <= (today + dt.timedelta(days=365)).isoformat()[:7]
+                        row["status"] = "Past amendable date" if row["open"] else ("Amendable within a year" if soon else "Contract in effect")
+                    else:
+                        row["status"] = "Not stated"
+                far = bool(m and m.get("amendable") and m["amendable"] > horizon)
+                if carrier.get("query") and not far:  # a contract years from opening: old headlines don't set its status
                     key = (carrier["query"], craft)
                     if key not in news_cache:
                         try:

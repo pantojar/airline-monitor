@@ -30,6 +30,7 @@ To run it on demand, open the **Actions** tab, choose **Refresh data**, then **R
 | `config/dot_carriers.json` | Operating carriers shown on the DOT tab: DOT code, owner, group, role, and footnotes |
 | `data/news_curated.json` | Hand-written news items with summaries; shown alongside the automatic feed |
 | `config/labor_sources.json` | Union websites the bargaining tracker reads (see below) |
+| `config/labor_groups_manual.json` | Union and amendable date for carriers whose 10-K describes contracts only in prose (Allegiant): one line per craft |
 
 ### Adding a union or negotiations website
 
