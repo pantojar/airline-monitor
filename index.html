@@ -531,12 +531,12 @@ window.dash = (function () {
 
     <div class="am-card" id="ltable-card">
       <h2>All represented groups</h2>
-      <p class="am-note">Open contracts first, oldest amendable date at the top. Click a status to open its source.</p>
+      <p class="am-note">Open contracts first, oldest amendable date at the top. Click a column header to sort by it (click again to reverse, a third time to return to this order). Click a status to open its source.</p>
       <div class="am-tbl-box">
         <table class="am-t" id="labor-table" data-source="labor_groups" data-row-key="ticker,unit,group">
           <thead><tr>
-            <th class="l" data-field="carrier">Carrier</th><th class="l" data-field="group">Group</th><th class="l am-hn" data-field="union">Union</th>
-            <th data-field="employees">Employees</th><th class="l" data-field="amendable_text">Amendable</th><th class="l" data-field="status">Status</th><th class="l w" data-field="news">Latest source</th>
+            <th class="l" data-field="carrier"><button data-lsort="carrier">Carrier</button></th><th class="l" data-field="group"><button data-lsort="group">Group</button></th><th class="l am-hn" data-field="union"><button data-lsort="union">Union</button></th>
+            <th data-field="employees"><button data-lsort="employees">Employees</button></th><th class="l" data-field="amendable_text"><button data-lsort="amendable">Amendable</button></th><th class="l" data-field="status"><button data-lsort="status">Status</button></th><th class="l w" data-field="news"><button data-lsort="source">Latest source</button></th>
           </tr></thead>
           <tbody></tbody>
         </table>
@@ -1301,6 +1301,23 @@ dash.calc('dotpeer', {
     'Amendable within a year': ['Amendable within a year', 'var(--c5)'], 'Contract in effect': ['Contract in effect', 'var(--cds-chart-muted)'],
   };
   const lcat = (st) => LCAT[st] || ['Other', 'var(--cds-chart-muted)'];
+  // table sorting: null = default order (open contracts first, oldest amendable date first)
+  let lSortCol = null, lSortDir = 1;
+  const LSTATUS = Object.keys(LCAT);
+  const lKey = {
+    carrier: (r) => r.carrier || '', group: (r) => r.group || '', union: (r) => r.union || '',
+    employees: (r) => r.employees ?? null,
+    amendable: (r) => (amDate(r) ? amDate(r).getTime() : null),
+    status: (r) => (LSTATUS.includes(r.status) ? LSTATUS.indexOf(r.status) : LSTATUS.length),
+    source: (r) => (r.status_date && r.status_source !== '10-K' ? r.status_date : null),
+  };
+  root.querySelectorAll('#labor-table th button[data-lsort]').forEach((b) => b.addEventListener('click', () => {
+    const c = b.dataset.lsort;
+    // text columns start A–Z; numbers and dates start largest / newest first, except amendable (oldest first)
+    const first = ['carrier', 'group', 'union', 'amendable', 'status'].includes(c) ? 1 : -1;
+    if (lSortCol !== c) { lSortCol = c; lSortDir = first; } else if (lSortDir === first) lSortDir = -first; else { lSortCol = null; lSortDir = 1; }
+    dash.setParams({});
+  }));
   const amDate = (r) => {
     if (!r.amendable) return null;
     const a = r.amendable;
@@ -1556,7 +1573,19 @@ dash.calc('dotpeer', {
       calendar(document.getElementById('cal-chart'), rows.filter((r) => !r.prose));
       // table
       const ord = (r) => (r.open && r.status !== 'Ratified' ? 0 : r.prose ? 2 : 1);
-      const sorted = rows.slice().sort((a, b) => ord(a) - ord(b) || String(a.amendable || '9999').localeCompare(String(b.amendable || '9999')) || (b.employees || 0) - (a.employees || 0));
+      const dflt = (a, b) => ord(a) - ord(b) || String(a.amendable || '9999').localeCompare(String(b.amendable || '9999')) || (b.employees || 0) - (a.employees || 0);
+      const sorted = rows.slice().sort((a, b) => {
+        if (!lSortCol) return dflt(a, b);
+        const f = lKey[lSortCol], va = f(a), vb = f(b);
+        if (va === null || va === '') return vb === null || vb === '' ? dflt(a, b) : 1;  // blanks always last
+        if (vb === null || vb === '') return -1;
+        const c = typeof va === 'string' ? va.localeCompare(vb) : va - vb;
+        return c * lSortDir || dflt(a, b);
+      });
+      root.querySelectorAll('#labor-table th').forEach((th) => {
+        const b = th.querySelector('button'); th.removeAttribute('aria-sort');
+        if (b && b.dataset.lsort === lSortCol) th.setAttribute('aria-sort', lSortDir > 0 ? 'ascending' : 'descending');
+      });
       document.querySelector('#labor-table tbody').replaceChildren(...sorted.map((r) => {
         const tr = document.createElement('tr'); tr.dataset.key = [r.ticker, r.unit || '', r.group].join(',');
         const st = td('', 'l ws'); const pill = document.createElement('span'); pill.className = 'am-pill'; pill.style.color = lcat(r.status)[1];
