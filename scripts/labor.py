@@ -434,6 +434,9 @@ def update_labor(root, meta, ua, carriers, force=False):
                         row["status"] = "Past amendable date" if row["open"] else ("Amendable within a year" if soon else "Contract in effect")
                     else:
                         row["status"] = "Not stated"
+                if m and m.get("status"):
+                    row["status"], row["status_date"], row["status_source"] = m["status"], m.get("status_date"), "manual"
+                    row["filing_quote"] = m.get("status_note")
                 far = bool(m and m.get("amendable") and m["amendable"] > horizon)
                 if carrier.get("query") and not far:  # a contract years from opening: old headlines don't set its status
                     key = (carrier["query"], craft)

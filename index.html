@@ -1593,12 +1593,13 @@ dash.calc('dotpeer', {
         if (link && /^https:\/\//.test(link)) { const a = document.createElement('a'); a.href = link; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = r.status; pill.append(a); } else pill.textContent = r.status;
         st.append(pill);
         if (r.status_date && r.status_source !== '10-K') { const d = document.createElement('div'); d.style.color = 'var(--color-fg-muted)'; d.style.marginTop = '3px';
-          d.textContent = (r.status_date.length === 7 ? d3.utcFormat('%b %Y')(new Date(r.status_date + '-15T00:00:00Z')) : d3.utcFormat('%b %-d, %Y')(new Date(r.status_date.slice(0, 10) + 'T00:00:00Z'))) + ' · ' + (r.status_source === 'union' && r.union_event ? r.union_event.source : r.status_source === '10-Q' ? '10-Q' : r.status_source === '10-K' ? '10-K' : 'news');
+          d.textContent = (r.status_date.length === 7 ? d3.utcFormat('%b %Y')(new Date(r.status_date + '-15T00:00:00Z')) : d3.utcFormat('%b %-d, %Y')(new Date(r.status_date.slice(0, 10) + 'T00:00:00Z'))) + ' · ' + (r.status_source === 'union' && r.union_event ? r.union_event.source : r.status_source === '10-Q' ? '10-Q' : r.status_source === '10-K' ? '10-K' : r.status_source === 'manual' ? 'entered by hand' : 'news');
           st.append(d); }
         const src = td('', 'l w');
         if (r.status_source === 'union' && r.union_event) { const e = r.union_event; const a = document.createElement('a'); a.href = e.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = e.title; a.style.color = 'inherit';
           const q = document.createElement('div'); q.style.color = 'var(--color-fg-muted)'; q.textContent = '“' + e.quote.slice(0, 220) + (e.quote.length > 220 ? '…' : '') + '”';
           src.append(a, q); }
+        else if (r.status_source === 'manual' && r.filing_quote) src.textContent = r.filing_quote;
         else if (r.status_source === '10-Q' && r.filing_quote) src.textContent = '“' + r.filing_quote.slice(0, 220) + (r.filing_quote.length > 220 ? '…' : '') + '”';
         else if (r.news) { const a = document.createElement('a'); a.href = r.news.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = r.news.title; a.style.color = 'inherit';
           const m = document.createElement('span'); m.style.color = 'var(--color-fg-muted)'; m.textContent = ' — ' + (r.news.source || '');
