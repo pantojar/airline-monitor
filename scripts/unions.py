@@ -92,7 +92,7 @@ def clause_names_group(clause, toks):
     return all(any(w.startswith(t) for w in words) for t in toks)
 
 
-PREP_RE = re.compile(r"\bprepar|\bupcoming\b|\bahead of\b|\bsurvey|\bin advance of\b|\bwill (begin|open|start)\b", re.I)
+PREP_RE = re.compile(r"\bprepar|\bupcoming\b|\bahead of\b|\bsurvey|\bin advance of\b|\bwill (begin|open|start)\b|\b(set|scheduled) to begin\b", re.I)
 
 
 def status_of(clause):
@@ -308,6 +308,9 @@ def events_for(item, groups, site, aliases):
     if not ANNOUNCE_RE.search(text):
         return []
     owner = doc_owner(counts)
+    # a post about getting ready to bargain ("prepare for upcoming negotiations", "talks begin April 1, 2027")
+    # mentions negotiating throughout; none of that means talks are underway
+    prep_doc = any(PREP_RE.search(c) and re.search(r"negotiat|bargain", c, re.I) for c in CLAUSE_SPLIT.split(text))
     out = []
     for g in groups:
         unit = g.get("unit")
@@ -338,7 +341,7 @@ def events_for(item, groups, site, aliases):
             if re.match(r"\s*(In the news|In the media|Related|See also|Read more)\b", clause, re.I):
                 continue  # a list of other outlets' headlines, not this union's own report
             st = status_of(clause)
-            if not st:
+            if not st or (st == "In negotiations" and prep_doc):
                 continue
             if dedicated:
                 ok = not re.search(OTHER_CARRIERS, clause, re.I) or names_own(clause)
