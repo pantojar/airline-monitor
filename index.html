@@ -125,6 +125,9 @@ window.dash = (function () {
 #dash-root .am-head{padding:28px 0 4px}
 #dash-root .am-head h1{display:inline-block;margin:0;background:var(--sign-navy);color:var(--sign-on-navy);font-weight:800;font-size:var(--cds-font-size-title);line-height:1;letter-spacing:.01em;
   padding:14px 20px 10px;border-radius:4px;box-shadow:inset 0 0 0 3px var(--sign-navy),inset 0 0 0 5px var(--sign-on-navy)}
+#dash-root .am-titlerow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+#dash-root .am-beta{font-weight:800;font-size:14px;line-height:1;padding:7px 10px 5px;border-radius:3px;background:var(--sign-light);color:var(--sign-on-light);border:1.5px solid var(--sign-navy)}
+#dash-root .am-betanote{margin:10px 0 0;max-width:46rem;font-size:var(--cds-font-size-caption);line-height:1.5;color:var(--color-fg);background:color-mix(in srgb,var(--sign-light) 55%,var(--color-panel));border-left:3px solid var(--sign-navy);padding:8px 12px 6px;border-radius:0 3px 3px 0}
 #dash-root .am-take{color:var(--color-fg);font-size:20px;line-height:1.45;margin:18px 0 0;max-width:46rem;font-weight:400}
 #dash-root .am-take b{font-weight:800}
 
@@ -232,8 +235,9 @@ window.dash = (function () {
 
 <div class="am">
   <header class="am-head" id="top">
-    <h1>Airline Financial Monitor</h1>
+    <div class="am-titlerow"><h1>Airline Financial Monitor</h1><span class="am-beta">Beta</span></div>
     <p class="am-asof" id="asof">Loading latest data…</p>
+    <p class="am-betanote">This dashboard is still being built. Some figures and statuses may be wrong while sources are added and checked, so confirm anything important against the linked filing or source before relying on it.</p>
     <p class="am-take" id="takeaway">
       In each carrier's latest reported quarter, <b><span class="dash-skeleton" data-source="summary" data-field="n_loss" data-row="0">—</span></b> of
       <b><span class="dash-skeleton" data-source="summary" data-field="n_active" data-row="0">—</span></b> active carriers posted an operating loss.
