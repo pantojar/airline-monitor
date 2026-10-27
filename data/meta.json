@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-27T14:33:28Z",
+  "at": "2026-10-27T17:23:49Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -113,10 +113,10 @@
    }
   }
  },
- "generated": "2026-10-27T14:33:53Z",
+ "generated": "2026-10-27T17:33:21Z",
  "news": {
-  "at": "2026-10-27T14:33:51Z",
-  "items": 80,
+  "at": "2026-10-27T17:24:11Z",
+  "items": 78,
   "errors": []
  },
  "dot": {
@@ -133,7 +133,7 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-27T14:33:51Z",
+  "at": "2026-10-27T17:24:11Z",
   "latest": "2026-10-20",
   "rows": 1197,
   "diesel_close": "2026-10-26",
@@ -146,6 +146,7 @@
   "errors": []
  },
  "labor": {
+  "at": "2026-10-27T17:33:21Z",
   "groups": 96,
   "errors": [],
   "union_sites": [
@@ -154,7 +155,7 @@
     "url": "https://iam141.org",
     "groups": 13,
     "method": "wp-posts,wp-media",
-    "items": 204,
+    "items": 205,
     "pdfs_read": 0
    },
    {
@@ -163,7 +164,7 @@
     "groups": 14,
     "method": "wp-posts,wp-media",
     "items": 599,
-    "pdfs_read": 3
+    "pdfs_read": 0
    },
    {
     "name": "IAM (international)",
@@ -228,7 +229,7 @@
    {
     "name": "Teamsters",
     "url": "https://teamster.org",
-    "groups": 14,
+    "groups": 17,
     "method": "rss /feed/",
     "items": 12,
     "pdfs_read": 0
@@ -236,7 +237,7 @@
    {
     "name": "TWU",
     "url": "https://www.twu.org",
-    "groups": 26,
+    "groups": 27,
     "method": "wp-posts,wp-media",
     "items": 104,
     "pdfs_read": 0
@@ -273,7 +274,7 @@
     "groups": 4,
     "method": "html list",
     "items": 20,
-    "pdfs_read": 4
+    "pdfs_read": 0
    }
   ]
  }
