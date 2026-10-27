@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-27T17:23:49Z",
+  "at": "2026-10-27T17:53:07Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -113,10 +113,10 @@
    }
   }
  },
- "generated": "2026-10-27T17:33:21Z",
+ "generated": "2026-10-27T18:02:23Z",
  "news": {
-  "at": "2026-10-27T17:24:11Z",
-  "items": 78,
+  "at": "2026-10-27T17:53:29Z",
+  "items": 80,
   "errors": []
  },
  "dot": {
@@ -133,7 +133,7 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-27T17:24:11Z",
+  "at": "2026-10-27T17:53:30Z",
   "latest": "2026-10-20",
   "rows": 1197,
   "diesel_close": "2026-10-26",
@@ -146,6 +146,7 @@
   "errors": []
  },
  "labor": {
+  "at": "2026-10-27T18:02:23Z",
   "groups": 96,
   "errors": [],
   "union_sites": [
@@ -228,7 +229,7 @@
    {
     "name": "Teamsters",
     "url": "https://teamster.org",
-    "groups": 17,
+    "groups": 18,
     "method": "rss /feed/",
     "items": 12,
     "pdfs_read": 0

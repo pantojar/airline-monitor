@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-27T17:33:21Z",
+ "generated": "2026-10-27T18:02:23Z",
  "companies": {
   "DAL": {
    "ticker": "DAL",
@@ -3435,18 +3435,19 @@
    "ticker": "RJET",
    "unit": null,
    "group": "Flight attendants",
-   "union": "",
+   "union": "International Brotherhood of Teamsters (IBT)",
    "employees": null,
-   "amendable_text": "See 10-K text",
-   "amendable": null,
-   "precision": null,
+   "amendable_text": null,
+   "amendable": "2027-01",
+   "precision": "month",
    "footnote": null,
    "carrier": "Republic Airways",
    "craft": "flight attendants",
-   "open": null,
+   "open": false,
    "status": "Tentative agreement",
    "status_source": "news",
-   "prose": true,
+   "prose": false,
+   "manual": true,
    "news": {
     "title": "Mesa Airlines & Republic Airways Flight Attendants Reach Joint Tentative Agreement Following Airline Merger",
     "date": "2025-12-16",
