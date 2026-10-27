@@ -2,5 +2,6 @@
  {"ticker": "ALGT", "craft": "pilots", "union": "International Brotherhood of Teamsters (IBT)", "amendable": "2028-07", "status": "Ratified", "status_date": "2026-08", "status_note": "Two-year agreement ratified August 2026"},
  {"ticker": "ALGT", "craft": "flight attendants", "union": "Transport Workers Union (TWU)", "amendable": "2029-04-15"},
  {"ticker": "ALGT", "craft": "mechanics", "union": "International Brotherhood of Teamsters (IBT)", "amendable": "2028-10-31"},
- {"ticker": "ALGT", "craft": "dispatchers", "union": "International Brotherhood of Teamsters (IBT)", "amendable": "2026-05"}
+ {"ticker": "ALGT", "craft": "dispatchers", "union": "International Brotherhood of Teamsters (IBT)", "amendable": "2026-05"},
+ {"ticker": "RJET", "craft": "flight attendants", "union": "International Brotherhood of Teamsters (IBT)"}
 ]
