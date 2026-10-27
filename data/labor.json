@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-27T18:02:23Z",
+ "generated": "2026-10-27T18:14:06Z",
  "companies": {
   "DAL": {
    "ticker": "DAL",
@@ -1191,10 +1191,10 @@
    "status": "Ratified",
    "status_source": "union",
    "news": {
-    "title": "United Airlines' flight attendants ratify deal for 31% wage hike, boarding pay",
-    "date": "2026-05-13",
-    "source": "Reuters",
-    "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNOGcxamduZXpIVHZ3RGRvcmhHV3VGMFhxZWFzVUhkakZqSkoybFpsbmR6aDJ4VGJ1cXBTdG5uLTBvbGpBaE5KLWIxZS1YMzQ1N3ZOMXcxczFOakEyQkhBNHd5RGdDbW1xVU9YMTFqdVctTFhSdFJBSXdIXzAwa0ZkLXAwcmFjODBCSC0yRmo0YW5iakhGa19GTm5SRFRyWC0yS2pFOE5sa2hwSHV3U090X1RKZWZqVVBVLVlJeUMwbU85WFd2bTJ2SFVB?oc=5"
+    "title": "Senior United Flight Attendants Land $100 Hr As New Contract Ratified",
+    "date": "2026-05-14",
+    "source": "Open Jaw",
+    "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNVDFxdkpYNEpxMGEtcC03TkVNTU1EOGxzNG1nWFFLU3ZscGdMZHdGaHM2WHlTcTc3M1JFVjdoNUtXM1BRNF90cUJHVEhVejJwcWM3bVBhbExoZlJKNkZsSm9oUlhHUWM3QWhTUWFqVUpfbmo1dXl1eDNoVktka0NzS0RVQzhJMFRzVTBtc0kteDMzenBIOWFqekdjd0JhVjJVVEMzTGhIZG03Tlk2U2g3UkpuenhRaU03?oc=5"
    },
    "status_date": "2026-05-12",
    "filing_quote": "In May 2026, the Company's flight attendants, represented by the Association of Flight Attendants (\"AFA\"), ratified a five-year agreement, effective May 31, 2026, with the Company that included improvements with respect to scheduling, reserve requirements and other quality of life improvements, as well as pay rate increases.",
@@ -1933,47 +1933,8 @@
    "carrier": "American Airlines",
    "open": false,
    "craft": "mechanics",
-   "status": "In negotiations",
-   "status_source": "union",
-   "union_events": [
-    {
-     "status": "In negotiations",
-     "date": "2026-07-03",
-     "source": "IAM District 142",
-     "kind": "union",
-     "title": "TWU-IAM Association M&R Membership Bulletin – July 3, 2026",
-     "url": "https://atd142.org/twu-iam-association-mr-membership-bulletin-july-3-2026/",
-     "quote": "July 3, 2026 TWU/IAM Association M&R Membership Bulletin Negotiations Committees Meet to Prepare for Upcoming Bargaining Brothers and Sisters, The TWU/IAM Association Negotiating Committee met this week in Phoenix, Arizona, with the negotiations subcommittees representing our Maintenance & Related (M&R), Maintenance Control Technicians (MCT), Maintenance Training Specialists (MTS), and Material Lo"
-    },
-    {
-     "status": "In negotiations",
-     "date": "2026-07-03",
-     "source": "IAM District 142",
-     "kind": "union",
-     "title": "2026 July 3 MR Association Bulletin",
-     "url": "https://atd142.org/wp-content/uploads/2026/07/2026_July_3-MR-Association-Bulletin-1.pdf",
-     "quote": "July 3, 2026 TWU/IAM Association M&R Membership Bulletin Negotiations Committees Meet to Prepare for Upcoming Bargaining Brothers and Sisters, The TWU/IAM Association Negotiating Committee met this week in Phoenix, Arizona, with the negotiations subcommittees representing our Maintenance & Related (M&R), Maintenance Control Technicians (MCT), Maintenance Training Specialists (MTS), and Material L "
-    },
-    {
-     "status": "In negotiations",
-     "date": "2026-07-02",
-     "source": "IAM District 142",
-     "kind": "union",
-     "title": "2026 July 3 MR Association Bulletin",
-     "url": "https://atd142.org/wp-content/uploads/2026/07/2026_July_3-MR-Association-Bulletin.pdf",
-     "quote": "July 3, 2026 TWU/IAM Association M&R Membership Bulletin Negotiations Committees Meet to Prepare for Upcoming Bargaining Brothers and Sisters, The TWU/IAM Association Negotiating Committee met this week in Phoenix, Arizona, with the negotiations subcommittees representing our Maintenance & Related (M&R), Maintenance Control Technicians (MCT), Maintenance Training Specialists (MTS), and Material L "
-    }
-   ],
-   "status_date": "2026-07-03",
-   "union_event": {
-    "status": "In negotiations",
-    "date": "2026-07-03",
-    "source": "IAM District 142",
-    "kind": "union",
-    "title": "TWU-IAM Association M&R Membership Bulletin – July 3, 2026",
-    "url": "https://atd142.org/twu-iam-association-mr-membership-bulletin-july-3-2026/",
-    "quote": "July 3, 2026 TWU/IAM Association M&R Membership Bulletin Negotiations Committees Meet to Prepare for Upcoming Bargaining Brothers and Sisters, The TWU/IAM Association Negotiating Committee met this week in Phoenix, Arizona, with the negotiations subcommittees representing our Maintenance & Related (M&R), Maintenance Control Technicians (MCT), Maintenance Training Specialists (MTS), and Material Lo"
-   }
+   "status": "Amendable within a year",
+   "status_source": "10-K"
   },
   {
    "unit": "Mainline",
@@ -1989,47 +1950,8 @@
    "carrier": "American Airlines",
    "open": false,
    "craft": "mechanics",
-   "status": "In negotiations",
-   "status_source": "union",
-   "union_events": [
-    {
-     "status": "In negotiations",
-     "date": "2026-07-03",
-     "source": "IAM District 142",
-     "kind": "union",
-     "title": "TWU-IAM Association M&R Membership Bulletin – July 3, 2026",
-     "url": "https://atd142.org/twu-iam-association-mr-membership-bulletin-july-3-2026/",
-     "quote": "July 3, 2026 TWU/IAM Association M&R Membership Bulletin Negotiations Committees Meet to Prepare for Upcoming Bargaining Brothers and Sisters, The TWU/IAM Association Negotiating Committee met this week in Phoenix, Arizona, with the negotiations subcommittees representing our Maintenance & Related (M&R), Maintenance Control Technicians (MCT), Maintenance Training Specialists (MTS), and Material Lo"
-    },
-    {
-     "status": "In negotiations",
-     "date": "2026-07-03",
-     "source": "IAM District 142",
-     "kind": "union",
-     "title": "2026 July 3 MR Association Bulletin",
-     "url": "https://atd142.org/wp-content/uploads/2026/07/2026_July_3-MR-Association-Bulletin-1.pdf",
-     "quote": "July 3, 2026 TWU/IAM Association M&R Membership Bulletin Negotiations Committees Meet to Prepare for Upcoming Bargaining Brothers and Sisters, The TWU/IAM Association Negotiating Committee met this week in Phoenix, Arizona, with the negotiations subcommittees representing our Maintenance & Related (M&R), Maintenance Control Technicians (MCT), Maintenance Training Specialists (MTS), and Material L "
-    },
-    {
-     "status": "In negotiations",
-     "date": "2026-07-02",
-     "source": "IAM District 142",
-     "kind": "union",
-     "title": "2026 July 3 MR Association Bulletin",
-     "url": "https://atd142.org/wp-content/uploads/2026/07/2026_July_3-MR-Association-Bulletin.pdf",
-     "quote": "July 3, 2026 TWU/IAM Association M&R Membership Bulletin Negotiations Committees Meet to Prepare for Upcoming Bargaining Brothers and Sisters, The TWU/IAM Association Negotiating Committee met this week in Phoenix, Arizona, with the negotiations subcommittees representing our Maintenance & Related (M&R), Maintenance Control Technicians (MCT), Maintenance Training Specialists (MTS), and Material L "
-    }
-   ],
-   "status_date": "2026-07-03",
-   "union_event": {
-    "status": "In negotiations",
-    "date": "2026-07-03",
-    "source": "IAM District 142",
-    "kind": "union",
-    "title": "TWU-IAM Association M&R Membership Bulletin – July 3, 2026",
-    "url": "https://atd142.org/twu-iam-association-mr-membership-bulletin-july-3-2026/",
-    "quote": "July 3, 2026 TWU/IAM Association M&R Membership Bulletin Negotiations Committees Meet to Prepare for Upcoming Bargaining Brothers and Sisters, The TWU/IAM Association Negotiating Committee met this week in Phoenix, Arizona, with the negotiations subcommittees representing our Maintenance & Related (M&R), Maintenance Control Technicians (MCT), Maintenance Training Specialists (MTS), and Material Lo"
-   }
+   "status": "Amendable within a year",
+   "status_source": "10-K"
   },
   {
    "unit": "Mainline",
@@ -2469,11 +2391,11 @@
     },
     {
      "status": "In negotiations",
-     "date": "2026-09-14",
+     "date": "2026-08-21",
      "source": "IAM District 142",
      "kind": "union",
      "title": "IAM/PSA Airlines Stores Negotiations Update",
-     "url": "https://atd142.org/iam-psa-airlines-stores-negotiations-update-14/",
+     "url": "https://atd142.org/iam-psa-airlines-stores-negotiations-update-13/",
      "quote": "IAM/PSA Airlines Stores Negotiations Update."
     },
     {
@@ -2481,9 +2403,9 @@
      "date": "2026-08-21",
      "source": "IAM District 142",
      "kind": "union",
-     "title": "IAM/PSA Airlines Stores Negotiations Update",
-     "url": "https://atd142.org/iam-psa-airlines-stores-negotiations-update-13/",
-     "quote": "IAM/PSA Airlines Stores Negotiations Update."
+     "title": "161-OH-Stores IAM PSA Airlines Stores Negotiations Update",
+     "url": "https://atd142.org/wp-content/uploads/2026/08/161-OH-Stores_IAM-PSA-Airlines-Stores-Negotiations-Update.pdf",
+     "quote": "161-OH-Stores IAM PSA Airlines Stores Negotiations Update."
     }
    ],
    "status_date": "2026-10-09",
