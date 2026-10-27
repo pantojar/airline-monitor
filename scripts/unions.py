@@ -92,9 +92,14 @@ def clause_names_group(clause, toks):
     return all(any(w.startswith(t) for w in words) for t in toks)
 
 
+PREP_RE = re.compile(r"\bprepar|\bupcoming\b|\bahead of\b|\bsurvey|\bin advance of\b|\bwill (begin|open|start)\b", re.I)
+
+
 def status_of(clause):
     for st, rx in STATUS_RULES:
         if re.search(rx, clause, re.I):
+            if st == "In negotiations" and PREP_RE.search(clause):
+                return None  # "committees meet to prepare for upcoming negotiations" is bargaining prep, not talks
             return st
     return None
 
