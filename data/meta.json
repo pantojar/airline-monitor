@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-28T19:02:13Z",
+  "at": "2026-10-28T19:03:30Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -27,8 +27,8 @@
      "form": "10-Q",
      "filed": "2026-07-23"
     },
-    "quarters": 14,
-    "through": "2026-06"
+    "quarters": 15,
+    "through": "2026-09"
    },
    "LUV": {
     "ok": true,
@@ -45,8 +45,8 @@
      "form": "10-Q",
      "filed": "2026-08-04"
     },
-    "quarters": 14,
-    "through": "2026-06"
+    "quarters": 15,
+    "through": "2026-09"
    },
    "JBLU": {
     "ok": true,
@@ -81,8 +81,8 @@
      "form": "10-Q",
      "filed": "2026-05-01"
     },
-    "quarters": 13,
-    "through": "2026-03"
+    "quarters": 15,
+    "through": "2026-09"
    },
    "SAVE": {
     "ok": true,
@@ -90,8 +90,8 @@
      "form": "10-K/A",
      "filed": "2026-04-30"
     },
-    "quarters": 12,
-    "through": "2025-12"
+    "quarters": 14,
+    "through": "2026-06"
    },
    "SKYW": {
     "ok": true,
@@ -108,14 +108,14 @@
      "form": "10-Q",
      "filed": "2026-07-31"
     },
-    "quarters": 5,
-    "through": "2026-06"
+    "quarters": 6,
+    "through": "2026-09"
    }
   }
  },
- "generated": "2026-10-28T19:02:38Z",
+ "generated": "2026-10-28T19:03:55Z",
  "news": {
-  "at": "2026-10-28T19:02:37Z",
+  "at": "2026-10-28T19:03:54Z",
   "items": 80,
   "errors": []
  },
@@ -133,7 +133,7 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-28T19:02:37Z",
+  "at": "2026-10-28T19:03:54Z",
   "latest": "2026-10-27",
   "rows": 1202,
   "diesel_close": "2026-10-27"
@@ -277,7 +277,7 @@
   ]
  },
  "cpi": {
-  "at": "2026-10-28T19:02:37Z",
+  "at": "2026-10-28T19:03:54Z",
   "cpiw": "2026-09",
   "cpiu": "2026-09"
  }

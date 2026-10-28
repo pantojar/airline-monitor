@@ -880,6 +880,26 @@
   "basis": "SEC XBRL"
  },
  {
+  "ticker": "AAL",
+  "carrier": "American Airlines Group",
+  "quarter": "2026-09",
+  "rev": null,
+  "opex": null,
+  "labor": null,
+  "fuel": null,
+  "opinc": null,
+  "ni": null,
+  "buyback": null,
+  "div": null,
+  "cash": null,
+  "sti": null,
+  "debt": null,
+  "oplease": null,
+  "da": null,
+  "rent": 305.0,
+  "basis": "SEC XBRL"
+ },
+ {
   "ticker": "LUV",
   "carrier": "Southwest Airlines",
   "quarter": "2023-03",
@@ -1460,6 +1480,26 @@
   "basis": "SEC XBRL"
  },
  {
+  "ticker": "ALK",
+  "carrier": "Alaska Air Group",
+  "quarter": "2026-09",
+  "rev": null,
+  "opex": null,
+  "labor": null,
+  "fuel": null,
+  "opinc": null,
+  "ni": null,
+  "buyback": null,
+  "div": null,
+  "cash": null,
+  "sti": null,
+  "debt": null,
+  "oplease": null,
+  "da": null,
+  "rent": 62.5,
+  "basis": "SEC XBRL"
+ },
+ {
   "ticker": "JBLU",
   "carrier": "JetBlue Airways",
   "quarter": "2023-03",
@@ -1776,7 +1816,7 @@
   "debt": 429.0,
   "oplease": 2639.0,
   "da": 11.0,
-  "rent": 127.0,
+  "rent": 131.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1796,7 +1836,7 @@
   "debt": 433.0,
   "oplease": 2654.0,
   "da": 12.0,
-  "rent": 131.0,
+  "rent": 148.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1816,7 +1856,7 @@
   "debt": 490.0,
   "oplease": 2852.0,
   "da": 13.0,
-  "rent": 138.0,
+  "rent": 150.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1836,7 +1876,7 @@
   "debt": 474.0,
   "oplease": 2989.0,
   "da": 14.0,
-  "rent": 143.0,
+  "rent": 125.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1856,7 +1896,7 @@
   "debt": 469.0,
   "oplease": 3141.0,
   "da": 16.0,
-  "rent": 147.0,
+  "rent": 159.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1876,7 +1916,7 @@
   "debt": 455.0,
   "oplease": 3617.0,
   "da": 18.0,
-  "rent": 155.0,
+  "rent": 147.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1896,7 +1936,7 @@
   "debt": 474.0,
   "oplease": 3758.0,
   "da": 19.0,
-  "rent": 167.0,
+  "rent": 177.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1916,7 +1956,7 @@
   "debt": 507.0,
   "oplease": 3966.0,
   "da": 19.0,
-  "rent": 174.0,
+  "rent": 192.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1936,7 +1976,7 @@
   "debt": 512.0,
   "oplease": 4284.0,
   "da": 20.0,
-  "rent": 181.0,
+  "rent": 161.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1956,7 +1996,7 @@
   "debt": 565.0,
   "oplease": 4310.0,
   "da": 21.0,
-  "rent": 181.0,
+  "rent": 194.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1976,7 +2016,7 @@
   "debt": 673.0,
   "oplease": 4364.0,
   "da": 24.0,
-  "rent": 186.0,
+  "rent": 181.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1996,7 +2036,7 @@
   "debt": 620.0,
   "oplease": 4849.0,
   "da": 26.0,
-  "rent": 196.0,
+  "rent": 212.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2016,7 +2056,7 @@
   "debt": 588.0,
   "oplease": 4665.0,
   "da": 62.0,
-  "rent": 238.0,
+  "rent": 265.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2036,7 +2076,7 @@
   "debt": 511.0,
   "oplease": 4736.0,
   "da": 56.0,
-  "rent": 243.0,
+  "rent": 266.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2056,7 +2096,7 @@
   "debt": 486.0,
   "oplease": 4568.0,
   "da": 59.0,
-  "rent": 278.0,
+  "rent": 301.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2076,7 +2116,7 @@
   "debt": 2105.8,
   "oplease": 110.1,
   "da": 54.7,
-  "rent": null,
+  "rent": 5.3,
   "basis": "SEC XBRL"
  },
  {
@@ -2096,7 +2136,7 @@
   "debt": 2158.0,
   "oplease": 113.4,
   "da": 53.9,
-  "rent": null,
+  "rent": 5.3,
   "basis": "SEC XBRL"
  },
  {
@@ -2516,7 +2556,7 @@
   "debt": 312.6,
   "oplease": 19.9,
   "da": 24.8,
-  "rent": null,
+  "rent": 0.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2536,7 +2576,7 @@
   "debt": 282.1,
   "oplease": 19.0,
   "da": 25.0,
-  "rent": null,
+  "rent": 0.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2556,7 +2596,7 @@
   "debt": 301.3,
   "oplease": 18.2,
   "da": 24.7,
-  "rent": null,
+  "rent": 0.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2576,7 +2616,7 @@
   "debt": 323.3,
   "oplease": 17.4,
   "da": 24.4,
-  "rent": null,
+  "rent": 0.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2596,7 +2636,47 @@
   "debt": 306.9,
   "oplease": 16.6,
   "da": 25.2,
-  "rent": null,
+  "rent": 0.0,
+  "basis": "SEC XBRL"
+ },
+ {
+  "ticker": "SNCY",
+  "carrier": "Sun Country Airlines",
+  "quarter": "2026-06",
+  "rev": null,
+  "opex": null,
+  "labor": null,
+  "fuel": null,
+  "opinc": null,
+  "ni": null,
+  "buyback": null,
+  "div": null,
+  "cash": null,
+  "sti": null,
+  "debt": null,
+  "oplease": null,
+  "da": null,
+  "rent": 0.0,
+  "basis": "SEC XBRL"
+ },
+ {
+  "ticker": "SNCY",
+  "carrier": "Sun Country Airlines",
+  "quarter": "2026-09",
+  "rev": null,
+  "opex": null,
+  "labor": null,
+  "fuel": null,
+  "opinc": null,
+  "ni": null,
+  "buyback": null,
+  "div": null,
+  "cash": null,
+  "sti": null,
+  "debt": null,
+  "oplease": null,
+  "da": null,
+  "rent": 0.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2616,7 +2696,7 @@
   "debt": 3512.5,
   "oplease": 2800.1,
   "da": 78.0,
-  "rent": 84.2,
+  "rent": 85.3,
   "basis": "SEC XBRL"
  },
  {
@@ -2636,7 +2716,7 @@
   "debt": 3400.1,
   "oplease": 2994.8,
   "da": 80.5,
-  "rent": 91.1,
+  "rent": 92.1,
   "basis": "SEC XBRL"
  },
  {
@@ -2656,7 +2736,7 @@
   "debt": 3355.0,
   "oplease": 3319.4,
   "da": 82.8,
-  "rent": 95.8,
+  "rent": 97.4,
   "basis": "SEC XBRL"
  },
  {
@@ -2676,7 +2756,7 @@
   "debt": 3439.1,
   "oplease": 3523.7,
   "da": 79.5,
-  "rent": 106.3,
+  "rent": 106.5,
   "basis": "SEC XBRL"
  },
  {
@@ -2696,7 +2776,7 @@
   "debt": 3391.8,
   "oplease": 3827.8,
   "da": 81.3,
-  "rent": 117.2,
+  "rent": 115.2,
   "basis": "SEC XBRL"
  },
  {
@@ -2716,7 +2796,7 @@
   "debt": 3318.9,
   "oplease": 4138.8,
   "da": 84.5,
-  "rent": 124.7,
+  "rent": 125.3,
   "basis": "SEC XBRL"
  },
  {
@@ -2736,7 +2816,7 @@
   "debt": 3287.2,
   "oplease": 4523.5,
   "da": 84.0,
-  "rent": 133.3,
+  "rent": 148.5,
   "basis": "SEC XBRL"
  },
  {
@@ -2756,7 +2836,7 @@
   "debt": 2210.5,
   "oplease": 4592.9,
   "da": 75.4,
-  "rent": 141.8,
+  "rent": 152.9,
   "basis": "SEC XBRL"
  },
  {
@@ -2776,7 +2856,7 @@
   "debt": 2767.7,
   "oplease": 4438.7,
   "da": null,
-  "rent": null,
+  "rent": 135.5,
   "basis": "SEC XBRL"
  },
  {
@@ -2796,7 +2876,7 @@
   "debt": 2688.9,
   "oplease": 4468.5,
   "da": 62.9,
-  "rent": 142.0,
+  "rent": 140.7,
   "basis": "SEC XBRL"
  },
  {
@@ -2816,7 +2896,7 @@
   "debt": 931.0,
   "oplease": 22.6,
   "da": 58.0,
-  "rent": 150.8,
+  "rent": 154.1,
   "basis": "SEC XBRL"
  },
  {
@@ -2836,7 +2916,47 @@
   "debt": 1258.7,
   "oplease": 0.0,
   "da": 57.7,
-  "rent": 100.6,
+  "rent": 102.7,
+  "basis": "SEC XBRL"
+ },
+ {
+  "ticker": "SAVE",
+  "carrier": "Spirit Aviation Holdings",
+  "quarter": "2026-03",
+  "rev": null,
+  "opex": null,
+  "labor": null,
+  "fuel": null,
+  "opinc": null,
+  "ni": null,
+  "buyback": null,
+  "div": null,
+  "cash": null,
+  "sti": null,
+  "debt": null,
+  "oplease": null,
+  "da": null,
+  "rent": 135.5,
+  "basis": "SEC XBRL"
+ },
+ {
+  "ticker": "SAVE",
+  "carrier": "Spirit Aviation Holdings",
+  "quarter": "2026-06",
+  "rev": null,
+  "opex": null,
+  "labor": null,
+  "fuel": null,
+  "opinc": null,
+  "ni": null,
+  "buyback": null,
+  "div": null,
+  "cash": null,
+  "sti": null,
+  "debt": null,
+  "oplease": null,
+  "da": null,
+  "rent": 135.5,
   "basis": "SEC XBRL"
  },
  {
@@ -3136,7 +3256,7 @@
   "debt": null,
   "oplease": 8.4,
   "da": 30.6,
-  "rent": 0.6,
+  "rent": 0.0,
   "basis": "SEC XBRL"
  },
  {
@@ -3156,7 +3276,7 @@
   "debt": null,
   "oplease": 8.6,
   "da": 30.9,
-  "rent": 0.6,
+  "rent": 0.0,
   "basis": "SEC XBRL"
  },
  {
@@ -3176,7 +3296,7 @@
   "debt": 1025.4,
   "oplease": 140.4,
   "da": null,
-  "rent": 19.6,
+  "rent": -1.1,
   "basis": "SEC XBRL"
  },
  {
@@ -3217,6 +3337,26 @@
   "oplease": 133.3,
   "da": 35.2,
   "rent": 2.1,
+  "basis": "SEC XBRL"
+ },
+ {
+  "ticker": "RJET",
+  "carrier": "Republic Airways Holdings",
+  "quarter": "2026-09",
+  "rev": null,
+  "opex": null,
+  "labor": null,
+  "fuel": null,
+  "opinc": null,
+  "ni": null,
+  "buyback": null,
+  "div": null,
+  "cash": null,
+  "sti": null,
+  "debt": null,
+  "oplease": null,
+  "da": null,
+  "rent": 0.2,
   "basis": "SEC XBRL"
  }
 ]
