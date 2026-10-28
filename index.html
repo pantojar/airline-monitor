@@ -45,7 +45,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
 <script src="vendor/d3.min.js"></script>
 <script>
 window.dash = (function () {
-  var DEFAULTS = { group: 'All', basis: 'lq', dbasis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', pgroup: 'All', lcarrier: 'All', lopen: false };
+  var DEFAULTS = { group: 'All', basis: 'lq', dbasis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', pgroup: 'All', lcarrier: 'All', lopen: false, cpiidx: 'cpiw', cpispan: '12m', cpifrom: null, cpito: null };
   var params = Object.assign({}, DEFAULTS), calcs = {}, order = [], res = null, fns = [];
   var DATA = null, state = 'loading';
   function compute() {
@@ -76,12 +76,13 @@ window.dash = (function () {
       get('fuel_spot').catch(function () { return []; }),
       get('exec_pay').catch(function () { return []; }),
       get('labor').catch(function () { return { groups: [], companies: {} }; }),
+      get('cpi').catch(function () { return {}; }),
     ]).then(function (v) {
       var today = new Date().toISOString().slice(0, 10);
       var curated = v[2].filter(function (r) { return !(r.kind === 'Upcoming' && r.date < today); });
       DATA = { financials: v[0], carriers: v[1], news: curated.concat(v[3]), dot: v[5], dot_carriers: v[6], meta: [v[4] || {}],
         dot_annual: v[7], dot_fuel: v[8], fuel_spot: v[9].map(function (r) { return { date: r[0], price: r[1], est: r[2] === 1 }; }), exec_pay: v[10],
-        labor_groups: v[11].groups || [], labor_companies: Object.values(v[11].companies || {}), labor_meta: [{ generated: v[11].generated }] };
+        labor_groups: v[11].groups || [], labor_companies: Object.values(v[11].companies || {}), labor_meta: [{ generated: v[11].generated }], cpi: [v[12] || {}] };
       res = null; state = 'ok';
       var g = v[4] && v[4].generated ? new Date(v[4].generated) : null;
       asOf(g && !isNaN(g)
@@ -125,6 +126,7 @@ window.dash = (function () {
 #dash-root .am-head{padding:28px 0 4px}
 #dash-root .am-head h1{display:inline-block;margin:0;background:var(--sign-navy);color:var(--sign-on-navy);font-weight:800;font-size:var(--cds-font-size-title);line-height:1;letter-spacing:.01em;
   padding:14px 20px 10px;border-radius:4px;box-shadow:inset 0 0 0 3px var(--sign-navy),inset 0 0 0 5px var(--sign-on-navy)}
+#dash-root #cpi-range .am-sel{margin-left:4px;padding:4px 8px 2px}
 #dash-root .am-titlerow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 #dash-root .am-beta{font-weight:800;font-size:14px;line-height:1;padding:7px 10px 5px;border-radius:3px;background:var(--sign-light);color:var(--sign-on-light);border:1.5px solid var(--sign-navy)}
 #dash-root .am-betanote{margin:10px 0 0;max-width:46rem;font-size:var(--cds-font-size-caption);line-height:1.5;color:var(--color-fg);background:color-mix(in srgb,var(--sign-light) 55%,var(--color-panel));border-left:3px solid var(--sign-navy);padding:8px 12px 6px;border-radius:0 3px 3px 0}
@@ -479,6 +481,31 @@ window.dash = (function () {
 
   <!-- PAY -->
   <section class="am-page am-stack" id="pay" hidden>
+    <div class="am-card" id="cpi-card">
+      <h2>Consumer prices</h2>
+      <p class="am-note">How much prices rose over any period you choose. Consumer Price Index, U.S. city average, all items, not seasonally adjusted (Bureau of Labor Statistics). CPI-W covers urban wage earners and clerical workers and is the index most labor contracts use; CPI-U covers all urban consumers.</p>
+      <div class="am-bar">
+        <span id="cpi-idx"><button class="am-chip" data-idx="cpiw">CPI-W</button> <button class="am-chip" data-idx="cpiu">CPI-U</button></span>
+        <span class="sp"></span>
+        <span id="cpi-span">
+          <button class="am-chip" data-span="6m">6 months</button> <button class="am-chip" data-span="12m">12 months</button>
+          <button class="am-chip" data-span="2y">2 years</button> <button class="am-chip" data-span="3y">3 years</button>
+          <button class="am-chip" data-span="5y">5 years</button> <button class="am-chip" data-span="10y">10 years</button>
+        </span>
+      </div>
+      <div class="am-bar" id="cpi-range">
+        <label class="am-chk">From <select class="am-sel" id="cpi-fm" aria-label="From month"></select><select class="am-sel" id="cpi-fy" aria-label="From year"></select></label>
+        <label class="am-chk">to <select class="am-sel" id="cpi-tm" aria-label="To month"></select><select class="am-sel" id="cpi-ty" aria-label="To year"></select></label>
+      </div>
+      <div class="am-tiles" id="cpi-tiles" style="margin-bottom:var(--cds-gap-md)">
+        <div class="am-tile"><div class="k" id="cpi-k">Price change</div><div class="v" id="cpi-chg">—</div><div class="d" id="cpi-chg-d">—</div></div>
+        <div class="am-tile"><div class="k">Average annual rate</div><div class="v" id="cpi-ann">—</div><div class="d">Compounded</div></div>
+        <div class="am-tile"><div class="k">Index level</div><div class="v" id="cpi-lvl">—</div><div class="d" id="cpi-lvl-d">1982–84 = 100</div></div>
+        <div class="am-tile"><div class="k">Latest 12-month change</div><div class="v" id="cpi-yoy">—</div><div class="d" id="cpi-yoy-d">—</div></div>
+      </div>
+      <div class="am-wrap am-chart" id="cpi-chart" data-source="cpi"></div>
+    </div>
+
     <div class="am-card" id="exec-card">
       <h2>CEO pay and the median employee</h2>
       <p class="am-note" id="exec-note">From each company's latest proxy statement. CEO total is the Summary Compensation Table figure used for the SEC-required pay ratio. Compensation actually paid adds the change in value of the CEO's stock awards during the year, so it rises and falls with the share price. Median employee pay is the company's own figure for its middle-paid employee.</p>
@@ -1304,6 +1331,60 @@ dash.calc('dotpeer', {
   // ---------- pay controls ----------
   const WFG = [['h_pilots', 'Pilots'], ['h_cabin', 'Flight attendants & passenger services'], ['h_handling', 'Aircraft & traffic handling'], ['h_maint', 'Maintenance'], ['h_mgmt', 'General management'], ['h_other', 'Other']];
 
+  // ---------- consumer prices ----------
+  const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  root.querySelectorAll('#cpi-idx .am-chip').forEach((b) => b.addEventListener('click', () => dash.setParams({ cpiidx: b.dataset.idx })));
+  root.querySelectorAll('#cpi-span .am-chip').forEach((b) => b.addEventListener('click', () => dash.setParams({ cpispan: b.dataset.span, cpifrom: null, cpito: null })));
+  const cpiSel = ['cpi-fm', 'cpi-fy', 'cpi-tm', 'cpi-ty'].map((id) => document.getElementById(id));
+  cpiSel.forEach((el) => el.addEventListener('change', () => {
+    const [fm, fy, tm, ty] = cpiSel.map((e) => e.value);
+    let from = fy + '-' + fm, to = ty + '-' + tm;
+    if (from > to) [from, to] = [to, from];
+    dash.setParams({ cpispan: 'custom', cpifrom: from, cpito: to });
+  }));
+  const ymAdd = (ym, n) => { const d = new Date(Date.UTC(+ym.slice(0, 4), +ym.slice(5, 7) - 1 + n, 1)); return d.toISOString().slice(0, 7); };
+  const ymLabel = (ym) => MONTHS[+ym.slice(5, 7) - 1] + ' ' + ym.slice(0, 4);
+  const ymDiff = (a, b) => (+b.slice(0, 4) - +a.slice(0, 4)) * 12 + (+b.slice(5, 7) - +a.slice(5, 7));
+
+  function cpiChart(box, S, idxName) {
+    clearSvg(box);
+    if (S.length < 2) return;
+    const W = Math.max(300, box.clientWidth), H = 300;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).style('display', 'block');
+    const base = S[0].v;
+    const P = S.map((d) => ({ t: new Date(d.ym + '-15T00:00:00Z'), ym: d.ym, v: d.v, c: d.v / base - 1 }));
+    const lo = d3.min(P, (d) => d.c), hi = d3.max(P, (d) => d.c);
+    const y = d3.scaleLinear([Math.min(0, lo), Math.max(0, hi) * 1.08 || 0.01], [H - 22, 10]).nice();
+    const ticks = y.ticks(5);
+    const fmtP = (v) => (v > 0 ? '+' : v < 0 ? '−' : '') + d3.format(Math.abs(hi - lo) < 0.05 ? '.1%' : '.0%')(Math.abs(v));
+    const m = { l: Math.ceil(d3.max(ticks, (t) => textW(svg, fmtP(t)))) + 10, r: 12 };
+    const x = d3.scaleUtc([P[0].t, P[P.length - 1].t], [m.l, W - m.r]);
+    svg.selectAll('line.gr').data(ticks).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', (t) => y(t)).attr('y2', (t) => y(t))
+      .attr('stroke', (t) => (t === 0 ? 'var(--cds-chart-axis)' : 'var(--cds-chart-grid)'));
+    svg.selectAll('text.tk').data(ticks).join('text').attr('x', m.l - 6).attr('y', (t) => y(t) + 4).attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(fmtP);
+    const xt = x.ticks(W < 520 ? 4 : 8);
+    const span = ymDiff(S[0].ym, S[S.length - 1].ym);
+    svg.selectAll('text.xt').data(xt).join('text').attr('x', (t) => x(t)).attr('y', H - 5).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)')
+      .text(d3.utcFormat(span > 36 ? '%Y' : "%b '%y"));
+    svg.append('path').datum(P).attr('fill', 'var(--c1)').attr('opacity', 0.1)
+      .attr('d', d3.area().x((d) => x(d.t)).y0(y(0)).y1((d) => y(d.c)));
+    svg.append('path').datum(P).attr('fill', 'none').attr('stroke', 'var(--c1)').attr('stroke-width', 2).attr('stroke-linejoin', 'round')
+      .attr('d', d3.line().x((d) => x(d.t)).y((d) => y(d.c)));
+    const last = P[P.length - 1];
+    svg.append('circle').attr('cx', x(last.t)).attr('cy', y(last.c)).attr('r', 3.5).attr('fill', 'var(--c1)');
+    const tp = tip(box);
+    const rule = svg.append('line').attr('y1', 10).attr('y2', H - 22).attr('stroke', 'var(--cds-chart-axis)').attr('opacity', 0);
+    const bis = d3.bisector((d) => d.t).center;
+    svg.append('rect').attr('x', m.l).attr('y', 0).attr('width', W - m.l - m.r).attr('height', H).attr('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const [mx, my] = d3.pointer(ev); const d = P[bis(P, x.invert(mx))];
+        rule.attr('x1', x(d.t)).attr('x2', x(d.t)).attr('opacity', 1);
+        const sc = box.clientWidth / W;
+        tp.show(mx * sc, my * sc, ymLabel(d.ym), [{ color: 'var(--c1)', name: 'Change since ' + ymLabel(P[0].ym), value: sgn(d.c) }, { name: idxName + ' index', value: d3.format('.3f')(d.v) }]);
+      })
+      .on('pointerleave', () => { rule.attr('opacity', 0); tp.hide(); });
+  }
+
   // ---------- bargaining ----------
   const lsel = document.getElementById('lcarrier');
   lsel.addEventListener('change', () => dash.setParams({ lcarrier: lsel.value }));
@@ -1667,6 +1748,38 @@ dash.calc('dotpeer', {
 
     // ---------- pay tab ----------
     if (tab === 'pay') {
+      const cpiD = dash.data('cpi');
+      const C = cpiD.status === 'ok' && cpiD.data[0] ? cpiD.data[0] : {};
+      const idx = P.cpiidx === 'cpiu' ? 'cpiu' : 'cpiw', idxName = idx === 'cpiu' ? 'CPI-U' : 'CPI-W';
+      const ser = (C[idx] || []).map(([ym, v]) => ({ ym, v }));
+      root.querySelectorAll('#cpi-idx .am-chip').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.idx === idx)));
+      const span = P.cpispan || '12m';
+      root.querySelectorAll('#cpi-span .am-chip').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.span === span)));
+      if (ser.length > 13) {
+        const first = ser[0].ym, latest = ser[ser.length - 1].ym;
+        const months = { '6m': 6, '12m': 12, '2y': 24, '3y': 36, '5y': 60, '10y': 120 };
+        let to = span === 'custom' && P.cpito ? P.cpito : latest;
+        let from = span === 'custom' && P.cpifrom ? P.cpifrom : ymAdd(to, -(months[span] || 12));
+        if (to > latest) to = latest; if (from < first) from = first; if (from >= to) from = ymAdd(to, -1);
+        // selects
+        const years = d3.range(+first.slice(0, 4), +latest.slice(0, 4) + 1).map(String);
+        const fill = (el, opts, val) => { if (el.options.length !== opts.length) el.replaceChildren(...opts.map(([v, t]) => new Option(t, v))); el.value = val; };
+        const mopts = MONTHS.map((n, i) => [String(i + 1).padStart(2, '0'), n]), yopts = years.map((y) => [y, y]);
+        fill(cpiSel[0], mopts, from.slice(5, 7)); fill(cpiSel[1], yopts, from.slice(0, 4));
+        fill(cpiSel[2], mopts, to.slice(5, 7)); fill(cpiSel[3], yopts, to.slice(0, 4));
+        const S = ser.filter((d) => d.ym >= from && d.ym <= to);
+        const a = S[0], b = S[S.length - 1];
+        const chg = b.v / a.v - 1, n = ymDiff(a.ym, b.ym);
+        document.getElementById('cpi-k').textContent = idxName + ' change';
+        document.getElementById('cpi-chg').textContent = sgn(chg);
+        document.getElementById('cpi-chg-d').textContent = ymLabel(a.ym) + ' to ' + ymLabel(b.ym) + ' (' + [Math.floor(n / 12) ? Math.floor(n / 12) + (Math.floor(n / 12) === 1 ? ' year' : ' years') : '', n % 12 ? n % 12 + (n % 12 === 1 ? ' month' : ' months') : ''].filter(Boolean).join(', ') + ')';
+        document.getElementById('cpi-ann').textContent = sgn(Math.pow(b.v / a.v, 12 / n) - 1);
+        document.getElementById('cpi-lvl').textContent = d3.format('.1f')(a.v) + ' → ' + d3.format('.1f')(b.v);
+        const ya = ser.find((d) => d.ym === ymAdd(latest, -12)), L = ser[ser.length - 1];
+        document.getElementById('cpi-yoy').textContent = ya ? sgn(L.v / ya.v - 1) : '—';
+        document.getElementById('cpi-yoy-d').textContent = ya ? ymLabel(ya.ym) + ' to ' + ymLabel(L.ym) : '—';
+        cpiChart(document.getElementById('cpi-chart'), S, idxName);
+      }
       const ex = dash.data('exec_pay'), ann = dash.data('dot_annual');
       if (ex.status === 'ok') {
         const names = new Map((car.status === 'ok' ? car.data : []).map((c) => [c.ticker, c.carrier]));
