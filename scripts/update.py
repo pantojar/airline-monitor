@@ -16,6 +16,7 @@ Outputs (all in data/):
   dot_annual.json   DOT headcount by employee group and pilot salaries, by carrier and year
   dot_fuel.json     DOT monthly fuel gallons and cost by carrier
   fuel_spot.json    daily Gulf Coast jet fuel spot price (FRED DJFUELUSGULF)
+  cpi.json          monthly CPI-W and CPI-U, U.S. city average, not seasonally adjusted (BLS via FRED)
   exec_pay.json     CEO pay, median employee pay and pay ratio from proxy statements (see scripts/proxy.py)
   labor.json        union contracts from 10-Ks, labor sentences from 10-Qs, and news-based status (see scripts/labor.py)
   meta.json         when each part last refreshed and anything that failed
@@ -428,6 +429,27 @@ def update_fuel_spot(meta):
     meta["fuel_spot"] = info
 
 
+def update_cpi(meta):
+    """Consumer Price Index, U.S. city average, all items, not seasonally adjusted (1982-84=100), from BLS via FRED:
+    CPI-W (CWUR0000SA0, urban wage earners and clerical workers) and CPI-U (CPIAUCNS, all urban consumers)."""
+    out, info = {}, {"at": now_iso()}
+    for key, sid in (("cpiw", "CWUR0000SA0"), ("cpiu", "CPIAUCNS")):
+        try:
+            rows = fred_series(sid, "1990-01-01")
+            if len(rows) < 100:
+                raise ValueError("too few observations")
+            out[key] = [[d[:7], v] for d, v in rows]
+            info[key] = out[key][-1][0]
+        except Exception as e:  # noqa: BLE001
+            info[key + "_error"] = f"{type(e).__name__}: {e}"[:200]
+            prev = load(os.path.join(DATA, "cpi.json"), {}) or {}
+            if prev.get(key):
+                out[key] = prev[key]
+    if out:
+        save(os.path.join(DATA, "cpi.json"), out)
+    meta["cpi"] = info
+
+
 def now_iso():
     return dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
@@ -443,6 +465,7 @@ def main(argv):
         update_news(meta)
     if "--sec-only" not in argv and "--news-only" not in argv:
         update_fuel_spot(meta)
+        update_cpi(meta)
         try:
             listed = [c for c in load(os.path.join(CONFIG, "carriers.json"), []) if c.get("status") == "Active"]
             proxy.update_exec_pay(ROOT, meta, user_agent(), listed, force="--force-proxy" in argv)
