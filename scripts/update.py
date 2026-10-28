@@ -43,7 +43,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG = os.path.join(ROOT, "config")
 DATA = os.path.join(ROOT, "data")
 
-FIELDS = ["rev", "opex", "labor", "fuel", "opinc", "ni", "buyback", "div", "cash", "sti", "debt"]
+FIELDS = ["rev", "opex", "labor", "fuel", "opinc", "ni", "buyback", "div", "cash", "sti", "debt", "oplease"]
 FLOW_FIELDS = ["rev", "opex", "labor", "fuel", "opinc", "ni", "buyback", "div"]
 FIRST_QUARTER = "2023-03"
 
@@ -164,6 +164,9 @@ def extract(cf, QE):
                 add(inst_q(cf, "LongTermDebtAndCapitalLeaseObligationsCurrent", QE), inst_q(cf, "LongTermDebtAndCapitalLeaseObligations", QE))):
         for k, v in alt.items():
             debt.setdefault(k, v)
+    oplease = pick(cf, ["OperatingLeaseLiability"], inst_q, QE)
+    for k, v in add(inst_q(cf, "OperatingLeaseLiabilityCurrent", QE), inst_q(cf, "OperatingLeaseLiabilityNoncurrent", QE)).items():
+        oplease.setdefault(k, v)
     return {
         "rev": pick(cf, ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "RevenueFromContractWithCustomerIncludingAssessedTax"], flow_q, QE),
         "opex": pick(cf, ["OperatingExpenses", "CostsAndExpenses", "OperatingCostsAndExpenses"], flow_q, QE),
@@ -176,6 +179,8 @@ def extract(cf, QE):
         "cash": pick(cf, ["CashAndCashEquivalentsAtCarryingValue", "Cash"], inst_q, QE),
         "sti": pick(cf, ["ShortTermInvestments", "AvailableForSaleSecuritiesDebtSecuritiesCurrent"], inst_q, QE),
         "debt": debt,
+        # operating lease liabilities (current + noncurrent): mostly leased aircraft, which reported debt leaves out
+        "oplease": oplease,
     }
 
 

@@ -271,7 +271,7 @@ window.dash = (function () {
 
     <div class="am-card" id="peer-card">
       <h2>Peer comparison</h2>
-      <p class="am-note" id="peer-note">GAAP figures as filed with the SEC, $ millions. Net income is the bottom line after interest, taxes and special items. Labor is the salaries, wages and benefits line. Debt and net debt are from the latest balance sheet; net debt is debt less cash and short-term investments (negative means more cash than debt), and carriers define debt differently (some include finance leases). Returned to shareholders is buybacks plus dividends paid. Click a header to sort; click a row for that carrier's detail.</p>
+      <p class="am-note" id="peer-note">GAAP figures as filed with the SEC, $ millions. Net income is the bottom line after interest, taxes and special items. Labor is the salaries, wages and benefits line. Debt and net debt are from the latest balance sheet; net debt is debt less cash and short-term investments (negative means more cash than debt). Carriers define debt differently (some include finance leases), and none include operating leases, which is how most aircraft leases are booked; "net debt incl. leases" adds operating lease liabilities so lease-heavy carriers compare fairly with those that own their fleets. Returned to shareholders is buybacks plus dividends paid. Click a header to sort; click a row for that carrier's detail.</p>
       <div class="am-tbl-box">
         <table class="am-t" id="peer-table" data-source="peer" data-row-key="ticker">
           <thead><tr>
@@ -283,6 +283,7 @@ window.dash = (function () {
             <th data-base="opm" data-field="opm_ttm"><button data-sort="opm">Op. margin</button></th>
             <th data-field="debt"><button data-sort="debt">Debt</button></th>
             <th data-field="net_debt"><button data-sort="net_debt">Net debt</button></th>
+            <th data-field="lease_net_debt"><button data-sort="lease_net_debt">Net debt incl. leases</button></th>
             <th data-base="labor" data-field="labor_ttm"><button data-sort="labor">Labor cost</button></th>
             <th data-base="lopex" data-field="lopex_ttm"><button data-sort="lopex">Labor % of opex</button></th>
             <th data-base="lyoy" data-field="lyoy_ttm"><button data-sort="lyoy">Labor cost YoY</button></th>
@@ -700,8 +701,15 @@ dash.calc('peer', {
         liquidity: withCash ? num(withCash.cash) + (num(withCash.sti) || 0) : null,
         debt: withDebt ? num(withDebt.debt) : null,
         // net debt from one balance sheet: debt less cash and short-term investments at the same quarter end
-        net_debt: (() => { const b = rows.filter((r) => num(r.debt) !== null && num(r.cash) !== null).sort((a, b) => (a.quarter < b.quarter ? 1 : -1))[0];
-          return b ? num(b.debt) - num(b.cash) - (num(b.sti) || 0) : null; })(),
+        ...(() => {
+          const b = rows.filter((r) => num(r.debt) !== null && num(r.cash) !== null).sort((a, b) => (a.quarter < b.quarter ? 1 : -1))[0];
+          if (!b) return { net_debt: null, lease_net_debt: null };
+          const nd = num(b.debt) - num(b.cash) - (num(b.sti) || 0);
+          // operating lease liabilities at the same quarter end, or the latest reported in the prior year
+          const l = rows.filter((r) => num(r.oplease) !== null && r.quarter <= b.quarter && r.quarter >= (Number(b.quarter.slice(0, 4)) - 1) + b.quarter.slice(4))
+            .sort((a, c) => (a.quarter < c.quarter ? 1 : -1))[0];
+          return { net_debt: nd, oplease: l ? num(l.oplease) : null, lease_net_debt: l ? nd + num(l.oplease) : null };
+        })(),
         ret_cum: cumOk && rc ? cq.reduce((s, r) => s + retOf(r), 0) : null,
         ni_cum: cumOk ? cq.reduce((s, r) => s + num(r.ni), 0) : null,
       };
@@ -1750,7 +1758,7 @@ dash.calc('dotpeer', {
           lp.append(document.createTextNode(pct(r['lopex_' + pbasis])));
           tr.append(
             td(r.ticker, 'l'), td(r.carrier, 'l am-hn'), td(r.latest ? ql(r.latest) : '—', 'l'),
-            td(fmtM(r['rev_' + pbasis])), td(fmtM(r['ni_' + pbasis]), r['ni_' + pbasis] < 0 ? 'am-neg' : ''), td(pct(op), op < 0 ? 'am-neg' : ''), td(fmtM(r.debt)), td(fmtM(r.net_debt)), td(fmtM(r['labor_' + pbasis])), lp,
+            td(fmtM(r['rev_' + pbasis])), td(fmtM(r['ni_' + pbasis]), r['ni_' + pbasis] < 0 ? 'am-neg' : ''), td(pct(op), op < 0 ? 'am-neg' : ''), td(fmtM(r.debt)), td(fmtM(r.net_debt)), td(fmtM(r.lease_net_debt)), td(fmtM(r['labor_' + pbasis])), lp,
             td(sgn(r['lyoy_' + pbasis])), td(fmtM(r['ret_' + pbasis])), td(pct(r['rl_' + pbasis]), 'am-hn'),
             td(fmtM(r.liquidity), 'am-hn'),
           );
