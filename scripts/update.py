@@ -159,6 +159,30 @@ def add(a, b):
     return {k: a[k] + b[k] for k in a if k in b}
 
 
+RENT_CONCEPTS = ["AircraftRental", "OperatingLeaseCost", "OperatingLeasesRentExpenseNet", "LeaseAndRentalExpense"]
+
+
+def rent_q(cf, QE):
+    """Rent for EBITDAR, per quarter. Aircraft rent where the income statement shows it; otherwise operating lease
+    cost. Some carriers report lease cost only in the annual 10-K: those quarters get a quarter of the latest
+    full-year figure."""
+    out = pick(cf, RENT_CONCEPTS, flow_q, QE)
+    annual = []
+    for c in RENT_CONCEPTS:
+        annual = [f for f in facts(cf, c) if f.get("start") and 350 < days(f["start"], f["end"]) < 380]
+        if annual:
+            break
+    for E in QE:
+        if E in out or not annual:
+            continue
+        prior = [f for f in annual if f["end"] <= E or f["start"] <= E]
+        if prior:
+            f = max(prior, key=lambda g: g["end"])
+            if days(f["end"], E) < 550:
+                out[E] = f["val"] / 4
+    return out
+
+
 def extract(cf, QE):
     debt = pick(cf, ["LongTermDebt"], inst_q, QE)
     for alt in (add(inst_q(cf, "LongTermDebtCurrent", QE), inst_q(cf, "LongTermDebtNoncurrent", QE)),
@@ -184,7 +208,7 @@ def extract(cf, QE):
         "oplease": oplease,
         # for EBITDAR: depreciation and amortization, and operating lease (rent) cost
         "da": pick(cf, ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization", "DepreciationAmortizationAndAccretionNet", "Depreciation"], flow_q, QE),
-        "rent": pick(cf, ["OperatingLeaseCost", "AircraftRental", "OperatingLeasesRentExpenseNet", "LeaseAndRentalExpense"], flow_q, QE),
+        "rent": rent_q(cf, QE),
     }
 
 
