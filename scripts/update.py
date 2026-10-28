@@ -44,8 +44,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG = os.path.join(ROOT, "config")
 DATA = os.path.join(ROOT, "data")
 
-FIELDS = ["rev", "opex", "labor", "fuel", "opinc", "ni", "buyback", "div", "cash", "sti", "debt", "oplease"]
-FLOW_FIELDS = ["rev", "opex", "labor", "fuel", "opinc", "ni", "buyback", "div"]
+FIELDS = ["rev", "opex", "labor", "fuel", "opinc", "ni", "buyback", "div", "cash", "sti", "debt", "oplease", "da", "rent"]
+FLOW_FIELDS = ["rev", "opex", "labor", "fuel", "opinc", "ni", "buyback", "div", "da", "rent"]
 FIRST_QUARTER = "2023-03"
 
 
@@ -182,6 +182,9 @@ def extract(cf, QE):
         "debt": debt,
         # operating lease liabilities (current + noncurrent): mostly leased aircraft, which reported debt leaves out
         "oplease": oplease,
+        # for EBITDAR: depreciation and amortization, and operating lease (rent) cost
+        "da": pick(cf, ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization", "DepreciationAmortizationAndAccretionNet", "Depreciation"], flow_q, QE),
+        "rent": pick(cf, ["OperatingLeaseCost", "AircraftRental", "OperatingLeasesRentExpenseNet", "LeaseAndRentalExpense"], flow_q, QE),
     }
 
 
