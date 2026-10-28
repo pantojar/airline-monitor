@@ -168,7 +168,7 @@ def rent_q(cf, QE):
     full-year figure."""
     out = pick(cf, RENT_CONCEPTS, flow_q, QE)
     annual = []
-    for c in RENT_CONCEPTS:
+    for c in RENT_CONCEPTS + ["OperatingLeasePayments"]:  # last resort: cash paid on operating leases (lease note)
         annual = [f for f in facts(cf, c) if f.get("start") and 350 < days(f["start"], f["end"]) < 380]
         if annual:
             break
@@ -192,7 +192,7 @@ def extract(cf, QE):
     oplease = pick(cf, ["OperatingLeaseLiability"], inst_q, QE)
     for k, v in add(inst_q(cf, "OperatingLeaseLiabilityCurrent", QE), inst_q(cf, "OperatingLeaseLiabilityNoncurrent", QE)).items():
         oplease.setdefault(k, v)
-    return {
+    out = {
         "rev": pick(cf, ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "RevenueFromContractWithCustomerIncludingAssessedTax"], flow_q, QE),
         "opex": pick(cf, ["OperatingExpenses", "CostsAndExpenses", "OperatingCostsAndExpenses"], flow_q, QE),
         "labor": pick(cf, ["LaborAndRelatedExpense"], flow_q, QE),
@@ -210,6 +210,9 @@ def extract(cf, QE):
         "da": pick(cf, ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization", "DepreciationAmortizationAndAccretionNet", "Depreciation"], flow_q, QE),
         "rent": rent_q(cf, QE),
     }
+    # an estimated rent figure alone doesn't make a quarter: keep it only where the quarter was reported
+    out["rent"] = {k: v for k, v in out["rent"].items() if k in out["opinc"]}
+    return out
 
 
 def round1(v):

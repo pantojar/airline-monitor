@@ -301,7 +301,7 @@ window.dash = (function () {
 
     <div class="am-card" id="peer-card">
       <h2>Peer comparison</h2>
-      <p class="am-note" id="peer-note">GAAP figures as filed with the SEC, $ millions. Net income is the bottom line after interest, taxes and special items. Labor is the salaries, wages and benefits line. Debt and net debt are from the latest balance sheet; net debt is debt less cash and short-term investments (negative means more cash than debt). Carriers define debt differently (some include finance leases), and none include operating leases, which is how most aircraft leases are booked; "net debt incl. leases" adds operating lease liabilities so lease-heavy carriers compare fairly with those that own their fleets. Returned to shareholders is buybacks plus dividends paid. Click a header to sort; click a row for that carrier's detail.</p>
+      <p class="am-note" id="peer-note">GAAP figures as filed with the SEC, $ millions. Net income is the bottom line after interest, taxes and special items. Labor is the salaries, wages and benefits line. Debt and net debt are from the latest balance sheet; net debt is debt less cash and short-term investments (negative means more cash than debt). Carriers define debt differently (some include finance leases), and none include operating leases, which is how most aircraft leases are booked; "net debt incl. leases" adds operating lease liabilities so lease-heavy carriers compare fairly with those that own their fleets. Leverage is net debt incl. leases ÷ trailing-12-month EBITDAR (operating income + depreciation and amortization + aircraft rent), the measure credit analysts use for airlines: lower means a stronger balance sheet; "n/m" means EBITDAR was zero or negative. Returned to shareholders is buybacks plus dividends paid. Click a header to sort; click a row for that carrier's detail.</p>
       <div class="am-tbl-box">
         <table class="am-t" id="peer-table" data-source="peer" data-row-key="ticker">
           <thead><tr>
@@ -314,6 +314,7 @@ window.dash = (function () {
             <th data-field="debt"><button data-sort="debt">Debt</button></th>
             <th data-field="net_debt"><button data-sort="net_debt">Net debt</button></th>
             <th data-field="lease_net_debt"><button data-sort="lease_net_debt">Net debt incl. leases</button></th>
+            <th data-field="leverage"><button data-sort="leverage">Leverage (× EBITDAR)</button></th>
             <th data-base="labor" data-field="labor_ttm"><button data-sort="labor">Labor cost</button></th>
             <th data-base="lopex" data-field="lopex_ttm"><button data-sort="lopex">Labor % of opex</button></th>
             <th data-base="lyoy" data-field="lyoy_ttm"><button data-sort="lyoy">Labor cost YoY</button></th>
@@ -769,8 +770,10 @@ dash.calc('peer', {
         })(),
         ret_cum: cumOk && rc ? cq.reduce((s, r) => s + retOf(r), 0) : null,
         ni_cum: cumOk ? cq.reduce((s, r) => s + num(r.ni), 0) : null,
+        // EBITDAR, trailing 12 months: operating income + depreciation & amortization + aircraft rent
+        ebitdar_ttm: ttmOk && t4.every((r) => num(r.da) !== null) ? opinc_ttm + t4.reduce((s, r) => s + num(r.da) + (num(r.rent) || 0), 0) : null,
       };
-    });
+    }).map((o) => Object.assign(o, { leverage: !bad(o.lease_net_debt) && o.ebitdar_ttm > 0 ? o.lease_net_debt / o.ebitdar_ttm : null }));
   },
 });
 
@@ -1399,7 +1402,7 @@ dash.calc('dotpeer', {
     const L = el('div');
     L.append(el('h2', '', 'Trailing 12 months'), tbl([['Measure', 'l'], ['Value']], [
       [['Revenue', 'l'], [fmtM(pr.rev_ttm)]], [['Operating margin', 'l'], [pct(pr.opm_ttm), neg(pr.opm_ttm)]], [['Net income', 'l'], [fmtM(pr.ni_ttm), neg(pr.ni_ttm)]],
-      [['Labor cost', 'l'], [fmtM(pr.labor_ttm)]], [['Labor cost vs prior 12 months', 'l'], [sgn(pr.lyoy_ttm)]], [['Labor as % of operating expense', 'l'], [pct(pr.lopex_ttm)]],
+      [['EBITDAR', 'l'], [fmtM(pr.ebitdar_ttm), neg(pr.ebitdar_ttm)]], [['Labor cost', 'l'], [fmtM(pr.labor_ttm)]], [['Labor cost vs prior 12 months', 'l'], [sgn(pr.lyoy_ttm)]], [['Labor as % of operating expense', 'l'], [pct(pr.lopex_ttm)]],
       [['Returned to shareholders (buybacks + dividends)', 'l'], [fmtM(pr.ret_ttm)]], [['Returned to shareholders ÷ labor cost', 'l'], [pct(pr.rl_ttm)]],
     ]));
     const R = el('div');
@@ -1410,6 +1413,7 @@ dash.calc('dotpeer', {
       [['Debt', 'l'], [fmtM(pr.debt)], ['']],
       [['Net debt', 'l'], [fmtM(pr.net_debt)], ['']],
       [['Net debt incl. operating leases', 'l'], [fmtM(pr.lease_net_debt)], ['']],
+      [['Leverage: net debt incl. leases ÷ EBITDAR', 'l'], [bad(pr.leverage) ? 'n/m' : d3.format('.1f')(pr.leverage) + '×'], [rank('leverage', false) + (bad(pr.leverage) ? '' : ' (1 = lowest)')]],
       [['Operating margin, trailing 12 months', 'l'], [pct(pr.opm_ttm)], [rank('opm_ttm', true)]],
       [['Labor % of operating expense', 'l'], [pct(pr.lopex_ttm)], [rank('lopex_ttm', true)]],
       [['Returned to shareholders ÷ labor', 'l'], [pct(pr.rl_ttm)], [rank('rl_ttm', true)]],
@@ -1995,7 +1999,7 @@ dash.calc('dotpeer', {
           lp.append(document.createTextNode(pct(r['lopex_' + pbasis])));
           tr.append(
             td(r.ticker, 'l'), td(r.carrier, 'l am-hn'), td(r.latest ? ql(r.latest) : '—', 'l'),
-            td(fmtM(r['rev_' + pbasis])), td(fmtM(r['ni_' + pbasis]), r['ni_' + pbasis] < 0 ? 'am-neg' : ''), td(pct(op), op < 0 ? 'am-neg' : ''), td(fmtM(r.debt)), td(fmtM(r.net_debt)), td(fmtM(r.lease_net_debt)), td(fmtM(r['labor_' + pbasis])), lp,
+            td(fmtM(r['rev_' + pbasis])), td(fmtM(r['ni_' + pbasis]), r['ni_' + pbasis] < 0 ? 'am-neg' : ''), td(pct(op), op < 0 ? 'am-neg' : ''), td(fmtM(r.debt)), td(fmtM(r.net_debt)), td(fmtM(r.lease_net_debt)), td(bad(r.leverage) ? (r.ebitdar_ttm !== null && r.ebitdar_ttm <= 0 ? 'n/m' : '—') : d3.format('.1f')(r.leverage) + '×'), td(fmtM(r['labor_' + pbasis])), lp,
             td(sgn(r['lyoy_' + pbasis])), td(fmtM(r['ret_' + pbasis])), td(pct(r['rl_' + pbasis]), 'am-hn'),
             td(fmtM(r.liquidity), 'am-hn'),
           );
