@@ -127,6 +127,32 @@ window.dash = (function () {
 #dash-root .am-head h1{display:inline-block;margin:0;background:var(--sign-navy);color:var(--sign-on-navy);font-weight:800;font-size:var(--cds-font-size-title);line-height:1;letter-spacing:.01em;
   padding:14px 20px 10px;border-radius:4px;box-shadow:inset 0 0 0 3px var(--sign-navy),inset 0 0 0 5px var(--sign-on-navy)}
 #dash-root #cpi-range .am-sel{margin-left:4px;padding:4px 8px 2px}
+#dash-root .am-printbtn{background:var(--sign-navy);color:var(--sign-on-navy);border-color:var(--sign-navy)}
+#dash-root #brief{display:none}
+@media print{
+  @page{margin:0.6in}
+  html,body{background:#fff !important;color:#000}
+  #dash-root{padding:0;max-width:none}
+  #dash-root .am > *:not(#brief){display:none !important}
+  #dash-root #brief{display:block;font-family:var(--font-anthropic-sans);color:#000;font-size:10.5pt;line-height:1.4}
+}
+#dash-root #brief h1{font-size:20pt;font-weight:800;margin:0;color:#14284b}
+#dash-root #brief .b-sub{color:#444;font-size:9pt;margin:4px 0 14px;padding-bottom:8px;border-bottom:2px solid #14284b}
+#dash-root #brief h2{font-size:12pt;font-weight:800;margin:16px 0 6px;color:#14284b;break-after:avoid}
+#dash-root #brief table{border-collapse:collapse;width:100%;font-size:9.5pt;break-inside:auto}
+#dash-root #brief th,#dash-root #brief td{padding:4px 6px 3px;border-bottom:1px solid #ccd;text-align:right;vertical-align:top}
+#dash-root #brief th{font-weight:800;border-bottom:1.5px solid #14284b}
+#dash-root #brief .l{text-align:left}
+#dash-root #brief tr{break-inside:avoid}
+#dash-root #brief .b-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+#dash-root #brief .b-keys{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:2px solid #14284b;margin-bottom:4px}
+#dash-root #brief .b-key{padding:6px 8px 6px 0;border-bottom:1px solid #ccd}
+#dash-root #brief .b-key .k{font-size:8.5pt;color:#444;font-weight:600}
+#dash-root #brief .b-key .v{font-size:16pt;font-weight:800;line-height:1.15}
+#dash-root #brief .b-key .d{font-size:8.5pt;color:#444}
+#dash-root #brief .neg{color:#b00020}
+#dash-root #brief .b-foot{margin-top:16px;padding-top:6px;border-top:1px solid #ccd;font-size:8pt;color:#444}
+#dash-root #brief svg text{font-family:var(--font-anthropic-sans)}
 #dash-root .am-titlerow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 #dash-root .am-beta{font-weight:800;font-size:14px;line-height:1;padding:7px 10px 5px;border-radius:3px;background:var(--sign-light);color:var(--sign-on-light);border:1.5px solid var(--sign-navy)}
 #dash-root .am-betanote{margin:10px 0 0;max-width:46rem;font-size:var(--cds-font-size-caption);line-height:1.5;color:var(--color-fg);background:color-mix(in srgb,var(--sign-light) 55%,var(--color-panel));border-left:3px solid var(--sign-navy);padding:8px 12px 6px;border-radius:0 3px 3px 0}
@@ -259,6 +285,8 @@ window.dash = (function () {
     <button class="am-tab" role="tab" data-tab="notes" aria-selected="false">Sources &amp; notes</button>
   </nav>
 
+  <div id="brief" aria-hidden="true"></div>
+
   <!-- PEERS -->
   <section class="am-page am-stack" id="peers">
     <div class="am-bar">
@@ -352,6 +380,8 @@ window.dash = (function () {
     <div class="am-bar">
       <select class="am-sel" id="car-sel" aria-label="Carrier" data-source="carriers"></select>
       <span class="am-note" id="car-status" style="margin:0"></span>
+      <span class="sp"></span>
+      <button class="am-chip am-printbtn" id="brief-btn" type="button">Print carrier brief</button>
     </div>
     <div class="am-card" id="tiles-card">
       <h2 id="tiles-h">Latest quarter</h2>
@@ -1330,6 +1360,100 @@ dash.calc('dotpeer', {
 
   // ---------- pay controls ----------
   const WFG = [['h_pilots', 'Pilots'], ['h_cabin', 'Flight attendants & passenger services'], ['h_handling', 'Aircraft & traffic handling'], ['h_maint', 'Maintenance'], ['h_mgmt', 'General management'], ['h_other', 'Other']];
+
+  // ---------- printable carrier brief ----------
+  document.getElementById('brief-btn').addEventListener('click', () => { if (buildBrief()) window.print(); });
+  function buildBrief() {
+    const P = dash.params(), t = P.carrier || 'DAL';
+    const fin = dash.data('financials'), peer = dash.data('peer'), ex = dash.data('exec_pay'), lg = dash.data('labor_groups'), car = dash.data('carriers');
+    if (fin.status !== 'ok' || peer.status !== 'ok') return false;
+    const pr = peer.data.find((r) => r.ticker === t); if (!pr) return false;
+    const cinfo = (car.data || []).find((c) => c.ticker === t) || {};
+    const box = document.getElementById('brief'); box.replaceChildren();
+    const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt !== undefined) e.textContent = txt; return e; };
+    const neg = (v) => (num(v) !== null && num(v) < 0 ? 'neg' : '');
+    const today = d3.utcFormat('%B %-d, %Y')(new Date());
+    box.append(el('h1', '', pr.carrier + ' (' + t + ')'));
+    box.append(el('div', 'b-sub', 'Financial brief prepared ' + today + '. Latest reported quarter: ' + ql(pr.latest) + '. Public sources: SEC filings, DOT Form 41, union websites and news. $ millions unless noted. From the Airline Financial Monitor (beta): confirm key figures against the filings before relying on them.'));
+
+    // latest quarter vs a year earlier
+    const rows = fin.data.filter((r) => r.ticker === t);
+    const m = new Map(rows.map((r) => [r.quarter, r]));
+    const lq = m.get(pr.latest) || {}, ya = pr.latest ? m.get(Number(pr.latest.slice(0, 4)) - 1 + pr.latest.slice(4)) || {} : {};
+    const dv = (a, b) => (num(a) === null || !num(b) ? null : num(a) / num(b));
+    const keys = el('div', 'b-keys');
+    const key = (k, v, d, cls) => { const b = el('div', 'b-key'); b.append(el('div', 'k', k), el('div', 'v ' + (cls || ''), v), el('div', 'd', d)); keys.append(b); };
+    const gr = (a, b) => (num(a) === null || !num(b) ? '—' : sgn(num(a) / num(b) - 1) + ' vs ' + ql(ya.quarter));
+    const opmL = dv(lq.opinc, lq.rev), opmY = dv(ya.opinc, ya.rev);
+    const ppts = (a, b) => (a === null || b === null ? '—' : (a - b >= 0 ? '+' : '−') + d3.format('.1f')(Math.abs(a - b) * 100) + ' pts vs ' + ql(ya.quarter));
+    key('Revenue', fmtM(lq.rev), gr(lq.rev, ya.rev));
+    key('Operating margin', pct(opmL), ppts(opmL, opmY), neg(opmL));
+    key('Net income', fmtM(lq.ni), ya.ni !== undefined ? fmtM(ya.ni) + ' in ' + ql(ya.quarter) : '—', neg(lq.ni));
+    key('Labor cost', fmtM(lq.labor), gr(lq.labor, ya.labor));
+    box.append(el('h2', '', 'Latest quarter: ' + ql(pr.latest)), keys);
+
+    // two columns: trailing year and balance sheet / peer standing
+    const grid = el('div', 'b-grid');
+    const tbl = (head, body) => { const tb = el('table'); const tr = el('tr'); head.forEach(([h, c]) => tr.append(el('th', c || '', h))); const th = el('thead'); th.append(tr); const bd = el('tbody');
+      body.forEach((r) => { const x = el('tr'); r.forEach(([v, c]) => x.append(el('td', c || '', v))); bd.append(x); }); tb.append(th, bd); return tb; };
+    const L = el('div');
+    L.append(el('h2', '', 'Trailing 12 months'), tbl([['Measure', 'l'], ['Value']], [
+      [['Revenue', 'l'], [fmtM(pr.rev_ttm)]], [['Operating margin', 'l'], [pct(pr.opm_ttm), neg(pr.opm_ttm)]], [['Net income', 'l'], [fmtM(pr.ni_ttm), neg(pr.ni_ttm)]],
+      [['Labor cost', 'l'], [fmtM(pr.labor_ttm)]], [['Labor cost vs prior 12 months', 'l'], [sgn(pr.lyoy_ttm)]], [['Labor as % of operating expense', 'l'], [pct(pr.lopex_ttm)]],
+      [['Returned to shareholders (buybacks + dividends)', 'l'], [fmtM(pr.ret_ttm)]], [['Returned to shareholders ÷ labor cost', 'l'], [pct(pr.rl_ttm)]],
+    ]));
+    const R = el('div');
+    const act = peer.data.filter((r) => r.active);
+    const rank = (f, hi) => { const v = pr[f]; if (bad(v)) return '—'; const xs = act.map((r) => r[f]).filter((x) => !bad(x)).sort((a, b) => (hi ? b - a : a - b)); return (xs.indexOf(v) + 1) + ' of ' + xs.length; };
+    R.append(el('h2', '', 'Balance sheet and peer standing'), tbl([['Measure', 'l'], ['Value'], ['Peer rank (1 = highest)']], [
+      [['Cash + short-term investments', 'l'], [fmtM(pr.liquidity)], [rank('liquidity', true)]],
+      [['Debt', 'l'], [fmtM(pr.debt)], ['']],
+      [['Net debt', 'l'], [fmtM(pr.net_debt)], ['']],
+      [['Net debt incl. operating leases', 'l'], [fmtM(pr.lease_net_debt)], ['']],
+      [['Operating margin, trailing 12 months', 'l'], [pct(pr.opm_ttm)], [rank('opm_ttm', true)]],
+      [['Labor % of operating expense', 'l'], [pct(pr.lopex_ttm)], [rank('lopex_ttm', true)]],
+      [['Returned to shareholders ÷ labor', 'l'], [pct(pr.rl_ttm)], [rank('rl_ttm', true)]],
+    ]));
+    grid.append(L, R); box.append(grid);
+
+    // operating margin by quarter
+    const qs = rows.filter((r) => num(r.rev) && num(r.opinc) !== null).sort((a, b) => (a.quarter < b.quarter ? -1 : 1)).slice(-12);
+    if (qs.length > 2) {
+      box.append(el('h2', '', 'Operating margin by quarter'));
+      const W = 640, H = 150, ml = 40;
+      const svg = d3.select(box).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('width', '100%');
+      const vals = qs.map((r) => num(r.opinc) / num(r.rev));
+      const y = d3.scaleLinear([Math.min(0, d3.min(vals)), Math.max(0, d3.max(vals))], [H - 22, 10]).nice();
+      const x = d3.scaleBand(qs.map((r) => r.quarter), [ml, W - 4]).padding(0.25);
+      y.ticks(4).forEach((tk) => { svg.append('line').attr('x1', ml).attr('x2', W - 4).attr('y1', y(tk)).attr('y2', y(tk)).attr('stroke', tk === 0 ? '#555' : '#ddd');
+        svg.append('text').attr('x', ml - 5).attr('y', y(tk) + 3).attr('text-anchor', 'end').attr('font-size', 9).attr('fill', '#444').text(d3.format('.0%')(tk)); });
+      qs.forEach((r, i) => { const v = vals[i];
+        svg.append('rect').attr('x', x(r.quarter)).attr('width', x.bandwidth()).attr('y', y(Math.max(0, v))).attr('height', Math.abs(y(v) - y(0))).attr('fill', v < 0 ? '#b00020' : '#1f5fbf');
+        svg.append('text').attr('x', x(r.quarter) + x.bandwidth() / 2).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#444').text(ql(r.quarter).replace(' 20', " '"));
+        svg.append('text').attr('x', x(r.quarter) + x.bandwidth() / 2).attr('y', v < 0 ? y(v) + 10 : y(v) - 3).attr('text-anchor', 'middle').attr('font-size', 8.5).attr('fill', '#222').text(d3.format('.1%')(v)); });
+    }
+
+    // executive pay
+    const e = ex.status === 'ok' ? ex.data.filter((r) => r.ticker === t && !bad(r.ratio)).sort((a, b) => b.fy - a.fy) : [];
+    if (e.length) {
+      const c = e[0], pv = e.find((r) => r.fy === c.fy - 1);
+      const d0 = (v) => (bad(v) ? '—' : (v < 0 ? '−$' : '$') + d3.format(',.0f')(Math.abs(v)));
+      box.append(el('h2', '', 'CEO pay, ' + c.fy + ' proxy'), tbl([['CEO', 'l'], ['Total pay'], ['Comp. actually paid'], ['Median employee'], ['Pay ratio'], ['CEO pay vs prior year']], [
+        [[c.ceo || '—', 'l'], [d0(c.ceo_total)], [d0(c.cap), neg(c.cap)], [d0(c.median)], [d3.format(',.0f')(c.ratio) + ' : 1'], [pv ? sgn(c.ceo_total / pv.ceo_total - 1) : '—']]]));
+    }
+
+    // union contracts
+    const gs = lg.status === 'ok' ? lg.data.filter((r) => r.ticker === t) : [];
+    if (gs.length) {
+      const ord = (r) => (r.open && r.status !== 'Ratified' ? 0 : r.prose ? 2 : 1);
+      const sorted = gs.slice().sort((a, b) => ord(a) - ord(b) || String(a.amendable || '9999').localeCompare(String(b.amendable || '9999')));
+      const sdate = (r) => (r.status_date && r.status_source !== '10-K' ? ' (' + (r.status_date.length === 7 ? mfmt(r.status_date) : d3.utcFormat('%b %-d, %Y')(new Date(r.status_date.slice(0, 10) + 'T00:00:00Z'))) + ')' : '');
+      box.append(el('h2', '', 'Union contracts'), tbl([['Carrier', 'l'], ['Group', 'l'], ['Union', 'l'], ['Employees'], ['Amendable', 'l'], ['Status', 'l']],
+        sorted.map((r) => [[r.carrier, 'l'], [r.group, 'l'], [(r.union || '—').replace(/\s*\(“?[^)]*\)\s*$/, '') || '—', 'l'], [r.employees ? d3.format(',')(r.employees) : '—'], [amText(r), 'l'], [r.status + sdate(r), 'l']])));
+    }
+    box.append(el('div', 'b-foot', 'Definitions: figures are GAAP as filed with the SEC. Labor cost is the salaries, wages and benefits line. Operating margin is operating income ÷ revenue. Returned to shareholders is share buybacks plus dividends paid. Net debt is debt less cash and short-term investments; carriers define debt differently, and the lease-inclusive figure adds operating lease liabilities. Union statuses come from union websites, company filings and news headlines and may lag events. Peer ranks compare the ' + act.length + ' active U.S.-listed passenger airlines on the dashboard.' + (cinfo.note ? ' Note: ' + cinfo.note : '')));
+    return true;
+  }
 
   // ---------- consumer prices ----------
   const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
