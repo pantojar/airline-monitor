@@ -45,7 +45,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
 <script src="vendor/d3.min.js"></script>
 <script>
 window.dash = (function () {
-  var DEFAULTS = { group: 'All', basis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', pgroup: 'All', lcarrier: 'All', lopen: false };
+  var DEFAULTS = { group: 'All', basis: 'lq', dbasis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', pgroup: 'All', lcarrier: 'All', lopen: false };
   var params = Object.assign({}, DEFAULTS), calcs = {}, order = [], res = null, fns = [];
   var DATA = null, state = 'loading';
   function compute() {
@@ -263,8 +263,8 @@ window.dash = (function () {
       <span id="group-chips" data-source="carriers"></span>
       <span class="sp"></span>
       <span id="basis-chips">
-        <button class="am-chip" data-basis="ttm" aria-pressed="true">Trailing 12 months</button>
-        <button class="am-chip" data-basis="lq" aria-pressed="false">Latest quarter</button>
+        <button class="am-chip" data-basis="lq" aria-pressed="true">Latest quarter</button>
+        <button class="am-chip" data-basis="ttm" aria-pressed="false">Trailing 12 months</button>
       </span>
       <label class="am-chk"><input type="checkbox" id="inactive"> Include acquired / ceased</label>
     </div>
@@ -953,7 +953,7 @@ dash.calc('dotpeer', {
   // ---------- operating carriers (DOT) controls ----------
   let dSortCol = 'comp', dSortDir = -1;
   const DBASED = new Set(['rev', 'opm', 'comp', 'lopex', 'casm', 'casmx', 'lcasm', 'fte', 'comp_fte', 'cfyoy', 'asm_fte', 'trasm', 'prasm', 'lf']);
-  root.querySelectorAll('#dbasis-chips .am-chip').forEach((b) => b.addEventListener('click', () => dash.setParams({ basis: b.dataset.basis })));
+  root.querySelectorAll('#dbasis-chips .am-chip').forEach((b) => b.addEventListener('click', () => dash.setParams({ dbasis: b.dataset.basis })));
   const dinact = document.getElementById('dinactive');
   dinact.addEventListener('change', () => dash.setParams({ dinactive: dinact.checked }));
   const dmetric = document.getElementById('dmetric');
@@ -1390,7 +1390,7 @@ dash.calc('dotpeer', {
     });
 
     // controls
-    root.querySelectorAll('#basis-chips .am-chip').forEach((b) => b.setAttribute('aria-pressed', String((P.basis || 'ttm') === b.dataset.basis)));
+    root.querySelectorAll('#basis-chips .am-chip').forEach((b) => b.setAttribute('aria-pressed', String((P.basis || 'lq') === b.dataset.basis)));
     inact.checked = P.inactive === true;
     const gc = document.getElementById('group-chips');
     if (car.status === 'ok') {
@@ -1406,7 +1406,8 @@ dash.calc('dotpeer', {
     }
 
     const allQ = fin.status === 'ok' ? [...new Set(fin.data.map((r) => r.quarter))].sort() : [];
-    const basis = P.basis === 'lq' ? 'lq' : 'ttm';
+    const basis = P.dbasis === 'lq' ? 'lq' : 'ttm';  // DOT tab
+    const pbasis = P.basis === 'ttm' ? 'ttm' : 'lq';  // peer comparison
 
     // ---------- operating carriers (DOT) ----------
     const dpeer = dash.data('dotpeer'), dq = dash.data('dotq'), dcar = dash.data('dot_carriers');
@@ -1722,31 +1723,31 @@ dash.calc('dotpeer', {
     if (tab === 'peers') {
       // peer table
       const tb = document.querySelector('#peer-table tbody');
-      root.querySelectorAll('#peer-table th[data-base]').forEach((th) => th.setAttribute('data-field', th.dataset.base + '_' + basis));
+      root.querySelectorAll('#peer-table th[data-base]').forEach((th) => th.setAttribute('data-field', th.dataset.base + '_' + pbasis));
       root.querySelectorAll('#peer-table th').forEach((th) => {
         const b = th.querySelector('button'); th.removeAttribute('aria-sort');
         if (b && b.dataset.sort === sortCol) th.setAttribute('aria-sort', sortDir > 0 ? 'ascending' : 'descending');
       });
       if (peer.status === 'ok') {
-        const field = BASED.has(sortCol) ? sortCol + '_' + basis : sortCol;
+        const field = BASED.has(sortCol) ? sortCol + '_' + pbasis : sortCol;
         const rows = visiblePeers(peer.data, P).slice().sort((a, b) => {
           const va = a[field], vb = b[field];
           if (bad(va) && typeof va !== 'string') return 1; if (bad(vb) && typeof vb !== 'string') return -1;
           return (typeof va === 'string' ? va.localeCompare(vb) : va - vb) * sortDir;
         });
-        const maxL = d3.max(peer.data, (r) => r['lopex_' + basis]) || 0.5;
+        const maxL = d3.max(peer.data, (r) => r['lopex_' + pbasis]) || 0.5;
         tb.replaceChildren(...rows.map((r) => {
           const tr = document.createElement('tr'); tr.dataset.key = r.ticker; tr.style.cursor = 'pointer';
           if (!r.active) tr.className = 'off';
           const td = (txt, cls) => { const c = document.createElement('td'); if (cls) c.className = cls; c.textContent = txt; return c; };
-          const op = r['opm_' + basis];
+          const op = r['opm_' + pbasis];
           const lp = td('');
-          if (!bad(r['lopex_' + basis])) { const i = document.createElement('i'); i.className = 'am-ib'; i.style.width = Math.round(48 * r['lopex_' + basis] / maxL) + 'px'; lp.append(i); }
-          lp.append(document.createTextNode(pct(r['lopex_' + basis])));
+          if (!bad(r['lopex_' + pbasis])) { const i = document.createElement('i'); i.className = 'am-ib'; i.style.width = Math.round(48 * r['lopex_' + pbasis] / maxL) + 'px'; lp.append(i); }
+          lp.append(document.createTextNode(pct(r['lopex_' + pbasis])));
           tr.append(
             td(r.ticker, 'l'), td(r.carrier, 'l am-hn'), td(r.latest ? ql(r.latest) : '—', 'l'),
-            td(fmtM(r['rev_' + basis])), td(fmtM(r['ni_' + basis]), r['ni_' + basis] < 0 ? 'am-neg' : ''), td(pct(op), op < 0 ? 'am-neg' : ''), td(fmtM(r['labor_' + basis])), lp,
-            td(sgn(r['lyoy_' + basis])), td(fmtM(r['ret_' + basis])), td(pct(r['rl_' + basis]), 'am-hn'),
+            td(fmtM(r['rev_' + pbasis])), td(fmtM(r['ni_' + pbasis]), r['ni_' + pbasis] < 0 ? 'am-neg' : ''), td(pct(op), op < 0 ? 'am-neg' : ''), td(fmtM(r['labor_' + pbasis])), lp,
+            td(sgn(r['lyoy_' + pbasis])), td(fmtM(r['ret_' + pbasis])), td(pct(r['rl_' + pbasis]), 'am-hn'),
             td(fmtM(r.liquidity), 'am-hn'), td(fmtM(r.debt), 'am-hn'),
           );
           return tr;
