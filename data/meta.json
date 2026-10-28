@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-28T10:53:24Z",
+  "at": "2026-10-28T14:37:24Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -61,10 +61,10 @@
     "ok": true,
     "latest_filing": {
      "form": "10-Q",
-     "filed": "2026-05-05"
+     "filed": "2026-10-28"
     },
-    "quarters": 14,
-    "through": "2026-06"
+    "quarters": 15,
+    "through": "2026-09"
    },
    "ALGT": {
     "ok": true,
@@ -113,9 +113,9 @@
    }
   }
  },
- "generated": "2026-10-28T10:53:48Z",
+ "generated": "2026-10-28T14:37:48Z",
  "news": {
-  "at": "2026-10-28T10:53:47Z",
+  "at": "2026-10-28T14:37:47Z",
   "items": 80,
   "errors": []
  },
@@ -133,11 +133,11 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-28T10:53:48Z",
+  "at": "2026-10-28T14:37:47Z",
   "latest": "2026-10-20",
   "rows": 1197,
-  "diesel_close": "2026-10-26",
-  "estimated_through": "2026-10-26",
+  "diesel_close": "2026-10-27",
+  "estimated_through": "2026-10-27",
   "spread": -0.288
  },
  "exec_pay": {
