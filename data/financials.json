@@ -14,6 +14,7 @@
   "cash": 3215.0,
   "sti": 3396.0,
   "debt": 20320.0,
+  "oplease": 7601.0,
   "basis": "SEC XBRL"
  },
  {
@@ -31,6 +32,7 @@
   "cash": 2668.0,
   "sti": 3368.0,
   "debt": 18636.0,
+  "oplease": 7345.0,
   "basis": "SEC XBRL"
  },
  {
@@ -48,6 +50,7 @@
   "cash": 2835.0,
   "sti": 2170.0,
   "debt": 18028.0,
+  "oplease": 7286.0,
   "basis": "SEC XBRL"
  },
  {
@@ -65,6 +68,7 @@
   "cash": 2741.0,
   "sti": 1127.0,
   "debt": 18610.0,
+  "oplease": 7227.0,
   "basis": "SEC XBRL"
  },
  {
@@ -82,6 +86,7 @@
   "cash": 3877.0,
   "sti": 589.0,
   "debt": 18127.0,
+  "oplease": 6945.0,
   "basis": "SEC XBRL"
  },
  {
@@ -99,6 +104,7 @@
   "cash": 4110.0,
   "sti": 124.0,
   "debt": 16783.0,
+  "oplease": 6828.0,
   "basis": "SEC XBRL"
  },
  {
@@ -116,6 +122,7 @@
   "cash": 3969.0,
   "sti": 8.0,
   "debt": 16581.0,
+  "oplease": 6691.0,
   "basis": "SEC XBRL"
  },
  {
@@ -133,6 +140,7 @@
   "cash": 3069.0,
   "sti": 0.0,
   "debt": 15347.0,
+  "oplease": 6577.0,
   "basis": "SEC XBRL"
  },
  {
@@ -150,6 +158,7 @@
   "cash": 3711.0,
   "sti": null,
   "debt": 15076.0,
+  "oplease": 6456.0,
   "basis": "SEC XBRL"
  },
  {
@@ -167,6 +176,7 @@
   "cash": 3331.0,
   "sti": null,
   "debt": 14381.0,
+  "oplease": 6224.0,
   "basis": "SEC XBRL"
  },
  {
@@ -184,6 +194,7 @@
   "cash": 3791.0,
   "sti": null,
   "debt": 14174.0,
+  "oplease": 6099.0,
   "basis": "SEC XBRL"
  },
  {
@@ -201,6 +212,7 @@
   "cash": 4310.0,
   "sti": null,
   "debt": 13308.0,
+  "oplease": 6162.0,
   "basis": "SEC XBRL"
  },
  {
@@ -218,6 +230,7 @@
   "cash": 5053.0,
   "sti": null,
   "debt": 13235.0,
+  "oplease": 6135.0,
   "basis": "SEC XBRL"
  },
  {
@@ -235,6 +248,7 @@
   "cash": 4665.0,
   "sti": null,
   "debt": 12905.0,
+  "oplease": 6032.0,
   "basis": "SEC XBRL"
  },
  {
@@ -252,6 +266,7 @@
   "cash": 3787.0,
   "sti": null,
   "debt": 12105.0,
+  "oplease": 5984.0,
   "basis": "SEC XBRL"
  },
  {
@@ -269,6 +284,7 @@
   "cash": 7634.0,
   "sti": 9522.0,
   "debt": 30666.0,
+  "oplease": 5179.0,
   "basis": "SEC XBRL"
  },
  {
@@ -286,6 +302,7 @@
   "cash": 9605.0,
   "sti": 9533.0,
   "debt": 30293.0,
+  "oplease": 5178.0,
   "basis": "SEC XBRL"
  },
  {
@@ -303,6 +320,7 @@
   "cash": 7478.0,
   "sti": 9608.0,
   "debt": 29581.0,
+  "oplease": 5091.0,
   "basis": "SEC XBRL"
  },
  {
@@ -320,6 +338,7 @@
   "cash": 6058.0,
   "sti": 8330.0,
   "debt": 29075.0,
+  "oplease": 5079.0,
   "basis": "SEC XBRL"
  },
  {
@@ -337,6 +356,7 @@
   "cash": 8401.0,
   "sti": 5591.0,
   "debt": 27017.0,
+  "oplease": 5074.0,
   "basis": "SEC XBRL"
  },
  {
@@ -354,6 +374,7 @@
   "cash": 10864.0,
   "sti": 4384.0,
   "debt": 26444.0,
+  "oplease": 4991.0,
   "basis": "SEC XBRL"
  },
  {
@@ -371,6 +392,7 @@
   "cash": 8812.0,
   "sti": 5352.0,
   "debt": 25486.0,
+  "oplease": 4923.0,
   "basis": "SEC XBRL"
  },
  {
@@ -388,6 +410,7 @@
   "cash": 8769.0,
   "sti": 5706.0,
   "debt": 24653.0,
+  "oplease": 4977.0,
   "basis": "SEC XBRL"
  },
  {
@@ -405,6 +428,7 @@
   "cash": 9370.0,
   "sti": 5960.0,
   "debt": 27663.0,
+  "oplease": 5262.0,
   "basis": "SEC XBRL"
  },
  {
@@ -422,6 +446,7 @@
   "cash": 9354.0,
   "sti": 6262.0,
   "debt": 27079.0,
+  "oplease": 5707.0,
   "basis": "SEC XBRL"
  },
  {
@@ -439,6 +464,7 @@
   "cash": 6730.0,
   "sti": 6599.0,
   "debt": 25428.0,
+  "oplease": 5894.0,
   "basis": "SEC XBRL"
  },
  {
@@ -456,6 +482,7 @@
   "cash": 5942.0,
   "sti": 6298.0,
   "debt": 21266.0,
+  "oplease": 6048.0,
   "basis": "SEC XBRL"
  },
  {
@@ -473,6 +500,7 @@
   "cash": 7869.0,
   "sti": 6298.0,
   "debt": 24193.0,
+  "oplease": 6778.0,
   "basis": "SEC XBRL"
  },
  {
@@ -490,6 +518,7 @@
   "cash": 10166.0,
   "sti": 6471.0,
   "debt": 26464.0,
+  "oplease": 7204.0,
   "basis": "SEC XBRL"
  },
  {
@@ -507,6 +536,7 @@
   "cash": 6648.0,
   "sti": 8005.0,
   "debt": 26398.0,
+  "oplease": 7896.0,
   "basis": "SEC XBRL"
  },
  {
@@ -524,6 +554,7 @@
   "cash": 452.0,
   "sti": 11041.0,
   "debt": 31089.0,
+  "oplease": 7764.0,
   "basis": "SEC XBRL"
  },
  {
@@ -541,6 +572,7 @@
   "cash": 614.0,
   "sti": 11447.0,
   "debt": 30340.0,
+  "oplease": 7937.0,
   "basis": "SEC XBRL"
  },
  {
@@ -558,6 +590,7 @@
   "cash": 577.0,
   "sti": 10005.0,
   "debt": 29308.0,
+  "oplease": 7716.0,
   "basis": "SEC XBRL"
  },
  {
@@ -575,6 +608,7 @@
   "cash": 578.0,
   "sti": 7000.0,
   "debt": 28895.0,
+  "oplease": 7761.0,
   "basis": "SEC XBRL"
  },
  {
@@ -592,6 +626,7 @@
   "cash": 604.0,
   "sti": 7696.0,
   "debt": 27853.0,
+  "oplease": 7730.0,
   "basis": "SEC XBRL"
  },
  {
@@ -609,6 +644,7 @@
   "cash": 605.0,
   "sti": 7841.0,
   "debt": 27209.0,
+  "oplease": 7691.0,
   "basis": "SEC XBRL"
  },
  {
@@ -626,6 +662,7 @@
   "cash": 834.0,
   "sti": 7638.0,
   "debt": 25848.0,
+  "oplease": 7521.0,
   "basis": "SEC XBRL"
  },
  {
@@ -643,6 +680,7 @@
   "cash": 804.0,
   "sti": 6180.0,
   "debt": 24617.0,
+  "oplease": 7068.0,
   "basis": "SEC XBRL"
  },
  {
@@ -660,6 +698,7 @@
   "cash": 835.0,
   "sti": 6631.0,
   "debt": 24217.0,
+  "oplease": 7158.0,
   "basis": "SEC XBRL"
  },
  {
@@ -677,6 +716,7 @@
   "cash": 833.0,
   "sti": 7740.0,
   "debt": 24705.0,
+  "oplease": 7320.0,
   "basis": "SEC XBRL"
  },
  {
@@ -694,6 +734,7 @@
   "cash": 835.0,
   "sti": 6023.0,
   "debt": 24538.0,
+  "oplease": 7347.0,
   "basis": "SEC XBRL"
  },
  {
@@ -711,6 +752,7 @@
   "cash": 954.0,
   "sti": 4882.0,
   "debt": 24639.0,
+  "oplease": 6963.0,
   "basis": "SEC XBRL"
  },
  {
@@ -728,6 +770,7 @@
   "cash": 903.0,
   "sti": 6391.0,
   "debt": 22934.0,
+  "oplease": 6815.0,
   "basis": "SEC XBRL"
  },
  {
@@ -745,6 +788,7 @@
   "cash": 1028.0,
   "sti": 6742.0,
   "debt": 25254.0,
+  "oplease": 6802.0,
   "basis": "SEC XBRL"
  },
  {
@@ -762,6 +806,7 @@
   "cash": 8359.0,
   "sti": 3315.0,
   "debt": 8031.0,
+  "oplease": 1345.0,
   "basis": "SEC XBRL"
  },
  {
@@ -779,6 +824,7 @@
   "cash": 9158.0,
   "sti": 3021.0,
   "debt": 8025.0,
+  "oplease": 1303.0,
   "basis": "SEC XBRL"
  },
  {
@@ -796,6 +842,7 @@
   "cash": 9497.0,
   "sti": 2236.0,
   "debt": 8014.0,
+  "oplease": 1259.0,
   "basis": "SEC XBRL"
  },
  {
@@ -813,6 +860,7 @@
   "cash": 9288.0,
   "sti": 2186.0,
   "debt": 8012.0,
+  "oplease": 1193.0,
   "basis": "SEC XBRL"
  },
  {
@@ -830,6 +878,7 @@
   "cash": 8367.0,
   "sti": 2145.0,
   "debt": 8002.0,
+  "oplease": 1159.0,
   "basis": "SEC XBRL"
  },
  {
@@ -847,6 +896,7 @@
   "cash": 8142.0,
   "sti": 1860.0,
   "debt": 7996.0,
+  "oplease": 1113.0,
   "basis": "SEC XBRL"
  },
  {
@@ -864,6 +914,7 @@
   "cash": 8503.0,
   "sti": 879.0,
   "debt": 8005.0,
+  "oplease": 1090.0,
   "basis": "SEC XBRL"
  },
  {
@@ -881,6 +932,7 @@
   "cash": 7509.0,
   "sti": 1216.0,
   "debt": 6697.0,
+  "oplease": 1359.0,
   "basis": "SEC XBRL"
  },
  {
@@ -898,6 +950,7 @@
   "cash": 8134.0,
   "sti": 118.0,
   "debt": 6694.0,
+  "oplease": 1301.0,
   "basis": "SEC XBRL"
  },
  {
@@ -915,6 +968,7 @@
   "cash": 3475.0,
   "sti": 364.0,
   "debt": 4103.0,
+  "oplease": 1238.0,
   "basis": "SEC XBRL"
  },
  {
@@ -932,6 +986,7 @@
   "cash": 2902.0,
   "sti": 116.0,
   "debt": 4102.0,
+  "oplease": 1156.0,
   "basis": "SEC XBRL"
  },
  {
@@ -949,6 +1004,7 @@
   "cash": 3231.0,
   "sti": 0.0,
   "debt": 4929.0,
+  "oplease": 1080.0,
   "basis": "SEC XBRL"
  },
  {
@@ -966,6 +1022,7 @@
   "cash": 3328.0,
   "sti": null,
   "debt": 5387.0,
+  "oplease": 1009.0,
   "basis": "SEC XBRL"
  },
  {
@@ -983,6 +1040,7 @@
   "cash": 3791.0,
   "sti": null,
   "debt": 5946.0,
+  "oplease": 943.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1000,6 +1058,7 @@
   "cash": 3624.0,
   "sti": null,
   "debt": 5887.0,
+  "oplease": 984.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1017,6 +1076,7 @@
   "cash": 516.0,
   "sti": null,
   "debt": 2063.0,
+  "oplease": 1668.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1034,6 +1094,7 @@
   "cash": 536.0,
   "sti": null,
   "debt": 2146.0,
+  "oplease": 1425.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1051,6 +1112,7 @@
   "cash": 647.0,
   "sti": null,
   "debt": 2412.0,
+  "oplease": 1263.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1068,6 +1130,7 @@
   "cash": 281.0,
   "sti": null,
   "debt": 2471.0,
+  "oplease": 1283.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1085,6 +1148,7 @@
   "cash": 885.0,
   "sti": null,
   "debt": 2565.0,
+  "oplease": 1256.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1102,6 +1166,7 @@
   "cash": 1115.0,
   "sti": null,
   "debt": 2672.0,
+  "oplease": 1203.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1119,6 +1184,7 @@
   "cash": 1015.0,
   "sti": null,
   "debt": 4625.0,
+  "oplease": 1460.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1136,6 +1202,7 @@
   "cash": 1201.0,
   "sti": 1274.0,
   "debt": 4933.0,
+  "oplease": 1405.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1153,6 +1220,7 @@
   "cash": 1044.0,
   "sti": null,
   "debt": 4809.0,
+  "oplease": 1414.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1170,6 +1238,7 @@
   "cash": 750.0,
   "sti": null,
   "debt": 4948.0,
+  "oplease": 1374.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1187,6 +1256,7 @@
   "cash": 778.0,
   "sti": null,
   "debt": 5009.0,
+  "oplease": 1413.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1204,6 +1274,7 @@
   "cash": 627.0,
   "sti": 1496.0,
   "debt": 5309.0,
+  "oplease": 1338.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1221,6 +1292,7 @@
   "cash": 451.0,
   "sti": 1317.0,
   "debt": 5079.0,
+  "oplease": 1348.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1238,6 +1310,7 @@
   "cash": 1064.0,
   "sti": 1598.0,
   "debt": 6048.0,
+  "oplease": 1381.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1255,6 +1328,7 @@
   "cash": 1333.0,
   "sti": null,
   "debt": 3578.0,
+  "oplease": 714.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1272,6 +1346,7 @@
   "cash": 1462.0,
   "sti": null,
   "debt": 3756.0,
+  "oplease": 691.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1289,6 +1364,7 @@
   "cash": 973.0,
   "sti": null,
   "debt": 4000.0,
+  "oplease": 675.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1306,6 +1382,7 @@
   "cash": 1166.0,
   "sti": null,
   "debt": 4716.0,
+  "oplease": 664.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1323,6 +1400,7 @@
   "cash": 1237.0,
   "sti": null,
   "debt": 4992.0,
+  "oplease": 640.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1340,6 +1418,7 @@
   "cash": 1312.0,
   "sti": null,
   "debt": 5301.0,
+  "oplease": 635.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1357,6 +1436,7 @@
   "cash": 2594.0,
   "sti": null,
   "debt": 8164.0,
+  "oplease": 610.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1374,6 +1454,7 @@
   "cash": 1921.0,
   "sti": null,
   "debt": 8539.0,
+  "oplease": 603.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1391,6 +1472,7 @@
   "cash": 2297.0,
   "sti": null,
   "debt": 8474.0,
+  "oplease": 940.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1408,6 +1490,7 @@
   "cash": 2135.0,
   "sti": null,
   "debt": 8451.0,
+  "oplease": 964.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1425,6 +1508,7 @@
   "cash": 2410.0,
   "sti": null,
   "debt": 8475.0,
+  "oplease": 948.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1442,6 +1526,7 @@
   "cash": 1946.0,
   "sti": null,
   "debt": 8498.0,
+  "oplease": 918.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1459,6 +1544,7 @@
   "cash": 1857.0,
   "sti": null,
   "debt": 8435.0,
+  "oplease": 899.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1476,6 +1562,7 @@
   "cash": 1656.0,
   "sti": null,
   "debt": 8478.0,
+  "oplease": 908.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1493,6 +1580,7 @@
   "cash": 1258.0,
   "sti": null,
   "debt": 8393.0,
+  "oplease": 953.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1510,6 +1598,7 @@
   "cash": 790.0,
   "sti": null,
   "debt": 429.0,
+  "oplease": 2639.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1527,6 +1616,7 @@
   "cash": 780.0,
   "sti": null,
   "debt": 433.0,
+  "oplease": 2654.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1544,6 +1634,7 @@
   "cash": 640.0,
   "sti": null,
   "debt": 490.0,
+  "oplease": 2852.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1561,6 +1652,7 @@
   "cash": 609.0,
   "sti": null,
   "debt": 474.0,
+  "oplease": 2989.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1578,6 +1670,7 @@
   "cash": 622.0,
   "sti": null,
   "debt": 469.0,
+  "oplease": 3141.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1595,6 +1688,7 @@
   "cash": 658.0,
   "sti": null,
   "debt": 455.0,
+  "oplease": 3617.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1612,6 +1706,7 @@
   "cash": 576.0,
   "sti": null,
   "debt": 474.0,
+  "oplease": 3758.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1629,6 +1724,7 @@
   "cash": 740.0,
   "sti": null,
   "debt": 507.0,
+  "oplease": 3966.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1646,6 +1742,7 @@
   "cash": 686.0,
   "sti": null,
   "debt": 512.0,
+  "oplease": 4284.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1663,6 +1760,7 @@
   "cash": 563.0,
   "sti": null,
   "debt": 565.0,
+  "oplease": 4310.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1680,6 +1778,7 @@
   "cash": 566.0,
   "sti": null,
   "debt": 673.0,
+  "oplease": 4364.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1697,6 +1796,7 @@
   "cash": 671.0,
   "sti": null,
   "debt": 620.0,
+  "oplease": 4849.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1714,6 +1814,7 @@
   "cash": 772.0,
   "sti": null,
   "debt": 588.0,
+  "oplease": 4665.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1731,6 +1832,7 @@
   "cash": 955.0,
   "sti": null,
   "debt": 511.0,
+  "oplease": 4736.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1748,6 +1850,7 @@
   "cash": 976.0,
   "sti": null,
   "debt": 486.0,
+  "oplease": 4568.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1765,6 +1868,7 @@
   "cash": 317.6,
   "sti": 690.6,
   "debt": 2105.8,
+  "oplease": 110.1,
   "basis": "SEC XBRL"
  },
  {
@@ -1782,6 +1886,7 @@
   "cash": 152.2,
   "sti": 825.2,
   "debt": 2158.0,
+  "oplease": 113.4,
   "basis": "SEC XBRL"
  },
  {
@@ -1799,6 +1904,7 @@
   "cash": 284.2,
   "sti": 651.2,
   "debt": 2286.0,
+  "oplease": 108.4,
   "basis": "SEC XBRL"
  },
  {
@@ -1816,6 +1922,7 @@
   "cash": 143.3,
   "sti": 671.4,
   "debt": 2259.7,
+  "oplease": 103.3,
   "basis": "SEC XBRL"
  },
  {
@@ -1833,6 +1940,7 @@
   "cash": 193.4,
   "sti": 616.5,
   "debt": 2248.7,
+  "oplease": 99.5,
   "basis": "SEC XBRL"
  },
  {
@@ -1850,6 +1958,7 @@
   "cash": 215.8,
   "sti": 576.1,
   "debt": 2218.9,
+  "oplease": 94.1,
   "basis": "SEC XBRL"
  },
  {
@@ -1867,6 +1976,7 @@
   "cash": 265.9,
   "sti": 493.4,
   "debt": 2188.1,
+  "oplease": 88.6,
   "basis": "SEC XBRL"
  },
  {
@@ -1884,6 +1994,7 @@
   "cash": 285.9,
   "sti": 495.2,
   "debt": 2066.5,
+  "oplease": 83.1,
   "basis": "SEC XBRL"
  },
  {
@@ -1901,6 +2012,7 @@
   "cash": 283.8,
   "sti": 594.8,
   "debt": 2013.9,
+  "oplease": 77.5,
   "basis": "SEC XBRL"
  },
  {
@@ -1918,6 +2030,7 @@
   "cash": 209.9,
   "sti": 632.9,
   "debt": 1961.9,
+  "oplease": 71.9,
   "basis": "SEC XBRL"
  },
  {
@@ -1935,6 +2048,7 @@
   "cash": 316.2,
   "sti": 640.5,
   "debt": 2056.4,
+  "oplease": 69.4,
   "basis": "SEC XBRL"
  },
  {
@@ -1952,6 +2066,7 @@
   "cash": 172.7,
   "sti": 633.0,
   "debt": 1799.6,
+  "oplease": 65.1,
   "basis": "SEC XBRL"
  },
  {
@@ -1969,6 +2084,7 @@
   "cash": 283.4,
   "sti": 618.7,
   "debt": 1791.8,
+  "oplease": 62.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1986,6 +2102,7 @@
   "cash": 508.7,
   "sti": 544.8,
   "debt": 2779.5,
+  "oplease": 72.7,
   "basis": "SEC XBRL"
  },
  {
@@ -2003,6 +2120,7 @@
   "cash": 71.6,
   "sti": 171.6,
   "debt": 412.3,
+  "oplease": 26.1,
   "basis": "SEC XBRL"
  },
  {
@@ -2020,6 +2138,7 @@
   "cash": 86.9,
   "sti": 158.2,
   "debt": 448.4,
+  "oplease": 22.7,
   "basis": "SEC XBRL"
  },
  {
@@ -2037,6 +2156,7 @@
   "cash": 27.0,
   "sti": 153.3,
   "debt": 435.1,
+  "oplease": 19.4,
   "basis": "SEC XBRL"
  },
  {
@@ -2054,6 +2174,7 @@
   "cash": 46.3,
   "sti": 141.1,
   "debt": 401.6,
+  "oplease": 18.8,
   "basis": "SEC XBRL"
  },
  {
@@ -2071,6 +2192,7 @@
   "cash": 28.4,
   "sti": 132.8,
   "debt": 388.1,
+  "oplease": 18.1,
   "basis": "SEC XBRL"
  },
  {
@@ -2088,6 +2210,7 @@
   "cash": 26.9,
   "sti": 108.3,
   "debt": 365.5,
+  "oplease": 17.8,
   "basis": "SEC XBRL"
  },
  {
@@ -2105,6 +2228,7 @@
   "cash": 56.8,
   "sti": 89.7,
   "debt": 351.8,
+  "oplease": 21.4,
   "basis": "SEC XBRL"
  },
  {
@@ -2122,6 +2246,7 @@
   "cash": 83.2,
   "sti": 104.1,
   "debt": 327.1,
+  "oplease": 20.7,
   "basis": "SEC XBRL"
  },
  {
@@ -2139,6 +2264,7 @@
   "cash": 53.4,
   "sti": 105.4,
   "debt": 312.6,
+  "oplease": 19.9,
   "basis": "SEC XBRL"
  },
  {
@@ -2156,6 +2282,7 @@
   "cash": 37.0,
   "sti": 101.3,
   "debt": 282.1,
+  "oplease": 19.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2173,6 +2300,7 @@
   "cash": 111.8,
   "sti": 64.4,
   "debt": 301.3,
+  "oplease": 18.2,
   "basis": "SEC XBRL"
  },
  {
@@ -2190,6 +2318,7 @@
   "cash": 144.7,
   "sti": 89.6,
   "debt": 323.3,
+  "oplease": 17.4,
   "basis": "SEC XBRL"
  },
  {
@@ -2207,6 +2336,7 @@
   "cash": 153.7,
   "sti": 66.0,
   "debt": 306.9,
+  "oplease": 16.6,
   "basis": "SEC XBRL"
  },
  {
@@ -2224,6 +2354,7 @@
   "cash": 1287.7,
   "sti": 108.4,
   "debt": 3512.5,
+  "oplease": 2800.1,
   "basis": "SEC XBRL"
  },
  {
@@ -2241,6 +2372,7 @@
   "cash": 1110.7,
   "sti": 109.5,
   "debt": 3400.1,
+  "oplease": 2994.8,
   "basis": "SEC XBRL"
  },
  {
@@ -2258,6 +2390,7 @@
   "cash": 818.3,
   "sti": 110.9,
   "debt": 3355.0,
+  "oplease": 3319.4,
   "basis": "SEC XBRL"
  },
  {
@@ -2275,6 +2408,7 @@
   "cash": 865.2,
   "sti": 112.5,
   "debt": 3439.1,
+  "oplease": 3523.7,
   "basis": "SEC XBRL"
  },
  {
@@ -2292,6 +2426,7 @@
   "cash": 764.8,
   "sti": 113.9,
   "debt": 3391.8,
+  "oplease": 3827.8,
   "basis": "SEC XBRL"
  },
  {
@@ -2309,6 +2444,7 @@
   "cash": 724.8,
   "sti": 115.3,
   "debt": 3318.9,
+  "oplease": 4138.8,
   "basis": "SEC XBRL"
  },
  {
@@ -2326,6 +2462,7 @@
   "cash": 423.5,
   "sti": 117.1,
   "debt": 3287.2,
+  "oplease": 4523.5,
   "basis": "SEC XBRL"
  },
  {
@@ -2343,6 +2480,7 @@
   "cash": 902.1,
   "sti": 118.3,
   "debt": 2210.5,
+  "oplease": 4592.9,
   "basis": "SEC XBRL"
  },
  {
@@ -2360,6 +2498,7 @@
   "cash": 487.5,
   "sti": 119.6,
   "debt": 2767.7,
+  "oplease": 4438.7,
   "basis": "SEC XBRL"
  },
  {
@@ -2377,6 +2516,7 @@
   "cash": 407.5,
   "sti": 0.0,
   "debt": 2688.9,
+  "oplease": 4468.5,
   "basis": "SEC XBRL"
  },
  {
@@ -2394,6 +2534,7 @@
   "cash": 250.5,
   "sti": 0.0,
   "debt": 931.0,
+  "oplease": 22.6,
   "basis": "SEC XBRL"
  },
  {
@@ -2411,6 +2552,7 @@
   "cash": 273.0,
   "sti": 0.0,
   "debt": 1258.7,
+  "oplease": 0.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2428,6 +2570,7 @@
   "cash": 74.5,
   "sti": 861.3,
   "debt": 3298.9,
+  "oplease": 95.2,
   "basis": "SEC XBRL"
  },
  {
@@ -2445,6 +2588,7 @@
   "cash": 114.4,
   "sti": 747.9,
   "debt": 3186.0,
+  "oplease": 92.6,
   "basis": "SEC XBRL"
  },
  {
@@ -2462,6 +2606,7 @@
   "cash": 125.3,
   "sti": 694.2,
   "debt": 3076.9,
+  "oplease": 85.7,
   "basis": "SEC XBRL"
  },
  {
@@ -2479,6 +2624,7 @@
   "cash": 148.3,
   "sti": 686.9,
   "debt": 3006.1,
+  "oplease": 86.7,
   "basis": "SEC XBRL"
  },
  {
@@ -2496,6 +2642,7 @@
   "cash": 180.0,
   "sti": 641.2,
   "debt": 2895.8,
+  "oplease": 85.9,
   "basis": "SEC XBRL"
  },
  {
@@ -2513,6 +2660,7 @@
   "cash": 141.8,
   "sti": 692.5,
   "debt": 2782.1,
+  "oplease": 82.4,
   "basis": "SEC XBRL"
  },
  {
@@ -2530,6 +2678,7 @@
   "cash": 177.6,
   "sti": 658.4,
   "debt": 2693.3,
+  "oplease": 85.3,
   "basis": "SEC XBRL"
  },
  {
@@ -2547,6 +2696,7 @@
   "cash": 227.4,
   "sti": 574.3,
   "debt": 2672.4,
+  "oplease": 87.7,
   "basis": "SEC XBRL"
  },
  {
@@ -2564,6 +2714,7 @@
   "cash": 179.0,
   "sti": 571.9,
   "debt": 2559.6,
+  "oplease": 83.7,
   "basis": "SEC XBRL"
  },
  {
@@ -2581,6 +2732,7 @@
   "cash": 48.3,
   "sti": 678.7,
   "debt": 2496.6,
+  "oplease": 79.9,
   "basis": "SEC XBRL"
  },
  {
@@ -2598,6 +2750,7 @@
   "cash": 44.5,
   "sti": 708.8,
   "debt": 2384.8,
+  "oplease": 84.8,
   "basis": "SEC XBRL"
  },
  {
@@ -2615,6 +2768,7 @@
   "cash": 122.7,
   "sti": 584.2,
   "debt": 2392.1,
+  "oplease": 81.9,
   "basis": "SEC XBRL"
  },
  {
@@ -2632,6 +2786,7 @@
   "cash": 65.8,
   "sti": 561.4,
   "debt": 2394.1,
+  "oplease": 83.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2649,6 +2804,7 @@
   "cash": 81.4,
   "sti": 519.6,
   "debt": 2296.5,
+  "oplease": 87.6,
   "basis": "SEC XBRL"
  },
  {
@@ -2666,6 +2822,7 @@
   "cash": null,
   "sti": null,
   "debt": null,
+  "oplease": 8.4,
   "basis": "SEC XBRL"
  },
  {
@@ -2683,6 +2840,7 @@
   "cash": null,
   "sti": null,
   "debt": null,
+  "oplease": 8.6,
   "basis": "SEC XBRL"
  },
  {
@@ -2700,6 +2858,7 @@
   "cash": 134.3,
   "sti": null,
   "debt": 1025.4,
+  "oplease": 140.4,
   "basis": "SEC XBRL"
  },
  {
@@ -2717,6 +2876,7 @@
   "cash": 111.3,
   "sti": null,
   "debt": 1102.1,
+  "oplease": 136.8,
   "basis": "SEC XBRL"
  },
  {
@@ -2734,6 +2894,7 @@
   "cash": 115.7,
   "sti": null,
   "debt": 1061.2,
+  "oplease": 133.3,
   "basis": "SEC XBRL"
  }
 ]
