@@ -10,7 +10,7 @@ data/markets.json keeps daily history from 2019 on. Only the last few weeks are 
 run costs one request per ticker plus one for all live prices (Tiingo's free tier allows 50 an hour).
 
 Usage:
-  python scripts/markets.py            # only acts near 9:35 a.m., 12:00 or 4:05 p.m. New York time
+  python scripts/markets.py            # only acts near 9:45 a.m., 12:00 or 4:15 p.m. New York time
   python scripts/markets.py --now      # run regardless of the clock (manual runs)
 """
 import datetime as dt
@@ -27,7 +27,7 @@ CONFIG = os.path.join(ROOT, "config")
 API = "https://api.tiingo.com"
 START = "2019-01-01"
 BENCHMARKS = [{"ticker": "SPY", "name": "S&P 500 (SPY)"}, {"ticker": "JETS", "name": "U.S. airline ETF (JETS)"}]
-TARGETS = [(9, 35), (12, 0), (16, 5)]  # New York time
+TARGETS = [(9, 45), (12, 0), (16, 15)]  # New York time
 NY = ZoneInfo("America/New_York")
 
 

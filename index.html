@@ -46,7 +46,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
 <script src="vendor/d3.min.js"></script>
 <script>
 window.dash = (function () {
-  var DEFAULTS = { group: 'All', basis: 'lq', dbasis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', pgroup: 'All', lcarrier: 'All', lopen: false, cpiidx: 'cpiw', cpispan: '12m', cpifrom: null, cpito: null, h2h: 'DAL,UAL', lcasmreg: false };
+  var DEFAULTS = { group: 'All', basis: 'lq', dbasis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', pgroup: 'All', lcarrier: 'All', lopen: false, cpiidx: 'cpiw', cpispan: '12m', cpifrom: null, cpito: null, h2h: 'DAL,UAL', lcasmreg: false, relview: 'mkt', relper: 'ttm', relmetric: 'ontime', relsel: 'DL,UA,AA,WN,AS', mkfrom: 'ytd', mksel: 'DAL,UAL,AAL,LUV,SPY,JETS' };
   var params = Object.assign({}, DEFAULTS), calcs = {}, order = [], res = null, fns = [];
   var DATA = null, state = 'loading';
   function compute() {
@@ -79,12 +79,14 @@ window.dash = (function () {
       get('labor').catch(function () { return { groups: [], companies: {} }; }),
       get('cpi').catch(function () { return {}; }),
       get('revenue_split').catch(function () { return []; }),
+      get('markets').catch(function () { return {}; }),
+      get('reliability').catch(function () { return { fields: [], rows: [] }; }),
     ]).then(function (v) {
       var today = new Date().toISOString().slice(0, 10);
       var curated = v[2].filter(function (r) { return !(r.kind === 'Upcoming' && r.date < today); });
       DATA = { financials: v[0], carriers: v[1], news: curated.concat(v[3]), dot: v[5], dot_carriers: v[6], meta: [v[4] || {}],
         dot_annual: v[7], dot_fuel: v[8], fuel_spot: v[9].map(function (r) { return { date: r[0], price: r[1], est: r[2] === 1 }; }), exec_pay: v[10],
-        labor_groups: v[11].groups || [], labor_companies: Object.values(v[11].companies || {}), labor_meta: [{ generated: v[11].generated }], cpi: [v[12] || {}], revsplit: v[13] || [] };
+        labor_groups: v[11].groups || [], labor_companies: Object.values(v[11].companies || {}), labor_meta: [{ generated: v[11].generated }], cpi: [v[12] || {}], revsplit: v[13] || [], markets: [v[14] || {}], reliability: [v[15] || { fields: [], rows: [] }] };
       res = null; state = 'ok';
       var g = v[4] && v[4].generated ? new Date(v[4].generated) : null;
       asOf(g && !isNaN(g)
@@ -292,6 +294,8 @@ window.dash = (function () {
     <button class="am-tab" role="tab" data-tab="peers" aria-selected="true">Peer Comparison</button>
     <button class="am-tab" role="tab" data-tab="carrier" aria-selected="false">Carrier Detail</button>
     <button class="am-tab" role="tab" data-tab="opcarriers" aria-selected="false">Operating Carriers (DOT)</button>
+    <button class="am-tab" role="tab" data-tab="reliability" aria-selected="false">Operational Reliability</button>
+    <button class="am-tab" role="tab" data-tab="markets" aria-selected="false">Equity Markets</button>
     <button class="am-tab" role="tab" data-tab="pay" aria-selected="false">Pay &amp; Prices</button>
     <button class="am-tab" role="tab" data-tab="labor" aria-selected="false">Bargaining</button>
     <button class="am-tab" role="tab" data-tab="news" aria-selected="false">News</button>
@@ -555,6 +559,116 @@ window.dash = (function () {
         </select>
       </div>
       <div class="am-multi" id="mult-dot" data-source="dotq"></div>
+    </div>
+  </section>
+
+  <!-- OPERATIONAL RELIABILITY -->
+  <section class="am-page am-stack" id="reliability" hidden>
+    <div class="am-bar">
+      <span id="rel-view">
+        <button class="am-chip" data-view="mkt">Mainline + regional partners</button>
+        <button class="am-chip" data-view="op">By operating carrier</button>
+      </span>
+      <span class="sp"></span>
+      <span id="rel-per">
+        <button class="am-chip" data-per="lm">Latest month</button>
+        <button class="am-chip" data-per="ttm">Trailing 12 months</button>
+      </span>
+    </div>
+
+    <div class="am-card" id="rel-card">
+      <h2>On-time performance</h2>
+      <p class="am-note" id="rel-note">DOT on-time records for every scheduled U.S. domestic flight. Click a header to sort.</p>
+      <div class="am-tbl-box">
+        <table class="am-t" id="rel-table" data-source="reliability">
+          <thead><tr>
+            <th class="l"><button data-rsort="name">Carrier</button></th>
+            <th class="l am-hn" id="rel-extra-h"><button data-rsort="extra">Flies for</button></th>
+            <th><button data-rsort="flights">Scheduled flights</button></th>
+            <th><button data-rsort="ontime">On time</button></th>
+            <th><button data-rsort="late">Late 15+ min</button></th>
+            <th><button data-rsort="canc">Cancelled</button></th>
+            <th class="am-hn"><button data-rsort="div">Diverted</button></th>
+            <th><button data-rsort="cc">Airline-caused cancellations</button></th>
+            <th><button data-rsort="avg">Avg. delay (min)</button></th>
+            <th class="l am-hn">Delay minutes by cause</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="am-legend" id="rel-cause-legend"></div>
+      <ul class="am-foot am-defs">
+        <li><b>On time:</b> arrived less than 15 minutes after schedule. Cancelled and diverted flights count as not on time, so on time + late + cancelled + diverted = 100%.</li>
+        <li><b>Mainline + regional partners:</b> flights rolled up to the brand the passenger booked, so Delta includes Endeavor, SkyWest and Republic flights sold as Delta Connection. <b>By operating carrier:</b> the airline that actually flew the plane and employs the crews.</li>
+        <li><b>Airline-caused cancellations:</b> share of cancellations the carrier attributed to itself (maintenance, crew, etc.), as opposed to weather, air traffic control or security.</li>
+        <li><b>Avg. arrival delay:</b> minutes late per flight that arrived, with early arrivals counted as zero. <b>Delay causes</b> are the carriers' own attribution of delays of 15 minutes or more: the airline, a late-arriving aircraft from an earlier flight, the air traffic system (NAS), weather, or security.</li>
+        <li>Mishandled bags, wheelchairs and consumer complaints (DOT's Air Travel Consumer Report) aren't here yet: DOT's site turns away automated downloads.</li>
+      </ul>
+    </div>
+
+    <div class="am-card" id="rel-trend-card">
+      <h2>Monthly trend</h2>
+      <p class="am-note">Pick up to six carriers. Summer storms and holiday peaks move every carrier together; look for the gaps between them.</p>
+      <div class="am-bar">
+        <span id="rel-metric">
+          <button class="am-chip" data-metric="ontime">On time</button>
+          <button class="am-chip" data-metric="canc">Cancelled</button>
+          <button class="am-chip" data-metric="avg">Avg. arrival delay</button>
+        </span>
+      </div>
+      <div class="am-bar"><span id="rel-sel"></span></div>
+      <div class="am-legend" id="rel-legend"></div>
+      <div class="am-wrap am-chart" id="rel-chart" data-source="reliability"></div>
+    </div>
+  </section>
+
+  <!-- EQUITY MARKETS -->
+  <section class="am-page am-stack" id="markets" hidden>
+    <div class="am-bar">
+      <span id="mk-span">
+        <button class="am-chip" data-from="ytd">Year to date</button>
+        <button class="am-chip" data-from="1y">1 year</button>
+        <button class="am-chip" data-from="3y">3 years</button>
+        <button class="am-chip" data-from="5y">5 years</button>
+        <button class="am-chip" data-from="2019-01-02">Since 2019</button>
+      </span>
+      <label class="am-chk">Since <input type="date" class="am-sel" id="mk-date" style="min-width:10em" min="2019-01-02" aria-label="Start date for returns"></label>
+    </div>
+
+    <div class="am-card" id="mk-card">
+      <h2>Share prices and market value</h2>
+      <p class="am-note" id="mk-note">Click a header to sort.</p>
+      <div class="am-tbl-box">
+        <table class="am-t" id="mk-table" data-source="markets">
+          <thead><tr>
+            <th class="l"><button data-msort="ticker">Ticker</button></th>
+            <th class="l am-hn"><button data-msort="name">Company</button></th>
+            <th><button data-msort="price">Price</button></th>
+            <th><button data-msort="day">Today</button></th>
+            <th><button data-msort="tsr" id="mk-tsr-h">Total return</button></th>
+            <th class="am-hn"><button data-msort="ann">Annualized</button></th>
+            <th><button data-msort="mcap">Market cap</button></th>
+            <th class="am-hn"><button data-msort="ev">Enterprise value</button></th>
+            <th><button data-msort="evx">EV ÷ EBITDAR</button></th>
+            <th><button data-msort="lmc">Labor cost ÷ market cap</button></th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <ul class="am-foot am-defs">
+        <li><b>Total return:</b> share price change plus dividends reinvested, from the start date you pick (the last trading day on or before it). <b>Annualized</b> is shown for periods over a year.</li>
+        <li><b>Market cap:</b> share price × shares outstanding from the cover of the latest 10-Q or 10-K. <b>Enterprise value:</b> market cap + net debt incl. leases (Peer Comparison tab). <b>EV ÷ EBITDAR</b> uses trailing-12-month EBITDAR; "n/m" where EBITDAR was under 5% of revenue.</li>
+        <li><b>Labor cost ÷ market cap:</b> trailing-12-month salaries, wages and benefits as a share of what the market values the whole company at. Above 100% means a year of payroll costs more than buying every share.</li>
+        <li>Prices update near 9:45 a.m., noon and 4:15 p.m. Eastern on trading days; daytime prices are the latest IEX trade and can differ slightly from the consolidated tape. Price data: Tiingo.</li>
+      </ul>
+    </div>
+
+    <div class="am-card" id="tsr-card">
+      <h2>Total shareholder return</h2>
+      <p class="am-note">Cumulative return with dividends reinvested, from the start date above. Pick up to eight; the S&amp;P 500 and the U.S. airline ETF (JETS) are dashed for reference.</p>
+      <div class="am-bar"><span id="mk-sel"></span></div>
+      <div class="am-legend" id="tsr-legend"></div>
+      <div class="am-wrap am-chart" id="tsr-chart" data-source="markets"></div>
     </div>
   </section>
 
@@ -1644,6 +1758,8 @@ dash.calc('dotpeer', {
       ['Cash + short-term investments', (r) => r.liquidity, fmtM, 'hi'],
       ['Mainline fleet age (yrs)', (r) => r.fleet_age, (v) => (bad(v) ? '—' : d3.format('.1f')(v)), 'lo'],
       ['Labor cost per FTE (DOT, mainline, 12 mo.)', (r) => dotv(r.ticker, 'comp_fte'), fmtK, null],
+      ['On-time arrivals (DOT, 12 mo.)', (r) => { const s = relFor(r.ticker); return s ? s.ontime_r : null; }, pct, 'hi'],
+      ['Flights cancelled (DOT, 12 mo.)', (r) => { const s = relFor(r.ticker); return s ? s.canc_r : null; }, pct, 'lo'],
       ['CEO pay ratio (latest proxy)', (r) => ratio(r.ticker), (v) => (bad(v) ? '—' : d3.format(',.0f')(v) + ' : 1'), null],
       ['Groups past amendable date', (r) => openN(r.ticker), (v) => (bad(v) ? '—' : String(v)), null],
     ];
@@ -1869,6 +1985,293 @@ dash.calc('dotpeer', {
   }
 
   // ---------- main draw ----------
+  // ---------- shared multi-line chart ----------
+  // series: [{ key, name, color, dashed, pts: [{ t: Date, v }] }]
+  function lineChart(box, series, fmtY, opts) {
+    clearSvg(box);
+    opts = opts || {};
+    const S = series.filter((s) => s.pts.length);
+    if (!S.length) { const e = document.createElement('div'); e.className = 'am-empty'; e.textContent = opts.empty || 'No data for this selection.'; box.append(e); return; }
+    const W = Math.max(300, box.clientWidth), H = opts.h || 300;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).style('display', 'block');
+    const all = S.flatMap((s) => s.pts);
+    let lo = d3.min(all, (d) => d.v), hi = d3.max(all, (d) => d.v);
+    if (opts.zero) { lo = Math.min(0, lo); hi = Math.max(0, hi); }
+    const pad = (hi - lo) * 0.06 || Math.abs(hi) * 0.05 || 1;
+    const y = d3.scaleLinear([lo - (opts.zero && lo === 0 ? 0 : pad), hi + pad], [H - 22, 10]).nice();
+    const ticks = y.ticks(5);
+    const m = { l: Math.ceil(d3.max(ticks, (t) => textW(svg, fmtY(t)))) + 10, r: 12 };
+    const ext = d3.extent(all, (d) => d.t);
+    const x = d3.scaleUtc(ext, [m.l, W - m.r]);
+    svg.selectAll('line.gr').data(ticks).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', (t) => y(t)).attr('y2', (t) => y(t))
+      .attr('stroke', (t) => (opts.zero && t === 0 ? 'var(--cds-chart-axis)' : 'var(--cds-chart-grid)'));
+    svg.selectAll('text.tk').data(ticks).join('text').attr('x', m.l - 6).attr('y', (t) => y(t) + 4).attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(fmtY);
+    const days = (ext[1] - ext[0]) / 864e5;
+    svg.selectAll('text.xt').data(x.ticks(W < 520 ? 4 : 7)).join('text').attr('x', (t) => x(t)).attr('y', H - 5).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)')
+      .text(d3.utcFormat(days > 1100 ? '%Y' : days > 120 ? "%b '%y" : '%b %-d'));
+    for (const s of S) {
+      svg.append('path').datum(s.pts).attr('fill', 'none').attr('stroke', s.color).attr('stroke-width', s.dashed ? 1.6 : 2).attr('stroke-dasharray', s.dashed ? '5 3' : null).attr('stroke-linejoin', 'round')
+        .attr('d', d3.line().x((d) => x(d.t)).y((d) => y(d.v)));
+      if (opts.dots) svg.selectAll(null).data(s.pts).join('circle').attr('cx', (d) => x(d.t)).attr('cy', (d) => y(d.v)).attr('r', 2.5).attr('fill', s.color);
+    }
+    const tp = tip(box);
+    const rule = svg.append('line').attr('y1', 10).attr('y2', H - 22).attr('stroke', 'var(--cds-chart-axis)').attr('opacity', 0);
+    const bis = d3.bisector((d) => d.t).center;
+    svg.append('rect').attr('x', m.l).attr('y', 0).attr('width', W - m.l - m.r).attr('height', H).attr('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const [mx, my] = d3.pointer(ev); const t = x.invert(mx);
+        const lines = S.map((s) => { const d = s.pts[bis(s.pts, t)]; return { d, s }; }).filter((o) => o.d && Math.abs(o.d.t - t) < (opts.snap || 40) * 864e5)
+          .sort((a, b) => b.d.v - a.d.v);
+        if (!lines.length) { tp.hide(); rule.attr('opacity', 0); return; }
+        const tt = lines[0].d.t;
+        rule.attr('x1', x(tt)).attr('x2', x(tt)).attr('opacity', 1);
+        const sc = box.clientWidth / W;
+        tp.show(mx * sc, my * sc, opts.tfmt ? opts.tfmt(tt) : d3.utcFormat('%b %-d, %Y')(tt), lines.map((o) => ({ color: o.s.color, name: o.s.name, value: fmtY(o.d.v) })));
+      })
+      .on('pointerleave', () => { rule.attr('opacity', 0); tp.hide(); });
+  }
+  function legendInto(id, items) {
+    const el = document.getElementById(id); if (!el) return;
+    el.replaceChildren(...items.map((it) => { const sp = document.createElement('span'); const w = document.createElement('i'); w.className = 'am-sw'; w.style.background = it.color; if (it.dashed) w.style.opacity = '0.6'; sp.append(w, document.createTextNode(it.name)); return sp; }));
+  }
+  function pickChips(boxId, items, sel, max, key) {
+    const box = document.getElementById(boxId); if (!box) return;
+    box.replaceChildren(...items.map((it) => {
+      const b = document.createElement('button'); b.className = 'am-chip'; b.textContent = it.label; if (it.title) b.title = it.title; b.style.marginRight = '6px';
+      b.setAttribute('aria-pressed', String(sel.includes(it.code)));
+      b.addEventListener('click', () => {
+        let s2 = sel.includes(it.code) ? sel.filter((c) => c !== it.code) : sel.concat(it.code);
+        if (s2.length > max) s2 = s2.slice(-max);
+        dash.setParams({ [key]: s2.join(',') });
+      });
+      return b;
+    }));
+  }
+  function sortHeads(sel, attr, state) {
+    root.querySelectorAll(sel).forEach((b) => {
+      const th = b.closest('th'); const on = state.col === b.dataset[attr];
+      th.setAttribute('aria-sort', on ? (state.dir > 0 ? 'ascending' : 'descending') : 'none');
+    });
+  }
+  function sortRows(rows, state, key) {
+    if (!state.col) return rows;
+    return rows.slice().sort((a, b) => {
+      const va = key(a, state.col), vb = key(b, state.col);
+      const na = va === null || va === undefined || (typeof va === 'number' && isNaN(va)), nb = vb === null || vb === undefined || (typeof vb === 'number' && isNaN(vb));
+      if (na || nb) return na - nb;
+      return (typeof va === 'string' ? va.localeCompare(vb) : va - vb) * state.dir;
+    });
+  }
+
+  // ---------- operational reliability ----------
+  const AIRLINE = { '9E': 'Endeavor Air', AA: 'American', AS: 'Alaska', B6: 'JetBlue', C5: 'CommuteAir', DL: 'Delta', F9: 'Frontier', G4: 'Allegiant', G7: 'GoJet',
+    HA: 'Hawaiian', MQ: 'Envoy', NK: 'Spirit', OH: 'PSA', OO: 'SkyWest', PT: 'Piedmont', QX: 'Horizon', UA: 'United', WN: 'Southwest', YV: 'Mesa', YX: 'Republic',
+    ZW: 'Air Wisconsin', SY: 'Sun Country', MX: 'Breeze', XP: 'Avelo', EV: 'ExpressJet', KS: 'PenAir', '9K': 'Cape Air', CP: 'Compass' };
+  const aname = (c) => AIRLINE[c] || c;
+  const CAUSES = [['carrier_min', 'Airline'], ['late_aircraft_min', 'Late-arriving aircraft'], ['nas_min', 'Air traffic system'], ['weather_min', 'Weather'], ['security_min', 'Security']];
+  const causeCol = (k) => ({ carrier_min: C()[0], late_aircraft_min: C()[1], nas_min: C()[2], weather_min: C()[3], security_min: C()[4] })[k];
+  let relCache = null;
+  function relData() {
+    const d = dash.data('reliability');
+    if (d.status !== 'ok' || !d.data[0] || !d.data[0].rows || !d.data[0].rows.length) return null;
+    if (relCache && relCache.src === d.data[0]) return relCache;
+    const F = d.data[0].fields, rows = d.data[0].rows.map((r) => Object.fromEntries(F.map((f, i) => [f, r[i]])));
+    const months = [...new Set(rows.map((r) => r.month))].sort();
+    relCache = { src: d.data[0], rows, months };
+    return relCache;
+  }
+  const SUMF = ['flights', 'arr', 'ontime', 'del15', 'delay_min', 'cancelled', 'diverted', 'canc_carrier', 'carrier_min', 'weather_min', 'nas_min', 'security_min', 'late_aircraft_min'];
+  function relStats(R, view, months, codes) {
+    const ms = new Set(months), out = new Map();
+    for (const r of R.rows) {
+      if (!ms.has(r.month)) continue;
+      const k = view === 'op' ? r.op : r.mkt;
+      if (codes && !codes.has(k)) continue;
+      let s = out.get(k); if (!s) { s = Object.fromEntries(SUMF.map((f) => [f, 0])); s.code = k; s.partners = new Map(); s.months = new Set(); out.set(k, s); }
+      SUMF.forEach((f) => { s[f] += r[f] || 0; });
+      s.months.add(r.month);
+      const o = view === 'op' ? r.mkt : r.op;
+      if (o !== k) s.partners.set(o, (s.partners.get(o) || 0) + r.flights);
+    }
+    for (const s of out.values()) {
+      const f = s.flights || NaN;
+      s.ontime_r = s.ontime / f; s.late_r = s.del15 / f; s.canc_r = s.cancelled / f; s.div_r = s.diverted / f;
+      s.cc_r = s.cancelled ? s.canc_carrier / s.cancelled : null; s.avg = s.arr ? s.delay_min / s.arr : null;
+      s.causeTot = d3.sum(CAUSES, ([c]) => s[c]);
+    }
+    return out;
+  }
+  const relSort = { col: 'flights', dir: -1 };
+  root.querySelectorAll('#rel-table th button[data-rsort]').forEach((b) => b.addEventListener('click', () => {
+    const c = b.dataset.rsort, first = ['name', 'extra'].includes(c) ? 1 : -1;
+    if (relSort.col !== c) { relSort.col = c; relSort.dir = first; } else relSort.dir = -relSort.dir;
+    dash.setParams({});
+  }));
+  root.querySelectorAll('#rel-view .am-chip').forEach((b) => b.addEventListener('click', () => {
+    const v = b.dataset.view, P = dash.params();
+    // carry the trend picks across views where the code exists in both (mainline brands)
+    dash.setParams({ relview: v, relsel: v === 'op' ? 'DL,UA,AA,OO,YX,9E' : 'DL,UA,AA,WN,AS' });
+  }));
+  root.querySelectorAll('#rel-per .am-chip').forEach((b) => b.addEventListener('click', () => dash.setParams({ relper: b.dataset.per })));
+  root.querySelectorAll('#rel-metric .am-chip').forEach((b) => b.addEventListener('click', () => dash.setParams({ relmetric: b.dataset.metric })));
+  const mlab = (ym) => MONTHS[+ym.slice(5, 7) - 1] + ' ' + ym.slice(0, 4);
+  function drawRel(P) {
+    const view = P.relview === 'op' ? 'op' : 'mkt', per = P.relper === 'lm' ? 'lm' : 'ttm';
+    root.querySelectorAll('#rel-view .am-chip').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
+    root.querySelectorAll('#rel-per .am-chip').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.per === per)));
+    root.querySelectorAll('#rel-metric .am-chip').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.metric === (P.relmetric || 'ontime'))));
+    const R = relData(), tb = document.querySelector('#rel-table tbody');
+    if (!R) { tb.replaceChildren(); const tr = document.createElement('tr'); const c = document.createElement('td'); c.className = 'l'; c.colSpan = 10; c.textContent = 'On-time data is still loading from DOT; it fills in over the next few daily runs.'; tr.append(c); tb.append(tr); clearSvg(document.getElementById('rel-chart')); return; }
+    const last = R.months[R.months.length - 1];
+    const months = per === 'lm' ? [last] : R.months.slice(-12);
+    const st = relStats(R, view, months);
+    document.querySelector('#rel-extra-h button').textContent = view === 'op' ? 'Flies for' : 'Flown by';
+    const pername = per === 'lm' ? mlab(last) : mlab(months[0]) + '–' + mlab(last);
+    stamp('rel-card', 'DOT, ' + pername);
+    document.getElementById('rel-note').textContent = 'DOT on-time records for every scheduled U.S. domestic flight, ' + pername + (per === 'ttm' && months.length < 12 ? ' (' + months.length + ' months so far)' : '') + '. ' +
+      (view === 'mkt' ? 'Rolled up to the brand the passenger booked.' : 'By the airline that operated the flight.') + ' Click a header to sort.';
+    const partnersText = (s) => [...s.partners.entries()].sort((a, b) => b[1] - a[1]).filter(([, n]) => n / s.flights >= 0.01).map(([c, n]) => aname(c) + (view === 'mkt' ? ' ' + d3.format('.0%')(n / s.flights) : '')).join(', ');
+    const list = [...st.values()].filter((s) => s.flights >= (per === 'lm' ? 300 : 3000));
+    const key = (s, c) => ({ name: aname(s.code), extra: partnersText(s), flights: s.flights, ontime: s.ontime_r, late: s.late_r, canc: s.canc_r, div: s.div_r, cc: s.cc_r, avg: s.avg })[c];
+    const rows = sortRows(list, relSort, key);
+    sortHeads('#rel-table th button[data-rsort]', 'rsort', relSort);
+    const best = { ontime: d3.max(list, (s) => s.ontime_r), canc: d3.min(list, (s) => s.canc_r) };
+    const td = (t, cls) => { const c = document.createElement('td'); if (cls) c.className = cls; c.textContent = t; return c; };
+    tb.replaceChildren(...rows.map((s) => {
+      const tr = document.createElement('tr');
+      const nm = td(aname(s.code) + (view === 'mkt' && s.partners.size ? ' +' : ''), 'l'); nm.title = s.code;
+      const ex = td(partnersText(s) || (view === 'mkt' ? 'Own flights only' : '—'), 'l am-hn'); ex.style.whiteSpace = 'normal'; ex.style.minWidth = '180px';
+      const on = td(pct(s.ontime_r)); if (s.ontime_r === best.ontime) on.style.fontWeight = '800';
+      const ca = td(pct(s.canc_r)); if (s.canc_r === best.canc) ca.style.fontWeight = '800';
+      const bar = document.createElement('td'); bar.className = 'l am-hn';
+      if (s.causeTot > 0) {
+        const wrap = document.createElement('div'); wrap.style.cssText = 'display:flex;width:120px;height:12px;border-radius:2px;overflow:hidden';
+        wrap.title = CAUSES.map(([c, n]) => n + ' ' + d3.format('.0%')(s[c] / s.causeTot)).join(' · ');
+        CAUSES.forEach(([c]) => { const seg = document.createElement('span'); seg.style.cssText = 'display:block;height:100%;background:' + causeCol(c) + ';width:' + (100 * s[c] / s.causeTot) + '%'; wrap.append(seg); });
+        bar.append(wrap);
+      }
+      tr.append(nm, ex, td(d3.format(',')(s.flights)), on, td(pct(s.late_r)), ca, td(pct(s.div_r), 'am-hn'), td(pct(s.cc_r)), td(bad(s.avg) ? '—' : d3.format('.1f')(s.avg)), bar);
+      return tr;
+    }));
+    legendInto('rel-cause-legend', CAUSES.map(([c, n]) => ({ name: 'Delay: ' + n, color: causeCol(c) })));
+    // trend
+    const big = relStats(R, view, R.months.slice(-12));
+    const choices = [...big.values()].filter((s) => s.flights >= 3000).sort((a, b) => b.flights - a.flights);
+    let sel = String(P.relsel || '').split(',').filter((c) => choices.some((s) => s.code === c));
+    pickChips('rel-sel', choices.map((s) => ({ code: s.code, label: aname(s.code) })), sel, 6, 'relsel');
+    const metric = P.relmetric || 'ontime';
+    const mf = { ontime: (s) => s.ontime_r, canc: (s) => s.canc_r, avg: (s) => s.avg }[metric] || ((s) => s.ontime_r);
+    const fy = metric === 'avg' ? (v) => d3.format('.0f')(v) + ' min' : (v) => d3.format(metric === 'canc' ? '.1%' : '.0%')(v);
+    const series = sel.map((code, i) => {
+      const pts = R.months.map((m) => { const s = relStats(R, view, [m], new Set([code])).get(code); return s && s.flights ? { t: new Date(m + '-15T00:00:00Z'), v: mf(s) } : null; }).filter((p) => p && !bad(p.v));
+      return { key: code, name: aname(code), color: C()[i % 6], pts };
+    });
+    lineChart(document.getElementById('rel-chart'), series, fy, { dots: R.months.length < 24, zero: metric !== 'ontime', tfmt: (t) => d3.utcFormat('%B %Y')(t), empty: 'Pick a carrier above.' });
+    legendInto('rel-legend', series.map((s) => ({ name: s.name, color: s.color })));
+  }
+  // reliability figures for the head-to-head (brand rollup for mainline, own flights for regionals)
+  function relFor(ticker) {
+    const R = relData(); if (!R) return null;
+    const code = MAINLINE[ticker]; if (!code) return null;
+    const view = ticker === 'SKYW' || ticker === 'RJET' ? 'op' : 'mkt';
+    return relStats(R, view, R.months.slice(-12), new Set([code])).get(code) || null;
+  }
+
+  // ---------- equity markets ----------
+  const BENCH = new Set(['SPY', 'JETS']);
+  const mkSort = { col: 'mcap', dir: -1 };
+  root.querySelectorAll('#mk-table th button[data-msort]').forEach((b) => b.addEventListener('click', () => {
+    const c = b.dataset.msort, first = ['ticker', 'name'].includes(c) ? 1 : -1;
+    if (mkSort.col !== c) { mkSort.col = c; mkSort.dir = first; } else mkSort.dir = -mkSort.dir;
+    dash.setParams({});
+  }));
+  root.querySelectorAll('#mk-span .am-chip').forEach((b) => b.addEventListener('click', () => dash.setParams({ mkfrom: b.dataset.from })));
+  const mkDate = document.getElementById('mk-date');
+  mkDate.addEventListener('change', () => { if (/^\d{4}-\d{2}-\d{2}$/.test(mkDate.value)) dash.setParams({ mkfrom: mkDate.value }); });
+  function mkStart(from, latest) {
+    if (/^\d{4}-\d{2}-\d{2}$/.test(from || '')) return from;
+    const d = new Date(latest + 'T12:00:00Z');
+    if (from === '1y' || from === '3y' || from === '5y') { d.setUTCFullYear(d.getUTCFullYear() - +from[0]); return d.toISOString().slice(0, 10); }
+    return (+latest.slice(0, 4) - 1) + '-12-31';  // year to date: from last year's final close
+  }
+  // latest price for a ticker: today's live trade if newer than the last close
+  function mkNow(h) {
+    const E = h.eod, L = E[E.length - 1];
+    if (!L) return null;
+    const lv = h.live, ld = lv && lv.time ? lv.time.slice(0, 10) : null;
+    if (lv && lv.price && ld && ld > L[0]) return { date: ld, close: lv.price, adj: lv.price * (L[2] / L[1]), prev: lv.prev_close || L[1], live: true, time: lv.time };
+    const Pv = E[E.length - 2];
+    return { date: L[0], close: L[1], adj: L[2], prev: Pv ? Pv[1] : null, live: false };
+  }
+  function mkBase(E, start) {
+    let i = d3.bisector((r) => r[0]).right(E, start) - 1;
+    if (i < 0) i = 0;
+    return E[i];
+  }
+  function drawMarkets(P, peer) {
+    const md = dash.data('markets'), car = dash.data('carriers');
+    const M = md.status === 'ok' && md.data[0] && md.data[0].tickers ? md.data[0] : null;
+    const tb = document.querySelector('#mk-table tbody');
+    root.querySelectorAll('#mk-span .am-chip').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.from === (P.mkfrom || 'ytd'))));
+    if (!M) { tb.replaceChildren(); return; }
+    const T = M.tickers, latest = d3.max(Object.values(T), (h) => (h.eod.length ? h.eod[h.eod.length - 1][0] : null));
+    const start = mkStart(P.mkfrom || 'ytd', latest);
+    mkDate.max = latest; if (document.activeElement !== mkDate) mkDate.value = start;
+    const yrs = (new Date(latest) - new Date(start)) / (365.25 * 864e5);
+    document.getElementById('mk-tsr-h').textContent = 'Total return since ' + dfmt(start);
+    const cinfo = car.status === 'ok' ? Object.fromEntries(car.data.map((c) => [c.ticker, c])) : {};
+    const pinfo = peer.status === 'ok' ? Object.fromEntries(peer.data.map((p) => [p.ticker, p])) : {};
+    let liveAt = null;
+    const list = Object.entries(T).map(([t, h]) => {
+      const now = mkNow(h); if (!now) return null;
+      if (now.live && (!liveAt || now.time > liveAt)) liveAt = now.time;
+      const b = mkBase(h.eod, start), late = b[0] > start;
+      const tsr = now.adj / b[2] - 1;
+      const sh = cinfo[t] && cinfo[t].shares, p = pinfo[t];
+      const mcap = sh ? now.close * sh / 1e6 : null;  // $ millions
+      const ev = mcap !== null && p && !bad(p.lease_net_debt) ? mcap + p.lease_net_debt : null;
+      const evx = ev !== null && p && p.ebitdar_ttm > 0 && !p.lev_nm ? ev / p.ebitdar_ttm : null;
+      return { ticker: t, name: h.name, bench: BENCH.has(t), price: now.close, day: now.prev ? now.close / now.prev - 1 : null, live: now.live,
+        tsr, ann: yrs > 1.05 && !late ? Math.pow(1 + tsr, 1 / yrs) - 1 : null, late: late ? b[0] : null, mcap, ev, evx, evnm: p && p.lev_nm,
+        lmc: mcap && p && !bad(p.labor_ttm) ? p.labor_ttm / mcap : null, sharesDate: cinfo[t] && cinfo[t].shares_date };
+    }).filter(Boolean);
+    const key = (r, c) => r[c];
+    const rows = sortRows(list.filter((r) => !r.bench), mkSort, key).concat(list.filter((r) => r.bench));
+    sortHeads('#mk-table th button[data-msort]', 'msort', mkSort);
+    const td = (t, cls) => { const c = document.createElement('td'); if (cls) c.className = cls; c.textContent = t; return c; };
+    const money = (v) => (bad(v) ? '—' : '$' + d3.format(',.2f')(v));
+    const ret = (v) => { const c = td(sgn(v)); if (v < 0) c.classList.add('am-neg'); return c; };
+    tb.replaceChildren(...rows.map((r) => {
+      const tr = document.createElement('tr'); if (r.bench) tr.style.color = 'var(--color-fg-muted)';
+      const tsr = ret(r.tsr); if (r.late) { tsr.title = 'Trading history starts ' + dfmt(r.late); const f = document.createElement('span'); f.className = 'am-flag'; f.textContent = '†'; tsr.append(f); }
+      tr.append(td(r.ticker, 'l'), td(r.name, 'l am-hn'), td(money(r.price)), ret(r.day), tsr, (() => { const c = ret(r.ann); c.classList.add('am-hn'); return c; })(),
+        td(r.bench ? '' : fmtM(r.mcap)), td(r.bench ? '' : fmtM(r.ev), 'am-hn'),
+        td(r.bench ? '' : bad(r.evx) ? (r.evnm ? 'n/m' : '—') : d3.format('.1f')(r.evx) + '×'), td(r.bench ? '' : pct(r.lmc)));
+      return tr;
+    }));
+    const lateOnes = rows.filter((r) => r.late).map((r) => r.ticker + ' from ' + dfmt(r.late));
+    const asof = liveAt ? 'Prices as of ' + new Date(liveAt).toLocaleString('en-US', { timeZone: 'America/New_York', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) + ' ET (latest IEX trade)'
+      : 'Closing prices, ' + dfmt(latest);
+    stamp('mk-card', liveAt ? 'Intraday' : 'Close ' + dfmt(latest));
+    const shd = d3.max(list, (r) => r.sharesDate);
+    document.getElementById('mk-note').textContent = asof + '. Total return runs from the close on ' + dfmt(mkBase((T.SPY || Object.values(T)[0]).eod, start)[0]) + '. Market cap uses shares outstanding from the latest SEC filing' + (shd ? ' (as of ' + dfmt(shd) + ' or earlier)' : '') + '; financial measures are the trailing 12 months from the Peer Comparison tab.' + (lateOnes.length ? ' † Return from first trading day: ' + lateOnes.join(', ') + '.' : '') + ' Click a header to sort.';
+    // chart
+    const choices = Object.entries(T).map(([t, h]) => ({ code: t, label: t, title: h.name }));
+    const sel = String(P.mksel || '').split(',').filter((t) => T[t]);
+    pickChips('mk-sel', choices, sel, 8, 'mksel');
+    let ci = 0;
+    const series = sel.map((t) => {
+      const h = T[t], E = h.eod, b = mkBase(E, start);
+      const pts = E.filter((r) => r[0] >= b[0]).map((r) => ({ t: new Date(r[0] + 'T00:00:00Z'), v: r[2] / b[2] - 1 }));
+      const now = mkNow(h); if (now && now.live) pts.push({ t: new Date(now.date + 'T00:00:00Z'), v: now.adj / b[2] - 1 });
+      const bench = BENCH.has(t);
+      return { key: t, name: t, color: bench ? (t === 'SPY' ? 'var(--color-fg-muted)' : 'var(--color-fg)') : C()[ci++ % 6], dashed: bench, pts };
+    });
+    lineChart(document.getElementById('tsr-chart'), series, (v) => (v > 0 ? '+' : v < 0 ? '−' : '') + d3.format(Math.abs(v) < 0.1 ? '.1%' : '.0%')(Math.abs(v)), { zero: true, snap: 5, empty: 'Pick a ticker above.' });
+    legendInto('tsr-legend', series.map((s) => ({ name: s.name + (T[s.key] ? ' — ' + T[s.key].name : ''), color: s.color, dashed: s.dashed })));
+    stamp('tsr-card', 'Since ' + dfmt(start));
+  }
+
   function draw() {
     const P = dash.params();
     sw('sw-labor', C()[0]); sw('sw-fuel', C()[1]); sw('sw-ret', C()[0]); sw('sw-ni', 'var(--cds-chart-muted)');
@@ -2401,6 +2804,9 @@ dash.calc('dotpeer', {
     }
     const lmeta = dash.data('labor_meta');
     if (lmeta.status === 'ok' && lmeta.data[0] && lmeta.data[0].generated) ['labor-sum-card', 'ltable-card'].forEach((id) => stamp(id, 'Checked ' + d3.utcFormat('%b %-d, %Y')(new Date(lmeta.data[0].generated))));
+
+    if (tab === 'reliability') drawRel(P);
+    if (tab === 'markets') drawMarkets(P, peer);
 
     if (!drawn && fin.status === 'ok') {
       drawn = true;
