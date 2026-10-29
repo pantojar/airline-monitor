@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-29T17:11:02Z",
+  "at": "2026-10-29T17:23:27Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -113,10 +113,10 @@
    }
   }
  },
- "generated": "2026-10-29T17:23:02Z",
+ "generated": "2026-10-29T17:25:15Z",
  "news": {
-  "at": "2026-10-29T17:11:35Z",
-  "items": 106,
+  "at": "2026-10-29T17:25:13Z",
+  "items": 105,
   "errors": [
    "Envoy Air news: unavailable",
    "PSA Airlines news: unavailable"
@@ -137,7 +137,7 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-29T17:11:35Z",
+  "at": "2026-10-29T17:25:13Z",
   "latest": "2026-10-27",
   "rows": 1202,
   "diesel_close": "2026-10-28",
@@ -397,8 +397,45 @@
   ]
  },
  "cpi": {
-  "at": "2026-10-29T17:11:36Z",
+  "at": "2026-10-29T17:25:14Z",
   "cpiw": "2026-09",
   "cpiu": "2026-09"
+ },
+ "revsplit": {
+  "at": "2026-10-29T17:24:39Z",
+  "carriers": {
+   "DAL": {
+    "quarters": 19,
+    "new_filings": 15
+   },
+   "UAL": {
+    "quarters": 19,
+    "new_filings": 15
+   },
+   "AAL": {
+    "quarters": 19,
+    "new_filings": 15
+   },
+   "LUV": {
+    "quarters": 19,
+    "new_filings": 15
+   },
+   "ALK": {
+    "quarters": 18,
+    "new_filings": 14
+   },
+   "JBLU": {
+    "quarters": 19,
+    "new_filings": 15
+   },
+   "ULCC": {
+    "quarters": 19,
+    "new_filings": 15
+   },
+   "ALGT": {
+    "quarters": 18,
+    "new_filings": 14
+   }
+  }
  }
 }
