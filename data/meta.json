@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-29T18:33:19Z",
+  "at": "2026-10-29T18:35:25Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -10,7 +10,9 @@
      "filed": "2026-10-09"
     },
     "quarters": 15,
-    "through": "2026-09"
+    "through": "2026-09",
+    "shares": 657912380,
+    "shares_date": "2026-09-30"
    },
    "UAL": {
     "ok": true,
@@ -19,7 +21,9 @@
      "filed": "2026-10-21"
     },
     "quarters": 15,
-    "through": "2026-09"
+    "through": "2026-09",
+    "shares": 324894375,
+    "shares_date": "2026-10-15"
    },
    "AAL": {
     "ok": true,
@@ -28,7 +32,9 @@
      "filed": "2026-07-23"
     },
     "quarters": 14,
-    "through": "2026-06"
+    "through": "2026-06",
+    "shares": 661969951,
+    "shares_date": "2027-07-17"
    },
    "LUV": {
     "ok": true,
@@ -37,7 +43,9 @@
      "filed": "2026-10-22"
     },
     "quarters": 15,
-    "through": "2026-09"
+    "through": "2026-09",
+    "shares": 489602380,
+    "shares_date": "2026-10-21"
    },
    "ALK": {
     "ok": true,
@@ -46,7 +54,9 @@
      "filed": "2026-08-04"
     },
     "quarters": 14,
-    "through": "2026-06"
+    "through": "2026-06",
+    "shares": 111603120,
+    "shares_date": "2026-07-31"
    },
    "JBLU": {
     "ok": true,
@@ -55,7 +65,9 @@
      "filed": "2026-10-26"
     },
     "quarters": 15,
-    "through": "2026-09"
+    "through": "2026-09",
+    "shares": 377351854,
+    "shares_date": "2026-09-30"
    },
    "ULCC": {
     "ok": true,
@@ -64,7 +76,9 @@
      "filed": "2026-10-28"
     },
     "quarters": 15,
-    "through": "2026-09"
+    "through": "2026-09",
+    "shares": 230417551,
+    "shares_date": "2026-10-23"
    },
    "ALGT": {
     "ok": true,
@@ -73,7 +87,9 @@
      "filed": "2026-08-10"
     },
     "quarters": 14,
-    "through": "2026-06"
+    "through": "2026-06",
+    "shares": 27337755,
+    "shares_date": "2026-07-31"
    },
    "SNCY": {
     "ok": true,
@@ -82,7 +98,9 @@
      "filed": "2026-05-01"
     },
     "quarters": 13,
-    "through": "2026-03"
+    "through": "2026-03",
+    "shares": 54196458,
+    "shares_date": "2026-03-31"
    },
    "SAVE": {
     "ok": true,
@@ -91,7 +109,9 @@
      "filed": "2026-04-30"
     },
     "quarters": 12,
-    "through": "2025-12"
+    "through": "2025-12",
+    "shares": 28365259,
+    "shares_date": "2026-04-28"
    },
    "SKYW": {
     "ok": true,
@@ -100,7 +120,9 @@
      "filed": "2026-07-24"
     },
     "quarters": 14,
-    "through": "2026-06"
+    "through": "2026-06",
+    "shares": 38828325,
+    "shares_date": "2026-07-17"
    },
    "RJET": {
     "ok": true,
@@ -109,14 +131,16 @@
      "filed": "2026-07-31"
     },
     "quarters": 5,
-    "through": "2026-06"
+    "through": "2026-06",
+    "shares": 46819500,
+    "shares_date": "2026-07-29"
    }
   }
  },
- "generated": "2026-10-29T18:33:57Z",
+ "generated": "2026-10-29T18:47:11Z",
  "news": {
-  "at": "2026-10-29T18:33:55Z",
-  "items": 105,
+  "at": "2026-10-29T18:36:01Z",
+  "items": 106,
   "errors": [
    "Envoy Air news: unavailable",
    "PSA Airlines news: unavailable"
@@ -137,7 +161,7 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-29T18:33:56Z",
+  "at": "2026-10-29T18:36:01Z",
   "latest": "2026-10-27",
   "rows": 1202,
   "diesel_close": "2026-10-28",
@@ -397,12 +421,12 @@
   ]
  },
  "cpi": {
-  "at": "2026-10-29T18:33:56Z",
+  "at": "2026-10-29T18:36:01Z",
   "cpiw": "2026-09",
   "cpiu": "2026-09"
  },
  "revsplit": {
-  "at": "2026-10-29T18:33:21Z",
+  "at": "2026-10-29T18:35:26Z",
   "carriers": {
    "DAL": {
     "quarters": 19,
@@ -436,6 +460,29 @@
     "quarters": 18,
     "new_filings": 0
    }
+  }
+ },
+ "reliability": {
+  "at": "2026-10-29T18:47:11Z",
+  "checked": "2026-10-29",
+  "first": "2025-07",
+  "latest": "2026-08",
+  "fetched": {
+   "2025-07": 696049,
+   "2025-08": 666242,
+   "2025-09": 621601,
+   "2025-10": 668332,
+   "2025-11": 630188,
+   "2025-12": 644987,
+   "2026-01": 602953,
+   "2026-02": 568789,
+   "2026-03": 675500,
+   "2026-04": 660674,
+   "2026-05": 677208,
+   "2026-06": 671781,
+   "2026-07": 697754,
+   "2026-08": 673065,
+   "2026-09": "failed: ValueError: TranStats did not return a zip file"
   }
  }
 }

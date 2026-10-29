@@ -7,6 +7,8 @@
   "returns_complete": true,
   "note": "",
   "cik": "27904",
+  "shares": 657912380,
+  "shares_date": "2026-09-30",
   "latest_filing": "10-Q filed 2026-10-09"
  },
  {
@@ -17,6 +19,8 @@
   "returns_complete": true,
   "note": "",
   "cik": "100517",
+  "shares": 324894375,
+  "shares_date": "2026-10-15",
   "latest_filing": "10-Q filed 2026-10-21"
  },
  {
@@ -27,6 +31,8 @@
   "returns_complete": true,
   "note": "Includes Envoy, Piedmont and PSA; subsidiaries are not broken out.",
   "cik": "6201",
+  "shares": 661969951,
+  "shares_date": "2027-07-17",
   "latest_filing": "10-Q filed 2026-07-23"
  },
  {
@@ -37,6 +43,8 @@
   "returns_complete": true,
   "note": "",
   "cik": "92380",
+  "shares": 489602380,
+  "shares_date": "2026-10-21",
   "latest_filing": "10-Q filed 2026-10-22"
  },
  {
@@ -47,6 +55,8 @@
   "returns_complete": true,
   "note": "Includes Hawaiian from Sep 18, 2024 and Horizon.",
   "cik": "766421",
+  "shares": 111603120,
+  "shares_date": "2026-07-31",
   "latest_filing": "10-Q filed 2026-08-04"
  },
  {
@@ -57,6 +67,8 @@
   "returns_complete": true,
   "note": "",
   "cik": "1158463",
+  "shares": 377351854,
+  "shares_date": "2026-09-30",
   "latest_filing": "10-Q filed 2026-10-26"
  },
  {
@@ -67,6 +79,8 @@
   "returns_complete": true,
   "note": "",
   "cik": "1670076",
+  "shares": 230417551,
+  "shares_date": "2026-10-23",
   "latest_filing": "10-Q filed 2026-10-28"
  },
  {
@@ -77,6 +91,8 @@
   "returns_complete": true,
   "note": "Includes Sun Country from May 13, 2026.",
   "cik": "1362468",
+  "shares": 27337755,
+  "shares_date": "2026-07-31",
   "latest_filing": "10-Q filed 2026-08-10"
  },
  {
@@ -87,6 +103,8 @@
   "returns_complete": true,
   "note": "Last standalone quarter: Q1 2026.",
   "cik": "1743907",
+  "shares": 54196458,
+  "shares_date": "2026-03-31",
   "latest_filing": "10-Q filed 2026-05-01"
  },
  {
@@ -97,6 +115,8 @@
   "returns_complete": true,
   "note": "Last filed quarter: Q4 2025. Q1 2025 split by fresh-start accounting.",
   "cik": "1498710",
+  "shares": 28365259,
+  "shares_date": "2026-04-28",
   "latest_filing": "10-K/A filed 2026-04-30"
  },
  {
@@ -107,6 +127,8 @@
   "returns_complete": false,
   "note": "Revenue tag includes assessed taxes. Share repurchases after Q1 2024 are not in the cash-flow data SEC publishes, so shareholder returns show as unavailable.",
   "cik": "793733",
+  "shares": 38828325,
+  "shares_date": "2026-07-17",
   "latest_filing": "10-Q filed 2026-07-24"
  },
  {
@@ -117,6 +139,8 @@
   "returns_complete": true,
   "note": "Republic–Mesa merger closed Nov 2025. Pre-merger Mesa history excluded; 2025 Q1–Q2 are Republic comparatives.",
   "cik": "810332",
+  "shares": 46819500,
+  "shares_date": "2026-07-29",
   "latest_filing": "10-Q filed 2026-07-31"
  }
 ]
