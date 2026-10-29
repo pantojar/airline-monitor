@@ -361,6 +361,10 @@ def update_news(meta, per_query=6, keep_days=30, cap=80):
                 continue
             seen.add(key)
             tags = set(q["tags"].split())
+            # a carrier search sometimes returns unrelated stories (e.g. another company's earnings):
+            # keep it only if the headline names an airline
+            if "Industry" not in tags and not any(re.search(name_tags[t], g["title"]) for t in tags if t in name_tags):
+                continue
             for t, rx in name_tags.items():
                 if re.search(rx, g["title"]):
                     tags.add(t)
@@ -395,7 +399,7 @@ RELEASE_RE = re.compile(
     r"union|contract|agreement|ratif|tentative|negotiat|bargain|labor|strike|pilots|flight attendants|mechanics|technicians|dispatchers|"
     r"quarter|results|earnings|guidance|outlook|financial|revenue|profit|dividend|repurchase|notes|offering|debt|liquidity|investor|"
     r"fleet|aircraft order|orders? \d|deliver|capacity|"
-    r"chief|ceo|president|officer|appoint|names? .* (to|as)|\bboard\b|resign|retire|executive|leadership|"
+    r"chief|\bceo\b|president|appoint|names? .* (to|as)|\bboard\b|resign|retire|executive|leadership|"
     r"merger|acqui|combin|transaction|antitrust|hart-scott|department of transportation|\bDOT\b|furlough|layoff|job cuts|restructur|bankrupt",
     re.I)
 
