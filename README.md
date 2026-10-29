@@ -46,7 +46,7 @@ A site that has neither, but has a news page listing articles, also needs `"list
 {"name": "Frontier flight attendants negotiations", "url": "https://example.org", "carriers": ["ULCC"], "craft": "flight att"}
 ```
 
-The **Union websites read** table on the Bargaining tab shows, after each weekly run, whether each site could be read and, if not, why.
+The **Union and company websites read** table on the Bargaining tab shows, after each weekly run, whether each site could be read and, if not, why.
 
 ## Settings
 

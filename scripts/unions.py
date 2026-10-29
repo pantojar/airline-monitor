@@ -32,14 +32,15 @@ import xml.etree.ElementTree as ET
 STOP = {"and", "related", "employees", "employee", "of", "the", "&", "other", "classifications", "inc", "airlines",
         "southwest", "delta", "endeavor", "united", "representatives", "agreement", "group"}
 SYNONYMS = {"inflight": "flight attendant", "crewmember": "", "technicians": "technician", "stores": "storekeeper"}
-ANNOUNCE_RE = re.compile(r"update|ratif|result|vote|tentative|\bTA\b|announce|message|bulletin|news|negotiat|mediat|strike|picket|status|reject", re.I)
+ANNOUNCE_RE = re.compile(r"update|ratif|result|vote|tentative|\bTA\b|announce|message|bulletin|news|negotiat|mediat|strike|picket|status|reject|approv|contract|agreement", re.I)
 AIRLINE_WORDS = re.compile(r"airline|air\b|airways|aviation|flight|pilot|mechanic|technician|\bAMT|dispatch|ramp|fleet|passenger|agent|"
                            r"stores|cabin|crew|American|Envoy|Piedmont|PSA|United|Delta|Southwest|SWA|Alaska|Hawaiian|Horizon|Frontier|JetBlue", re.I)
+LABOR_WORDS = re.compile(r"union|contract|agreement|ratif|tentative|negotiat|bargain|labor|pilots|flight attendants|mechanics|technicians|dispatchers|agents|ramp|fleet service|instructors|team members|employees", re.I)
 CONTRACT_DOC_RE = re.compile(r"agreement|contract|\bCBA\b|\bLOA\b|letter of agreement", re.I)
 
 STATUS_RULES = [
     ("Contract rejected", r"\breject|did not ratify|not ratified|failed to ratify|voted down|vote(d)? no\b|not been ratified"),
-    ("Ratified", r"ratif(y|ied|ies|ication)|approved? (the|their|a) (new )?(contract|agreement|TA)"),
+    ("Ratified", r"ratif(y|ied|ies|ication)|approved? (the|their|a) (new )?(contract|agreement|TA)|approve[sd]? (a |the |their )?new [\w-]*(-| )?(year )?(contract|agreement|labor agreement)|vote[sd]? to approve"),
     ("Tentative agreement", r"tentative (agreement|deal)|agreement in principle|reached (a|an) (deal|agreement)"),
     ("Strike vote", r"strike (vote|authori[sz]ation)|vote[sd]? to (authori[sz]e|strike)"),
     ("Seeking release", r"request(s|ed|ing)? (a )?release|release from (the )?(NMB|mediation)|cooling[- ]off|proffer"),
@@ -206,8 +207,34 @@ def html_list(f, site, since):
     return ("html list" if items else None), items, tried or (["list: no news links found"] if not items else [])
 
 
+def q4_list(f, site, since):
+    """Company newsrooms on the Q4 platform (American, JetBlue, Allegiant, Delta and Frontier investor sites):
+    a public JSON list of press releases. Releases come without their text; the article page is read when the
+    headline looks like labor news."""
+    base = site["url"].rstrip("/")
+    url = (base + "/feed/PressRelease.svc/GetPressReleaseList?LanguageId=1&bodyType=0&pressReleaseDateFilter=3"
+           "&pageSize=100&pageNumber=0&year=-1&excludeSelection=1")
+    try:
+        data, _ = f.get(url, "application/json")
+        rows = json.loads(data).get("GetPressReleaseListResult") or []
+    except Exception as e:  # noqa: BLE001
+        return None, [], ["q4: " + _err(e)]
+    items = []
+    for r in rows:
+        try:
+            d = dt.datetime.strptime(r["PressReleaseDate"][:10], "%m/%d/%Y").date().isoformat()
+        except Exception:  # noqa: BLE001
+            continue
+        if d < since:
+            continue
+        items.append({"date": d, "title": clean(r.get("Headline")), "url": urllib.parse.urljoin(base + "/", r.get("LinkToDetailPage") or ""), "kind": "page"})
+    return ("press releases" if items else None), items, ([] if items else ["q4: no releases"])
+
+
 def list_items(f, site, since):
     """Return (method, [{date, title, url, kind, text?}])"""
+    if site.get("q4"):
+        return q4_list(f, site, since)
     if site.get("list"):
         return html_list(f, site, since)
     base = site["url"].rstrip("/")
@@ -230,7 +257,7 @@ def list_items(f, site, since):
             methods.append("wp-posts")
         if len(got) < 50:
             break
-    for page in range(1, 5 if not site.get("feeds") else 1):
+    for page in range(1, 5 if not (site.get("feeds") or site.get("company")) else 1):
         try:
             data, _ = f.get(f"{base}/wp-json/wp/v2/media?mime_type=application/pdf&per_page=100&page={page}&after={after}&_fields=date,source_url,title", "application/json")
             got = json.loads(data)
@@ -421,7 +448,8 @@ def collect(root, groups, ua, aliases, since_days=400, budget_s=600):
                 elif c and (c.get("skipped") or c.get("error")):
                     continue
                 else:
-                    if not (ANNOUNCE_RE.search(it["title"]) and (len(site["carriers"]) == 1 or AIRLINE_WORDS.search(it["title"]))):
+                    if not (ANNOUNCE_RE.search(it["title"]) and (len(site["carriers"]) == 1 or AIRLINE_WORDS.search(it["title"]))) \
+                            or (site.get("company") and not LABOR_WORDS.search(it["title"])):
                         cache[key] = {"date": it["date"] or dt.date.today().isoformat(), "skipped": True}
                         continue
                     if nread >= 25 or time.time() - t0 > budget_s:
@@ -431,7 +459,7 @@ def collect(root, groups, ua, aliases, since_days=400, budget_s=600):
                         raw = data.decode("utf-8", "replace")
                         body = re.search(r"(?is)<(article|main)\b.*?</\1>", raw)
                         it["text"] = clean(body.group(0) if body else raw)[:30000]
-                        it["date"] = page_date(raw, it["text"] if body else None) or it["date"]  # the article's own date beats the listing's layout
+                        it["date"] = it["date"] if site.get("q4") else (page_date(raw, it["text"] if body else None) or it["date"])  # the article's own date beats the listing's layout
                         nread += 1
                         time.sleep(0.5)
                     except Exception as e:  # noqa: BLE001
@@ -464,6 +492,12 @@ def collect(root, groups, ua, aliases, since_days=400, budget_s=600):
             cache[key] = {"date": it["date"], "title": it["title"][:200], "site": site["name"], "kind": it["kind"],
                           "counts": it["counts"], "text": status_text(it.get("text"))}
             match(it, rel, site)
+        # feeds only show their latest 10-50 items: keep matching what earlier runs read from this site
+        seen = {it["url"] for it in items}
+        for k, v in list(cache.items()):
+            if v.get("site") == site["name"] and k not in seen and "text" in v:
+                match({"url": k, "date": v["date"], "title": v.get("title", ""), "text": v["text"],
+                       "kind": v.get("kind"), "counts": v.get("counts")}, rel, site)
         rep["pdfs_read"] = nread
         report.append(rep)
     # keep the cache to recent items

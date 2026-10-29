@@ -618,8 +618,8 @@ window.dash = (function () {
     </div>
 
     <div class="am-card" id="usrc-card">
-      <h2>Union websites read</h2>
-      <p class="am-note">Checked weekly. Sites that block automated reading, or don't publish in a readable form, show as unavailable; their news still reaches the tracker through headlines.</p>
+      <h2>Union and company websites read</h2>
+      <p class="am-note">Checked weekly: union sites, plus each airline's own newsroom, where ratifications and tentative agreements are often announced. Sites that block automated reading, or don't publish in a readable form, show as unavailable; their news still reaches the tracker through headlines.</p>
       <div class="am-tbl-box">
         <table class="am-t" id="usrc-table" data-source="meta">
           <thead><tr><th class="l">Site</th><th class="l">Read via</th><th>Items, past year</th><th>Groups it covers</th><th>Status events found</th></tr></thead>
@@ -1861,7 +1861,7 @@ dash.calc('dotpeer', {
           : /URLError|Timeout/.test(e || '') ? 'Unavailable: site did not respond'
           : 'Unavailable: no news feed found';
         const how = x.method === 'deferred' ? 'Carried over from last read'
-          : x.method ? x.method.replace('wp-posts', 'posts').replace('wp-media', 'PDF uploads').replace(/rss .*/, 'RSS feed') : why(x.error);
+          : x.method ? x.method.replace('wp-posts', 'posts').replace('wp-media', 'PDF uploads').replace(/rss .*/, 'RSS feed').replace('press releases', 'Press release list') : why(x.error);
         tr.append(n, td(how, 'l'), td(x.method ? d3.format(',')(x.items) : '—'), td(String(x.groups)), td(String(evCount.get(x.name) || 0)));
         if (!x.method) tr.className = 'off';
         return tr;

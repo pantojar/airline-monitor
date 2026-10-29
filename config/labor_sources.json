@@ -13,5 +13,19 @@
  {"name": "TWU Local 556", "url": "https://www.twu556.org", "unions": ["\\bTWU\\b", "Transport Workers"], "carriers": ["LUV"]},
  {"name": "TWU Local 555", "url": "https://www.twu555.org", "unions": ["\\bTWU\\b", "Transport Workers"], "carriers": ["LUV"]},
  {"name": "AMFA", "url": "https://www.amfanational.org", "unions": ["\\bAMFA\\b", "Aircraft Mechanics Fraternal"], "carriers": ["LUV", "ALK"], "list": ["https://www.amfanational.org/?zone=/unionactive/view_page.cfm&page=Latest20News"], "link": "view_article\\.cfm&HomeID=\\d+", "names": {"LUV": "SWA"}},
- {"name": "CWA", "url": "https://cwa-union.org", "unions": ["\\bCWA\\b", "Communications Workers"], "carriers": ["AAL"], "list": ["https://cwa-union.org/news/all", "https://cwa-union.org/news/all?page=1", "https://cwa-union.org/news/all?page=2", "https://cwa-union.org/news/all?page=3"], "link": "cwa-union\\.org/(index%2Ephp/)?news/(?!all\\b)[a-z0-9][^?#]*$"}
+ {"name": "CWA", "url": "https://cwa-union.org", "unions": ["\\bCWA\\b", "Communications Workers"], "carriers": ["AAL"], "list": ["https://cwa-union.org/news/all", "https://cwa-union.org/news/all?page=1", "https://cwa-union.org/news/all?page=2", "https://cwa-union.org/news/all?page=3"], "link": "cwa-union\\.org/(index%2Ephp/)?news/(?!all\\b)[a-z0-9][^?#]*$"},
+ {"name": "American Airlines newsroom", "url": "https://news.aa.com", "q4": true, "carriers": ["AAL"], "company": true},
+ {"name": "Envoy Air news", "url": "https://www.envoyair.com", "carriers": ["AAL"], "unit": "Envoy", "company": true},
+ {"name": "Piedmont Airlines news", "url": "https://www.piedmont-airlines.com", "carriers": ["AAL"], "unit": "Piedmont", "company": true},
+ {"name": "PSA Airlines news", "url": "https://www.psaairlines.com", "feeds": ["/feed/"], "carriers": ["AAL"], "unit": "PSA", "company": true},
+ {"name": "Delta News Hub", "url": "https://news.delta.com", "feeds": ["/rss.xml"], "carriers": ["DAL"], "company": true},
+ {"name": "Delta investor news", "url": "https://ir.delta.com", "q4": true, "carriers": ["DAL"], "company": true},
+ {"name": "United newsroom", "url": "https://united.mediaroom.com", "feeds": ["/news-releases?pagetemplate=rss"], "carriers": ["UAL"], "company": true},
+ {"name": "Southwest investor news", "url": "https://investors.southwest.com", "feeds": ["/news-events/press-releases/rss"], "carriers": ["LUV"], "company": true},
+ {"name": "Alaska Air Group News Hub", "url": "https://news.alaskaair.com", "carriers": ["ALK"], "company": true},
+ {"name": "JetBlue newsroom", "url": "https://news.jetblue.com", "q4": true, "carriers": ["JBLU"], "company": true},
+ {"name": "Frontier newsroom", "url": "https://news.flyfrontier.com", "feeds": ["/feed/"], "carriers": ["ULCC"], "company": true},
+ {"name": "Frontier investor news", "url": "https://ir.flyfrontier.com", "q4": true, "carriers": ["ULCC"], "company": true},
+ {"name": "Allegiant newsroom", "url": "https://newsroom.allegiantair.com", "q4": true, "carriers": ["ALGT"], "company": true},
+ {"name": "Republic Airways news", "url": "https://rjet.com", "carriers": ["RJET"], "company": true}
 ]
