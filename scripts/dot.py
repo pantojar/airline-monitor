@@ -53,6 +53,9 @@ TABLES = {
     # Aircraft operating expenses: pilot and copilot salaries (summed across aircraft types)
     "p52": {"code": "FMK", "db": FIN_DB, "period": "quarter",
             "fields": ["YEAR", "QUARTER", "UNIQUE_CARRIER", "REGION", "AIRCRAFT_TYPE", "PILOT_FLY_OPS"]},
+    # Annual aircraft inventory (B-43): one row per aircraft, with the year it was built
+    "b43": {"code": "GEH", "db": FIN_DB, "period": "year",
+            "fields": ["YEAR", "UNIQUE_CARRIER", "TAIL_NUMBER", "MANUFACTURE_YEAR", "OPERATING_STATUS", "NUMBER_OF_SEATS"]},
     # Monthly fuel consumption and cost
     "p12a": {"code": "FMH", "db": FIN_DB, "period": "month",
              "fields": ["YEAR", "MONTH", "UNIQUE_CARRIER", "TOTAL_GALLONS", "TOTAL_COST"]},
@@ -188,7 +191,7 @@ def aggregate(raw, codes):
 
 
 def aggregate_annual(raw, codes):
-    """Headcount by labor category (P-10) and pilot salaries (P-5.2) by carrier and year."""
+    """Headcount by labor category (P-10), pilot salaries (P-5.2) and fleet size and age (B-43) by carrier and year."""
     out = {}
     for r in raw.get("p10", []):
         c = r.get("UNIQUE_CARRIER")
@@ -211,6 +214,24 @@ def aggregate_annual(raw, codes):
         if len(qs) == 4:  # complete years only
             a = out.setdefault(k, {"code": k[0], "year": k[1]})
             a["pilot_sal"] = round(sum(qs.values()) / 1000, 1)  # $ millions
+    # fleet size and average age: operating aircraft on each year-end inventory (B-43), one row per tail number
+    fleet = {}
+    for r in raw.get("b43", []):
+        c = r.get("UNIQUE_CARRIER")
+        if c not in codes or str(r.get("OPERATING_STATUS", "")).strip().upper() not in ("Y", "YES", "1"):
+            continue
+        try:
+            y, built = int(r["YEAR"]), int(float(r.get("MANUFACTURE_YEAR") or 0))
+        except ValueError:
+            continue
+        if not 1960 <= built <= y + 1:
+            continue
+        fleet.setdefault((c, y), {})[str(r.get("TAIL_NUMBER") or len(fleet)).strip()] = y - built
+    for k, ages in fleet.items():
+        if len(ages) >= 5:
+            a = out.setdefault(k, {"code": k[0], "year": k[1]})
+            a["fleet_n"] = len(ages)
+            a["fleet_age"] = round(sum(ages.values()) / len(ages), 1)
     rows = []
     for a in out.values():
         for kk in list(a):
@@ -299,6 +320,7 @@ def update_dot(root, meta, user_agent, first_year=2022, force=False, refetch_yea
             if r.get(f) is not None:
                 latest[k] = max(latest.get(k, ""), r["quarter"])
     latest["headcount_year"] = max((a["year"] for a in annual if a.get("h_total")), default=None)
+    latest["fleet_year"] = max((a["year"] for a in annual if a.get("fleet_age") is not None), default=None)
     latest["fuel_month"] = max((f["month"] for f in fuel), default=None)
     meta["dot"] = {"at": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
                    "ok": not failed, "failed": failed, "latest": latest, "rows": len(rows)}
