@@ -250,6 +250,8 @@ window.dash = (function () {
 #dash-root .am-quote{border-left:3px solid var(--sign-hover);padding:2px 0 2px 12px;margin:8px 0;color:var(--color-fg-muted);font-size:var(--cds-font-size-body);line-height:1.5}
 #dash-root .am-disc h3{font-size:var(--cds-font-size-body);font-weight:800;margin:var(--cds-gap-md) 0 2px}
 #dash-root .am-foot{margin:var(--cds-gap-sm) 0 0;padding-left:1.2rem;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);line-height:1.5}
+#dash-root .am-defs{list-style:none;padding-left:0;margin-top:12px;max-width:60rem}
+#dash-root .am-defs li{margin-bottom:3px}
 #dash-root .am-foot b{color:var(--color-fg);font-weight:800}
 @media (max-width:700px){
   #dash-root .am-hn{display:none}
@@ -301,7 +303,7 @@ window.dash = (function () {
 
     <div class="am-card" id="peer-card">
       <h2>Peer comparison</h2>
-      <p class="am-note" id="peer-note">GAAP figures as filed with the SEC, $ millions. Net income is the bottom line after interest, taxes and special items. Labor is the salaries, wages and benefits line. Debt and net debt are from the latest balance sheet; net debt is debt less cash and short-term investments (negative means more cash than debt). Carriers define debt differently (some include finance leases), and none include operating leases, which is how most aircraft leases are booked; "net debt incl. leases" adds operating lease liabilities so lease-heavy carriers compare fairly with those that own their fleets. Leverage is net debt incl. leases ÷ trailing-12-month EBITDAR (operating income + depreciation and amortization + aircraft rent), the measure credit analysts use for airlines: lower means a stronger balance sheet; "n/m" (not meaningful) means EBITDAR was under 5% of revenue, where the ratio swings wildly and says little beyond "almost no earnings to service debt". Southwest and Allegiant don't report rent in a form the SEC data captures, so their EBITDAR leaves it out; both lease few aircraft, so the effect is small. Returned to shareholders is buybacks plus dividends paid. Click a header to sort; click a row for that carrier's detail.</p>
+      <p class="am-note" id="peer-note">GAAP figures as filed with the SEC, $ millions. Click a header to sort, or a row for that carrier's detail. Definitions are below the table.</p>
       <div class="am-tbl-box">
         <table class="am-t" id="peer-table" data-source="peer" data-row-key="ticker">
           <thead><tr>
@@ -325,6 +327,14 @@ window.dash = (function () {
           <tbody></tbody>
         </table>
       </div>
+      <ul class="am-foot am-defs">
+        <li><b>Net income:</b> the bottom line, after interest, taxes and special items.</li>
+        <li><b>Labor cost:</b> the salaries, wages and benefits line.</li>
+        <li><b>Net debt:</b> debt minus cash and short-term investments, from the latest balance sheet. Negative means more cash than debt. Carriers define debt differently.</li>
+        <li><b>Net debt incl. leases:</b> adds operating lease liabilities (mostly leased aircraft), so carriers that lease compare fairly with those that own.</li>
+        <li><b>Leverage:</b> net debt incl. leases ÷ trailing-12-month EBITDAR (operating income + depreciation + aircraft rent). Lower is stronger. "n/m" means EBITDAR was under 5% of revenue, too small for the ratio to mean much. Southwest's and Allegiant's EBITDAR leaves out rent, which they don't report in usable form; both lease few aircraft.</li>
+        <li><b>Returned to shareholders:</b> buybacks plus dividends paid.</li>
+      </ul>
     </div>
 
     <div class="am-card" id="margin-card">
