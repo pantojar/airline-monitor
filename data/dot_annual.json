@@ -10,6 +10,8 @@
 "h_other":594,
 "h_total":4912,
 "pilot_sal":232.0,
+"fleet_n":156,
+"fleet_age":13.1,
 "pilot_avg":153541
 },
 {
@@ -23,6 +25,8 @@
 "h_other":427,
 "h_total":4535,
 "pilot_sal":260.8,
+"fleet_n":128,
+"fleet_age":13.0,
 "pilot_avg":189673
 },
 {
@@ -36,6 +40,8 @@
 "h_other":336,
 "h_total":4454,
 "pilot_sal":236.3,
+"fleet_n":137,
+"fleet_age":14.4,
 "pilot_avg":184321
 },
 {
@@ -49,6 +55,8 @@
 "h_other":371,
 "h_total":4754,
 "pilot_sal":264.5,
+"fleet_n":143,
+"fleet_age":15.4,
 "pilot_avg":189334
 },
 {
@@ -62,6 +70,8 @@
 "h_other":16058,
 "h_total":101835,
 "pilot_sal":3172.5,
+"fleet_n":934,
+"fleet_age":11.7,
 "pilot_avg":220053
 },
 {
@@ -75,6 +85,8 @@
 "h_other":16070,
 "h_total":103182,
 "pilot_sal":3902.2,
+"fleet_n":965,
+"fleet_age":12.5,
 "pilot_avg":260982
 },
 {
@@ -88,6 +100,8 @@
 "h_other":15530,
 "h_total":102674,
 "pilot_sal":4490.8,
+"fleet_n":977,
+"fleet_age":13.3,
 "pilot_avg":311083
 },
 {
@@ -101,6 +115,8 @@
 "h_other":16554,
 "h_total":105981,
 "pilot_sal":4790.5,
+"fleet_n":1013,
+"fleet_age":13.8,
 "pilot_avg":314957
 },
 {
@@ -114,6 +130,8 @@
 "h_other":3091,
 "h_total":19550,
 "pilot_sal":697.8,
+"fleet_n":219,
+"fleet_age":9.3,
 "pilot_avg":211968
 },
 {
@@ -127,6 +145,8 @@
 "h_other":3165,
 "h_total":20144,
 "pilot_sal":875.2,
+"fleet_n":230,
+"fleet_age":9.1,
 "pilot_avg":252001
 },
 {
@@ -140,6 +160,8 @@
 "h_other":3165,
 "h_total":20268,
 "pilot_sal":950.7,
+"fleet_n":237,
+"fleet_age":9.3,
 "pilot_avg":279535
 },
 {
@@ -153,6 +175,8 @@
 "h_other":3850,
 "h_total":22375,
 "pilot_sal":996.6,
+"fleet_n":248,
+"fleet_age":9.3,
 "pilot_avg":296607
 },
 {
@@ -166,6 +190,8 @@
 "h_other":2482,
 "h_total":20008,
 "pilot_sal":971.8,
+"fleet_n":285,
+"fleet_age":11.8,
 "pilot_avg":241201
 },
 {
@@ -179,6 +205,8 @@
 "h_other":2602,
 "h_total":20578,
 "pilot_sal":1140.1,
+"fleet_n":286,
+"fleet_age":11.9,
 "pilot_avg":258292
 },
 {
@@ -192,6 +220,8 @@
 "h_other":2440,
 "h_total":19824,
 "pilot_sal":1264.7,
+"fleet_n":289,
+"fleet_age":11.5,
 "pilot_avg":279122
 },
 {
@@ -205,6 +235,8 @@
 "h_other":2413,
 "h_total":19257,
 "pilot_sal":1364.1,
+"fleet_n":291,
+"fleet_age":11.6,
 "pilot_avg":310941
 },
 {
@@ -218,6 +250,8 @@
 "h_other":234,
 "h_total":1287,
 "pilot_sal":49.2,
+"fleet_n":50,
+"fleet_age":18.0,
 "pilot_avg":105579
 },
 {
@@ -231,6 +265,8 @@
 "h_other":235,
 "h_total":1165,
 "pilot_sal":57.9,
+"fleet_n":49,
+"fleet_age":19.0,
 "pilot_avg":147704
 },
 {
@@ -244,6 +280,8 @@
 "h_other":241,
 "h_total":1259,
 "pilot_sal":57.2,
+"fleet_n":49,
+"fleet_age":20.0,
 "pilot_avg":132715
 },
 {
@@ -257,6 +295,8 @@
 "h_other":221,
 "h_total":1208,
 "pilot_sal":60.7,
+"fleet_n":49,
+"fleet_age":21.0,
 "pilot_avg":142155
 },
 {
@@ -270,6 +310,8 @@
 "h_other":19992,
 "h_total":89691,
 "pilot_sal":3113.6,
+"fleet_n":864,
+"fleet_age":14.1,
 "pilot_avg":268808
 },
 {
@@ -283,6 +325,8 @@
 "h_other":21739,
 "h_total":98442,
 "pilot_sal":4316.3,
+"fleet_n":958,
+"fleet_age":13.8,
 "pilot_avg":318711
 },
 {
@@ -296,6 +340,8 @@
 "h_other":20342,
 "h_total":100924,
 "pilot_sal":5033.1,
+"fleet_n":975,
+"fleet_age":14.3,
 "pilot_avg":331802
 },
 {
@@ -309,6 +355,8 @@
 "h_other":19522,
 "h_total":100851,
 "pilot_sal":5576.7,
+"fleet_n":989,
+"fleet_age":14.3,
 "pilot_avg":356316
 },
 {
@@ -322,6 +370,8 @@
 "h_other":475,
 "h_total":6470,
 "pilot_sal":377.1,
+"fleet_n":120,
+"fleet_age":3.9,
 "pilot_avg":188833
 },
 {
@@ -335,6 +385,8 @@
 "h_other":586,
 "h_total":7235,
 "pilot_sal":445.1,
+"fleet_n":136,
+"fleet_age":3.9,
 "pilot_avg":210748
 },
 {
@@ -348,6 +400,8 @@
 "h_other":585,
 "h_total":7938,
 "pilot_sal":454.3,
+"fleet_n":159,
+"fleet_age":4.2,
 "pilot_avg":206500
 },
 {
@@ -361,6 +415,8 @@
 "h_other":600,
 "h_total":7679,
 "pilot_sal":472.6,
+"fleet_n":176,
+"fleet_age":4.6,
 "pilot_avg":209208
 },
 {
@@ -374,6 +430,8 @@
 "h_other":409,
 "h_total":4847,
 "pilot_sal":195.5,
+"fleet_n":121,
+"fleet_age":14.5,
 "pilot_avg":174242
 },
 {
@@ -387,6 +445,8 @@
 "h_other":495,
 "h_total":5250,
 "pilot_sal":247.2,
+"fleet_n":123,
+"fleet_age":14.9,
 "pilot_avg":219149
 },
 {
@@ -400,6 +460,8 @@
 "h_other":468,
 "h_total":5640,
 "pilot_sal":305.2,
+"fleet_n":123,
+"fleet_age":14.9,
 "pilot_avg":227422
 },
 {
@@ -413,6 +475,8 @@
 "h_other":462,
 "h_total":5656,
 "pilot_sal":319.1,
+"fleet_n":123,
+"fleet_age":13.8,
 "pilot_avg":235324
 },
 {
@@ -426,6 +490,8 @@
 "h_other":238,
 "h_total":838,
 "pilot_sal":31.8,
+"fleet_n":67,
+"fleet_age":17.9,
 "pilot_avg":135897
 },
 {
@@ -439,6 +505,8 @@
 "h_other":239,
 "h_total":857,
 "pilot_sal":39.5,
+"fleet_n":67,
+"fleet_age":18.9,
 "pilot_avg":159919
 },
 {
@@ -452,6 +520,8 @@
 "h_other":272,
 "h_total":926,
 "pilot_sal":47.8,
+"fleet_n":60,
+"fleet_age":19.9,
 "pilot_avg":164828
 },
 {
@@ -478,6 +548,8 @@
 "h_other":835,
 "h_total":7113,
 "pilot_sal":191.9,
+"fleet_n":60,
+"fleet_age":11.1,
 "pilot_avg":196217
 },
 {
@@ -491,6 +563,8 @@
 "h_other":935,
 "h_total":7378,
 "pilot_sal":242.2,
+"fleet_n":60,
+"fleet_age":12.1,
 "pilot_avg":216831
 },
 {
@@ -504,6 +578,8 @@
 "h_other":910,
 "h_total":7401,
 "pilot_sal":280.2,
+"fleet_n":59,
+"fleet_age":13.3,
 "pilot_avg":247745
 },
 {
@@ -530,6 +606,8 @@
 "h_other":362,
 "h_total":14314,
 "pilot_sal":303.1,
+"fleet_n":203,
+"fleet_age":11.9,
 "pilot_avg":156560
 },
 {
@@ -543,6 +621,8 @@
 "h_other":495,
 "h_total":16380,
 "pilot_sal":287.8,
+"fleet_n":179,
+"fleet_age":11.1,
 "pilot_avg":163616
 },
 {
@@ -556,6 +636,8 @@
 "h_other":330,
 "h_total":17341,
 "pilot_sal":356.8,
+"fleet_n":164,
+"fleet_age":9.2,
 "pilot_avg":170473
 },
 {
@@ -569,6 +651,8 @@
 "h_other":344,
 "h_total":18289,
 "pilot_sal":389.0,
+"fleet_n":179,
+"fleet_age":9.7,
 "pilot_avg":175383
 },
 {
@@ -580,7 +664,9 @@
 "h_handling":355,
 "h_mgmt":9,
 "h_other":215,
-"h_total":993
+"h_total":993,
+"fleet_n":26,
+"fleet_age":7.8
 },
 {
 "code":"MX",
@@ -591,7 +677,9 @@
 "h_handling":626,
 "h_mgmt":8,
 "h_other":315,
-"h_total":1513
+"h_total":1513,
+"fleet_n":37,
+"fleet_age":6.8
 },
 {
 "code":"MX",
@@ -604,6 +692,8 @@
 "h_other":342,
 "h_total":1969,
 "pilot_sal":89.8,
+"fleet_n":46,
+"fleet_age":5.4,
 "pilot_avg":162681
 },
 {
@@ -617,6 +707,8 @@
 "h_other":350,
 "h_total":1795,
 "pilot_sal":105.7,
+"fleet_n":54,
+"fleet_age":3.9,
 "pilot_avg":181615
 },
 {
@@ -630,6 +722,8 @@
 "h_other":430,
 "h_total":11673,
 "pilot_sal":553.2,
+"fleet_n":194,
+"fleet_age":6.6,
 "pilot_avg":176572
 },
 {
@@ -643,6 +737,8 @@
 "h_other":1551,
 "h_total":13593,
 "pilot_sal":756.2,
+"fleet_n":205,
+"fleet_age":6.1,
 "pilot_avg":205489
 },
 {
@@ -656,6 +752,8 @@
 "h_other":12051,
 "h_total":22846,
 "pilot_sal":775.2,
+"fleet_n":213,
+"fleet_age":5.4,
 "pilot_avg":231472
 },
 {
@@ -669,6 +767,8 @@
 "h_other":252,
 "h_total":10337,
 "pilot_sal":623.5,
+"fleet_n":131,
+"fleet_age":7.5,
 "pilot_avg":237072
 },
 {
@@ -682,6 +782,8 @@
 "h_other":601,
 "h_total":4223,
 "pilot_sal":252.2,
+"fleet_n":130,
+"fleet_age":10.8,
 "pilot_avg":157527
 },
 {
@@ -695,6 +797,8 @@
 "h_other":690,
 "h_total":4109,
 "pilot_sal":288.4,
+"fleet_n":141,
+"fleet_age":11.5,
 "pilot_avg":190363
 },
 {
@@ -708,6 +812,8 @@
 "h_other":718,
 "h_total":4553,
 "pilot_sal":297.2,
+"fleet_n":143,
+"fleet_age":12.4,
 "pilot_avg":184711
 },
 {
@@ -721,6 +827,8 @@
 "h_other":877,
 "h_total":4912,
 "pilot_sal":360.5,
+"fleet_n":149,
+"fleet_age":13.1,
 "pilot_avg":204018
 },
 {
@@ -734,6 +842,8 @@
 "h_other":316,
 "h_total":12717,
 "pilot_sal":611.8,
+"fleet_n":584,
+"fleet_age":12.3,
 "pilot_avg":130060
 },
 {
@@ -747,6 +857,8 @@
 "h_other":344,
 "h_total":12296,
 "pilot_sal":690.5,
+"fleet_n":547,
+"fleet_age":12.7,
 "pilot_avg":156576
 },
 {
@@ -760,6 +872,8 @@
 "h_other":376,
 "h_total":13743,
 "pilot_sal":736.1,
+"fleet_n":566,
+"fleet_age":13.1,
 "pilot_avg":145820
 },
 {
@@ -773,6 +887,8 @@
 "h_other":362,
 "h_total":14797,
 "pilot_sal":752.4,
+"fleet_n":581,
+"fleet_age":14.0,
 "pilot_avg":140530
 },
 {
@@ -786,6 +902,8 @@
 "h_other":925,
 "h_total":2209,
 "pilot_sal":96.5,
+"fleet_n":47,
+"fleet_age":20.4,
 "pilot_avg":160299
 },
 {
@@ -799,6 +917,8 @@
 "h_other":952,
 "h_total":2387,
 "pilot_sal":123.8,
+"fleet_n":58,
+"fleet_age":20.1,
 "pilot_avg":182596
 },
 {
@@ -812,6 +932,8 @@
 "h_other":958,
 "h_total":7880,
 "pilot_sal":110.0,
+"fleet_n":56,
+"fleet_age":20.9,
 "pilot_avg":156472
 },
 {
@@ -825,6 +947,8 @@
 "h_other":986,
 "h_total":8191,
 "pilot_sal":131.5,
+"fleet_n":71,
+"fleet_age":21.8,
 "pilot_avg":168159
 },
 {
@@ -838,6 +962,8 @@
 "h_other":137,
 "h_total":2736,
 "pilot_sal":65.5,
+"fleet_n":30,
+"fleet_age":4.2,
 "pilot_avg":104800
 },
 {
@@ -851,6 +977,8 @@
 "h_other":141,
 "h_total":3208,
 "pilot_sal":77.8,
+"fleet_n":41,
+"fleet_age":3.9,
 "pilot_avg":137699
 },
 {
@@ -864,6 +992,8 @@
 "h_other":146,
 "h_total":3400,
 "pilot_sal":76.8,
+"fleet_n":44,
+"fleet_age":4.5,
 "pilot_avg":119626
 },
 {
@@ -877,6 +1007,8 @@
 "h_other":169,
 "h_total":3846,
 "pilot_sal":87.1,
+"fleet_n":47,
+"fleet_age":5.2,
 "pilot_avg":131571
 },
 {
@@ -890,6 +1022,8 @@
 "h_other":237,
 "h_total":2072,
 "pilot_sal":102.5,
+"fleet_n":54,
+"fleet_age":15.4,
 "pilot_avg":199416
 },
 {
@@ -903,6 +1037,8 @@
 "h_other":256,
 "h_total":2373,
 "pilot_sal":122.4,
+"fleet_n":60,
+"fleet_age":15.3,
 "pilot_avg":198701
 },
 {
@@ -916,6 +1052,8 @@
 "h_other":249,
 "h_total":2609,
 "pilot_sal":138.2,
+"fleet_n":63,
+"fleet_age":16.1,
 "pilot_avg":209712
 },
 {
@@ -929,6 +1067,8 @@
 "h_other":240,
 "h_total":2767,
 "pilot_sal":164.6,
+"fleet_n":67,
+"fleet_age":17.9,
 "pilot_avg":237861
 },
 {
@@ -942,6 +1082,8 @@
 "h_other":2612,
 "h_total":77699,
 "pilot_sal":3074.6,
+"fleet_n":866,
+"fleet_age":16.2,
 "pilot_avg":243552
 },
 {
@@ -955,6 +1097,8 @@
 "h_other":5378,
 "h_total":92966,
 "pilot_sal":4248.8,
+"fleet_n":932,
+"fleet_age":15.6,
 "pilot_avg":298099
 },
 {
@@ -968,6 +1112,8 @@
 "h_other":6561,
 "h_total":96422,
 "pilot_sal":4976.2,
+"fleet_n":994,
+"fleet_age":15.4,
 "pilot_avg":307363
 },
 {
@@ -981,6 +1127,8 @@
 "h_other":8526,
 "h_total":101401,
 "pilot_sal":5437.5,
+"fleet_n":1058,
+"fleet_age":15.0,
 "pilot_avg":320022
 },
 {
@@ -994,6 +1142,8 @@
 "h_other":7292,
 "h_total":61806,
 "pilot_sal":2838.7,
+"fleet_n":770,
+"fleet_age":11.7,
 "pilot_avg":325576
 },
 {
@@ -1007,6 +1157,8 @@
 "h_other":8491,
 "h_total":70063,
 "pilot_sal":3387.9,
+"fleet_n":817,
+"fleet_age":10.9,
 "pilot_avg":337810
 },
 {
@@ -1020,6 +1172,8 @@
 "h_other":8886,
 "h_total":71593,
 "pilot_sal":3900.4,
+"fleet_n":803,
+"fleet_age":11.1,
 "pilot_avg":365411
 },
 {
@@ -1033,7 +1187,15 @@
 "h_other":8197,
 "h_total":70254,
 "pilot_sal":4122.6,
+"fleet_n":803,
+"fleet_age":10.7,
 "pilot_avg":399864
+},
+{
+"code":"XP",
+"year":2022,
+"fleet_n":14,
+"fleet_age":14.6
 },
 {
 "code":"XP",
@@ -1044,7 +1206,9 @@
 "h_handling":82,
 "h_mgmt":17,
 "h_other":81,
-"h_total":678
+"h_total":678,
+"fleet_n":16,
+"fleet_age":15.2
 },
 {
 "code":"XP",
@@ -1057,6 +1221,8 @@
 "h_other":103,
 "h_total":769,
 "pilot_sal":33.1,
+"fleet_n":20,
+"fleet_age":15.9,
 "pilot_avg":195858
 },
 {
@@ -1070,6 +1236,8 @@
 "h_other":103,
 "h_total":827,
 "pilot_sal":41.8,
+"fleet_n":22,
+"fleet_age":16.8,
 "pilot_avg":217708
 },
 {
@@ -1083,6 +1251,8 @@
 "h_other":230,
 "h_total":2483,
 "pilot_sal":97.5,
+"fleet_n":104,
+"fleet_age":9.6,
 "pilot_avg":105065
 },
 {
@@ -1096,6 +1266,8 @@
 "h_other":2465,
 "h_total":4449,
 "pilot_sal":119.8,
+"fleet_n":105,
+"fleet_age":9.1,
 "pilot_avg":151646
 },
 {
@@ -1109,6 +1281,8 @@
 "h_other":1919,
 "h_total":3469,
 "pilot_sal":94.4,
+"fleet_n":93,
+"fleet_age":6.4,
 "pilot_avg":161921
 },
 {
@@ -1122,6 +1296,8 @@
 "h_other":122,
 "h_total":1536,
 "pilot_sal":65.9,
+"fleet_n":60,
+"fleet_age":9.7,
 "pilot_avg":131275
 },
 {
@@ -1135,6 +1311,8 @@
 "h_other":489,
 "h_total":5962,
 "pilot_sal":252.2,
+"fleet_n":230,
+"fleet_age":12.3,
 "pilot_avg":112539
 },
 {
@@ -1148,6 +1326,8 @@
 "h_other":461,
 "h_total":5481,
 "pilot_sal":294.7,
+"fleet_n":218,
+"fleet_age":12.5,
 "pilot_avg":152932
 },
 {
@@ -1161,6 +1341,8 @@
 "h_other":448,
 "h_total":6047,
 "pilot_sal":307.5,
+"fleet_n":238,
+"fleet_age":13.5,
 "pilot_avg":139900
 },
 {
@@ -1174,6 +1356,8 @@
 "h_other":576,
 "h_total":6670,
 "pilot_sal":355.0,
+"fleet_n":249,
+"fleet_age":13.9,
 "pilot_avg":139052
 },
 {
@@ -1187,6 +1371,8 @@
 "h_other":148,
 "h_total":1088,
 "pilot_sal":35.2,
+"fleet_n":64,
+"fleet_age":19.9,
 "pilot_avg":72428
 },
 {
@@ -1200,6 +1386,8 @@
 "h_other":154,
 "h_total":1043,
 "pilot_sal":39.4,
+"fleet_n":63,
+"fleet_age":20.8,
 "pilot_avg":100254
 },
 {
@@ -1213,6 +1401,8 @@
 "h_other":151,
 "h_total":956,
 "pilot_sal":44.7,
+"fleet_n":63,
+"fleet_age":21.8,
 "pilot_avg":132641
 },
 {
@@ -1226,6 +1416,8 @@
 "h_other":40,
 "h_total":230,
 "pilot_sal":15.5,
+"fleet_n":54,
+"fleet_age":22.8,
 "pilot_avg":352273
 }
 ]
