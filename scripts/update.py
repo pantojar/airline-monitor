@@ -44,8 +44,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG = os.path.join(ROOT, "config")
 DATA = os.path.join(ROOT, "data")
 
-FIELDS = ["rev", "opex", "labor", "fuel", "opinc", "ni", "buyback", "div", "cash", "sti", "debt", "oplease", "da", "rent"]
-FLOW_FIELDS = ["rev", "opex", "labor", "fuel", "opinc", "ni", "buyback", "div", "da", "rent"]
+FIELDS = ["rev", "opex", "labor", "fuel", "opinc", "ni", "buyback", "div", "cash", "sti", "debt", "oplease", "da", "rent", "capex", "due12"]
+FLOW_FIELDS = ["rev", "opex", "labor", "fuel", "opinc", "ni", "buyback", "div", "da", "rent", "capex"]
 FIRST_QUARTER = "2023-03"
 
 
@@ -210,6 +210,20 @@ def extract(cf, QE):
         "da": pick(cf, ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization", "DepreciationAmortizationAndAccretionNet", "Depreciation"], flow_q, QE),
         "rent": rent_q(cf, QE),
     }
+    # capital spending: flight equipment plus other property where the filer splits them (Delta, Alaska,
+    # SkyWest), otherwise the single total line
+    fe = flow_q(cf, "PaymentsForFlightEquipment", QE)
+    other = pick(cf, ["PaymentsToAcquireOtherProductiveAssets", "PaymentsToAcquireOtherPropertyPlantAndEquipment", "PaymentsToAcquirePropertyPlantAndEquipment"], flow_q, QE)
+    total = pick(cf, ["PaymentsToAcquireProductiveAssets", "PaymentsToAcquirePropertyPlantAndEquipment"], flow_q, QE)
+    out["capex"] = {k: fe[k] + other.get(k, 0) for k in fe}
+    for k, v in total.items():
+        out["capex"].setdefault(k, v)
+    # debt and leases due within 12 months (current portions on the balance sheet)
+    cur_debt = pick(cf, ["LongTermDebtAndCapitalLeaseObligationsCurrent"], inst_q, QE)
+    for k, v in inst_q(cf, "LongTermDebtCurrent", QE).items():
+        cur_debt.setdefault(k, v + inst_q(cf, "FinanceLeaseLiabilityCurrent", QE).get(k, 0))
+    cur_lease = inst_q(cf, "OperatingLeaseLiabilityCurrent", QE)
+    out["due12"] = {k: v + cur_lease.get(k, 0) for k, v in cur_debt.items()}
     # an estimated rent figure alone doesn't make a quarter: keep it only where the quarter was reported
     out["rent"] = {k: v for k, v in out["rent"].items() if k in out["opinc"]}
     return out
