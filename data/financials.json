@@ -17,6 +17,8 @@
   "oplease": 7601.0,
   "da": 564.0,
   "rent": 132.0,
+  "capex": 1000.0,
+  "due12": 2860.0,
   "basis": "SEC XBRL"
  },
  {
@@ -37,6 +39,8 @@
   "oplease": 7345.0,
   "da": 573.0,
   "rent": 132.0,
+  "capex": 1452.0,
+  "due12": 2764.0,
   "basis": "SEC XBRL"
  },
  {
@@ -57,6 +61,8 @@
   "oplease": 7286.0,
   "da": 594.0,
   "rent": 131.0,
+  "capex": 1269.0,
+  "due12": 2709.0,
   "basis": "SEC XBRL"
  },
  {
@@ -77,6 +83,8 @@
   "oplease": 7227.0,
   "da": 610.0,
   "rent": 137.0,
+  "capex": 1602.0,
+  "due12": 3742.0,
   "basis": "SEC XBRL"
  },
  {
@@ -97,6 +105,8 @@
   "oplease": 6945.0,
   "da": 615.0,
   "rent": 136.0,
+  "capex": 1193.0,
+  "due12": 3551.0,
   "basis": "SEC XBRL"
  },
  {
@@ -117,6 +127,8 @@
   "oplease": 6828.0,
   "da": 620.0,
   "rent": 138.0,
+  "capex": 1309.0,
+  "due12": 3725.0,
   "basis": "SEC XBRL"
  },
  {
@@ -137,6 +149,8 @@
   "oplease": 6691.0,
   "da": 643.0,
   "rent": 137.0,
+  "capex": 1328.0,
+  "due12": 4096.0,
   "basis": "SEC XBRL"
  },
  {
@@ -157,6 +171,8 @@
   "oplease": 6577.0,
   "da": 635.0,
   "rent": 137.0,
+  "capex": 1310.0,
+  "due12": 2938.0,
   "basis": "SEC XBRL"
  },
  {
@@ -177,6 +193,8 @@
   "oplease": 6456.0,
   "da": 607.0,
   "rent": 137.0,
+  "capex": 1224.0,
+  "due12": 3690.0,
   "basis": "SEC XBRL"
  },
  {
@@ -197,6 +215,8 @@
   "oplease": 6224.0,
   "da": 602.0,
   "rent": 137.0,
+  "capex": 1209.0,
+  "due12": 2965.0,
   "basis": "SEC XBRL"
  },
  {
@@ -217,6 +237,8 @@
   "oplease": 6099.0,
   "da": 614.0,
   "rent": 135.0,
+  "capex": 1159.0,
+  "due12": 2849.0,
   "basis": "SEC XBRL"
  },
  {
@@ -237,6 +259,8 @@
   "oplease": 6162.0,
   "da": 620.0,
   "rent": 134.0,
+  "capex": 907.0,
+  "due12": 2414.0,
   "basis": "SEC XBRL"
  },
  {
@@ -257,6 +281,8 @@
   "oplease": 6135.0,
   "da": 635.0,
   "rent": 143.0,
+  "capex": 1200.0,
+  "due12": 3925.0,
   "basis": "SEC XBRL"
  },
  {
@@ -277,6 +303,8 @@
   "oplease": 6032.0,
   "da": 656.0,
   "rent": 168.0,
+  "capex": 1458.0,
+  "due12": 4311.0,
   "basis": "SEC XBRL"
  },
  {
@@ -297,6 +325,8 @@
   "oplease": 5984.0,
   "da": 673.0,
   "rent": 159.0,
+  "capex": 1413.0,
+  "due12": 4236.0,
   "basis": "SEC XBRL"
  },
  {
@@ -317,6 +347,8 @@
   "oplease": 5179.0,
   "da": 655.0,
   "rent": 56.0,
+  "capex": 1843.0,
+  "due12": 3891.0,
   "basis": "SEC XBRL"
  },
  {
@@ -337,6 +369,8 @@
   "oplease": 5178.0,
   "da": 669.0,
   "rent": 49.0,
+  "capex": 1420.0,
+  "due12": 4376.0,
   "basis": "SEC XBRL"
  },
  {
@@ -357,6 +391,8 @@
   "oplease": 5091.0,
   "da": 663.0,
   "rent": 46.0,
+  "capex": 1842.0,
+  "due12": 4518.0,
   "basis": "SEC XBRL"
  },
  {
@@ -377,6 +413,8 @@
   "oplease": 5079.0,
   "da": 684.0,
   "rent": 46.0,
+  "capex": 2066.0,
+  "due12": 4823.0,
   "basis": "SEC XBRL"
  },
  {
@@ -397,6 +435,8 @@
   "oplease": 5074.0,
   "da": 708.0,
   "rent": 43.0,
+  "capex": 1366.0,
+  "due12": 4632.0,
   "basis": "SEC XBRL"
  },
  {
@@ -417,6 +457,8 @@
   "oplease": 4991.0,
   "da": 719.0,
   "rent": 40.0,
+  "capex": 1164.0,
+  "due12": 5415.0,
   "basis": "SEC XBRL"
  },
  {
@@ -437,6 +479,8 @@
   "oplease": 4923.0,
   "da": 742.0,
   "rent": 65.0,
+  "capex": 1410.0,
+  "due12": 3857.0,
   "basis": "SEC XBRL"
  },
  {
@@ -457,6 +501,8 @@
   "oplease": 4977.0,
   "da": 759.0,
   "rent": 45.0,
+  "capex": 1675.0,
+  "due12": 3920.0,
   "basis": "SEC XBRL"
  },
  {
@@ -477,6 +523,8 @@
   "oplease": 5262.0,
   "da": 727.0,
   "rent": 51.0,
+  "capex": 1233.0,
+  "due12": 3771.0,
   "basis": "SEC XBRL"
  },
  {
@@ -497,6 +545,8 @@
   "oplease": 5707.0,
   "da": 733.0,
   "rent": 67.0,
+  "capex": 1287.0,
+  "due12": 6735.0,
   "basis": "SEC XBRL"
  },
  {
@@ -517,6 +567,8 @@
   "oplease": 5894.0,
   "da": 730.0,
   "rent": 54.0,
+  "capex": 1464.0,
+  "due12": 5184.0,
   "basis": "SEC XBRL"
  },
  {
@@ -537,6 +589,8 @@
   "oplease": 6048.0,
   "da": 748.0,
   "rent": 80.0,
+  "capex": 1890.0,
+  "due12": 5057.0,
   "basis": "SEC XBRL"
  },
  {
@@ -557,6 +611,8 @@
   "oplease": 6778.0,
   "da": 756.0,
   "rent": 83.0,
+  "capex": 1672.0,
+  "due12": 3001.0,
   "basis": "SEC XBRL"
  },
  {
@@ -577,6 +633,8 @@
   "oplease": 7204.0,
   "da": 762.0,
   "rent": 112.0,
+  "capex": 1343.0,
+  "due12": 2988.0,
   "basis": "SEC XBRL"
  },
  {
@@ -597,6 +655,8 @@
   "oplease": 7896.0,
   "da": 777.0,
   "rent": 116.0,
+  "capex": 2139.0,
+  "due12": 2782.0,
   "basis": "SEC XBRL"
  },
  {
@@ -617,6 +677,8 @@
   "oplease": 7764.0,
   "da": 486.0,
   "rent": 344.0,
+  "capex": 505.0,
+  "due12": 5018.0,
   "basis": "SEC XBRL"
  },
  {
@@ -637,6 +699,8 @@
   "oplease": 7937.0,
   "da": 483.0,
   "rent": 344.0,
+  "capex": 739.0,
+  "due12": 5305.0,
   "basis": "SEC XBRL"
  },
  {
@@ -657,6 +721,8 @@
   "oplease": 7716.0,
   "da": 487.0,
   "rent": 342.0,
+  "capex": 509.0,
+  "due12": 5154.0,
   "basis": "SEC XBRL"
  },
  {
@@ -677,6 +743,8 @@
   "oplease": 7761.0,
   "da": 480.0,
   "rent": 338.0,
+  "capex": 843.0,
+  "due12": 4941.0,
   "basis": "SEC XBRL"
  },
  {
@@ -697,6 +765,8 @@
   "oplease": 7730.0,
   "da": 470.0,
   "rent": 328.0,
+  "capex": 824.0,
+  "due12": 5375.0,
   "basis": "SEC XBRL"
  },
  {
@@ -717,6 +787,8 @@
   "oplease": 7691.0,
   "da": 474.0,
   "rent": 314.0,
+  "capex": 651.0,
+  "due12": 5329.0,
   "basis": "SEC XBRL"
  },
  {
@@ -737,6 +809,8 @@
   "oplease": 7521.0,
   "da": 479.0,
   "rent": 303.0,
+  "capex": 468.0,
+  "due12": 6557.0,
   "basis": "SEC XBRL"
  },
  {
@@ -757,6 +831,8 @@
   "oplease": 7068.0,
   "da": 502.0,
   "rent": 297.0,
+  "capex": 740.0,
+  "due12": 6414.0,
   "basis": "SEC XBRL"
  },
  {
@@ -777,6 +853,8 @@
   "oplease": 7158.0,
   "da": 468.0,
   "rent": 297.0,
+  "capex": 824.0,
+  "due12": 5825.0,
   "basis": "SEC XBRL"
  },
  {
@@ -797,6 +875,8 @@
   "oplease": 7320.0,
   "da": 476.0,
   "rent": 303.0,
+  "capex": 499.0,
+  "due12": 5725.0,
   "basis": "SEC XBRL"
  },
  {
@@ -817,6 +897,8 @@
   "oplease": 7347.0,
   "da": 474.0,
   "rent": 310.0,
+  "capex": 826.0,
+  "due12": 4747.0,
   "basis": "SEC XBRL"
  },
  {
@@ -837,6 +919,8 @@
   "oplease": 6963.0,
   "da": 472.0,
   "rent": 310.0,
+  "capex": 1630.0,
+  "due12": 4811.0,
   "basis": "SEC XBRL"
  },
  {
@@ -857,6 +941,8 @@
   "oplease": 6815.0,
   "da": 475.0,
   "rent": 309.0,
+  "capex": 811.0,
+  "due12": 5248.0,
   "basis": "SEC XBRL"
  },
  {
@@ -877,6 +963,8 @@
   "oplease": 6802.0,
   "da": 478.0,
   "rent": 308.0,
+  "capex": 822.0,
+  "due12": 4146.0,
   "basis": "SEC XBRL"
  },
  {
@@ -897,6 +985,8 @@
   "oplease": 1345.0,
   "da": 365.0,
   "rent": null,
+  "capex": 1046.0,
+  "due12": 265.0,
   "basis": "SEC XBRL"
  },
  {
@@ -917,6 +1007,8 @@
   "oplease": 1303.0,
   "da": 367.0,
   "rent": null,
+  "capex": 925.0,
+  "due12": 257.0,
   "basis": "SEC XBRL"
  },
  {
@@ -937,6 +1029,8 @@
   "oplease": 1259.0,
   "da": 375.0,
   "rent": null,
+  "capex": 842.0,
+  "due12": 250.0,
   "basis": "SEC XBRL"
  },
  {
@@ -957,6 +1051,8 @@
   "oplease": 1193.0,
   "da": 415.0,
   "rent": null,
+  "capex": 708.0,
+  "due12": 237.0,
   "basis": "SEC XBRL"
  },
  {
@@ -977,6 +1073,8 @@
   "oplease": 1159.0,
   "da": 408.0,
   "rent": null,
+  "capex": 583.0,
+  "due12": 234.0,
   "basis": "SEC XBRL"
  },
  {
@@ -997,6 +1095,8 @@
   "oplease": 1113.0,
   "da": 404.0,
   "rent": null,
+  "capex": 494.0,
+  "due12": 3129.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1017,6 +1117,8 @@
   "oplease": 1090.0,
   "da": 438.0,
   "rent": null,
+  "capex": 517.0,
+  "due12": 3132.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1037,6 +1139,8 @@
   "oplease": 1359.0,
   "da": 407.0,
   "rent": null,
+  "capex": 460.0,
+  "due12": 1958.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1057,6 +1161,8 @@
   "oplease": 1301.0,
   "da": 396.0,
   "rent": null,
+  "capex": 527.0,
+  "due12": 2939.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1077,6 +1183,8 @@
   "oplease": 1238.0,
   "da": 400.0,
   "rent": null,
+  "capex": 660.0,
+  "due12": 345.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1097,6 +1205,8 @@
   "oplease": 1156.0,
   "da": 394.0,
   "rent": null,
+  "capex": 735.0,
+  "due12": 333.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1117,6 +1227,8 @@
   "oplease": 1080.0,
   "da": 371.0,
   "rent": null,
+  "capex": 751.0,
+  "due12": 636.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1137,6 +1249,8 @@
   "oplease": 1009.0,
   "da": 398.0,
   "rent": null,
+  "capex": 630.0,
+  "due12": 1151.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1157,6 +1271,8 @@
   "oplease": 943.0,
   "da": 402.0,
   "rent": null,
+  "capex": 818.0,
+  "due12": 2439.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1177,6 +1293,8 @@
   "oplease": 984.0,
   "da": 398.0,
   "rent": null,
+  "capex": 1006.0,
+  "due12": 2431.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1197,6 +1315,8 @@
   "oplease": 1668.0,
   "da": 104.0,
   "rent": 59.0,
+  "capex": 100.0,
+  "due12": 481.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1217,6 +1337,8 @@
   "oplease": 1425.0,
   "da": 113.0,
   "rent": 54.0,
+  "capex": 427.0,
+  "due12": 534.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1237,6 +1359,8 @@
   "oplease": 1263.0,
   "da": 113.0,
   "rent": 48.0,
+  "capex": 295.0,
+  "due12": 434.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1257,6 +1381,8 @@
   "oplease": 1283.0,
   "da": 121.0,
   "rent": 47.0,
+  "capex": 430.0,
+  "due12": 511.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1277,6 +1403,8 @@
   "oplease": 1256.0,
   "da": 126.0,
   "rent": 47.0,
+  "capex": 13.0,
+  "due12": 459.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1297,6 +1425,8 @@
   "oplease": 1203.0,
   "da": 128.0,
   "rent": 46.0,
+  "capex": 430.0,
+  "due12": 512.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1317,6 +1447,8 @@
   "oplease": 1460.0,
   "da": 139.0,
   "rent": 49.0,
+  "capex": 207.0,
+  "due12": 726.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1337,6 +1469,8 @@
   "oplease": 1405.0,
   "da": 190.0,
   "rent": 65.0,
+  "capex": 338.0,
+  "due12": 657.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1357,6 +1491,8 @@
   "oplease": 1414.0,
   "da": 194.0,
   "rent": 62.0,
+  "capex": 250.0,
+  "due12": 741.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1377,6 +1513,8 @@
   "oplease": 1374.0,
   "da": 199.0,
   "rent": 64.0,
+  "capex": 453.0,
+  "due12": 725.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1397,6 +1535,8 @@
   "oplease": 1413.0,
   "da": 203.0,
   "rent": 64.0,
+  "capex": null,
+  "due12": 744.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1417,6 +1557,8 @@
   "oplease": 1338.0,
   "da": 199.0,
   "rent": 60.0,
+  "capex": null,
+  "due12": 918.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1437,6 +1579,8 @@
   "oplease": 1348.0,
   "da": 204.0,
   "rent": 61.0,
+  "capex": 338.0,
+  "due12": 710.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1457,6 +1601,8 @@
   "oplease": 1381.0,
   "da": 207.0,
   "rent": 64.0,
+  "capex": 185.0,
+  "due12": 669.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1477,6 +1623,8 @@
   "oplease": 714.0,
   "da": 151.0,
   "rent": 32.0,
+  "capex": 172.0,
+  "due12": 361.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1497,6 +1645,8 @@
   "oplease": 691.0,
   "da": 155.0,
   "rent": 34.0,
+  "capex": 267.0,
+  "due12": 384.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1517,6 +1667,8 @@
   "oplease": 675.0,
   "da": 156.0,
   "rent": 33.0,
+  "capex": 311.0,
+  "due12": 387.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1537,6 +1689,8 @@
   "oplease": 664.0,
   "da": 159.0,
   "rent": 27.0,
+  "capex": 378.0,
+  "due12": 424.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1557,6 +1711,8 @@
   "oplease": 640.0,
   "da": 158.0,
   "rent": 27.0,
+  "capex": 427.0,
+  "due12": 442.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1577,6 +1733,8 @@
   "oplease": 635.0,
   "da": 164.0,
   "rent": 25.0,
+  "capex": 427.0,
+  "due12": 457.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1597,6 +1755,8 @@
   "oplease": 610.0,
   "da": 165.0,
   "rent": 21.0,
+  "capex": 273.0,
+  "due12": 462.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1617,6 +1777,8 @@
   "oplease": 603.0,
   "da": 168.0,
   "rent": 19.0,
+  "capex": 351.0,
+  "due12": 485.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1637,6 +1799,8 @@
   "oplease": 940.0,
   "da": 168.0,
   "rent": 19.0,
+  "capex": 176.0,
+  "due12": 486.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1657,6 +1821,8 @@
   "oplease": 964.0,
   "da": 171.0,
   "rent": 20.0,
+  "capex": 297.0,
+  "due12": 795.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1677,6 +1843,8 @@
   "oplease": 948.0,
   "da": 173.0,
   "rent": 21.0,
+  "capex": 269.0,
+  "due12": 783.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1697,6 +1865,8 @@
   "oplease": 918.0,
   "da": 176.0,
   "rent": 14.0,
+  "capex": 336.0,
+  "due12": 848.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1717,6 +1887,8 @@
   "oplease": 899.0,
   "da": 179.0,
   "rent": 15.0,
+  "capex": 126.0,
+  "due12": 810.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1737,6 +1909,8 @@
   "oplease": 908.0,
   "da": 183.0,
   "rent": 15.0,
+  "capex": 222.0,
+  "due12": 574.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1757,6 +1931,8 @@
   "oplease": 953.0,
   "da": 186.0,
   "rent": 19.0,
+  "capex": 227.0,
+  "due12": 583.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1777,6 +1953,8 @@
   "oplease": 2639.0,
   "da": 11.0,
   "rent": 131.0,
+  "capex": 11.0,
+  "due12": 702.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1797,6 +1975,8 @@
   "oplease": 2654.0,
   "da": 12.0,
   "rent": 148.0,
+  "capex": 12.0,
+  "due12": 734.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1817,6 +1997,8 @@
   "oplease": 2852.0,
   "da": 13.0,
   "rent": 150.0,
+  "capex": 14.0,
+  "due12": 794.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1837,6 +2019,8 @@
   "oplease": 2989.0,
   "da": 14.0,
   "rent": 125.0,
+  "capex": 14.0,
+  "due12": 800.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1857,6 +2041,8 @@
   "oplease": 3141.0,
   "da": 16.0,
   "rent": 159.0,
+  "capex": 17.0,
+  "due12": 841.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1877,6 +2063,8 @@
   "oplease": 3617.0,
   "da": 18.0,
   "rent": 147.0,
+  "capex": 31.0,
+  "due12": 864.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1897,6 +2085,8 @@
   "oplease": 3758.0,
   "da": 19.0,
   "rent": 177.0,
+  "capex": 14.0,
+  "due12": 822.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1917,6 +2107,8 @@
   "oplease": 3966.0,
   "da": 19.0,
   "rent": 192.0,
+  "capex": 14.0,
+  "due12": 925.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1937,6 +2129,8 @@
   "oplease": 4284.0,
   "da": 20.0,
   "rent": 161.0,
+  "capex": 18.0,
+  "due12": 949.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1957,6 +2151,8 @@
   "oplease": 4310.0,
   "da": 21.0,
   "rent": 194.0,
+  "capex": 33.0,
+  "due12": 1026.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1977,6 +2173,8 @@
   "oplease": 4364.0,
   "da": 24.0,
   "rent": 181.0,
+  "capex": 2.0,
+  "due12": 1081.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1997,6 +2195,8 @@
   "oplease": 4849.0,
   "da": 26.0,
   "rent": 212.0,
+  "capex": 22.0,
+  "due12": 1080.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2017,6 +2217,8 @@
   "oplease": 4665.0,
   "da": 62.0,
   "rent": 265.0,
+  "capex": 12.0,
+  "due12": 1033.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2037,6 +2239,8 @@
   "oplease": 4736.0,
   "da": 56.0,
   "rent": 266.0,
+  "capex": 13.0,
+  "due12": 958.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2057,6 +2261,8 @@
   "oplease": 4568.0,
   "da": 59.0,
   "rent": 301.0,
+  "capex": 10.0,
+  "due12": 884.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2077,6 +2283,8 @@
   "oplease": 110.1,
   "da": 54.7,
   "rent": 5.3,
+  "capex": 178.1,
+  "due12": 309.9,
   "basis": "SEC XBRL"
  },
  {
@@ -2097,6 +2305,8 @@
   "oplease": 113.4,
   "da": 53.9,
   "rent": 5.3,
+  "capex": 273.0,
+  "due12": 291.3,
   "basis": "SEC XBRL"
  },
  {
@@ -2117,6 +2327,8 @@
   "oplease": 108.4,
   "da": 55.8,
   "rent": null,
+  "capex": 235.8,
+  "due12": 286.6,
   "basis": "SEC XBRL"
  },
  {
@@ -2137,6 +2349,8 @@
   "oplease": 103.3,
   "da": 58.7,
   "rent": null,
+  "capex": 202.5,
+  "due12": 460.8,
   "basis": "SEC XBRL"
  },
  {
@@ -2157,6 +2371,8 @@
   "oplease": 99.5,
   "da": 63.8,
   "rent": null,
+  "capex": 136.2,
+  "due12": 481.1,
   "basis": "SEC XBRL"
  },
  {
@@ -2177,6 +2393,8 @@
   "oplease": 94.1,
   "da": 65.4,
   "rent": null,
+  "capex": 43.1,
+  "due12": 507.9,
   "basis": "SEC XBRL"
  },
  {
@@ -2197,6 +2415,8 @@
   "oplease": 88.6,
   "da": 63.9,
   "rent": null,
+  "capex": 41.8,
+  "due12": 442.9,
   "basis": "SEC XBRL"
  },
  {
@@ -2217,6 +2437,8 @@
   "oplease": 83.1,
   "da": 65.1,
   "rent": null,
+  "capex": 43.2,
+  "due12": 475.5,
   "basis": "SEC XBRL"
  },
  {
@@ -2237,6 +2459,8 @@
   "oplease": 77.5,
   "da": 63.3,
   "rent": null,
+  "capex": 83.5,
+  "due12": 285.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2257,6 +2481,8 @@
   "oplease": 71.9,
   "da": 68.5,
   "rent": null,
+  "capex": 138.8,
+  "due12": 198.3,
   "basis": "SEC XBRL"
  },
  {
@@ -2277,6 +2503,8 @@
   "oplease": 69.4,
   "da": 59.0,
   "rent": null,
+  "capex": 129.3,
+  "due12": 283.3,
   "basis": "SEC XBRL"
  },
  {
@@ -2297,6 +2525,8 @@
   "oplease": 65.1,
   "da": 58.4,
   "rent": null,
+  "capex": 56.7,
+  "due12": 129.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2317,6 +2547,8 @@
   "oplease": 62.0,
   "da": 57.9,
   "rent": null,
+  "capex": 175.9,
+  "due12": 131.7,
   "basis": "SEC XBRL"
  },
  {
@@ -2337,6 +2569,8 @@
   "oplease": 72.7,
   "da": 70.7,
   "rent": null,
+  "capex": 120.7,
+  "due12": 333.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2357,6 +2591,8 @@
   "oplease": 26.1,
   "da": 19.5,
   "rent": 1.5,
+  "capex": 105.0,
+  "due12": 91.3,
   "basis": "SEC XBRL"
  },
  {
@@ -2377,6 +2613,8 @@
   "oplease": 22.7,
   "da": 22.4,
   "rent": 0.8,
+  "capex": 87.4,
+  "due12": 121.3,
   "basis": "SEC XBRL"
  },
  {
@@ -2397,6 +2635,8 @@
   "oplease": 19.4,
   "da": 22.8,
   "rent": 0.0,
+  "capex": 18.3,
+  "due12": 117.7,
   "basis": "SEC XBRL"
  },
  {
@@ -2417,6 +2657,8 @@
   "oplease": 18.8,
   "da": 23.6,
   "rent": 0.0,
+  "capex": 7.5,
+  "due12": 121.2,
   "basis": "SEC XBRL"
  },
  {
@@ -2437,6 +2679,8 @@
   "oplease": 18.1,
   "da": 23.8,
   "rent": 0.0,
+  "capex": 29.7,
+  "due12": 121.7,
   "basis": "SEC XBRL"
  },
  {
@@ -2457,6 +2701,8 @@
   "oplease": 17.8,
   "da": 23.6,
   "rent": 0.0,
+  "capex": 8.5,
+  "due12": 112.5,
   "basis": "SEC XBRL"
  },
  {
@@ -2477,6 +2723,8 @@
   "oplease": 21.4,
   "da": 23.8,
   "rent": 0.0,
+  "capex": 4.4,
+  "due12": 121.3,
   "basis": "SEC XBRL"
  },
  {
@@ -2497,6 +2745,8 @@
   "oplease": 20.7,
   "da": 23.8,
   "rent": 0.0,
+  "capex": 4.7,
+  "due12": 111.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2517,6 +2767,8 @@
   "oplease": 19.9,
   "da": 24.8,
   "rent": 0.0,
+  "capex": 15.4,
+  "due12": 115.6,
   "basis": "SEC XBRL"
  },
  {
@@ -2537,6 +2789,8 @@
   "oplease": 19.0,
   "da": 25.0,
   "rent": 0.0,
+  "capex": 5.8,
+  "due12": 105.7,
   "basis": "SEC XBRL"
  },
  {
@@ -2557,6 +2811,8 @@
   "oplease": 18.2,
   "da": 24.7,
   "rent": 0.0,
+  "capex": 7.9,
+  "due12": 99.3,
   "basis": "SEC XBRL"
  },
  {
@@ -2577,6 +2833,8 @@
   "oplease": 17.4,
   "da": 24.4,
   "rent": 0.0,
+  "capex": 44.0,
+  "due12": 133.2,
   "basis": "SEC XBRL"
  },
  {
@@ -2597,6 +2855,8 @@
   "oplease": 16.6,
   "da": 25.2,
   "rent": 0.0,
+  "capex": 40.5,
+  "due12": 126.0,
   "basis": "SEC XBRL"
  },
  {
@@ -2617,6 +2877,8 @@
   "oplease": 2800.1,
   "da": 78.0,
   "rent": 85.3,
+  "capex": null,
+  "due12": 456.8,
   "basis": "SEC XBRL"
  },
  {
@@ -2637,6 +2899,8 @@
   "oplease": 2994.8,
   "da": 80.5,
   "rent": 92.1,
+  "capex": null,
+  "due12": 436.9,
   "basis": "SEC XBRL"
  },
  {
@@ -2657,6 +2921,8 @@
   "oplease": 3319.4,
   "da": 82.8,
   "rent": 97.4,
+  "capex": null,
+  "due12": 446.9,
   "basis": "SEC XBRL"
  },
  {
@@ -2677,6 +2943,8 @@
   "oplease": 3523.7,
   "da": 79.5,
   "rent": 106.5,
+  "capex": null,
+  "due12": 540.4,
   "basis": "SEC XBRL"
  },
  {
@@ -2697,6 +2965,8 @@
   "oplease": 3827.8,
   "da": 81.3,
   "rent": 115.2,
+  "capex": null,
+  "due12": 390.9,
   "basis": "SEC XBRL"
  },
  {
@@ -2717,6 +2987,8 @@
   "oplease": 4138.8,
   "da": 84.5,
   "rent": 125.3,
+  "capex": null,
+  "due12": 386.3,
   "basis": "SEC XBRL"
  },
  {
@@ -2737,6 +3009,8 @@
   "oplease": 4523.5,
   "da": 84.0,
   "rent": 148.5,
+  "capex": null,
+  "due12": 1509.3,
   "basis": "SEC XBRL"
  },
  {
@@ -2757,6 +3031,8 @@
   "oplease": 4592.9,
   "da": 75.4,
   "rent": 152.9,
+  "capex": null,
+  "due12": 694.3,
   "basis": "SEC XBRL"
  },
  {
@@ -2777,6 +3053,8 @@
   "oplease": 4438.7,
   "da": null,
   "rent": null,
+  "capex": null,
+  "due12": 430.3,
   "basis": "SEC XBRL"
  },
  {
@@ -2797,6 +3075,8 @@
   "oplease": 4468.5,
   "da": 62.9,
   "rent": 140.7,
+  "capex": null,
+  "due12": 360.8,
   "basis": "SEC XBRL"
  },
  {
@@ -2817,6 +3097,8 @@
   "oplease": 22.6,
   "da": 58.0,
   "rent": 154.1,
+  "capex": null,
+  "due12": 123.4,
   "basis": "SEC XBRL"
  },
  {
@@ -2837,6 +3119,8 @@
   "oplease": 0.0,
   "da": 57.7,
   "rent": 102.7,
+  "capex": null,
+  "due12": 474.8,
   "basis": "SEC XBRL"
  },
  {
@@ -2857,6 +3141,8 @@
   "oplease": 95.2,
   "da": 94.1,
   "rent": 24.9,
+  "capex": 103.3,
+  "due12": 462.1,
   "basis": "SEC XBRL"
  },
  {
@@ -2877,6 +3163,8 @@
   "oplease": 92.6,
   "da": 97.2,
   "rent": 7.9,
+  "capex": 30.6,
+  "due12": 460.9,
   "basis": "SEC XBRL"
  },
  {
@@ -2897,6 +3185,8 @@
   "oplease": 85.7,
   "da": 96.6,
   "rent": 8.0,
+  "capex": 31.7,
+  "due12": 462.4,
   "basis": "SEC XBRL"
  },
  {
@@ -2917,6 +3207,8 @@
   "oplease": 86.7,
   "da": 95.2,
   "rent": 7.4,
+  "capex": 85.7,
+  "due12": 463.2,
   "basis": "SEC XBRL"
  },
  {
@@ -2937,6 +3229,8 @@
   "oplease": 85.9,
   "da": 95.9,
   "rent": 7.3,
+  "capex": 37.8,
+  "due12": 526.3,
   "basis": "SEC XBRL"
  },
  {
@@ -2957,6 +3251,8 @@
   "oplease": 82.4,
   "da": 96.8,
   "rent": 6.7,
+  "capex": 19.2,
+  "due12": 516.5,
   "basis": "SEC XBRL"
  },
  {
@@ -2977,6 +3273,8 @@
   "oplease": 85.3,
   "da": 96.7,
   "rent": 6.6,
+  "capex": 90.7,
+  "due12": 515.3,
   "basis": "SEC XBRL"
  },
  {
@@ -2997,6 +3295,8 @@
   "oplease": 87.7,
   "da": 94.5,
   "rent": 7.8,
+  "capex": 163.0,
+  "due12": 556.1,
   "basis": "SEC XBRL"
  },
  {
@@ -3017,6 +3317,8 @@
   "oplease": 83.7,
   "da": 89.4,
   "rent": 8.3,
+  "capex": 73.3,
+  "due12": 506.5,
   "basis": "SEC XBRL"
  },
  {
@@ -3037,6 +3339,8 @@
   "oplease": 79.9,
   "da": 90.2,
   "rent": 8.9,
+  "capex": 168.5,
+  "due12": 510.6,
   "basis": "SEC XBRL"
  },
  {
@@ -3057,6 +3361,8 @@
   "oplease": 84.8,
   "da": 92.5,
   "rent": 10.1,
+  "capex": 122.3,
+  "due12": 539.4,
   "basis": "SEC XBRL"
  },
  {
@@ -3077,6 +3383,8 @@
   "oplease": 81.9,
   "da": 92.4,
   "rent": 9.5,
+  "capex": 214.0,
+  "due12": 566.4,
   "basis": "SEC XBRL"
  },
  {
@@ -3097,6 +3405,8 @@
   "oplease": 83.0,
   "da": 90.2,
   "rent": 10.9,
+  "capex": 102.2,
+  "due12": 619.3,
   "basis": "SEC XBRL"
  },
  {
@@ -3117,6 +3427,8 @@
   "oplease": 87.6,
   "da": 92.5,
   "rent": 11.3,
+  "capex": 138.5,
+  "due12": 675.6,
   "basis": "SEC XBRL"
  },
  {
@@ -3137,6 +3449,8 @@
   "oplease": 8.4,
   "da": 30.6,
   "rent": 0.0,
+  "capex": 2.2,
+  "due12": 100.1,
   "basis": "SEC XBRL"
  },
  {
@@ -3157,6 +3471,8 @@
   "oplease": 8.6,
   "da": 30.9,
   "rent": 0.0,
+  "capex": 1.1,
+  "due12": 86.4,
   "basis": "SEC XBRL"
  },
  {
@@ -3177,6 +3493,8 @@
   "oplease": 140.4,
   "da": null,
   "rent": -1.1,
+  "capex": null,
+  "due12": 218.5,
   "basis": "SEC XBRL"
  },
  {
@@ -3197,6 +3515,8 @@
   "oplease": 136.8,
   "da": 34.5,
   "rent": 1.9,
+  "capex": 93.1,
+  "due12": 210.2,
   "basis": "SEC XBRL"
  },
  {
@@ -3217,6 +3537,8 @@
   "oplease": 133.3,
   "da": 35.2,
   "rent": 2.1,
+  "capex": 20.5,
+  "due12": 203.4,
   "basis": "SEC XBRL"
  }
 ]
