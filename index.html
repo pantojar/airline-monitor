@@ -8,6 +8,7 @@
 <link rel="icon" type="image/png" href="favicon.png?v=2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
 <meta name="robots" content="noindex">
+<script data-goatcounter="https://pantojar.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;800&display=swap" rel="stylesheet">
@@ -1013,6 +1014,8 @@ dash.calc('dotpeer', {
     root.querySelectorAll('.am-page').forEach((p) => { p.hidden = p.id !== id; });
     if (link) dash.setLink(id);
     draw();
+    // visitor stats: count each tab opened (GoatCounter; no cookies, no personal data)
+    if (link) { try { window.goatcounter && window.goatcounter.count && window.goatcounter.count({ path: '/tab/' + id, title: 'Tab: ' + id }); } catch (e) {} }
   }
   tabs.forEach((b) => b.addEventListener('click', () => showTab(b.dataset.tab, true)));
   document.getElementById('all-news').addEventListener('click', () => showTab('news', true));
