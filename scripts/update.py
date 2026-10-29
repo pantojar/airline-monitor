@@ -17,6 +17,7 @@ Outputs (all in data/):
   dot_fuel.json     DOT monthly fuel gallons and cost by carrier
   fuel_spot.json    daily Gulf Coast jet fuel spot price (FRED DJFUELUSGULF)
   cpi.json          monthly CPI-W and CPI-U, U.S. city average, not seasonally adjusted (BLS via FRED)
+  revenue_split.json passenger / loyalty / cargo / refinery revenue by quarter from 10-Q and 10-K XBRL (see scripts/revsplit.py)
   exec_pay.json     CEO pay, median employee pay and pay ratio from proxy statements (see scripts/proxy.py)
   labor.json        union contracts from 10-Ks, labor sentences from 10-Qs, and news-based status (see scripts/labor.py)
   meta.json         when each part last refreshed and anything that failed
@@ -585,6 +586,13 @@ def main(argv):
         facts_dir = argv[argv.index("--facts-dir") + 1]
     if "--news-only" not in argv:
         update_sec(meta, facts_dir)
+    if "--news-only" not in argv:
+        try:
+            import revsplit
+            revsplit.update_revsplit(ROOT, meta, user_agent(), [c for c in load(os.path.join(CONFIG, "carriers.json"), []) if c.get("status") == "Active"])
+        except Exception as e:  # noqa: BLE001
+            meta.setdefault("revsplit", {})["error"] = f"{type(e).__name__}: {e}"[:300]
+            print(f"[warn] revenue split: {e}", file=sys.stderr)
     if "--sec-only" not in argv:
         update_news(meta)
     if "--sec-only" not in argv and "--news-only" not in argv:
