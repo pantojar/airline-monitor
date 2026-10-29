@@ -11,12 +11,10 @@ jobs:
           python3 - <<'PY'
           import json, urllib.request, re, html
           UA = "Mozilla/5.0 (compatible; AirlineFinancialMonitor/1.0)"
-          bases = ["https://news.delta.com", "https://united.mediaroom.com", "https://news.aa.com", "https://www.swamedia.com",
-                   "https://news.alaskaair.com", "https://news.jetblue.com", "https://news.flyfrontier.com", "https://ir.allegiantair.com",
-                   "https://inc.skywest.com", "https://rjet.com", "https://newsroom.hawaiianairlines.com", "https://www.envoyair.com",
-                   "https://www.piedmont-airlines.com", "https://www.psaairlines.com", "https://www.endeavorair.com", "https://news.allegiantair.com",
-                   "https://ir.jetblue.com", "https://ir.united.com", "https://ir.delta.com", "https://americanairlines.gcs-web.com", "https://www.southwestairlinesinvestorrelations.com", "https://investor.alaskaair.com", "https://ir.flyfrontier.com", "https://ir.suncountry.com"]
-          paths = ["", "/wp-json/wp/v2/posts?per_page=2&_fields=date,title", "/feed/", "/rss", "/rss.xml", "/news-releases?pagetemplate=rss", "/rss/news-releases.xml", "/news/rss", "/news-releases/rss", "/press-releases/rss", "/feed/rss2", "/news-releases"]
+          q4 = "/feed/PressRelease.svc/GetPressReleaseList?LanguageId=1&bodyType=0&pressReleaseDateFilter=3&categoryId=1cb807d2-208f-4bc3-9133-6a9ad45ac3b0&pageSize=50&pageNumber=0&tagList=&includeTags=true&year=-1&excludeSelection=1"
+          q4b = "/feed/PressRelease.svc/GetPressReleaseList?LanguageId=1&bodyType=0&pressReleaseDateFilter=3&pageSize=50&pageNumber=0&year=-1&excludeSelection=1"
+          bases = ["https://news.aa.com", "https://news.jetblue.com", "https://ir.allegiantair.com", "https://ir.delta.com", "https://ir.flyfrontier.com", "https://www.swamedia.com", "https://investors.southwest.com", "https://united.mediaroom.com", "https://www.skywest.com", "https://inc.skywest.com", "https://newsroom.allegiantair.com", "https://www.endeavorair.com"]
+          paths = ["", q4, q4b, "/news-events/press-releases/rss", "/news-releases?pagetemplate=rss&l=50", "/rss", "/feed", "/feed/", "/news", "/news/default.aspx", "/releases", "/press-releases", "/rss.xml", "/news-releases"]
           out = {}
           for b in bases:
               r = {}
@@ -26,10 +24,15 @@ jobs:
                           data = resp.read(400000).decode("utf-8", "replace")
                           ct = resp.headers.get("Content-Type", "")
                           info = {"status": resp.status, "ct": ct[:40], "len": len(data)}
-                          if p == "" or p == "/news-releases":
+                          if p in ("", "/news-releases", "/news", "/releases", "/press-releases", "/news/default.aspx"):
                               info["feeds"] = re.findall(r'<link[^>]+type="application/(?:rss|atom)\+xml"[^>]*>', data)[:4]
                               info["title"] = (re.search(r"<title>(.*?)</title>", data, re.S) or [None, ""])[1].strip()[:80]
                               info["sample_links"] = list(dict.fromkeys(re.findall(r'href="([^"]*(?:news|release|press|stories|story)[^"]*)"', data)))[:12]
+                          if p.startswith("/feed/PressRelease"):
+                              try:
+                                  j = json.loads(data); L = j.get("GetPressReleaseListResult") or []
+                                  info["q4"] = len(L); info["first"] = [(x.get("PressReleaseDate"), x.get("Headline", "")[:80], x.get("LinkToDetailPage")) for x in L[:3]]
+                              except Exception as e: info["q4err"] = type(e).__name__ + data[:120]
                           if "<item>" in data or "<entry" in data:
                               info["items"] = data.count("<item>") + data.count("<entry")
                               info["first"] = [html.unescape(t)[:90] for t in re.findall(r"<title>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?</title>", data)[1:4]]
@@ -40,7 +43,7 @@ jobs:
                   except Exception as e:
                       r[p or "/"] = "ERR " + (str(getattr(e, "code", "")) or type(e).__name__)
               out[b] = r
-          json.dump(out, open("carriers.json", "w"), indent=1)
+          json.dump(out, open("carriers2.json", "w"), indent=1)
           PY
           git init -q && git checkout -q -b probe
           git config user.name probe && git config user.email probe@example.com
