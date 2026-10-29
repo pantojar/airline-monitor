@@ -8,7 +8,7 @@ jobs:
     steps:
       - run: |
           mkdir out && cd out
-          for u in "https://www.transtats.bts.gov/OT_Delay/OT_DelayCause1.asp?20=E" "https://www.transtats.bts.gov/OT_Delay/ot_delaycause1.asp?qv52ynB=qn6n&20=E" "https://www.transportation.gov/airconsumer/air-travel-consumer-reports-2026" "https://www.transportation.gov/individuals/aviation-consumer-protection/air-travel-consumer-reports"; do
+          for u in "https://www.transtats.bts.gov/OT_Delay/ot_delaycause1_DL.aspx?8n4=9ur4r%20Brn4z106u%20or69rr0%20FHGFD%20NaQ%20FHGFD" "https://www.transtats.bts.gov/OT_Delay/ot_delaycause1_DL.aspx?8n4=9ur4r%20Brn4z106u%20or69rr0%20FHGEG%20NaQ%20FHGFD" "https://www.bts.gov/airline-data-downloads" "https://www.bts.gov/topics/airlines-and-airports/airline-time-performance-and-causes-flight-delays"; do
             n=$(echo "$u" | md5sum | cut -c1-8); curl -s -L -A "Mozilla/5.0 (compatible; AirlineFinancialMonitor/1.0)" "$u" -o "p_$n.html" -w "$n %{http_code} %{size_download} $u\n" >> index.txt || true
           done
           git init -q && git checkout -q -b probe
