@@ -154,6 +154,14 @@ window.dash = (function () {
 #dash-root #brief .neg{color:#b00020}
 #dash-root #brief .b-foot{margin-top:16px;padding-top:6px;border-top:1px solid #ccd;font-size:8pt;color:#444}
 #dash-root #brief svg text{font-family:var(--font-anthropic-sans)}
+#dash-root .am-t th:first-child,#dash-root .am-t td:first-child{position:sticky;left:0;z-index:2;background:var(--color-panel);box-shadow:1px 0 0 var(--color-border-line)}
+#dash-root .am-t thead th:first-child{z-index:4}
+#dash-root .am-t th[title]{cursor:help}
+#dash-root .am-csvrow{display:flex;justify-content:flex-end;margin:-4px 0 6px}
+#dash-root .am-csv{appearance:none;font:inherit;font-size:var(--cds-font-size-caption);font-weight:600;background:none;border:1px solid var(--color-border-line);color:var(--color-fg);border-radius:3px;padding:4px 10px 2px;cursor:pointer}
+#dash-root .am-csv:hover{border-color:var(--color-fg-muted)}
+#dash-root .am-stamp{display:inline-block;margin-left:10px;font-size:var(--cds-font-size-caption);font-weight:600;color:var(--color-fg-muted);background:var(--cds-chart-grid);border-radius:3px;padding:2px 7px 0;vertical-align:3px}
+#dash-root .am-flag{color:var(--color-warn);font-weight:800;margin-left:1px}
 #dash-root .am-titlerow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 #dash-root .am-beta{font-weight:800;font-size:14px;line-height:1;padding:7px 10px 5px;border-radius:3px;background:var(--sign-light);color:var(--sign-on-light);border:1.5px solid var(--sign-navy)}
 #dash-root .am-betanote{margin:10px 0 0;max-width:46rem;font-size:var(--cds-font-size-caption);line-height:1.5;color:var(--color-fg);background:color-mix(in srgb,var(--sign-light) 55%,var(--color-panel));border-left:3px solid var(--sign-navy);padding:8px 12px 6px;border-radius:0 3px 3px 0}
@@ -319,10 +327,13 @@ window.dash = (function () {
             <th data-field="net_debt"><button data-sort="net_debt">Net debt</button></th>
             <th data-field="lease_net_debt"><button data-sort="lease_net_debt">Net debt incl. leases</button></th>
             <th data-field="leverage"><button data-sort="leverage">Leverage (× EBITDAR)</button></th>
+            <th data-field="due12"><button data-sort="due12">Due within 12 mo.</button></th>
+            <th data-field="cover"><button data-sort="cover">Cash ÷ due</button></th>
             <th data-base="labor" data-field="labor_ttm"><button data-sort="labor">Labor cost</button></th>
             <th data-base="lopex" data-field="lopex_ttm"><button data-sort="lopex">Labor % of opex</button></th>
             <th data-base="lyoy" data-field="lyoy_ttm"><button data-sort="lyoy">Labor cost YoY</button></th>
             <th data-base="ret" data-field="ret_ttm"><button data-sort="ret">Returned to shareholders</button></th>
+            <th data-base="capex" data-field="capex_ttm"><button data-sort="capex">CapEx</button></th>
             <th class="am-hn" data-base="rl" data-field="rl_ttm"><button data-sort="rl">Returns ÷ labor</button></th>
             <th class="am-hn" data-field="liquidity"><button data-sort="liquidity">Cash + ST inv.</button></th>
           </tr></thead>
@@ -335,7 +346,8 @@ window.dash = (function () {
         <li><b>Net debt:</b> debt minus cash and short-term investments, from the latest balance sheet. Negative means more cash than debt. Carriers define debt differently.</li>
         <li><b>Net debt incl. leases:</b> adds operating lease liabilities (mostly leased aircraft), so carriers that lease compare fairly with those that own.</li>
         <li><b>Leverage:</b> net debt incl. leases ÷ trailing-12-month EBITDAR (operating income + depreciation + aircraft rent). Lower is stronger. "n/m" means EBITDAR was under 5% of revenue, too small for the ratio to mean much. Southwest's and Allegiant's EBITDAR leaves out rent, which they don't report in usable form; both lease few aircraft.</li>
-        <li><b>Returned to shareholders:</b> buybacks plus dividends paid.</li>
+        <li><b>Due within 12 mo.:</b> debt and lease payments due in the next year (the current portions on the balance sheet). <b>Cash ÷ due</b> is cash and short-term investments divided by that amount; below 1× means the airline would need new borrowing or operating cash to meet them.</li>
+        <li><b>Returned to shareholders:</b> buybacks plus dividends paid. <b>CapEx:</b> cash spent on aircraft and other property (including pre-delivery deposits), from the cash flow statement.</li>
       </ul>
     </div>
 
@@ -410,8 +422,8 @@ window.dash = (function () {
     </div>
     <div class="am-card" id="cost-card">
       <h2>Revenue and where it went</h2>
-      <p class="am-note">Bars stack operating expense by labor, fuel and everything else; the line is revenue. Where the bar clears the line, the quarter lost money at the operating level.</p>
-      <div class="am-legend"><span><i class="am-sw" id="sw2-labor"></i>Labor</span><span><i class="am-sw" id="sw2-fuel"></i>Fuel</span><span><i class="am-sw" id="sw2-other"></i>Other opex</span><span><i class="am-sw" id="sw2-rev"></i>Revenue</span></div>
+      <p class="am-note">Bars stack operating expense by labor, fuel and everything else; the line is revenue. The thin strip beside each bar is the gap between them: green is an operating profit, red an operating loss.</p>
+      <div class="am-legend"><span><i class="am-sw" id="sw2-labor"></i>Labor</span><span><i class="am-sw" id="sw2-fuel"></i>Fuel</span><span><i class="am-sw" id="sw2-other"></i>Other opex</span><span><i class="am-sw" id="sw2-rev"></i>Revenue</span><span><i class="am-sw" style="background:var(--color-ok)"></i>Operating profit</span><span><i class="am-sw" style="background:var(--color-bad)"></i>Operating loss</span></div>
       <div class="am-wrap am-chart" id="det-chart" data-source="financials"></div>
     </div>
     <div class="am-card" id="det-table-card">
@@ -567,7 +579,7 @@ window.dash = (function () {
 
     <div class="am-card" id="ratio-card">
       <h2>CEO pay ratio</h2>
-      <p class="am-note">How many years the median employee would need to work to earn what the CEO was paid in one.</p>
+      <p class="am-note">How many years the median employee would need to work to earn what the CEO was paid in one. Read across carriers with care: an airline that outsources lower-paid work (ramp, cleaning, wheelchair service) reports a higher median wage, and so a lower ratio, than one that keeps that work in-house.</p>
       <div class="am-wrap am-chart" id="ratio-chart" data-source="exec_pay"></div>
     </div>
 
@@ -584,7 +596,7 @@ window.dash = (function () {
   <section class="am-page am-stack" id="labor" hidden>
     <div class="am-card" id="labor-sum-card">
       <h2>Union contracts</h2>
-      <p class="am-note" id="labor-note">Groups, unions, headcount and amendable dates come from each carrier's latest 10-K. Status is the most recent dated event from four automatic sources: the unions' own websites (announcements and posted PDFs, read group by group), the company's 10-Q, 10-K footnotes, and news headlines naming the carrier, the craft and a milestone. Follow the links to check a status.</p>
+      <p class="am-note" id="labor-note">Groups, unions, headcount and amendable dates come from each carrier's latest 10-K. Status is the most recent dated event from automatic sources: the unions' own websites (announcements and posted PDFs, read group by group), the airlines' newsrooms, the company's 10-Q and 10-K, and news headlines naming the carrier, the craft and a milestone. <b>Statuses are read automatically and can be wrong:</b> check the linked source before citing one. Hand-entered statuses say so.</p>
       <div class="am-tiles" id="labor-tiles">
         <div class="am-tile"><div class="k">Represented groups tracked</div><div class="v" id="lt-groups">—</div><div class="d" id="lt-groups-d">—</div></div>
         <div class="am-tile"><div class="k">Past amendable date</div><div class="v" id="lt-open">—</div><div class="d" id="lt-open-d">—</div></div>
@@ -768,17 +780,20 @@ dash.calc('peer', {
         ret_lq, ret_ttm,
         rl_lq: dv(ret_lq, lqq ? num(lq.labor) : null), rl_ttm: dv(ret_ttm, labor_ttm),
         ni_lq: lqq ? num(lq.ni) : null, ni_ttm: ttm('ni'),
+        capex_lq: lqq ? num(lq.capex) : null, capex_ttm: ttmOk && t4.every((r) => num(r.capex) !== null) ? sum(t4, 'capex') : null,
         liquidity: withCash ? num(withCash.cash) + (num(withCash.sti) || 0) : null,
         debt: withDebt ? num(withDebt.debt) : null,
         // net debt from one balance sheet: debt less cash and short-term investments at the same quarter end
         ...(() => {
           const b = rows.filter((r) => num(r.debt) !== null && num(r.cash) !== null).sort((a, b) => (a.quarter < b.quarter ? 1 : -1))[0];
-          if (!b) return { net_debt: null, lease_net_debt: null };
+          if (!b) return { net_debt: null, lease_net_debt: null, due12: null, cover: null };
           const nd = num(b.debt) - num(b.cash) - (num(b.sti) || 0);
+          const liq = num(b.cash) + (num(b.sti) || 0), due = num(b.due12);
           // operating lease liabilities at the same quarter end, or the latest reported in the prior year
           const l = rows.filter((r) => num(r.oplease) !== null && r.quarter <= b.quarter && r.quarter >= (Number(b.quarter.slice(0, 4)) - 1) + b.quarter.slice(4))
             .sort((a, c) => (a.quarter < c.quarter ? 1 : -1))[0];
-          return { net_debt: nd, oplease: l ? num(l.oplease) : null, lease_net_debt: l ? nd + num(l.oplease) : null };
+          return { net_debt: nd, oplease: l ? num(l.oplease) : null, lease_net_debt: l ? nd + num(l.oplease) : null,
+            due12: due, cover: due ? liq / due : null, bs_q: b.quarter };
         })(),
         ret_cum: cumOk && rc ? cq.reduce((s, r) => s + retOf(r), 0) : null,
         ni_cum: cumOk ? cq.reduce((s, r) => s + num(r.ni), 0) : null,
@@ -971,7 +986,7 @@ dash.calc('dotpeer', {
   const qs = (q) => 'Q' + Number(q.slice(5, 7)) / 3 + ' ’' + q.slice(2, 4);
   const dfmt = (s) => { const d = new Date(s + 'T12:00:00Z'); return isNaN(d) ? s : d3.utcFormat('%b %-d, %Y')(d); };
   const C = () => dash.colors;
-  const BASED = new Set(['rev', 'ni', 'opm', 'labor', 'lopex', 'lyoy', 'ret', 'rl']);
+  const BASED = new Set(['rev', 'ni', 'capex', 'opm', 'labor', 'lopex', 'lyoy', 'ret', 'rl']);
   let sortCol = 'rev', sortDir = -1, tab = 'peers', drawn = false;
 
   // legends
@@ -1244,6 +1259,13 @@ dash.calc('dotpeer', {
         acc += v;
       });
     }
+    // profit/loss strip beside each bar: the gap between revenue and operating expense, green for profit, red for loss
+    for (const r of d) {
+      if (bad(r.rev) || bad(r.opex) || r.rev === r.opex) continue;
+      const gx = x(r.q) + off + bw + 2, top = y(Math.max(r.rev, r.opex)), bot = y(Math.min(r.rev, r.opex));
+      svg.append('rect').attr('x', gx).attr('width', 5).attr('y', top).attr('height', Math.max(1.5, bot - top)).attr('rx', 1.5)
+        .attr('fill', r.rev > r.opex ? 'var(--color-ok)' : 'var(--color-bad)');
+    }
     const line = d3.line().defined((r) => !bad(r.rev)).x((r) => x(r.q) + x.bandwidth() / 2).y((r) => y(r.rev));
     svg.append('path').datum(d).attr('fill', 'none').attr('stroke', 'var(--color-fg)').attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round').attr('d', line);
     svg.selectAll('circle.rv').data(d.filter((r) => !bad(r.rev))).join('circle').attr('cx', (r) => x(r.q) + x.bandwidth() / 2).attr('cy', (r) => y(r.rev)).attr('r', 2.5).attr('fill', 'var(--color-fg)');
@@ -1423,7 +1445,7 @@ dash.calc('dotpeer', {
     L.append(el('h2', '', 'Trailing 12 months'), tbl([['Measure', 'l'], ['Value']], [
       [['Revenue', 'l'], [fmtM(pr.rev_ttm)]], [['Operating margin', 'l'], [pct(pr.opm_ttm), neg(pr.opm_ttm)]], [['Net income', 'l'], [fmtM(pr.ni_ttm), neg(pr.ni_ttm)]],
       [['EBITDAR', 'l'], [fmtM(pr.ebitdar_ttm), neg(pr.ebitdar_ttm)]], [['Labor cost', 'l'], [fmtM(pr.labor_ttm)]], [['Labor cost vs prior 12 months', 'l'], [sgn(pr.lyoy_ttm)]], [['Labor as % of operating expense', 'l'], [pct(pr.lopex_ttm)]],
-      [['Returned to shareholders (buybacks + dividends)', 'l'], [fmtM(pr.ret_ttm)]], [['Returned to shareholders ÷ labor cost', 'l'], [pct(pr.rl_ttm)]],
+      [['Returned to shareholders (buybacks + dividends)', 'l'], [fmtM(pr.ret_ttm)]], [['Returned to shareholders ÷ labor cost', 'l'], [pct(pr.rl_ttm)]], [['Capital spending (CapEx)', 'l'], [fmtM(pr.capex_ttm)]],
     ]));
     const R = el('div');
     const act = peer.data.filter((r) => r.active);
@@ -1433,6 +1455,8 @@ dash.calc('dotpeer', {
       [['Debt', 'l'], [fmtM(pr.debt)], ['']],
       [['Net debt', 'l'], [fmtM(pr.net_debt)], ['']],
       [['Net debt incl. operating leases', 'l'], [fmtM(pr.lease_net_debt)], ['']],
+      [['Debt and leases due within 12 months', 'l'], [fmtM(pr.due12)], ['']],
+      [['Cash ÷ amount due within 12 months', 'l'], [bad(pr.cover) ? '—' : d3.format('.1f')(pr.cover) + '×'], [rank('cover', true)]],
       [['Leverage: net debt incl. leases ÷ EBITDAR', 'l'], [bad(pr.leverage) ? (pr.lev_nm ? 'n/m (EBITDAR under 5% of revenue)' : '—') : d3.format('.1f')(pr.leverage) + '×'], [rank('leverage', false) + (bad(pr.leverage) ? '' : ' (1 = lowest)')]],
       [['Operating margin, trailing 12 months', 'l'], [pct(pr.opm_ttm)], [rank('opm_ttm', true)]],
       [['Labor % of operating expense', 'l'], [pct(pr.lopex_ttm)], [rank('lopex_ttm', true)]],
@@ -1477,6 +1501,78 @@ dash.calc('dotpeer', {
     }
     box.append(el('div', 'b-foot', 'Definitions: figures are GAAP as filed with the SEC. Labor cost is the salaries, wages and benefits line. Operating margin is operating income ÷ revenue. Returned to shareholders is share buybacks plus dividends paid. Net debt is debt less cash and short-term investments; carriers define debt differently, and the lease-inclusive figure adds operating lease liabilities. Union statuses come from union websites, company filings and news headlines and may lag events. Peer ranks compare the ' + act.length + ' active U.S.-listed passenger airlines on the dashboard.' + (cinfo.note ? ' Note: ' + cinfo.note : '')));
     return true;
+  }
+
+  // ---------- table helpers: CSV download, header tooltips; chart "data through" stamps ----------
+  // keep the unrounded value on a table cell ($ millions) so CSV downloads aren't limited to the rounded display
+  const withV = (cell, v) => { v = num(v); if (v !== null && isFinite(v)) cell.dataset.v = String(Math.round(v * 1e6)); return cell; };
+  // CSV cells: dollar amounts become plain numbers in dollars ($20.2B -> 20200000000), multiples lose the ×, dashes go blank
+  const csvCell = (t) => {
+    t = String(t).replace(/\s+/g, ' ').replace(/ [↑↓]$/, '').replace(/†/g, '').trim();
+    const m = t.match(/^([−-]?)\$([\d,]*\.?\d+)([BMK]?)$/);
+    if (m) { const v = parseFloat(m[2].replace(/,/g, '')) * ({ B: 1e9, M: 1e6, K: 1e3 }[m[3]] || 1); t = (m[1] ? '-' : '') + String(Math.round(v)); }
+    else if (/^[−-]?[\d.]+×$/.test(t)) t = t.replace('×', '').replace('−', '-');
+    else if (/^[−+]?[\d.,]+%$/.test(t)) t = t.replace('−', '-');
+    else if (/^[−-]?\d{1,3}(,\d{3})+(\.\d+)?$/.test(t)) t = t.replace(/,/g, '').replace('−', '-');
+    else if (t === '—') t = '';
+    return /[",\n]/.test(t) ? '"' + t.replace(/"/g, '""') + '"' : t;
+  };
+  root.querySelectorAll('table.am-t').forEach((tbl) => {
+    const box = tbl.closest('.am-tbl-box'); if (!box) return;
+    const card = tbl.closest('.am-card');
+    const row = document.createElement('div'); row.className = 'am-csvrow';
+    const b = document.createElement('button'); b.className = 'am-csv'; b.type = 'button'; b.textContent = 'Download CSV';
+    b.addEventListener('click', () => {
+      const head = [...tbl.querySelectorAll('thead tr:last-child th')].map((th) => csvCell(th.textContent));
+      const body = [...tbl.querySelectorAll('tbody tr')].map((tr) => [...tr.children].map((td) => (td.dataset.v !== undefined ? td.dataset.v : csvCell(td.innerText || td.textContent))).join(','));
+      const title = (card && card.querySelector('h2') ? card.querySelector('h2').childNodes[0].textContent : tbl.id).trim();
+      const blob = new Blob(['﻿' + [head.join(','), ...body].join('\r\n')], { type: 'text/csv;charset=utf-8' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+      a.download = title.replace(/[^\w &-]+/g, '').replace(/\s+/g, ' ') + ' ' + new Date().toISOString().slice(0, 10) + '.csv';
+      document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    });
+    row.append(b); box.before(row);
+  });
+  const TIPS = {
+    rev: 'Total operating revenue.', ni: 'Net income: the bottom line, after interest, taxes and special items.',
+    opm: 'Operating income ÷ revenue.', debt: 'Debt as reported on the latest balance sheet. Definitions vary; some include finance leases.',
+    net_debt: 'Debt minus cash and short-term investments. Negative means more cash than debt.',
+    lease_net_debt: 'Net debt plus operating lease liabilities (mostly leased aircraft), so leasing and owning carriers compare fairly.',
+    leverage: 'Net debt incl. leases ÷ trailing-12-month EBITDAR (operating income + depreciation + aircraft rent). Lower is stronger. n/m when EBITDAR is under 5% of revenue.',
+    due12: 'Debt and lease payments due within the next 12 months (current portions on the balance sheet).',
+    cover: 'Cash and short-term investments ÷ debt and leases due within 12 months. Below 1× means new borrowing or operating cash is needed to meet them.',
+    labor: 'Salaries, wages and benefits.', lopex: 'Labor cost as a share of total operating expense.',
+    lyoy: 'Change in labor cost versus the same period a year earlier.', ret: 'Share buybacks plus dividends paid.',
+    capex: 'Cash spent on aircraft and other property, including pre-delivery deposits.',
+    rl: 'Returned to shareholders ÷ labor cost.', liquidity: 'Cash plus short-term investments, latest balance sheet.',
+    latest: 'Latest quarter reported.', comp: 'Salaries and benefits, DOT Form 41 (same definition as the SEC labor line).',
+    casm: 'Operating expense per available seat mile, in cents. † = runs high for carriers with regional partners (see notes).',
+    casmx: 'Operating expense excluding fuel per available seat mile, in cents. † = runs high for carriers with regional partners.',
+    lcasm: 'Salaries and benefits per available seat mile, in cents.',
+    trasm: 'Total revenue per available seat mile, in cents. † = runs high for carriers with regional partners.',
+    prasm: 'Passenger revenue per available seat mile, in cents. † = runs high for carriers with regional partners.',
+    lf: 'Revenue passenger miles ÷ available seat miles.', fte: 'Average full-time-equivalent employees (DOT P-1a).',
+    comp_fte: 'Salaries and benefits per full-time equivalent, annual.', cfyoy: 'Change in labor cost per FTE versus a year earlier.',
+    asm_fte: 'Available seat miles per FTE, thousands: a rough productivity measure.',
+    ratio: 'CEO total pay ÷ median employee pay, as each company reports it. Airlines that outsource lower-paid work (ramp, cleaning, wheelchair service) report a higher median, which lowers their ratio.',
+    median: "The company's own figure for its middle-paid employee; depends on how much work is outsourced.",
+    cap: "Compensation actually paid: adds the change in value of the CEO's stock awards, so it moves with the share price.",
+    amendable: 'Date the contract becomes amendable under the Railway Labor Act, from the 10-K or hand-entered.',
+    status: 'Latest dated milestone found automatically (union site, company release, 10-Q or news) or entered by hand. Follow the link to check it.',
+    source: 'The document or headline the status came from.',
+  };
+  function applyTips() {
+    root.querySelectorAll('table.am-t thead th').forEach((th) => {
+      const b = th.querySelector('button');
+      const key = (b && (b.dataset.sort || b.dataset.lsort)) || th.dataset.base || th.dataset.field;
+      if (key && TIPS[key]) th.title = TIPS[key];
+    });
+  }
+  function stamp(cardId, text) {
+    const card = document.getElementById(cardId); if (!card || !text) return;
+    const h = card.querySelector('h2'); if (!h) return;
+    let el = h.querySelector('.am-stamp'); if (!el) { el = document.createElement('span'); el.className = 'am-stamp'; h.append(el); }
+    el.textContent = text;
   }
 
   // ---------- consumer prices ----------
@@ -1690,6 +1786,9 @@ dash.calc('dotpeer', {
           li.append(b, document.createTextNode([r.note, r.spike ? 'Labor cost in ' + ql(r.spike) + ' was well above its usual level (often a ratification or retro payment), which lifts trailing-12-month labor figures.' : ''].filter(Boolean).join(' ')));
           li.value = i + 1; return li;
         }));
+        // mainline carriers whose regional partners fly part of their schedule: per-seat-mile figures run high
+        const REGIONAL_PARTNERS = new Set(['AA', 'DL', 'UA', 'AS']);
+        const flagged = (cell, r) => { if (REGIONAL_PARTNERS.has(r.code) && cell.textContent !== '—') { const f = document.createElement('span'); f.className = 'am-flag'; f.textContent = '†'; cell.append(f); cell.title = 'Runs high: includes revenue and contract costs for regional partner flights, but not their seat miles.'; } return cell; };
         tb.replaceChildren(...sorted.map((r) => {
           const tr = document.createElement('tr'); tr.dataset.key = r.code; tr.style.cursor = 'pointer';
           if (!r.current) tr.className = 'off';
@@ -1700,14 +1799,14 @@ dash.calc('dotpeer', {
           if (r.note || r.spike) { const f = document.createElement('sup'); f.textContent = ' ' + (fnIndex.get(r.code) || ''); f.style.color = 'var(--color-fg-muted)'; nm.append(f); }
           const op = r[k('opm')];
           tr.append(nm, td(r.parent === 'Private' ? 'Private' : r.parent, 'l am-hn'), td(r.latest ? ql(r.latest) : '—', 'l'),
-            td(fmtM(r[k('rev')])), td(pct(op), op < 0 ? 'am-neg' : ''), td(fmtM(r[k('comp')])), td(pct(r[k('lopex')])),
-            td(fmtC(r[k('casm')])), td(fmtC(r[k('casmx')]), 'am-hn'), td(fmtC(r[k('lcasm')])),
-            td(fmtC(r[k('trasm')])), td(fmtC(r[k('prasm')]), 'am-hn'), td(pct(r[k('lf')])), td(fmtN(r[k('fte')])),
+            withV(td(fmtM(r[k('rev')])), r[k('rev')]), td(pct(op), op < 0 ? 'am-neg' : ''), withV(td(fmtM(r[k('comp')])), r[k('comp')]), td(pct(r[k('lopex')])),
+            ...[['casm', ''], ['casmx', 'am-hn']].map(([f, c]) => flagged(td(fmtC(r[k(f)]), c), r)), td(fmtC(r[k('lcasm')])),
+            ...[['trasm', ''], ['prasm', 'am-hn']].map(([f, c]) => flagged(td(fmtC(r[k(f)]), c), r)), td(pct(r[k('lf')])), td(fmtN(r[k('fte')])),
             td(fmtK(r[k('comp_fte')])), td(sgn(r[k('cfyoy')])), td(fmtN(r[k('asm_fte')]), 'am-hn'));
           return tr;
         }));
         const dl = d3.max(dpeer.data, (r) => r.latest);
-        document.getElementById('dot-note').textContent = 'DOT Form 41 reports through ' + ql(dl) + ', one row per airline certificate, so wholly owned regionals such as Envoy, PSA, Piedmont, Endeavor and Horizon appear on their own. $ millions. Salaries & benefits use the same definition as the SEC labor line. Per-FTE figures are annual. A regional\'s revenue is set by its contract with its mainline partner, so compare regionals on costs rather than margins. American, Delta, United and Alaska book revenue and contract costs for flights their regional partners operate, but those seat miles count on the regional\'s report, so their per-seat-mile figures run above what the airlines publish. Click a row to highlight that carrier in the trend chart.';
+        document.getElementById('dot-note').textContent = 'DOT Form 41 reports through ' + ql(dl) + ', one row per airline certificate, so wholly owned regionals such as Envoy, PSA, Piedmont, Endeavor and Horizon appear on their own. $ millions. Salaries & benefits use the same definition as the SEC labor line. Per-FTE figures are annual. A regional\'s revenue is set by its contract with its mainline partner, so compare regionals on costs rather than margins. American, Delta, United and Alaska book revenue and contract costs for flights their regional partners operate, but those seat miles count on the regional\'s report, so their per-seat-mile figures run above what the airlines publish (marked †). Click a row to highlight that carrier in the trend chart.';
         hbar(document.getElementById('lcasm-chart'), rows, (r) => r[k('lcasm')], (v) => d3.format('.2f')(v) + '¢',
           (r) => [{ name: 'Labor ¢ per ASM', value: fmtC(r[k('lcasm')]) + '¢' }, { name: 'CASM ex fuel', value: fmtC(r[k('casmx')]) + '¢' }, { name: 'Labor cost per FTE', value: fmtK(r[k('comp_fte')]) }]);
         document.getElementById('salmix-legend').replaceChildren(...SALG.map(([, n], i) => { const s = document.createElement('span'); const w = document.createElement('i'); w.className = 'am-sw'; w.style.background = dash.colors[i]; s.append(w, document.createTextNode(n)); return s; }));
@@ -1986,8 +2085,8 @@ dash.calc('dotpeer', {
         document.querySelector('#family-table tbody').replaceChildren(...fam.sort((a, b) => (b.rev_ttm || 0) - (a.rev_ttm || 0)).map((r) => {
           const tr = document.createElement('tr'); tr.dataset.key = r.code; if (!r.current) tr.className = 'off';
           const nmc = td(r.name + ' (' + r.code + ')' + (r.note || r.spike ? ' *' : ''), 'l'); nmc.title = [r.note, r.spike ? 'Labor cost in ' + ql(r.spike) + ' was well above its usual level, lifting trailing figures.' : ''].filter(Boolean).join(' ');
-          tr.append(nmc, td(r.role, 'l am-hn'), td(ql(r.latest), 'l'), td(fmtM(r.rev_ttm)), td(pct(r.opm_ttm), r.opm_ttm < 0 ? 'am-neg' : ''),
-            td(fmtM(r.comp_ttm)), td(pct(r.lopex_ttm)), td(fmtN(r.fte_ttm)), td(fmtK(r.comp_fte_ttm)), td(fmtC(r.lcasm_ttm) + (bad(r.lcasm_ttm) ? '' : '¢'), 'am-hn'));
+          tr.append(nmc, td(r.role, 'l am-hn'), td(ql(r.latest), 'l'), withV(td(fmtM(r.rev_ttm)), r.rev_ttm), td(pct(r.opm_ttm), r.opm_ttm < 0 ? 'am-neg' : ''),
+            withV(td(fmtM(r.comp_ttm)), r.comp_ttm), td(pct(r.lopex_ttm)), td(fmtN(r.fte_ttm)), td(fmtK(r.comp_fte_ttm)), td(fmtC(r.lcasm_ttm) + (bad(r.lcasm_ttm) ? '' : '¢'), 'am-hn'));
           return tr;
         }));
       }
@@ -2019,9 +2118,9 @@ dash.calc('dotpeer', {
           lp.append(document.createTextNode(pct(r['lopex_' + pbasis])));
           tr.append(
             td(r.ticker, 'l'), td(r.carrier, 'l am-hn'), td(r.latest ? ql(r.latest) : '—', 'l'),
-            td(fmtM(r['rev_' + pbasis])), td(fmtM(r['ni_' + pbasis]), r['ni_' + pbasis] < 0 ? 'am-neg' : ''), td(pct(op), op < 0 ? 'am-neg' : ''), td(fmtM(r.debt)), td(fmtM(r.net_debt)), td(fmtM(r.lease_net_debt)), td(bad(r.leverage) ? (r.lev_nm ? 'n/m' : '—') : d3.format('.1f')(r.leverage) + '×'), td(fmtM(r['labor_' + pbasis])), lp,
-            td(sgn(r['lyoy_' + pbasis])), td(fmtM(r['ret_' + pbasis])), td(pct(r['rl_' + pbasis]), 'am-hn'),
-            td(fmtM(r.liquidity), 'am-hn'),
+            withV(td(fmtM(r['rev_' + pbasis])), r['rev_' + pbasis]), withV(td(fmtM(r['ni_' + pbasis]), r['ni_' + pbasis] < 0 ? 'am-neg' : ''), r['ni_' + pbasis]), td(pct(op), op < 0 ? 'am-neg' : ''), withV(td(fmtM(r.debt)), r.debt), withV(td(fmtM(r.net_debt)), r.net_debt), withV(td(fmtM(r.lease_net_debt)), r.lease_net_debt), td(bad(r.leverage) ? (r.lev_nm ? 'n/m' : '—') : d3.format('.1f')(r.leverage) + '×'), withV(td(fmtM(r.due12)), r.due12), td(bad(r.cover) ? '—' : d3.format('.1f')(r.cover) + '×'), withV(td(fmtM(r['labor_' + pbasis])), r['labor_' + pbasis]), lp,
+            td(sgn(r['lyoy_' + pbasis])), withV(td(fmtM(r['ret_' + pbasis])), r['ret_' + pbasis]), withV(td(fmtM(r['capex_' + pbasis])), r['capex_' + pbasis]), td(pct(r['rl_' + pbasis]), 'am-hn'),
+            withV(td(fmtM(r.liquidity), 'am-hn'), r.liquidity),
           );
           return tr;
         }));
@@ -2080,9 +2179,9 @@ dash.calc('dotpeer', {
       tb.replaceChildren(...rows.slice().reverse().map((r) => {
         const tr = document.createElement('tr'); tr.dataset.key = encodeURIComponent(r.ticker) + ',' + encodeURIComponent(r.quarter);
         const td = (txt, cls) => { const x = document.createElement('td'); if (cls) x.className = cls; x.textContent = txt; return x; };
-        tr.append(td(ql(r.quarter), 'l'), td(fmtM(r.rev)), td(fmtM(r.opex)), td(fmtM(r.labor)), td(fmtM(r.fuel)),
-          td(fmtM(r.opinc), num(r.opinc) < 0 ? 'am-neg' : ''), td(fmtM(r.ni), num(r.ni) < 0 ? 'am-neg' : ''),
-          td(fmtM(r.buyback), 'am-hn'), td(fmtM(r.div), 'am-hn'), td(fmtM(r.cash), 'am-hn'), td(fmtM(r.debt), 'am-hn'));
+        tr.append(td(ql(r.quarter), 'l'), withV(td(fmtM(r.rev)), r.rev), withV(td(fmtM(r.opex)), r.opex), withV(td(fmtM(r.labor)), r.labor), withV(td(fmtM(r.fuel)), r.fuel),
+          withV(td(fmtM(r.opinc), num(r.opinc) < 0 ? 'am-neg' : ''), r.opinc), withV(td(fmtM(r.ni), num(r.ni) < 0 ? 'am-neg' : ''), r.ni),
+          withV(td(fmtM(r.buyback), 'am-hn'), r.buyback), withV(td(fmtM(r.div), 'am-hn'), r.div), withV(td(fmtM(r.cash), 'am-hn'), r.cash), withV(td(fmtM(r.debt), 'am-hn'), r.debt));
         return tr;
       }));
     } else if (tab === 'carrier' && (fin.status === 'error' || qtr.status === 'error')) { fail(document.getElementById('det-chart')); }
@@ -2112,6 +2211,27 @@ dash.calc('dotpeer', {
         return tr;
       }));
     }
+
+    applyTips();
+    if (fin.status === 'ok' && fin.data.length) {
+      const qs = [...new Set(dash.data('peer').data.filter((r) => r.active && r.latest).map((r) => r.latest))].sort();
+      const a0 = qs[0], a1 = qs[qs.length - 1];
+      const span = !qs.length ? '' : a0 === a1 ? ql(a0) : a0.slice(0, 4) === a1.slice(0, 4) ? ql(a0).split(' ')[0] + '–' + ql(a1) : ql(a0) + '–' + ql(a1);
+      ['peer-card', 'margin-card', 'mix-card', 'returns-card'].forEach((id) => stamp(id, 'SEC filings through ' + span));
+    }
+    if (dpeer.status === 'ok' && dpeer.data.length) {
+      const dl = d3.max(dpeer.data, (r) => r.latest);
+      ['dot-card', 'lcasm-card', 'salmix-card', 'dtrend-card', 'family-card'].forEach((id) => stamp(id, 'DOT Form 41 through ' + ql(dl)));
+    }
+    const annD = dash.data('dot_annual');
+    if (annD.status === 'ok' && annD.data.length) stamp('workforce-card', 'DOT, ' + d3.max(annD.data.filter((r) => r.h_total), (r) => r.year));
+    const fs = dash.data('fuel_spot'), fpd = dash.data('fuelpaid');
+    if (fs.status === 'ok' && fs.data.length && fpd.status === 'ok') {
+      const L = fs.data[fs.data.length - 1], ind = fpd.data.filter((r) => r.code === 'ALL');
+      stamp('fuel-card', 'Spot through ' + d3.utcFormat('%b %-d')(new Date(L.date + 'T00:00:00Z')) + (ind.length ? '; airlines paid through ' + mfmt(ind[ind.length - 1].month) : ''));
+    }
+    const lmeta = dash.data('labor_meta');
+    if (lmeta.status === 'ok' && lmeta.data[0] && lmeta.data[0].generated) ['labor-sum-card', 'ltable-card'].forEach((id) => stamp(id, 'Checked ' + d3.utcFormat('%b %-d, %Y')(new Date(lmeta.data[0].generated))));
 
     if (!drawn && fin.status === 'ok') {
       drawn = true;
