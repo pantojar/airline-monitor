@@ -46,7 +46,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
 <script src="vendor/d3.min.js"></script>
 <script>
 window.dash = (function () {
-  var DEFAULTS = { group: 'All', basis: 'lq', dbasis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', pgroup: 'All', lcarrier: 'All', lopen: false, cpiidx: 'cpiw', cpispan: '12m', cpifrom: null, cpito: null };
+  var DEFAULTS = { group: 'All', basis: 'lq', dbasis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', pgroup: 'All', lcarrier: 'All', lopen: false, cpiidx: 'cpiw', cpispan: '12m', cpifrom: null, cpito: null, h2h: 'DAL,UAL' };
   var params = Object.assign({}, DEFAULTS), calcs = {}, order = [], res = null, fns = [];
   var DATA = null, state = 'loading';
   function compute() {
@@ -78,12 +78,13 @@ window.dash = (function () {
       get('exec_pay').catch(function () { return []; }),
       get('labor').catch(function () { return { groups: [], companies: {} }; }),
       get('cpi').catch(function () { return {}; }),
+      get('revenue_split').catch(function () { return []; }),
     ]).then(function (v) {
       var today = new Date().toISOString().slice(0, 10);
       var curated = v[2].filter(function (r) { return !(r.kind === 'Upcoming' && r.date < today); });
       DATA = { financials: v[0], carriers: v[1], news: curated.concat(v[3]), dot: v[5], dot_carriers: v[6], meta: [v[4] || {}],
         dot_annual: v[7], dot_fuel: v[8], fuel_spot: v[9].map(function (r) { return { date: r[0], price: r[1], est: r[2] === 1 }; }), exec_pay: v[10],
-        labor_groups: v[11].groups || [], labor_companies: Object.values(v[11].companies || {}), labor_meta: [{ generated: v[11].generated }], cpi: [v[12] || {}] };
+        labor_groups: v[11].groups || [], labor_companies: Object.values(v[11].companies || {}), labor_meta: [{ generated: v[11].generated }], cpi: [v[12] || {}], revsplit: v[13] || [] };
       res = null; state = 'ok';
       var g = v[4] && v[4].generated ? new Date(v[4].generated) : null;
       asOf(g && !isNaN(g)
@@ -334,6 +335,8 @@ window.dash = (function () {
             <th data-base="lyoy" data-field="lyoy_ttm"><button data-sort="lyoy">Labor cost YoY</button></th>
             <th data-base="ret" data-field="ret_ttm"><button data-sort="ret">Returned to shareholders</button></th>
             <th data-base="capex" data-field="capex_ttm"><button data-sort="capex">CapEx</button></th>
+            <th data-base="loy" data-field="loy_ttm"><button data-sort="loy">Loyalty % of revenue</button></th>
+            <th data-field="fleet_age"><button data-sort="fleet_age">Fleet age (yrs)</button></th>
             <th class="am-hn" data-base="rl" data-field="rl_ttm"><button data-sort="rl">Returns ÷ labor</button></th>
             <th class="am-hn" data-field="liquidity"><button data-sort="liquidity">Cash + ST inv.</button></th>
           </tr></thead>
@@ -347,8 +350,21 @@ window.dash = (function () {
         <li><b>Net debt incl. leases:</b> adds operating lease liabilities (mostly leased aircraft), so carriers that lease compare fairly with those that own.</li>
         <li><b>Leverage:</b> net debt incl. leases ÷ trailing-12-month EBITDAR (operating income + depreciation + aircraft rent). Lower is stronger. "n/m" means EBITDAR was under 5% of revenue, too small for the ratio to mean much. Southwest's and Allegiant's EBITDAR leaves out rent, which they don't report in usable form; both lease few aircraft.</li>
         <li><b>Due within 12 mo.:</b> debt and lease payments due in the next year (the current portions on the balance sheet). <b>Cash ÷ due</b> is cash and short-term investments divided by that amount; below 1× means the airline would need new borrowing or operating cash to meet them.</li>
+        <li><b>Loyalty % of revenue:</b> award travel plus what partners, mainly co-branded credit cards, pay for miles and marketing, from each airline's own revenue breakdown. JetBlue and Frontier don't report loyalty separately. <b>Fleet age:</b> average age of the mainline operating fleet at the latest year end (DOT B-43 inventory).</li>
         <li><b>Returned to shareholders:</b> buybacks plus dividends paid. <b>CapEx:</b> cash spent on aircraft and other property (including pre-delivery deposits), from the cash flow statement.</li>
       </ul>
+    </div>
+
+    <div class="am-card" id="h2h-card">
+      <h2>Head-to-head</h2>
+      <p class="am-note">Pick two or three carriers to compare side by side. Uses the same period as the table above (latest quarter or trailing 12 months); the best figure in each row is in bold where "best" is clear-cut.</p>
+      <div class="am-bar"><span id="h2h-chips" data-source="peer"></span></div>
+      <div class="am-tbl-box">
+        <table class="am-t" id="h2h-table" data-source="peer">
+          <thead><tr id="h2h-head"></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
     </div>
 
     <div class="am-card" id="margin-card">
@@ -425,6 +441,13 @@ window.dash = (function () {
       <p class="am-note">Bars stack operating expense by labor, fuel and everything else; the line is revenue. The thin strip beside each bar is the gap between them: green is an operating profit, red an operating loss.</p>
       <div class="am-legend"><span><i class="am-sw" id="sw2-labor"></i>Labor</span><span><i class="am-sw" id="sw2-fuel"></i>Fuel</span><span><i class="am-sw" id="sw2-other"></i>Other opex</span><span><i class="am-sw" id="sw2-rev"></i>Revenue</span><span><i class="am-sw" style="background:var(--color-ok)"></i>Operating profit</span><span><i class="am-sw" style="background:var(--color-bad)"></i>Operating loss</span></div>
       <div class="am-wrap am-chart" id="det-chart" data-source="financials"></div>
+    </div>
+
+    <div class="am-card" id="revmix-card">
+      <h2>Where revenue comes from</h2>
+      <p class="am-note" id="revmix-note">Revenue by type, from the breakdown each airline files with its 10-Q and 10-K. Loyalty is award travel plus what partners (mainly co-branded credit cards) pay for miles and marketing.</p>
+      <div class="am-legend" id="revmix-legend"></div>
+      <div class="am-wrap am-chart" id="revmix-chart" data-source="revsplit"></div>
     </div>
     <div class="am-card" id="det-table-card">
       <h2>Quarterly figures</h2>
@@ -986,7 +1009,7 @@ dash.calc('dotpeer', {
   const qs = (q) => 'Q' + Number(q.slice(5, 7)) / 3 + ' ’' + q.slice(2, 4);
   const dfmt = (s) => { const d = new Date(s + 'T12:00:00Z'); return isNaN(d) ? s : d3.utcFormat('%b %-d, %Y')(d); };
   const C = () => dash.colors;
-  const BASED = new Set(['rev', 'ni', 'capex', 'opm', 'labor', 'lopex', 'lyoy', 'ret', 'rl']);
+  const BASED = new Set(['rev', 'ni', 'capex', 'loy', 'opm', 'labor', 'lopex', 'lyoy', 'ret', 'rl']);
   let sortCol = 'rev', sortDir = -1, tab = 'peers', drawn = false;
 
   // legends
@@ -1444,7 +1467,7 @@ dash.calc('dotpeer', {
     const L = el('div');
     L.append(el('h2', '', 'Trailing 12 months'), tbl([['Measure', 'l'], ['Value']], [
       [['Revenue', 'l'], [fmtM(pr.rev_ttm)]], [['Operating margin', 'l'], [pct(pr.opm_ttm), neg(pr.opm_ttm)]], [['Net income', 'l'], [fmtM(pr.ni_ttm), neg(pr.ni_ttm)]],
-      [['EBITDAR', 'l'], [fmtM(pr.ebitdar_ttm), neg(pr.ebitdar_ttm)]], [['Labor cost', 'l'], [fmtM(pr.labor_ttm)]], [['Labor cost vs prior 12 months', 'l'], [sgn(pr.lyoy_ttm)]], [['Labor as % of operating expense', 'l'], [pct(pr.lopex_ttm)]],
+      [['EBITDAR', 'l'], [fmtM(pr.ebitdar_ttm), neg(pr.ebitdar_ttm)]], [['Loyalty revenue as % of total', 'l'], [pct(pr.loy_ttm)]], [['Labor cost', 'l'], [fmtM(pr.labor_ttm)]], [['Labor cost vs prior 12 months', 'l'], [sgn(pr.lyoy_ttm)]], [['Labor as % of operating expense', 'l'], [pct(pr.lopex_ttm)]],
       [['Returned to shareholders (buybacks + dividends)', 'l'], [fmtM(pr.ret_ttm)]], [['Returned to shareholders ÷ labor cost', 'l'], [pct(pr.rl_ttm)]], [['Capital spending (CapEx)', 'l'], [fmtM(pr.capex_ttm)]],
     ]));
     const R = el('div');
@@ -1458,6 +1481,7 @@ dash.calc('dotpeer', {
       [['Debt and leases due within 12 months', 'l'], [fmtM(pr.due12)], ['']],
       [['Cash ÷ amount due within 12 months', 'l'], [bad(pr.cover) ? '—' : d3.format('.1f')(pr.cover) + '×'], [rank('cover', true)]],
       [['Leverage: net debt incl. leases ÷ EBITDAR', 'l'], [bad(pr.leverage) ? (pr.lev_nm ? 'n/m (EBITDAR under 5% of revenue)' : '—') : d3.format('.1f')(pr.leverage) + '×'], [rank('leverage', false) + (bad(pr.leverage) ? '' : ' (1 = lowest)')]],
+      [['Mainline fleet average age' + (pr.fleet_year ? ' (' + pr.fleet_year + ', ' + pr.fleet_n + ' aircraft)' : ''), 'l'], [bad(pr.fleet_age) ? '—' : d3.format('.1f')(pr.fleet_age) + ' yrs'], [rank('fleet_age', false) + (bad(pr.fleet_age) ? '' : ' (1 = youngest)')]],
       [['Operating margin, trailing 12 months', 'l'], [pct(pr.opm_ttm)], [rank('opm_ttm', true)]],
       [['Labor % of operating expense', 'l'], [pct(pr.lopex_ttm)], [rank('lopex_ttm', true)]],
       [['Returned to shareholders ÷ labor', 'l'], [pct(pr.rl_ttm)], [rank('rl_ttm', true)]],
@@ -1503,6 +1527,136 @@ dash.calc('dotpeer', {
     return true;
   }
 
+  // ---------- revenue mix, fleet age and head-to-head ----------
+  const REVCATS = [['passenger', 'Passenger tickets & fees'], ['loyalty', 'Loyalty (award travel & partners)'], ['cargo', 'Cargo'], ['refinery', 'Refinery sales'], ['other', 'Other']];
+  function revRows(t) {
+    const rs = dash.data('revsplit'), fin = dash.data('financials');
+    if (rs.status !== 'ok' || fin.status !== 'ok') return [];
+    const tot = new Map(fin.data.filter((r) => r.ticker === t).map((r) => [r.quarter, num(r.rev)]));
+    return rs.data.filter((r) => r.ticker === t && tot.get(r.quarter)).map((r) => {
+      const rev = tot.get(r.quarter); const known = ['passenger', 'loyalty', 'cargo', 'refinery'].reduce((a, k) => a + (num(r[k]) || 0), 0);
+      return Object.assign({}, r, { rev, other: Math.max(0, rev - known), hasLoy: r.loyalty !== undefined });
+    }).sort((a, b) => (a.quarter < b.quarter ? -1 : 1));
+  }
+  // mainline DOT certificate for each listed parent (fleet age is the mainline fleet)
+  const MAINLINE = { DAL: 'DL', UAL: 'UA', AAL: 'AA', LUV: 'WN', ALK: 'AS', JBLU: 'B6', ULCC: 'F9', ALGT: 'G4', SKYW: 'OO', RJET: 'YX' };
+  function fleetOf(code) {
+    const ann = dash.data('dot_annual'); if (ann.status !== 'ok') return null;
+    const r = ann.data.filter((x) => x.code === code && x.fleet_age !== undefined).sort((a, b) => b.year - a.year)[0];
+    return r || null;
+  }
+  let enriched = null;
+  function enrichPeer(peer, fin) {
+    if (peer.status !== 'ok' || fin.status !== 'ok' || enriched === peer.data) return;
+    enriched = peer.data;
+    for (const p of peer.data) {
+      const rr = revRows(p.ticker).filter((r) => r.hasLoy);
+      const last = rr[rr.length - 1];
+      p.loy_lq = last && last.quarter === p.latest ? last.loyalty / last.rev : null;
+      const t4 = rr.slice(-4);
+      p.loy_ttm = t4.length === 4 && t4[3].quarter === p.latest ? d3.sum(t4, (r) => r.loyalty) / d3.sum(t4, (r) => r.rev) : null;
+      const f = fleetOf(MAINLINE[p.ticker]);
+      p.fleet_age = f ? f.fleet_age : null; p.fleet_n = f ? f.fleet_n : null; p.fleet_year = f ? f.year : null;
+    }
+  }
+  function revChart(box, rows) {
+    clearSvg(box);
+    if (!rows.length) return;
+    const W = Math.max(300, box.clientWidth), H = 280;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).style('display', 'block');
+    const cats = REVCATS.filter(([k]) => rows.some((r) => num(r[k]) > 0));
+    const col = (k) => ({ passenger: C()[0], loyalty: C()[2], cargo: C()[4], refinery: C()[5], other: 'var(--cds-chart-muted)' })[k];
+    const max = d3.max(rows, (r) => r.rev) || 1, big = max >= 3000;
+    const tf = (v) => (big ? '$' + d3.format(',.0f')(v / 1000) + 'B' : '$' + d3.format(',.0f')(v) + 'M');
+    const y = d3.scaleLinear([0, max * 1.05], [H - 22, 8]).nice(), ticks = y.ticks(5);
+    const m = { l: Math.ceil(d3.max(ticks, (t) => textW(svg, tf(t)))) + 8, r: 6 };
+    const x = d3.scaleBand(rows.map((r) => r.quarter), [m.l, W - m.r]).paddingInner(0.28).paddingOuter(0.1);
+    svg.selectAll('line.gr').data(ticks).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', (t) => y(t)).attr('y2', (t) => y(t)).attr('stroke', 'var(--cds-chart-grid)');
+    svg.selectAll('text.tk').data(ticks).join('text').attr('x', m.l - 6).attr('y', (t) => y(t) + 4).attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(tf);
+    const every = x.step() >= 52;
+    svg.selectAll('text.xl').data(every ? rows : rows.filter((r) => r.quarter.endsWith('-03'))).join('text')
+      .attr('x', (r) => x(r.quarter) + x.bandwidth() / 2).attr('y', H - 6).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)')
+      .text((r) => (every ? ql(r.quarter).replace(' 20', " '") : 'Q1 ’' + r.quarter.slice(2, 4)));
+    const bw = Math.min(34, x.bandwidth()), off = (x.bandwidth() - bw) / 2;
+    for (const r of rows) {
+      let acc = 0;
+      cats.forEach(([k], i) => { const v = num(r[k]) || 0; if (!v) return;
+        svg.append('rect').attr('x', x(r.quarter) + off).attr('width', bw).attr('y', y(acc + v)).attr('height', Math.max(0, y(acc) - y(acc + v))).attr('fill', col(k)).attr('rx', i === cats.length - 1 ? 2 : 0);
+        acc += v; });
+    }
+    const tp = tip(box);
+    svg.append('rect').attr('x', m.l).attr('y', 0).attr('width', W - m.l - m.r).attr('height', H).attr('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const [mx, my] = d3.pointer(ev); const i = Math.max(0, Math.min(rows.length - 1, Math.floor((mx - m.l) / x.step()))); const r = rows[i];
+        const sc = box.clientWidth / W;
+        tp.show(mx * sc, my * sc, ql(r.quarter) + ' · ' + tf(r.rev), cats.slice().reverse().map(([k, n]) => ({ color: col(k), name: n, value: tf(num(r[k]) || 0) + ' (' + d3.format('.0%')((num(r[k]) || 0) / r.rev) + ')' })));
+      })
+      .on('pointerleave', () => tp.hide());
+    document.getElementById('revmix-legend').replaceChildren(...cats.map(([k, n]) => { const sp = document.createElement('span'); const w = document.createElement('i'); w.className = 'am-sw'; w.style.background = col(k); sp.append(w, document.createTextNode(n)); return sp; }));
+  }
+  const H2H_NOTES = {
+    JBLU: 'JetBlue and Frontier report loyalty inside passenger and other revenue rather than as its own line.',
+    ULCC: 'JetBlue and Frontier report loyalty inside passenger and other revenue rather than as its own line.',
+    DAL: "Delta's revenue includes refinery sales to third parties.",
+  };
+  function drawH2H(peer, P) {
+    const box = document.getElementById('h2h-chips'); if (!box || peer.status !== 'ok') return;
+    const act = peer.data.filter((r) => r.active);
+    let sel = String(P.h2h || '').split(',').filter((t) => act.some((r) => r.ticker === t));
+    box.replaceChildren(...act.map((r) => {
+      const b = document.createElement('button'); b.className = 'am-chip'; b.textContent = r.ticker; b.title = r.carrier; b.style.marginRight = '6px';
+      b.setAttribute('aria-pressed', String(sel.includes(r.ticker)));
+      b.addEventListener('click', () => {
+        let s2 = sel.includes(r.ticker) ? sel.filter((t) => t !== r.ticker) : sel.concat(r.ticker);
+        if (s2.length > 3) s2 = s2.slice(-3);
+        dash.setParams({ h2h: s2.join(',') });
+      });
+      return b;
+    }));
+    const cols = sel.map((t) => act.find((r) => r.ticker === t));
+    const head = document.getElementById('h2h-head'), tb = document.querySelector('#h2h-table tbody');
+    const th = (t, cls) => { const e = document.createElement('th'); if (cls) e.className = cls; e.textContent = t; return e; };
+    head.replaceChildren(th('Measure', 'l'), ...cols.map((r) => th(r.carrier)));
+    if (cols.length < 2) { tb.replaceChildren(); const tr = document.createElement('tr'); const td0 = document.createElement('td'); td0.className = 'l'; td0.colSpan = 4; td0.textContent = 'Pick at least two carriers above.'; tr.append(td0); tb.append(tr); return; }
+    const pb = P.basis === 'ttm' ? 'ttm' : 'lq', per = pb === 'ttm' ? 'trailing 12 months' : 'latest quarter';
+    const ex = dash.data('exec_pay'), lg = dash.data('labor_groups'), dp = dash.data('dotpeer');
+    const ratio = (t) => { if (ex.status !== 'ok') return null; const e = ex.data.filter((r) => r.ticker === t && !bad(r.ratio)).sort((a, b) => b.fy - a.fy)[0]; return e ? e.ratio : null; };
+    const openN = (t) => (lg.status === 'ok' ? lg.data.filter((r) => r.ticker === t && r.open && r.status !== 'Ratified').length : null);
+    const dotv = (t, f) => { if (dp.status !== 'ok') return null; const r = dp.data.find((x) => x.code === MAINLINE[t]); return r ? r[f + '_ttm'] : null; };
+    const x = (v) => (bad(v) ? '—' : d3.format('.1f')(v) + '×');
+    const ROWS = [
+      ['Period', (r) => ql(r.latest) + (pb === 'ttm' ? ' (12 mo.)' : ''), null],
+      ['Revenue', (r) => r['rev_' + pb], fmtM, 'hi'],
+      ['Net income', (r) => r['ni_' + pb], fmtM, 'hi'],
+      ['Operating margin', (r) => r['opm_' + pb], pct, 'hi'],
+      ['Labor cost', (r) => r['labor_' + pb], fmtM, null],
+      ['Labor % of operating expense', (r) => r['lopex_' + pb], pct, null],
+      ['Labor cost vs a year earlier', (r) => r['lyoy_' + pb], sgn, null],
+      ['Returned to shareholders', (r) => r['ret_' + pb], fmtM, null],
+      ['Returned to shareholders ÷ labor', (r) => r['rl_' + pb], pct, null],
+      ['Loyalty % of revenue', (r) => r['loy_' + pb], pct, 'hi'],
+      ['CapEx', (r) => r['capex_' + pb], fmtM, null],
+      ['Net debt incl. leases', (r) => r.lease_net_debt, fmtM, 'lo'],
+      ['Leverage (× EBITDAR, 12 mo.)', (r) => r.leverage, x, 'lo'],
+      ['Cash ÷ debt due within 12 months', (r) => r.cover, x, 'hi'],
+      ['Cash + short-term investments', (r) => r.liquidity, fmtM, 'hi'],
+      ['Mainline fleet age (yrs)', (r) => r.fleet_age, (v) => (bad(v) ? '—' : d3.format('.1f')(v)), 'lo'],
+      ['Labor cost per FTE (DOT, mainline, 12 mo.)', (r) => dotv(r.ticker, 'comp_fte'), fmtK, null],
+      ['CEO pay ratio (latest proxy)', (r) => ratio(r.ticker), (v) => (bad(v) ? '—' : d3.format(',.0f')(v) + ' : 1'), null],
+      ['Groups past amendable date', (r) => openN(r.ticker), (v) => (bad(v) ? '—' : String(v)), null],
+    ];
+    tb.replaceChildren(...ROWS.map(([name, f, fmt, best]) => {
+      const tr = document.createElement('tr'); const n = document.createElement('td'); n.className = 'l'; n.textContent = name; tr.append(n);
+      const vals = cols.map((r) => f(r));
+      const nums = vals.filter((v) => typeof v === 'number' && !bad(v));
+      const target = best && nums.length > 1 ? (best === 'hi' ? Math.max(...nums) : Math.min(...nums)) : null;
+      vals.forEach((v) => { const td = document.createElement('td'); td.textContent = fmt ? fmt(v) : v; if (target !== null && v === target) td.style.fontWeight = '800'; if (typeof v === 'number' && v < 0 && fmt !== sgn) td.classList.add('am-neg'); tr.append(td); });
+      return tr;
+    }));
+    const notes = [...new Set(sel.map((t) => H2H_NOTES[t]).filter(Boolean))];
+    document.querySelector('#h2h-card .am-note').textContent = 'Pick two or three carriers to compare side by side. Financial rows use the ' + per + ' (switch with the buttons above the peer table); the best figure in each row is in bold where "best" is clear-cut.' + (notes.length ? ' ' + notes.join(' ') : '');
+  }
+
   // ---------- table helpers: CSV download, header tooltips; chart "data through" stamps ----------
   // keep the unrounded value on a table cell ($ millions) so CSV downloads aren't limited to the rounded display
   const withV = (cell, v) => { v = num(v); if (v !== null && isFinite(v)) cell.dataset.v = String(Math.round(v * 1e6)); return cell; };
@@ -1544,6 +1698,8 @@ dash.calc('dotpeer', {
     labor: 'Salaries, wages and benefits.', lopex: 'Labor cost as a share of total operating expense.',
     lyoy: 'Change in labor cost versus the same period a year earlier.', ret: 'Share buybacks plus dividends paid.',
     capex: 'Cash spent on aircraft and other property, including pre-delivery deposits.',
+    loy: 'Loyalty revenue (award travel plus partner and credit card payments for miles and marketing) as a share of total revenue. Blank where the airline does not report loyalty as its own line.',
+    fleet_age: 'Average age of the mainline operating fleet at the latest year end, from the DOT B-43 aircraft inventory.',
     rl: 'Returned to shareholders ÷ labor cost.', liquidity: 'Cash plus short-term investments, latest balance sheet.',
     latest: 'Latest quarter reported.', comp: 'Salaries and benefits, DOT Form 41 (same definition as the SEC labor line).',
     casm: 'Operating expense per available seat mile, in cents. † = runs high for carriers with regional partners (see notes).',
@@ -1717,6 +1873,7 @@ dash.calc('dotpeer', {
     sw('sw2-labor', C()[0]); sw('sw2-fuel', C()[1]); sw('sw2-other', 'var(--cds-chart-muted)'); sw('sw2-rev', 'var(--color-fg)');
     const fin = dash.data('financials'), car = dash.data('carriers'), nws = dash.data('news');
     const qtr = dash.data('qtr'), peer = dash.data('peer'), sum = dash.data('summary');
+    enrichPeer(peer, fin);
 
     // takeaway
     const S = sum.status === 'ok' && sum.data && sum.data[0];
@@ -2093,6 +2250,7 @@ dash.calc('dotpeer', {
     }
 
     if (tab === 'peers') {
+      drawH2H(peer, P);
       // peer table
       const tb = document.querySelector('#peer-table tbody');
       root.querySelectorAll('#peer-table th[data-base]').forEach((th) => th.setAttribute('data-field', th.dataset.base + '_' + pbasis));
@@ -2119,7 +2277,7 @@ dash.calc('dotpeer', {
           tr.append(
             td(r.ticker, 'l'), td(r.carrier, 'l am-hn'), td(r.latest ? ql(r.latest) : '—', 'l'),
             withV(td(fmtM(r['rev_' + pbasis])), r['rev_' + pbasis]), withV(td(fmtM(r['ni_' + pbasis]), r['ni_' + pbasis] < 0 ? 'am-neg' : ''), r['ni_' + pbasis]), td(pct(op), op < 0 ? 'am-neg' : ''), withV(td(fmtM(r.debt)), r.debt), withV(td(fmtM(r.net_debt)), r.net_debt), withV(td(fmtM(r.lease_net_debt)), r.lease_net_debt), td(bad(r.leverage) ? (r.lev_nm ? 'n/m' : '—') : d3.format('.1f')(r.leverage) + '×'), withV(td(fmtM(r.due12)), r.due12), td(bad(r.cover) ? '—' : d3.format('.1f')(r.cover) + '×'), withV(td(fmtM(r['labor_' + pbasis])), r['labor_' + pbasis]), lp,
-            td(sgn(r['lyoy_' + pbasis])), withV(td(fmtM(r['ret_' + pbasis])), r['ret_' + pbasis]), withV(td(fmtM(r['capex_' + pbasis])), r['capex_' + pbasis]), td(pct(r['rl_' + pbasis]), 'am-hn'),
+            td(sgn(r['lyoy_' + pbasis])), withV(td(fmtM(r['ret_' + pbasis])), r['ret_' + pbasis]), withV(td(fmtM(r['capex_' + pbasis])), r['capex_' + pbasis]), td(pct(r['loy_' + pbasis])), td(bad(r.fleet_age) ? '—' : d3.format('.1f')(r.fleet_age)), td(pct(r['rl_' + pbasis]), 'am-hn'),
             withV(td(fmtM(r.liquidity), 'am-hn'), r.liquidity),
           );
           return tr;
@@ -2175,6 +2333,14 @@ dash.calc('dotpeer', {
       S2('t-ret', 'qtr', 'returns', fmtM(qr.returns));
       document.getElementById('t-opm').classList.toggle('am-neg', num(qr.op_margin) < 0);
       costChart(document.getElementById('det-chart'), rows.filter((r) => num(r.opex) !== null));
+      const rv = revRows(t);
+      document.getElementById('revmix-card').hidden = false;
+      revChart(document.getElementById('revmix-chart'), rv);
+      const base = 'Revenue by type, from the breakdown each airline files with its 10-Q and 10-K. Loyalty is award travel plus what partners (mainly co-branded credit cards) pay for miles and marketing.';
+      document.getElementById('revmix-note').textContent = !rv.length
+        ? (['SKYW', 'RJET'].includes(t) ? 'Not shown: this airline earns its revenue mainly from capacity-purchase contracts with larger airlines, so there is no passenger, loyalty or cargo split.' : 'No revenue breakdown on file yet for this airline.')
+        : base + (t === 'DAL' ? ' Delta\'s total includes refinery sales to third parties.' : '') + (['JBLU', 'ULCC'].includes(t) ? ' This airline doesn\'t report loyalty as its own line, so it sits inside passenger and other revenue.' : '') + (t === 'ALGT' ? ' Allegiant reports only its co-branded card revenue as loyalty.' : '');
+      if (!rv.length) clearSvg(document.getElementById('revmix-chart'));
       const tb = document.querySelector('#det-table tbody');
       tb.replaceChildren(...rows.slice().reverse().map((r) => {
         const tr = document.createElement('tr'); tr.dataset.key = encodeURIComponent(r.ticker) + ',' + encodeURIComponent(r.quarter);
