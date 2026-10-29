@@ -202,7 +202,7 @@ def extract(cf, QE):
         "buyback": pick(cf, ["PaymentsForRepurchaseOfCommonStock"], flow_q, QE),
         "div": pick(cf, ["PaymentsOfDividendsCommonStock", "PaymentsOfDividends"], flow_q, QE),
         "cash": pick(cf, ["CashAndCashEquivalentsAtCarryingValue", "Cash"], inst_q, QE),
-        "sti": pick(cf, ["ShortTermInvestments", "AvailableForSaleSecuritiesDebtSecuritiesCurrent"], inst_q, QE),
+        "sti": pick(cf, ["ShortTermInvestments", "AvailableForSaleSecuritiesDebtSecuritiesCurrent", "MarketableSecuritiesCurrent"], inst_q, QE),  # JetBlue and Republic use the last
         "debt": debt,
         # operating lease liabilities (current + noncurrent): mostly leased aircraft, which reported debt leaves out
         "oplease": oplease,
