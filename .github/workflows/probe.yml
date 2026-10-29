@@ -1,0 +1,17 @@
+name: Probe (temporary)
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          mkdir out && cd out
+          for u in "https://www.transtats.bts.gov/OT_Delay/OT_DelayCause1.asp?20=E" "https://www.transtats.bts.gov/OT_Delay/ot_delaycause1.asp?qv52ynB=qn6n&20=E" "https://www.transportation.gov/airconsumer/air-travel-consumer-reports-2026" "https://www.transportation.gov/individuals/aviation-consumer-protection/air-travel-consumer-reports"; do
+            n=$(echo "$u" | md5sum | cut -c1-8); curl -s -L -A "Mozilla/5.0 (compatible; AirlineFinancialMonitor/1.0)" "$u" -o "p_$n.html" -w "$n %{http_code} %{size_download} $u\n" >> index.txt || true
+          done
+          git init -q && git checkout -q -b probe
+          git config user.name probe && git config user.email probe@example.com
+          git add -A && git commit -qm probe
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" probe
