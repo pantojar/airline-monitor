@@ -370,14 +370,70 @@ def update_news(meta, per_query=6, keep_days=30, cap=80):
             if q["kind"] is None and LABOR_RE.search(g["title"]):
                 kind = "Labor"
             items.append({"date": g["date"], "tags": " ".join(sorted(tags)), "kind": kind, "headline": g["title"], "summary": "", "source": g["source"], "url": g["url"]})
+    # the airlines' own newsrooms (same sites the bargaining tracker reads): bargaining-relevant releases only
+    company, cerr = company_releases(name_tags, keep_days)
+    errors += cerr
+    if company:
+        def toks(t):
+            return {w for w in re.findall(r"[a-z0-9]+", t.lower()) if len(w) > 3}
+        ct = [(toks(c["headline"]), c["date"]) for c in company]
+        def dup(i):  # press coverage of something the company itself announced
+            a = toks(i["headline"])
+            return any(a and len(a & b) / len(a | b) >= 0.45 and abs((dt.date.fromisoformat(i["date"]) - dt.date.fromisoformat(d)).days) <= 3 for b, d in ct)
+        items = company + [i for i in items if not dup(i)]
     if not items and old:
         items = old  # feed outage: keep what we had
     cutoff = (dt.date.today() - dt.timedelta(days=keep_days)).isoformat()
-    items = sorted([i for i in items if i["date"] >= cutoff], key=lambda i: i["date"], reverse=True)[:cap]
+    items = sorted([i for i in items if i["date"] >= cutoff], key=lambda i: (i["date"], bool(i.get("company"))), reverse=True)[:cap + 40]
     for n, i in enumerate(items):
         i["id"] = f"f{n + 1}"
     save(os.path.join(DATA, "news_feed.json"), items)
     meta["news"] = {"at": now_iso(), "items": len(items), "errors": errors}
+
+
+RELEASE_RE = re.compile(
+    r"union|contract|agreement|ratif|tentative|negotiat|bargain|labor|strike|pilots|flight attendants|mechanics|technicians|dispatchers|"
+    r"quarter|results|earnings|guidance|outlook|financial|revenue|profit|dividend|repurchase|notes|offering|debt|liquidity|investor|"
+    r"fleet|aircraft order|orders? \d|deliver|capacity|"
+    r"chief|ceo|president|officer|appoint|names? .* (to|as)|\bboard\b|resign|retire|executive|leadership|"
+    r"merger|acqui|combin|transaction|antitrust|hart-scott|department of transportation|\bDOT\b|furlough|layoff|job cuts|restructur|bankrupt",
+    re.I)
+
+
+def company_releases(name_tags, keep_days):
+    """Recent releases from each airline's newsroom, filtered to what matters at the bargaining table."""
+    import unions
+    try:
+        sites = [x for x in load(os.path.join(CONFIG, "labor_sources.json"), []) if x.get("company")]
+    except Exception:  # noqa: BLE001
+        return [], []
+    since = (dt.date.today() - dt.timedelta(days=keep_days)).isoformat()
+    f = unions.Fetch(user_agent())
+    out, errors, seen = [], [], set()
+    for site in sites:
+        try:
+            method, got, tried = unions.list_items(f, site, since)
+        except Exception as e:  # noqa: BLE001
+            errors.append(f"{site['name']}: {type(e).__name__}")
+            continue
+        if not method:
+            errors.append(f"{site['name']}: unavailable")
+        for it in got:
+            title = it.get("title") or ""
+            if not it.get("date") or it["date"] < since or not RELEASE_RE.search(title) or SKIP_RE.search(title):
+                continue
+            key = re.sub(r"\W+", " ", title.lower()).strip()
+            if key in seen:
+                continue
+            seen.add(key)
+            tags = set(site.get("carriers", []))
+            for t, rx in name_tags.items():
+                if re.search(rx, title):
+                    tags.add(t)
+            kind = "Labor" if LABOR_RE.search(title) else "Earnings" if EARN_RE.search(title) else "Corporate"
+            out.append({"date": it["date"], "tags": " ".join(sorted(tags)), "kind": kind, "headline": title, "summary": "",
+                        "source": site["name"], "url": it["url"], "company": True})
+    return out, errors
 
 
 def fred_series(sid, since="2022-01-01"):
