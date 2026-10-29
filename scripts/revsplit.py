@@ -110,7 +110,10 @@ def update_revsplit(root, meta, ua, carriers):
         try:
             sub = json.loads(_get(f"https://data.sec.gov/submissions/CIK{cik:010d}.json", ua))
             r = sub["filings"]["recent"]
-            for i, form in enumerate(r["form"]):
+            # oldest filing first: when a later filing restates a prior period, keep the figure as first reported,
+            # so each year's quarters and full-year total come from the same basis
+            for i in sorted(range(len(r["form"])), key=lambda i: r["filingDate"][i]):
+                form = r["form"][i]
                 if form not in ("10-Q", "10-K") or r["reportDate"][i] < since:
                     continue
                 acc = r["accessionNumber"][i]
@@ -135,7 +138,12 @@ def update_revsplit(root, meta, ua, carriers):
                 continue
             tot = {}
             for spec in specs:
-                for e, v in quarters(series(facts, spec)).items():
+                # "A|B": use line A, or line B for periods where A isn't reported (Southwest's 10-K shows only total other revenue)
+                qs = {}
+                for alt in spec.split("|"):
+                    for e, v in quarters(series(facts, alt)).items():
+                        qs.setdefault(e, v)
+                for e, v in qs.items():
                     tot.setdefault(e, []).append(v)
             # a quarter counts only when every line in the category is present
             per[cat] = {e: sum(vs) for e, vs in tot.items() if len(vs) == len(specs)}

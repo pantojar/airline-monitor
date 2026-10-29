@@ -2342,7 +2342,7 @@ dash.calc('dotpeer', {
       const base = 'Revenue by type, from the breakdown each airline files with its 10-Q and 10-K. Loyalty is award travel plus what partners (mainly co-branded credit cards) pay for miles and marketing.';
       document.getElementById('revmix-note').textContent = !rv.length
         ? (['SKYW', 'RJET'].includes(t) ? 'Not shown: this airline earns its revenue mainly from capacity-purchase contracts with larger airlines, so there is no passenger, loyalty or cargo split.' : 'No revenue breakdown on file yet for this airline.')
-        : base + (t === 'DAL' ? ' Delta\'s total includes refinery sales to third parties.' : '') + (['JBLU', 'ULCC'].includes(t) ? ' This airline doesn\'t report loyalty as its own line, so it sits inside passenger and other revenue.' : '') + (t === 'ALGT' ? ' Allegiant reports only its co-branded card revenue as loyalty.' : '');
+        : base + (t === 'DAL' ? ' Delta\'s total includes refinery sales to third parties. Delta began counting more revenue as loyalty in 2026, so its loyalty bar steps up from Q1 2026; earlier quarters are shown as originally reported.' : '') + (['JBLU', 'ULCC'].includes(t) ? ' This airline doesn\'t report loyalty as its own line, so it sits inside passenger and other revenue.' : '') + (t === 'ALGT' ? ' Allegiant reports only its co-branded card revenue as loyalty.' : '');
       if (!rv.length) clearSvg(document.getElementById('revmix-chart'));
       const tb = document.querySelector('#det-table tbody');
       tb.replaceChildren(...rows.slice().reverse().map((r) => {

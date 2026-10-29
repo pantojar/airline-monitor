@@ -1,5 +1,5 @@
 {
- "_about": "Which revenue lines in each airline's 10-Q/10-K make up passenger, loyalty, cargo and (Delta) refinery revenue. Names are the XBRL members the filings use; 'Member@ConceptPrefix' picks a member under a concept other than RevenueFromContractWithCustomer. 'passenger_minus' is subtracted from passenger (United reports award travel inside passenger revenue). Other revenue is total revenue minus these.",
+ "_about": "Which revenue lines in each airline's 10-Q/10-K make up passenger, loyalty, cargo and (Delta) refinery revenue. Names are the XBRL members the filings use; 'Member@ConceptPrefix' picks a member under a concept other than RevenueFromContractWithCustomer. 'A|B' uses line B for periods where A isn't reported. 'passenger_minus' is subtracted from passenger (United reports award travel inside passenger revenue). Other revenue is total revenue minus these.",
  "DAL": {"passenger": ["PassengerAirTrafficMember", "PassengerTravelRelatedServicesMember"],
          "loyalty": ["PassengerLoyaltyTravelAwardsMember", "ProductAndServiceOtherLoyaltyProgramMember"],
          "cargo": ["CargoAndFreightMember"], "refinery": ["ProductAndServiceOtherRefineryMember"]},
@@ -10,7 +10,7 @@
          "loyalty": ["LoyaltyProgramTravelRedemptionsMember", "LoyaltyProgramMarketingServicesMember"],
          "cargo": ["CargoAndFreightMember"]},
  "LUV": {"passenger": ["PassengerRevenueNonLoyaltyMember", "PassengerAncillarySoldSeparatelyMember"],
-         "loyalty": ["PassengerLoyaltyAirTransportationMember", "ProductAndServiceOtherLoyaltyProgramMember"],
+         "loyalty": ["PassengerLoyaltyAirTransportationMember", "ProductAndServiceOtherLoyaltyProgramMember|ProductAndServiceOtherMember"],
          "cargo": ["CargoAndFreightMember"]},
  "ALK": {"passenger": ["PassengerTicketsMember", "PassengerAncillaryServicesMember"],
          "loyalty": ["LoyaltyPlanMember", "LoyaltyPlanOtherMember"],
