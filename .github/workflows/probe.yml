@@ -15,43 +15,22 @@ jobs:
           ua = "AirlineFinancialMonitor " + os.environ.get("SEC_CONTACT", "")
           def get(u, ua2=None):
               return urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": ua2 or ua}), timeout=90).read()
-          out = {"transtats": {}, "xbrl": {}}
-          # 1. TranStats: find the B-43 table and its fields
-          try:
-              page = get("https://www.transtats.bts.gov/Tables.asp?QO_VQ=EGD&QO_anzr=Nv4%20Pn44vr4%20Sv0n0pvny&QO_fu146_anzr=Nv4%20Pn44vr4%20Sv0n0pvny", "Mozilla/5.0").decode("utf-8","replace")
-              out["transtats"]["links"] = re.findall(r'<a[^>]+href="([^"]*gnoyr_VQ=([A-Z]{3})[^"]*)"[^>]*>([^<]*)', page)[:80]
-              names = re.findall(r'gnoyr_VQ=([A-Z]{3})[^>]*>[^<]*</a>\s*</[^>]+>\s*<[^>]+>([^<]{0,120})', page)
-              out["transtats"]["names"] = names[:80]
-              m = re.search(r'B-43[^<]{0,200}', page); out["transtats"]["b43ctx"] = page[max(0,page.find("B-43")-1500):page.find("B-43")+500] if m else page[:3000]
-          except Exception as e:
-              out["transtats"]["err"] = repr(e)
-          # 2. XBRL instance: revenue by product/service member, latest 10-Q per carrier
-          for t, cik in [("DAL",27904),("UAL",100517),("AAL",6201),("LUV",92380),("ALK",766421),("JBLU",1158463),("ULCC",1670076),("ALGT",1362468),("SKYW",793733),("RJET",810332)]:
+          out = {}
+          u = "https://www.transtats.bts.gov/Tables.asp?QO_VQ=EGI&QO_anzr=Nv4%FDPn44vr4%FDSv0n0pvny%FDer21465%FD%FLS14z%FDHE%FDSv0n0pvny%FDQn6n%FM&QO_fu146_anzr=Nv4%FDPn44vr4%FDSv0n0pvny"
+          page = get(u, "Mozilla/5.0").decode("utf-8", "replace")
+          out["tables"] = re.findall(r"gnoyr_VQ=([A-Z]{3})[^>]*>([^<]*)", page)[:120]
+          out["b43"] = [m for m in re.findall(r"([A-Z]{3})[^A-Z]{0,400}?B-43", page)][:10]
+          i = page.find("B-43"); out["ctx"] = re.sub(r"\s+", " ", page[max(0, i-800):i+300])
+          codes = sorted(set(c for c, n in out["tables"]))
+          out["fields"] = {}
+          for c in codes:
               try:
-                  sub = json.loads(get(f"https://data.sec.gov/submissions/CIK{cik:010d}.json"))
-                  r = sub["filings"]["recent"]
-                  i = next(i for i, f in enumerate(r["form"]) if f in ("10-Q", "10-K"))
-                  acc = r["accessionNumber"][i].replace("-", ""); doc = r["primaryDocument"][i]
-                  inst = f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc}/" + re.sub(r"\.htm$", "_htm.xml", doc)
-                  x = get(inst)
-                  root = ET.fromstring(x)
-                  ns = {"xbrli": "http://www.xbrl.org/2003/instance", "xbrldi": "http://xbrl.org/2006/xbrldi"}
-                  ctx = {}
-                  for c in root.findall("xbrli:context", ns):
-                      p = c.find("xbrli:period", ns); s = p.find("xbrli:startDate", ns); e = p.find("xbrli:endDate", ns)
-                      mems = [(m.get("dimension"), m.text) for m in c.iter("{http://xbrl.org/2006/xbrldi}explicitMember")]
-                      ctx[c.get("id")] = (s.text if s is not None else None, e.text if e is not None else None, mems)
-                  res = []
-                  for el in root:
-                      tag = el.tag.split("}")[-1]
-                      if not re.search(r"Revenue", tag) or el.get("contextRef") not in ctx: continue
-                      s, e, mems = ctx[el.get("contextRef")]
-                      if not s or not mems: continue
-                      if not any("ProductOrService" in d or "Revenue" in d for d, _ in mems): continue
-                      res.append([tag, s, e, mems, el.text])
-                  out["xbrl"][t] = {"form": r["form"][i], "date": r["reportDate"][i], "url": inst, "facts": res[:80]}
-              except Exception as ex:
-                  out["xbrl"][t] = {"err": repr(ex)}
+                  pg = get("https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=" + c + "&QO_fu146_anzr=Nv4%20Pn44vr4%20Sv0n0pvny", "Mozilla/5.0").decode("utf-8", "replace")
+                  title = (re.search(r"<title>(.*?)</title>", pg, re.S) or [0, ""])[1].strip()
+                  flds = re.findall(r'<input[^>]*type="checkbox"[^>]*(?:id|name)="([A-Z_0-9]+)"', pg)
+                  out["fields"][c] = [title[:80], re.findall(r"(?:Schedule|Table)[^<]{0,60}", pg)[:3], flds[:40]]
+              except Exception as e:
+                  out["fields"][c] = repr(e)
           json.dump(out, open("probe.json","w"), indent=1)
           PY
           git init -q && git checkout -q -b probe
