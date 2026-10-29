@@ -265,6 +265,16 @@ def latest_filing(cf):
     return {"form": best[0], "filed": best[1]} if best else None
 
 
+def shares_outstanding(cf):
+    """(shares, as-of date) from the cover page of the latest 10-Q/10-K, summed across share classes."""
+    u = cf.get("facts", {}).get("dei", {}).get("EntityCommonStockSharesOutstanding", {}).get("units", {}).get("shares", [])
+    if not u:
+        return None
+    last = max(u, key=lambda f: (f.get("filed", ""), f.get("end", "")))
+    tot = sum(f["val"] for f in u if f.get("accn") == last.get("accn") and f.get("end") == last.get("end"))
+    return (tot, last.get("end")) if tot > 0 else None
+
+
 def carrier_rows(c, cf, QE, overrides):
     d = extract(cf, QE)
     rows = []
@@ -320,6 +330,9 @@ def update_sec(meta, facts_dir=None):
                 raise ValueError("no usable quarters found")
             rows.extend(new)
             status[t] = {"ok": True, "latest_filing": latest_filing(cf), "quarters": len(new), "through": new[-1]["quarter"]}
+            sh = shares_outstanding(cf)
+            if sh:
+                status[t]["shares"], status[t]["shares_date"] = sh
         except Exception as e:  # noqa: BLE001
             kept = [r for r in old if r.get("ticker") == t]
             rows.extend(kept)
@@ -330,6 +343,13 @@ def update_sec(meta, facts_dir=None):
     for c in carriers:
         pc = {k: c[k] for k in ("ticker", "carrier", "group", "status", "returns_complete", "note")}
         pc["cik"] = str(c["cik"])
+        st = status.get(c["ticker"], {})
+        if st.get("shares"):
+            pc["shares"], pc["shares_date"] = st["shares"], st["shares_date"]
+        else:  # keep the last known count if this run's read failed
+            oc = next((o for o in load(os.path.join(DATA, "carriers.json"), []) if o.get("ticker") == c["ticker"]), {})
+            if oc.get("shares"):
+                pc["shares"], pc["shares_date"] = oc["shares"], oc["shares_date"]
         lf = status.get(c["ticker"], {}).get("latest_filing")
         if lf:
             pc["latest_filing"] = f"{lf['form']} filed {lf['filed']}"
@@ -615,6 +635,13 @@ def main(argv):
         except Exception as e:  # noqa: BLE001
             meta.setdefault("dot", {})["error"] = f"{type(e).__name__}: {e}"[:300]
             print(f"[warn] DOT: {e}", file=sys.stderr)
+    if "--sec-only" not in argv and "--news-only" not in argv and "--no-dot" not in argv:
+        try:
+            import reliability
+            reliability.update_reliability(ROOT, meta, user_agent(), force="--force-dot" in argv or os.environ.get("FORCE_DOT") == "true")
+        except Exception as e:  # noqa: BLE001
+            meta.setdefault("reliability", {})["error"] = f"{type(e).__name__}: {e}"[:300]
+            print(f"[warn] reliability: {e}", file=sys.stderr)
     meta["generated"] = now_iso()
     save(os.path.join(DATA, "meta.json"), meta)
     bad = [t for t, s in meta.get("sec", {}).get("carriers", {}).items() if not s.get("ok")]
