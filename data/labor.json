@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-27T18:14:06Z",
+ "generated": "2026-10-29T14:39:28Z",
  "companies": {
   "DAL": {
    "ticker": "DAL",
@@ -1010,12 +1010,16 @@
     "prose": []
    },
    "tenq": {
-    "accession": "0001670076-26-000087",
-    "filed": "2026-07-29",
-    "url": "https://www.sec.gov/Archives/edgar/data/1670076/000167007626000087/fron-20260630.htm",
+    "accession": "0001670076-26-000103",
+    "filed": "2026-10-28",
+    "url": "https://www.sec.gov/Archives/edgar/data/1670076/000167007626000103/fron-20260930.htm",
     "sentences": [
-     "(d) The Company’s collective bargaining agreement with its aircraft technicians, represented by IBT, was still amendable as of June 30, 2026.",
-     "We are currently in negotiations with the unions which represent our pilots, flight attendants, and aircraft technicians regarding their next labor contracts."
+     "In September 2026, we entered into a collective bargaining contract ratification with the union representing our aircraft technicians.",
+     "Further, we are currently in negotiations with the unions which represent our pilots and flight attendants regarding their next labor contracts.",
+     "For the three months ended September 30, 2026, Adjusted CASM (excluding fuel) also excludes the impact of $136 million in expenses related to the Early Return Agreements and the $6 million expense relating to the collective bargaining contract ratification.",
+     "For the nine months ended September 30, 2026, Adjusted CASM (excluding fuel) also excludes the impact of $345 million in expenses relating to the Early Return Agreements and $6 million in expenses related to aircraft technicians collective bargaining contract ratification.",
+     "The increase was primarily due to higher crew costs and costs related to the collective bargaining contract ratification with our aircraft technicians, as compared to the corresponding prior year period.",
+     "(e) We entered into an agreement with the union representing our aircraft technicians effective September 2026, and as a result incurred a one-time charge of $6 million related to a contract ratification incentive recorded in salaries, wages and benefits within the condensed consolidated statement of operations during the three months ended September 30, 2026."
     ]
    }
   },
@@ -1191,10 +1195,10 @@
    "status": "Ratified",
    "status_source": "union",
    "news": {
-    "title": "Senior United Flight Attendants Land $100 Hr As New Contract Ratified",
-    "date": "2026-05-14",
-    "source": "Open Jaw",
-    "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNVDFxdkpYNEpxMGEtcC03TkVNTU1EOGxzNG1nWFFLU3ZscGdMZHdGaHM2WHlTcTc3M1JFVjdoNUtXM1BRNF90cUJHVEhVejJwcWM3bVBhbExoZlJKNkZsSm9oUlhHUWM3QWhTUWFqVUpfbmo1dXl1eDNoVktka0NzS0RVQzhJMFRzVTBtc0kteDMzenBIOWFqekdjd0JhVjJVVEMzTGhIZG03Tlk2U2g3UkpuenhRaU03?oc=5"
+    "title": "United Airlines' flight attendants ratify deal for 31% wage hike, boarding pay",
+    "date": "2026-05-13",
+    "source": "Reuters",
+    "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNOGcxamduZXpIVHZ3RGRvcmhHV3VGMFhxZWFzVUhkakZqSkoybFpsbmR6aDJ4VGJ1cXBTdG5uLTBvbGpBaE5KLWIxZS1YMzQ1N3ZOMXcxczFOakEyQkhBNHd5RGdDbW1xVU9YMTFqdVctTFhSdFJBSXdIXzAwa0ZkLXAwcmFjODBCSC0yRmo0YW5iakhGa19GTm5SRFRyWC0yS2pFOE5sa2hwSHV3U090X1RKZWZqVVBVLVlJeUMwbU85WFd2bTJ2SFVB?oc=5"
    },
    "status_date": "2026-05-12",
    "filing_quote": "In May 2026, the Company's flight attendants, represented by the Association of Flight Attendants (\"AFA\"), ratified a five-year agreement, effective May 31, 2026, with the Company that included improvements with respect to scheduling, reserve requirements and other quality of life improvements, as well as pay rate increases.",
@@ -1454,6 +1458,15 @@
      "quote": "Fleet Technical Instructors & Related, Maintenance Instructors, Security Officers and Storekeepers ratified their tentative agreements.;"
     },
     {
+     "status": "In negotiations",
+     "date": "2026-06-04",
+     "source": "IAM (international)",
+     "kind": "union",
+     "title": "Apple Under Fire: Congressional Labor Caucus Calls for NLRB Investigation into Tech Giant’s Treatment of Unionized Towson Workers",
+     "url": "https://www.goiam.org/news/apple-under-fire-congressional-labor-caucus-calls-for-nlrb-investigation-into-tech-giants-treatment-of-unionized-towson-workers/",
+     "quote": "“The Towson, Maryland location was the first Apple store in the country to unionize and secure a negotiated collective bargaining agreement with the company,” the letter to NLRB General Counsel Crystal Carey states .;"
+    },
+    {
      "status": "Tentative agreement",
      "date": "2026-05-26",
      "source": "IAM District 141",
@@ -1461,15 +1474,6 @@
      "title": "Storekeeper Employees Tentative Agreement 2026 All Markup",
      "url": "https://iam141.org/wp-content/uploads/2026/05/Storekeeper-Employees-Tentative-Agreement-2026_All-Markup.pdf",
      "quote": "Storekeeper Employees Tentative Agreement 2026 All Markup."
-    },
-    {
-     "status": "Tentative agreement",
-     "date": "2025-12-22",
-     "source": "IAM District 141",
-     "kind": "union",
-     "title": "UA Negotiation Update 23 December 2025",
-     "url": "https://iam141.org/wp-content/uploads/2025/12/UA-Negotiation-Update-23-December-2025.pdf",
-     "quote": "Although no tentative agreements were reached, we had very constructive and positive discussions regarding job preferencing and the triggers for bringing Storekeepers into a station where we are not currently performing work, as outlined in Article One of the agreement.;"
     }
    ],
    "status_date": "2026-08-19",
@@ -1967,8 +1971,35 @@
    "carrier": "American Airlines",
    "open": true,
    "craft": "dispatchers",
-   "status": "Past amendable date",
-   "status_source": "10-K"
+   "status": "Ratified",
+   "status_source": "union",
+   "news": {
+    "title": "American Dispatchers, Operations Specialists Approve New Contract",
+    "date": "2026-10-28",
+    "source": "AirlineGeeks.com",
+    "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNaEZXUXBpZ1ZvOVVuRVNuVjJYUS1QeDJLRnI2X1U2RGsxNHlndHotVFVqWjBqdW9CUnFFc2NYMFRNdUFWQkR3M1hhWWV5Z3Njc2hKS29jRXk4MzlmUk5zaFdxX2NIWXJ6ZWgxaGNrVlhZS1hmQVF5S2lLVGRSOTZsMTRySGE3RENfQy10bFhrR3ljb3kyS1ZwVmdGU1NwRE9ZakxJ?oc=5"
+   },
+   "status_date": "2026-10-27",
+   "union_events": [
+    {
+     "status": "Ratified",
+     "date": "2026-10-27",
+     "source": "American Airlines newsroom",
+     "kind": "union",
+     "title": "American Airlines dispatchers and operations specialists approve new 5-year contract",
+     "url": "https://news.aa.com/news/news-details/2026/American-Airlines-dispatchers-and-operations-specialists-approve-new-five-year-contract-CORP-LAB-10/default.aspx",
+     "quote": "American Airlines dispatchers and operations specialists approve new 5-year contract."
+    }
+   ],
+   "union_event": {
+    "status": "Ratified",
+    "date": "2026-10-27",
+    "source": "American Airlines newsroom",
+    "kind": "union",
+    "title": "American Airlines dispatchers and operations specialists approve new 5-year contract",
+    "url": "https://news.aa.com/news/news-details/2026/American-Airlines-dispatchers-and-operations-specialists-approve-new-five-year-contract-CORP-LAB-10/default.aspx",
+    "quote": "American Airlines dispatchers and operations specialists approve new 5-year contract."
+   }
   },
   {
    "unit": "Mainline",
@@ -2887,13 +2918,33 @@
    "open": true,
    "craft": "pilots",
    "status": "Picketing",
-   "status_source": "news",
+   "status_source": "union",
    "status_date": "2026-10-15",
    "news": {
     "title": "Teamsters Pilots at Horizon Air Hold Informational Pickets",
     "date": "2026-10-15",
     "source": "International Brotherhood of Teamsters",
     "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQSW1rdl95SXJMSGdueWF5UjJPb3JwZDhYd2FHcDVEQ2JoQUluLV9ndlpDUEswNG9YUWE2TWd3b0w1UHNJcDdOX2NfVjBpVVFtalJwdUtXTGN3ZHNvV2xqNkpBZVFhVjZGejhnYnpxQU9rYlFTZVJyT1BjNWt1ZW9Db2J2U2tTdE9SSjBwdjhtUjhoZw?oc=5"
+   },
+   "union_events": [
+    {
+     "status": "Picketing",
+     "date": "2026-10-15",
+     "source": "Teamsters",
+     "kind": "union",
+     "title": "Teamsters Pilots at Horizon Air Hold Informational Pickets",
+     "url": "https://teamster.org/2026/10/teamsters-pilots-at-horizon-air-hold-informational-pickets/",
+     "quote": "Teamsters Pilots at Horizon Air Hold Informational Pickets."
+    }
+   ],
+   "union_event": {
+    "status": "Picketing",
+    "date": "2026-10-15",
+    "source": "Teamsters",
+    "kind": "union",
+    "title": "Teamsters Pilots at Horizon Air Hold Informational Pickets",
+    "url": "https://teamster.org/2026/10/teamsters-pilots-at-horizon-air-hold-informational-pickets/",
+    "quote": "Teamsters Pilots at Horizon Air Hold Informational Pickets."
    }
   },
   {
@@ -3109,7 +3160,7 @@
     "title": "Frontier Airlines flight attendants picket just weeks before holiday travel season",
     "date": "2026-10-26",
     "source": "6abc Philadelphia",
-    "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPQVlMc0R2SXk0LXRjT2F6TUE2RlVMbFZfbkYtODZEbHRRRENHY2FXWXVXeDdXN2NfdU0xLXFSWEZGRjZscFYyT3FmVHZoUkFya1lVajNEdmMzRnUtVnNYb0NxRjR3NF9EdXJpbHZwYzhYYjZ5WlJiT2loTFpvLWJ6SnY2eXdfVG5TbkpCdzlsUEZQWmZMLUVMR3I5elR0YXVEVE1ac2pBZnEwR3laZ3fSAbMBQVVfeXFMTVlNSmR4bDFsMGRyTUtmeHpTTEMwS3oxbnZ6dzdudC1lUHBMVV9GT0ZBZnpMdGI5UEJPM2d4d3U1WEV2bTRqUUw3ZG5NMEpJeXBHS1R1OHJYdk1NMnpBVUl2cVlORDdpdkVSVm9QNEtENlhMVTQ2NzdVVmtUZWRHdDNXc3djZHpFb1dsVnlLZEttWlJJcldrVW5uM19Jb2tjS3NvLW8zUlRydlpOSS1FdlFjUkU?oc=5"
+    "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNWU1KZHhsMWwwZHJNS2Z4elNMQzBLejFudnp3N250LWVQcExVX0ZPRkFmekx0YjlQQk8zZ3h3dTVYRXZtNGpRTDdkbk0wSkl5cEdLVHU4clh2TU0yekFVSXZxWU5EN2l2RVJWb1A0S0Q2WExVNDY3N1VWa1RlZEd0M1dzd2NkekVvV2xWeUtkS21aUklyV2tVbm4zX0lva2NLc28tbzNSVHJ2Wk5JLUV2UWNSRdIBswFBVV95cUxNWU1KZHhsMWwwZHJNS2Z4elNMQzBLejFudnp3N250LWVQcExVX0ZPRkFmekx0YjlQQk8zZ3h3dTVYRXZtNGpRTDdkbk0wSkl5cEdLVHU4clh2TU0yekFVSXZxWU5EN2l2RVJWb1A0S0Q2WExVNDY3N1VWa1RlZEd0M1dzd2NkekVvV2xWeUtkS21aUklyV2tVbm4zX0lva2NLc28tbzNSVHJ2Wk5JLUV2UWNSRQ?oc=5"
    },
    "union_events": [
     {
@@ -3173,9 +3224,11 @@
    "carrier": "Frontier Airlines",
    "open": true,
    "craft": "mechanics",
-   "status": "In negotiations",
-   "status_source": "10-K",
-   "status_date": "2026-02-18"
+   "status": "Ratified",
+   "status_source": "10-Q",
+   "status_date": "2026-09",
+   "filing_quote": "In September 2026, we entered into a collective bargaining contract ratification with the union representing our aircraft technicians.",
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/1670076/000167007626000103/fron-20260930.htm"
   },
   {
    "unit": null,

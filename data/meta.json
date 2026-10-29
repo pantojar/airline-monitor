@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-29T14:26:47Z",
+  "at": "2026-10-29T14:29:17Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -113,9 +113,9 @@
    }
   }
  },
- "generated": "2026-10-29T14:27:10Z",
+ "generated": "2026-10-29T14:39:28Z",
  "news": {
-  "at": "2026-10-29T14:27:10Z",
+  "at": "2026-10-29T14:29:39Z",
   "items": 80,
   "errors": []
  },
@@ -133,7 +133,7 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-29T14:27:10Z",
+  "at": "2026-10-29T14:29:40Z",
   "latest": "2026-10-27",
   "rows": 1202,
   "diesel_close": "2026-10-28",
@@ -146,6 +146,7 @@
   "errors": []
  },
  "labor": {
+  "at": "2026-10-29T14:39:28Z",
   "groups": 96,
   "errors": [],
   "union_sites": [
@@ -238,7 +239,7 @@
     "url": "https://www.twu.org",
     "groups": 27,
     "method": "wp-posts,wp-media",
-    "items": 104,
+    "items": 103,
     "pdfs_read": 0
    },
    {
@@ -274,11 +275,125 @@
     "method": "html list",
     "items": 20,
     "pdfs_read": 0
+   },
+   {
+    "name": "American Airlines newsroom",
+    "url": "https://news.aa.com",
+    "groups": 32,
+    "method": "press releases",
+    "items": 100,
+    "pdfs_read": 2
+   },
+   {
+    "name": "Envoy Air news",
+    "url": "https://www.envoyair.com",
+    "groups": 9,
+    "error": "posts: HTTP 403; /feed/: HTTP 403; /rss: HTTP 403; /rss.xml: HTTP 403; /feed: HTTP 403",
+    "method": null,
+    "items": 0,
+    "pdfs_read": 0
+   },
+   {
+    "name": "Piedmont Airlines news",
+    "url": "https://www.piedmont-airlines.com",
+    "groups": 6,
+    "method": "wp-posts",
+    "items": 29,
+    "pdfs_read": 0
+   },
+   {
+    "name": "PSA Airlines news",
+    "url": "https://www.psaairlines.com",
+    "groups": 6,
+    "error": "/feed/: HTTP 403",
+    "method": null,
+    "items": 0,
+    "pdfs_read": 0
+   },
+   {
+    "name": "Delta News Hub",
+    "url": "https://news.delta.com",
+    "groups": 4,
+    "method": "rss /rss.xml",
+    "items": 10,
+    "pdfs_read": 0
+   },
+   {
+    "name": "Delta investor news",
+    "url": "https://ir.delta.com",
+    "groups": 4,
+    "method": "press releases",
+    "items": 18,
+    "pdfs_read": 0
+   },
+   {
+    "name": "United newsroom",
+    "url": "https://united.mediaroom.com",
+    "groups": 14,
+    "method": "rss /news-releases?pagetemplate=rss",
+    "items": 10,
+    "pdfs_read": 0
+   },
+   {
+    "name": "Southwest investor news",
+    "url": "https://investors.southwest.com",
+    "groups": 12,
+    "method": "rss /news-events/press-releases/rss",
+    "items": 10,
+    "pdfs_read": 0
+   },
+   {
+    "name": "Alaska Air Group News Hub",
+    "url": "https://news.alaskaair.com",
+    "groups": 16,
+    "method": "wp-posts",
+    "items": 192,
+    "pdfs_read": 0
+   },
+   {
+    "name": "JetBlue newsroom",
+    "url": "https://news.jetblue.com",
+    "groups": 3,
+    "method": "press releases",
+    "items": 78,
+    "pdfs_read": 0
+   },
+   {
+    "name": "Frontier newsroom",
+    "url": "https://news.flyfrontier.com",
+    "groups": 7,
+    "method": "rss /feed/",
+    "items": 25,
+    "pdfs_read": 0
+   },
+   {
+    "name": "Frontier investor news",
+    "url": "https://ir.flyfrontier.com",
+    "groups": 7,
+    "method": "press releases",
+    "items": 13,
+    "pdfs_read": 0
+   },
+   {
+    "name": "Allegiant newsroom",
+    "url": "https://newsroom.allegiantair.com",
+    "groups": 4,
+    "method": "press releases",
+    "items": 44,
+    "pdfs_read": 0
+   },
+   {
+    "name": "Republic Airways news",
+    "url": "https://rjet.com",
+    "groups": 3,
+    "method": "wp-posts",
+    "items": 14,
+    "pdfs_read": 0
    }
   ]
  },
  "cpi": {
-  "at": "2026-10-29T14:27:10Z",
+  "at": "2026-10-29T14:29:40Z",
   "cpiw": "2026-09",
   "cpiu": "2026-09"
  }
