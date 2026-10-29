@@ -780,7 +780,7 @@ dash.calc('peer', {
         ret_lq, ret_ttm,
         rl_lq: dv(ret_lq, lqq ? num(lq.labor) : null), rl_ttm: dv(ret_ttm, labor_ttm),
         ni_lq: lqq ? num(lq.ni) : null, ni_ttm: ttm('ni'),
-        capex_lq: lqq ? num(lq.capex) : null, capex_ttm: ttmOk && t4.every((r) => num(r.capex) !== null) ? sum(t4, 'capex') : null,
+        capex_lq: lqq ? num(lq.capex) : null, capex_ttm: lqq && num(lq.capex_ttm) !== null ? num(lq.capex_ttm) : ttmOk && t4.every((r) => num(r.capex) !== null) ? sum(t4, 'capex') : null,
         liquidity: withCash ? num(withCash.cash) + (num(withCash.sti) || 0) : null,
         debt: withDebt ? num(withDebt.debt) : null,
         // net debt from one balance sheet: debt less cash and short-term investments at the same quarter end

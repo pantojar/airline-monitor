@@ -44,7 +44,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG = os.path.join(ROOT, "config")
 DATA = os.path.join(ROOT, "data")
 
-FIELDS = ["rev", "opex", "labor", "fuel", "opinc", "ni", "buyback", "div", "cash", "sti", "debt", "oplease", "da", "rent", "capex", "due12"]
+FIELDS = ["rev", "opex", "labor", "fuel", "opinc", "ni", "buyback", "div", "cash", "sti", "debt", "oplease", "da", "rent", "capex", "due12", "capex_ttm"]
 FLOW_FIELDS = ["rev", "opex", "labor", "fuel", "opinc", "ni", "buyback", "div", "da", "rent", "capex"]
 FIRST_QUARTER = "2023-03"
 
@@ -212,12 +212,32 @@ def extract(cf, QE):
     }
     # capital spending: flight equipment plus other property where the filer splits them (Delta, Alaska,
     # SkyWest), otherwise the single total line
+    OTHER = ["PaymentsToAcquireOtherPropertyPlantAndEquipment", "PaymentsToAcquireOtherProductiveAssets", "PaymentsToAcquirePropertyPlantAndEquipment"]
+    TOTAL = ["PaymentsToAcquireProductiveAssets", "PaymentsToAcquirePropertyPlantAndEquipment"]
     fe = flow_q(cf, "PaymentsForFlightEquipment", QE)
-    other = pick(cf, ["PaymentsToAcquireOtherProductiveAssets", "PaymentsToAcquireOtherPropertyPlantAndEquipment", "PaymentsToAcquirePropertyPlantAndEquipment"], flow_q, QE)
-    total = pick(cf, ["PaymentsToAcquireProductiveAssets", "PaymentsToAcquirePropertyPlantAndEquipment"], flow_q, QE)
+    other = pick(cf, OTHER, flow_q, QE)
+    total = pick(cf, TOTAL, flow_q, QE)
     out["capex"] = {k: fe[k] + other.get(k, 0) for k in fe}
     for k, v in total.items():
         out["capex"].setdefault(k, v)
+    # trailing 12 months straight from year-to-date figures: works even when a filer skips a quarter's tag
+    # (Alaska's Q3 2025 10-Q), since TTM = this year-to-date + last full year - last year's same year-to-date
+    def ttm_ytd(concepts):
+        res = {}
+        for E in QE:
+            for c in concepts:
+                y = {f["end"]: f["val"] for f in facts(cf, c) if f.get("start") and f["start"][5:] == "01-01" and f["start"][:4] == f["end"][:4]}
+                prev = str(int(E[:4]) - 1)
+                if E[5:] == "12-31" and E in y:
+                    res[E] = y[E]; break
+                pe = prev + E[4:]
+                if E in y and prev + "-12-31" in y and pe in y:
+                    res[E] = y[E] + y[prev + "-12-31"] - y[pe]; break
+        return res
+    fe12, oth12, tot12 = ttm_ytd(["PaymentsForFlightEquipment"]), ttm_ytd(OTHER), ttm_ytd(TOTAL)
+    out["capex_ttm"] = {k: fe12[k] + oth12.get(k, 0) for k in fe12}
+    for k, v in tot12.items():
+        out["capex_ttm"].setdefault(k, v)
     # debt and leases due within 12 months (current portions on the balance sheet)
     cur_debt = pick(cf, ["LongTermDebtAndCapitalLeaseObligationsCurrent"], inst_q, QE)
     for k, v in inst_q(cf, "LongTermDebtCurrent", QE).items():
