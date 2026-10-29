@@ -2255,7 +2255,7 @@ dash.calc('dotpeer', {
     const asof = liveAt ? 'Prices as of ' + new Date(liveAt).toLocaleString('en-US', { timeZone: 'America/New_York', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) + ' ET (latest IEX trade)'
       : 'Closing prices, ' + dfmt(latest);
     stamp('mk-card', liveAt ? 'Intraday' : 'Close ' + dfmt(latest));
-    const shd = d3.max(list, (r) => r.sharesDate);
+    const today = new Date().toISOString().slice(0, 10), shd = d3.max(list, (r) => (r.sharesDate && r.sharesDate <= today ? r.sharesDate : null));
     document.getElementById('mk-note').textContent = asof + '. Total return runs from the close on ' + dfmt(mkBase((T.SPY || Object.values(T)[0]).eod, start)[0]) + '. Market cap uses shares outstanding from the latest SEC filing' + (shd ? ' (as of ' + dfmt(shd) + ' or earlier)' : '') + '; financial measures are the trailing 12 months from the Peer Comparison tab.' + (lateOnes.length ? ' † Return from first trading day: ' + lateOnes.join(', ') + '.' : '') + ' Click a header to sort.';
     // chart
     const choices = Object.entries(T).map(([t, h]) => ({ code: t, label: t, title: h.name }));
