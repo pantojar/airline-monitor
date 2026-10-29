@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-29T17:23:27Z",
+  "at": "2026-10-29T17:26:47Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -113,9 +113,9 @@
    }
   }
  },
- "generated": "2026-10-29T17:25:15Z",
+ "generated": "2026-10-29T17:27:23Z",
  "news": {
-  "at": "2026-10-29T17:25:13Z",
+  "at": "2026-10-29T17:27:23Z",
   "items": 105,
   "errors": [
    "Envoy Air news: unavailable",
@@ -137,7 +137,7 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-29T17:25:13Z",
+  "at": "2026-10-29T17:27:23Z",
   "latest": "2026-10-27",
   "rows": 1202,
   "diesel_close": "2026-10-28",
@@ -397,44 +397,44 @@
   ]
  },
  "cpi": {
-  "at": "2026-10-29T17:25:14Z",
+  "at": "2026-10-29T17:27:23Z",
   "cpiw": "2026-09",
   "cpiu": "2026-09"
  },
  "revsplit": {
-  "at": "2026-10-29T17:24:39Z",
+  "at": "2026-10-29T17:26:48Z",
   "carriers": {
    "DAL": {
     "quarters": 19,
-    "new_filings": 15
+    "new_filings": 0
    },
    "UAL": {
     "quarters": 19,
-    "new_filings": 15
+    "new_filings": 0
    },
    "AAL": {
     "quarters": 19,
-    "new_filings": 15
+    "new_filings": 0
    },
    "LUV": {
     "quarters": 19,
-    "new_filings": 15
+    "new_filings": 0
    },
    "ALK": {
     "quarters": 18,
-    "new_filings": 14
+    "new_filings": 0
    },
    "JBLU": {
     "quarters": 19,
-    "new_filings": 15
+    "new_filings": 0
    },
    "ULCC": {
     "quarters": 19,
-    "new_filings": 15
+    "new_filings": 0
    },
    "ALGT": {
     "quarters": 18,
-    "new_filings": 14
+    "new_filings": 0
    }
   }
  }
