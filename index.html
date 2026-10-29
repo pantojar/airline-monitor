@@ -46,7 +46,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
 <script src="vendor/d3.min.js"></script>
 <script>
 window.dash = (function () {
-  var DEFAULTS = { group: 'All', basis: 'lq', dbasis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', pgroup: 'All', lcarrier: 'All', lopen: false, cpiidx: 'cpiw', cpispan: '12m', cpifrom: null, cpito: null, h2h: 'DAL,UAL' };
+  var DEFAULTS = { group: 'All', basis: 'lq', dbasis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', pgroup: 'All', lcarrier: 'All', lopen: false, cpiidx: 'cpiw', cpispan: '12m', cpifrom: null, cpito: null, h2h: 'DAL,UAL', lcasmreg: false };
   var params = Object.assign({}, DEFAULTS), calcs = {}, order = [], res = null, fns = [];
   var DATA = null, state = 'loading';
   function compute() {
@@ -528,7 +528,8 @@ window.dash = (function () {
     <div class="am-grid2">
       <div class="am-card" id="lcasm-card">
         <h2>Labor cost per available seat mile</h2>
-        <p class="am-note">Salaries &amp; benefits ÷ ASMs, in cents. Regionals flying under capacity-purchase agreements are paid per block hour or departure; their seat-mile costs are not directly comparable to mainline carriers.</p>
+        <p class="am-note">Salaries &amp; benefits ÷ ASMs, in cents. Regional airlines are left out by default: they fly under contracts that pay them per block hour or departure, and their short flights on small planes give them far higher costs per seat mile, so they aren't comparable to mainline carriers.</p>
+        <div class="am-bar"><label class="am-chk"><input type="checkbox" id="lcasm-reg"> Include regional airlines</label></div>
         <div class="am-wrap am-chart" id="lcasm-chart" data-source="dotpeer"></div>
       </div>
       <div class="am-card" id="salmix-card">
@@ -1100,6 +1101,7 @@ dash.calc('dotpeer', {
     }
   });
   document.getElementById('to-dot').addEventListener('click', () => showTab('opcarriers', true));
+  document.getElementById('lcasm-reg').addEventListener('change', (e) => dash.setParams({ lcasmreg: e.target.checked }));
   function visibleDot(rows, P) {
     return rows.filter((r) => r.latest && (P.dinactive === true || r.current) && (!P.dgroup || P.dgroup === 'All' || r.group === P.dgroup));
   }
@@ -1964,7 +1966,8 @@ dash.calc('dotpeer', {
         }));
         const dl = d3.max(dpeer.data, (r) => r.latest);
         document.getElementById('dot-note').textContent = 'DOT Form 41 reports through ' + ql(dl) + ', one row per airline certificate, so wholly owned regionals such as Envoy, PSA, Piedmont, Endeavor and Horizon appear on their own. $ millions. Salaries & benefits use the same definition as the SEC labor line. Per-FTE figures are annual. A regional\'s revenue is set by its contract with its mainline partner, so compare regionals on costs rather than margins. American, Delta, United and Alaska book revenue and contract costs for flights their regional partners operate, but those seat miles count on the regional\'s report, so their per-seat-mile figures run above what the airlines publish (marked †). Click a row to highlight that carrier in the trend chart.';
-        hbar(document.getElementById('lcasm-chart'), rows, (r) => r[k('lcasm')], (v) => d3.format('.2f')(v) + '¢',
+        document.getElementById('lcasm-reg').checked = P.lcasmreg === true;
+        hbar(document.getElementById('lcasm-chart'), P.lcasmreg === true ? rows : rows.filter((r) => r.role === 'Mainline'), (r) => r[k('lcasm')], (v) => d3.format('.2f')(v) + '¢',
           (r) => [{ name: 'Labor ¢ per ASM', value: fmtC(r[k('lcasm')]) + '¢' }, { name: 'CASM ex fuel', value: fmtC(r[k('casmx')]) + '¢' }, { name: 'Labor cost per FTE', value: fmtK(r[k('comp_fte')]) }]);
         document.getElementById('salmix-legend').replaceChildren(...SALG.map(([, n], i) => { const s = document.createElement('span'); const w = document.createElement('i'); w.className = 'am-sw'; w.style.background = dash.colors[i]; s.append(w, document.createTextNode(n)); return s; }));
         salmix(document.getElementById('salmix-chart'), rows, basis);
