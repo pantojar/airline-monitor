@@ -413,7 +413,7 @@ def update_labor(root, meta, ua, carriers, force=False):
         # companies that describe contracts in prose: one row per craft the prose mentions, status from news only
         prose = (rec.get("tenk") or {}).get("prose") or []
         if prose and not (rec.get("tenk") or {}).get("groups"):
-            manual_rows = {m["craft"]: m for m in manual if m["ticker"] == t}
+            manual_rows = {m["craft"]: m for m in manual if m["ticker"] == t and not m.get("add") and not m.get("override")}
             carrier = aliases.get(t, {"name": t})
             text = " ".join(prose)
             for craft, craft_rx, craft_q in CRAFTS:
