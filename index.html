@@ -591,7 +591,7 @@ window.dash = (function () {
             <th class="am-hn"><button data-rsort="div">Diverted</button></th>
             <th><button data-rsort="cc">Airline-caused cancellations</button></th>
             <th><button data-rsort="avg">Avg. delay (min)</button></th>
-            <th class="l am-hn">Delay minutes by cause</th>
+            <th class="l am-hn" data-csvcols="Delay share: Airline|Delay share: Late-arriving aircraft|Delay share: Air traffic system|Delay share: Weather|Delay share: Security|Delay minutes: Airline|Delay minutes: Late-arriving aircraft|Delay minutes: Air traffic system|Delay minutes: Weather|Delay minutes: Security">Delay minutes by cause</th>
           </tr></thead>
           <tbody></tbody>
         </table>
@@ -1805,8 +1805,8 @@ dash.calc('dotpeer', {
     const row = document.createElement('div'); row.className = 'am-csvrow';
     const b = document.createElement('button'); b.className = 'am-csv'; b.type = 'button'; b.textContent = 'Download CSV';
     b.addEventListener('click', () => {
-      const head = [...tbl.querySelectorAll('thead tr:last-child th')].map((th) => csvCell(th.textContent));
-      const body = [...tbl.querySelectorAll('tbody tr')].map((tr) => [...tr.children].map((td) => (td.dataset.v !== undefined ? td.dataset.v : csvCell(td.innerText || td.textContent))).join(','));
+      const head = [...tbl.querySelectorAll('thead tr:last-child th')].flatMap((th) => (th.dataset.csvcols ? th.dataset.csvcols.split('|').map(csvCell) : [csvCell(th.textContent)]));
+      const body = [...tbl.querySelectorAll('tbody tr')].map((tr) => [...tr.children].flatMap((td) => (td.dataset.csv !== undefined ? JSON.parse(td.dataset.csv).map((v) => (v === null ? '' : String(v))) : [td.dataset.v !== undefined ? td.dataset.v : csvCell(td.innerText || td.textContent)])).join(','));
       const title = (card && card.querySelector('h2') ? card.querySelector('h2').childNodes[0].textContent : tbl.id).trim();
       const blob = new Blob(['﻿' + [head.join(','), ...body].join('\r\n')], { type: 'text/csv;charset=utf-8' });
       const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
@@ -2154,6 +2154,7 @@ dash.calc('dotpeer', {
       const on = td(pct(s.ontime_r)); if (s.ontime_r === best.ontime) on.style.fontWeight = '800';
       const ca = td(pct(s.canc_r)); if (s.canc_r === best.canc) ca.style.fontWeight = '800';
       const bar = document.createElement('td'); bar.className = 'l am-hn';
+      bar.dataset.csv = JSON.stringify([...CAUSES.map(([c]) => (s.causeTot > 0 ? (100 * s[c] / s.causeTot).toFixed(1) + '%' : null)), ...CAUSES.map(([c]) => Math.round(s[c]))]);
       if (s.causeTot > 0) {
         const wrap = document.createElement('div'); wrap.style.cssText = 'display:flex;width:120px;height:12px;border-radius:2px;overflow:hidden';
         wrap.title = CAUSES.map(([c, n]) => n + ' ' + d3.format('.0%')(s[c] / s.causeTot)).join(' · ');
