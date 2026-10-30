@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-29T17:21:21Z",
+ "generated": "2026-10-30T16:03:21Z",
  "companies": {
   "DAL": {
    "ticker": "DAL",
@@ -1144,7 +1144,7 @@
    "craft": "dispatchers",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": "Endeavor",
@@ -1162,7 +1162,7 @@
    "craft": "pilots",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": "Endeavor",
@@ -1199,10 +1199,10 @@
    "status": "Ratified",
    "status_source": "union",
    "news": {
-    "title": "Senior United Flight Attendants Land $100 Hr As New Contract Ratified",
-    "date": "2026-05-14",
-    "source": "Open Jaw",
-    "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNVDFxdkpYNEpxMGEtcC03TkVNTU1EOGxzNG1nWFFLU3ZscGdMZHdGaHM2WHlTcTc3M1JFVjdoNUtXM1BRNF90cUJHVEhVejJwcWM3bVBhbExoZlJKNkZsSm9oUlhHUWM3QWhTUWFqVUpfbmo1dXl1eDNoVktka0NzS0RVQzhJMFRzVTBtc0kteDMzenBIOWFqekdjd0JhVjJVVEMzTGhIZG03Tlk2U2g3UkpuenhRaU03?oc=5"
+    "title": "United Airlines' flight attendants ratify deal for 31% wage hike, boarding pay",
+    "date": "2026-05-13",
+    "source": "Reuters",
+    "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNOGcxamduZXpIVHZ3RGRvcmhHV3VGMFhxZWFzVUhkakZqSkoybFpsbmR6aDJ4VGJ1cXBTdG5uLTBvbGpBaE5KLWIxZS1YMzQ1N3ZOMXcxczFOakEyQkhBNHd5RGdDbW1xVU9YMTFqdVctTFhSdFJBSXdIXzAwa0ZkLXAwcmFjODBCSC0yRmo0YW5iakhGa19GTm5SRFRyWC0yS2pFOE5sa2hwSHV3U090X1RKZWZqVVBVLVlJeUMwbU85WFd2bTJ2SFVB?oc=5"
    },
    "status_date": "2026-05-12",
    "filing_quote": "In May 2026, the Company's flight attendants, represented by the Association of Flight Attendants (\"AFA\"), ratified a five-year agreement, effective May 31, 2026, with the Company that included improvements with respect to scheduling, reserve requirements and other quality of life improvements, as well as pay rate increases.",
@@ -1597,7 +1597,7 @@
    "craft": null,
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1856,7 +1856,7 @@
    "craft": "flight attendants",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": "Mainline",
@@ -1874,7 +1874,7 @@
    "craft": "passenger service",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": "Mainline",
@@ -1946,7 +1946,7 @@
    "craft": null,
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": "Mainline",
@@ -2045,7 +2045,7 @@
    "craft": null,
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": "Envoy",
@@ -2063,7 +2063,7 @@
    "craft": "pilots",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": "Envoy",
@@ -2169,16 +2169,9 @@
    "carrier": "Envoy Air",
    "open": false,
    "craft": "fleet service",
-   "status": "In negotiations",
-   "status_source": "news",
-   "news": {
-    "title": "Trump envoy salutes ‘humanitari­an’ Putin as talks to win peace ramp up",
-    "date": "2026-10-22",
-    "source": "PressReader",
-    "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE05WklRcm1RQTVlUk9nMW1QWndNZUs0VG9hVGVMWU5nVm1JTVVfMVJqVDhHSDMxNU1jRW5ueFFaam9yRHN2QVpoOC1IUEZ0VlJBbGJ1SHNhOVBQa2E1MV9Rdmo5c1hLd0NsWEJaOElJT0RGZw?oc=5"
-   },
-   "status_date": "2026-10-22",
-   "status_changed": "2026-10-22"
+   "status": "Amendable within a year",
+   "status_source": "10-K",
+   "status_changed": "2025-01-01"
   },
   {
    "unit": "Envoy",
@@ -2232,7 +2225,7 @@
    "craft": "pilots",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": "Piedmont",
@@ -2322,7 +2315,7 @@
    "craft": "dispatchers",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": "PSA",
@@ -2340,7 +2333,7 @@
    "craft": "pilots",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": "PSA",
@@ -2514,7 +2507,7 @@
    "craft": null,
    "status": "Not stated",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": "PSA",
@@ -2550,7 +2543,7 @@
    "craft": "pilots",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": null,
@@ -2568,7 +2561,7 @@
    "craft": "flight attendants",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": null,
@@ -2604,7 +2597,7 @@
    "craft": "fleet service",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": null,
@@ -2622,7 +2615,7 @@
    "craft": "mechanics",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": null,
@@ -2733,7 +2726,7 @@
    "craft": "mechanics",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": null,
@@ -2751,7 +2744,7 @@
    "craft": "passenger service",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": null,
@@ -2769,7 +2762,7 @@
    "craft": null,
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": "Alaska",
@@ -2866,7 +2859,7 @@
    "craft": "mechanics",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": "Alaska",
@@ -2920,7 +2913,7 @@
    "craft": "flight attendants",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": "Hawaiian",
@@ -3109,7 +3102,7 @@
    "craft": "mechanics",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": "Horizon",
@@ -3128,7 +3121,7 @@
    "status": "In mediation",
    "status_source": "10-K",
    "status_date": "2026-02-12",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": "McGee Air Services",
@@ -3146,7 +3139,7 @@
    "craft": "fleet service",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": null,
@@ -3182,7 +3175,7 @@
    "craft": "pilots",
    "status": "Not stated",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": null,
@@ -3219,7 +3212,7 @@
    "status": "In mediation",
    "status_source": "10-K",
    "status_date": "2026-02-18",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": null,
@@ -3330,7 +3323,7 @@
    "craft": "passenger service",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": null,
@@ -3348,7 +3341,7 @@
    "craft": "dispatchers",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": null,
@@ -3366,7 +3359,7 @@
    "craft": null,
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "unit": null,
@@ -3384,7 +3377,7 @@
    "craft": null,
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "ticker": "ALGT",
@@ -3424,7 +3417,7 @@
    "status_source": "10-K",
    "prose": false,
    "manual": true,
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "ticker": "ALGT",
@@ -3443,7 +3436,7 @@
    "status_source": "10-K",
    "prose": false,
    "manual": true,
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "ticker": "ALGT",
@@ -3480,7 +3473,7 @@
    "status": "See 10-K text",
    "status_source": "10-K",
    "prose": true,
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "ticker": "RJET",
@@ -3498,7 +3491,7 @@
    "status": "See 10-K text",
    "status_source": "10-K",
    "prose": true,
-   "status_changed": null
+   "status_changed": "2026-10-30"
   },
   {
    "ticker": "RJET",
@@ -3542,7 +3535,7 @@
    "status": "See 10-K text",
    "status_source": "10-K",
    "prose": true,
-   "status_changed": null
+   "status_changed": "2026-10-30"
   }
  ]
 }
