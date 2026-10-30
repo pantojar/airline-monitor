@@ -127,9 +127,9 @@
   "returns_complete": false,
   "note": "Revenue tag includes assessed taxes. Share repurchases after Q1 2024 are not in the cash-flow data SEC publishes, so shareholder returns show as unavailable.",
   "cik": "793733",
-  "shares": 38828325,
-  "shares_date": "2026-07-17",
-  "latest_filing": "10-Q filed 2026-07-24"
+  "shares": 38034157,
+  "shares_date": "2026-10-23",
+  "latest_filing": "10-Q filed 2026-10-30"
  },
  {
   "ticker": "RJET",
@@ -139,8 +139,8 @@
   "returns_complete": true,
   "note": "Republic–Mesa merger closed Nov 2025. Pre-merger Mesa history excluded; 2025 Q1–Q2 are Republic comparatives.",
   "cik": "810332",
-  "shares": 46819500,
-  "shares_date": "2026-07-29",
-  "latest_filing": "10-Q filed 2026-07-31"
+  "shares": 46750317,
+  "shares_date": "2026-10-29",
+  "latest_filing": "10-Q filed 2026-10-30"
  }
 ]

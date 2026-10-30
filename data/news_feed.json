@@ -10,6 +10,26 @@
   "id": "f1"
  },
  {
+  "date": "2026-10-30",
+  "tags": "ULCC",
+  "kind": "Earnings",
+  "headline": "Frontier Airlines posts surprise profit after prices increase, rivals pull back",
+  "summary": "",
+  "source": "FOX 10 Phoenix",
+  "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNVExNZ3V0MF9CUEZKNmFrSEJ5MDA2ZDhiVVoteW01Q2V5cGRjN29rcnFXQlpuYUtNY3R0OVZ6TzdTTkFJMUJ2MWc4d3M3R3VpcWZYOXZ1U2dHUkk0bWpEbnY5anU0MEhDUlRpSTJaaHdoYktaLTE5X0dOcDlNTC1paW9qWmNaMjdSb0pQRFhTc24wak5pM045S0NkeUt0dnRJU1E?oc=5",
+  "id": "f2"
+ },
+ {
+  "date": "2026-10-30",
+  "tags": "ULCC",
+  "kind": "Labor",
+  "headline": "AFA Frontier Flight Attendants Say Claws Out, Contract Now",
+  "summary": "",
+  "source": "Association of Flight Attendants-CWA",
+  "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNM0tLRmlGU1ZMNUU0Qkd0NmlqNWxJcDl4UDluTi1qLWN4b2U0MFpzLThsaXpkMlNnRjE4SEhYbmxPMGRlekhleDMyRGdZZUNlYWZTZ3RtTHNtbVMxaXc5UlAzb1hiaEZXUVVkRnBtV0hKS1BZd0w4ajhnV2xoRDRoMWxudw?oc=5",
+  "id": "f3"
+ },
+ {
   "date": "2026-10-29",
   "tags": "UAL",
   "kind": "Headline",
@@ -17,7 +37,7 @@
   "summary": "",
   "source": "NJ.com",
   "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOdFd1enRTemJuQkZZZFhESk13Q2VvcjlncW9hOWtnN0c2ZkNxVjBhUnhSOG5ObFlMWDdfZG1HZWZwamFpQy1pUUYxMjJTdl9vRUNrZGpKaGFpay1zQ2NzaFl5WmpsMDhXcFZfYzRvRUxydGhsQmxHM2V6N0VwVURwazgyekNEdlVFbFhfVGZ6cGJ0SDJhekFETFBFWlp2bFhieG5B0gG3AUFVX3lxTE9VYnR2NlJvZVJ3bUJNakdjYnNqV0lwT29FbEluQzUyYTNUNXo3NkpCRDVHZnlmSHJuSUR1V2tGTnBwcXBqMk56OGZBaVQxT2hiZzljcHRCX2ZtTzYxYXc1aS1rTG8xRFZSb3dBZlFxM1V0QmNDaWNzZXRzUnY5TlowR3JtYWZoY25EaUFPTndzRHY5Rk1tM244WDZjazBjendFUzd4SUx5aTlkdHZxNFQ4bHJRX3U0cw?oc=5",
-  "id": "f2"
+  "id": "f4"
  },
  {
   "date": "2026-10-29",
@@ -27,7 +47,7 @@
   "summary": "",
   "source": "CBS News",
   "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOYWpOdGZiZjFNZWMtcWJURGZvdG43c1pfbzc1TDV4aVlPNktIWHBES3BjSzZqejY1SHl1QjdvNzZkZGJtaXNydVZ0Uk5tM3RQR25rRFJBdGJnV2RJcmlETGtBWVhtVEtQNTZFQUo3U29hcWVSbXZUX0ZwVVNrNkV5ZE5hakpSY2ZOUHhMeWNpbDRHdkEwOGRN?oc=5",
-  "id": "f3"
+  "id": "f5"
  },
  {
   "date": "2026-10-29",
@@ -37,7 +57,7 @@
   "summary": "",
   "source": "Allegiant Stadium",
   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNMmVVaXZTVzk5RUoyRUR4YW42SWRzQ1BDWmxEYmI5UDZQN3ZLdGlDYlMxMXpGYVRBbkgwS2g2NW9sYUt4OEVaWHhGVWRzeFpLSW1wYlUxaldmb2hwekZqX3JvTDF2NUpjZnF5NHNGTGdsZU14R0tnVjZEWmhFdkdBM0ZFUGdYUW1DMW9NYlQ3NmJJcWRKcUhQUXZsS0czMm5SSGdTOEtPaW5JT2tSU2FNMG5zUjZsQQ?oc=5",
-  "id": "f4"
+  "id": "f6"
  },
  {
   "date": "2026-10-29",
@@ -47,7 +67,7 @@
   "summary": "",
   "source": "Star Tribune",
   "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQTHBWWmc3R3BMUWs3U09FWGV6VmUtQTQ2NVJ6ZzZCb2l1LWlmekw0eW51WFU3LVRuTUZLUVVScGRKbnl2WFgzUE9MZlZ2eWNSQVRKa29FZG41UnFfaGhQX2FfVHdFV19KT0M1SW5HM2dhM1FBdGZCRmhRWWhadkJxTXZ0ZUFYQktOczZxMDJ4ZTRveENKRkJNbTVJM1BqcGx1cG9ud0Z6NlNHYlBEc1QtQWJtRlJLWTRvTHpBUXZQWjYzb1E5RmJiOFU2UnBZc2tldHc?oc=5",
-  "id": "f5"
+  "id": "f7"
  },
  {
   "date": "2026-10-29",
@@ -57,7 +77,7 @@
   "summary": "",
   "source": "10TV",
   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPVkxDTXpHWWktRTk3QV9zbm9PaFVrWGpCMk1kUHlsVDNHV09JNVctSG1MZFdGampGLW1lVEY0UUl3QUtCLUtNR1hZR3hraEdVQlU1MWtlMGJQUTVHc3pLNFpJaWcwVDZNNWRsZ3R2Mk5jMEVqbUNyMkVLRnE4Z1Y0SnlTTUZabkh5NHhjaExJWWRhNzZVZUV1VUZCTHlpMnNlZEphcDN5SldiX0t2TGpyYlRKZG1LRmM1UFJISHZnU21KV2k5?oc=5",
-  "id": "f6"
+  "id": "f8"
  },
  {
   "date": "2026-10-29",
@@ -67,7 +87,7 @@
   "summary": "",
   "source": "Investing.com",
   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPcnJ3aDF4dmpRN3RiQlNrXzJ5T2hSc0VMcGRjRHNtRzd2YVZ2VTRVWFFmRWZnNG5VSlk1dDBUc0pvcFg3Y1pwUG0tQ2lXWXRxUUtRSEtocmFFSWZVbXdDQnFfMU9QTTlZVTczZFljMWZsZlJtRHZrV09yNjJDMW1LZmNjOWpnSWxtcDBublN0dTVVbV85dTREbExJTkN6ZlFDUVFQRXVMbnlsQS0tZTFyT0ZR?oc=5",
-  "id": "f7"
+  "id": "f9"
  },
  {
   "date": "2026-10-29",
@@ -77,7 +97,7 @@
   "summary": "",
   "source": "Benzinga",
   "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOMVZ0OFZSaFhNa1pKRkhWaEJOZ3NBd01WMnV3ZVpGOXFhZ09STGlxWjJ1MTZfd3djQWhLZjcxaUNLMlk2NmNXNlZHdWdlbnlhREVDNFRzX2dsdS1uc2F5Ml9UVzhucTFfOGM3ZDF0aHhhWGFJNV9lLTdScWlXd3Vtb1lONW1DcUNYbGlTQXBn?oc=5",
-  "id": "f8"
+  "id": "f10"
  },
  {
   "date": "2026-10-29",
@@ -87,7 +107,7 @@
   "summary": "",
   "source": "Yahoo Finance",
   "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPb0hWNFFHRGh1bWprbHZfQm56a2tlRjNBZkJJRExFZ0FBUXpDUnVrUUI4VTV3TUFVWm5RRFFaWE5DcWxXblJqRFpVWXViMkJFSVpzSGlCVVJSc0p2d082VjdEcU5sMWJCbXI5RFVZdk1OOGhERWtWa0h5c1FlU1VNbmFaMlRaMkNZbWxKWllneWI4el95dk9hcTh1MkJrTW9DcktycA?oc=5",
-  "id": "f9"
+  "id": "f11"
  },
  {
   "date": "2026-10-29",
@@ -97,7 +117,7 @@
   "summary": "",
   "source": "Aviation Week",
   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNRW80YmxFR29pcmVPNVJFRHQ5TU8tdXhDZFJTaWQ1LW9OaTNhTmhvTEZTa1dvUm9UanFhajF5SXN4Qnc4SE91OVRYcnhKeVh6ZXZVUW9PRGNTSUpsRXM0NEszcElPMTkzUEI3WjVzUlFlTkR1eG4yNEREdVQ5RTlMZ3BSRUMxN2luN0QyVllIYzZYb2thd0hmbVZubEhaR28yZ2pOZjVPbTY5M2xlYVZIdUpNeWlreXNwWXc?oc=5",
-  "id": "f10"
+  "id": "f12"
  },
  {
   "date": "2026-10-29",
@@ -107,7 +127,7 @@
   "summary": "",
   "source": "AlphaStreet",
   "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxObzNHc1ZkZU51V0xOZWozalJEOU43Mi1Pb3BYYVNmUG4zbTN0SzR3b2M3cGZETFNCdWpuZjhtdUtDU2VxZzNtTDQ3SEVhMEdjVmtIV0RvS05VZTJfQWI5ZzdVcG9MQTNhTUhGaktwTFFNOV93Rlp1WGpDU3lkZ3FjNHRTRmtRX0ZwR0ozbEVRUmtpR3ZITlpENNIBngFBVV95cUxQR1d3UUNlSDdwWDFPRE9jZnRhaUgwLVhKbzZLOFhJR2hRdFZ4VnJoT0ktQVJRckpHcWMxWGRHeVZ6OVptY0VtSTM4WE9OUTBsbTZfd1pJdFoxY2JmT1EycUVDVWZmbENUaTI5VW5UcG83R1VqTHdtYTdCQ0JkTTlDQUViR1ctR0JiSE5FSzh3RlhNVW5wckJDM0pkeDVTZw?oc=5",
-  "id": "f11"
+  "id": "f13"
  },
  {
   "date": "2026-10-29",
@@ -117,7 +137,7 @@
   "summary": "",
   "source": "TradingView",
   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOTDNhUXVZX0NndDQyTm1KTEduWEJwaDBEUFU0VzdFS0Z5MVZiQzJGcmNzRnV2TC03S0JqX1RPUEZCRWU2TDBUZE5WeVloMl8ycUtsUVVKdGt2Y0ZYNzZmTTktRUkxUkNzLVV3MUpfQWlseGZ3bWhJM2MzblFFbVVHN0V2VGpBR3J1c0prdkY1WFV1aUZuUUlJZThLVzYwRGtPQUV2M3ZUb3h5aFhsX0trZ1J0YUhtaDY0Vmc?oc=5",
-  "id": "f12"
+  "id": "f14"
  },
  {
   "date": "2026-10-29",
@@ -127,7 +147,17 @@
   "summary": "",
   "source": "Investing.com",
   "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNaTJGdkpuUkdydEhicC1qY3ZpWFpwdWktMXRQSmp6QlZPeGpIR0dUNFBnMVZFSTZKR3dvenNjQUZqcEdCQW5xaFVwdVMteTB4bG9NS3NmYUNpNm9uNlE0VS1wM2d6QTBTOUtOYUQwTjN2ekZWc1A5THB4VDNPUkd1M19CQUY2ekxwTlNnSW9CWXowLWlGUkE1YlFhejlmWHFSdHU3WVRDWU9oNl9ISzh4WUNBN3RrbHQ2YXNMQ2hCcw?oc=5",
-  "id": "f13"
+  "id": "f15"
+ },
+ {
+  "date": "2026-10-29",
+  "tags": "RJET",
+  "kind": "Headline",
+  "headline": "Mesa Airlines Flight Tracker – Live Flights, Fleet & Stats",
+  "summary": "",
+  "source": "Simple Flying",
+  "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5QZl9YeDJpMnNpaFRsM3VtUnNRTmJRX0dtWHpGbVdJV2JPQ0VuZmdXVjFUOXE1YkV6WW02UzlnQjRpbjFaT25RLVdvZnJwNVF2ZFZRN21zSWRIck9ZYTkxTmNyZVBKSTRhbGszU0lHRjY?oc=5",
+  "id": "f16"
  },
  {
   "date": "2026-10-29",
@@ -137,7 +167,7 @@
   "summary": "",
   "source": "The Business Journals",
   "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNWkNRcmJ0YTN1cmJkYjdJaFNJWkUyUE1DNWRRVktBMS13RkhCZmY4UnVQSk4tN2ZyVFVpX1BoRnJXbjJvOWlBcEFxbmQ4bzNmUGpfUE43bm9pMmZZWkM4OWRJS1VIbE1EVF9NTnhZMWQyMDhFUFhlNzk5S3JQeUlFT2RSWnlURjZYVlU4R1hheDljaEo3?oc=5",
-  "id": "f14"
+  "id": "f17"
  },
  {
   "date": "2026-10-29",
@@ -147,17 +177,7 @@
   "summary": "",
   "source": "Aero-News Network",
   "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOS1U2d09vY2RwYzhLa1JkZ2N6VEVibkZ2c21TZFAwTG9wS3kwdFdudkFzQzc3SE81NjNqRVBtUXhCX3JkRFZ0aklnQklxLWpWVE9zcHBUTTExanFBNVVkNFJ6ZzNjMHZlM1o3ek84NGR4UW04azQ2cXQ0ZEVtdDBCeEhhVm41R1lzT3hnSHJSSHpkajF2SXVN?oc=5",
-  "id": "f15"
- },
- {
-  "date": "2026-10-29",
-  "tags": "Industry",
-  "kind": "Labor",
-  "headline": "Pilots at German airline Condor to be given 7% pay increase in 2028",
-  "summary": "",
-  "source": "Yahoo Finance",
-  "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPZ2FfUVY3OU9ZT0F6bzhrMUtiVXc3bms0UmJkTUpKNVdxcm5hZWVPN1QwNVlIS3JtMEhyNWd5aFVWQ24zR0R4c3lDRVV5ZUlWZzJCUG95am1nNnN1cDFjNWhURFZ4UjZaMnRkb0hpWEk2RXRkaUZHbVZXOWU1ekh3eFAwSkowc2QyTFZvMUlfZmpwUFMyQmk5M2h1OGxtUVVq?oc=5",
-  "id": "f16"
+  "id": "f18"
  },
  {
   "date": "2026-10-29",
@@ -167,7 +187,7 @@
   "summary": "",
   "source": "Simple Flying",
   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE92Y09rNVMta0Z0dlJOcXJYckpmRUZYQS0wclpMSVF4bmVTNHFYZTQ5bU9LVXZENXpBSEdWNUxIeENvaEFCdVVmNHpfUnhrbWtTc2V2TGxKajZMZzRNNVZmcms0QzJuTHZkTlVSTlVHWDZEM05zQUE?oc=5",
-  "id": "f17"
+  "id": "f19"
  },
  {
   "date": "2026-10-29",
@@ -177,7 +197,7 @@
   "summary": "",
   "source": "EnergyNow.com",
   "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNLWFlTXNhQ1RZdXVnb1RWeEE5SmtIdnM2TkxhZk9ULWl1U01XblJ5RV9rcHVtZTFySDNKa19fWkZ6ZG5SNjNoMkdtZG1pMmliN1FCb0NNSEF3VjRDMnBLS1dqVEJ6d1dkdFQ2Ql94R254aEVsT1FMQUNnRFlVOTB5UDFyVFo0SFpmXzBqQUdrbkRIOUxtb2tmOUVNV2U3dw?oc=5",
-  "id": "f18"
+  "id": "f20"
  },
  {
   "date": "2026-10-28",
@@ -188,7 +208,7 @@
   "source": "Delta News Hub",
   "url": "https://news.delta.com/aeroitalia-selects-delta-techops-737-fleet-component-support-program",
   "company": true,
-  "id": "f19"
+  "id": "f21"
  },
  {
   "date": "2026-10-28",
@@ -199,7 +219,7 @@
   "source": "Frontier investor news",
   "url": "https://ir.flyfrontier.com/news-events/news/news-details/2026/Frontier-Airlines-Delivers-Record-Third-Quarter-2026-Revenue-of-1-4-billion-up-53-percent-Year-over-Year-and-Adjusted-EPS-Significantly-Above-Guidance-Overcoming-High-Fuel-Prices/default.aspx",
   "company": true,
-  "id": "f20"
+  "id": "f22"
  },
  {
   "date": "2026-10-28",
@@ -209,27 +229,17 @@
   "summary": "",
   "source": "KTLA",
   "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQSTlJOGNpT1FmaWZzelNDLUFpRzdfLXoxX2NHVXhQVG0yR2xIcExuTzlJMEdUN21hTWVRV05xeXl4MzdHWWY1ZFdadkpYWVEzbmJEU0NsUTMtWm5QVVFmS3RwRTAwY0NpSzZma2ktaTlZNVBmZUR2TXJNd1F3ZGZOVG4wb2g0LWF6dFdoQUxTV0lmbWRhU0tn0gGcAUFVX3lxTE40SUNjMmNtYkpFOTF1RUFZWUotc0ZJaXZub2lJck5JbmJQQ3ZrRmoySzk5dkhXWDJzNWZ3RWtCeUVGOFNLbW1GM3NkdTNxREdzLUZTak01OTlHY254RTBJc21LX1MyRTFfSmt2RUZsZ1JZU0hqeTVwdktGWXRWVEVrNk10TUNpbzU3aHFteVhHSF9PR1RVUG9GRG5IWA?oc=5",
-  "id": "f21"
- },
- {
-  "date": "2026-10-28",
-  "tags": "ULCC",
-  "kind": "Earnings",
-  "headline": "Frontier swings to surprise profit on 'healthy balance' between higher fares and demand",
-  "summary": "",
-  "source": "Reuters",
-  "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOQjF1SFA3a1F5dnVSNkNSSEJrMVZGYUxJY3NnU3dMMGtIZWhzME4xUnBRTHU5WEFlMTV0YnB3VVEzenJnYnlxSTBiM0wwWG50UW82U2xDWjdYcG1xSldPX2FUeHBONGVBOEtNMjZvSUYxaHpQSHN3clYxMlRkdFFJWWpTT2FpTXBsTjg1dmNxVWx0djhBbkY4ZnVPZ2VGTWFwTWJfSmF4UDUtYks2cjMxV3RrSW9Hc0NubnlZM203N1F4QQ?oc=5",
-  "id": "f22"
- },
- {
-  "date": "2026-10-28",
-  "tags": "Industry",
-  "kind": "Labor",
-  "headline": "ALPA Elects National Leadership",
-  "summary": "",
-  "source": "AirlineGeeks.com",
-  "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1jRHBQSTVxbDlfaURpZnY5aWduVlAxdThnczhhdVR1YnhKT2psdWMzSkNsZVgxUF9SN193a0ZHQjdMa0JWd1ZPS3NCaEhXa0NWX3kxM3hVbDJOS1U2dDlEVjNCZUktV0puU3lnOUFqTEVXQzBhV19R?oc=5",
   "id": "f23"
+ },
+ {
+  "date": "2026-10-28",
+  "tags": "ALGT",
+  "kind": "Headline",
+  "headline": "Former Sun Country CEO Bricker Resigns From Allegiant’s Board",
+  "summary": "",
+  "source": "Aviation Week",
+  "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNWTJkYnFZVVhUcWVxejFJQzJlTTBaQ3ZSOUt3VFF4aDhWSURhaUtzNjA2SHM3cWlEMk5PRm1tbE5DOTBPdEVNUldoT0lDQnhhX2I4bHpVbTdhS0lQYW1YbGQtalhJUmZTcjdzSFBpdUdHY1N5YWozNGtuekE4X0VlSFhqSkV0eE1EYV9tWndPT1lpX2V5UVFBaGR6aEl4SEJ3a25VajNfWjNQMmhlbEVEaw?oc=5",
+  "id": "f24"
  },
  {
   "date": "2026-10-28",
@@ -239,7 +249,7 @@
   "summary": "",
   "source": "Reuters",
   "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOSnZ2TEZjYXMwcUtkN0cxbHVHVEd5YWp2NjRUMVFPWEFweEJyQUl3alk1UllPZ2lnVDdEQ0haUFRzNjVGZllNRk1ZR0JlaXdCOG8zRjVodWpPcXBvNlVGWGJTQlBXR2JSWGxaTU5qdHZ6dlhpYUdyeUcxcTdYUWppWmduVmtIM3RvOHAtenZCY0djWUs3UXFfRk9NVFV3Um9yNWVHS1NkWUJTRzFx?oc=5",
-  "id": "f24"
+  "id": "f25"
  },
  {
   "date": "2026-10-27",
@@ -250,7 +260,7 @@
   "source": "American Airlines newsroom",
   "url": "https://news.aa.com/news/news-details/2026/American-Airlines-dispatchers-and-operations-specialists-approve-new-five-year-contract-CORP-LAB-10/default.aspx",
   "company": true,
-  "id": "f25"
+  "id": "f26"
  },
  {
   "date": "2026-10-27",
@@ -261,16 +271,6 @@
   "source": "Allegiant newsroom",
   "url": "https://newsroom.allegiantair.com/press-releases/press-release-details/2026/Allegiant-Announces-Resignation-of-Board-Member-Jude-Bricker/default.aspx",
   "company": true,
-  "id": "f26"
- },
- {
-  "date": "2026-10-27",
-  "tags": "AAL",
-  "kind": "Headline",
-  "headline": "American Airlines and AIM partner to expand aviation career pathways in Charlotte with new scholarships, tuition support",
-  "summary": "",
-  "source": "American Airlines",
-  "url": "https://news.google.com/rss/articles/CBMihAJBVV95cUxNYlVReWVUdkpWeXN5UTZKazhwNTN0T0l3QjZQTTN6Y3Z3Ti15UXotV01FUWN0YmtEdHFaM01LaXpzOVVSaF81ejVvaFFfck16TTNhU1E5SlRvcDI5UjNqRlNkeV9pX3dtUF8zU0lVRThFcnZtVktxYWdyaC1lMnpoeC1LaV90ZTIxUHVBZU1NTTdLNkk0REJvejdQZUdrNFhSUUhfYWthQ1ZBS1hUYWIxS1NBUW1kNVUxYThidVVvNEMzUXpMcTNPYTh5d0dqTU9DUFVUaDg1RUZubWptM1BDbS0xbUl1S3NoYmRMNTBhMnBWUm9sMWY5Z3BCSHJzMXJmR1BsaQ?oc=5",
   "id": "f27"
  },
  {
@@ -468,22 +468,12 @@
  {
   "date": "2026-10-23",
   "tags": "AAL",
-  "kind": "Labor",
-  "headline": "American Airlines flight returns to MIA after flight attendant and passenger dispute",
-  "summary": "",
-  "source": "NBC 6 South Florida",
-  "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQQUVieGozN1VhUHFxV004SWN3UUo3dXhCTFdkWFFIcFdaMFJPb3Y2UGVoMDd4V3pUYUp3SmZPc0xFSEV4dnM5X3VWcXM0enRfQ2tqbGxIdkxjUVpISkFYR052U2xpMzF6ODJxbXg0RGhfVnB4cWxISFIyTkJmay1ZUklveDJDTFRidnZMSXY3WFF2LUV1cU84dzFOY3Y1d9IBpgFBVV95cUxNbXFtcUp6d1o2Q25NUWFBc09OelFPU1dDa0hxWl9JVktPN0R2ajJRYW1CNTVpal9OYTgxbmY3ckZGZlRqLV9zZlk1a2lHVE03SUlRYjJUZlMyaDc0eEhfSUZuRldKTzBtb2JOODFPN1VfWlJKb21fWFRPUEVDcXIyZE8yRkt1dnltbEE0TFVJa05QM1VPRUVZdmFEYXJtVG83TUZoSE1B?oc=5",
-  "id": "f47"
- },
- {
-  "date": "2026-10-23",
-  "tags": "AAL",
   "kind": "Headline",
   "headline": "American Airlines plane makes emergency landing at Bradley International Airport",
   "summary": "",
   "source": "NBC Connecticut",
   "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPQjhPWGM2TEJfTF9BRExsS2FKX0pXNXVfTXVKVVFEWE1WWjZaSWhPMG9IU3NUQ1dDQ25RQlhTbGVMbkRhNVduck9CSmx4ODQwaVJEUDZDcFlYSEtuLUl6WUg0cVFnMUpuc3BXZjRFSUFjR0ZoR1BNNTVlR2g3QUVwRXVfZGd5SzVaWG1SSjJtQ0ctbTQ1YzhBcW5Nci02Zl9pdWpLOWlOMjY5cXBTZV9zbHkyYUMtZVU1N2ZINTZvMllQRGNfRExMR1duSdIB0wFBVV95cUxQNUk5ZmMxVEZNckVKd1hrWW5qaDhGbVN6b2c0aUZrRUZZSGdmZWtSZEJlV3lzODlGSGtNR1VyWkxNZW5tRV9Hbzd1NGZtRlhUZmFjRHNVUW1wVHpNNm1rREpqWFNhODBoNS1COEJSY0pQQU81MC1qMG9wS0JsNDVrYmhjdnZqOUQ1X2ZWeGdRMmJGWFZhS3o1Wm9Xb0M4YXNCbEY2V05zN19oVWthQ3Z5X3lFTHQ2ck1wYmo1bHAtdVhJeXRiTXdlTndGdDNsaXR3Z0ZB?oc=5",
-  "id": "f48"
+  "id": "f47"
  },
  {
   "date": "2026-10-23",
@@ -493,6 +483,16 @@
   "summary": "",
   "source": "Reuters",
   "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPNlM2ODEyWTVoOUdVRnJFWDFwX1NQeXI0b1J3bzJoOGFfNkl5ejNNYWJ0N0RDYUpHNTVjektKRzk0dDluR1ZmeWdMcG05ajJoelBrbXYzMXF3R1oyN0gwX3dnanZnVHpjbDFiRTJtNHgxaUVSSDRKZzdaM3dRUnFvVHl6OVprTTFEZHMxek5sTnRzX0VfRHd2S1pLZHNrRFItdTlIaUJjTUFqYy03Tk9oZmc3bHJwbFVuWmZtMWh6VEJLT1ZCODhjODRiNkpMaTJocVFZ?oc=5",
+  "id": "f48"
+ },
+ {
+  "date": "2026-10-23",
+  "tags": "Industry",
+  "kind": "Labor",
+  "headline": "Porter pilots prepare for final stage of contract negotiations with US$2 million grant",
+  "summary": "",
+  "source": "Skies Mag",
+  "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOWjltY3JPWFoyRmd6X0VtczRqRjBzZkRTSDVUbW04OUdzRmM5Y2JWelJkdXlpY2xta183UEc5SjFGc0d0R0toNlRUNlJ3ak5tcDJWZHB1aF9JbFpEVVdZaFlPMmk3RDlnd3l5VmV4QWNFUExFSUxNaE1Uc0ViQzNkUWZOeEoyclFqZzRISGZHWlEtQ3k5bHFMQjB4dVl1TjNQSThBRmw5WFRtRTBYS3piaHV30gG3AUFVX3lxTE00ekI0eHFsN3NzOXplTlRzdGpUb0VxanpjVERWWldfYjhOM2NWNDhJRUUzd3pXeUFrWUVhYUZ5NUdRZmF1TV9hV1V3YzJHbGlSOW9nT3g3Q1p5STJ2bE1QTnF5T2NUV3hRaDdNMmtIMmpITWc4cV9zOEpLMmhZTkpnOVZLMnZKU1ozTzRuN1haNFhzMkFkZi1INTUwMGhBSFFmQkx1dDRpbV8wYklMT1V3T2piSDlwbw?oc=5",
   "id": "f49"
  },
  {
@@ -507,23 +507,13 @@
  },
  {
   "date": "2026-10-23",
-  "tags": "ULCC",
-  "kind": "Labor",
-  "headline": "3 Days Out: AFA Frontier Picket at PHL",
-  "summary": "",
-  "source": "Association of Flight Attendants-CWA",
-  "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE93WEtCRFIyRzlGRUswUlJzYWREemdHMnNUUzZnQ0dsSG1jSnBLOFRRU3VtbFN1aXJ3cmc1c1dtSHJ1RDlDT1JDOTBGd0JncTdtLV93T05xM0g1OGN5d2JCY0hFQVR4X2FX?oc=5",
-  "id": "f51"
- },
- {
-  "date": "2026-10-23",
   "tags": "Industry",
   "kind": "Costs",
   "headline": "Jet fuel prices hit a record and holiday airfares soar higher",
   "summary": "",
   "source": "NPR",
   "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQZDlIaEpKMHkzT0dYQjZuQ1hwUm9KdXZVTXd6bjZFSloxMF9IX0cwakc3aDFLYV9hcXJkQmM2OUdUdTlubDZDR0pMLUo2eDdPaEo4Wk9uNGFZeUVQNjNDRl9haTlZclBjWjF2VGZJd1BYenB6aHY5QUFDbzVkcV81UQ?oc=5",
-  "id": "f52"
+  "id": "f51"
  },
  {
   "date": "2026-10-23",
@@ -533,7 +523,7 @@
   "summary": "",
   "source": "Forbes",
   "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNM0wxR040bkdWTnZxNUZHSms3N3JnMy1IU2w0RUx4ak5CUXQ5Y3p3YnNFcGhTZWV3dHBDWGdzVlZkQlYwYWNPY1QwQW1xS3V2cXRyc19BenA4Qk4tSzJkOGt5d0gxTFBpZExPaldvSGdfNnp5QTJWbUNhcEMyNjBFUlJ1SmJaVDNYckNWUUFQekg2eFBZMzBmSjNOdUR6WlVpc2ZtSXhhUGU5MWxMYldySEdYNW1rN0hwOXdEb19fSVQ?oc=5",
-  "id": "f53"
+  "id": "f52"
  },
  {
   "date": "2026-10-23",
@@ -543,7 +533,7 @@
   "summary": "",
   "source": "Axios",
   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9nRFptd19qQVFMNG9VQVdOdGFQSnlabmVaem50bkt2VFdGUkg0Mm1icGdoTmJmeExydUNPbk1tSWhTSUllQW4wNkxmdVQyOVFQTDFDYmVzSHNleU9LT0ZlSnMtS1Q1S0xiR1E?oc=5",
-  "id": "f54"
+  "id": "f53"
  },
  {
   "date": "2026-10-22",
@@ -554,7 +544,7 @@
   "source": "American Airlines newsroom",
   "url": "https://news.aa.com/news/news-details/2026/American-sets-new-revenue-records-amid-historic-fuel-cost-pressure-CORP-FI-10/default.aspx",
   "company": true,
-  "id": "f55"
+  "id": "f54"
  },
  {
   "date": "2026-10-22",
@@ -565,6 +555,16 @@
   "source": "Frontier newsroom",
   "url": "https://news.flyfrontier.com/new-study-recognizes-frontiers-fleet-as-the-youngest-among-us-airlines-finds-a-majority-of-travelers-value-flying-on-newer-aircraft/",
   "company": true,
+  "id": "f55"
+ },
+ {
+  "date": "2026-10-22",
+  "tags": "AAL",
+  "kind": "Labor",
+  "headline": "American Airlines flight returns to MIA after flight attendant and passenger dispute",
+  "summary": "",
+  "source": "NBC 6 South Florida",
+  "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQQUVieGozN1VhUHFxV004SWN3UUo3dXhCTFdkWFFIcFdaMFJPb3Y2UGVoMDd4V3pUYUp3SmZPc0xFSEV4dnM5X3VWcXM0enRfQ2tqbGxIdkxjUVpISkFYR052U2xpMzF6ODJxbXg0RGhfVnB4cWxISFIyTkJmay1ZUklveDJDTFRidnZMSXY3WFF2LUV1cU84dzFOY3Y1d9IBpgFBVV95cUxNbXFtcUp6d1o2Q25NUWFBc09OelFPU1dDa0hxWl9JVktPN0R2ajJRYW1CNTVpal9OYTgxbmY3ckZGZlRqLV9zZlk1a2lHVE03SUlRYjJUZlMyaDc0eEhfSUZuRldKTzBtb2JOODFPN1VfWlJKb21fWFRPUEVDcXIyZE8yRkt1dnltbEE0TFVJa05QM1VPRUVZdmFEYXJtVG83TUZoSE1B?oc=5",
   "id": "f56"
  },
  {
@@ -621,11 +621,21 @@
   "date": "2026-10-22",
   "tags": "Industry",
   "kind": "Labor",
+  "headline": "Mediation between Lufthansa and its pilots ends without agreement",
+  "summary": "",
+  "source": "Yahoo Finance",
+  "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOV214Ql93SmJXRVFwU0NnblpWREdqMThWc0N3RUo3cHJtWEQwRlVCVmdsVTJMdHl1UmQxc2dwTVN3TGZvX1V5NGhicXU4ajJsYVdBSzZMVjdEZVF5OG9pNmU3SEp5Z1VvVHg0dThBeEw2bGlsbVdOU2pPandDRlhEM2xMbHQ2RTZpaUk2b1d0RThaWFRRZ25Qc25VMWFNS1MtamR1bjhyQQ?oc=5",
+  "id": "f62"
+ },
+ {
+  "date": "2026-10-22",
+  "tags": "Industry",
+  "kind": "Labor",
   "headline": "The Highest-Paid Aviation Engineering Jobs & Their Average Salaries",
   "summary": "",
   "source": "Simple Flying",
   "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE41aWtITjI1NWJ0YnBuaUxuSWxCLVNqNkd3TDc5ekF6aTlqVDY3b1dac3BMOTlnSHdCV0NPV0NSanotTGpvd1lNeVk3VjFMSkhITFc2OHo4ZjFyX0VYOEd3alBZMC1yNWNTS1dhTGUtOGJlRDduWFY1anpYSVRVZw?oc=5",
-  "id": "f62"
+  "id": "f63"
  },
  {
   "date": "2026-10-22",
@@ -635,7 +645,7 @@
   "summary": "",
   "source": "Reuters",
   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQalVWOWpxTXAwZ1M0cmFmTFRxZ2dMRzU0SEIxcVhPVVR4T1I1OUd3MGVtb0d6alVyd2pJakpUUUQxQ1FlMVc2eWVtWHVTQWlIaW84RUhBU0twdnpmTkZfUkxiQlVJWE1TeDNVMk90ZjI2NGNpU2F2Um1TSVJEck91cXZ1OHZmVnpLdWR3SnVicVJNMklNRGdLaXZybHRZYTFTTTNZak9IZEtKRGxPQTFVQUF3?oc=5",
-  "id": "f63"
+  "id": "f64"
  },
  {
   "date": "2026-10-21",
@@ -646,7 +656,7 @@
   "source": "Southwest investor news",
   "url": "https://investors.southwest.com/news-events/press-releases/detail/1947/southwest-airlines-reports-third-quarter-2026-results-record-revenue-performance-drives-year-over-year-margin-expansion",
   "company": true,
-  "id": "f64"
+  "id": "f65"
  },
  {
   "date": "2026-10-21",
@@ -656,7 +666,7 @@
   "summary": "",
   "source": "Reuters",
   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNSnJId1FFNzhweDNmbDMybnA4N21ETWMtMW5nYjY3Njc0WDQtcFduODFKRzVFZEVnUGJDS2piYnRFSE9CbDU2eldCbl82eGhDMVBIM3BKaDltUndGWXhQbnRQS2Jyb05tcFhoaWx0U1ZmZThEMUpuNzFLUWVPRDBqTTZhUko1bGIzblpMMjZYMnh0M1NGZWJnVDgxZHFnX29KcmVEcUJQSFR2Zw?oc=5",
-  "id": "f65"
+  "id": "f66"
  },
  {
   "date": "2026-10-21",
@@ -666,7 +676,7 @@
   "summary": "",
   "source": "CNBC",
   "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQZGpGLWN1Z0ZQZ1FZY3cyX0pWV1VhR1RLX1VPc3RBc01FLTJ2eGNrZFRnVUcxeTI4Vmxpd2xRbEU3R21DaWVISUx2MG94eVNNM0M2MTdyRDNjLW55b1R5dEIyTUc3X0Z2YzVTbGotZzFMVUtlVGpCLXRvOEZ3YlpvMS1R0gGHAUFVX3lxTE0yb2tWUWlZV1VRWFZUeVJtWHRnaVU0ckFOSWFsU3pWLWMzdU1zRGhFa0hLLS1pMFpELXpfZHhyZVk5OXhNVTZBb3RRd3BQc2h2YmxiOFFxRkw0YUdmdkdsdUZ0ejdlRWNadDZic3B5c0tHX0ZHYlRBSlVIUDZFOTVFcm9adjZKZw?oc=5",
-  "id": "f66"
+  "id": "f67"
  },
  {
   "date": "2026-10-21",
@@ -676,7 +686,7 @@
   "summary": "",
   "source": "Business Insider",
   "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQQk9DYlhzWmYtTThYSV9Vd1dCcE90SFo2blFlT1pTNmhPcVJDWkNvYzMzYWUyR19JZkpTc1RpeXNfZVlkVm1rMms4QmU3MkZoQWlvTlMxeHVzU0d2eUJOclAtSXlpbEQxWGwzQVVRV05KWUdfSkpHWjFzYVBDUkhXZ1FLQnRQNGZEZWRRTXNrUVB3RjJzQmI0ajI2RXhMZW1PbFdTUDYyTQ?oc=5",
-  "id": "f67"
+  "id": "f68"
  },
  {
   "date": "2026-10-21",
@@ -686,7 +696,7 @@
   "summary": "",
   "source": "NerdWallet",
   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQV1NvdWEtaThQdzFja0V3SjR3ckFhOWRsd0d5cHJqaGxkcmJ6LWJDSUotb1FRNnRRaUJRRjVCdWwtUC1YR1dlYnZwc3hoQ2ZBM1d4SzJfMG9pLXVaN0hXZnpISG5zcjFKanhneDRadnpUR0RlMzZITkVHY3R4VjhUemtiVGRnUQ?oc=5",
-  "id": "f68"
+  "id": "f69"
  },
  {
   "date": "2026-10-21",
@@ -696,7 +706,7 @@
   "summary": "",
   "source": "KIRO 7 News Seattle",
   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQOWVlWVY1YzZOWWc1MUFFN09ldHVtUklqQU5qWE9lVlRVb2xqWkRMNzNvLVdoVVhuaGwtdEV0OTdISzlTMW50SlBiMmp2bFFyVTVacGVPTEZ6QUpUY0lyc0lORVJzWW9MUTF1UWFlZHpvbHBIUUFWWlljeENfeEtpYlI1WEc0UXQzZTBINzZkQmcyb0RrYzFBdEhFbGtjazkyX1owX09hYzZPWHZIazNLbkJNTVhnelplbE5n0gHPAUFVX3lxTE5Ya0tBNmdSc19QeGtXMHpnd1IyUlA5ejVwcFhEQWtKa0RhNW9uQ3ZTVFRKcnd3YzREOE8xeTJwQ3RIMzA1d3VlMG82N0lzUFhHN2Q1cnBZMG45MFF2OVZFbUV4QXpCZzVSN0VnU29SeUYtQU96VDF4LXlvTnlYV2NvajdDcUlGdlRWWnN4MUpBNmdQX0x5TVlYMkVOakVnU0VYeE51bC02QWtlSVQ5RmwwejR6ZVp0TTN5TjJrOFpvcmtSTklkZ2x6QlJVZk5nQQ?oc=5",
-  "id": "f69"
+  "id": "f70"
  },
  {
   "date": "2026-10-21",
@@ -706,17 +716,17 @@
   "summary": "",
   "source": "NerdWallet",
   "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQYS1XTlpueTMtd0laQURSSUxuMXRoeEJkQlJ3M2I2bmxOTTk4SG4wZ0JUQ1BfeVFWNThxLXN0cEVUWjhjbW82MjRQTlRheU9ZbnVKcnVsVFlCYnZpUmVPeUZQZEI4bWlSSWFOUEt6d1hpOGlST1NSWmhpTXZ0LTZWSU4zV256LWgzSDJGNw?oc=5",
-  "id": "f70"
+  "id": "f71"
  },
  {
   "date": "2026-10-21",
-  "tags": "UAL",
+  "tags": "Industry",
   "kind": "Earnings",
-  "headline": "United Airlines Earnings Were Disappointing. The Stock Is Flying.",
+  "headline": "Fuel costs weigh on United earnings as airline cuts profit guidance",
   "summary": "",
-  "source": "Barron's",
-  "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPRkJ2Y29ORFJ1akhKSG53XzFaR0Yxa3pVdFpkbXVmM1cyTnR0Q25Eb2tvUjhwM1RaT1NVTzlRV0dZUFBsMThfS0Y4ODhFbzVwM2o5OXdhMWUxdWZ3V21SRVh0SFVLeWFadl9zdTBOby03LS1ieFlPTlNSWUs0bjhJZk9XbzQ?oc=5",
-  "id": "f71"
+  "source": "FlightGlobal",
+  "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPa0d2bFRDeHBVWnNqbDBpUG5xNlVyeUhTQ1pxTTgtMFRUMFVabnNlQkxMaC01Y1dsQ2xBMGFnX1R4UXBMcmVBdXhBam50c1gyVVZmWVdNdXN6ZWVMTW5VYmtpMURTZVBHZlJ4UWhSVDN1WDVDNGt2cV9rLW0wZnBfNHFERVh3eFNsRmJkdmxHa0c2TWdaREZLZHBtWUxlTy1GZzVqX25CSUZwRERlVkQtUG9yNi0?oc=5",
+  "id": "f72"
  },
  {
   "date": "2026-10-20",
@@ -727,7 +737,7 @@
   "source": "Delta News Hub",
   "url": "https://news.delta.com/where-imagination-takes-flight-delta-customers-collaborators-explore-future-flight",
   "company": true,
-  "id": "f72"
+  "id": "f73"
  },
  {
   "date": "2026-10-20",
@@ -738,7 +748,7 @@
   "source": "United newsroom",
   "url": "https://united.mediaroom.com/2026-10-20-United-Delivers-Record-17-Revenue-Growth-in-Q3,-and-Expects-Record-Q4-Revenue-Growth,-Underpinned-by-Accelerating-Customer-Investments",
   "company": true,
-  "id": "f73"
+  "id": "f74"
  },
  {
   "date": "2026-10-20",
@@ -749,7 +759,7 @@
   "source": "Alaska Air Group News Hub",
   "url": "https://news.alaskaair.com/company/alaska-air-group-reports-third-quarter-2026-results/",
   "company": true,
-  "id": "f74"
+  "id": "f75"
  },
  {
   "date": "2026-10-20",
@@ -759,7 +769,7 @@
   "summary": "",
   "source": "NJ.com",
   "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNeXFPcDFURTJzOC1FSFVWcnVJZE1HcWo0RnhrWVVEakJ6Q0FLNFVESC1fZWV1cWxXR3VMb0NubzBsc2tNbkluUUxEbXdURk9DcjRSYnJ1WlRaMGRna0ZGNW5oTzdTaHg4d09TUmhLWFNmcWF5Um1ySkFfQ2N4ZEk1T2dRalA1Sk00T3lFUWw1UmU3X0hISm81em9tSEVXdGFCTktabWZYWjBrMjJSZVHSAcIBQVVfeXFMUFU0MU1odlFZM1hfLUo0ckpsdVhjTVR5OEZTNFdvbGFnckNzYzhFcm9XRUZpVEdtVmhIUVVRVjl6N1U5NXFwRTJzNEtfdDIzY2pDWlFXYU5ZUHZrQ28wczFYX2hscWEyYks5TlJGSlUxM3E1eE5YTnpSUzlxYk9qa3F2aUh6TGhud2p4QUgxdThCeXVPTm9tMjdTc3FVVXJ1bXI2UTBZbkhMckl6ekotUW1zX0VSMEJXYWtObmVKMlItZ2c?oc=5",
-  "id": "f75"
+  "id": "f76"
  },
  {
   "date": "2026-10-20",
@@ -769,7 +779,7 @@
   "summary": "",
   "source": "Reuters",
   "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQamVzdE52ZkRRLW1EdjMwNmI3YjV5T3ZIQTFiLWJ1MTZaUE90NWZ5d1RwTDRCWHF4MXpSa0paRlctMFRERG84OF84aWdBdEJYclZONkQ1cVNma0hNd3VjV2dYT25tOG1zZXNFdExMdXJyLVFyNExQdjFuMW9qdS1KSnI5V2FpQUdNNWZuSXBydGFZRl8xODlDWGh3VWdFTjZhTG85b3BoZi1hMmJPQ0NCUjdURkFOVnhRWmpXbnR2dXJydw?oc=5",
-  "id": "f76"
+  "id": "f77"
  },
  {
   "date": "2026-10-20",
@@ -779,7 +789,7 @@
   "summary": "",
   "source": "CNBC",
   "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBLMVhhMlVReDFPbkRjZlAzMmFUNE1pNXVMaWNrNUJvRXRZSHZLbDZSTVZ6a2xJS0lHbndqd1h4UkNqN09sWFF2UGdpWGxtdGlRYlpZbmtCNzNrYVBTZHdrWFlQaFNEUkhVRURNNWJZTUZQblBIZzZ4aTRfUFYyd9IBgwFBVV95cUxOblZ4MmZEY2lsdDdMOXpkX19kemhaTFNneWwtNndKNEQ5R0x5UFNud203SHk0czU3dGdwZFlrT3ZhOS1FWjFTbFNsS0g3NktoREd3LWRMd0twcXBhS3FJajI4ZllnRXlEU1hiUF9ITktoYWFQU0xJY1lNMG1LTndfNF9pQQ?oc=5",
-  "id": "f77"
+  "id": "f78"
  },
  {
   "date": "2026-10-20",
@@ -789,7 +799,7 @@
   "summary": "",
   "source": "CNBC",
   "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNb0hOTXd2ZVNfUjYzdzd6dmNVbmE1REdSUnpTYnNJdG8wVFppRjRUVjJ4ZFNjdE5DQ0ZlSVpNQWZlZlpUTGtvNFVsazQtUU4wOXNkVW1jNG9wV2xMdVBMSkM3U2ViTk9RajVZaVNKamVHNTRYbm54blNnTVpmUmFKY01vSml5NU02UHE0dWV4Mzhad2JhQzlzcUh3MzJnZ0xSM3lzeEs5bGZ6Zkp2c0J3VzRsZkZQWWhmMWIxYTFwUHMtWjRBQUtOSVY1R2dNVTF1cnlPMA?oc=5",
-  "id": "f78"
+  "id": "f79"
  },
  {
   "date": "2026-10-20",
@@ -799,7 +809,7 @@
   "summary": "",
   "source": "Yahoo Finance",
   "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNbmgyZXAtdFN4d01xMDk1QVhaUnVraFRpampxUFRMc3VlZnFlU1p3NXZ1eXJfU2JOVTluWjFaS0duR3pKSUdrd2VlTEw3cVFhc2NzZEx2ODVYN2FBcm5GNHNNTk5xYWl1VU1pMnV4QjVmeUxselpsNE9YVTBuSDl0Z3lZVkItNlRkWEJWd0RIR1FyMnFrS2t2bEZkc2d5Y2s?oc=5",
-  "id": "f79"
+  "id": "f80"
  },
  {
   "date": "2026-10-20",
@@ -809,7 +819,7 @@
   "summary": "",
   "source": "WSJ",
   "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQZDdGY09YTDBjVnZhSFhJMldwckJJd05yekJSV3l3WFgtSzdZRHBZeVFyaHptNmhxb3VFajlzdGxZeVRBbXY1M3B3SGlIcUxlQ01IazRxM1dJMDlmb3JFaGFfclJhbm51dkRPUFpTejBqcjdSX2s2c0owem4zdHhuUEJ5cVQwbTZOTkNmaUZvWUd6SVBLdWNLbUw0MXk5bTRKOU1ITVpaR0ZjZ1Qw?oc=5",
-  "id": "f80"
+  "id": "f81"
  },
  {
   "date": "2026-10-19",
@@ -820,7 +830,7 @@
   "source": "Piedmont Airlines news",
   "url": "https://piedmont-airlines.com/2026/10/connecting-care-to-every-journey-the-impact-of-presidents-award-winner-holly-lumbard/",
   "company": true,
-  "id": "f81"
+  "id": "f82"
  },
  {
   "date": "2026-10-19",
@@ -831,7 +841,7 @@
   "source": "Alaska Air Group News Hub",
   "url": "https://news.alaskaair.com/company/alaska-airlines-names-amaresh-siva-chief-information-technology-officer/",
   "company": true,
-  "id": "f82"
+  "id": "f83"
  },
  {
   "date": "2026-10-19",
@@ -842,7 +852,7 @@
   "source": "Frontier investor news",
   "url": "https://ir.flyfrontier.com/news-events/news/news-details/2026/Frontier-Group-Holdings-Announces-Webcast-of-Third-Quarter-2026-Financial-Results/default.aspx",
   "company": true,
-  "id": "f83"
+  "id": "f84"
  },
  {
   "date": "2026-10-19",
@@ -853,7 +863,7 @@
   "source": "Allegiant newsroom",
   "url": "https://newsroom.allegiantair.com/press-releases/press-release-details/2026/ALLEGIANT-TRAVEL-COMPANY-SCHEDULES-THIRD-QUARTER-2026-EARNINGS-CALL/default.aspx",
   "company": true,
-  "id": "f84"
+  "id": "f85"
  },
  {
   "date": "2026-10-19",
@@ -863,7 +873,7 @@
   "summary": "",
   "source": "Yahoo Finance",
   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPU0dXNC14SDg5TWpKSy0zbmRyZllpakNqLUlUOVJfQ1EyMWZUeXZTS2hHV1FqTUlmZTUxSUNMcTJoSFpvb2w5R240N0Q1Q2tqM0dicjZKZU9XMGdvdmQ3YVR0Q19wMmFjOU5JSzRjTFFGRTN6QUs5R21mTWpMNWtBT3ZLVnY3bzFlY2k2ME16bnBiQQ?oc=5",
-  "id": "f85"
+  "id": "f86"
  },
  {
   "date": "2026-10-19",
@@ -873,7 +883,7 @@
   "summary": "",
   "source": "AirlineGeeks.com",
   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOUlo0bFdoNERQN2JFVGRfU3dQYXVsT0pSTEE5amRMRU5RWUpEd3h2b29LTWd4QzRZT3F1VVBtV3otcUhCcFU2LWZkR1B0X1RpZmtaclRzcDNmenlNV0xpN0ZCZG9wOHRpOTN6dDBMZy15ZXFza25pYnFVSk9uWHdfQlprUQ?oc=5",
-  "id": "f86"
+  "id": "f87"
  },
  {
   "date": "2026-10-19",
@@ -883,7 +893,7 @@
   "summary": "",
   "source": "The Natchez Democrat",
   "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNcWdOcmM3ck9iS0QwejZ3d2oxMmNjVzNWc0Y2Sk9TdER2UUI2ZXhlZDFpZTBXQlhoWVBRQktiMlA2YmVYZ0hoZGxsd0E1Wk5CZkp2MmpPT1lYSjBPRVk1b0ZyUVFiMnJVcUNRMnRGWDI0MGcySHJHUzE5X3c5SjUzWGpHLVZHd3ZfUEQ3Y0w3bnpDak9nNkVYMGJLQ1VlUUowMElaenZIVDYwMERSVjl0Ym1ZVndHR2J2aElqUUJLeG5ZQ0dQMDFZ?oc=5",
-  "id": "f87"
+  "id": "f88"
  },
  {
   "date": "2026-10-18",
@@ -893,7 +903,7 @@
   "summary": "",
   "source": "PYOK",
   "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxQRDZYS2FrS1pUUGxTTEpLbEJDREJyMGt2TE5pdUQzeEU3RFZDbFNLLWg0TXViRFJFdEZITENrUG0ySUNLdDdCTGxGWFBKa1didTZTUVVVMnJ0U0ZpQjdLdEZFTDFrZmFBZlBfSVNyQmR5WFNPWS1keU14RERqaGFFWVFXX2tkNFNmNkZGOEVlbjY4emV4RTJ5SXA3eGU1cFE4Q1NhclNGSW9xbERYQTRDaWhCRXZBWnN1MUFpSVM2S05Fdi1janNzWE1WVlZIc1IzWnBaVGpqdHA2V1VvWDFJV01hbHZlNzFhYlBBQTJMNDI0MjNrUmpj?oc=5",
-  "id": "f88"
+  "id": "f89"
  },
  {
   "date": "2026-10-18",
@@ -903,7 +913,7 @@
   "summary": "",
   "source": "qz.com",
   "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBPTFVNanJSMVpQTVdlRVUyNGNlV3VKdTFYSUdpYnRydURTczRQdTI0dVk4ekVlbk5CajAtRlQteER6dUVaakZOOFY3RDZqRmZPRmdpdEdlaVpBRms0eFNZ?oc=5",
-  "id": "f89"
+  "id": "f90"
  },
  {
   "date": "2026-10-18",
@@ -913,7 +923,7 @@
   "summary": "",
   "source": "The Aviation Hub",
   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNRW5DQUFFeU5lYTU5VTZoUXNRdW5MSVJWSC1EaURsRkdfZkFWY2dpMEs5SHNRTWY5OE1ZM3pqNHVyZU5KN0MtZkN4bGJjYUdCbWkyQjlVN3d2MGo4T2ViMkw4QlJDcndiWjVuQ3pjejlOaWExbnVwc2Q2dV90cUVYUmJrS28?oc=5",
-  "id": "f90"
+  "id": "f91"
  },
  {
   "date": "2026-10-17",
@@ -923,7 +933,7 @@
   "summary": "",
   "source": "The Points Guy",
   "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBNVklhSXEzQ1hKOUJkdjNZVl9iT0ZCVkxucEh6NXJ1QXg0MFk5c0h6bnFhb2dtbk1PSGQ0b0RiRkluNWFFZWlkdEhGOWpyc2ZsVEprc3hYWlJRUXZyTFVtSmxPUzRzanBQVHhJZEpJcDg4ZlZNazNPRVJwMkdxMDQ?oc=5",
-  "id": "f91"
+  "id": "f92"
  },
  {
   "date": "2026-10-17",
@@ -933,7 +943,7 @@
   "summary": "",
   "source": "TravelPulse",
   "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPSE5QRHplQTRaUjlrVEQ1MEIxeXNjOVNocFBVMHVSQVNjdmczbHFncHZCeUVySzh6LVNydHdqTlBoYVc2djFud3JKMVVwS0RHc1BROVN0cTU5SmtGOWRyM0ZUZVpuWnRuejI1Rnh1aGlGd2hRSEwyRzRPNTRpT214OC1DVkJJdUFqaUtxdXpMdVc4YVA0Q1U1VlliMmJZWWZ1VFhKZTd6SERuOWxRVDlyd2hJekw4TWtyQ3J5YXY5UkRyRFZlYWZFM1JiNzg?oc=5",
-  "id": "f92"
+  "id": "f93"
  },
  {
   "date": "2026-10-17",
@@ -943,7 +953,7 @@
   "summary": "",
   "source": "KMOV",
   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNd2tsMXJqWXp2TnYxVFhHME5RSHNQUTBYQldzOGszVUJSRFNhcmlLMG0xVnNQd0E5Y2JyMXhNaE42VFZmQU96SGdiS2k1a3hmZkp5ZVB0SlRlV2hRMnFrbkZ0eTdyUHNVVmY2YjRKNnNSQUpidDQtYlgxbEl5MXU5RlRVVEI2WkNUNlVvRzliU25HWktReWJ5QXhzTzF4cXhFMU9rTDZrZTJPVS1zNE96WVppdkFCcDFqY0HSAc4BQVVfeXFMT2VwbEtpZlRrcWxIWm83QWFEQU01UU9MVWI3SVZIQVZyM2Nid19IbkVuUzNDUGJRdU1xVjJuekxiakN0LURmOERWaTNRRWJWUldJZ29QUF9rT1V4Q0liX0oyb1FrN0dsb0JvdDdNUzVQVWZYMFREOGF4OTUzYmZaTzdGdVlPOWVCcWlQeGRiSy02eVRuQWMydWlsREF3SC1HSnVLUW5OeE1rcXpQSGJvUE82MUxwVnEyaElhNHNFX2lCTlFkdGw2WUJ4UTZRa0E?oc=5",
-  "id": "f93"
+  "id": "f94"
  },
  {
   "date": "2026-10-17",
@@ -953,7 +963,7 @@
   "summary": "",
   "source": "www.insideflyer.com",
   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQd3dEWnl4bUNsVVFibEFOMFBMd1UyX0N5VlVEWTRJdVk3dnRDVUNKOVBYakVOc2ZYQnUyMG5qbnVWaUFRdTRFZ293SU1tWkdqYWQ5SXZCcXg3TkNrSGxaZ1RRd3I3OUFkV0ctTmVKa3FsdU85WHRjYmsxQnRlalViVVNGNm5lai05MUV6ancwc2Rrdw?oc=5",
-  "id": "f94"
+  "id": "f95"
  },
  {
   "date": "2026-10-16",
@@ -964,7 +974,7 @@
   "source": "Delta News Hub",
   "url": "https://news.delta.com/delta-funding-helps-clayton-county-nonprofit-strengthen-food-delivery-services",
   "company": true,
-  "id": "f95"
+  "id": "f96"
  },
  {
   "date": "2026-10-13",
@@ -975,7 +985,7 @@
   "source": "United newsroom",
   "url": "https://united.mediaroom.com/United-Continues-Starlink-Rollout-with-Installations-Underway-on-Boeing-737-MAX-8-Fleet-on-Guam",
   "company": true,
-  "id": "f96"
+  "id": "f97"
  },
  {
   "date": "2026-10-13",
@@ -986,7 +996,7 @@
   "source": "JetBlue newsroom",
   "url": "https://news.jetblue.com/latest-news/press-release-details/2026/JetBlue-Announces-Webcast-of-Third-Quarter-2026-Earnings-Conference-Call/default.aspx",
   "company": true,
-  "id": "f97"
+  "id": "f98"
  },
  {
   "date": "2026-10-09",
@@ -997,7 +1007,7 @@
   "source": "Delta investor news",
   "url": "https://ir.delta.com/news/news-details/2026/Delta-Air-Lines-Announces-September-Quarter-2026-Financial-Results/default.aspx",
   "company": true,
-  "id": "f98"
+  "id": "f99"
  },
  {
   "date": "2026-10-09",
@@ -1008,7 +1018,7 @@
   "source": "United newsroom",
   "url": "https://united.mediaroom.com/2026-10-09-United-and-DISH-add-Playoff-Baseball-to-the-Live-Streaming-Lineup-on-Airplanes-with-Starlink-Equipped-Seatback-Screens",
   "company": true,
-  "id": "f99"
+  "id": "f100"
  },
  {
   "date": "2026-10-08",
@@ -1019,7 +1029,7 @@
   "source": "American Airlines newsroom",
   "url": "https://news.aa.com/news/news-details/2026/Full-fleet-full-speed-full-connection-American-Airlines-will-bring-Starlink-to-every-mainline-jet-MKG-OB-10/default.aspx",
   "company": true,
-  "id": "f100"
+  "id": "f101"
  },
  {
   "date": "2026-10-07",
@@ -1030,7 +1040,7 @@
   "source": "Alaska Air Group News Hub",
   "url": "https://news.alaskaair.com/company/alaska-air-group-announces-webcast-of-third-quarter-2026-financial-results/",
   "company": true,
-  "id": "f101"
+  "id": "f102"
  },
  {
   "date": "2026-10-01",
@@ -1041,7 +1051,7 @@
   "source": "American Airlines newsroom",
   "url": "https://news.aa.com/news/news-details/2026/American-Airlines-Group-announces-webcast-of-third-quarter-2026-financial-results-CORP-FI-10/default.aspx",
   "company": true,
-  "id": "f102"
+  "id": "f103"
  },
  {
   "date": "2026-10-01",
@@ -1052,7 +1062,7 @@
   "source": "Southwest investor news",
   "url": "https://investors.southwest.com/news-events/press-releases/detail/1943/southwest-airlines-to-discuss-third-quarter-2026-financial-results-on-october-22-2026",
   "company": true,
-  "id": "f103"
+  "id": "f104"
  },
  {
   "date": "2026-09-30",
@@ -1063,6 +1073,6 @@
   "source": "United newsroom",
   "url": "https://united.mediaroom.com/2026-09-30-United-to-Hold-Webcast-of-Third-Quarter-2026-Financial-Results",
   "company": true,
-  "id": "f104"
+  "id": "f105"
  }
 ]
