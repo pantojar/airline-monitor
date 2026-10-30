@@ -3,5 +3,6 @@
  {"ticker": "ALGT", "craft": "flight attendants", "union": "Transport Workers Union (TWU)", "amendable": "2029-04-15"},
  {"ticker": "ALGT", "craft": "mechanics", "union": "International Brotherhood of Teamsters (IBT)", "amendable": "2028-10-31"},
  {"ticker": "ALGT", "craft": "dispatchers", "union": "International Brotherhood of Teamsters (IBT)", "amendable": "2026-05"},
- {"ticker": "RJET", "craft": "flight attendants", "union": "International Brotherhood of Teamsters (IBT)", "amendable": "2027-01"}
+ {"ticker": "RJET", "craft": "flight attendants", "union": "International Brotherhood of Teamsters (IBT)", "amendable": "2027-01"},
+ {"ticker": "JBLU", "craft": "dispatchers", "group": "Dispatchers", "add": true, "carrier": "JetBlue Airways", "union": "Transport Workers Union (TWU)", "amendable_text": "First contract", "status": "In negotiations", "status_date": "2026-02-26", "status_note": "Dispatchers and dispatch-related workers at JetBlue's Long Island City headquarters voted to join the TWU (announced Feb 26, 2026); negotiating a first contract.", "source_url": "https://www.twu.org/jetblue-air-dispatchers-vote-to-join-the-twu-and-reject-managements-empty-promises/", "source_title": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management's Empty Promises", "source_name": "TWU"}
 ]

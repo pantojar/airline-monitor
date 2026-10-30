@@ -456,6 +456,21 @@ def update_labor(root, meta, ua, carriers, force=False):
                         row["status"], row["status_source"], row["status_date"], row["filing_quote"], row["filing_url"] = "Ratified", "10-Q", ym, sent, tq.get("url")
                         break
                 groups.append(row)
+    # groups the 10-K doesn't list yet (e.g. newly organized), entered by hand with "add": true
+    names = {t: (rec.get("name") or next((g["carrier"] for g in groups if g["ticker"] == t), t)) for t, rec in companies.items()}
+    for m in manual:
+        if not m.get("add") or any(g["ticker"] == m["ticker"] and g.get("craft") == m["craft"] and g.get("group") == m.get("group") for g in groups):
+            continue
+        amend = m.get("amendable") or ""
+        row = {"ticker": m["ticker"], "unit": m.get("unit"), "group": m.get("group") or m["craft"].capitalize(), "group_raw": m.get("group") or m["craft"],
+               "union": m.get("union", ""), "employees": m.get("employees"), "amendable_text": m.get("amendable_text") or ("Not stated" if not amend else None),
+               "amendable": amend or None, "precision": {4: "year", 7: "month"}.get(len(amend), "day") if amend else None, "footnote": None,
+               "carrier": m.get("carrier") or names.get(m["ticker"], m["ticker"]), "craft": m["craft"], "open": m.get("open", True),
+               "status": m.get("status") or "Not stated", "status_source": "manual", "status_date": m.get("status_date"),
+               "filing_quote": m.get("status_note"), "manual": True}
+        if m.get("source_url"):
+            row["news"] = {"title": m.get("source_title") or m["source_url"], "url": m["source_url"], "source": m.get("source_name", ""), "date": m.get("status_date")}
+        groups.append(row)
     # union websites: dated, group-level announcements; the newest event across all sources sets the status
     import unions
     try:
