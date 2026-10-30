@@ -46,7 +46,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
 <script src="vendor/d3.min.js"></script>
 <script>
 window.dash = (function () {
-  var DEFAULTS = { group: 'All', basis: 'lq', dbasis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', pgroup: 'All', lcarrier: 'All', lopen: false, cpiidx: 'cpiw', cpispan: '12m', cpifrom: null, cpito: null, h2h: 'DAL,UAL', lcasmreg: false, relview: 'mkt', relper: 'ttm', relmetric: 'ontime', relsel: 'DL,UA,AA,WN,AS', mkfrom: 'ytd', mksel: 'DAL,UAL,AAL,LUV,SPY,JETS' };
+  var DEFAULTS = { group: 'All', basis: 'lq', dbasis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', pgroup: 'All', lcarrier: 'All', lopen: false, cpiidx: 'cpiw', cpispan: '12m', cpifrom: null, cpito: null, h2h: 'DAL,UAL', lcasmreg: false, relview: 'mkt', relper: 'ttm', relmetric: 'ontime', relsel: 'DL,UA,AA,WN,AS', mkfrom: 'ytd', mksel: 'DAL,UAL,AAL,LUV,SPY,JETS', mkmode: 'tsr', mkone: 'DAL' };
   var params = Object.assign({}, DEFAULTS), calcs = {}, order = [], res = null, fns = [];
   var DATA = null, state = 'loading';
   function compute() {
@@ -664,8 +664,16 @@ window.dash = (function () {
     </div>
 
     <div class="am-card" id="tsr-card">
-      <h2>Total shareholder return</h2>
-      <p class="am-note">Cumulative return with dividends reinvested, from the start date above. Pick up to eight; the S&amp;P 500 and the U.S. airline ETF (JETS) are dashed for reference.</p>
+      <h2 id="tsr-h">Total shareholder return</h2>
+      <p class="am-note" id="tsr-note">Cumulative return with dividends reinvested, from the start date above. Pick up to eight; the S&amp;P 500 and the U.S. airline ETF (JETS) are dashed for reference.</p>
+      <div class="am-bar">
+        <span id="mk-mode">
+          <button class="am-chip" data-mode="tsr">Total return</button>
+          <button class="am-chip" data-mode="px">Price change</button>
+          <button class="am-chip" data-mode="usd">Share price ($)</button>
+        </span>
+        <select class="am-sel" id="mk-one" aria-label="Company" hidden></select>
+      </div>
       <div class="am-bar"><span id="mk-sel"></span></div>
       <div class="am-legend" id="tsr-legend"></div>
       <div class="am-wrap am-chart" id="tsr-chart" data-source="markets"></div>
@@ -2189,6 +2197,8 @@ dash.calc('dotpeer', {
   }));
   root.querySelectorAll('#mk-span .am-chip').forEach((b) => b.addEventListener('click', () => dash.setParams({ mkfrom: b.dataset.from })));
   const mkDate = document.getElementById('mk-date');
+  root.querySelectorAll('#mk-mode .am-chip').forEach((b) => b.addEventListener('click', () => dash.setParams({ mkmode: b.dataset.mode })));
+  document.getElementById('mk-one').addEventListener('change', (e) => dash.setParams({ mkone: e.target.value }));
   mkDate.addEventListener('change', () => { if (/^\d{4}-\d{2}-\d{2}$/.test(mkDate.value)) dash.setParams({ mkfrom: mkDate.value }); });
   function mkStart(from, latest) {
     if (/^\d{4}-\d{2}-\d{2}$/.test(from || '')) return from;
@@ -2257,20 +2267,51 @@ dash.calc('dotpeer', {
     stamp('mk-card', liveAt ? 'Intraday' : 'Close ' + dfmt(latest));
     const today = new Date().toISOString().slice(0, 10), shd = d3.max(list, (r) => (r.sharesDate && r.sharesDate <= today ? r.sharesDate : null));
     document.getElementById('mk-note').textContent = asof + '. Total return runs from the close on ' + dfmt(mkBase((T.SPY || Object.values(T)[0]).eod, start)[0]) + '. Market cap uses shares outstanding from the latest SEC filing' + (shd ? ' (as of ' + dfmt(shd) + ' or earlier)' : '') + '; financial measures are the trailing 12 months from the Peer Comparison tab.' + (lateOnes.length ? ' † Return from first trading day: ' + lateOnes.join(', ') + '.' : '') + ' Click a header to sort.';
-    // chart
+    // chart: total return (dividends reinvested), price change (split-adjusted, no dividends) or share price in dollars
+    const mode = ['px', 'usd'].includes(P.mkmode) ? P.mkmode : 'tsr';
+    root.querySelectorAll('#mk-mode .am-chip').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+    const one = document.getElementById('mk-one'), selBox = document.getElementById('mk-sel');
+    one.hidden = mode !== 'usd'; selBox.hidden = mode === 'usd';
+    const fmtPct = (v) => (v > 0 ? '+' : v < 0 ? '−' : '') + d3.format(Math.abs(v) < 0.1 ? '.1%' : '.0%')(Math.abs(v));
+    // close adjusted for later stock splits only, so a split doesn't look like a crash
+    const splitAdj = (E) => { const out = new Array(E.length); let m = 1; for (let i = E.length - 1; i >= 0; i--) { out[i] = E[i][1] / m; m *= E[i][4] || 1; } return out; };
+    if (mode === 'usd') {
+      const opts = Object.entries(T);
+      if (one.options.length !== opts.length) one.replaceChildren(...opts.map(([t, h]) => new Option(t + ' — ' + h.name, t)));
+      const t = T[P.mkone] ? P.mkone : 'DAL'; one.value = t;
+      const h = T[t], E = h.eod, b = mkBase(E, start);
+      const pts = E.filter((r) => r[0] >= b[0]).map((r) => ({ t: new Date(r[0] + 'T00:00:00Z'), v: r[1] }));
+      const now = mkNow(h); if (now && now.live) pts.push({ t: new Date(now.date + 'T00:00:00Z'), v: now.close });
+      const series = [{ key: t, name: t, color: C()[0], pts }];
+      lineChart(document.getElementById('tsr-chart'), series, (v) => '$' + d3.format(v < 20 ? ',.2f' : ',.0f')(v), { snap: 5 });
+      legendInto('tsr-legend', [{ name: t + ' — ' + h.name, color: C()[0] }]);
+      const yr = new Date(new Date(E[E.length - 1][0]).getTime() - 365 * 864e5).toISOString().slice(0, 10);
+      const Y = E.filter((r) => r[0] > yr); const hi = d3.greatest(Y, (r) => r[1]), lo = d3.least(Y, (r) => r[1]);
+      document.getElementById('tsr-h').firstChild.textContent = 'Share price';
+      document.getElementById('tsr-note').textContent = 'Daily closing price in dollars, as traded (not adjusted for dividends), from the start date above. One company at a time, since prices run from about $3 to over $700.' +
+        (hi && lo ? ' 52-week range: $' + d3.format(',.2f')(lo[1]) + ' (' + dfmt(lo[0]) + ') to $' + d3.format(',.2f')(hi[1]) + ' (' + dfmt(hi[0]) + ').' : '');
+      stamp('tsr-card', 'Since ' + dfmt(start));
+      return;
+    }
     const choices = Object.entries(T).map(([t, h]) => ({ code: t, label: t, title: h.name }));
     const sel = String(P.mksel || '').split(',').filter((t) => T[t]);
     pickChips('mk-sel', choices, sel, 8, 'mksel');
     let ci = 0;
     const series = sel.map((t) => {
-      const h = T[t], E = h.eod, b = mkBase(E, start);
-      const pts = E.filter((r) => r[0] >= b[0]).map((r) => ({ t: new Date(r[0] + 'T00:00:00Z'), v: r[2] / b[2] - 1 }));
-      const now = mkNow(h); if (now && now.live) pts.push({ t: new Date(now.date + 'T00:00:00Z'), v: now.adj / b[2] - 1 });
+      const h = T[t], E = h.eod, b = mkBase(E, start), bi = E.indexOf(b);
+      const ref = mode === 'px' ? splitAdj(E) : E.map((r) => r[2]);
+      const pts = E.map((r, i) => (i >= bi ? { t: new Date(r[0] + 'T00:00:00Z'), v: ref[i] / ref[bi] - 1 } : null)).filter(Boolean);
+      const now = mkNow(h);
+      if (now && now.live) pts.push({ t: new Date(now.date + 'T00:00:00Z'), v: (mode === 'px' ? now.close : now.adj) / (mode === 'px' ? ref[bi] : b[2]) - 1 });
       const bench = BENCH.has(t);
       return { key: t, name: t, color: bench ? (t === 'SPY' ? 'var(--color-fg-muted)' : 'var(--color-fg)') : C()[ci++ % 6], dashed: bench, pts };
     });
-    lineChart(document.getElementById('tsr-chart'), series, (v) => (v > 0 ? '+' : v < 0 ? '−' : '') + d3.format(Math.abs(v) < 0.1 ? '.1%' : '.0%')(Math.abs(v)), { zero: true, snap: 5, empty: 'Pick a ticker above.' });
+    lineChart(document.getElementById('tsr-chart'), series, fmtPct, { zero: true, snap: 5, empty: 'Pick a ticker above.' });
     legendInto('tsr-legend', series.map((s) => ({ name: s.name + (T[s.key] ? ' — ' + T[s.key].name : ''), color: s.color, dashed: s.dashed })));
+    document.getElementById('tsr-h').firstChild.textContent = mode === 'px' ? 'Share price change' : 'Total shareholder return';
+    document.getElementById('tsr-note').textContent = (mode === 'px'
+      ? 'Change in share price alone, from the start date above, leaving out dividends (adjusted for stock splits).'
+      : 'Cumulative return with dividends reinvested, from the start date above.') + ' Pick up to eight; the S&P 500 and the U.S. airline ETF (JETS) are dashed for reference.';
     stamp('tsr-card', 'Since ' + dfmt(start));
   }
 
