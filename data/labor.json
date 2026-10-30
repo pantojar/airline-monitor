@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-30T16:03:21Z",
+ "generated": "2026-10-30T16:14:02Z",
  "companies": {
   "DAL": {
    "ticker": "DAL",
@@ -3536,6 +3536,53 @@
    "status_source": "10-K",
    "prose": true,
    "status_changed": "2026-10-30"
+  },
+  {
+   "ticker": "JBLU",
+   "unit": null,
+   "group": "Dispatchers",
+   "group_raw": "Dispatchers",
+   "union": "Transport Workers Union (TWU)",
+   "employees": null,
+   "amendable_text": "First contract",
+   "amendable": null,
+   "precision": null,
+   "footnote": null,
+   "carrier": "JetBlue Airways",
+   "craft": "dispatchers",
+   "open": true,
+   "status": "Contract rejected",
+   "status_source": "union",
+   "status_date": "2026-02-26",
+   "filing_quote": "Dispatchers and dispatch-related workers at JetBlue's Long Island City headquarters voted to join the TWU (announced Feb 26, 2026); negotiating a first contract.",
+   "manual": true,
+   "news": {
+    "title": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management's Empty Promises",
+    "url": "https://www.twu.org/jetblue-air-dispatchers-vote-to-join-the-twu-and-reject-managements-empty-promises/",
+    "source": "TWU",
+    "date": "2026-02-26"
+   },
+   "union_events": [
+    {
+     "status": "Contract rejected",
+     "date": "2026-02-26",
+     "source": "TWU",
+     "kind": "union",
+     "title": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises",
+     "url": "https://www.twu.org/jetblue-air-dispatchers-vote-to-join-the-twu-and-reject-managements-empty-promises/",
+     "quote": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises."
+    }
+   ],
+   "union_event": {
+    "status": "Contract rejected",
+    "date": "2026-02-26",
+    "source": "TWU",
+    "kind": "union",
+    "title": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises",
+    "url": "https://www.twu.org/jetblue-air-dispatchers-vote-to-join-the-twu-and-reject-managements-empty-promises/",
+    "quote": "JetBlue Air Dispatchers Vote to Join the TWU and Reject Management’s Empty Promises."
+   },
+   "status_changed": "2026-02-26"
   }
  ]
 }
