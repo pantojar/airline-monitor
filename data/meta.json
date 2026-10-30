@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-10-30T16:04:22Z",
+  "at": "2026-10-30T16:16:14Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -137,10 +137,10 @@
    }
   }
  },
- "generated": "2026-10-30T16:14:02Z",
+ "generated": "2026-10-30T16:26:51Z",
  "news": {
-  "at": "2026-10-30T16:04:56Z",
-  "items": 105,
+  "at": "2026-10-30T16:16:51Z",
+  "items": 104,
   "errors": [
    "Envoy Air news: unavailable",
    "PSA Airlines news: unavailable"
@@ -161,7 +161,7 @@
   "rows": 430
  },
  "fuel_spot": {
-  "at": "2026-10-30T16:04:57Z",
+  "at": "2026-10-30T16:16:51Z",
   "latest": "2026-10-27",
   "rows": 1202,
   "diesel_close": "2026-10-29",
@@ -174,7 +174,8 @@
   "errors": []
  },
  "labor": {
-  "groups": 97,
+  "at": "2026-10-30T16:26:51Z",
+  "groups": 102,
   "errors": [],
   "union_sites": [
    {
@@ -264,7 +265,7 @@
    {
     "name": "TWU",
     "url": "https://www.twu.org",
-    "groups": 28,
+    "groups": 29,
     "method": "wp-posts,wp-media",
     "items": 103,
     "pdfs_read": 0
@@ -273,7 +274,7 @@
     "name": "TWU Local 556",
     "url": "https://www.twu556.org",
     "groups": 5,
-    "error": "posts: HTTP 401; media: HTTP 401; /feed/: HTTP 17; /rss: HTTP 17; /rss.xml: HTTP 404; /feed: HTTP 17",
+    "error": "posts: HTTP 401; media: TimeoutError; /feed/: HTTP 17; /rss: TimeoutError; /rss.xml: HTTP 404; /feed: HTTP 17",
     "method": null,
     "items": 0,
     "pdfs_read": 0
@@ -404,7 +405,7 @@
    {
     "name": "Allegiant newsroom",
     "url": "https://newsroom.allegiantair.com",
-    "groups": 4,
+    "groups": 9,
     "method": "press releases",
     "items": 44,
     "pdfs_read": 0
@@ -420,12 +421,12 @@
   ]
  },
  "cpi": {
-  "at": "2026-10-30T16:04:57Z",
+  "at": "2026-10-30T16:16:52Z",
   "cpiw": "2026-09",
   "cpiu": "2026-09"
  },
  "revsplit": {
-  "at": "2026-10-30T16:04:23Z",
+  "at": "2026-10-30T16:16:15Z",
   "carriers": {
    "DAL": {
     "quarters": 19,
@@ -462,7 +463,7 @@
   }
  },
  "reliability": {
-  "at": "2026-10-30T16:14:02Z",
+  "at": "2026-10-30T16:26:51Z",
   "checked": "2026-10-30",
   "first": "2023-01",
   "latest": "2026-08",
