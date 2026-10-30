@@ -474,12 +474,53 @@ def update_labor(root, meta, ua, carriers, force=False):
         if e["date"] >= cur[:len(e["date"])] or rank["union"] > rank.get(row.get("status_source"), 0) and e["date"][:7] >= cur[:7]:
             row["status"], row["status_source"], row["status_date"] = e["status"], "union", e["date"]
             row["union_event"] = e
+    stamp_status_changes(groups, prev.get("groups", []))
     out = {"generated": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
            "companies": companies, "groups": groups}
     with open(path, "w", encoding="utf-8") as f:
         json.dump(out, f, indent=1, ensure_ascii=False)
     meta["labor"] = {"at": out["generated"], "groups": len(groups), "errors": errors, "union_sites": ureport}
     return True
+
+
+def _amend_dt(row):
+    a = row.get("amendable") or ""
+    try:
+        return dt.date.fromisoformat(a if len(a) == 10 else (a + "-01" if len(a) == 7 else a + "-01-01"))
+    except ValueError:
+        return None
+
+
+def stamp_status_changes(groups, prev_groups):
+    """status_changed: the date each group's current status took effect, kept from run to run.
+
+    A status carried over unchanged keeps its earlier date. A new status takes the date of the event that set it
+    (a news story, union post or filing), or for statuses that follow from the contract dates, the date the threshold
+    was crossed (amendable date, or a year before it). Otherwise it is the date this run first saw the change."""
+    today = dt.date.today().isoformat()
+    key = lambda r: (r.get("ticker"), r.get("unit"), r.get("group"))
+    old = {key(r): r for r in prev_groups}
+    for row in groups:
+        p = old.get(key(row))
+        if p and p.get("status") == row.get("status") and p.get("status_changed"):
+            row["status_changed"] = p["status_changed"]
+            continue
+        st, d = row.get("status"), None
+        ad = _amend_dt(row)
+        if st == "Past amendable date" and ad:
+            d = ad.isoformat()
+        elif st == "Amendable within a year" and ad:
+            d = (ad - dt.timedelta(days=365)).isoformat()
+        elif row.get("status_source") in ("news", "union", "manual", "10-Q") and row.get("status_date"):
+            d = row["status_date"][:10]
+            # union posts newest first: walk back while they report the same status, to its first report
+            for e in row.get("union_events") or []:
+                if e.get("status") != st:
+                    break
+                d = min(d, e["date"][:10])
+        elif p is not None:
+            d = today  # the status changed since the last run, with no dated event behind it
+        row["status_changed"] = d if d and d <= today else (today if p is not None else None)
 
 
 if __name__ == "__main__":

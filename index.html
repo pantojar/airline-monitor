@@ -281,13 +281,6 @@ window.dash = (function () {
     <div class="am-titlerow"><h1>Airline Financial Monitor</h1><span class="am-beta">Beta</span></div>
     <p class="am-asof" id="asof">Loading latest data…</p>
     <p class="am-betanote">This dashboard is still being built. Some figures and statuses may be wrong while sources are added and checked, so confirm anything important against the linked filing or source before relying on it.</p>
-    <p class="am-take" id="takeaway">
-      In each carrier's latest reported quarter, <b><span class="dash-skeleton" data-source="summary" data-field="n_loss" data-row="0">—</span></b> of
-      <b><span class="dash-skeleton" data-source="summary" data-field="n_active" data-row="0">—</span></b> active carriers posted an operating loss.
-      Fuel took a median <b><span class="dash-skeleton" data-source="summary" data-field="med_fuel_lq" data-row="0">—</span></b> of operating expense, up from
-      <b><span class="dash-skeleton" data-source="summary" data-field="med_fuel_ya" data-row="0">—</span></b> a year earlier; labor took a median
-      <b><span class="dash-skeleton" data-source="summary" data-field="med_lopex_lq" data-row="0">—</span></b>.
-    </p>
   </header>
 
   <nav class="am-tabs" role="tablist">
@@ -765,12 +758,12 @@ window.dash = (function () {
 
     <div class="am-card" id="ltable-card">
       <h2>All represented groups</h2>
-      <p class="am-note">Open contracts first, oldest amendable date at the top. Click a column header to sort by it (click again to reverse, a third time to return to this order). Click a status to open its source.</p>
+      <p class="am-note">Open contracts first, oldest amendable date at the top. Click a column header to sort by it (click again to reverse, a third time to return to this order). Click a status to open its source. Last updated is when the current status took effect.</p>
       <div class="am-tbl-box">
         <table class="am-t" id="labor-table" data-source="labor_groups" data-row-key="ticker,unit,group">
           <thead><tr>
             <th class="l" data-field="carrier"><button data-lsort="carrier">Carrier</button></th><th class="l" data-field="group"><button data-lsort="group">Group</button></th><th class="l am-hn" data-field="union"><button data-lsort="union">Union</button></th>
-            <th data-field="employees"><button data-lsort="employees">Employees</button></th><th class="l" data-field="amendable_text"><button data-lsort="amendable">Amendable</button></th><th class="l" data-field="status"><button data-lsort="status">Status</button></th><th class="l w" data-field="news"><button data-lsort="source">Latest source</button></th>
+            <th data-field="employees"><button data-lsort="employees">Employees</button></th><th class="l" data-field="amendable_text"><button data-lsort="amendable">Amendable</button></th><th class="l" data-field="status"><button data-lsort="status">Status</button></th><th data-field="status_changed"><button data-lsort="changed">Last updated</button></th><th class="l w" data-field="news"><button data-lsort="source">Latest source</button></th>
           </tr></thead>
           <tbody></tbody>
         </table>
@@ -788,11 +781,6 @@ window.dash = (function () {
       </div>
     </div>
 
-    <div class="am-card am-prose" id="disc-card">
-      <h2>What the companies say</h2>
-      <p class="am-note">Quoted from each company's latest 10-Q (and, where the 10-K has no union table, its 10-K). Text is as filed.</p>
-      <div id="disc-list" data-source="labor_companies"></div>
-    </div>
   </section>
 
   <!-- NEWS -->
@@ -1715,7 +1703,7 @@ dash.calc('dotpeer', {
       .on('pointermove', (ev) => {
         const [mx, my] = d3.pointer(ev); const i = Math.max(0, Math.min(rows.length - 1, Math.floor((mx - m.l) / x.step()))); const r = rows[i];
         const sc = box.clientWidth / W;
-        tp.show(mx * sc, my * sc, ql(r.quarter) + ' · ' + tf(r.rev), cats.slice().reverse().map(([k, n]) => ({ color: col(k), name: n, value: tf(num(r[k]) || 0) + ' (' + d3.format('.0%')((num(r[k]) || 0) / r.rev) + ')' })));
+        tp.show(mx * sc, my * sc, ql(r.quarter) + ' · ' + fmtM(r.rev), cats.slice().reverse().map(([k, n]) => ({ color: col(k), name: n, value: fmtM(num(r[k]) || 0) + ' (' + d3.format('.0%')((num(r[k]) || 0) / r.rev) + ')' })));
       })
       .on('pointerleave', () => tp.hide());
     document.getElementById('revmix-legend').replaceChildren(...cats.map(([k, n]) => { const sp = document.createElement('span'); const w = document.createElement('i'); w.className = 'am-sw'; w.style.background = col(k); sp.append(w, document.createTextNode(n)); return sp; }));
@@ -1935,6 +1923,7 @@ dash.calc('dotpeer', {
     amendable: (r) => (amDate(r) ? amDate(r).getTime() : null),
     status: (r) => (LSTATUS.includes(r.status) ? LSTATUS.indexOf(r.status) : LSTATUS.length),
     source: (r) => (r.status_date && r.status_source !== '10-K' ? r.status_date : null),
+    changed: (r) => r.status_changed || null,
   };
   root.querySelectorAll('#labor-table th button[data-lsort]').forEach((b) => b.addEventListener('click', () => {
     const c = b.dataset.lsort;
@@ -2324,14 +2313,6 @@ dash.calc('dotpeer', {
     const qtr = dash.data('qtr'), peer = dash.data('peer'), sum = dash.data('summary');
     enrichPeer(peer, fin);
 
-    // takeaway
-    const S = sum.status === 'ok' && sum.data && sum.data[0];
-    const tk = { n_loss: (v) => String(v), n_active: (v) => String(v), med_fuel_lq: pct, med_fuel_ya: pct, med_lopex_lq: pct };
-    root.querySelectorAll('#takeaway [data-field]').forEach((el) => {
-      const f = el.dataset.field;
-      if (S) { el.textContent = tk[f](S[f]); el.classList.remove('dash-skeleton'); } else el.textContent = '—';
-    });
-
     // controls
     root.querySelectorAll('#basis-chips .am-chip').forEach((b) => b.setAttribute('aria-pressed', String((P.basis || 'lq') === b.dataset.basis)));
     inact.checked = P.inactive === true;
@@ -2558,7 +2539,7 @@ dash.calc('dotpeer', {
           src.append(a, m); }
         else if (r.footnote) src.textContent = r.footnote;
         if (r.open && r.status !== 'Ratified') tr.style.fontWeight = 'var(--cds-font-weight-medium)';
-        tr.append(td(r.carrier, 'l'), td(r.group, 'l wg'), td(r.union || '—', 'l am-hn wu'), td(r.employees ? d3.format(',')(r.employees) : '—'), td(amText(r), 'l'), st, src);
+        tr.append(td(r.carrier, 'l'), td(r.group, 'l wg'), td(r.union || '—', 'l am-hn wu'), td(r.employees ? d3.format(',')(r.employees) : '—'), td(amText(r), 'l'), st, td(r.status_changed ? dfmt(r.status_changed) : '—'), src);
         return tr;
       }));
       // union sites
@@ -2578,26 +2559,6 @@ dash.calc('dotpeer', {
         if (!x.method) tr.className = 'off';
         return tr;
       }));
-      // disclosures
-      if (lc.status === 'ok') {
-        const names = new Map((car.status === 'ok' ? car.data : []).map((c) => [c.ticker, c.carrier]));
-        const box = document.getElementById('disc-list');
-        const wanted = (P.lcarrier || 'All') === 'All' ? null : new Set(all.filter((r) => r.carrier === P.lcarrier).map((r) => r.ticker));
-        box.replaceChildren(...lc.data.filter((c) => !wanted || wanted.has(c.ticker)).map((c) => {
-          const d = document.createElement('div'); d.className = 'am-disc';
-          const h = document.createElement('h3'); h.textContent = names.get(c.ticker) || c.ticker; d.append(h);
-          const add = (label, f, quotes) => {
-            if (!f || !quotes || !quotes.length) return;
-            const p = document.createElement('div'); p.className = 'am-note'; p.style.margin = '0';
-            const a = document.createElement('a'); a.href = f.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = label + ' filed ' + f.filed; a.style.color = 'inherit';
-            p.append(a); d.append(p);
-            quotes.forEach((q) => { const b = document.createElement('div'); b.className = 'am-quote'; b.textContent = q; d.append(b); });
-          };
-          add('10-Q', c.tenq, c.tenq && c.tenq.sentences);
-          add('10-K', c.tenk, c.tenk && c.tenk.prose);
-          return d.childElementCount > 1 ? d : null;
-        }).filter(Boolean));
-      }
     }
 
     // ---------- pay tab ----------

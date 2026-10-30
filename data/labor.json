@@ -1125,7 +1125,8 @@
     "source": "Skift",
     "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPQktJdm5VU3hia1lBRU9NekNKVXR3TXNkdjBNUlVZTlB2QkZOOXB0Ump3cmlBcWZ5UEo0RVJnWW9KNHVmMVBNTTgwNlpYcnRFQnU2U2MyM25sTzc1SWw3bmR1X0gtWlY3ZDI5WGVXVm9RY3o2T041ZmRTMlgxZEZRNnk0VWk2dlFJa3ZLRFFn?oc=5"
    },
-   "status_date": "2026-08-19"
+   "status_date": "2026-08-19",
+   "status_changed": "2026-08-19"
   },
   {
    "unit": null,
@@ -1142,7 +1143,8 @@
    "open": false,
    "craft": "dispatchers",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": "Endeavor",
@@ -1159,7 +1161,8 @@
    "open": false,
    "craft": "pilots",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": "Endeavor",
@@ -1176,7 +1179,8 @@
    "open": false,
    "craft": "flight attendants",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-03-31"
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1249,7 +1253,8 @@
     "title": "United Flight Attendants Ratify New Contract",
     "url": "https://afacwa.org/united-flight-attendants-ratify-new-contract/",
     "quote": "United Flight Attendants Ratify New Contract."
-   }
+   },
+   "status_changed": "2026-05-12"
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1314,7 +1319,8 @@
     "title": "Ratification.Results.JUN2026",
     "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
     "quote": "Fleet Service, Passenger Service, and Central Load Planners did not ratify their tentative agreements.;"
-   }
+   },
+   "status_changed": "2026-06-26"
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1331,7 +1337,8 @@
    "open": false,
    "craft": "pilots",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-10-01"
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1396,7 +1403,8 @@
     "title": "Ratification.Results.JUN2026",
     "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
     "quote": "Fleet Service, Passenger Service, and Central Load Planners did not ratify their tentative agreements.;"
-   }
+   },
+   "status_changed": "2026-06-26"
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1420,7 +1428,8 @@
     "source": "World Socialist Web Site",
     "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE13cm9TU3hGLWRxaGhwVnpFN0hZcFU5RlRqb0k1OE53UFV4YkN3d1cyTjhaQURXSVB4bWVCM290bEVES0U1cjBCcG40c25CT0V4YjJlZXZjSGRwVmZ0UVRNNVRqcFJPbjNB?oc=5"
    },
-   "status_date": "2026-09-24"
+   "status_date": "2026-09-24",
+   "status_changed": "2026-09-24"
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1485,7 +1494,8 @@
     "title": "Storekeeper Employees Agreement 2026-2031 Ratified",
     "url": "https://iam141.org/wp-content/uploads/2026/08/Storekeeper-Employees-Agreement-2026-2031_Ratified.pdf",
     "quote": "Storekeeper Employees Agreement 2026-2031 Ratified."
-   }
+   },
+   "status_changed": "2026-06-26"
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1502,7 +1512,8 @@
    "open": true,
    "craft": "dispatchers",
    "status": "Past amendable date",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2024-12-01"
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1567,7 +1578,8 @@
     "title": "Fleet Technical Instructors and Related Employees Agreement 2026-2031 Ratified",
     "url": "https://iam141.org/wp-content/uploads/2026/08/Fleet-Technical-Instructors-and-Related-Employees-Agreement-2026-2031_Ratified.pdf",
     "quote": "Fleet Technical Instructors and Related Employees Agreement 2026-2031 Ratified."
-   }
+   },
+   "status_changed": "2026-06-26"
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1584,7 +1596,8 @@
    "open": false,
    "craft": null,
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1601,7 +1614,8 @@
    "open": false,
    "craft": null,
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2025-11-01"
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1648,7 +1662,8 @@
     "title": "Ratification.Results.JUN2026",
     "url": "https://iam141.org/wp-content/uploads/2026/06/Ratification.Results.JUN2026.pdf",
     "quote": "Fleet Service, Passenger Service, and Central Load Planners did not ratify their tentative agreements.;"
-   }
+   },
+   "status_changed": "2026-06-26"
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1713,7 +1728,8 @@
     "title": "Maintenance Instructor Employees Agreement 2026-2031 Ratified",
     "url": "https://iam141.org/wp-content/uploads/2026/08/Maintenance-Instructor-Employees-Agreement-2026-2031_Ratified.pdf",
     "quote": "Maintenance Instructor Employees Agreement 2026-2031 Ratified."
-   }
+   },
+   "status_changed": "2026-06-26"
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1778,7 +1794,8 @@
     "title": "Security Officer Employees Agreement 2026-2031 Ratified",
     "url": "https://iam141.org/wp-content/uploads/2026/08/Security-Officer-Employees-Agreement-2026-2031_Ratified.pdf",
     "quote": "Security Officer Employees Agreement 2026-2031 Ratified."
-   }
+   },
+   "status_changed": "2026-06-26"
   },
   {
    "unit": "United Ground Express, Inc.",
@@ -1795,7 +1812,8 @@
    "open": true,
    "craft": "passenger service",
    "status": "Past amendable date",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2025-03-01"
   },
   {
    "unit": "Mainline",
@@ -1819,7 +1837,8 @@
     "source": "InsideFlyer",
     "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOaXFLbE1LNmQwZEZMb0RLMXpadXlEMlFHdVBaeDJUX3JPQjU0ekZ1ZWRNODR1SHAxUUZVZklSMG1JNnZXU213aXdfZVJJV3N3NUNFMFQwX3NvLTA2Y1diTEdrLVNlVkNyYlRCQ29yRktKSkJocjdFbnJ1cXg0S24tc1JjMVZ6ZHNwcjVpTGpWemc?oc=5"
    },
-   "status_date": "2026-09-17"
+   "status_date": "2026-09-17",
+   "status_changed": "2026-09-17"
   },
   {
    "unit": "Mainline",
@@ -1836,7 +1855,8 @@
    "open": false,
    "craft": "flight attendants",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": "Mainline",
@@ -1853,7 +1873,8 @@
    "open": false,
    "craft": "passenger service",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": "Mainline",
@@ -1870,7 +1891,8 @@
    "open": false,
    "craft": "mechanics",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-01-01"
   },
   {
    "unit": "Mainline",
@@ -1887,7 +1909,8 @@
    "open": false,
    "craft": "fleet service",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-01-01"
   },
   {
    "unit": "Mainline",
@@ -1904,7 +1927,8 @@
    "open": false,
    "craft": null,
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-01-01"
   },
   {
    "unit": "Mainline",
@@ -1921,7 +1945,8 @@
    "open": false,
    "craft": null,
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": "Mainline",
@@ -1938,7 +1963,8 @@
    "open": false,
    "craft": "mechanics",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-01-01"
   },
   {
    "unit": "Mainline",
@@ -1955,7 +1981,8 @@
    "open": false,
    "craft": "mechanics",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-01-01"
   },
   {
    "unit": "Mainline",
@@ -1999,7 +2026,8 @@
     "title": "American Airlines dispatchers and operations specialists approve new 5-year contract",
     "url": "https://news.aa.com/news/news-details/2026/American-Airlines-dispatchers-and-operations-specialists-approve-new-five-year-contract-CORP-LAB-10/default.aspx",
     "quote": "American Airlines dispatchers and operations specialists approve new 5-year contract."
-   }
+   },
+   "status_changed": "2026-10-27"
   },
   {
    "unit": "Mainline",
@@ -2016,7 +2044,8 @@
    "open": false,
    "craft": null,
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": "Envoy",
@@ -2033,7 +2062,8 @@
    "open": false,
    "craft": "pilots",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": "Envoy",
@@ -2050,7 +2080,8 @@
    "open": false,
    "craft": "flight attendants",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2025-01-01"
   },
   {
    "unit": "Envoy",
@@ -2067,7 +2098,8 @@
    "open": false,
    "craft": null,
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-01-01"
   },
   {
    "unit": "Envoy",
@@ -2084,7 +2116,8 @@
    "open": false,
    "craft": "mechanics",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-01-01"
   },
   {
    "unit": "Envoy",
@@ -2101,7 +2134,8 @@
    "open": false,
    "craft": null,
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-01-01"
   },
   {
    "unit": "Envoy",
@@ -2118,7 +2152,8 @@
    "open": false,
    "craft": null,
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2025-01-01"
   },
   {
    "unit": "Envoy",
@@ -2142,7 +2177,8 @@
     "source": "PressReader",
     "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE05WklRcm1RQTVlUk9nMW1QWndNZUs0VG9hVGVMWU5nVm1JTVVfMVJqVDhHSDMxNU1jRW5ueFFaam9yRHN2QVpoOC1IUEZ0VlJBbGJ1SHNhOVBQa2E1MV9Rdmo5c1hLd0NsWEJaOElJT0RGZw?oc=5"
    },
-   "status_date": "2026-10-22"
+   "status_date": "2026-10-22",
+   "status_changed": "2026-10-22"
   },
   {
    "unit": "Envoy",
@@ -2159,7 +2195,8 @@
    "open": true,
    "craft": "dispatchers",
    "status": "Past amendable date",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2025-01-01"
   },
   {
    "unit": "Envoy",
@@ -2176,7 +2213,8 @@
    "open": false,
    "craft": "passenger service",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2025-01-01"
   },
   {
    "unit": "Piedmont",
@@ -2193,7 +2231,8 @@
    "open": false,
    "craft": "pilots",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": "Piedmont",
@@ -2210,7 +2249,8 @@
    "open": false,
    "craft": "flight attendants",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2025-01-01"
   },
   {
    "unit": "Piedmont",
@@ -2227,7 +2267,8 @@
    "open": false,
    "craft": "mechanics",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2025-01-01"
   },
   {
    "unit": "Piedmont",
@@ -2244,7 +2285,8 @@
    "open": false,
    "craft": null,
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2025-01-01"
   },
   {
    "unit": "Piedmont",
@@ -2261,7 +2303,8 @@
    "open": true,
    "craft": "fleet service",
    "status": "Past amendable date",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2023-01-01"
   },
   {
    "unit": "Piedmont",
@@ -2278,7 +2321,8 @@
    "open": false,
    "craft": "dispatchers",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": "PSA",
@@ -2295,7 +2339,8 @@
    "open": false,
    "craft": "pilots",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": "PSA",
@@ -2366,7 +2411,8 @@
     "title": "AFA PSA Flight Attendants Are Seeing Red",
     "url": "https://afacwa.org/afa-psa-flight-attendants-are-seeing-red/",
     "quote": "AFA PSA Flight Attendants are wearing their Contract Now lanyards en masse to show management they stand behind their negotiators and won’t accept insulting, demoralizing proposals at the negotiating table."
-   }
+   },
+   "status_changed": "2026-10-16"
   },
   {
    "unit": "PSA",
@@ -2383,7 +2429,8 @@
    "open": false,
    "craft": "mechanics",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-01-01"
   },
   {
    "unit": "PSA",
@@ -2448,7 +2495,8 @@
     "title": "IAM/PSA Airlines Stores Negotiations Update",
     "url": "https://atd142.org/iam-psa-airlines-stores-negotiations-update-15/",
     "quote": "IAM/PSA Airlines Stores Negotiations Update."
-   }
+   },
+   "status_changed": "2026-08-21"
   },
   {
    "unit": "PSA",
@@ -2465,7 +2513,8 @@
    "open": false,
    "craft": null,
    "status": "Not stated",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": "PSA",
@@ -2482,7 +2531,8 @@
    "open": false,
    "craft": "dispatchers",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-01-01"
   },
   {
    "unit": null,
@@ -2499,7 +2549,8 @@
    "open": false,
    "craft": "pilots",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": null,
@@ -2516,7 +2567,8 @@
    "open": false,
    "craft": "flight attendants",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": null,
@@ -2533,7 +2585,8 @@
    "open": false,
    "craft": null,
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2025-10-01"
   },
   {
    "unit": null,
@@ -2550,7 +2603,8 @@
    "open": false,
    "craft": "fleet service",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": null,
@@ -2567,7 +2621,8 @@
    "open": false,
    "craft": "mechanics",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": null,
@@ -2584,7 +2639,8 @@
    "open": false,
    "craft": null,
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-01-01"
   },
   {
    "unit": null,
@@ -2601,7 +2657,8 @@
    "open": false,
    "craft": "dispatchers",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-06-01"
   },
   {
    "unit": null,
@@ -2618,7 +2675,8 @@
    "open": false,
    "craft": "mechanics",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-07-01"
   },
   {
    "unit": null,
@@ -2656,7 +2714,8 @@
     "title": "AMFA-SWA AMT Negotiations Update #1",
     "url": "https://www.amfanational.org/?zone=/unionactive/view_article.cfm&HomeID=1009673",
     "quote": "AMFA-SWA AMT Negotiations Update #1."
-   }
+   },
+   "status_changed": "2026-08-24"
   },
   {
    "unit": null,
@@ -2673,7 +2732,8 @@
    "open": false,
    "craft": "mechanics",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": null,
@@ -2690,7 +2750,8 @@
    "open": false,
    "craft": "passenger service",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": null,
@@ -2707,7 +2768,8 @@
    "open": false,
    "craft": null,
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": "Alaska",
@@ -2724,7 +2786,8 @@
    "open": false,
    "craft": "pilots",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-03-02"
   },
   {
    "unit": "Alaska",
@@ -2748,7 +2811,8 @@
     "source": "PYOK",
     "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxON1ZIWWVCWWJ3SmZhTGlBVVdlRG9LX2xOd1pqbVY4WGdtclFVT085TTNnelBNaWNBN293Sm92RmUzWFNTR1Y0Q2Y5Q2NJRzBfN1M1N2dULWhTYVg5WEJneElhR1F4NmhYWG9JZ01TQk9nUUY5T25zalZseWNGYkdHcVd4d3lzUk16TmcwTXdfczBYNU9BZXlLaXlNbkdjSEJ4encyR3hkdmhqTV9ZWXdaNVpEcGEwUFNxV0U2NEduaFU2RDJjemhzMjB1NzhnX2g2TWc1SUUtc25wd0JDNEN4czNnUzkxYmoxZjhaVzMwRWNtZzRw?oc=5"
    },
-   "status_date": "2025-12-30"
+   "status_date": "2025-12-30",
+   "status_changed": "2025-12-30"
   },
   {
    "unit": "Alaska",
@@ -2765,7 +2829,8 @@
    "open": true,
    "craft": "fleet service",
    "status": "Past amendable date",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-09-27"
   },
   {
    "unit": "Alaska",
@@ -2782,7 +2847,8 @@
    "open": true,
    "craft": "passenger service",
    "status": "Past amendable date",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-09-27"
   },
   {
    "unit": "Alaska",
@@ -2799,7 +2865,8 @@
    "open": false,
    "craft": "mechanics",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": "Alaska",
@@ -2816,7 +2883,8 @@
    "open": false,
    "craft": "dispatchers",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-03-24"
   },
   {
    "unit": "Hawaiian",
@@ -2833,7 +2901,8 @@
    "open": false,
    "craft": "pilots",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-03-02"
   },
   {
    "unit": "Hawaiian",
@@ -2850,7 +2919,8 @@
    "open": false,
    "craft": "flight attendants",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": "Hawaiian",
@@ -2867,7 +2937,8 @@
    "open": false,
    "craft": "mechanics",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-02-15"
   },
   {
    "unit": "Hawaiian",
@@ -2884,7 +2955,8 @@
    "open": false,
    "craft": "passenger service",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-02-15"
   },
   {
    "unit": "Hawaiian",
@@ -2901,7 +2973,8 @@
    "open": false,
    "craft": "dispatchers",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2026-04-21"
   },
   {
    "unit": "Horizon",
@@ -2945,7 +3018,8 @@
     "title": "Teamsters Pilots at Horizon Air Hold Informational Pickets",
     "url": "https://teamster.org/2026/10/teamsters-pilots-at-horizon-air-hold-informational-pickets/",
     "quote": "Teamsters Pilots at Horizon Air Hold Informational Pickets."
-   }
+   },
+   "status_changed": "2026-10-15"
   },
   {
    "unit": "Horizon",
@@ -3016,7 +3090,8 @@
     "title": "Horizon AFA Flight Attendants Picket Across the System",
     "url": "https://afacwa.org/horizon-afa-flight-attendants-picket-across-the-system/",
     "quote": "Horizon AFA Flight Attendants Picket Across the System."
-   }
+   },
+   "status_changed": "2026-10-02"
   },
   {
    "unit": "Horizon",
@@ -3033,7 +3108,8 @@
    "open": false,
    "craft": "mechanics",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": "Horizon",
@@ -3051,7 +3127,8 @@
    "craft": "dispatchers",
    "status": "In mediation",
    "status_source": "10-K",
-   "status_date": "2026-02-12"
+   "status_date": "2026-02-12",
+   "status_changed": null
   },
   {
    "unit": "McGee Air Services",
@@ -3068,7 +3145,8 @@
    "open": false,
    "craft": "fleet service",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": null,
@@ -3085,7 +3163,8 @@
    "open": true,
    "craft": "pilots",
    "status": "Past amendable date",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2025-02-01"
   },
   {
    "unit": null,
@@ -3102,7 +3181,8 @@
    "open": false,
    "craft": "pilots",
    "status": "Not stated",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": null,
@@ -3119,7 +3199,8 @@
    "open": false,
    "craft": "flight attendants",
    "status": "Amendable within a year",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": "2025-12-13"
   },
   {
    "unit": null,
@@ -3137,7 +3218,8 @@
    "craft": "pilots",
    "status": "In mediation",
    "status_source": "10-K",
-   "status_date": "2026-02-18"
+   "status_date": "2026-02-18",
+   "status_changed": null
   },
   {
    "unit": null,
@@ -3208,7 +3290,8 @@
     "title": "3 Days Out: AFA Frontier Picket at PHL",
     "url": "https://afacwa.org/3-days-out-afa-frontier-picket-at-phl/",
     "quote": "Your support during the picket will show management that Frontier Flight Attendants won’t accept anything less than industry standards."
-   }
+   },
+   "status_changed": "2026-09-18"
   },
   {
    "unit": null,
@@ -3228,7 +3311,8 @@
    "status_source": "10-Q",
    "status_date": "2026-09",
    "filing_quote": "In September 2026, we entered into a collective bargaining contract ratification with the union representing our aircraft technicians.",
-   "filing_url": "https://www.sec.gov/Archives/edgar/data/1670076/000167007626000103/fron-20260930.htm"
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/1670076/000167007626000103/fron-20260930.htm",
+   "status_changed": "2026-09"
   },
   {
    "unit": null,
@@ -3245,7 +3329,8 @@
    "open": false,
    "craft": "passenger service",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": null,
@@ -3262,7 +3347,8 @@
    "open": false,
    "craft": "dispatchers",
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": null,
@@ -3279,7 +3365,8 @@
    "open": false,
    "craft": null,
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "unit": null,
@@ -3296,7 +3383,8 @@
    "open": false,
    "craft": null,
    "status": "Contract in effect",
-   "status_source": "10-K"
+   "status_source": "10-K",
+   "status_changed": null
   },
   {
    "ticker": "ALGT",
@@ -3316,7 +3404,8 @@
    "prose": false,
    "manual": true,
    "status_date": "2026-08",
-   "filing_quote": "Two-year agreement ratified August 2026"
+   "filing_quote": "Two-year agreement ratified August 2026",
+   "status_changed": "2026-08"
   },
   {
    "ticker": "ALGT",
@@ -3334,7 +3423,8 @@
    "status": "Contract in effect",
    "status_source": "10-K",
    "prose": false,
-   "manual": true
+   "manual": true,
+   "status_changed": null
   },
   {
    "ticker": "ALGT",
@@ -3352,7 +3442,8 @@
    "status": "Contract in effect",
    "status_source": "10-K",
    "prose": false,
-   "manual": true
+   "manual": true,
+   "status_changed": null
   },
   {
    "ticker": "ALGT",
@@ -3370,7 +3461,8 @@
    "status": "Past amendable date",
    "status_source": "10-K",
    "prose": false,
-   "manual": true
+   "manual": true,
+   "status_changed": "2026-05-01"
   },
   {
    "ticker": "SKYW",
@@ -3387,7 +3479,8 @@
    "open": null,
    "status": "See 10-K text",
    "status_source": "10-K",
-   "prose": true
+   "prose": true,
+   "status_changed": null
   },
   {
    "ticker": "RJET",
@@ -3404,7 +3497,8 @@
    "open": null,
    "status": "See 10-K text",
    "status_source": "10-K",
-   "prose": true
+   "prose": true,
+   "status_changed": null
   },
   {
    "ticker": "RJET",
@@ -3429,7 +3523,8 @@
     "source": "Association of Flight Attendants-CWA",
     "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5zWGJEMk9EOXFDeGQtSU05RHVFVDk2VTN1RGdMd1pPd1dIUjgwelNHcjQtSmlRUmVxaW1SQkUwcm9VdGpnMjFMSHp5LXFHUi0tYXFmdUw3Qjc?oc=5"
    },
-   "status_date": "2025-12-16"
+   "status_date": "2025-12-16",
+   "status_changed": "2025-12-16"
   },
   {
    "ticker": "RJET",
@@ -3446,7 +3541,8 @@
    "open": null,
    "status": "See 10-K text",
    "status_source": "10-K",
-   "prose": true
+   "prose": true,
+   "status_changed": null
   }
  ]
 }

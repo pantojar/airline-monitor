@@ -7,7 +7,7 @@
  "Envoy": {
   "name": "Envoy Air",
   "query": "\"Envoy Air\" OR \"Envoy\"",
-  "match": "Envoy",
+  "match": "^(?!.*\\b(?:Putin|Ukraine|Russia|Gaza|Israel|Iran|Hamas|peace|Witkoff|Kushner|special envoy|diplomat\\w*|ceasefire)\\b).*(?:Envoy Air|(?-i:\\bEnvoy\\b))",
   "prefix": "Envoy",
   "parent": "AAL"
  },
