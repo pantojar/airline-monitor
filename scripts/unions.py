@@ -39,7 +39,7 @@ LABOR_WORDS = re.compile(r"union|contract|agreement|ratif|tentative|negotiat|bar
 CONTRACT_DOC_RE = re.compile(r"agreement|contract|\bCBA\b|\bLOA\b|letter of agreement", re.I)
 
 STATUS_RULES = [
-    ("Contract rejected", r"\breject|did not ratify|not ratified|failed to ratify|voted down|vote(d)? no\b|not been ratified"),
+    ("Contract rejected", r"\breject(?:s|ed|ing)?\s+(?:(?:the|a|their|its|new|proposed|latest|second|final|\S+-backed)\s+)*(?:tentative|TA\b|T/A\b|contract|agreement|deal|CBA)|\b(?:TA|T/A|tentative agreement|contract|agreement|deal)s?\s+(?:is\s+|was\s+|were\s+|has been\s+)?(?:overwhelmingly\s+)?rejected|\brejection of (?:the |a )?(?:tentative|TA\b|contract|agreement)|did not ratify|not ratified|failed to ratify|voted down|vote(d)? no\b|not been ratified"),
     ("Ratified", r"ratif(y|ied|ies|ication)|approved? (the|their|a) (new )?(contract|agreement|TA)|approve[sd]? (a |the |their )?new [\w-]*(-| )?(year )?(contract|agreement|labor agreement)|vote[sd]? to approve"),
     ("Tentative agreement", r"tentative (agreement|deal)|agreement in principle|reached (a|an) (deal|agreement)"),
     ("Strike vote", r"strike (vote|authori[sz]ation)|vote[sd]? to (authori[sz]e|strike)"),

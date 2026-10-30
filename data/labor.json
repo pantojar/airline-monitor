@@ -1144,7 +1144,7 @@
    "craft": "dispatchers",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": "Endeavor",
@@ -1162,7 +1162,7 @@
    "craft": "pilots",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": "Endeavor",
@@ -1597,7 +1597,7 @@
    "craft": null,
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": "United Airlines, Inc.",
@@ -1856,7 +1856,7 @@
    "craft": "flight attendants",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": "Mainline",
@@ -1874,7 +1874,7 @@
    "craft": "passenger service",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": "Mainline",
@@ -1946,7 +1946,7 @@
    "craft": null,
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": "Mainline",
@@ -2045,7 +2045,7 @@
    "craft": null,
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": "Envoy",
@@ -2063,7 +2063,7 @@
    "craft": "pilots",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": "Envoy",
@@ -2225,7 +2225,7 @@
    "craft": "pilots",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": "Piedmont",
@@ -2315,7 +2315,7 @@
    "craft": "dispatchers",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": "PSA",
@@ -2333,7 +2333,7 @@
    "craft": "pilots",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": "PSA",
@@ -2507,7 +2507,7 @@
    "craft": null,
    "status": "Not stated",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": "PSA",
@@ -2543,7 +2543,7 @@
    "craft": "pilots",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": null,
@@ -2561,7 +2561,7 @@
    "craft": "flight attendants",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": null,
@@ -2597,7 +2597,7 @@
    "craft": "fleet service",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": null,
@@ -2615,7 +2615,7 @@
    "craft": "mechanics",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": null,
@@ -2726,7 +2726,7 @@
    "craft": "mechanics",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": null,
@@ -2744,7 +2744,7 @@
    "craft": "passenger service",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": null,
@@ -2762,7 +2762,7 @@
    "craft": null,
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": "Alaska",
@@ -2859,7 +2859,7 @@
    "craft": "mechanics",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": "Alaska",
@@ -2913,7 +2913,7 @@
    "craft": "flight attendants",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": "Hawaiian",
@@ -3102,7 +3102,7 @@
    "craft": "mechanics",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": "Horizon",
@@ -3139,7 +3139,7 @@
    "craft": "fleet service",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": null,
@@ -3175,7 +3175,7 @@
    "craft": "pilots",
    "status": "Not stated",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": null,
@@ -3323,7 +3323,7 @@
    "craft": "passenger service",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": null,
@@ -3341,7 +3341,7 @@
    "craft": "dispatchers",
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": null,
@@ -3359,7 +3359,7 @@
    "craft": null,
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "unit": null,
@@ -3377,7 +3377,7 @@
    "craft": null,
    "status": "Contract in effect",
    "status_source": "10-K",
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "ticker": "ALGT",
@@ -3417,7 +3417,7 @@
    "status_source": "10-K",
    "prose": false,
    "manual": true,
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "ticker": "ALGT",
@@ -3436,7 +3436,7 @@
    "status_source": "10-K",
    "prose": false,
    "manual": true,
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "ticker": "ALGT",
@@ -3473,7 +3473,7 @@
    "status": "See 10-K text",
    "status_source": "10-K",
    "prose": true,
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "ticker": "RJET",
@@ -3491,7 +3491,7 @@
    "status": "See 10-K text",
    "status_source": "10-K",
    "prose": true,
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "ticker": "RJET",
@@ -3535,7 +3535,7 @@
    "status": "See 10-K text",
    "status_source": "10-K",
    "prose": true,
-   "status_changed": "2026-10-30"
+   "status_changed": null
   },
   {
    "ticker": "JBLU",

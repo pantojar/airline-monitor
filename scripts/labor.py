@@ -194,7 +194,7 @@ CRAFTS = [
     ("dispatchers", r"dispatch|flight superintendent", '(dispatchers)'),
 ]
 STATUS_RULES = [  # (status, pattern) checked in order on a headline
-    ("Contract rejected", r"\breject"),
+    ("Contract rejected", r"\breject(?:s|ed|ing)?\s+(?:(?:the|a|their|its|new|proposed|latest|second|final|\S+-backed)\s+)*(?:tentative|TA\b|T/A\b|contract|agreement|deal|CBA)|\b(?:TA|T/A|tentative agreement|contract|agreement|deal)s?\s+(?:is\s+|was\s+|were\s+|has been\s+)?(?:overwhelmingly\s+)?rejected|\brejection of (?:the |a )?(?:tentative|TA\b|contract|agreement)"),
     ("Ratified", r"ratif(y|ied|ies|ication)|approve[sd]? (new )?(contract|deal|agreement)"),
     ("Tentative agreement", r"tentative (agreement|deal)|agreement in principle|reach(es|ed)? (a )?(deal|agreement)|\bTA\b"),
     ("Strike vote", r"strike (vote|authori[sz]ation)|vote[sd]? to (authori[sz]e|strike)"),
@@ -456,18 +456,37 @@ def update_labor(root, meta, ua, carriers, force=False):
                         row["status"], row["status_source"], row["status_date"], row["filing_quote"], row["filing_url"] = "Ratified", "10-Q", ym, sent, tq.get("url")
                         break
                 groups.append(row)
+    # hand corrections to a 10-K group (e.g. a new contract's amendable date before the next 10-K): "override": true
+    for m in manual:
+        if not m.get("override"):
+            continue
+        for row in groups:
+            if row["ticker"] != m["ticker"] or (row.get("group") or "").lower() != (m.get("group") or "").lower() or (m.get("unit") and row.get("unit") != m["unit"]):
+                continue
+            amend = m.get("amendable")
+            if amend:
+                row["amendable"], row["amendable_text"] = amend, m.get("amendable_text") or row.get("amendable_text")
+                row["precision"] = {4: "year", 7: "month"}.get(len(amend), "day")
+                row["open"] = amend < today.isoformat()[:len(amend)]
+                if row.get("status_source") == "10-K":
+                    soon = not row["open"] and amend[:7] <= (today + dt.timedelta(days=365)).isoformat()[:7]
+                    row["status"] = "Past amendable date" if row["open"] else ("Amendable within a year" if soon else "Contract in effect")
+            row["manual_note"] = m.get("note")
     # groups the 10-K doesn't list yet (e.g. newly organized), entered by hand with "add": true
     names = {t: (rec.get("name") or next((g["carrier"] for g in groups if g["ticker"] == t), t)) for t, rec in companies.items()}
     for m in manual:
-        if not m.get("add") or any(g["ticker"] == m["ticker"] and g.get("craft") == m["craft"] and g.get("group") == m.get("group") for g in groups):
+        if not m.get("add") or any(g["ticker"] == m["ticker"] and g.get("unit") == m.get("unit") and g.get("craft") == m["craft"] and g.get("group") == m.get("group") for g in groups):
             continue
         amend = m.get("amendable") or ""
         row = {"ticker": m["ticker"], "unit": m.get("unit"), "group": m.get("group") or m["craft"].capitalize(), "group_raw": m.get("group") or m["craft"],
                "union": m.get("union", ""), "employees": m.get("employees"), "amendable_text": m.get("amendable_text") or ("Not stated" if not amend else None),
                "amendable": amend or None, "precision": {4: "year", 7: "month"}.get(len(amend), "day") if amend else None, "footnote": None,
-               "carrier": m.get("carrier") or names.get(m["ticker"], m["ticker"]), "craft": m["craft"], "open": m.get("open", True),
+               "carrier": m.get("carrier") or names.get(m["ticker"], m["ticker"]), "craft": m["craft"], "open": m.get("open", (amend < today.isoformat()[:len(amend)]) if amend else True),
                "status": m.get("status") or "Not stated", "status_source": "manual", "status_date": m.get("status_date"),
                "filing_quote": m.get("status_note"), "manual": True}
+        if amend and not m.get("status"):
+            soon = not row["open"] and amend[:7] <= (today + dt.timedelta(days=365)).isoformat()[:7]
+            row["status"], row["status_source"] = ("Past amendable date" if row["open"] else ("Amendable within a year" if soon else "Contract in effect")), "10-K"
         if m.get("source_url"):
             row["news"] = {"title": m.get("source_title") or m["source_url"], "url": m["source_url"], "source": m.get("source_name", ""), "date": m.get("status_date")}
         groups.append(row)
@@ -533,9 +552,10 @@ def stamp_status_changes(groups, prev_groups):
                 if e.get("status") != st:
                     break
                 d = min(d, e["date"][:10])
-        elif p is not None:
+        changed = p is not None and p.get("status") != st
+        if not d and changed:
             d = today  # the status changed since the last run, with no dated event behind it
-        row["status_changed"] = d if d and d <= today else (today if p is not None else None)
+        row["status_changed"] = d if d and d <= today else (today if changed else None)
 
 
 if __name__ == "__main__":

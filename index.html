@@ -1632,7 +1632,9 @@ dash.calc('dotpeer', {
     const gs = lg.status === 'ok' ? lg.data.filter((r) => r.ticker === t) : [];
     if (gs.length) {
       const ord = (r) => (r.open && r.status !== 'Ratified' ? 0 : r.prose ? 2 : 1);
-      const sorted = gs.slice().sort((a, b) => ord(a) - ord(b) || String(a.amendable || '9999').localeCompare(String(b.amendable || '9999')));
+      // mainline groups first, then each regional or other subsidiary together; open contracts first within each carrier
+      const main = (r) => (!r.unit || r.unit === 'Mainline' ? 0 : 1);
+      const sorted = gs.slice().sort((a, b) => main(a) - main(b) || (main(a) ? String(a.carrier).localeCompare(String(b.carrier)) : 0) || ord(a) - ord(b) || String(a.amendable || '9999').localeCompare(String(b.amendable || '9999')));
       const sdate = (r) => (r.status_date && r.status_source !== '10-K' ? ' (' + (r.status_date.length === 7 ? mfmt(r.status_date) : d3.utcFormat('%b %-d, %Y')(new Date(r.status_date.slice(0, 10) + 'T00:00:00Z'))) + ')' : '');
       box.append(el('h2', '', 'Union contracts'), tbl([['Carrier', 'l'], ['Group', 'l'], ['Union', 'l'], ['Employees'], ['Amendable', 'l'], ['Status', 'l']],
         sorted.map((r) => [[r.carrier, 'l'], [r.group, 'l'], [(r.union || '—').replace(/\s*\(“?[^)]*\)\s*$/, '') || '—', 'l'], [r.employees ? d3.format(',')(r.employees) : '—'], [amText(r), 'l'], [r.status + sdate(r), 'l']])));
