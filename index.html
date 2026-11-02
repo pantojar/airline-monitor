@@ -1788,6 +1788,93 @@ dash.calc('dotpeer', {
       }
     }
 
+    // ---------- operating airlines (DOT Form 41) ----------
+    {
+      const dp = dash.data('dotpeer'), O = dp.status === 'ok' ? dp.data.filter((r) => r.parent === t && !bad(r.rev_ttm)) : [];
+      if (O.length) {
+        O.sort((a, b) => (a.role === 'Mainline' ? -1 : b.role === 'Mainline' ? 1 : (b.rev_ttm || 0) - (a.rev_ttm || 0)));
+        box.append(el('h2', '', 'Operating airlines (DOT Form 41)'), el('div', 'b-note', 'Each airline certificate the company owns, as reported to the Department of Transportation, trailing four quarters through ' + ql(d3.max(O, (r) => r.latest)) + '. A wholly owned regional’s revenue is mostly what its parent pays it to fly.'));
+        box.append(tbl([['Airline', 'l'], ['Role', 'l'], ['Revenue'], ['Op. margin'], ['Salaries & benefits'], ['FTEs'], ['Labor cost per FTE']],
+          O.map((r) => [[r.name, 'l'], [r.role || '', 'l'], [fmtM(r.rev_ttm)], [pct(r.opm_ttm), neg(r.opm_ttm)], [fmtM(r.comp_ttm)], [bad(r.fte_ttm) ? '—' : d3.format(',.0f')(r.fte_ttm)], [fmtK(r.comp_fte_ttm)]])));
+      }
+    }
+
+    // ---------- where revenue comes from ----------
+    {
+      const RV = revRows(t).slice(-12);
+      if (RV.length >= 3) {
+        const cats = REVCATS.filter(([k]) => RV.some((r) => num(r[k]) > 0));
+        const col = { passenger: BLUE, loyalty: '#2a9d8f', cargo: ORANGE, refinery: '#7b5ea7', other: GREY };
+        box.append(el('h2', '', 'Where revenue comes from'), el('div', 'b-note', 'Share of each quarter’s revenue by type, from the breakdown the company files with its 10-Q and 10-K. Loyalty is award travel plus what partners, mainly co-branded credit cards, pay for miles and marketing.' + (H2H_NOTES[t] ? ' ' + H2H_NOTES[t] : '')));
+        legend(cats.map(([k, n]) => [col[k], n]));
+        const W = 640, H = 150, ml = 34, svg = svgBox(H), y = d3.scaleLinear([0, 1], [H - 22, 8]), x = d3.scaleBand(RV.map((r) => r.quarter), [ml, W - 4]).padding(0.25);
+        axisY(svg, y, ml, W, d3.format('.0%'));
+        RV.forEach((r) => {
+          let a = 0;
+          cats.forEach(([k]) => { const v = (num(r[k]) || 0) / r.rev; if (!v) return; svg.append('rect').attr('x', x(r.quarter)).attr('width', x.bandwidth()).attr('y', y(a + v)).attr('height', y(a) - y(a + v)).attr('fill', col[k]); a += v; });
+          svg.append('text').attr('x', x(r.quarter) + x.bandwidth() / 2).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#444').text(qlab(r.quarter));
+        });
+        const last = RV[RV.length - 1];
+        if (last.hasLoy) box.append(el('div', 'b-note', 'In ' + ql(last.quarter) + ', loyalty brought in ' + fmtM(last.loyalty) + ', ' + pct(last.loyalty / last.rev) + ' of revenue.'));
+      }
+    }
+
+    // ---------- reliability ----------
+    {
+      const Rl = relData(), code = MAINLINE[t];
+      if (Rl && code) {
+        const view = t === 'SKYW' || t === 'RJET' ? 'op' : 'mkt', months = Rl.months.slice(-12);
+        const me = relStats(Rl, view, months, new Set([code])).get(code);
+        const allS = [...relStats(Rl, 'mkt', months).values()];
+        const ind = (f, d) => d3.sum(allS, (s) => s[f]) / d3.sum(allS, (s) => s[d]);
+        const peers = [...relStats(Rl, view, months).values()].filter((s) => s.flights >= 3000);  // ranked against the same view (brands, or operating airlines)
+        const rk = (f, hi) => { const xs = peers.map((s) => s[f]).filter((v) => !bad(v)).sort((a, b) => (hi ? b - a : a - b)); return me && !bad(me[f]) ? (xs.indexOf(me[f]) + 1) + ' of ' + xs.length : '—'; };
+        if (me && me.flights) {
+          box.append(el('h2', '', 'Operational reliability'), el('div', 'b-note', 'DOT on-time records for scheduled U.S. domestic flights, ' + mlab(months[0]) + ' to ' + mlab(months[months.length - 1]) + (view === 'mkt' ? ', including regional partner flights sold under the brand' : ', flights the airline operated') + '. On time means arriving less than 15 minutes late; cancellation causes are the airlines’ own coding. Industry is all reporting carriers combined.'));
+          const indOn = ind('ontime', 'flights'), indCanc = ind('cancelled', 'flights'), indAvg = ind('delay_min', 'arr');
+          box.append(tbl([['Measure', 'l'], [aname(code)], ['Industry'], [view === 'op' ? 'Rank among airlines (1 = best)' : 'Rank among brands (1 = best)']], [
+            [['Flights scheduled', 'l'], [d3.format(',')(me.flights)], [''], ['']],
+            [['On-time arrivals', 'l'], [pct(me.ontime_r)], [pct(indOn)], [rk('ontime_r', true)]],
+            [['Flights cancelled', 'l'], [pct(me.canc_r)], [pct(indCanc)], [rk('canc_r', false)]],
+            [['Cancellations the airline attributed to itself', 'l'], [pct(me.cc_r)], [pct(ind('canc_carrier', 'cancelled'))], ['']],
+            [['Average arrival delay (minutes)', 'l'], [bad(me.avg) ? '—' : d3.format('.1f')(me.avg)], [d3.format('.1f')(indAvg)], [rk('avg', false)]],
+          ]));
+          const M = Rl.months.slice(-24);
+          const pts = M.map((m) => { const s = relStats(Rl, view, [m], new Set([code])).get(code), a = [...relStats(Rl, 'mkt', [m]).values()];
+            return s && s.flights ? { m, me: s.ontime_r, ind: d3.sum(a, (z) => z.ontime) / d3.sum(a, (z) => z.flights) } : null; }).filter(Boolean);
+          if (pts.length >= 6) {
+            legend([[BLUE, aname(code) + ' on-time rate'], ['#888', 'Industry', true]]);
+            const W = 640, H = 140, ml = 34, mr = 40, svg = svgBox(H), all = pts.flatMap((p) => [p.me, p.ind]);
+            const y = d3.scaleLinear([d3.min(all) - 0.02, Math.min(1, d3.max(all) + 0.02)], [H - 22, 8]).nice(), x = d3.scalePoint(pts.map((p) => p.m), [ml + 4, W - mr]);
+            axisY(svg, y, ml, W - mr + 4, d3.format('.0%'));
+            pts.forEach((p, i) => { if (i % 3 === 0 || i === pts.length - 1) svg.append('text').attr('x', x(p.m)).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#444').text(MONTHS[+p.m.slice(5, 7) - 1] + " '" + p.m.slice(2, 4)); });
+            svg.append('path').datum(pts).attr('fill', 'none').attr('stroke', '#888').attr('stroke-width', 1.5).attr('stroke-dasharray', '5 3').attr('d', d3.line().x((p) => x(p.m)).y((p) => y(p.ind)));
+            svg.append('path').datum(pts).attr('fill', 'none').attr('stroke', BLUE).attr('stroke-width', 2.2).attr('d', d3.line().x((p) => x(p.m)).y((p) => y(p.me)));
+          }
+        }
+      }
+    }
+
+    // ---------- fuel price paid vs industry ----------
+    {
+      const fp = dash.data('fuelpaid'), code = MAINLINE[t];
+      if (fp.status === 'ok' && code) {
+        const ind = new Map(fp.data.filter((r) => r.code === 'ALL').map((r) => [r.month, r.price]));
+        const pts = fp.data.filter((r) => r.code === code && ind.has(r.month)).slice(-24).map((r) => ({ m: r.month, me: r.price, ind: ind.get(r.month) }));
+        if (pts.length >= 6) {
+          const L12 = pts.slice(-12), gap = d3.sum(L12, (p) => p.me) / d3.sum(L12, (p) => p.ind) - 1;
+          box.append(el('h2', '', 'Fuel price paid vs the industry'), el('div', 'b-note', 'Dollars per gallon each month, including taxes, into-plane fees and hedging (DOT Form 41, ' + aname(code) + ' certificate). Industry is all U.S. passenger airlines on the dashboard combined. Over the latest 12 months ' + aname(code) + ' paid ' + d3.format('.0%')(Math.abs(gap)) + (gap >= 0 ? ' more' : ' less') + ' per gallon than the industry average.'));
+          legend([[ORANGE, aname(code)], ['#888', 'Industry', true]]);
+          const W = 640, H = 140, ml = 40, mr = 40, svg = svgBox(H), all = pts.flatMap((p) => [p.me, p.ind]);
+          const y = d3.scaleLinear([d3.min(all) * 0.95, d3.max(all) * 1.03], [H - 22, 8]).nice(), x = d3.scalePoint(pts.map((p) => p.m), [ml + 4, W - mr]);
+          axisY(svg, y, ml, W - mr + 4, (v) => '$' + d3.format('.2f')(v));
+          pts.forEach((p, i) => { if (i % 3 === 0 || i === pts.length - 1) svg.append('text').attr('x', x(p.m)).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#444').text(MONTHS[+p.m.slice(5, 7) - 1] + " '" + p.m.slice(2, 4)); });
+          svg.append('path').datum(pts).attr('fill', 'none').attr('stroke', '#888').attr('stroke-width', 1.5).attr('stroke-dasharray', '5 3').attr('d', d3.line().x((p) => x(p.m)).y((p) => y(p.ind)));
+          svg.append('path').datum(pts).attr('fill', 'none').attr('stroke', ORANGE).attr('stroke-width', 2.2).attr('d', d3.line().x((p) => x(p.m)).y((p) => y(p.me)));
+        }
+      }
+    }
+
     // executive pay
     const e = ex.status === 'ok' ? ex.data.filter((r) => r.ticker === t && !bad(r.ratio)).sort((a, b) => b.fy - a.fy) : [];
     if (e.length) {
@@ -1808,6 +1895,43 @@ dash.calc('dotpeer', {
       box.append(el('h2', '', 'Union contracts'), tbl([['Carrier', 'l'], ['Group', 'l'], ['Union', 'l'], ['Employees'], ['Amendable', 'l'], ['Status', 'l']],
         sorted.map((r) => [[r.carrier, 'l'], [r.group, 'l'], [(r.union || '—').replace(/\s*\(“?[^)]*\)\s*$/, '') || '—', 'l'], [r.employees ? d3.format(',')(r.employees) : '—'], [amText(r), 'l'], [r.status + sdate(r), 'l']])));
     }
+    // ---------- contract timeline ----------
+    {
+      const G = (lg.status === 'ok' ? lg.data.filter((r) => r.ticker === t && amDate(r)) : []);
+      if (G.length >= 2) {
+        const main = (r) => (!r.unit || r.unit === 'Mainline' ? 0 : 1);
+        G.sort((a, b) => main(a) - main(b) || (main(a) ? String(a.carrier).localeCompare(String(b.carrier)) : 0) || amDate(a) - amDate(b));
+        const COLS = { 'Rejected / dispute': RED, 'Mediation / release': '#7b5ea7', Picketing: '#c2185b', Negotiating: ORANGE, 'Open, no recent news': '#8a6d00', 'Tentative agreement': BLUE, Ratified: GREEN, 'Amendable within a year': '#2a9d8f', 'Contract in effect': '#9aa3ad', Other: '#9aa3ad' };
+        const cats = [...new Set(G.map((r) => lcat(r.status)[0]))];
+        box.append(el('h2', '', 'Contract timeline'), el('div', 'b-note', 'Each represented group at its amendable date, colored by current status; the dashed line is today. Groups left of the line are open for bargaining.'));
+        legend(cats.map((c) => [COLS[c] || '#9aa3ad', c]));
+        const W = 640, rowH = 15, H = G.length * rowH + 28, lab = 210, svg = svgBox(H), now = new Date();
+        const ext = d3.extent([...G.map(amDate), now]), x = d3.scaleUtc([d3.utcYear.floor(ext[0]), d3.utcYear.ceil(ext[1])], [lab + 6, W - 10]);
+        x.ticks(d3.utcYear.every(1)).forEach((tk) => { svg.append('line').attr('x1', x(tk)).attr('x2', x(tk)).attr('y1', 4).attr('y2', H - 20).attr('stroke', '#e2e2e2');
+          svg.append('text').attr('x', x(tk)).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#444').text(d3.utcFormat('%Y')(tk)); });
+        svg.append('line').attr('x1', x(now)).attr('x2', x(now)).attr('y1', 0).attr('y2', H - 20).attr('stroke', '#333').attr('stroke-dasharray', '4 3');
+        G.forEach((r, i) => {
+          const yy = 10 + i * rowH, nm = (r.carrier !== pr.carrier && main(r) ? r.carrier.replace(/ Airlines?$| Air$/, '') + ': ' : '') + r.group;
+          svg.append('text').attr('x', lab).attr('y', yy + 3).attr('text-anchor', 'end').attr('font-size', 8.5).attr('fill', '#222').text(nm.length > 42 ? nm.slice(0, 41) + '…' : nm);
+          svg.append('line').attr('x1', lab + 6).attr('x2', W - 10).attr('y1', yy).attr('y2', yy).attr('stroke', '#f0f0f0');
+          svg.append('circle').attr('cx', x(amDate(r))).attr('cy', yy).attr('r', 4.5).attr('fill', COLS[lcat(r.status)[0]] || '#9aa3ad');
+        });
+      }
+    }
+
+    // ---------- recent news ----------
+    {
+      const nw = dash.data('news');
+      if (nw.status === 'ok') {
+        const cut = new Date(Date.now() - 45 * 864e5).toISOString().slice(0, 10);
+        const N = nw.data.filter((r) => String(r.tags).split(' ').includes(t) && r.date >= cut).sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 10);
+        if (N.length) {
+          box.append(el('h2', '', 'Recent news, last 45 days'));
+          box.append(tbl([['Date', 'l'], ['Headline', 'l'], ['Source', 'l']], N.map((r) => [[d3.utcFormat('%b %-d')(new Date(r.date + 'T12:00:00Z')), 'l'], [r.headline, 'l'], [r.source || '', 'l']])));
+        }
+      }
+    }
+
     // keep each chart with its heading, note and legend on one page: wrap heading-to-heading runs that hold a chart
     [...box.querySelectorAll(':scope > h2')].forEach((h) => {
       const run = [h]; let n = h.nextElementSibling;
