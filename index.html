@@ -155,6 +155,14 @@ window.dash = (function () {
 #dash-root #brief .b-key .v{font-size:16pt;font-weight:800;line-height:1.15}
 #dash-root #brief .b-key .d{font-size:8.5pt;color:#444}
 #dash-root #brief .neg{color:#b00020}
+#dash-root #brief .b-points{margin:0 0 6px;padding-left:18px}
+#dash-root #brief .b-points li{margin:0 0 5px}
+#dash-root #brief .b-note{font-size:8.5pt;color:#444;margin:-2px 0 4px}
+#dash-root #brief .b-leg{display:flex;gap:14px;flex-wrap:wrap;font-size:8.5pt;color:#333;margin:2px 0 2px}
+#dash-root #brief .b-leg i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+#dash-root #brief .b-sec{break-inside:avoid}
+#dash-root #brief td:not(.l){white-space:nowrap}
+#dash-root #brief svg{break-inside:avoid}
 #dash-root #brief .b-foot{margin-top:16px;padding-top:6px;border-top:1px solid #ccd;font-size:8pt;color:#444}
 #dash-root #brief svg text{font-family:var(--font-anthropic-sans)}
 #dash-root .am-t th:first-child,#dash-root .am-t td:first-child{position:sticky;left:0;z-index:2;background:var(--color-panel);box-shadow:1px 0 0 var(--color-border-line)}
@@ -1601,6 +1609,63 @@ dash.calc('dotpeer', {
       [['Returned to shareholders ÷ labor', 'l'], [pct(pr.rl_ttm)], [rank('rl_ttm', true)]],
     ]));
     grid.append(L, R); box.append(grid);
+    // ---------- shared pieces for the added brief sections ----------
+    const qsorted = rows.slice().sort((a, b) => (a.quarter < b.quarter ? -1 : 1));
+    const qnext = (q) => { const y = +q.slice(0, 4), mo = +q.slice(5, 7); return mo === 12 ? (y + 1) + '-03' : y + '-' + String(mo + 3).padStart(2, '0'); };
+    // trailing-12-month sums for each quarter that closes four consecutive reported quarters
+    const ttmSeries = (f) => {
+      const out = [];
+      for (let i = 3; i < qsorted.length; i++) {
+        const w = qsorted.slice(i - 3, i + 1);
+        if (w.some((r, k) => num(r[f]) === null || (k && qnext(w[k - 1].quarter) !== r.quarter))) continue;
+        out.push({ q: w[3].quarter, v: d3.sum(w, (r) => num(r[f])) });
+      }
+      return out;
+    };
+    const ttmAt = (f, q) => { const s = ttmSeries(f).find((x) => x.q === q); return s ? s.v : null; };
+    const prevYearQ = (q) => Number(q.slice(0, 4)) - 1 + q.slice(4);
+    const chg = (a, b) => (a === null || b === null || !b ? null : a / Math.abs(b) - 1);
+    const BLUE = '#1f5fbf', ORANGE = '#d9761a', GREY = '#b9c0c8', NAVY = '#14284b', RED = '#b00020', GREEN = '#1a7f4b';
+    const svgBox = (H) => d3.select(box).append('svg').attr('viewBox', `0 0 640 ${H}`).attr('width', '100%');
+    const axisY = (svg, y, ml, W, f, zero) => y.ticks(4).forEach((tk) => {
+      svg.append('line').attr('x1', ml).attr('x2', W - 4).attr('y1', y(tk)).attr('y2', y(tk)).attr('stroke', zero !== undefined && tk === zero ? '#555' : '#ddd');
+      svg.append('text').attr('x', ml - 5).attr('y', y(tk) + 3).attr('text-anchor', 'end').attr('font-size', 9).attr('fill', '#444').text(f(tk));
+    });
+    const legend = (items) => { const d = el('div', 'b-leg'); items.forEach(([c, n, dash]) => { const s = el('span'); const i = el('i'); i.style.background = c; if (dash) i.style.opacity = '.55'; s.append(i, document.createTextNode(n)); d.append(s); }); box.append(d); };
+    const fmtAx = (v) => (Math.abs(v) >= 1000 ? '$' + d3.format(',.0f')(v / 1000) + 'B' : '$' + d3.format(',.0f')(v) + 'M');
+    const qlab = (q) => ql(q).replace(' 20', " '");
+
+    // market figures (same rules as the Equity Markets tab)
+    const md = dash.data('markets'), MT = md.status === 'ok' && md.data[0] && md.data[0].tickers ? md.data[0].tickers : null;
+    const tsrSince = (tk, start) => { const h = MT && MT[tk]; if (!h || !h.eod.length) return null; const b = mkBase(h.eod, start); if (b[0] > start) return null; const n = mkNow(h); return n ? n.adj / b[2] - 1 : null; };
+    const mkt = (() => {
+      if (!MT || !MT[t] || !MT[t].eod.length) return null;
+      const h = MT[t], now = mkNow(h), latest = h.eod[h.eod.length - 1][0];
+      const back = (y) => { const d = new Date(latest + 'T12:00:00Z'); d.setUTCFullYear(d.getUTCFullYear() - y); return d.toISOString().slice(0, 10); };
+      const ytd = (+latest.slice(0, 4) - 1) + '-12-31';
+      const mcap = cinfo.shares ? now.close * cinfo.shares / 1e6 : null;
+      const ev = mcap !== null && !bad(pr.lease_net_debt) ? mcap + pr.lease_net_debt : null;
+      const evx = ev !== null && pr.ebitdar_ttm > 0 && !pr.lev_nm ? ev / pr.ebitdar_ttm : null;
+      const per = [['Year to date', ytd], ['1 year', back(1)], ['3 years', back(3)]].map(([n, s]) => ({ n, s, me: tsrSince(t, s), spy: tsrSince('SPY', s), jets: tsrSince('JETS', s) }));
+      return { now, latest, mcap, ev, evx, per, start3: back(3), lmc: mcap && !bad(pr.labor_ttm) ? pr.labor_ttm / mcap : null };
+    })();
+
+    // ---------- key points (first page) ----------
+    const lt = pr.latest, revT = ttmAt('rev', lt), revP = ttmAt('rev', prevYearQ(lt)), labT = ttmAt('labor', lt), labP = ttmAt('labor', prevYearQ(lt));
+    const niT = ttmAt('ni', lt), retT = pr.ret_ttm, fuelT = ttmAt('fuel', lt), opexT = ttmAt('opex', lt);
+    const pts2 = [];
+    const P1 = (v) => (v === null ? null : (v >= 0 ? 'up ' : 'down ') + d3.format('.1%')(Math.abs(v)));
+    if (revT !== null) pts2.push('Over the 12 months through ' + ql(lt) + ', revenue was ' + fmtM(revT) + (revP !== null ? ', ' + P1(chg(revT, revP)) + ' from the year before' : '') + '. ' +
+      (labT !== null ? 'Labor cost was ' + fmtM(labT) + (labP !== null ? ', ' + P1(chg(labT, labP)) : '') + (opexT ? ', or ' + pct(labT / opexT) + ' of operating expense' : '') + '.' : ''));
+    if (!bad(pr.opm_ttm)) pts2.push('Operating margin was ' + pct(pr.opm_ttm) + ' (' + rank('opm_ttm', true) + ' among the peers on the dashboard)' + (niT !== null ? ', and net income was ' + fmtM(niT) : '') + '.');
+    if (fuelT !== null && opexT) pts2.push('Fuel cost ' + fmtM(fuelT) + ', ' + pct(fuelT / opexT) + ' of operating expense.');
+    if (!bad(retT)) pts2.push(retT > 0 ? 'The company returned ' + fmtM(retT) + ' to shareholders through buybacks and dividends' + (niT > 0 ? ', equal to ' + pct(retT / niT) + ' of net income' : '') + (labT ? ' and ' + pct(retT / labT) + ' of labor cost' : '') + '.' : 'The company made no buybacks or dividend payments over the period.');
+    if (!bad(pr.liquidity)) pts2.push('Cash and short-term investments stood at ' + fmtM(pr.liquidity) + (bad(pr.cover) ? '' : ', ' + d3.format('.1f')(pr.cover) + ' times the debt and lease payments due within a year') + (bad(pr.leverage) ? '' : '; leverage was ' + d3.format('.1f')(pr.leverage) + '× EBITDAR') + '.');
+    if (mkt && mkt.per[1].me !== null) pts2.push('Shareholders earned ' + sgn(mkt.per[1].me) + ' over the past year, dividends included, against ' + sgn(mkt.per[1].spy) + ' for the S&P 500 and ' + sgn(mkt.per[1].jets) + ' for the U.S. airline ETF (JETS)' + (mkt.mcap ? '; the company is valued at ' + fmtM(mkt.mcap) : '') + '.');
+    const gsAll = lg.status === 'ok' ? lg.data.filter((r) => r.ticker === t) : [];
+    const openG = gsAll.filter((r) => r.open && r.status !== 'Ratified');
+    if (gsAll.length) pts2.push(openG.length + ' of ' + gsAll.length + ' represented groups' + (openG.length ? ' (' + d3.format(',')(d3.sum(openG, (r) => r.employees || 0)) + ' employees) are past their amendable date or in open bargaining' : ' are past their amendable date') + '.');
+    if (pts2.length) { const h = el('h2', '', 'Key points'), ul = el('ul', 'b-points'); pts2.forEach((s) => ul.append(el('li', '', s))); const first = box.querySelector('h2'); box.insertBefore(h, first); box.insertBefore(ul, first); }
 
     // operating margin by quarter
     const qs = rows.filter((r) => num(r.rev) && num(r.opinc) !== null).sort((a, b) => (a.quarter < b.quarter ? -1 : 1)).slice(-12);
@@ -1617,6 +1682,110 @@ dash.calc('dotpeer', {
         svg.append('rect').attr('x', x(r.quarter)).attr('width', x.bandwidth()).attr('y', y(Math.max(0, v))).attr('height', Math.abs(y(v) - y(0))).attr('fill', v < 0 ? '#b00020' : '#1f5fbf');
         svg.append('text').attr('x', x(r.quarter) + x.bandwidth() / 2).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#444').text(ql(r.quarter).replace(' 20', " '"));
         svg.append('text').attr('x', x(r.quarter) + x.bandwidth() / 2).attr('y', v < 0 ? y(v) + 10 : y(v) - 3).attr('text-anchor', 'middle').attr('font-size', 8.5).attr('fill', '#222').text(d3.format('.1%')(v)); });
+    }
+
+    // ---------- labor cost vs revenue growth (trailing 12 months, indexed) ----------
+    {
+      const R = ttmSeries('rev'), Lb = ttmSeries('labor'), qset = new Set(Lb.map((x) => x.q));
+      const both = R.filter((x) => qset.has(x.q)).slice(-9);
+      if (both.length >= 3) {
+        const b0 = both[0], l0 = Lb.find((x) => x.q === b0.q).v;
+        const S = [['Revenue', NAVY, both.map((x) => ({ q: x.q, v: 100 * x.v / b0.v }))], ['Labor cost', BLUE, both.map((x) => ({ q: x.q, v: 100 * Lb.find((y) => y.q === x.q).v / l0 }))]];
+        box.append(el('h2', '', 'Labor cost vs revenue growth'), el('div', 'b-note', 'Trailing 12 months, indexed to 100 for the 12 months to ' + ql(b0.q) + '. A labor line below revenue means labor cost grew more slowly than the business.'));
+        legend(S.map(([n, c]) => [c, n]));
+        const W = 640, H = 170, ml = 34, mr = 46, svg = svgBox(H), all = S.flatMap((s) => s[2].map((p) => p.v));
+        const y = d3.scaleLinear([Math.min(95, d3.min(all)), d3.max(all) * 1.02], [H - 22, 8]).nice(), x = d3.scalePoint(both.map((p) => p.q), [ml + 6, W - mr]);
+        axisY(svg, y, ml, W - mr + 4, d3.format('.0f'), 100);
+        both.forEach((p) => svg.append('text').attr('x', x(p.q)).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#444').text(qlab(p.q)));
+        S.forEach(([n, c, pts]) => {
+          svg.append('path').datum(pts).attr('fill', 'none').attr('stroke', c).attr('stroke-width', 2.2).attr('d', d3.line().x((p) => x(p.q)).y((p) => y(p.v)));
+          const l = pts[pts.length - 1]; svg.append('text').attr('x', x(l.q) + 5).attr('y', y(l.v) + 3).attr('font-size', 9.5).attr('font-weight', 700).attr('fill', c).text(d3.format('.0f')(l.v));
+        });
+      }
+    }
+
+    // ---------- revenue and costs by quarter ----------
+    {
+      const Q = qsorted.filter((r) => num(r.rev) && num(r.opex) && num(r.labor) !== null).slice(-12);
+      if (Q.length >= 3) {
+        box.append(el('h2', '', 'Revenue and costs by quarter'), el('div', 'b-note', 'Bars stack operating expense; the line is revenue. Where fuel is blank the carrier didn’t report it separately that quarter, so it sits in other costs.'));
+        legend([[BLUE, 'Labor'], [ORANGE, 'Fuel'], [GREY, 'Other operating expense'], [NAVY, 'Revenue']]);
+        const W = 640, H = 180, ml = 44, svg = svgBox(H), max = d3.max(Q, (r) => Math.max(num(r.rev), num(r.opex)));
+        const y = d3.scaleLinear([0, max * 1.05], [H - 22, 8]).nice(), x = d3.scaleBand(Q.map((r) => r.quarter), [ml, W - 4]).padding(0.28);
+        axisY(svg, y, ml, W, fmtAx);
+        Q.forEach((r) => {
+          let a = 0; const lab = num(r.labor), fu = num(r.fuel) || 0, oth = Math.max(0, num(r.opex) - lab - fu);
+          [[lab, BLUE], [fu, ORANGE], [oth, GREY]].forEach(([v, c]) => { if (!v) return; svg.append('rect').attr('x', x(r.quarter)).attr('width', x.bandwidth()).attr('y', y(a + v)).attr('height', y(a) - y(a + v)).attr('fill', c); a += v; });
+          svg.append('text').attr('x', x(r.quarter) + x.bandwidth() / 2).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#444').text(qlab(r.quarter));
+        });
+        svg.append('path').datum(Q).attr('fill', 'none').attr('stroke', NAVY).attr('stroke-width', 2).attr('d', d3.line().x((r) => x(r.quarter) + x.bandwidth() / 2).y((r) => y(num(r.rev))));
+        Q.forEach((r) => svg.append('circle').attr('cx', x(r.quarter) + x.bandwidth() / 2).attr('cy', y(num(r.rev))).attr('r', 2.3).attr('fill', NAVY));
+      }
+    }
+
+    // ---------- cash to shareholders vs net income ----------
+    {
+      const Q = qsorted.filter((r) => num(r.ni) !== null).slice(-12);
+      if (Q.length >= 3) {
+        const ret = (r) => (num(r.buyback) || 0) + (num(r.div) || 0);
+        box.append(el('h2', '', 'Cash returned to shareholders vs net income'), el('div', 'b-note', 'By quarter. Returned to shareholders is share buybacks plus dividends paid.' + (Q.some((r) => ret(r) > 0) ? '' : ' The company made no buybacks or dividend payments in this period.')));
+        legend([[NAVY, 'Buybacks + dividends'], [GREY, 'Net income'], [RED, 'Net loss']]);
+        const W = 640, H = 160, ml = 44, svg = svgBox(H), vals = Q.flatMap((r) => [num(r.ni), ret(r)]);
+        const y = d3.scaleLinear([Math.min(0, d3.min(vals)), Math.max(1, d3.max(vals)) * 1.08], [H - 22, 8]).nice(), x = d3.scaleBand(Q.map((r) => r.quarter), [ml, W - 4]).padding(0.22), bw = x.bandwidth() / 2;
+        axisY(svg, y, ml, W, fmtAx, 0);
+        Q.forEach((r) => {
+          const n = num(r.ni), rt = ret(r);
+          svg.append('rect').attr('x', x(r.quarter)).attr('width', bw - 1).attr('y', y(Math.max(0, n))).attr('height', Math.abs(y(n) - y(0))).attr('fill', n < 0 ? RED : GREY);
+          if (rt) svg.append('rect').attr('x', x(r.quarter) + bw).attr('width', bw - 1).attr('y', y(rt)).attr('height', y(0) - y(rt)).attr('fill', NAVY);
+          svg.append('text').attr('x', x(r.quarter) + x.bandwidth() / 2).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#444').text(qlab(r.quarter));
+        });
+      }
+    }
+
+    // ---------- market snapshot and share price vs peers ----------
+    if (mkt) {
+      const asof = mkt.now.live ? 'latest trade ' + new Date(mkt.now.time).toLocaleString('en-US', { timeZone: 'America/New_York', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) + ' ET' : 'close ' + d3.utcFormat('%b %-d, %Y')(new Date(mkt.latest + 'T12:00:00Z'));
+      box.append(el('h2', '', 'Market snapshot'), el('div', 'b-note', 'Share price as of the ' + asof + '. Total return includes reinvested dividends. Market value uses shares outstanding from the latest SEC filing; enterprise value adds net debt including leases. Price data: Tiingo.'));
+      const g2 = el('div', 'b-grid'), A = el('div'), B = el('div');
+      A.append(tbl([['Measure', 'l'], ['Value']], [
+        [['Share price', 'l'], ['$' + d3.format(',.2f')(mkt.now.close)]],
+        [['Market value', 'l'], [fmtM(mkt.mcap)]],
+        [['Enterprise value', 'l'], [fmtM(mkt.ev)]],
+        [['Enterprise value ÷ EBITDAR (12 mo.)', 'l'], [bad(mkt.evx) ? (pr.lev_nm ? 'n/m' : '—') : d3.format('.1f')(mkt.evx) + '×']],
+        [['Labor cost (12 mo.) ÷ market value', 'l'], [pct(mkt.lmc)]],
+      ]));
+      B.append(tbl([['Total return', 'l'], [t], ['S&P 500'], ['Airline ETF']], mkt.per.map((p) => [[p.n, 'l'], [sgn(p.me), neg(p.me)], [sgn(p.spy), neg(p.spy)], [sgn(p.jets), neg(p.jets)]])));
+      g2.append(A, B); box.append(g2);
+      const series = [[t, BLUE, false], ['SPY', '#666', true], ['JETS', ORANGE, true]].map(([tk, c, dsh]) => {
+        const h = MT[tk]; if (!h) return null; const b = mkBase(h.eod, mkt.start3);
+        return { tk, c, dsh, pts: h.eod.filter((r) => r[0] >= b[0]).filter((r, i, a) => i % 3 === 0 || i === a.length - 1).map((r) => ({ t: new Date(r[0] + 'T00:00:00Z'), v: r[2] / b[2] - 1 })) };
+      }).filter(Boolean);
+      if (series.length && series[0].pts.length > 10) {
+        box.append(el('h2', '', 'Total shareholder return, past 3 years'));
+        legend(series.map((s) => [s.c, s.tk === 'SPY' ? 'S&P 500' : s.tk === 'JETS' ? 'U.S. airline ETF (JETS)' : pr.carrier, s.dsh]));
+        const W = 640, H = 170, ml = 40, mr = 46, svg = svgBox(H), all = series.flatMap((s) => s.pts.map((p) => p.v));
+        const y = d3.scaleLinear([Math.min(0, d3.min(all)), Math.max(0, d3.max(all))], [H - 22, 8]).nice(), x = d3.scaleUtc(d3.extent(series[0].pts, (p) => p.t), [ml, W - mr]);
+        axisY(svg, y, ml, W - mr + 4, (v) => (v > 0 ? '+' : v < 0 ? '−' : '') + d3.format('.0%')(Math.abs(v)), 0);
+        x.ticks(6).forEach((tk) => svg.append('text').attr('x', x(tk)).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#444').text(d3.utcFormat("%b '%y")(tk)));
+        series.slice().reverse().forEach((s) => {
+          svg.append('path').datum(s.pts).attr('fill', 'none').attr('stroke', s.c).attr('stroke-width', s.dsh ? 1.5 : 2.2).attr('stroke-dasharray', s.dsh ? '5 3' : null).attr('d', d3.line().x((p) => x(p.t)).y((p) => y(p.v)));
+          const l = s.pts[s.pts.length - 1]; svg.append('text').attr('x', W - mr + 5).attr('y', y(l.v) + 3).attr('font-size', 9).attr('font-weight', 700).attr('fill', s.c).text(sgn(l.v).replace('.0%', '%'));
+        });
+      }
+    }
+
+    // ---------- workforce (DOT) ----------
+    {
+      const code = MAINLINE[t], ann = dash.data('dot_annual'), dp = dash.data('dotpeer');
+      const A = ann.status === 'ok' ? ann.data.filter((r) => r.code === code && r.h_total).sort((a, b) => b.year - a.year) : [];
+      if (A.length) {
+        const c0 = A[0], c1 = A.find((r) => r.year === c0.year - 1), dr = dp.status === 'ok' ? dp.data.find((r) => r.code === code) : null;
+        box.append(el('h2', '', 'Workforce: ' + aname(code) + ' (mainline)'), el('div', 'b-note', 'Headcount by DOT Schedule P-10 employee group at year end. DOT’s groups are broad: flight attendants are reported with passenger and general services.'));
+        const rowsW = WFG.map(([k, n]) => [[n, 'l'], [d3.format(',')(c0[k] || 0)], [c1 && c1[k] ? sgn((c0[k] || 0) / c1[k] - 1) : '—']]);
+        rowsW.push([['Total', 'l'], [d3.format(',')(c0.h_total)], [c1 && c1.h_total ? sgn(c0.h_total / c1.h_total - 1) : '—']]);
+        if (dr && !bad(dr.comp_fte_ttm)) rowsW.push([['Labor cost per full-time equivalent (DOT, 12 mo.)', 'l'], [fmtK(dr.comp_fte_ttm)], ['']]);
+        box.append(tbl([['Group', 'l'], [String(c0.year)], ['vs ' + (c0.year - 1)]], rowsW));
+      }
     }
 
     // executive pay
@@ -1639,6 +1808,13 @@ dash.calc('dotpeer', {
       box.append(el('h2', '', 'Union contracts'), tbl([['Carrier', 'l'], ['Group', 'l'], ['Union', 'l'], ['Employees'], ['Amendable', 'l'], ['Status', 'l']],
         sorted.map((r) => [[r.carrier, 'l'], [r.group, 'l'], [(r.union || '—').replace(/\s*\(“?[^)]*\)\s*$/, '') || '—', 'l'], [r.employees ? d3.format(',')(r.employees) : '—'], [amText(r), 'l'], [r.status + sdate(r), 'l']])));
     }
+    // keep each chart with its heading, note and legend on one page: wrap heading-to-heading runs that hold a chart
+    [...box.querySelectorAll(':scope > h2')].forEach((h) => {
+      const run = [h]; let n = h.nextElementSibling;
+      while (n && n.tagName !== 'H2' && !(n.classList && n.classList.contains('b-grid'))) { run.push(n); n = n.nextElementSibling; }
+      if (!run.some((x) => x.tagName.toLowerCase() === 'svg')) return;
+      const w = el('div', 'b-sec'); h.before(w); run.forEach((x) => w.append(x));
+    });
     box.append(el('div', 'b-foot', 'Definitions: figures are GAAP as filed with the SEC. Labor cost is the salaries, wages and benefits line. Operating margin is operating income ÷ revenue. Returned to shareholders is share buybacks plus dividends paid. Net debt is debt less cash and short-term investments; carriers define debt differently, and the lease-inclusive figure adds operating lease liabilities. Union statuses come from union websites, company filings and news headlines and may lag events. Peer ranks compare the ' + act.length + ' active U.S.-listed passenger airlines on the dashboard.' + (cinfo.note ? ' Note: ' + cinfo.note : '')));
     return true;
   }
