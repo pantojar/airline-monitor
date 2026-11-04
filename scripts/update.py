@@ -104,12 +104,24 @@ def days(a, b):
 
 
 # ---------------------------------------------------------------- XBRL extraction
-def facts(cf, concept):
-    v = cf.get("facts", {}).get("us-gaap", {}).get(concept)
+def concept_facts(cf, name):
+    """USD facts for one concept: the us-gaap element if there is one, otherwise a filer's own (custom) element of
+    that name, e.g. Alaska's FuelCostsGrossOfHedging."""
+    all_ns = cf.get("facts", {})
+    v = all_ns.get("us-gaap", {}).get(name)
     if not v:
-        return []
+        v = next((c[name] for ns, c in all_ns.items() if ns not in ("us-gaap", "dei") and name in c), None)
+    return v.get("units", {}).get("USD", []) if v else []
+
+
+def facts(cf, concept):
+    """10-Q/10-K facts, latest filing per period. `concept` may be a tuple of elements a filer uses interchangeably
+    for the same line: they are pooled, so a quarter derived from year-to-date figures still works when the two
+    filings involved used different elements (Alaska switches fuel between FuelCosts and its own
+    FuelCostsGrossOfHedging from one filing to the next)."""
+    names = concept if isinstance(concept, (tuple, list)) else (concept,)
     best = {}
-    for f in v.get("units", {}).get("USD", []):
+    for f in (g for n in names for g in concept_facts(cf, n)):
         if not re.match(r"^10-[QK]", f.get("form", "")):
             continue
         k = (f.get("start") or "") + "|" + f["end"]
@@ -197,7 +209,7 @@ def extract(cf, QE):
         "rev": pick(cf, ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "RevenueFromContractWithCustomerIncludingAssessedTax"], flow_q, QE),
         "opex": pick(cf, ["OperatingExpenses", "CostsAndExpenses", "OperatingCostsAndExpenses"], flow_q, QE),
         "labor": pick(cf, ["LaborAndRelatedExpense"], flow_q, QE),
-        "fuel": pick(cf, ["FuelCosts"], flow_q, QE),
+        "fuel": pick(cf, [("FuelCosts", "FuelCostsGrossOfHedging")], flow_q, QE),
         "opinc": pick(cf, ["OperatingIncomeLoss"], flow_q, QE),
         "ni": pick(cf, ["NetIncomeLoss"], flow_q, QE),
         "buyback": pick(cf, ["PaymentsForRepurchaseOfCommonStock"], flow_q, QE),
