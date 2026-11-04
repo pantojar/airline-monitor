@@ -22,10 +22,10 @@
   {"ticker": "SAVE", "carrier": "Spirit Aviation Holdings", "group": "Ultra-low-cost / leisure", "status": "Ceased operations May 2, 2026", "cik": 1498710, "returns_complete": true,
    "news_query": null, "note": "Last filed quarter: Q4 2025. Q1 2025 split by fresh-start accounting."},
   {"ticker": "SKYW", "carrier": "SkyWest", "group": "Regional", "status": "Active", "cik": 793733, "returns_complete": false,
-   "news_query": "SkyWest", "note": "Revenue tag includes assessed taxes. Share repurchases after Q1 2024 are not in the cash-flow data SEC publishes, so shareholder returns show as unavailable."},
+   "news_query": "SkyWest", "note": "Fuel covers only flying outside its capacity purchase agreements; partners pay fuel on contract flying directly. Revenue tag includes assessed taxes. Share repurchases after Q1 2024 are not in the cash-flow data SEC publishes, so shareholder returns show as unavailable."},
   {"ticker": "RJET", "carrier": "Republic Airways Holdings", "group": "Regional", "status": "Active", "cik": 810332, "returns_complete": true,
    "news_query": "\"Republic Airways\" OR \"Mesa Airlines\"",
-   "note": "Republic–Mesa merger closed Nov 2025. Pre-merger Mesa history excluded; 2025 Q1–Q2 are Republic comparatives.",
+   "note": "No fuel expense: partner airlines pay fuel directly. Republic–Mesa merger closed Nov 2025. Pre-merger Mesa history excluded; 2025 Q1–Q2 are Republic comparatives.",
    "series_start": "2025-03",
    "drop_quarters": ["2025-09"],
    "null_fields": {

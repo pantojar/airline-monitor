@@ -209,7 +209,10 @@ def extract(cf, QE):
         "rev": pick(cf, ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "RevenueFromContractWithCustomerIncludingAssessedTax"], flow_q, QE),
         "opex": pick(cf, ["OperatingExpenses", "CostsAndExpenses", "OperatingCostsAndExpenses"], flow_q, QE),
         "labor": pick(cf, ["LaborAndRelatedExpense"], flow_q, QE),
-        "fuel": pick(cf, [("FuelCosts", "FuelCostsGrossOfHedging")], flow_q, QE),
+        # fuel: the standard element (pooled with Alaska's custom one), then other carriers' own names, which only
+        # fill quarters still empty: Allegiant's AircraftFuel, SkyWest's FuelCost. Republic has no fuel line
+        # (partners pay fuel directly), so it stays blank.
+        "fuel": pick(cf, [("FuelCosts", "FuelCostsGrossOfHedging"), "AircraftFuel", "FuelCost"], flow_q, QE),
         "opinc": pick(cf, ["OperatingIncomeLoss"], flow_q, QE),
         "ni": pick(cf, ["NetIncomeLoss"], flow_q, QE),
         "buyback": pick(cf, ["PaymentsForRepurchaseOfCommonStock"], flow_q, QE),
