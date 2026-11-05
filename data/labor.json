@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-30T16:37:15Z",
+ "generated": "2026-11-05T21:54:24Z",
  "companies": {
   "DAL": {
    "ticker": "DAL",
@@ -1069,9 +1069,9 @@
     ]
    },
    "tenq": {
-    "accession": "0001104659-26-086641",
-    "filed": "2026-07-24",
-    "url": "https://www.sec.gov/Archives/edgar/data/793733/000110465926086641/skyw-20260630x10q.htm",
+    "accession": "0001104659-26-120651",
+    "filed": "2026-10-30",
+    "url": "https://www.sec.gov/Archives/edgar/data/793733/000110465926120651/skyw-20260930x10q.htm",
     "sentences": []
    }
   },
@@ -1092,12 +1092,11 @@
     ]
    },
    "tenq": {
-    "accession": "0001628280-26-051405",
-    "filed": "2026-07-31",
-    "url": "https://www.sec.gov/Archives/edgar/data/810332/000162828026051405/rjet-20260630.htm",
+    "accession": "0001628280-26-068594",
+    "filed": "2026-10-30",
+    "url": "https://www.sec.gov/Archives/edgar/data/810332/000162828026068594/rjet-20260930.htm",
     "sentences": [
-     "E mployees under collective bargaining agreement— During the three and six months ended June 30, 2026 , certain of the Company’s maintenance technicians voted in favor of representation by the International Brotherhood of Teamsters (“IBT”) under a National Labor Relations Board election.",
-     "The Company and IBT, Local 135 have not yet reached agreement on the related collective bargaining agreement."
+     "E mployees under collective bargaining agreement— During the nine months ended September 30, 2026 , certain of the Company’s maintenance technicians voted in favor of representation by the International Brotherhood of Teamsters (“IBT”) under a National Labor Relations Board election."
     ]
    }
   }
@@ -1199,10 +1198,10 @@
    "status": "Ratified",
    "status_source": "union",
    "news": {
-    "title": "Senior United Flight Attendants Land $100 Hr As New Contract Ratified",
-    "date": "2026-05-14",
-    "source": "Open Jaw",
-    "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNVDFxdkpYNEpxMGEtcC03TkVNTU1EOGxzNG1nWFFLU3ZscGdMZHdGaHM2WHlTcTc3M1JFVjdoNUtXM1BRNF90cUJHVEhVejJwcWM3bVBhbExoZlJKNkZsSm9oUlhHUWM3QWhTUWFqVUpfbmo1dXl1eDNoVktka0NzS0RVQzhJMFRzVTBtc0kteDMzenBIOWFqekdjd0JhVjJVVEMzTGhIZG03Tlk2U2g3UkpuenhRaU03?oc=5"
+    "title": "United Airlines' flight attendants ratify deal for 31% wage hike, boarding pay",
+    "date": "2026-05-13",
+    "source": "Reuters",
+    "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNOGcxamduZXpIVHZ3RGRvcmhHV3VGMFhxZWFzVUhkakZqSkoybFpsbmR6aDJ4VGJ1cXBTdG5uLTBvbGpBaE5KLWIxZS1YMzQ1N3ZOMXcxczFOakEyQkhBNHd5RGdDbW1xVU9YMTFqdVctTFhSdFJBSXdIXzAwa0ZkLXAwcmFjODBCSC0yRmo0YW5iakhGa19GTm5SRFRyWC0yS2pFOE5sa2hwSHV3U090X1RKZWZqVVBVLVlJeUMwbU85WFd2bTJ2SFVB?oc=5"
    },
    "status_date": "2026-05-12",
    "filing_quote": "In May 2026, the Company's flight attendants, represented by the Association of Flight Attendants (\"AFA\"), ratified a five-year agreement, effective May 31, 2026, with the Company that included improvements with respect to scheduling, reserve requirements and other quality of life improvements, as well as pay rate increases.",
@@ -2000,13 +1999,6 @@
    "craft": "dispatchers",
    "status": "Ratified",
    "status_source": "union",
-   "news": {
-    "title": "American Dispatchers, Operations Specialists Approve New Contract",
-    "date": "2026-10-28",
-    "source": "AirlineGeeks.com",
-    "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNaEZXUXBpZ1ZvOVVuRVNuVjJYUS1QeDJLRnI2X1U2RGsxNHlndHotVFVqWjBqdW9CUnFFc2NYMFRNdUFWQkR3M1hhWWV5Z3Njc2hKS29jRXk4MzlmUk5zaFdxX2NIWXJ6ZWgxaGNrVlhZS1hmQVF5S2lLVGRSOTZsMTRySGE3RENfQy10bFhrR3ljb3kyS1ZwVmdGU1NwRE9ZakxJ?oc=5"
-   },
-   "status_date": "2026-10-27",
    "manual_note": "New five-year agreement ratified October 2026; the 10-K still shows the old contract's 2025 amendable date.",
    "union_events": [
     {
@@ -2019,6 +2011,7 @@
      "quote": "American Airlines dispatchers and operations specialists approve new 5-year contract."
     }
    ],
+   "status_date": "2026-10-27",
    "union_event": {
     "status": "Ratified",
     "date": "2026-10-27",
@@ -2332,9 +2325,16 @@
    "carrier": "PSA Airlines",
    "open": false,
    "craft": "pilots",
-   "status": "Contract in effect",
-   "status_source": "10-K",
-   "status_changed": null
+   "status": "In negotiations",
+   "status_source": "news",
+   "news": {
+    "title": "PSA Pilots Extend Contract, Flight Attendant Negotiations Progress",
+    "date": "2026-11-04",
+    "source": "Aviation Week",
+    "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPWksxSGhlMWZlaTQzdmp0M3ZnVXNjQ3gwQXItRHVacG95Si0tcTNZOHAxQXdyVnhBNGNnczFOMTdMQ1I1Z1JkVzMtXzIwaXlLa2ljMnpXcGJkaDN2OHhpNWR0OHlKMTFEcTBJMUpnZ19Yd2k2aWxBR2J4dVhCUTlWUE5zbVJ1TUN3R0hzdTc4cHNxaUpGeU5HRkpyNzd4R1dIZE9jZ0NzbW8tSndiSnJvWktSTW5pX2ljYmZpUF9R?oc=5"
+   },
+   "status_date": "2026-11-04",
+   "status_changed": "2026-11-04"
   },
   {
    "unit": "PSA",
@@ -2353,10 +2353,10 @@
    "status": "In negotiations",
    "status_source": "union",
    "news": {
-    "title": "PSA Flight Attendants Picket Grand Opening of New PSA Airlines HQ",
-    "date": "2026-09-01",
-    "source": "Association of Flight Attendants-CWA",
-    "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQRGRWZlNUOEJ5TllEem03S3J4a1lFZTItWFVOR1llSktraXpPd0pTYTFEVFdpRFZmMnYwUFdfai0tQWQtZDdvV1BTT2FicVNoWTNFYVZKTFc2LWxlNUV4aUc2Y3RsZ2ZkVFpGWlNYTlBrYkJIZ05hcnpIeE14VDgzbHJQTjk4RllEYnpPeWF3?oc=5"
+    "title": "Service & Solidarity Spotlight: PSA Flight Attendants Reach Tentative Agreement with 30%-50% Wage Increases",
+    "date": "2026-02-24",
+    "source": "AFL-CIO",
+    "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPdXJCVTBib3F5ZEFIWG4xeVFkRlB1QU1CT0FzTl9FVm8tYVhBTmUzU3VqYkpoc3J3X0RuUUtWZmpnRDVZaERrMTBlUHBwUGl2S2FZZlJuV1E4MEQtMlJZeTF0SHl0NGc3bkUxWWpuSklweXhIMTVnd1ZHSk9fa2ZXZ3lqQUtlenFlUjh5S2Y2NVR6b1BRU0RLcFhvRE12cWMtdHNXQW5DNGxBMkdpSDIydDJGZDdmcVk?oc=5"
    },
    "status_date": "2026-10-16",
    "union_events": [
@@ -2560,9 +2560,16 @@
    "carrier": "Southwest Airlines",
    "open": false,
    "craft": "flight attendants",
-   "status": "Contract in effect",
-   "status_source": "10-K",
-   "status_changed": null
+   "status": "Picketing",
+   "status_source": "news",
+   "news": {
+    "title": "Southwest flight attendant detained by ICE as co-workers, union rally to support",
+    "date": "2026-07-23",
+    "source": "NBC 5 Dallas-Fort Worth",
+    "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNVTF5ajNNZGJWZ2wyOVpnRlVFdWV3Y0hZM3JMUGRSdmxoZlY1bmU5a0x4OWlBcXh2blVjSFFnQUpTRVpCbUVoTEllTW12UkljVzUtSFBmUy1sUEhLWVVsSWswRWIzVXZvUVVMcnlIOXpSeE1MTWh1V0NrT3k3SFlTSmEyY0lrS3p6bDhfNDNiZndvX01GXzRNbUxuVmRyNjdNVW9tb3Z2NnNIYlhpdHZNdmh6LWJwTlpNV3lObGkzNFVVQVpsNzI5YXpKNNIB0wFBVV95cUxQNThIdG9mVEI3MUhONUtEVjRVeUE3OTlTMlNKc0hIZlJUWkI2MDQ5ZHk1RkF1akJaVUNfM01yY01HOWxjXzF5d3F2WUpUamV5R0JJbi0tYm5GV25RZG1lMTlzR3VhX0hiLXlHS0FkV0RGVXdiMm52SDgwMlBaVUNrNDJKQTRnZExOTVJyQWtoN291ejRBeVBvNUlDeWtDYndBcFZaSEp5R3RzcW9mN2ExbVdUWGhZUHIwNE9vN1pocWdPMmllRThNeVBiVFRUMFF1Yksw?oc=5"
+   },
+   "status_date": "2026-07-23",
+   "status_changed": "2026-07-23"
   },
   {
    "unit": null,
@@ -2576,11 +2583,11 @@
    "ticker": "LUV",
    "group_raw": "Southwest Material Specialists (formerly known as Stock Clerks)",
    "carrier": "Southwest Airlines",
-   "open": false,
+   "open": true,
    "craft": null,
-   "status": "Amendable within a year",
+   "status": "Past amendable date",
    "status_source": "10-K",
-   "status_changed": "2025-10-01"
+   "status_changed": "2026-10-01"
   },
   {
    "unit": null,
@@ -2725,9 +2732,9 @@
    "carrier": "Southwest Airlines",
    "open": false,
    "craft": "mechanics",
-   "status": "Contract in effect",
+   "status": "Amendable within a year",
    "status_source": "10-K",
-   "status_changed": null
+   "status_changed": "2026-11-01"
   },
   {
    "unit": null,
@@ -2797,16 +2804,9 @@
    "carrier": "Alaska Airlines",
    "open": false,
    "craft": "flight attendants",
-   "status": "Strike vote",
-   "status_source": "news",
-   "news": {
-    "title": "Regional Flight Attendants At Alaska Airlines Expect Strike Vote 'Sooner Rather Than Later' As Contract Talks Drag On",
-    "date": "2025-12-30",
-    "source": "PYOK",
-    "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxON1ZIWWVCWWJ3SmZhTGlBVVdlRG9LX2xOd1pqbVY4WGdtclFVT085TTNnelBNaWNBN293Sm92RmUzWFNTR1Y0Q2Y5Q2NJRzBfN1M1N2dULWhTYVg5WEJneElhR1F4NmhYWG9JZ01TQk9nUUY5T25zalZseWNGYkdHcVd4d3lzUk16TmcwTXdfczBYNU9BZXlLaXlNbkdjSEJ4encyR3hkdmhqTV9ZWXdaNVpEcGEwUFNxV0U2NEduaFU2RDJjemhzMjB1NzhnX2g2TWc1SUUtc25wd0JDNEN4czNnUzkxYmoxZjhaVzMwRWNtZzRw?oc=5"
-   },
-   "status_date": "2025-12-30",
-   "status_changed": "2025-12-30"
+   "status": "Contract in effect",
+   "status_source": "10-K",
+   "status_changed": "2026-11-05"
   },
   {
    "unit": "Alaska",
@@ -3231,14 +3231,23 @@
    "craft": "flight attendants",
    "status": "Picketing",
    "status_source": "union",
-   "status_date": "2026-10-23",
+   "status_date": "2026-10-30",
    "news": {
     "title": "Frontier Airlines flight attendants picket just weeks before holiday travel season",
     "date": "2026-10-26",
-    "source": "6abc Philadelphia",
-    "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNWU1KZHhsMWwwZHJNS2Z4elNMQzBLejFudnp3N250LWVQcExVX0ZPRkFmekx0YjlQQk8zZ3h3dTVYRXZtNGpRTDdkbk0wSkl5cEdLVHU4clh2TU0yekFVSXZxWU5EN2l2RVJWb1A0S0Q2WExVNDY3N1VWa1RlZEd0M1dzd2NkekVvV2xWeUtkS21aUklyV2tVbm4zX0lva2NLc28tbzNSVHJ2Wk5JLUV2UWNSRdIBswFBVV95cUxNWU1KZHhsMWwwZHJNS2Z4elNMQzBLejFudnp3N250LWVQcExVX0ZPRkFmekx0YjlQQk8zZ3h3dTVYRXZtNGpRTDdkbk0wSkl5cEdLVHU4clh2TU0yekFVSXZxWU5EN2l2RVJWb1A0S0Q2WExVNDY3N1VWa1RlZEd0M1dzd2NkekVvV2xWeUtkS21aUklyV2tVbm4zX0lva2NLc28tbzNSVHJ2Wk5JLUV2UWNSRQ?oc=5"
+    "source": "Yahoo",
+    "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPQkJlelhKQnpSRi05TENCWmk2a05FUlpteXdvVUo4N0hxQ2lRR0FHdUtPdnlIMFI4S0tsTl9jcWJ2ZXl2Z1FraFVEaENxbGZkcFM5ZV92Mkx5aXlzd1FPWmxFRjlaSVJERE03ZnNDUklSSEM5eFlSZkhlemtyM2RnakJzdkR0RE5BaDFicDdYOUlZc0dxV0RMN3dRUDk?oc=5"
    },
    "union_events": [
+    {
+     "status": "Picketing",
+     "date": "2026-10-30",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "AFA Frontier Flight Attendants Say Claws Out, Contract Now",
+     "url": "https://afacwa.org/afa-frontier-flight-attendants-say-claws-out-contract-now/",
+     "quote": "AFA Frontier Flight Attendants picketed at PHL earlier this week to demand management stop the excuses and deliver the Contract they have earned NOW."
+    },
     {
      "status": "Picketing",
      "date": "2026-10-23",
@@ -3265,25 +3274,16 @@
      "title": "Day in the Life of an AFA Frontier Flight Attendant",
      "url": "https://afacwa.org/day-in-the-life-of-an-afa-frontier-flight-attendant/",
      "quote": "Join AFA Frontier Flight Attendants on Monday, October 26 in PHL for a Claws Out, Contract Now picket to show management we won’t stop until we have a Contract that reflects our worth."
-    },
-    {
-     "status": "Picketing",
-     "date": "2026-09-18",
-     "source": "AFA-CWA",
-     "kind": "union",
-     "title": "AFA Frontier Flight Attendants Picket in Denver",
-     "url": "https://afacwa.org/afa-frontier-flight-attendants-picket-in-denver/",
-     "quote": "AFA Frontier Flight Attendants Picket in Denver."
     }
    ],
    "union_event": {
     "status": "Picketing",
-    "date": "2026-10-23",
+    "date": "2026-10-30",
     "source": "AFA-CWA",
     "kind": "union",
-    "title": "3 Days Out: AFA Frontier Picket at PHL",
-    "url": "https://afacwa.org/3-days-out-afa-frontier-picket-at-phl/",
-    "quote": "Your support during the picket will show management that Frontier Flight Attendants won’t accept anything less than industry standards."
+    "title": "AFA Frontier Flight Attendants Say Claws Out, Contract Now",
+    "url": "https://afacwa.org/afa-frontier-flight-attendants-say-claws-out-contract-now/",
+    "quote": "AFA Frontier Flight Attendants picketed at PHL earlier this week to demand management stop the excuses and deliver the Contract they have earned NOW."
    },
    "status_changed": "2026-09-18"
   },
@@ -3304,6 +3304,12 @@
    "status": "Ratified",
    "status_source": "10-Q",
    "status_date": "2026-09",
+   "news": {
+    "title": "Teamsters Frontier Airlines Mechanics Ratify Five-Year Contract With 93% Vote",
+    "date": "2026-09-16",
+    "source": "TradingView",
+    "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPdGZISmdSSkdmcVA0WUtwTXZVcW1HajV2VF9sRFk2enZuaHJEd3pia0FxSGZGZ1BneDJaRU9sNEFXbU5EcEdVR3pLMHVRZ3JadE5DWVJRMWNiajhDaTdjZU1EV0xuNXNNT0dEQkZ5VWVCX2dMblV2TFZodFpXT2hmNXh2Qzdsa2NhZVRaMVFZSFp4Y0dxWnBaVlFmVVE3ZU94bEV6c3YxVWU2S0x4dUZwTlZpTWtVU1pfRDdGZ2dTZEpmUVpfVFg0aHVfZEQxbC1aeHYwbktndnJRbm1KRXJR?oc=5"
+   },
    "filing_quote": "In September 2026, we entered into a collective bargaining contract ratification with the union representing our aircraft technicians.",
    "filing_url": "https://www.sec.gov/Archives/edgar/data/1670076/000167007626000103/fron-20260930.htm",
    "status_changed": "2026-09"
