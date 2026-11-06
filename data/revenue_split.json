@@ -241,6 +241,12 @@
 "loyalty":20.5
 },
 {
+"ticker":"ALGT",
+"quarter":"2026-09",
+"passenger":760.0,
+"loyalty":17.5
+},
+{
 "ticker":"ALK",
 "quarter":"2022-03",
 "passenger":1323.0,
