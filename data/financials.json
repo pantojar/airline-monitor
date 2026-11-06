@@ -1627,9 +1627,9 @@
   "oplease": 1413.0,
   "da": 203.0,
   "rent": 64.0,
-  "capex": null,
+  "capex": 222.0,
   "due12": 744.0,
-  "capex_ttm": null,
+  "capex_ttm": 1339.0,
   "basis": "SEC XBRL"
  },
  {
@@ -1650,7 +1650,7 @@
   "oplease": 1338.0,
   "da": 199.0,
   "rent": 60.0,
-  "capex": null,
+  "capex": 409.0,
   "due12": 918.0,
   "capex_ttm": 1372.0,
   "basis": "SEC XBRL"
@@ -1699,6 +1699,29 @@
   "capex": 185.0,
   "due12": 669.0,
   "capex_ttm": 1154.0,
+  "basis": "SEC XBRL"
+ },
+ {
+  "ticker": "ALK",
+  "carrier": "Alaska Air Group",
+  "quarter": "2026-09",
+  "rev": 4308.0,
+  "opex": 4226.0,
+  "labor": 1287.0,
+  "fuel": 1214.0,
+  "opinc": 82.0,
+  "ni": -147.0,
+  "buyback": 0.0,
+  "div": null,
+  "cash": 835.0,
+  "sti": 1396.0,
+  "debt": 5976.0,
+  "oplease": 1360.0,
+  "da": 216.0,
+  "rent": 66.0,
+  "capex": 442.0,
+  "due12": 1112.0,
+  "capex_ttm": 1374.0,
   "basis": "SEC XBRL"
  },
  {
