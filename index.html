@@ -159,7 +159,10 @@ window.dash = (function () {
 #dash-root #brief .b-points li{margin:0 0 5px}
 #dash-root #brief .b-note{font-size:8.5pt;color:#444;margin:-2px 0 4px}
 #dash-root #brief .b-leg{display:flex;gap:14px;flex-wrap:wrap;font-size:8.5pt;color:#333;margin:2px 0 2px}
-#dash-root #brief .b-leg i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+/* swatches: browsers drop background colours when printing unless "Background graphics" is on, so force exact colours
+   and also paint the swatch with a solid border (borders always print) */
+#dash-root #brief,#dash-root #brief *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#dash-root #brief .b-leg i{display:inline-block;box-sizing:border-box;width:9px;height:9px;border:4.5px solid currentColor;border-radius:2px;margin-right:4px;vertical-align:-1px}
 #dash-root #brief .b-sec{break-inside:avoid}
 #dash-root #brief td:not(.l){white-space:nowrap}
 #dash-root #brief svg{break-inside:avoid}
@@ -1631,7 +1634,7 @@ dash.calc('dotpeer', {
       svg.append('line').attr('x1', ml).attr('x2', W - 4).attr('y1', y(tk)).attr('y2', y(tk)).attr('stroke', zero !== undefined && tk === zero ? '#555' : '#ddd');
       svg.append('text').attr('x', ml - 5).attr('y', y(tk) + 3).attr('text-anchor', 'end').attr('font-size', 9).attr('fill', '#444').text(f(tk));
     });
-    const legend = (items) => { const d = el('div', 'b-leg'); items.forEach(([c, n, dash]) => { const s = el('span'); const i = el('i'); i.style.background = c; if (dash) i.style.opacity = '.55'; s.append(i, document.createTextNode(n)); d.append(s); }); box.append(d); };
+    const legend = (items) => { const d = el('div', 'b-leg'); items.forEach(([c, n, dash]) => { const s = el('span'); const i = el('i'); i.style.background = c; i.style.color = c; if (dash) i.style.opacity = '.55'; s.append(i, document.createTextNode(n)); d.append(s); }); box.append(d); };
     const fmtAx = (v) => (Math.abs(v) >= 1000 ? '$' + d3.format(',.0f')(v / 1000) + 'B' : '$' + d3.format(',.0f')(v) + 'M');
     const qlab = (q) => ql(q).replace(' 20', " '");
 
