@@ -471,6 +471,12 @@ def update_labor(root, meta, ua, carriers, force=False):
                 if row.get("status_source") == "10-K":
                     soon = not row["open"] and amend[:7] <= (today + dt.timedelta(days=365)).isoformat()[:7]
                     row["status"] = "Past amendable date" if row["open"] else ("Amendable within a year" if soon else "Contract in effect")
+            # a dated event entered by hand (e.g. a ratification), with its source
+            if m.get("status"):
+                row["status"], row["status_source"], row["status_date"] = m["status"], "manual", m.get("status_date")
+                row["filing_quote"] = m.get("status_note")
+            if m.get("source_url"):
+                row["news"] = {"title": m.get("source_title") or m["source_url"], "url": m["source_url"], "source": m.get("source_name", ""), "date": m.get("status_date")}
             row["manual_note"] = m.get("note")
     # groups the 10-K doesn't list yet (e.g. newly organized), entered by hand with "add": true
     names = {t: (rec.get("name") or next((g["carrier"] for g in groups if g["ticker"] == t), t)) for t, rec in companies.items()}

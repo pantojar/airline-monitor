@@ -2837,7 +2837,11 @@ dash.calc('dotpeer', {
         if (r.status_source === 'union' && r.union_event) { const e = r.union_event; const a = document.createElement('a'); a.href = e.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = e.title; a.style.color = 'inherit';
           const q = document.createElement('div'); q.style.color = 'var(--color-fg-muted)'; q.textContent = '“' + e.quote.slice(0, 220) + (e.quote.length > 220 ? '…' : '') + '”';
           src.append(a, q); }
-        else if (r.status_source === 'manual' && r.filing_quote) src.textContent = r.filing_quote;
+        else if (r.status_source === 'manual' && r.filing_quote) {
+          if (r.news && /^https:\/\//.test(r.news.url)) { const a = document.createElement('a'); a.href = r.news.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = r.news.title; a.style.color = 'inherit';
+            const m = document.createElement('span'); m.style.color = 'var(--color-fg-muted)'; m.textContent = r.news.source ? ' — ' + r.news.source : '';
+            const q = document.createElement('div'); q.style.color = 'var(--color-fg-muted)'; q.textContent = r.filing_quote; src.append(a, m, q); }
+          else src.textContent = r.filing_quote; }
         else if (r.status_source === '10-Q' && r.filing_quote) src.textContent = '“' + r.filing_quote.slice(0, 220) + (r.filing_quote.length > 220 ? '…' : '') + '”';
         else if (r.news) { const a = document.createElement('a'); a.href = r.news.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = r.news.title; a.style.color = 'inherit';
           const m = document.createElement('span'); m.style.color = 'var(--color-fg-muted)'; m.textContent = ' — ' + (r.news.source || '');
