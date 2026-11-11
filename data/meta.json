@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-11-11T14:38:06Z",
+  "at": "2026-11-11T22:03:54Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -137,9 +137,9 @@
    }
   }
  },
- "generated": "2026-11-11T14:38:45Z",
+ "generated": "2026-11-11T22:14:05Z",
  "news": {
-  "at": "2026-11-11T14:38:40Z",
+  "at": "2026-11-11T22:04:36Z",
   "items": 104,
   "errors": [
    "Envoy Air news: unavailable",
@@ -162,7 +162,7 @@
   "rows": 453
  },
  "fuel_spot": {
-  "at": "2026-11-11T14:38:41Z",
+  "at": "2026-11-11T22:04:36Z",
   "latest": "2026-11-03",
   "rows": 1207,
   "diesel_close": "2026-11-09",
@@ -175,7 +175,7 @@
   "errors": []
  },
  "labor": {
-  "at": "2026-11-05T21:54:24Z",
+  "at": "2026-11-11T22:14:05Z",
   "groups": 102,
   "errors": [],
   "union_sites": [
@@ -183,9 +183,9 @@
     "name": "IAM District 141",
     "url": "https://iam141.org",
     "groups": 13,
-    "method": "wp-posts",
-    "items": 1,
-    "pdfs_read": 0
+    "method": "wp-posts,wp-media",
+    "items": 206,
+    "pdfs_read": 1
    },
    {
     "name": "IAM District 142",
@@ -193,7 +193,7 @@
     "groups": 14,
     "method": "wp-posts,wp-media",
     "items": 599,
-    "pdfs_read": 34
+    "pdfs_read": 2
    },
    {
     "name": "IAM (international)",
@@ -302,8 +302,8 @@
     "url": "https://cwa-union.org",
     "groups": 4,
     "method": "html list",
-    "items": 20,
-    "pdfs_read": 1
+    "items": 19,
+    "pdfs_read": 3
    },
    {
     "name": "American Airlines newsroom",
@@ -311,7 +311,7 @@
     "groups": 32,
     "method": "press releases",
     "items": 100,
-    "pdfs_read": 0
+    "pdfs_read": 1
    },
    {
     "name": "Envoy Air news",
@@ -327,7 +327,7 @@
     "url": "https://www.piedmont-airlines.com",
     "groups": 6,
     "method": "wp-posts",
-    "items": 29,
+    "items": 28,
     "pdfs_read": 0
    },
    {
@@ -376,7 +376,7 @@
     "url": "https://news.alaskaair.com",
     "groups": 16,
     "method": "wp-posts",
-    "items": 190,
+    "items": 189,
     "pdfs_read": 0
    },
    {
@@ -384,7 +384,7 @@
     "url": "https://news.jetblue.com",
     "groups": 4,
     "method": "press releases",
-    "items": 80,
+    "items": 79,
     "pdfs_read": 0
    },
    {
@@ -400,7 +400,7 @@
     "url": "https://ir.flyfrontier.com",
     "groups": 7,
     "method": "press releases",
-    "items": 14,
+    "items": 15,
     "pdfs_read": 0
    },
    {
@@ -422,12 +422,12 @@
   ]
  },
  "cpi": {
-  "at": "2026-11-11T14:38:43Z",
+  "at": "2026-11-11T22:04:37Z",
   "cpiw": "2026-10",
   "cpiu": "2026-10"
  },
  "revsplit": {
-  "at": "2026-11-11T14:38:07Z",
+  "at": "2026-11-11T22:03:55Z",
   "carriers": {
    "DAL": {
     "quarters": 19,
@@ -464,7 +464,7 @@
   }
  },
  "reliability": {
-  "at": "2026-11-11T14:38:45Z",
+  "at": "2026-11-11T22:14:05Z",
   "checked": "2026-11-11",
   "first": "2023-01",
   "latest": "2026-08",

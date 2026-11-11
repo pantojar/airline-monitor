@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-05T21:54:24Z",
+ "generated": "2026-11-11T22:14:05Z",
  "companies": {
   "DAL": {
    "ticker": "DAL",
@@ -867,11 +867,11 @@
     "prose": []
    },
    "tenq": {
-    "accession": "0000766421-26-000041",
-    "filed": "2026-08-04",
-    "url": "https://www.sec.gov/Archives/edgar/data/766421/000076642126000041/alk-20260630.htm",
+    "accession": "0000766421-26-000049",
+    "filed": "2026-11-06",
+    "url": "https://www.sec.gov/Archives/edgar/data/766421/000076642126000049/alk-20260930.htm",
     "sentences": [
-     "Special items for the three and six months ended June 30, 2025 were $ 56 million and $ 147 million, respectively, and were associated with the integration of Hawaiian Airlines, as well as changes to Alaska flight attendants' sick leave benefits pursuant to a collective bargaining agreement ratified in the first quarter of 2025."
+     "Special items for the three and nine months ended September 30, 2025 were $ 64 million and $ 211 million, respectively, and were associated with the integration of Hawaiian Airlines, as well as changes to Alaska flight attendants' sick leave benefits pursuant to a collective bargaining agreement ratified in the first quarter of 2025."
     ]
    }
   },
@@ -1042,14 +1042,16 @@
     ]
    },
    "tenq": {
-    "accession": "0001362468-26-000051",
-    "filed": "2026-08-10",
-    "url": "https://www.sec.gov/Archives/edgar/data/1362468/000136246826000051/algt-20260630.htm",
+    "accession": "0001362468-26-000065",
+    "filed": "2026-11-06",
+    "url": "https://www.sec.gov/Archives/edgar/data/1362468/000136246826000065/algt-20260930.htm",
     "sentences": [
-     "On July 31, 2026, the Company's pilots ratified a new collective bargaining agreement.",
-     "Our ability to combine operations will be limited until we receive a single operating certificate and there are joint collective bargaining agreements in place with the various unionized work groups.",
      "Union Negotiations The Allegiant Air pilots, who are represented by the International Brotherhood of Teamsters (“IBT”), ratified a new collective bargaining agreement on July 31, 2026.",
-     "In 2026, the collective bargaining agreement between Allegiant Air and its air dispatchers represented by the IBT became amendable under the Railway Labor Act (“RLA”)."
+     "Following ratification of the collective bargaining agreement, we paid pilot retention bonuses (which we began accruing in May 2023) totaling $267.0 million, including related taxes.",
+     "In 2026, the collective bargaining agreement between Allegiant Air and its air dispatchers represented by the IBT became amendable under the Railway Labor Act (“RLA”).",
+     "In 2025, the collective bargaining agreement covering the Sun Country pilots, who are represented by the Air Line Pilots Association (“ALPA”), became amendable.",
+     "In order to fully integrate the pre-merger union represented employee groups of Allegiant Air and Sun Country, we may be required to negotiate joint collective bargaining agreements covering the respective combined crafts or classes of employees.",
+     "Cash payments for our salaries and benefits expense are typically made in the period incurred, except for the pilot retention bonus that had accumulated prior to ratification of the new collective bargaining agreement and was paid during third quarter 2026."
     ]
    }
   },
@@ -1999,6 +2001,13 @@
    "craft": "dispatchers",
    "status": "Ratified",
    "status_source": "union",
+   "news": {
+    "title": "American Dispatchers, Operations Specialists Approve New Contract",
+    "date": "2026-10-28",
+    "source": "AirlineGeeks.com",
+    "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNaEZXUXBpZ1ZvOVVuRVNuVjJYUS1QeDJLRnI2X1U2RGsxNHlndHotVFVqWjBqdW9CUnFFc2NYMFRNdUFWQkR3M1hhWWV5Z3Njc2hKS29jRXk4MzlmUk5zaFdxX2NIWXJ6ZWgxaGNrVlhZS1hmQVF5S2lLVGRSOTZsMTRySGE3RENfQy10bFhrR3ljb3kyS1ZwVmdGU1NwRE9ZakxJ?oc=5"
+   },
+   "status_date": "2026-10-27",
    "manual_note": "New five-year agreement ratified October 2026; the 10-K still shows the old contract's 2025 amendable date.",
    "union_events": [
     {
@@ -2011,7 +2020,6 @@
      "quote": "American Airlines dispatchers and operations specialists approve new 5-year contract."
     }
    ],
-   "status_date": "2026-10-27",
    "union_event": {
     "status": "Ratified",
     "date": "2026-10-27",
@@ -2291,7 +2299,6 @@
    "craft": "fleet service",
    "status": "Ratified",
    "status_source": "manual",
-   "status_changed": "2026-09-01",
    "status_date": "2026-09-01",
    "filing_quote": "CWA passenger service and ramp agents (about 7,500) ratified a five-year agreement effective September 1, 2026: 6% signing bonus (minimum $500), yearly wage increases, expanded vacation, sick and overtime accrual.",
    "news": {
@@ -2300,7 +2307,8 @@
     "source": "CWA Piedmont Agents",
     "date": "2026-09-01"
    },
-   "manual_note": "New five-year agreement effective September 1, 2026 (amendable date estimated from the five-year term); the 10-K still shows the old contract's 2023 amendable date."
+   "manual_note": "New five-year agreement effective September 1, 2026 (amendable date estimated from the five-year term); the 10-K still shows the old contract's 2023 amendable date.",
+   "status_changed": "2026-09-01"
   },
   {
    "unit": "Piedmont",
@@ -2454,6 +2462,24 @@
    "union_events": [
     {
      "status": "In negotiations",
+     "date": "2026-11-05",
+     "source": "IAM District 142",
+     "kind": "union",
+     "title": "IAM/PSA Airlines Stores Negotiations Update",
+     "url": "https://atd142.org/iam-psa-airlines-stores-negotiations-update-16/",
+     "quote": "IAM/PSA Airlines Stores Negotiations Update."
+    },
+    {
+     "status": "In negotiations",
+     "date": "2026-11-05",
+     "source": "IAM District 142",
+     "kind": "union",
+     "title": "204-OH IAM PSA Stores Negotiations Update",
+     "url": "https://atd142.org/wp-content/uploads/2026/11/204-OH_IAM-PSA-Stores-Negotiations-Update.pdf",
+     "quote": "204-OH IAM PSA Stores Negotiations Update."
+    },
+    {
+     "status": "In negotiations",
      "date": "2026-10-09",
      "source": "IAM District 142",
      "kind": "union",
@@ -2469,34 +2495,16 @@
      "title": "193-OH IAM PSA Stores Negotiations Update",
      "url": "https://atd142.org/wp-content/uploads/2026/10/193-OH_IAM-PSA-Stores-Negotiations-Update.pdf",
      "quote": "193-OH IAM PSA Stores Negotiations Update."
-    },
-    {
-     "status": "In negotiations",
-     "date": "2026-08-21",
-     "source": "IAM District 142",
-     "kind": "union",
-     "title": "IAM/PSA Airlines Stores Negotiations Update",
-     "url": "https://atd142.org/iam-psa-airlines-stores-negotiations-update-13/",
-     "quote": "IAM/PSA Airlines Stores Negotiations Update."
-    },
-    {
-     "status": "In negotiations",
-     "date": "2026-08-21",
-     "source": "IAM District 142",
-     "kind": "union",
-     "title": "161-OH-Stores IAM PSA Airlines Stores Negotiations Update",
-     "url": "https://atd142.org/wp-content/uploads/2026/08/161-OH-Stores_IAM-PSA-Airlines-Stores-Negotiations-Update.pdf",
-     "quote": "161-OH-Stores IAM PSA Airlines Stores Negotiations Update."
     }
    ],
-   "status_date": "2026-10-09",
+   "status_date": "2026-11-05",
    "union_event": {
     "status": "In negotiations",
-    "date": "2026-10-09",
+    "date": "2026-11-05",
     "source": "IAM District 142",
     "kind": "union",
     "title": "IAM/PSA Airlines Stores Negotiations Update",
-    "url": "https://atd142.org/iam-psa-airlines-stores-negotiations-update-15/",
+    "url": "https://atd142.org/iam-psa-airlines-stores-negotiations-update-16/",
     "quote": "IAM/PSA Airlines Stores Negotiations Update."
    },
    "status_changed": "2026-08-21"
@@ -2993,9 +3001,9 @@
    "carrier": "Horizon Air",
    "open": true,
    "craft": "pilots",
-   "status": "Picketing",
+   "status": "In negotiations",
    "status_source": "union",
-   "status_date": "2026-10-15",
+   "status_date": "2026-11-06",
    "news": {
     "title": "Teamsters Pilots at Horizon Air Hold Informational Pickets",
     "date": "2026-10-15",
@@ -3003,6 +3011,15 @@
     "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQSW1rdl95SXJMSGdueWF5UjJPb3JwZDhYd2FHcDVEQ2JoQUluLV9ndlpDUEswNG9YUWE2TWd3b0w1UHNJcDdOX2NfVjBpVVFtalJwdUtXTGN3ZHNvV2xqNkpBZVFhVjZGejhnYnpxQU9rYlFTZVJyT1BjNWt1ZW9Db2J2U2tTdE9SSjBwdjhtUjhoZw?oc=5"
    },
    "union_events": [
+    {
+     "status": "In negotiations",
+     "date": "2026-11-06",
+     "source": "Teamsters",
+     "kind": "union",
+     "title": "Horizon Air Teamsters Demand Accountability from Management",
+     "url": "https://teamster.org/2026/11/horizon-air-teamsters-demand-accountability-from-management/",
+     "quote": "The actions come as pilots continue fighting for a new collective bargaining agreement after more than three and a half years of negotiations."
+    },
     {
      "status": "Picketing",
      "date": "2026-10-15",
@@ -3014,15 +3031,15 @@
     }
    ],
    "union_event": {
-    "status": "Picketing",
-    "date": "2026-10-15",
+    "status": "In negotiations",
+    "date": "2026-11-06",
     "source": "Teamsters",
     "kind": "union",
-    "title": "Teamsters Pilots at Horizon Air Hold Informational Pickets",
-    "url": "https://teamster.org/2026/10/teamsters-pilots-at-horizon-air-hold-informational-pickets/",
-    "quote": "Teamsters Pilots at Horizon Air Hold Informational Pickets."
+    "title": "Horizon Air Teamsters Demand Accountability from Management",
+    "url": "https://teamster.org/2026/11/horizon-air-teamsters-demand-accountability-from-management/",
+    "quote": "The actions come as pilots continue fighting for a new collective bargaining agreement after more than three and a half years of negotiations."
    },
-   "status_changed": "2026-10-15"
+   "status_changed": "2026-11-06"
   },
   {
    "unit": "Horizon",
@@ -3240,7 +3257,7 @@
    "craft": "flight attendants",
    "status": "Picketing",
    "status_source": "union",
-   "status_date": "2026-10-30",
+   "status_date": "2026-11-06",
    "news": {
     "title": "Frontier Airlines flight attendants picket just weeks before holiday travel season",
     "date": "2026-10-26",
@@ -3248,6 +3265,15 @@
     "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPQkJlelhKQnpSRi05TENCWmk2a05FUlpteXdvVUo4N0hxQ2lRR0FHdUtPdnlIMFI4S0tsTl9jcWJ2ZXl2Z1FraFVEaENxbGZkcFM5ZV92Mkx5aXlzd1FPWmxFRjlaSVJERE03ZnNDUklSSEM5eFlSZkhlemtyM2RnakJzdkR0RE5BaDFicDdYOUlZc0dxV0RMN3dRUDk?oc=5"
    },
    "union_events": [
+    {
+     "status": "Picketing",
+     "date": "2026-11-06",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "RSVP Now: Join AFA Frontier in ATL",
+     "url": "https://afacwa.org/rsvp-now-join-afa-frontier-in-atl/",
+     "quote": "Frontier Flight Attendants are building on the success of two incredible pickets at Frontier HQ in Denver and Philadelphia International Airport."
+    },
     {
      "status": "Picketing",
      "date": "2026-10-30",
@@ -3274,25 +3300,16 @@
      "title": "Turn Out for Horizon and Frontier Flight Attendant Pickets",
      "url": "https://afacwa.org/turn-out-for-horizon-and-frontier-flight-attendant-pickets/",
      "quote": "Turn Out for Horizon and Frontier Flight Attendant Pickets."
-    },
-    {
-     "status": "Picketing",
-     "date": "2026-09-26",
-     "source": "AFA-CWA",
-     "kind": "union",
-     "title": "Day in the Life of an AFA Frontier Flight Attendant",
-     "url": "https://afacwa.org/day-in-the-life-of-an-afa-frontier-flight-attendant/",
-     "quote": "Join AFA Frontier Flight Attendants on Monday, October 26 in PHL for a Claws Out, Contract Now picket to show management we won’t stop until we have a Contract that reflects our worth."
     }
    ],
    "union_event": {
     "status": "Picketing",
-    "date": "2026-10-30",
+    "date": "2026-11-06",
     "source": "AFA-CWA",
     "kind": "union",
-    "title": "AFA Frontier Flight Attendants Say Claws Out, Contract Now",
-    "url": "https://afacwa.org/afa-frontier-flight-attendants-say-claws-out-contract-now/",
-    "quote": "AFA Frontier Flight Attendants picketed at PHL earlier this week to demand management stop the excuses and deliver the Contract they have earned NOW."
+    "title": "RSVP Now: Join AFA Frontier in ATL",
+    "url": "https://afacwa.org/rsvp-now-join-afa-frontier-in-atl/",
+    "quote": "Frontier Flight Attendants are building on the success of two incredible pickets at Frontier HQ in Denver and Philadelphia International Airport."
    },
    "status_changed": "2026-09-18"
   },
