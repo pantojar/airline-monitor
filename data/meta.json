@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-11-12T14:39:05Z",
+  "at": "2026-11-12T21:42:21Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -137,10 +137,10 @@
    }
   }
  },
- "generated": "2026-11-12T14:39:41Z",
+ "generated": "2026-11-12T21:43:06Z",
  "news": {
-  "at": "2026-11-12T14:39:37Z",
-  "items": 103,
+  "at": "2026-11-12T21:43:04Z",
+  "items": 105,
   "errors": [
    "Envoy Air news: unavailable",
    "PSA Airlines news: unavailable",
@@ -162,7 +162,7 @@
   "rows": 453
  },
  "fuel_spot": {
-  "at": "2026-11-12T14:39:38Z",
+  "at": "2026-11-12T21:43:05Z",
   "latest": "2026-11-03",
   "rows": 1207,
   "estimate_error": "EIA daily prices page: diesel price not found",
@@ -422,12 +422,12 @@
   ]
  },
  "cpi": {
-  "at": "2026-11-12T14:39:39Z",
+  "at": "2026-11-12T21:43:06Z",
   "cpiw": "2026-10",
   "cpiu": "2026-10"
  },
  "revsplit": {
-  "at": "2026-11-12T14:39:06Z",
+  "at": "2026-11-12T21:42:22Z",
   "carriers": {
    "DAL": {
     "quarters": 19,
@@ -464,7 +464,7 @@
   }
  },
  "reliability": {
-  "at": "2026-11-12T14:39:41Z",
+  "at": "2026-11-12T21:43:06Z",
   "checked": "2026-11-12",
   "first": "2023-01",
   "latest": "2026-08",
