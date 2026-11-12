@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-11-11T22:03:54Z",
+  "at": "2026-11-12T11:12:29Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -137,9 +137,9 @@
    }
   }
  },
- "generated": "2026-11-11T22:14:05Z",
+ "generated": "2026-11-12T11:14:24Z",
  "news": {
-  "at": "2026-11-11T22:04:36Z",
+  "at": "2026-11-12T11:13:05Z",
   "items": 104,
   "errors": [
    "Envoy Air news: unavailable",
@@ -162,7 +162,7 @@
   "rows": 453
  },
  "fuel_spot": {
-  "at": "2026-11-11T22:04:36Z",
+  "at": "2026-11-12T11:13:06Z",
   "latest": "2026-11-03",
   "rows": 1207,
   "diesel_close": "2026-11-09",
@@ -422,12 +422,12 @@
   ]
  },
  "cpi": {
-  "at": "2026-11-11T22:04:37Z",
+  "at": "2026-11-12T11:13:06Z",
   "cpiw": "2026-10",
   "cpiu": "2026-10"
  },
  "revsplit": {
-  "at": "2026-11-11T22:03:55Z",
+  "at": "2026-11-12T11:12:29Z",
   "carriers": {
    "DAL": {
     "quarters": 19,
@@ -464,10 +464,12 @@
   }
  },
  "reliability": {
-  "at": "2026-11-11T22:14:05Z",
-  "checked": "2026-11-11",
+  "at": "2026-11-12T11:14:24Z",
+  "checked": "2026-11-12",
   "first": "2023-01",
   "latest": "2026-08",
-  "fetched": {}
+  "fetched": {
+   "2026-09": "failed: ValueError: TranStats did not return a zip file"
+  }
  }
 }
