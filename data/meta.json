@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-11-13T14:37:41Z",
+  "at": "2026-11-13T14:45:12Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -137,9 +137,9 @@
    }
   }
  },
- "generated": "2026-11-13T14:38:17Z",
+ "generated": "2026-11-13T14:45:47Z",
  "news": {
-  "at": "2026-11-13T14:38:15Z",
+  "at": "2026-11-13T14:45:46Z",
   "items": 100,
   "errors": [
    "Envoy Air news: unavailable",
@@ -162,7 +162,7 @@
   "rows": 453
  },
  "fuel_spot": {
-  "at": "2026-11-13T14:38:17Z",
+  "at": "2026-11-13T14:45:46Z",
   "latest": "2026-11-11",
   "rows": 1213,
   "estimate_error": "EIA daily prices page: diesel price not found"
@@ -420,12 +420,12 @@
   ]
  },
  "cpi": {
-  "at": "2026-11-13T14:38:17Z",
+  "at": "2026-11-13T14:45:47Z",
   "cpiw": "2026-10",
   "cpiu": "2026-10"
  },
  "revsplit": {
-  "at": "2026-11-13T14:37:41Z",
+  "at": "2026-11-13T14:45:13Z",
   "carriers": {
    "DAL": {
     "quarters": 19,
@@ -462,7 +462,7 @@
   }
  },
  "reliability": {
-  "at": "2026-11-13T14:38:17Z",
+  "at": "2026-11-13T14:45:47Z",
   "checked": "2026-11-13",
   "first": "2023-01",
   "latest": "2026-08",
