@@ -177,6 +177,7 @@ window.dash = (function () {
 #dash-root .am-stamp{display:inline-block;margin-left:10px;font-size:var(--cds-font-size-caption);font-weight:600;color:var(--color-fg-muted);background:var(--cds-chart-grid);border-radius:3px;padding:2px 7px 0;vertical-align:3px}
 #dash-root .am-flag{color:var(--color-warn);font-weight:800;margin-left:1px}
 #dash-root .am-titlerow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+#dash-root .am-logo{flex:none;display:block;width:72px;height:72px}
 #dash-root .am-beta{font-weight:800;font-size:14px;line-height:1;padding:7px 10px 5px;border-radius:3px;background:var(--sign-light);color:var(--sign-on-light);border:1.5px solid var(--sign-navy)}
 #dash-root .am-betanote{margin:10px 0 0;max-width:46rem;font-size:var(--cds-font-size-caption);line-height:1.5;color:var(--color-fg);background:color-mix(in srgb,var(--sign-light) 30%,var(--color-panel));border-left:3px solid var(--sign-navy);padding:8px 12px 6px;border-radius:0 3px 3px 0}
 #dash-root .am-take{color:var(--color-fg);font-size:20px;line-height:1.45;margin:18px 0 0;max-width:46rem;font-weight:400}
@@ -281,6 +282,7 @@ window.dash = (function () {
   #dash-root .am-hn{display:none}
   #dash-root .am-bar .sp{flex-basis:100%;height:0}
   #dash-root .am-head h1{font-size:24px;padding:12px 14px 8px}
+  #dash-root .am-logo{width:52px;height:52px}
   #dash-root .am-take{font-size:17px}
   #dash-root .am-card{padding:16px 14px 18px}
 }
@@ -289,7 +291,7 @@ window.dash = (function () {
 
 <div class="am">
   <header class="am-head" id="top">
-    <div class="am-titlerow"><h1>TWU Airline Industry Monitor</h1><span class="am-beta">Beta</span></div>
+    <div class="am-titlerow"><img class="am-logo" src="twu-logo.png" width="72" height="72" alt="Transport Workers Union of America, AFL-CIO"><h1>TWU Airline Industry Monitor</h1><span class="am-beta">Beta</span></div>
     <p class="am-asof" id="asof">Loading latest data…</p>
     <p class="am-betanote">This dashboard is still being built. Some figures and statuses may be wrong while sources are added and checked, so confirm anything important against the linked filing or source before relying on it.</p>
   </header>
