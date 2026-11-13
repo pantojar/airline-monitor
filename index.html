@@ -141,7 +141,10 @@ window.dash = (function () {
   #dash-root #brief{display:block;font-family:var(--font-anthropic-sans);color:#000;font-size:10.5pt;line-height:1.4}
 }
 #dash-root #brief h1{font-size:20pt;font-weight:800;margin:0;color:#080082}
-#dash-root #brief .b-sub{color:#444;font-size:9pt;margin:4px 0 14px;padding-bottom:8px;border-bottom:2px solid #080082}
+#dash-root #brief .b-head{display:flex;align-items:center;gap:14px;margin:0 0 14px;padding-bottom:8px;border-bottom:2px solid #080082}
+#dash-root #brief .b-htxt{flex:1;min-width:0}
+#dash-root #brief .b-logo{flex:none;width:0.7in;height:0.7in}
+#dash-root #brief .b-sub{color:#444;font-size:9pt;margin:4px 0 0}
 #dash-root #brief h2{font-size:12pt;font-weight:800;margin:16px 0 6px;color:#080082;break-after:avoid}
 #dash-root #brief table{border-collapse:collapse;width:100%;font-size:9.5pt;break-inside:auto}
 #dash-root #brief th,#dash-root #brief td{padding:4px 6px 3px;border-bottom:1px solid #ccd;text-align:right;vertical-align:top}
@@ -1568,8 +1571,10 @@ dash.calc('dotpeer', {
     const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt !== undefined) e.textContent = txt; return e; };
     const neg = (v) => (num(v) !== null && num(v) < 0 ? 'neg' : '');
     const today = d3.utcFormat('%B %-d, %Y')(new Date());
-    box.append(el('h1', '', pr.carrier + ' (' + t + ')'));
-    box.append(el('div', 'b-sub', 'Financial brief prepared ' + today + '. Latest reported quarter: ' + ql(pr.latest) + '. Public sources: SEC filings, DOT Form 41, union websites and news. $ millions unless noted. From the TWU Airline Industry Monitor (beta): confirm key figures against the filings before relying on them.'));
+    const bhead = el('div', 'b-head'), btxt = el('div', 'b-htxt'), blogo = el('img', 'b-logo'); blogo.src = 'twu-logo.png'; blogo.alt = 'TWU';
+    bhead.append(btxt, blogo); box.append(bhead);
+    btxt.append(el('h1', '', pr.carrier + ' (' + t + ')'));
+    btxt.append(el('div', 'b-sub', 'Financial brief prepared ' + today + '. Latest reported quarter: ' + ql(pr.latest) + '. Public sources: SEC filings, DOT Form 41, union websites and news. $ millions unless noted. From the TWU Airline Industry Monitor (beta): confirm key figures against the filings before relying on them.'));
 
     // latest quarter vs a year earlier
     const rows = fin.data.filter((r) => r.ticker === t);
