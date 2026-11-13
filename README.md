@@ -1,4 +1,4 @@
-# Airline Financial Monitor
+# TWU Airline Industry Monitor
 
 A peer-comparison dashboard for US-listed passenger airlines: revenue, operating margin, labor cost, labor and fuel shares of operating expense, cash returned to shareholders, liquidity and debt, plus an industry and labor news feed.
 

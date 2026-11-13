@@ -1,4 +1,4 @@
-"""Refresh the Airline Financial Monitor data files.
+"""Refresh the TWU Airline Industry Monitor data files.
 
 Runs on a schedule (see .github/workflows/update.yml). Standard library only.
 
