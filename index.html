@@ -294,7 +294,7 @@ window.dash = (function () {
 
 <div class="am">
   <header class="am-head" id="top">
-    <div class="am-titlerow"><img class="am-logo" src="twu-logo.png" width="72" height="72" alt="Transport Workers Union of America, AFL-CIO"><h1>TWU Airline Industry Monitor</h1><span class="am-beta">Beta</span></div>
+    <div class="am-titlerow"><img class="am-logo" src="twu-logo.svg" width="72" height="72" alt="Transport Workers Union of America, AFL-CIO"><h1>TWU Airline Industry Monitor</h1><span class="am-beta">Beta</span></div>
     <p class="am-asof" id="asof">Loading latest data…</p>
     <p class="am-betanote">This dashboard is still being built. Some figures and statuses may be wrong while sources are added and checked, so confirm anything important against the linked filing or source before relying on it.</p>
   </header>
@@ -1571,7 +1571,7 @@ dash.calc('dotpeer', {
     const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt !== undefined) e.textContent = txt; return e; };
     const neg = (v) => (num(v) !== null && num(v) < 0 ? 'neg' : '');
     const today = d3.utcFormat('%B %-d, %Y')(new Date());
-    const bhead = el('div', 'b-head'), btxt = el('div', 'b-htxt'), blogo = el('img', 'b-logo'); blogo.src = 'twu-logo.png'; blogo.alt = 'TWU';
+    const bhead = el('div', 'b-head'), btxt = el('div', 'b-htxt'), blogo = el('img', 'b-logo'); blogo.src = 'twu-logo.svg'; blogo.alt = 'TWU';
     bhead.append(btxt, blogo); box.append(bhead);
     btxt.append(el('h1', '', pr.carrier + ' (' + t + ')'));
     btxt.append(el('div', 'b-sub', 'Financial brief prepared ' + today + '. Latest reported quarter: ' + ql(pr.latest) + '. Public sources: SEC filings, DOT Form 41, union websites and news. $ millions unless noted. From the TWU Airline Industry Monitor (beta): confirm key figures against the filings before relying on them.'));
