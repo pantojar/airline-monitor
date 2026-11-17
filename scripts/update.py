@@ -17,6 +17,7 @@ Outputs (all in data/):
   dot_fuel.json     DOT monthly fuel gallons and cost by carrier
   fuel_spot.json    daily Gulf Coast jet fuel spot price (FRED DJFUELUSGULF)
   cpi.json          monthly CPI-W and CPI-U, U.S. city average, not seasonally adjusted (BLS via FRED)
+  extfacts_cache.json carriers' own XBRL elements (e.g. Allegiant's fuel line) read from each filing (see scripts/extfacts.py)
   revenue_split.json passenger / loyalty / cargo / refinery revenue by quarter from 10-Q and 10-K XBRL (see scripts/revsplit.py)
   exec_pay.json     CEO pay, median employee pay and pay ratio from proxy statements (see scripts/proxy.py)
   labor.json        union contracts from 10-Ks, labor sentences from 10-Qs, and news-based status (see scripts/labor.py)
@@ -38,6 +39,7 @@ import xml.etree.ElementTree as ET
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import dot  # noqa: E402
+import extfacts  # noqa: E402
 import proxy  # noqa: E402
 import labor  # noqa: E402
 
@@ -209,10 +211,12 @@ def extract(cf, QE):
         "rev": pick(cf, ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "RevenueFromContractWithCustomerIncludingAssessedTax"], flow_q, QE),
         "opex": pick(cf, ["OperatingExpenses", "CostsAndExpenses", "OperatingCostsAndExpenses"], flow_q, QE),
         "labor": pick(cf, ["LaborAndRelatedExpense"], flow_q, QE),
-        # fuel: the standard element (pooled with Alaska's custom one), then other carriers' own names, which only
-        # fill quarters still empty: Allegiant's AircraftFuel, SkyWest's FuelCost. Republic has no fuel line
-        # (partners pay fuel directly), so it stays blank.
-        "fuel": pick(cf, [("FuelCosts", "FuelCostsGrossOfHedging"), "AircraftFuel", "FuelCost"], flow_q, QE),
+        # fuel: the standard element (pooled with Alaska's custom one), then carriers' own elements, which only
+        # fill quarters still empty: Allegiant's AircraftFuel; SkyWest's AircraftFuel, renamed FuelCost from Q3 2024
+        # (pooled, so year-to-date differences work across the rename). Company-facts data doesn't carry a filer's
+        # own elements, so these come from the filings themselves (scripts/extfacts.py, "extension_elements" in
+        # config/carriers.json). Republic has no fuel line (partners pay fuel directly), so it stays blank.
+        "fuel": pick(cf, [("FuelCosts", "FuelCostsGrossOfHedging"), ("AircraftFuel", "FuelCost")], flow_q, QE),
         "opinc": pick(cf, ["OperatingIncomeLoss"], flow_q, QE),
         "ni": pick(cf, ["NetIncomeLoss"], flow_q, QE),
         "buyback": pick(cf, ["PaymentsForRepurchaseOfCommonStock"], flow_q, QE),
@@ -329,6 +333,8 @@ def update_sec(meta, facts_dir=None):
     old = load(os.path.join(DATA, "financials.json"), [])
     QE = quarter_ends(dt.date.today())
     rows, status = [], {}
+    ext_cache = extfacts.load_cache(ROOT)
+    ext_status = {}
     for c in carriers:
         t = c["ticker"]
         try:
@@ -340,11 +346,15 @@ def update_sec(meta, facts_dir=None):
                 url = f"https://data.sec.gov/api/xbrl/companyfacts/CIK{int(c['cik']):010d}.json"
                 cf = json.loads(http_get(url))
                 time.sleep(0.3)  # stay well under SEC's 10 requests/second
+            if c.get("extension_elements"):
+                ext_status[t] = extfacts.add_extension_facts(cf, c, ext_cache, user_agent(), FIRST_QUARTER[:4] + "-01-01")
             new = carrier_rows(c, cf, QE, overrides)
             if not new:
                 raise ValueError("no usable quarters found")
             rows.extend(new)
             status[t] = {"ok": True, "latest_filing": latest_filing(cf), "quarters": len(new), "through": new[-1]["quarter"]}
+            if ext_status.get(t):
+                status[t]["extension"] = ext_status[t]
             sh = shares_outstanding(cf)
             if sh:
                 status[t]["shares"], status[t]["shares_date"] = sh
@@ -354,6 +364,8 @@ def update_sec(meta, facts_dir=None):
             status[t] = {"ok": False, "error": f"{type(e).__name__}: {e}"[:300], "kept_previous_rows": len(kept)}
             print(f"[warn] {t}: {e}", file=sys.stderr)
     save(os.path.join(DATA, "financials.json"), rows)
+    if ext_cache:
+        extfacts.save_cache(ROOT, ext_cache)
     page_carriers = []
     for c in carriers:
         pc = {k: c[k] for k in ("ticker", "carrier", "group", "status", "returns_complete", "note")}
