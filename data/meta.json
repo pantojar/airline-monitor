@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-11-17T03:35:34Z",
+  "at": "2026-11-17T19:10:28Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -137,18 +137,19 @@
    }
   }
  },
- "generated": "2026-11-17T03:37:45Z",
+ "generated": "2026-11-17T19:14:51Z",
  "news": {
-  "at": "2026-11-17T03:36:26Z",
-  "items": 101,
+  "at": "2026-11-17T19:11:06Z",
+  "items": 99,
   "errors": [
    "Envoy Air news: unavailable",
    "PSA Airlines news: unavailable",
-   "Delta investor news: unavailable"
+   "Delta investor news: unavailable",
+   "JetBlue newsroom: unavailable"
   ]
  },
  "dot": {
-  "at": "2026-11-11T11:08:18Z",
+  "at": "2026-11-17T19:14:51Z",
   "ok": true,
   "failed": [],
   "latest": {
@@ -162,15 +163,15 @@
   "rows": 453
  },
  "fuel_spot": {
-  "at": "2026-11-17T03:36:27Z",
+  "at": "2026-11-17T19:11:07Z",
   "latest": "2026-11-11",
   "rows": 1213,
-  "diesel_close": "2026-11-13",
-  "estimated_through": "2026-11-13",
+  "diesel_close": "2026-11-16",
+  "estimated_through": "2026-11-16",
   "spread": -0.304
  },
  "exec_pay": {
-  "at": "2026-11-11T11:07:03Z",
+  "at": "2026-11-17T19:11:13Z",
   "rows": 20,
   "errors": []
  },
@@ -422,12 +423,12 @@
   ]
  },
  "cpi": {
-  "at": "2026-11-17T03:36:27Z",
+  "at": "2026-11-17T19:11:07Z",
   "cpiw": "2026-10",
   "cpiu": "2026-10"
  },
  "revsplit": {
-  "at": "2026-11-17T03:35:34Z",
+  "at": "2026-11-17T19:10:29Z",
   "carriers": {
    "DAL": {
     "quarters": 19,
@@ -464,12 +465,10 @@
   }
  },
  "reliability": {
-  "at": "2026-11-17T03:37:45Z",
+  "at": "2026-11-17T19:14:51Z",
   "checked": "2026-11-17",
   "first": "2023-01",
   "latest": "2026-08",
-  "fetched": {
-   "2026-09": "failed: ValueError: TranStats did not return a zip file"
-  }
+  "fetched": {}
  }
 }
