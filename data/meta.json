@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-11-17T20:47:05Z",
+  "at": "2026-11-17T21:55:27Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -92,7 +92,7 @@
      "elements": [
       "AircraftFuel"
      ],
-     "new_filings": 15,
+     "new_filings": 0,
      "facts": 49
     },
     "shares": 27307455,
@@ -133,7 +133,7 @@
       "AircraftFuel",
       "FuelCost"
      ],
-     "new_filings": 15,
+     "new_filings": 0,
      "facts": 49
     },
     "shares": 38034157,
@@ -152,9 +152,9 @@
    }
   }
  },
- "generated": "2026-11-17T20:47:46Z",
+ "generated": "2026-11-17T21:56:12Z",
  "news": {
-  "at": "2026-11-17T20:47:42Z",
+  "at": "2026-11-17T21:56:03Z",
   "items": 102,
   "errors": [
    "Envoy Air news: unavailable",
@@ -177,7 +177,7 @@
   "rows": 453
  },
  "fuel_spot": {
-  "at": "2026-11-17T20:47:43Z",
+  "at": "2026-11-17T21:56:04Z",
   "latest": "2026-11-11",
   "rows": 1213,
   "diesel_close": "2026-11-16",
@@ -437,12 +437,12 @@
   ]
  },
  "cpi": {
-  "at": "2026-11-17T20:47:44Z",
+  "at": "2026-11-17T21:56:04Z",
   "cpiw": "2026-10",
   "cpiu": "2026-10"
  },
  "revsplit": {
-  "at": "2026-11-17T20:47:05Z",
+  "at": "2026-11-17T21:55:28Z",
   "carriers": {
    "DAL": {
     "quarters": 19,
@@ -479,7 +479,7 @@
   }
  },
  "reliability": {
-  "at": "2026-11-17T20:47:46Z",
+  "at": "2026-11-17T21:56:12Z",
   "checked": "2026-11-17",
   "first": "2023-01",
   "latest": "2026-08",
