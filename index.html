@@ -46,7 +46,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
 <script src="vendor/d3.min.js"></script>
 <script>
 window.dash = (function () {
-  var DEFAULTS = { group: 'All', basis: 'lq', dbasis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', pgroup: 'All', lcarrier: 'All', lopen: false, cpiidx: 'cpiw', cpispan: '12m', cpifrom: null, cpito: null, h2h: 'DAL,UAL', lcasmreg: false, relview: 'mkt', relper: 'ttm', relmetric: 'ontime', relsel: 'DL,UA,AA,WN,AS', mkfrom: 'ytd', mksel: 'DAL,UAL,AAL,LUV,SPY,JETS', mkmode: 'tsr', mkone: 'DAL' };
+  var DEFAULTS = { group: 'All', basis: 'lq', dbasis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', pgroup: 'All', lcarrier: 'All', lopen: false, cpiidx: 'cpiw', cpispan: '12m', cpifrom: null, cpito: null, h2h: 'DAL,UAL', lcasmreg: false, relview: 'mkt', relper: 'ttm', relmetric: 'ontime', relsel: 'DL,UA,AA,WN,AS', mkfrom: 'ytd', mksel: 'DAL,UAL,AAL,LUV,SPY,JETS', mkmode: 'tsr', mkone: 'DAL', fbcarea: null, fbcad: 2, fbcch: 2, fbcrate: '', fbchrs: '2080', fbcearn: 1, fbchc: '' };
   var params = Object.assign({}, DEFAULTS), calcs = {}, order = [], res = null, fns = [];
   var DATA = null, state = 'loading';
   function compute() {
@@ -131,6 +131,20 @@ window.dash = (function () {
 #dash-root .am-head h1{display:inline-block;margin:0;background:var(--sign-navy);color:var(--sign-on-navy);font-weight:800;font-size:var(--cds-font-size-title);line-height:1;letter-spacing:.01em;
   padding:14px 20px 10px;border-radius:4px;box-shadow:inset 0 0 0 3px var(--sign-navy),inset 0 0 0 5px var(--sign-on-navy)}
 #dash-root #cpi-range .am-sel{margin-left:4px;padding:4px 8px 2px}
+#dash-root #fbc-card .am-sel{margin-left:4px}
+#dash-root #fbc-card .am-chk input.am-sel{width:auto;height:auto;accent-color:auto}
+#dash-root #fbc-card #fbc-q{width:19rem;max-width:calc(100vw - 7rem);font-weight:400}
+#dash-root #fbc-base{max-width:100%}
+#dash-root #fbc-card .am-chk input.fbc-in{width:6.5em;font-weight:400}
+#dash-root .fbc-grp{display:inline-flex;align-items:center;gap:4px;font-size:var(--cds-font-size-caption);font-weight:600;color:var(--color-fg-muted)}
+#dash-root .fbc-grp .am-chip{margin-bottom:0;min-width:2.2em}
+#dash-root .fbc-place{font-weight:800;font-size:var(--cds-font-size-body);margin:var(--cds-gap-sm) 0 2px}
+#dash-root .fbc-place span{font-weight:400;color:var(--color-fg-muted);font-size:var(--cds-font-size-caption)}
+#dash-root .fbc-pay{margin:var(--cds-gap-md) 0 var(--cds-gap-sm);padding-top:var(--cds-gap-sm);border-top:1px solid var(--color-border-line)}
+#dash-root .fbc-bar{display:block;height:9px;border-radius:2px;background:var(--c1);min-width:1px}
+#dash-root #fbc-table td.b{width:30%;min-width:6rem}
+#dash-root #fbc-table tr.tot td{font-weight:800;border-top:2px solid var(--rule)}
+#dash-root .fbc-h3{font-size:var(--cds-font-size-body);font-weight:800;margin:var(--cds-gap-lg) 0 2px}
 #dash-root .am-printbtn{background:var(--sign-navy);color:var(--sign-on-navy);border-color:var(--sign-navy)}
 #dash-root #brief{display:none}
 @media print{
@@ -714,6 +728,59 @@ window.dash = (function () {
         <div class="am-tile"><div class="k">Latest 12-month change</div><div class="v" id="cpi-yoy">—</div><div class="d" id="cpi-yoy-d">—</div></div>
       </div>
       <div class="am-wrap am-chart" id="cpi-chart" data-source="cpi"></div>
+    </div>
+
+    <div class="am-card" id="fbc-card">
+      <h2>Family budget</h2>
+      <p class="am-note" id="fbc-note">What it costs to live a modest but adequate life in a given place, from the Economic Policy Institute's Family Budget Calculator: housing, food, child care, transportation, health care, other necessities and taxes, for 10 family types. Pick a hub or crew base, or search any metro area or county.</p>
+      <div class="am-bar">
+        <label class="am-chk">Hub or base <select class="am-sel" id="fbc-base" aria-label="Hub or crew base"></select></label>
+        <label class="am-chk">or search <input class="am-sel" id="fbc-q" list="fbc-list" placeholder="Any metro area or county" autocomplete="off" aria-label="Search metro areas and counties"></label>
+        <datalist id="fbc-list"></datalist>
+      </div>
+      <div class="am-bar">
+        <span class="fbc-grp" id="fbc-ad">Adults <button class="am-chip" data-ad="1">1</button><button class="am-chip" data-ad="2">2</button></span>
+        <span class="fbc-grp" id="fbc-ch" style="margin-left:var(--cds-gap-md)">Children <button class="am-chip" data-ch="0">0</button><button class="am-chip" data-ch="1">1</button><button class="am-chip" data-ch="2">2</button><button class="am-chip" data-ch="3">3</button><button class="am-chip" data-ch="4">4</button></span>
+      </div>
+      <div class="fbc-place" id="fbc-place">—</div>
+      <div class="am-tiles" id="fbc-tiles" style="margin-bottom:var(--cds-gap-md)">
+        <div class="am-tile"><div class="k">Annual budget</div><div class="v" id="fbc-tot">—</div><div class="d" id="fbc-tot-d">—</div></div>
+        <div class="am-tile"><div class="k" id="fbc-hr-k">Hourly wage needed</div><div class="v" id="fbc-hr">—</div><div class="d" id="fbc-hr-d">Full-time, 2,080 hours a year</div></div>
+        <div class="am-tile" id="fbc-hr2-tile"><div class="k">If both adults work full time</div><div class="v" id="fbc-hr2">—</div><div class="d">Hourly wage each, 2,080 hours a year</div></div>
+        <div class="am-tile"><div class="k">Median family income here</div><div class="v" id="fbc-mfi">—</div><div class="d" id="fbc-mfi-d">Census ACS, 2019–2023</div></div>
+      </div>
+      <div class="am-tbl-box">
+        <table class="am-t" id="fbc-table" data-source="fbc">
+          <thead><tr><th class="l">Budget item</th><th>Monthly</th><th>Annual</th><th>Share</th><th class="l am-hn"></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="fbc-pay">
+        <div class="am-bar">
+          <label class="am-chk">Compare a pay rate: $<input class="am-sel fbc-in" id="fbc-rate" type="number" min="0" step="0.01" inputmode="decimal" placeholder="per hour" aria-label="Hourly pay rate"></label>
+          <label class="am-chk">× <input class="am-sel fbc-in" id="fbc-hrs" type="number" min="0" step="1" inputmode="numeric" aria-label="Paid hours a year"> paid hours a year</label>
+          <span class="fbc-grp" id="fbc-earn">Earners at this pay <button class="am-chip" data-earn="1">1</button><button class="am-chip" data-earn="2">2</button></span>
+        </div>
+        <div class="am-bar">
+          <label class="am-chk">Health care with an employer plan: $<input class="am-sel fbc-in" id="fbc-hc" type="number" min="0" step="1" inputmode="numeric" placeholder="per year" aria-label="Annual health care cost with an employer plan"> a year (optional; replaces EPI's marketplace estimate)</label>
+        </div>
+        <div class="am-tiles" id="fbc-pay-tiles" hidden>
+          <div class="am-tile"><div class="k">Annual pay</div><div class="v" id="fbc-pay">—</div><div class="d" id="fbc-pay-d">—</div></div>
+          <div class="am-tile"><div class="k">Share of the budget covered</div><div class="v" id="fbc-cov">—</div><div class="d">Pay before taxes ÷ budget (the budget includes taxes)</div></div>
+          <div class="am-tile"><div class="k" id="fbc-gap-k">Gap</div><div class="v" id="fbc-gap">—</div><div class="d" id="fbc-gap-d">—</div></div>
+        </div>
+      </div>
+      <div class="fbc-h3">Annual budget at each hub and crew base</div>
+      <p class="am-note" id="fbc-bases-note">Same family type. The selected place is highlighted.</p>
+      <div class="am-wrap am-chart" id="fbc-chart" data-source="fbc"></div>
+      <ol class="am-foot" id="fbc-foot">
+        <li><b>What the budget covers.</b> EPI prices a modest but adequate standard of living. It is not a poverty line. It leaves out savings for retirement, college or emergencies, and since the 2026 edition it leaves out entertainment.</li>
+        <li><b>Health care</b> is EPI's estimate for the lowest-cost bronze plan on the ACA marketplace plus typical out-of-pocket costs, without premium tax credits. Members with an employer plan usually pay less: enter their premium share and out-of-pocket cost above to swap it in. Taxes are left as EPI figured them.</li>
+        <li><b>Child care</b> assumes children aged 4, 8, 12 and 16 (in that order as children are added) and full-time care for the 4-year-old. Every adult is assumed to work.</li>
+        <li><b>Hourly wage needed</b> is the annual budget ÷ 2,080 hours (40 hours × 52 weeks). The budget includes federal and state income taxes and the employee share of Social Security and Medicare taxes (not local or sales taxes), so it compares with pay before taxes.</li>
+        <li><b>Areas.</b> Metro areas are the metropolitan areas and HUD Fair Market Rent areas EPI uses. A metro that crosses a state line has a budget for each state, because state taxes differ. Median family income is from the Census Bureau's American Community Survey; EPI gives none for Connecticut. The hub and base list is in config/fbc_bases.json and can be edited.</li>
+        <li><b>Across years.</b> EPI updates its methods with each edition, so it advises against comparing one edition's budgets with another's.</li>
+      </ol>
     </div>
 
     <div class="am-card" id="exec-card">
@@ -2213,6 +2280,202 @@ dash.calc('dotpeer', {
       .on('pointerleave', () => { rule.attr('opacity', 0); tp.hide(); });
   }
 
+  // ---------- family budget (EPI Family Budget Calculator) ----------
+  // data/fbc.json (metro areas, hubs and bases) loads the first time the Pay & Prices tab opens;
+  // data/fbc_county.json (counties) loads only when someone uses the search box.
+  const FBC = { d: null, loading: false, failed: false, county: false, cLoading: false, byKey: new Map(), opts: new Map(), bases: [] };
+  const FBC_PARTS = [['housing', 'Housing'], ['food', 'Food'], ['childcare', 'Child care'], ['transportation', 'Transportation'], ['healthcare', 'Health care'], ['other', 'Other necessities'], ['taxes', 'Taxes']];
+  const fbcGet = (n) => (window.__EMBED && window.__EMBED[n] !== undefined ? Promise.resolve(window.__EMBED[n])
+    : fetch('data/' + n + '.json?t=' + Math.floor(Date.now() / 3600000), { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error(n + ' ' + r.status); return r.json(); }));
+  const fbcClean = (n) => n.replace(/\s+HUD Metro FMR Area$/, '').replace(/\s+MSA$/, '').replace(/\s{2,}/g, ' ');
+  const usd0 = (v) => (bad(v) ? '—' : (v < 0 ? '−$' : '$') + d3.format(',.0f')(Math.abs(v)));
+  const usd2 = (v) => (bad(v) ? '—' : (v < 0 ? '−$' : '$') + d3.format(',.2f')(Math.abs(v)));
+  function fbcIndex(rows, kind) {
+    // metro rows: [id, state, name, top100, median family income, 80 values]; county rows: [id, state, fips, name, median family income, 80 values]
+    const dup = new Map();
+    if (kind === 'm') rows.forEach((r) => dup.set(r[2], (dup.get(r[2]) || 0) + 1));
+    for (const r of rows) {
+      const key = kind + ':' + r[0], raw = kind === 'm' ? r[2] : r[3];
+      const name = kind === 'm' ? fbcClean(raw) + ' metro' + (dup.get(raw) > 1 ? ' (' + r[1] + ' part)' : '') : raw + ', ' + r[1];
+      FBC.byKey.set(key, { key, kind, st: r[1], raw, name, mfi: r[4], v: r.slice(5) });
+      FBC.opts.set(name, key);
+    }
+    const dl = document.getElementById('fbc-list');
+    dl.replaceChildren(...[...FBC.opts.keys()].sort((a, b) => a.localeCompare(b)).map((n) => { const o = document.createElement('option'); o.value = n; return o; }));
+  }
+  function fbcLoad() {
+    if (FBC.d || FBC.loading) return;
+    FBC.loading = true;
+    fbcGet('fbc').then((d) => {
+      FBC.d = d; fbcIndex(d.metro || [], 'm');
+      const mk = new Map([...FBC.byKey.values()].map((a) => [a.st + '|' + a.raw, a.key]));
+      FBC.bases = (d.bases || []).map((b) => Object.assign({}, b, { key: mk.get(b.st + '|' + (b.area || '')) || null })).filter((b) => b.key || b.county);
+      FBC.loading = false; dash.setParams({});
+    }).catch(() => { FBC.loading = false; FBC.failed = true; dash.setParams({}); });
+  }
+  function fbcLoadCounty() {
+    if (FBC.county || FBC.cLoading || !FBC.d) return;
+    FBC.cLoading = true;
+    fbcGet('fbc_county').then((d) => {
+      fbcIndex(d.county || [], 'c'); FBC.county = true;
+      const ck = new Map([...FBC.byKey.values()].filter((a) => a.kind === 'c').map((a) => [a.st + '|' + a.raw, a.key]));
+      FBC.bases.forEach((b) => { if (!b.key && b.county) b.key = ck.get(b.st + '|' + b.county) || null; });
+      FBC.cLoading = false; dash.setParams({});
+    }).catch(() => { FBC.cLoading = false; });
+  }
+  const fbcQ = document.getElementById('fbc-q');
+  fbcQ.addEventListener('focus', fbcLoadCounty);
+  const fbcPick = () => { const k = FBC.opts.get(fbcQ.value.trim()); if (k) { dash.setParams({ fbcarea: k }); fbcQ.value = ''; fbcQ.blur(); } };
+  fbcQ.addEventListener('change', fbcPick);
+  fbcQ.addEventListener('input', fbcPick);
+  fbcQ.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+    const q = fbcQ.value.trim().toLowerCase(); if (!q) return;
+    const hit = [...FBC.opts.keys()].find((n) => n.toLowerCase().startsWith(q)) || [...FBC.opts.keys()].find((n) => n.toLowerCase().includes(q));
+    if (hit) { fbcQ.value = hit; fbcPick(); }
+  });
+  document.getElementById('fbc-base').addEventListener('change', (e) => { if (e.target.value) dash.setParams({ fbcarea: e.target.value }); });
+  root.querySelectorAll('#fbc-ad .am-chip').forEach((b) => b.addEventListener('click', () => dash.setParams({ fbcad: +b.dataset.ad })));
+  root.querySelectorAll('#fbc-ch .am-chip').forEach((b) => b.addEventListener('click', () => dash.setParams({ fbcch: +b.dataset.ch })));
+  root.querySelectorAll('#fbc-earn .am-chip').forEach((b) => b.addEventListener('click', () => dash.setParams({ fbcearn: +b.dataset.earn })));
+  [['fbc-rate', 'fbcrate'], ['fbc-hrs', 'fbchrs'], ['fbc-hc', 'fbchc']].forEach(([id, k]) => {
+    const el = document.getElementById(id); let t;
+    el.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => dash.setParams({ [k]: el.value }), 250); });
+    el.addEventListener('change', () => { clearTimeout(t); dash.setParams({ [k]: el.value }); });
+  });
+
+  // annual figures for one area and family type: { parts: {housing: …}, total, epiTotal, hcOverride }
+  function fbcFam(a, fi, hc) {
+    const parts = FBC.d.parts, o = {};
+    parts.forEach((p, j) => { o[p] = a.v[fi * parts.length + j]; });
+    const epiTotal = o.total;
+    let total = epiTotal;
+    if (!bad(hc)) { total = epiTotal - o.healthcare + hc; o.healthcare = hc; }
+    return { parts: o, total, epiTotal, hcOverride: !bad(hc) };
+  }
+
+  function fbcChart(box, rows, selKey, pay) {
+    clearSvg(box);
+    if (!rows.length) return;
+    const data = rows.slice().sort((a, b) => b.total - a.total);
+    const W = Math.max(300, box.clientWidth), band = 24, top = pay ? 18 : 4, H = data.length * band + top + 4;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).style('display', 'block');
+    const lab = Math.min(W * 0.42, Math.max(...data.map((r) => textW(svg, r.name))) + 10);
+    // narrow screens: drop the airport codes, then trim with an ellipsis so every label fits
+    const fit = (n) => { if (textW(svg, n) <= lab - 10) return n; n = n.replace(/\s*\([^)]*\)$/, ''); if (textW(svg, n) <= lab - 10) return n; while (n.length > 4 && textW(svg, n + '…') > lab - 10) n = n.slice(0, -1); return n.trim() + '…'; };
+    const endW = Math.max(...data.map((r) => textW(svg, usd0(r.total)))) + 8;
+    const x = d3.scaleLinear([0, Math.max(d3.max(data, (r) => r.total), pay || 0)], [lab, W - endW]);
+    const y = d3.scaleBand(data.map((r) => r.key), [top, H - 4]).paddingInner(0.3);
+    const tp = tip(box);
+    for (const r of data) {
+      const sel = r.key === selKey;
+      svg.append('text').attr('x', lab - 8).attr('y', y(r.key) + y.bandwidth() / 2 + 4).attr('text-anchor', 'end').attr('fill', 'var(--color-fg)')
+        .style('font-size', 'var(--cds-font-size-caption)').style('font-weight', sel ? 800 : 400).text(fit(r.name));
+      svg.append('rect').attr('x', x(0)).attr('y', y(r.key)).attr('width', Math.max(1, x(r.total) - x(0))).attr('height', y.bandwidth()).attr('rx', 3)
+        .attr('fill', sel ? 'var(--c1)' : 'var(--cds-chart-muted)');
+      svg.append('text').attr('x', x(r.total) + 4).attr('y', y(r.key) + y.bandwidth() / 2 + 4).attr('fill', sel ? 'var(--color-fg)' : 'var(--color-fg-muted)')
+        .style('font-size', 'var(--cds-font-size-caption)').style('font-weight', sel ? 800 : 400).text(usd0(r.total));
+      svg.append('rect').attr('x', 0).attr('y', y(r.key) - 2).attr('width', W).attr('height', y.bandwidth() + 4).attr('fill', 'transparent')
+        .on('pointermove', (ev) => {
+          const sc = box.clientWidth / W; const [mx, my] = d3.pointer(ev);
+          const lines = [{ name: 'Annual budget', value: usd0(r.total) }, { name: 'Monthly', value: usd0(r.total / 12) }, { name: 'Hourly wage needed', value: usd2(r.total / 2080) }];
+          if (r.carriers) lines.push({ name: 'Carriers', value: r.carriers });
+          if (pay) lines.push({ name: 'Pay covers', value: d3.format('.0%')(pay / r.total) });
+          tp.show(mx * sc, my * sc, r.full || r.name, lines);
+        })
+        .on('pointerleave', () => tp.hide());
+    }
+    if (pay) {
+      svg.append('line').attr('x1', x(pay)).attr('x2', x(pay)).attr('y1', top - 4).attr('y2', H - 2).attr('stroke', 'var(--cds-chart-reference)').attr('stroke-width', 1.5).attr('stroke-dasharray', '4 3').style('pointer-events', 'none');
+      svg.append('text').attr('x', x(pay)).attr('y', 11).attr('text-anchor', x(pay) > W - 90 ? 'end' : 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text('Annual pay ' + usd0(pay));
+    }
+  }
+
+  function drawFbc(P) {
+    const box = document.getElementById('fbc-chart');
+    if (!FBC.d) { if (FBC.failed) fail(box); else fbcLoad(); return; }
+    const d = FBC.d;
+    const ad = P.fbcad === 1 ? 1 : 2, ch = Math.max(0, Math.min(4, +P.fbcch || 0)), fi = (ad - 1) * 5 + ch;
+    const hc = P.fbchc === '' || P.fbchc === null || P.fbchc === undefined ? null : parseFloat(P.fbchc);
+    const hcv = !bad(hc) && hc >= 0 ? hc : null;
+    const dflt = (FBC.bases.find((b) => /^Dallas/.test(b.label) && b.key) || FBC.bases.find((b) => b.key) || {}).key;
+    const key = P.fbcarea && FBC.byKey.has(P.fbcarea) ? P.fbcarea : dflt;
+    const a = FBC.byKey.get(key);
+    if (!a) return;
+    const base = FBC.bases.find((b) => b.key === key);
+
+    // controls
+    const yr = d.edition ? d.edition + ' edition, figures in ' + d.dollars + ' dollars' : '';
+    const note = document.getElementById('fbc-note');
+    if (!note.dataset.done) {
+      note.textContent = 'What it costs to live a modest but adequate life in a given place, from the Economic Policy Institute’s ';
+      const l = document.createElement('a'); l.href = 'https://www.epi.org/resources/budget/'; l.target = '_blank'; l.rel = 'noopener'; l.textContent = 'Family Budget Calculator';
+      note.append(l, document.createTextNode((yr ? ' (' + yr + ')' : '') + ': housing, food, child care, transportation, health care, other necessities and taxes, for 10 family types. Pick a hub or crew base, or search any metro area or county.'));
+      note.dataset.done = '1';
+    }
+    const bs = document.getElementById('fbc-base');
+    const opts = FBC.bases.filter((b) => b.key).map((b) => new Option(b.label, b.key));
+    if (!base) { const o = new Option('Search result: ' + a.name, a.key); opts.unshift(o); }
+    bs.replaceChildren(...opts); bs.value = key;
+    root.querySelectorAll('#fbc-ad .am-chip').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.ad === ad)));
+    root.querySelectorAll('#fbc-ch .am-chip').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.ch === ch)));
+    const earn = ad === 2 && P.fbcearn === 2 ? 2 : 1;
+    document.getElementById('fbc-earn').hidden = ad !== 2;
+    root.querySelectorAll('#fbc-earn .am-chip').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.earn === earn)));
+    [['fbc-rate', P.fbcrate], ['fbc-hrs', P.fbchrs], ['fbc-hc', P.fbchc]].forEach(([id, v]) => { const el = document.getElementById(id); if (document.activeElement !== el) el.value = v ?? ''; });
+
+    // place and tiles
+    const fam = (ad === 1 ? 'One adult' : 'Two adults') + (ch ? ', ' + ch + (ch === 1 ? ' child' : ' children') : ', no children');
+    const pl = document.getElementById('fbc-place');
+    const sub = document.createElement('span');
+    sub.textContent = '  ' + [base ? a.name : null, base && base.carriers ? base.carriers : null, fam].filter(Boolean).join(' · ');
+    pl.replaceChildren(document.createTextNode(base ? base.label : a.name), sub);
+    const F = fbcFam(a, fi, hcv);
+    document.getElementById('fbc-tot').textContent = usd0(F.total);
+    document.getElementById('fbc-tot-d').textContent = usd0(F.total / 12) + ' a month' + (F.hcOverride ? ' · with your health cost (EPI: ' + usd0(F.epiTotal) + ')' : '');
+    document.getElementById('fbc-hr-k').textContent = ad === 2 ? 'Hourly wage needed, one earner' : 'Hourly wage needed';
+    document.getElementById('fbc-hr').textContent = usd2(F.total / 2080);
+    document.getElementById('fbc-hr2-tile').hidden = ad !== 2;
+    document.getElementById('fbc-hr2').textContent = usd2(F.total / 4160);
+    document.getElementById('fbc-mfi').textContent = usd0(a.mfi);
+    document.getElementById('fbc-mfi-d').textContent = bad(a.mfi) ? 'Not published for this area' : 'Budget is ' + d3.format('.0%')(F.total / a.mfi) + ' of it · Census ACS, 2019–2023';
+
+    // breakdown table
+    const tdx = (t, cls) => { const c = document.createElement('td'); if (cls) c.className = cls; c.textContent = t; return c; };
+    const maxSh = d3.max(FBC_PARTS, ([p]) => F.parts[p] / F.total) || 1;
+    const rows = FBC_PARTS.map(([p, n]) => {
+      const v = F.parts[p], tr = document.createElement('tr');
+      const bc = tdx('', 'l b am-hn'); const bar = document.createElement('i'); bar.className = 'fbc-bar'; bar.style.width = (100 * (v / F.total) / maxSh) + '%'; bc.append(bar);
+      tr.append(tdx(n + (p === 'healthcare' && F.hcOverride ? ' (your figure)' : ''), 'l'), tdx(usd0(v / 12)), tdx(usd0(v)), tdx(d3.format('.0%')(v / F.total)), bc);
+      return tr;
+    });
+    const tot = document.createElement('tr'); tot.className = 'tot';
+    tot.append(tdx('Total', 'l'), tdx(usd0(F.total / 12)), tdx(usd0(F.total)), tdx('100%'), tdx('', 'am-hn'));
+    document.querySelector('#fbc-table tbody').replaceChildren(...rows, tot);
+
+    // pay comparison
+    const rate = parseFloat(P.fbcrate), hrs = parseFloat(P.fbchrs) > 0 ? parseFloat(P.fbchrs) : 2080;
+    const pay = rate > 0 ? rate * hrs * earn : null;
+    document.getElementById('fbc-pay-tiles').hidden = !pay;
+    if (pay) {
+      document.getElementById('fbc-pay').textContent = usd0(pay);
+      document.getElementById('fbc-pay-d').textContent = usd2(rate) + ' × ' + d3.format(',')(hrs) + ' hours' + (earn === 2 ? ' × 2 earners' : '');
+      document.getElementById('fbc-cov').textContent = d3.format('.0%')(pay / F.total);
+      const gap = F.total - pay;
+      document.getElementById('fbc-gap-k').textContent = gap > 0 ? 'Short of the budget' : 'Above the budget';
+      const g = document.getElementById('fbc-gap'); g.textContent = usd0(Math.abs(gap)); g.classList.toggle('am-neg', gap > 0);
+      document.getElementById('fbc-gap-d').textContent = 'A year · ' + usd2(Math.abs(gap) / hrs / earn) + ' an hour ' + (gap > 0 ? 'more needed' : 'to spare') + (earn === 2 ? ', per earner' : '');
+    }
+
+    // every hub and base, same family type
+    const list = FBC.bases.filter((b) => b.key && FBC.byKey.has(b.key)).map((b) => {
+      const x = FBC.byKey.get(b.key); return { key: b.key, name: b.label, full: x.name, carriers: b.carriers, total: fbcFam(x, fi, hcv).total };
+    });
+    if (!base) list.push({ key: a.key, name: a.name, full: a.name, total: F.total });
+    document.getElementById('fbc-bases-note').textContent = fam + '. ' + (base ? 'The selected place is highlighted.' : 'Your search result is highlighted.') + (pay ? ' The dashed line is the annual pay entered above.' : '') + (F.hcOverride ? ' Health care uses your figure everywhere.' : '');
+    fbcChart(box, list, key, pay);
+  }
+
   // ---------- bargaining ----------
   const lsel = document.getElementById('lcarrier');
   lsel.addEventListener('change', () => dash.setParams({ lcarrier: lsel.value }));
@@ -2879,6 +3142,7 @@ dash.calc('dotpeer', {
 
     // ---------- pay tab ----------
     if (tab === 'pay') {
+      try { drawFbc(P); } catch (e) { console.error(e); }
       const cpiD = dash.data('cpi');
       const C = cpiD.status === 'ok' && cpiD.data[0] ? cpiD.data[0] : {};
       const idx = P.cpiidx === 'cpiu' ? 'cpiu' : 'cpiw', idxName = idx === 'cpiu' ? 'CPI-U' : 'CPI-W';

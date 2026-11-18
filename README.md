@@ -13,7 +13,8 @@ A GitHub Actions job (`.github/workflows/update.yml`) runs every morning:
 3. Once a week (or when forced) `scripts/dot.py` downloads DOT Form 41 schedules from BTS TranStats — P-1.2 profit and loss, P-6 expenses by object (salaries by employee group, benefits, fuel), P-1(a) monthly employees, T-100 traffic, P-10 annual headcount by employee group, P-5.2 pilot salaries and P-12(a) monthly fuel cost — and rebuilds `data/dot.json` (carrier-quarters), `data/dot_annual.json` (headcount by employee group and year) and `data/dot_fuel.json` (monthly fuel cost per gallon). Prior years are cached in `data/dot_raw_cache.json`; the current and previous year are re-downloaded to pick up revisions.
 4. It downloads the daily U.S. Gulf Coast jet fuel spot price (EIA, via FRED series DJFUELUSGULF) into `data/fuel_spot.json`.
 5. Once a week `scripts/proxy.py` checks each company's two most recent proxy statements (DEF 14A) and reads the CEO pay-ratio disclosure — median employee pay, CEO total and the ratio — into `data/exec_pay.json`. Compensation actually paid and CEO names come from `config/exec_pay.json`, entered by hand from each proxy.
-6. It commits the changed files, and GitHub Pages republishes the site.
+6. Once a week `scripts/fbc.py` checks the Economic Policy Institute's Family Budget Calculator page for the newest dataset (`fbc_data_YYYY.xlsx`, updated once a year) and, when it has changed, rebuilds `data/fbc.json` (metro areas) and `data/fbc_county.json` (counties).
+7. It commits the changed files, and GitHub Pages republishes the site.
 
 If a carrier or feed fails to download, the previous data is kept and the failure is recorded in `data/meta.json`.
 
@@ -27,6 +28,7 @@ To run it on demand, open the **Actions** tab, choose **Refresh data**, then **R
 | `config/overrides.json` | Hand-entered figures used only where SEC's structured data has a gap |
 | `config/news_queries.json` | Industry-wide news searches (labor, fuel, earnings) |
 | `config/exec_pay.json` | Hand-verified CEO pay figures: name, compensation actually paid, notes (one row per company and fiscal year) |
+| `config/fbc_bases.json` | Hub and crew-base metros listed first in the Family budget card (Pay & Prices), with the carriers shown beside each |
 | `config/dot_carriers.json` | Operating carriers shown on the DOT tab: DOT code, owner, group, role, and footnotes |
 | `data/news_curated.json` | Hand-written news items with summaries; shown alongside the automatic feed |
 | `config/labor_sources.json` | Union websites the bargaining tracker reads (see below) |

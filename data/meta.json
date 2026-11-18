@@ -486,5 +486,17 @@
   "fetched": {
    "2026-09": "failed: ValueError: TranStats did not return a zip file"
   }
+ },
+ "fbc": {
+  "checked": "2026-11-18T16:43:35Z",
+  "url": "https://files.epi.org/uploads/fbc_data_2026.xlsx",
+  "found_by": "file",
+  "bytes": 7969195,
+  "sha": "eda46303451a8e0d",
+  "bases_missing": [],
+  "edition": 2026,
+  "dollars": 2025,
+  "metro": 673,
+  "changed": "2026-11-18T16:43:35Z"
  }
 }

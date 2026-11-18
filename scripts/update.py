@@ -17,6 +17,8 @@ Outputs (all in data/):
   dot_fuel.json     DOT monthly fuel gallons and cost by carrier
   fuel_spot.json    daily Gulf Coast jet fuel spot price (FRED DJFUELUSGULF)
   cpi.json          monthly CPI-W and CPI-U, U.S. city average, not seasonally adjusted (BLS via FRED)
+  fbc.json          EPI Family Budget Calculator budgets by metro area, checked weekly (see scripts/fbc.py);
+                    fbc_county.json holds the county budgets
   extfacts_cache.json carriers' own XBRL elements (e.g. Allegiant's fuel line) read from each filing (see scripts/extfacts.py)
   revenue_split.json passenger / loyalty / cargo / refinery revenue by quarter from 10-Q and 10-K XBRL (see scripts/revsplit.py)
   exec_pay.json     CEO pay, median employee pay and pay ratio from proxy statements (see scripts/proxy.py)
@@ -42,6 +44,7 @@ import dot  # noqa: E402
 import extfacts  # noqa: E402
 import proxy  # noqa: E402
 import labor  # noqa: E402
+import fbc  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG = os.path.join(ROOT, "config")
@@ -645,6 +648,11 @@ def main(argv):
     if "--sec-only" not in argv and "--news-only" not in argv:
         update_fuel_spot(meta)
         update_cpi(meta)
+        try:
+            fbc.update_fbc(ROOT, meta, user_agent(), force="--force-fbc" in argv)
+        except Exception as e:  # noqa: BLE001
+            meta.setdefault("fbc", {})["error"] = f"{type(e).__name__}: {e}"[:300]
+            print(f"[warn] EPI family budgets: {e}", file=sys.stderr)
         try:
             listed = [c for c in load(os.path.join(CONFIG, "carriers.json"), []) if c.get("status") == "Active"]
             proxy.update_exec_pay(ROOT, meta, user_agent(), listed, force="--force-proxy" in argv)
