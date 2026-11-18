@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-11-17T21:55:27Z",
+  "at": "2026-11-18T02:48:13Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -152,10 +152,10 @@
    }
   }
  },
- "generated": "2026-11-17T21:56:12Z",
+ "generated": "2026-11-18T02:59:51Z",
  "news": {
-  "at": "2026-11-17T21:56:03Z",
-  "items": 102,
+  "at": "2026-11-18T02:48:48Z",
+  "items": 101,
   "errors": [
    "Envoy Air news: unavailable",
    "PSA Airlines news: unavailable",
@@ -177,7 +177,7 @@
   "rows": 453
  },
  "fuel_spot": {
-  "at": "2026-11-17T21:56:04Z",
+  "at": "2026-11-18T02:48:49Z",
   "latest": "2026-11-11",
   "rows": 1213,
   "diesel_close": "2026-11-16",
@@ -190,7 +190,7 @@
   "errors": []
  },
  "labor": {
-  "at": "2026-11-11T22:14:05Z",
+  "at": "2026-11-18T02:58:32Z",
   "groups": 102,
   "errors": [],
   "union_sites": [
@@ -199,7 +199,7 @@
     "url": "https://iam141.org",
     "groups": 13,
     "method": "wp-posts,wp-media",
-    "items": 206,
+    "items": 205,
     "pdfs_read": 1
    },
    {
@@ -283,7 +283,7 @@
     "url": "https://www.twu.org",
     "groups": 29,
     "method": "wp-posts,wp-media",
-    "items": 105,
+    "items": 104,
     "pdfs_read": 0
    },
    {
@@ -317,7 +317,7 @@
     "url": "https://cwa-union.org",
     "groups": 4,
     "method": "html list",
-    "items": 19,
+    "items": 20,
     "pdfs_read": 3
    },
    {
@@ -326,7 +326,7 @@
     "groups": 32,
     "method": "press releases",
     "items": 100,
-    "pdfs_read": 1
+    "pdfs_read": 0
    },
    {
     "name": "Envoy Air news",
@@ -342,7 +342,7 @@
     "url": "https://www.piedmont-airlines.com",
     "groups": 6,
     "method": "wp-posts",
-    "items": 28,
+    "items": 26,
     "pdfs_read": 0
    },
    {
@@ -367,7 +367,7 @@
     "url": "https://ir.delta.com",
     "groups": 4,
     "method": "press releases",
-    "items": 17,
+    "items": 16,
     "pdfs_read": 0
    },
    {
@@ -391,7 +391,7 @@
     "url": "https://news.alaskaair.com",
     "groups": 16,
     "method": "wp-posts",
-    "items": 189,
+    "items": 188,
     "pdfs_read": 0
    },
    {
@@ -399,7 +399,7 @@
     "url": "https://news.jetblue.com",
     "groups": 4,
     "method": "press releases",
-    "items": 79,
+    "items": 80,
     "pdfs_read": 0
    },
    {
@@ -423,7 +423,7 @@
     "url": "https://newsroom.allegiantair.com",
     "groups": 9,
     "method": "press releases",
-    "items": 46,
+    "items": 47,
     "pdfs_read": 0
    },
    {
@@ -437,12 +437,12 @@
   ]
  },
  "cpi": {
-  "at": "2026-11-17T21:56:04Z",
+  "at": "2026-11-18T02:48:55Z",
   "cpiw": "2026-10",
   "cpiu": "2026-10"
  },
  "revsplit": {
-  "at": "2026-11-17T21:55:28Z",
+  "at": "2026-11-18T02:48:14Z",
   "carriers": {
    "DAL": {
     "quarters": 19,
@@ -479,10 +479,12 @@
   }
  },
  "reliability": {
-  "at": "2026-11-17T21:56:12Z",
-  "checked": "2026-11-17",
+  "at": "2026-11-18T02:59:51Z",
+  "checked": "2026-11-18",
   "first": "2023-01",
   "latest": "2026-08",
-  "fetched": {}
+  "fetched": {
+   "2026-09": "failed: ValueError: TranStats did not return a zip file"
+  }
  }
 }
