@@ -2379,7 +2379,6 @@ dash.calc('dotpeer', {
         .on('pointermove', (ev) => {
           const sc = box.clientWidth / W; const [mx, my] = d3.pointer(ev);
           const lines = [{ name: 'Annual budget', value: usd0(r.total) }, { name: 'Monthly', value: usd0(r.total / 12) }, { name: 'Hourly wage needed', value: usd2(r.total / 2080) }];
-          if (r.carriers) lines.push({ name: 'Carriers', value: r.carriers });
           if (pay) lines.push({ name: 'Pay covers', value: d3.format('.0%')(pay / r.total) });
           tp.show(mx * sc, my * sc, r.full || r.name, lines);
         })
@@ -2428,7 +2427,7 @@ dash.calc('dotpeer', {
     const fam = (ad === 1 ? 'One adult' : 'Two adults') + (ch ? ', ' + ch + (ch === 1 ? ' child' : ' children') : ', no children');
     const pl = document.getElementById('fbc-place');
     const sub = document.createElement('span');
-    sub.textContent = '  ' + [base ? a.name : null, base && base.carriers ? base.carriers : null, fam].filter(Boolean).join(' · ');
+    sub.textContent = '  ' + [base ? a.name : null, fam].filter(Boolean).join(' · ');
     pl.replaceChildren(document.createTextNode(base ? base.label : a.name), sub);
     const F = fbcFam(a, fi, hcv);
     document.getElementById('fbc-tot').textContent = usd0(F.total);
@@ -2469,7 +2468,7 @@ dash.calc('dotpeer', {
 
     // every hub and base, same family type
     const list = FBC.bases.filter((b) => b.key && FBC.byKey.has(b.key)).map((b) => {
-      const x = FBC.byKey.get(b.key); return { key: b.key, name: b.label, full: x.name, carriers: b.carriers, total: fbcFam(x, fi, hcv).total };
+      const x = FBC.byKey.get(b.key); return { key: b.key, name: b.label, full: x.name, total: fbcFam(x, fi, hcv).total };
     });
     if (!base) list.push({ key: a.key, name: a.name, full: a.name, total: F.total });
     document.getElementById('fbc-bases-note').textContent = fam + '. ' + (base ? 'The selected place is highlighted.' : 'Your search result is highlighted.') + (pay ? ' The dashed line is the annual pay entered above.' : '') + (F.hcOverride ? ' Health care uses your figure everywhere.' : '');
