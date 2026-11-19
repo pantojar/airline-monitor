@@ -252,7 +252,8 @@ window.dash = (function () {
 #dash-root .am-t td.ws{white-space:normal;min-width:10rem;max-width:15rem;line-height:1.35}
 #dash-root .am-t tr.off td{color:var(--color-fg-muted)}
 #dash-root #rat-table tr.am-rgrp td{background:var(--color-panel);font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:var(--cds-font-size-caption);color:var(--color-fg);padding-top:16px;border-bottom:2px solid var(--rule);text-align:left}
-#dash-root #rat-table td.l{white-space:normal;min-width:13rem;max-width:16rem;line-height:1.3}
+#dash-root #rat-table td.l{white-space:normal;min-width:10.5rem;max-width:14rem;line-height:1.3}
+#dash-root #rat-table td,#dash-root #rat-table th{padding-left:8px;padding-right:8px}
 #dash-root #rat-table th.med,#dash-root #rat-table td.med{color:var(--color-fg-muted);border-left:1px solid var(--color-border-line)}
 #dash-root #rat-table td.nm{color:var(--color-fg-muted)}
 #dash-root .am-neg{color:var(--color-bad)}
@@ -412,7 +413,7 @@ window.dash = (function () {
         <li><b>Operating ratio:</b> operating expense ÷ revenue; below 100% means an operating profit. <b>Net profit margin:</b> net income ÷ revenue.</li>
         <li><b>ROIC</b> (return on invested capital, 12 months): operating income after tax ÷ average invested capital, which is debt + operating lease liabilities + shareholders' equity, averaged over the opening and closing balance sheets. Tax is at the 12-month effective rate, or 21% where that rate isn't meaningful (a pre-tax loss, or a rate outside 0–50%). <b>ROE</b> (return on equity, 12 months): net income ÷ average shareholders' equity. "n/m" where equity is negative, as at American, whose liabilities exceed its assets.</li>
         <li><b>Interest cover:</b> operating income ÷ interest expense, for the period; how many times over earnings pay the interest bill. Delta reports interest only net of interest income, so its cover is on net interest. <b>Debt to equity:</b> debt as reported (some carriers include finance leases) ÷ shareholders' equity, latest balance sheet.</li>
-        <li><b>Current ratio:</b> current assets ÷ current liabilities. <b>Quick ratio:</b> cash, short-term investments and receivables ÷ current liabilities. Airlines run below 1× as a matter of course: current liabilities include the air traffic liability (tickets sold but not yet flown) and loyalty miles expected to be redeemed within a year, which are paid back in flying rather than cash. <b>Cash as % of operating revenue:</b> cash and short-term investments ÷ 12-month revenue; airlines commonly aim for roughly 15–25%.</li>
+        <li><b>Current ratio:</b> current assets ÷ current liabilities. <b>Quick ratio:</b> cash, short-term investments and receivables ÷ current liabilities. Airlines run below 1× as a matter of course: current liabilities include the air traffic liability (tickets sold but not yet flown) and loyalty miles expected to be redeemed within a year, which are paid back in flying rather than cash. <b>Cash as % of operating revenue:</b> cash and short-term investments ÷ 12-month revenue. Airlines' own liquidity targets (often 15–25% of revenue) usually also count undrawn credit lines, which this figure leaves out.</li>
         <li><b>Market valuation</b> uses the latest share price (Markets &amp; Fuel tab) with 12-month or last-fiscal-year earnings; not shown for companies no longer trading. <b>Market cap:</b> price × shares outstanding from the latest 10-Q or 10-K cover. <b>EPS:</b> diluted earnings per share as filed; 12-month EPS is the 10-K figure at a fiscal year end, otherwise the sum of four quarters. <b>P/E:</b> price ÷ 12-month EPS, "n/m" for a loss. <b>Dividend yield:</b> dividends per share with an ex-date in the past 12 months (or the fiscal year) ÷ price. <b>Dividend cover:</b> EPS ÷ dividends per share. <b>NAV per share:</b> shareholders' equity ÷ shares outstanding (book value). <b>Op cash flow multiple:</b> market cap ÷ 12-month cash from operations, "n/m" where that was negative.</li>
       </ul>
     </div>
@@ -2366,7 +2367,7 @@ dash.calc('dotpeer', {
     const td = (t, cls) => { const c = document.createElement('td'); if (cls) c.className = cls; c.textContent = t; return c; };
     const trs = [];
     const pr = document.createElement('tr'); pr.append(td('Period', 'l'));
-    cols.forEach((r) => pr.append(td(pb === 'fy' ? (r.at_fy ? 'FY ' + r.at_fy.slice(0, 4) : '—') : qs(r.latest) + (pb === 'ttm' ? ' TTM' : ''))));
+    cols.forEach((r) => pr.append(td(pb === 'fy' ? (r.at_fy ? 'FY ' + r.at_fy.slice(0, 4) : '—') : qs(r.latest))));
     pr.append(td('', 'med')); trs.push(pr);
     for (const [title, rows] of SECTIONS) {
       const gr = document.createElement('tr'); gr.className = 'am-rgrp'; const gc = td(title); gc.colSpan = cols.length + 2; gr.append(gc); trs.push(gr);
