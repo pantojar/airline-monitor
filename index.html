@@ -251,6 +251,10 @@ window.dash = (function () {
 #dash-root #labor-table td{vertical-align:top}
 #dash-root .am-t td.ws{white-space:normal;min-width:10rem;max-width:15rem;line-height:1.35}
 #dash-root .am-t tr.off td{color:var(--color-fg-muted)}
+#dash-root #rat-table tr.am-rgrp td{background:var(--color-panel);font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:var(--cds-font-size-caption);color:var(--color-fg);padding-top:16px;border-bottom:2px solid var(--rule);text-align:left}
+#dash-root #rat-table td.l{white-space:normal;min-width:13rem;max-width:16rem;line-height:1.3}
+#dash-root #rat-table th.med,#dash-root #rat-table td.med{color:var(--color-fg-muted);border-left:1px solid var(--color-border-line)}
+#dash-root #rat-table td.nm{color:var(--color-fg-muted)}
 #dash-root .am-neg{color:var(--color-bad)}
 #dash-root .am-ib{display:inline-block;height:6px;border-radius:1px;background:var(--cds-chart-muted);margin-right:6px;vertical-align:1px}
 
@@ -393,6 +397,24 @@ window.dash = (function () {
           <tbody></tbody>
         </table>
       </div>
+    </div>
+
+    <div class="am-card" id="rat-card">
+      <h2>Financial ratios</h2>
+      <p class="am-note" id="rat-note">Classic ratios for each carrier, side by side.</p>
+      <div class="am-tbl-box">
+        <table class="am-t" id="rat-table" data-source="ratios">
+          <thead><tr id="rat-head"></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <ul class="am-foot am-defs">
+        <li><b>Operating ratio:</b> operating expense ÷ revenue; below 100% means an operating profit. <b>Net profit margin:</b> net income ÷ revenue.</li>
+        <li><b>ROIC</b> (return on invested capital, 12 months): operating income after tax ÷ average invested capital, which is debt + operating lease liabilities + shareholders' equity, averaged over the opening and closing balance sheets. Tax is at the 12-month effective rate, or 21% where that rate isn't meaningful (a pre-tax loss, or a rate outside 0–50%). <b>ROE</b> (return on equity, 12 months): net income ÷ average shareholders' equity. "n/m" where equity is negative, as at American, whose liabilities exceed its assets.</li>
+        <li><b>Interest cover:</b> operating income ÷ interest expense, for the period; how many times over earnings pay the interest bill. <b>Debt to equity:</b> debt as reported (some carriers include finance leases) ÷ shareholders' equity, latest balance sheet.</li>
+        <li><b>Current ratio:</b> current assets ÷ current liabilities. <b>Quick ratio:</b> cash, short-term investments and receivables ÷ current liabilities. Airlines run below 1× as a matter of course: current liabilities include the air traffic liability (tickets sold but not yet flown) and loyalty miles expected to be redeemed within a year, which are paid back in flying rather than cash. <b>Cash as % of operating revenue:</b> cash and short-term investments ÷ 12-month revenue; airlines commonly aim for roughly 15–25%.</li>
+        <li><b>Market valuation</b> uses the latest share price (Markets &amp; Fuel tab) with 12-month or last-fiscal-year earnings; not shown for companies no longer trading. <b>Market cap:</b> price × shares outstanding from the latest 10-Q or 10-K cover. <b>EPS:</b> diluted earnings per share as filed; 12-month EPS is the 10-K figure at a fiscal year end, otherwise the sum of four quarters. <b>P/E:</b> price ÷ 12-month EPS, "n/m" for a loss. <b>Dividend yield:</b> dividends per share with an ex-date in the past 12 months (or the fiscal year) ÷ price. <b>Dividend cover:</b> EPS ÷ dividends per share. <b>NAV per share:</b> shareholders' equity ÷ shares outstanding (book value). <b>Op cash flow multiple:</b> market cap ÷ 12-month cash from operations, "n/m" where that was negative.</li>
+      </ul>
     </div>
 
     <div class="am-card" id="margin-card">
@@ -892,6 +914,7 @@ window.dash = (function () {
         <li><b>Unit revenue and load factor (DOT).</b> TRASM is total operating revenue ÷ available seat miles; PRASM uses scheduled passenger revenue; load factor is revenue passenger miles ÷ available seat miles (T-100, all services). A regional's revenue is set by its contract with its mainline partner, so its unit revenue isn't a market figure.</li>
         <li><b>Per-seat-mile figures for carriers with regional partners.</b> American, Delta, United and Alaska report the ticket revenue and capacity-purchase payments for flights their regional partners operate, while those flights' seat miles appear on the regional's own report. Their DOT CASM, TRASM and PRASM therefore run above the figures the airlines publish, which use combined mainline and regional seat miles. Labor cost per seat mile is affected less, since regional crews are on the regional's payroll. Southwest, JetBlue and the low-cost carriers have no regional partners and aren't affected.</li>
         <li><b>Jet fuel.</b> The spot line is the daily U.S. Gulf Coast kerosene-type jet fuel price from the Energy Information Administration, via the St. Louis Fed's FRED service (series DJFUELUSGULF), refreshed each morning. EIA posts that series about once a week, so the days since its latest figure are estimated and drawn dashed: EIA's daily Gulf Coast ultra-low-sulfur diesel close (eia.gov daily prices page) plus jet fuel's typical spread to diesel over the previous 20 trading days (FRED DDFUELUSGULF). Each estimate is replaced by EIA's own figure once it's published. "Airlines paid" is DOT Schedule P-12(a): total fuel cost ÷ gallons for the passenger carriers on the DOT tab, which includes taxes, into-plane fees and hedging results and runs about four months behind.</li>
+        <li><b>Financial ratios.</b> Built from the same SEC XBRL data as the rest of the Company Financials tab, adding interest expense (InterestExpenseNonoperating, or InterestExpense before the 2024 taxonomy change), pre-tax income and income tax, cash from operations, shareholders' equity, current assets and liabilities, receivables and diluted EPS. Market valuation rows combine those with the latest share price and the dividends paid per share (Tiingo). Definitions are under the Financial ratios card.</li>
         <li><b>CEO pay and pay ratio.</b> From each company's proxy statement (DEF 14A). The job reads the SEC-required pay-ratio disclosure automatically each week (median employee pay, CEO total and the ratio), keeping a CEO figure only when it reproduces the stated ratio. Compensation actually paid comes from the pay-versus-performance table and is entered by hand, since table layouts vary when a company had two CEOs in a year. Companies choose their own method for finding the median employee, so ratios are not strictly comparable across companies.</li>
         <li><b>Bargaining tracker.</b> Represented groups, unions, headcounts and amendable dates are read automatically from the union table in each carrier's latest 10-K (checked weekly, re-read when a new 10-K is filed). Allegiant, Republic and SkyWest describe their contracts in prose, so their 10-K sentences are quoted instead. Status is the most recent dated event across four sources. Union websites listed on the Bargaining tab are read weekly: recent posts and uploaded announcement PDFs are split into clauses, and a clause naming a tracked group and a milestone (for example "Fleet Service, Passenger Service, and Central Load Planners did not ratify") sets that group's status. A ratification in the company's latest 10-Q and status stated in 10-K footnotes are used too. Otherwise a weekly news search for each group that is open or amendable within 18 months takes the most recent headline from the past year that names the carrier, the craft and a milestone (ratified, rejected, tentative agreement, mediation, release request, strike vote, picketing, negotiations). Headline matching can misread a story, so every status links to its source. Amendable dates given only as a year are treated as open from January 1 of the following year.</li>
               <li><b>Operational reliability.</b> From BTS's Marketing Carrier On-Time Performance records (TranStats), one row per scheduled domestic flight by every carrier that reports on-time data, carrying both the brand it was sold under and the airline that operated it. Each month is downloaded once, about two months after it ends, and summed by brand and operating carrier. On-time, cancellation and delay-cause definitions are DOT's.</li>
@@ -1049,6 +1072,77 @@ dash.calc('peer', {
       // leverage isn't meaningful when EBITDAR is near zero: analysts show "n/m" below about a 5% EBITDAR margin
       const lowE = o.ebitdar_ttm !== null && o.rev_ttm ? o.ebitdar_ttm / o.rev_ttm < 0.05 : false;
       return Object.assign(o, { lev_nm: lowE, leverage: !lowE && o.lease_net_debt !== null && o.lease_net_debt !== undefined && o.ebitdar_ttm > 0 ? o.lease_net_debt / o.ebitdar_ttm : null });
+    });
+  },
+});
+
+dash.calc('ratios', {
+  title: 'Financial ratios',
+  description: 'One row per carrier, for the latest quarter, trailing 12 months and last fiscal year: operating ratio, net margin, ROIC, ROE, interest cover, debt to equity, current and quick ratios, cash as a share of revenue, plus the 12-month EPS, operating cash flow and equity behind the market valuation rows.',
+  inputs: ['financials', 'carriers'],
+  fn: (financials, carriers) => {
+    const num = (v) => (v === null || v === undefined || v === '' ? null : Number(v));
+    const dv = (a, b) => (a === null || b === null || !b ? null : a / b);
+    const Q = [...new Set(financials.map((r) => r.quarter))].sort();
+    const NM = 'n/m';
+    return carriers.map((c) => {
+      const rows = financials.filter((r) => r.ticker === c.ticker);
+      const m = new Map(rows.map((r) => [r.quarter, r]));
+      const ok = (r) => !!r && ['rev', 'opex', 'opinc'].every((k) => num(r[k]) !== null);
+      const done = rows.filter(ok).map((r) => r.quarter).sort();
+      const lqq = done.length ? done[done.length - 1] : null;
+      const out = { ticker: c.ticker, carrier: c.carrier, group: c.group, status: c.status, active: c.status === 'Active', latest: lqq };
+      if (!lqq) return out;
+      const span = (a, b) => (a < 0 ? [] : Q.slice(a, b + 1).map((q) => m.get(q)));
+      const all4 = (rs) => rs.length === 4 && rs.every(ok);
+      const sum = (rs, f) => (rs.length && rs.every((r) => r && num(r[f]) !== null) ? rs.reduce((s, r) => s + num(r[f]), 0) : null);
+      const k = Q.indexOf(lqq);
+      const fyEnd = String(c.fy_end_month || 12).padStart(2, '0');
+      const fyq = done.filter((q) => q.slice(5, 7) === fyEnd).pop() || null;
+      const fk = fyq ? Q.indexOf(fyq) : -1;
+      // a balance-sheet figure at quarter q, and the same figure four quarters earlier (for averages)
+      const bs = (q, f) => (q && m.get(q) ? num(m.get(q)[f]) : null);
+      const yago = (q) => (q ? Number(q.slice(0, 4)) - 1 + q.slice(4) : null);
+      const avg = (a, b) => (a === null ? null : b === null ? a : (a + b) / 2);
+      // diluted EPS over four quarters: the 10-K's full-year figure when the four quarters are a fiscal year,
+      // otherwise the sum of the quarters (a Q4 is the year less nine months)
+      const eps4 = (end, rs) => (end && end.slice(5, 7) === fyEnd && bs(end, 'eps_fy') !== null ? bs(end, 'eps_fy') : sum(rs, 'eps'));
+      const ocf4 = (end, rs) => (bs(end, 'ocf_ttm') !== null ? bs(end, 'ocf_ttm') : sum(rs, 'ocf'));
+      const ic = (q) => { const d = bs(q, 'debt'), e = bs(q, 'equity'); return d === null || e === null ? null : d + e + (bs(q, 'oplease') || 0); };
+      const sets = { lq: { flow: [m.get(lqq)], y: span(k - 3, k), at: lqq }, ttm: { flow: span(k - 3, k), y: span(k - 3, k), at: lqq },
+        fy: { flow: fk < 0 ? [] : span(fk - 3, fk), y: fk < 0 ? [] : span(fk - 3, fk), at: fyq } };
+      for (const [b, S] of Object.entries(sets)) {
+        const flowOk = b === 'lq' ? ok(S.flow[0]) : all4(S.flow), yOk = all4(S.y), at = S.at;
+        const F = (f) => (flowOk ? sum(S.flow, f) : null), Y = (f) => (yOk ? sum(S.y, f) : null);
+        const rev = F('rev');
+        out['opr_' + b] = dv(F('opex'), rev);
+        out['npm_' + b] = dv(F('ni'), rev);
+        // ROIC (12 months): operating income after tax ÷ average invested capital (debt + operating lease
+        // liabilities + equity). Tax at the 12-month effective rate, or 21% when that rate isn't meaningful.
+        const opinc12 = Y('opinc'), pre12 = Y('pretax'), tax12 = Y('tax');
+        const er = pre12 > 0 && tax12 !== null && tax12 / pre12 >= 0 && tax12 / pre12 <= 0.5 ? tax12 / pre12 : 0.21;
+        const icAvg = avg(ic(at), ic(yago(at)));
+        out['roic_' + b] = opinc12 === null || icAvg === null ? null : icAvg <= 0 ? NM : opinc12 * (1 - er) / icAvg;
+        out['taxr_' + b] = opinc12 === null ? null : er;
+        const e1 = bs(at, 'equity'), e0 = bs(yago(at), 'equity');
+        const ni12 = Y('ni');
+        out['roe_' + b] = ni12 === null || e1 === null ? null : e1 <= 0 || (e0 !== null && e0 <= 0) ? NM : ni12 / avg(e1, e0);
+        const ie = F('intexp');
+        out['icov_' + b] = ie && ie > 0 ? dv(F('opinc'), ie) : null;
+        const debt = bs(at, 'debt');
+        out['de_' + b] = debt === null || e1 === null ? null : e1 <= 0 ? NM : debt / e1;
+        const ca = bs(at, 'cur_assets'), cl = bs(at, 'cur_liab'), cash = bs(at, 'cash'), sti = bs(at, 'sti') || 0, rcv = bs(at, 'recv');
+        out['cur_' + b] = dv(ca, cl);
+        out['quick_' + b] = cash === null || rcv === null ? null : dv(cash + sti + rcv, cl);
+        out['cashrev_' + b] = cash === null ? null : dv(cash + sti, Y('rev'));
+        // inputs for the market valuation rows (price-based, so the page adds the current share price)
+        out['eps_' + b] = b === 'lq' ? (flowOk ? num(S.flow[0].eps) : null) : flowOk ? eps4(at, S.flow) : null;
+        out['eps12_' + b] = yOk ? eps4(at, S.y) : null;
+        out['ocf12_' + b] = yOk ? ocf4(at, S.y) : null;
+        out['equity_' + b] = e1;
+        out['at_' + b] = at;
+      }
+      return out;
     });
   },
 });
@@ -2200,6 +2294,105 @@ dash.calc('dotpeer', {
     document.querySelector('#h2h-card .am-note').textContent = 'Pick two or three carriers to compare side by side. Financial rows use the ' + per + ' (switch with the buttons above the peer table); the best figure in each row is in bold where "best" is clear-cut.' + (notes.length ? ' ' + notes.join(' ') : '');
   }
 
+  // ---------- financial ratios (Company Financials tab) ----------
+  function drawRatios(peer, P) {
+    const rat = dash.data('ratios'), md = dash.data('markets'), car = dash.data('carriers');
+    const head = document.getElementById('rat-head'), tb = document.querySelector('#rat-table tbody');
+    if (!head || rat.status !== 'ok') return;
+    const pb = P.basis === 'ttm' || P.basis === 'fy' ? P.basis : 'lq';
+    const rev = new Map(peer.status === 'ok' ? peer.data.map((r) => [r.ticker, r.rev_ttm || r.rev_fy || 0]) : []);
+    const cols = visiblePeers(rat.data, P).filter((r) => r.latest).sort((a, b) => (rev.get(b.ticker) || 0) - (rev.get(a.ticker) || 0));
+    const M = md.status === 'ok' && md.data[0] && md.data[0].tickers ? md.data[0].tickers : {};
+    const cinfo = car.status === 'ok' ? Object.fromEntries(car.data.map((c) => [c.ticker, c])) : {};
+    const QEND = { '03': '03-31', '06': '06-30', '09': '09-30', '12': '12-31' };
+    let priceAsOf = null;
+    // share price, market cap and dividends per share for one carrier; only for companies still trading
+    const mk = (r) => {
+      const h = M[r.ticker], sh = cinfo[r.ticker] && cinfo[r.ticker].shares;
+      if (!r.active || !h || !h.eod || !h.eod.length) return null;
+      const now = mkNow(h); if (!now) return null;
+      if (!priceAsOf || now.date > priceAsOf) priceAsOf = now.date;
+      let lo, hi;
+      if (pb === 'fy') {
+        const at = r.at_fy; if (!at) return { price: now.close, mcap: sh ? now.close * sh / 1e6 : null, sh, dps: null };
+        hi = at.slice(0, 4) + '-' + QEND[at.slice(5, 7)]; lo = Number(at.slice(0, 4)) - 1 + '-' + QEND[at.slice(5, 7)];
+      } else {
+        hi = now.date; const d = new Date(now.date + 'T12:00:00Z'); d.setUTCFullYear(d.getUTCFullYear() - 1); lo = d.toISOString().slice(0, 10);
+      }
+      const dps = h.eod.reduce((s, e) => s + (e[0] > lo && e[0] <= hi ? +e[3] || 0 : 0), 0);
+      return { price: now.close, mcap: sh ? now.close * sh / 1e6 : null, sh, dps };
+    };
+    const mkt = new Map(cols.map((r) => [r.ticker, mk(r)]));
+    const m12 = pb === 'lq' ? ' (12 mo.)' : '';
+    const x1 = (v) => (bad(v) ? '—' : (v < 0 ? '−' : '') + d3.format(',.1f')(Math.abs(v)) + '×');
+    const x2 = (v) => (bad(v) ? '—' : (v < 0 ? '−' : '') + d3.format(',.2f')(Math.abs(v)) + '×');
+    const usd = (v) => (bad(v) ? '—' : (v < 0 ? '−' : '') + '$' + d3.format(',.2f')(Math.abs(v)));
+    const pct2 = (v) => (bad(v) ? '—' : d3.format('.2%')(v));
+    const NMT = { roic: 'Invested capital is negative.', roe: 'Shareholders’ equity is negative, so the ratio has no meaning.', de: 'Shareholders’ equity is negative, so the ratio has no meaning.',
+      pe: 'A loss over the period: no meaningful P/E.', pocf: 'Operating cash flow was negative.' };
+    const g = (f) => (r) => r[f + '_' + pb];
+    const per = (r, f) => { const x = mkt.get(r.ticker); return x ? f(x, r) : null; };
+    const pos = (v) => (bad(v) ? null : v > 0 ? v : 'n/m');
+    // [label, value, format, best ('hi' | 'lo' | null), median?, n/m reason key, tooltip]
+    const SECTIONS = [
+      ['Performance / earnings', [
+        ['Operating ratio', g('opr'), pct, 'lo', true, null, 'Operating expense ÷ revenue. Below 100% is an operating profit.'],
+        ['Net profit margin', g('npm'), pct, 'hi', true, null, 'Net income ÷ revenue.'],
+        ['Return on invested capital' + m12, g('roic'), pct, 'hi', true, 'roic', 'Operating income after tax ÷ average invested capital (debt + operating lease liabilities + equity), 12 months.'],
+        ['Return on equity' + m12, g('roe'), pct, 'hi', true, 'roe', 'Net income ÷ average shareholders’ equity, 12 months.'],
+      ]],
+      ['Risk / solvency', [
+        ['Interest cover', g('icov'), x1, 'hi', true, null, 'Operating income ÷ interest expense.'],
+        ['Debt to equity', g('de'), x2, 'lo', true, 'de', 'Debt ÷ shareholders’ equity, latest balance sheet in the period.'],
+      ]],
+      ['Liquidity', [
+        ['Current ratio', g('cur'), x2, 'hi', true, null, 'Current assets ÷ current liabilities. Airlines run below 1× because unflown tickets and miles sit in current liabilities.'],
+        ['Quick ratio', g('quick'), x2, 'hi', true, null, 'Cash, short-term investments and receivables ÷ current liabilities.'],
+        ['Cash as % of operating revenue', g('cashrev'), pct, 'hi', true, null, 'Cash and short-term investments ÷ 12-month revenue.'],
+      ]],
+      ['Market valuation', [
+        ['Share price', (r) => per(r, (x) => x.price), usd, null, false, null, 'Latest share price.'],
+        ['Market cap', (r) => per(r, (x) => x.mcap), fmtM, null, true, null, 'Share price × shares outstanding from the latest SEC filing.'],
+        ['EPS, diluted' + (pb === 'lq' ? ' (quarter)' : ''), g('eps'), usd, null, false, null, 'Diluted earnings per share as filed.'],
+        ['P/E ratio', (r) => per(r, (x) => { const e = pos(r['eps12_' + pb]); return e === 'n/m' ? e : e ? x.price / e : null; }), x1, null, true, 'pe', 'Share price ÷ 12-month diluted EPS.'],
+        ['Dividend yield', (r) => per(r, (x) => (x.dps === null ? null : x.dps ? x.dps / x.price : 'none')), pct2, null, false, null, 'Dividends per share (by ex-date) over the period ÷ share price.'],
+        ['Dividend cover', (r) => per(r, (x) => (x.dps === null || bad(r['eps12_' + pb]) ? null : x.dps ? r['eps12_' + pb] / x.dps : 'none')), x1, 'hi', true, null, 'EPS ÷ dividends per share.'],
+        ['NAV per share', (r) => per(r, (x) => (x.sh && !bad(r['equity_' + pb]) ? r['equity_' + pb] * 1e6 / x.sh : null)), usd, null, false, null, 'Shareholders’ equity ÷ shares outstanding (book value per share).'],
+        ['Op cash flow multiple', (r) => per(r, (x) => { const o = pos(r['ocf12_' + pb]); return o === 'n/m' ? o : o && x.mcap ? x.mcap / o : null; }), x1, null, true, 'pocf', 'Market cap ÷ 12-month cash from operations.'],
+      ]],
+    ];
+    const th = (t, cls, title) => { const e = document.createElement('th'); if (cls) e.className = cls; e.textContent = t; if (title) e.title = title; return e; };
+    head.replaceChildren(th('Ratio', 'l'), ...cols.map((r) => th(r.ticker, '', r.carrier)), th('Median', 'med', 'Median of the carriers shown'));
+    const td = (t, cls) => { const c = document.createElement('td'); if (cls) c.className = cls; c.textContent = t; return c; };
+    const trs = [];
+    const pr = document.createElement('tr'); pr.append(td('Period', 'l'));
+    cols.forEach((r) => pr.append(td(pb === 'fy' ? (r.at_fy ? 'FY ' + r.at_fy.slice(0, 4) : '—') : qs(r.latest) + (pb === 'ttm' ? ' TTM' : ''))));
+    pr.append(td('', 'med')); trs.push(pr);
+    for (const [title, rows] of SECTIONS) {
+      const gr = document.createElement('tr'); gr.className = 'am-rgrp'; const gc = td(title); gc.colSpan = cols.length + 2; gr.append(gc); trs.push(gr);
+      for (const [name, f, fmt, best, med, nmKey, tipT] of rows) {
+        const tr = document.createElement('tr'); const n = td(name, 'l'); n.title = tipT; tr.append(n);
+        const vals = cols.map((r) => f(r));
+        const nums = vals.filter((v) => typeof v === 'number' && isFinite(v));
+        const target = best && nums.length > 1 ? (best === 'hi' ? Math.max(...nums) : Math.min(...nums)) : null;
+        vals.forEach((v) => {
+          let c;
+          if (v === 'n/m' || v === 'none') { c = td(v, 'nm'); if (v === 'n/m' && NMT[nmKey]) c.title = NMT[nmKey]; if (v === 'none') c.title = 'No dividend paid.'; }
+          else { c = td(fmt(v)); if (fmt === fmtM) withV(c, v); if (typeof v === 'number' && v < 0) c.classList.add('am-neg'); if (target !== null && v === target) c.style.fontWeight = '800'; }
+          tr.append(c);
+        });
+        const mv = med && nums.length > 1 ? d3.median(nums) : null;
+        tr.append(td(mv === null ? '' : fmt(mv), 'med'));
+        trs.push(tr);
+      }
+    }
+    tb.replaceChildren(...trs);
+    const perTxt = pb === 'ttm' ? 'trailing 12 months' : pb === 'fy' ? 'last fiscal year' : 'latest quarter';
+    document.getElementById('rat-note').textContent = 'Each carrier’s ' + perTxt + ' (switch with the buttons at the top of the tab); balance-sheet ratios use the balance sheet at the end of that period' +
+      (pb === 'lq' ? '; returns, cash ÷ revenue and market multiples use the 12 months to that quarter' : '') + '. Carriers follow the group and inactive filters above, largest first. ' +
+      (priceAsOf ? 'Share prices as of ' + dfmt(priceAsOf) + '. ' : '') + 'The best figure in a row is in bold where "best" is clear-cut; hover over a ratio for its definition.';
+  }
+
   // ---------- table helpers: CSV download, header tooltips; chart "data through" stamps ----------
   // keep the unrounded value on a table cell ($ millions) so CSV downloads aren't limited to the rounded display
   const withV = (cell, v) => { v = num(v); if (v !== null && isFinite(v)) cell.dataset.v = String(Math.round(v * 1e6)); return cell; };
@@ -3297,6 +3490,7 @@ dash.calc('dotpeer', {
 
     if (tab === 'peers') {
       drawH2H(peer, P);
+      drawRatios(peer, P);
       // peer table
       const tb = document.querySelector('#peer-table tbody');
       root.querySelectorAll('#peer-table th[data-base]').forEach((th) => th.setAttribute('data-field', th.dataset.base + '_' + pbasis));

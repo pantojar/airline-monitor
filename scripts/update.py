@@ -50,8 +50,12 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG = os.path.join(ROOT, "config")
 DATA = os.path.join(ROOT, "data")
 
-FIELDS = ["rev", "opex", "labor", "fuel", "opinc", "ni", "buyback", "div", "cash", "sti", "debt", "oplease", "da", "rent", "capex", "due12", "capex_ttm"]
-FLOW_FIELDS = ["rev", "opex", "labor", "fuel", "opinc", "ni", "buyback", "div", "da", "rent", "capex"]
+FIELDS = ["rev", "opex", "labor", "fuel", "opinc", "ni", "buyback", "div", "cash", "sti", "debt", "oplease", "da", "rent", "capex", "due12", "capex_ttm",
+          # for the Ratios card: interest, pre-tax income and tax, operating cash flow, equity, current assets and
+          # liabilities, receivables, diluted EPS (quarter, and the 10-K's full-year figure on fiscal year-end rows)
+          "intexp", "pretax", "tax", "ocf", "ocf_ttm", "equity", "cur_assets", "cur_liab", "recv", "eps", "eps_fy"]
+FLOW_FIELDS = ["rev", "opex", "labor", "fuel", "opinc", "ni", "buyback", "div", "da", "rent", "capex", "intexp", "pretax", "tax", "ocf"]
+PER_SHARE = {"eps", "eps_fy"}  # $ per share, not $ millions
 FIRST_QUARTER = "2023-03"
 
 
@@ -111,12 +115,15 @@ def days(a, b):
 # ---------------------------------------------------------------- XBRL extraction
 def concept_facts(cf, name):
     """USD facts for one concept: the us-gaap element if there is one, otherwise a filer's own (custom) element of
-    that name, e.g. Alaska's FuelCostsGrossOfHedging."""
+    that name, e.g. Alaska's FuelCostsGrossOfHedging. Per-share elements (EPS) are in USD/shares."""
     all_ns = cf.get("facts", {})
     v = all_ns.get("us-gaap", {}).get(name)
     if not v:
         v = next((c[name] for ns, c in all_ns.items() if ns not in ("us-gaap", "dei") and name in c), None)
-    return v.get("units", {}).get("USD", []) if v else []
+    if not v:
+        return []
+    u = v.get("units", {})
+    return u.get("USD") or u.get("USD/shares") or []
 
 
 def facts(cf, concept):
@@ -269,6 +276,32 @@ def extract(cf, QE):
     out["due12"] = {k: v + cur_lease.get(k, 0) for k, v in cur_debt.items()}
     # an estimated rent figure alone doesn't make a quarter: keep it only where the quarter was reported
     out["rent"] = {k: v for k, v in out["rent"].items() if k in out["opinc"]}
+
+    # ---- for the Ratios card
+    # interest expense: the 2024 taxonomy replaced InterestExpense with InterestExpenseNonoperating, and filers moved
+    # over at different times, so the two are pooled (a Q4 derived from year-to-date figures works across the
+    # switch); narrower elements only fill quarters still empty
+    out["intexp"] = pick(cf, [("InterestExpenseNonoperating", "InterestExpense"), "InterestExpenseDebt", "InterestAndDebtExpense"], flow_q, QE)
+    out["pretax"] = pick(cf, ["IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                              "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                              "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic"], flow_q, QE)
+    out["tax"] = pick(cf, ["IncomeTaxExpenseBenefit"], flow_q, QE)
+    OCF = ["NetCashProvidedByUsedInOperatingActivities", "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations"]
+    out["ocf"] = pick(cf, OCF, flow_q, QE)
+    out["ocf_ttm"] = ttm_ytd(OCF)
+    out["equity"] = pick(cf, ["StockholdersEquity", "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"], inst_q, QE)
+    out["cur_assets"] = pick(cf, ["AssetsCurrent"], inst_q, QE)
+    out["cur_liab"] = pick(cf, ["LiabilitiesCurrent"], inst_q, QE)
+    out["recv"] = pick(cf, ["AccountsReceivableNetCurrent", "ReceivablesNetCurrent", "AccountsNotesAndLoansReceivableNetCurrent"], inst_q, QE)
+    # diluted EPS: quarters as filed; a Q4 is the 10-K year less nine months, which is close but not exact because
+    # the share count changes, so fiscal year-end rows also carry the 10-K's own full-year figure
+    EPS = ["EarningsPerShareDiluted", "EarningsPerShareBasicAndDiluted"]
+    out["eps"] = pick(cf, EPS, flow_q, QE)
+    out["eps_fy"] = {}
+    for c in EPS:
+        for f in facts(cf, c):
+            if f.get("start") and f["end"] in QE and 350 < days(f["start"], f["end"]) < 380:
+                out["eps_fy"].setdefault(f["end"], f["val"])
     return out
 
 
@@ -309,7 +342,7 @@ def carrier_rows(c, cf, QE, overrides):
         r = {"ticker": c["ticker"], "carrier": c["carrier"], "quarter": q}
         for f in FIELDS:
             v = d[f].get(E)
-            r[f] = None if v is None else round1(v)
+            r[f] = None if v is None else (round(v, 4) if f in PER_SHARE else round1(v))
         if r["div"] is not None and r["div"] < 0:
             r["div"] = 0
         for f in c.get("null_fields", {}).get(q, []):
