@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-11-19T15:32:40Z",
+  "at": "2026-11-19T15:33:47Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -152,9 +152,9 @@
    }
   }
  },
- "generated": "2026-11-19T15:33:19Z",
+ "generated": "2026-11-19T15:47:41Z",
  "news": {
-  "at": "2026-11-19T15:33:17Z",
+  "at": "2026-11-19T15:34:20Z",
   "items": 95,
   "errors": [
    "Envoy Air news: unavailable",
@@ -162,7 +162,7 @@
   ]
  },
  "dot": {
-  "at": "2026-11-17T19:14:51Z",
+  "at": "2026-11-19T15:45:12Z",
   "ok": true,
   "failed": [],
   "latest": {
@@ -176,7 +176,7 @@
   "rows": 453
  },
  "fuel_spot": {
-  "at": "2026-11-19T15:33:17Z",
+  "at": "2026-11-19T15:34:21Z",
   "latest": "2026-11-17",
   "rows": 1217,
   "diesel_close": "2026-11-18",
@@ -189,7 +189,7 @@
   "errors": []
  },
  "labor": {
-  "at": "2026-11-18T02:58:32Z",
+  "at": "2026-11-19T15:43:53Z",
   "groups": 102,
   "errors": [],
   "union_sites": [
@@ -198,8 +198,8 @@
     "url": "https://iam141.org",
     "groups": 13,
     "method": "wp-posts,wp-media",
-    "items": 205,
-    "pdfs_read": 1
+    "items": 204,
+    "pdfs_read": 0
    },
    {
     "name": "IAM District 142",
@@ -207,7 +207,7 @@
     "groups": 14,
     "method": "wp-posts,wp-media",
     "items": 599,
-    "pdfs_read": 2
+    "pdfs_read": 0
    },
    {
     "name": "IAM (international)",
@@ -278,11 +278,19 @@
     "pdfs_read": 0
    },
    {
+    "name": "Teamsters Airline Division",
+    "url": "https://teamster.org/division-news/airline-division/",
+    "groups": 20,
+    "method": "html list",
+    "items": 10,
+    "pdfs_read": 8
+   },
+   {
     "name": "TWU",
     "url": "https://www.twu.org",
     "groups": 29,
     "method": "wp-posts,wp-media",
-    "items": 104,
+    "items": 106,
     "pdfs_read": 0
    },
    {
@@ -316,8 +324,8 @@
     "url": "https://cwa-union.org",
     "groups": 4,
     "method": "html list",
-    "items": 20,
-    "pdfs_read": 3
+    "items": 18,
+    "pdfs_read": 0
    },
    {
     "name": "American Airlines newsroom",
@@ -366,7 +374,7 @@
     "url": "https://ir.delta.com",
     "groups": 4,
     "method": "press releases",
-    "items": 16,
+    "items": 17,
     "pdfs_read": 0
    },
    {
@@ -390,7 +398,7 @@
     "url": "https://news.alaskaair.com",
     "groups": 16,
     "method": "wp-posts",
-    "items": 188,
+    "items": 190,
     "pdfs_read": 0
    },
    {
@@ -436,12 +444,12 @@
   ]
  },
  "cpi": {
-  "at": "2026-11-19T15:33:18Z",
+  "at": "2026-11-19T15:34:23Z",
   "cpiw": "2026-10",
   "cpiu": "2026-10"
  },
  "revsplit": {
-  "at": "2026-11-19T15:32:42Z",
+  "at": "2026-11-19T15:33:47Z",
   "carriers": {
    "DAL": {
     "quarters": 19,
@@ -478,11 +486,15 @@
   }
  },
  "reliability": {
-  "at": "2026-11-19T15:33:19Z",
+  "at": "2026-11-19T15:47:41Z",
   "checked": "2026-11-19",
   "first": "2023-01",
   "latest": "2026-08",
-  "fetched": {}
+  "fetched": {
+   "2026-07": 697754,
+   "2026-08": 673065,
+   "2026-09": "failed: ValueError: TranStats did not return a zip file"
+  }
  },
  "fbc": {
   "checked": "2026-11-18T16:43:35Z",

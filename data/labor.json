@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-18T02:58:32Z",
+ "generated": "2026-11-19T15:43:53Z",
  "companies": {
   "DAL": {
    "ticker": "DAL",
@@ -1202,8 +1202,8 @@
    "news": {
     "title": "United flight attendants ratify 5-year contract with 31% pay hike and boarding pay",
     "date": "2026-05-13",
-    "source": "AP News",
-    "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxORHF4eG5SdUlDS0tsNDNIUlRDRmZLejRyckRrNGNNZE1rTEtIaTV2WEI1c05vWXBGUkRlbHo5V0FKTFYxdV9MMGlrM1V3NzQxbVBaNTZ5WnB5ckhGbmxsU1ppbTRtZ0xySGVNb3VncWM2WmN0bUxrcVl3M1VYejU5OHo2MUlRelJDelRJXy1qdjdBcHU5Z2lkbzZ0YWlRUmVBUjlsTVdtS2IyVmxKbWlNSzF5bjUwdw?oc=5"
+    "source": "CBS News",
+    "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPUmlOcjdOVXNGQ3U4TXpBUG5wWGhkdGJucm9oaTBLbmZPQi1vWE55NGRqbHhBbE1nbnZhclNOR3BGdldGcFowbjdpNDRsRU5odTJna3JWQmNBeFdDM2ZmMVIyVzR2eU1KSnBDY1JZMnh5UXFqeDdhZzRPMEZpYkw4cENCOFQ3LUJlN1B6ZQ?oc=5"
    },
    "status_date": "2026-05-12",
    "filing_quote": "In May 2026, the Company's flight attendants, represented by the Association of Flight Attendants (\"AFA\"), ratified a five-year agreement, effective May 31, 2026, with the Company that included improvements with respect to scheduling, reserve requirements and other quality of life improvements, as well as pay rate increases.",
@@ -1430,6 +1430,17 @@
     "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE13cm9TU3hGLWRxaGhwVnpFN0hZcFU5RlRqb0k1OE53UFV4YkN3d1cyTjhaQURXSVB4bWVCM290bEVES0U1cjBCcG40c25CT0V4YjJlZXZjSGRwVmZ0UVRNNVRqcFJPbjNB?oc=5"
    },
    "status_date": "2026-09-24",
+   "union_events": [
+    {
+     "status": "Tentative agreement",
+     "date": "2026-07-21",
+     "source": "Teamsters Airline Division",
+     "kind": "union",
+     "title": "Teamsters Land Industry-Leading Deal at United Airlines",
+     "url": "https://teamster.org/2026/07/teamsters-land-industry-leading-deal-at-united-airlines/",
+     "quote": "Press Releases Teamsters Land Industry-Leading Deal at United Airlines 2026.07.21 Union Secures Agreement in Principle for 11,000 Mechanics and Related Employees Nationwide Press Contact: Lena Melentijevic Phone: (347) 208-2279 Email: LMelentijevic@teamster.org (WASHINGTON) – The Teamsters Union has reached an agreement in principle with United Airlines (UA) on a new contract for more than 11,000 "
+    }
+   ],
    "status_changed": "2026-09-24"
   },
   {
@@ -1775,15 +1786,6 @@
      "title": "Security Officer Employees Tentative Agreement 2026 All Markup",
      "url": "https://iam141.org/wp-content/uploads/2026/05/Security-Officer-Employees-Tentative-Agreement-2026_All-Markup.pdf",
      "quote": "Security Officer Employees Tentative Agreement 2026 All Markup."
-    },
-    {
-     "status": "In negotiations",
-     "date": "2025-10-13",
-     "source": "IAM District 141",
-     "kind": "union",
-     "title": "14.1.October.2025.UA Negotiations Update 3.22.26?PM",
-     "url": "https://iam141.org/wp-content/uploads/2025/10/14.1.October.2025.UA-Negotiations-Update-3.22.26-PM.pdf",
-     "quote": "For the Security Officer contract, negotiations focused on clarifying and reaching a shared understanding of existing contract language regarding badge control work.;"
     }
    ],
    "status_date": "2026-08-19",
@@ -3259,10 +3261,10 @@
    "status_source": "union",
    "status_date": "2026-11-06",
    "news": {
-    "title": "Frontier flight attendants rally at Atlanta airport over contract ahead of holiday travel season",
-    "date": "2026-11-17",
-    "source": "CBS News",
-    "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPS2lLQmR0eF9DMVBHTjhrN0hjZXpFU2JobUdKVjVKQjA4VWl1YzEwRnhtSUY3VTdYdlJYS2xvSmhvZ1EybmFJNS0tM2FRQkd3VVFYdUNpaGhZUmNtSUI0ai1nZnh6a1BobHY5N0djd0VMZHRkWTMtUVlVSndTbm5IZ2p6WmFiT21qbFNGYS1XTnV3REdldmlUMWNMOU4yNllBME1MeDJObkVSNW94b202ZzM2TElTZ1V3S0YxU0lZZTF1ODBSY0lkZllaVDVlRUE?oc=5"
+    "title": "Frontier flight attendants protest; Roswell road work begins",
+    "date": "2026-11-18",
+    "source": "FOX 5 Atlanta",
+    "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFB4aUxoNmFBQ2tnNEdVSnZHYUR4aVgxLVVPbXlXTkVvS3BUaXo2TzlEeUhQWXVXWHNEb3g3dWstUlFGREFOaHk0ZXVHTzFqMGNkMW5lUXJPV1lVR2doOGhFWWQ1ZnTSAWpBVV95cUxNd29UOHhmM0NkeDM3QkFpY0hiUnBsQjFETjZqOVo5R21zT1g0aUtBZ3BJOExnWkxZZ0tzTmNPdjRFQlNQT0RMdmQ4M1k1VmZpVGlNLTJYeU1yLVBBV2xlUC1YQUtncFdULTRn?oc=5"
    },
    "union_events": [
     {
@@ -3330,12 +3332,6 @@
    "status": "Ratified",
    "status_source": "10-Q",
    "status_date": "2026-09",
-   "news": {
-    "title": "Teamsters Frontier Airlines Mechanics Ratify Five-Year Contract With 93% Vote",
-    "date": "2026-09-16",
-    "source": "TradingView",
-    "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPdGZISmdSSkdmcVA0WUtwTXZVcW1HajV2VF9sRFk2enZuaHJEd3pia0FxSGZGZ1BneDJaRU9sNEFXbU5EcEdVR3pLMHVRZ3JadE5DWVJRMWNiajhDaTdjZU1EV0xuNXNNT0dEQkZ5VWVCX2dMblV2TFZodFpXT2hmNXh2Qzdsa2NhZVRaMVFZSFp4Y0dxWnBaVlFmVVE3ZU94bEV6c3YxVWU2S0x4dUZwTlZpTWtVU1pfRDdGZ2dTZEpmUVpfVFg0aHVfZEQxbC1aeHYwbktndnJRbm1KRXJR?oc=5"
-   },
    "filing_quote": "In September 2026, we entered into a collective bargaining contract ratification with the union representing our aircraft technicians.",
    "filing_url": "https://www.sec.gov/Archives/edgar/data/1670076/000167007626000103/fron-20260930.htm",
    "status_changed": "2026-09"
@@ -3426,11 +3422,49 @@
    "craft": "pilots",
    "open": false,
    "status": "Ratified",
-   "status_source": "manual",
+   "status_source": "union",
    "prose": false,
    "manual": true,
-   "status_date": "2026-08",
+   "status_date": "2026-08-05",
    "filing_quote": "Two-year agreement ratified August 2026",
+   "union_events": [
+    {
+     "status": "Ratified",
+     "date": "2026-08-05",
+     "source": "Teamsters Airline Division",
+     "kind": "union",
+     "title": "Allegiant Air Pilots Ratify Two-year Agreement",
+     "url": "https://teamster.org/2026/08/allegiant-air-pilots-ratify-two-year-agreement/",
+     "quote": "Allegiant Air Pilots Ratify Two-year Agreement."
+    },
+    {
+     "status": "In negotiations",
+     "date": "2026-01-15",
+     "source": "Teamsters Airline Division",
+     "kind": "union",
+     "title": "Teamsters to Monitor Proposed Allegiant-Sun Country Merger",
+     "url": "https://teamster.org/2026/01/teamsters-to-monitor-proposed-allegiant-sun-country-merger/",
+     "quote": "Both Allegiant and the Sun Country pilots are currently in negotiations with their respective companies to secure improvements to existing labor contracts."
+    },
+    {
+     "status": "Picketing",
+     "date": "2025-11-19",
+     "source": "Teamsters Airline Division",
+     "kind": "union",
+     "title": "Teamsters Pilots at Allegiant Air Picket Nationwide",
+     "url": "https://teamster.org/2025/11/teamsters-pilots-at-allegiant-air-picket-nationwide/",
+     "quote": "Teamsters Pilots at Allegiant Air Picket Nationwide."
+    }
+   ],
+   "union_event": {
+    "status": "Ratified",
+    "date": "2026-08-05",
+    "source": "Teamsters Airline Division",
+    "kind": "union",
+    "title": "Allegiant Air Pilots Ratify Two-year Agreement",
+    "url": "https://teamster.org/2026/08/allegiant-air-pilots-ratify-two-year-agreement/",
+    "quote": "Allegiant Air Pilots Ratify Two-year Agreement."
+   },
    "status_changed": "2026-08"
   },
   {
