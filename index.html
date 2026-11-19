@@ -314,7 +314,7 @@ window.dash = (function () {
   </header>
 
   <nav class="am-tabs" role="tablist">
-    <button class="am-tab" role="tab" data-tab="peers" aria-selected="true">Peer Comparison</button>
+    <button class="am-tab" role="tab" data-tab="peers" aria-selected="true">Company Financials</button>
     <button class="am-tab" role="tab" data-tab="carrier" aria-selected="false">Carrier Detail</button>
     <button class="am-tab" role="tab" data-tab="opcarriers" aria-selected="false">Operating Carriers (DOT)</button>
     <button class="am-tab" role="tab" data-tab="reliability" aria-selected="false">Operational Reliability</button>
@@ -335,6 +335,7 @@ window.dash = (function () {
       <span id="basis-chips">
         <button class="am-chip" data-basis="lq" aria-pressed="true">Latest quarter</button>
         <button class="am-chip" data-basis="ttm" aria-pressed="false">Trailing 12 months</button>
+        <button class="am-chip" data-basis="fy" aria-pressed="false">Last fiscal year</button>
       </span>
       <label class="am-chk"><input type="checkbox" id="inactive"> Include acquired / ceased</label>
     </div>
@@ -384,7 +385,7 @@ window.dash = (function () {
 
     <div class="am-card" id="h2h-card">
       <h2>Head-to-head</h2>
-      <p class="am-note">Pick two or three carriers to compare side by side. Uses the same period as the table above (latest quarter or trailing 12 months); the best figure in each row is in bold where "best" is clear-cut.</p>
+      <p class="am-note">Pick two or three carriers to compare side by side. Uses the same period as the table above (latest quarter, trailing 12 months or last fiscal year); the best figure in each row is in bold where "best" is clear-cut.</p>
       <div class="am-bar"><span id="h2h-chips" data-source="peer"></span></div>
       <div class="am-tbl-box">
         <table class="am-t" id="h2h-table" data-source="peer">
@@ -680,7 +681,7 @@ window.dash = (function () {
       </div>
       <ul class="am-foot am-defs">
         <li><b>Total return:</b> share price change plus dividends reinvested, from the start date you pick (the last trading day on or before it). <b>Annualized</b> is shown for periods over a year.</li>
-        <li><b>Market cap:</b> share price × shares outstanding from the cover of the latest 10-Q or 10-K. <b>Enterprise value:</b> market cap + net debt incl. leases (Peer Comparison tab). <b>EV ÷ EBITDAR</b> uses trailing-12-month EBITDAR; "n/m" where EBITDAR was under 5% of revenue.</li>
+        <li><b>Market cap:</b> share price × shares outstanding from the cover of the latest 10-Q or 10-K. <b>Enterprise value:</b> market cap + net debt incl. leases (Company Financials tab). <b>EV ÷ EBITDAR</b> uses trailing-12-month EBITDAR; "n/m" where EBITDAR was under 5% of revenue.</li>
         <li><b>Labor cost ÷ market cap:</b> trailing-12-month salaries, wages and benefits as a share of what the market values the whole company at. Above 100% means a year of payroll costs more than buying every share.</li>
         <li>Prices update near 9:45 a.m., noon and 4:15 p.m. Eastern on trading days; daytime prices are the latest IEX trade and can differ slightly from the consolidated tape. Price data: Tiingo.</li>
       </ul>
@@ -887,6 +888,7 @@ window.dash = (function () {
         <li><b>Quarters.</b> Where a filing reports only year-to-date amounts (every Q4, and all cash-flow items), the quarter is the year-to-date figure minus the prior year-to-date figure.</li>
         <li><b>Line items.</b> Revenue is total operating revenue. Labor is the salaries, wages and benefits line (us-gaap LaborAndRelatedExpense), which includes profit sharing for carriers that book it there. Fuel is aircraft fuel and related taxes. Returned to shareholders is cash paid for share repurchases plus dividends.</li>
         <li><b>Trailing 12 months</b> needs four consecutive reported quarters; carriers with a gap show a dash.</li>
+        <li><b>Last fiscal year</b> is the four quarters of each carrier's most recent fiscal year covered by a 10-K (every carrier covered uses the calendar year). CapEx uses the 10-K's full-year figure. Debt, cash, leverage and fleet age stay at the latest balance sheet whichever period is chosen.</li>
         <li><b>Cash + ST investments</b> excludes undrawn credit lines, so it runs below the "total liquidity" carriers quote.</li>
         <li><b>Debt</b> is as each carrier tags it. Some include finance leases and some do not, so compare debt levels across carriers with care.</li>
         <li><b>Operating carriers (DOT Form 41).</b> Each airline certificate files its own reports with the Department of Transportation, published by BTS on TranStats. The dashboard uses Schedule P-1.2 (profit and loss), P-6 (salaries by employee group, benefits, fuel), P-1(a) (monthly employees) and T-100 (available seat miles, all services). Figures are summed across DOT reporting regions to a system total. Financial schedules run about one quarter behind SEC filings; BTS publishes Q3 2026 on December 17. The job checks for new DOT data weekly.</li>
@@ -956,7 +958,7 @@ dash.calc('qtr', {
 
 dash.calc('peer', {
   title: 'Peer comparison',
-  description: 'One row per carrier: latest complete quarter and trailing four quarters of revenue, margin, labor cost and shareholder returns, plus cumulative returns and net income from Q1 2024.',
+  description: 'One row per carrier: latest complete quarter, trailing four quarters and last complete fiscal year of revenue, margin, labor cost and shareholder returns, plus cumulative returns and net income from Q1 2024.',
   inputs: ['financials', 'carriers'],
   fn: (financials, carriers) => {
     const num = (v) => (v === null || v === undefined || v === '' ? null : Number(v));
@@ -984,6 +986,19 @@ dash.calc('peer', {
       const ya = lqq ? m.get(Number(lqq.slice(0, 4)) - 1 + lqq.slice(4)) : null;
       const ret_ttm = ttmOk && rc ? t4.reduce((s, r) => s + retOf(r), 0) : null;
       const ret_lq = lqq && rc ? retOf(lq) : null;
+      // last fiscal year: the four quarters ending at the latest reported fiscal year-end quarter
+      // (December unless carriers.json sets fy_end_month for a carrier with a non-calendar year)
+      const fyEnd = String(c.fy_end_month || 12).padStart(2, '0');
+      const fyq = done.filter((q) => q.slice(5, 7) === fyEnd).pop() || null;
+      const fk = fyq ? Q.indexOf(fyq) : -1;
+      const f4 = span(fk - 3, fk);
+      const fyOk = f4.length === 4 && f4.every(ok);
+      const fy = (f) => (fyOk ? sum(f4, f) : null);
+      const rev_fy = fy('rev'), labor_fy = fy('labor'), opex_fy = fy('opex'), opinc_fy = fy('opinc');
+      const pf4 = span(fk - 7, fk - 4);
+      const labor_pfy = pf4.length === 4 ? sum(pf4, 'labor') : null;
+      const ret_fy = fyOk && rc ? f4.reduce((s, r) => s + retOf(r), 0) : null;
+      const fyRow = fyq ? m.get(fyq) : null;
       const withCash = rows.filter((r) => num(r.cash) !== null).sort((a, b) => (a.quarter < b.quarter ? 1 : -1))[0];
       const withDebt = rows.filter((r) => num(r.debt) !== null).sort((a, b) => (a.quarter < b.quarter ? 1 : -1))[0];
       const cq = lqq ? Q.filter((q) => q >= '2024-03' && q <= lqq).map((q) => m.get(q)) : [];
@@ -1000,6 +1015,11 @@ dash.calc('peer', {
         rl_lq: dv(ret_lq, lqq ? num(lq.labor) : null), rl_ttm: dv(ret_ttm, labor_ttm),
         ni_lq: lqq ? num(lq.ni) : null, ni_ttm: ttm('ni'),
         capex_lq: lqq ? num(lq.capex) : null, capex_ttm: lqq && num(lq.capex_ttm) !== null ? num(lq.capex_ttm) : ttmOk && t4.every((r) => num(r.capex) !== null) ? sum(t4, 'capex') : null,
+        fy_q: fyOk ? fyq : null, fy_label: fyOk ? 'FY ' + fyq.slice(0, 4) : null,
+        rev_fy, opm_fy: dv(opinc_fy, rev_fy), labor_fy, lopex_fy: dv(labor_fy, opex_fy), lyoy_fy: gr(labor_fy, labor_pfy),
+        ret_fy, rl_fy: dv(ret_fy, labor_fy), ni_fy: fy('ni'),
+        // the 10-K's full-year capex where tagged, otherwise the sum of the four quarters
+        capex_fy: fyOk && fyRow && num(fyRow.capex_ttm) !== null ? num(fyRow.capex_ttm) : fyOk && f4.every((r) => num(r.capex) !== null) ? sum(f4, 'capex') : null,
         liquidity: withCash ? num(withCash.cash) + (num(withCash.sti) || 0) : null,
         debt: withDebt ? num(withDebt.debt) : null,
         // net debt from one balance sheet: debt less cash and short-term investments at the same quarter end
@@ -2048,6 +2068,10 @@ dash.calc('dotpeer', {
       p.loy_lq = last && last.quarter === p.latest ? last.loyalty / last.rev : null;
       const t4 = rr.slice(-4);
       p.loy_ttm = t4.length === 4 && t4[3].quarter === p.latest ? d3.sum(t4, (r) => r.loyalty) / d3.sum(t4, (r) => r.rev) : null;
+      const fi = p.fy_q ? rr.findIndex((r) => r.quarter === p.fy_q) : -1;
+      const f4 = fi >= 3 ? rr.slice(fi - 3, fi + 1) : [];
+      const fyQs = p.fy_q ? [0, 3, 6, 9].map((k) => { const y = Number(p.fy_q.slice(0, 4)), mo = Number(p.fy_q.slice(5, 7)) - k; return (mo > 0 ? y : y - 1) + '-' + String(mo > 0 ? mo : mo + 12).padStart(2, '0'); }).reverse() : [];
+      p.loy_fy = f4.length === 4 && f4.every((r, i) => r.quarter === fyQs[i]) ? d3.sum(f4, (r) => r.loyalty) / d3.sum(f4, (r) => r.rev) : null;
       const f = fleetOf(MAINLINE[p.ticker]);
       p.fleet_age = f ? f.fleet_age : null; p.fleet_n = f ? f.fleet_n : null; p.fleet_year = f ? f.year : null;
     }
@@ -2111,14 +2135,14 @@ dash.calc('dotpeer', {
     const th = (t, cls) => { const e = document.createElement('th'); if (cls) e.className = cls; e.textContent = t; return e; };
     head.replaceChildren(th('Measure', 'l'), ...cols.map((r) => th(r.carrier)));
     if (cols.length < 2) { tb.replaceChildren(); const tr = document.createElement('tr'); const td0 = document.createElement('td'); td0.className = 'l'; td0.colSpan = 4; td0.textContent = 'Pick at least two carriers above.'; tr.append(td0); tb.append(tr); return; }
-    const pb = P.basis === 'ttm' ? 'ttm' : 'lq', per = pb === 'ttm' ? 'trailing 12 months' : 'latest quarter';
+    const pb = P.basis === 'ttm' || P.basis === 'fy' ? P.basis : 'lq', per = pb === 'ttm' ? 'trailing 12 months' : pb === 'fy' ? 'last fiscal year' : 'latest quarter';
     const ex = dash.data('exec_pay'), lg = dash.data('labor_groups'), dp = dash.data('dotpeer');
     const ratio = (t) => { if (ex.status !== 'ok') return null; const e = ex.data.filter((r) => r.ticker === t && !bad(r.ratio)).sort((a, b) => b.fy - a.fy)[0]; return e ? e.ratio : null; };
     const openN = (t) => (lg.status === 'ok' ? lg.data.filter((r) => r.ticker === t && r.open && r.status !== 'Ratified').length : null);
     const dotv = (t, f) => { if (dp.status !== 'ok') return null; const r = dp.data.find((x) => x.code === MAINLINE[t]); return r ? r[f + '_ttm'] : null; };
     const x = (v) => (bad(v) ? '—' : d3.format('.1f')(v) + '×');
     const ROWS = [
-      ['Period', (r) => ql(r.latest) + (pb === 'ttm' ? ' (12 mo.)' : ''), null],
+      ['Period', (r) => (pb === 'fy' ? r.fy_label || '—' : ql(r.latest) + (pb === 'ttm' ? ' (12 mo.)' : '')), null],
       ['Revenue', (r) => r['rev_' + pb], fmtM, 'hi'],
       ['Net income', (r) => r['ni_' + pb], fmtM, 'hi'],
       ['Operating margin', (r) => r['opm_' + pb], pct, 'hi'],
@@ -2830,7 +2854,7 @@ dash.calc('dotpeer', {
       : 'Closing prices, ' + dfmt(latest);
     stamp('mk-card', liveAt ? 'Intraday' : 'Close ' + dfmt(latest));
     const today = new Date().toISOString().slice(0, 10), shd = d3.max(list, (r) => (r.sharesDate && r.sharesDate <= today ? r.sharesDate : null));
-    document.getElementById('mk-note').textContent = asof + '. Total return runs from the close on ' + dfmt(mkBase((T.SPY || Object.values(T)[0]).eod, start)[0]) + '. Market cap uses shares outstanding from the latest SEC filing' + (shd ? ' (as of ' + dfmt(shd) + ' or earlier)' : '') + '; financial measures are the trailing 12 months from the Peer Comparison tab.' + (lateOnes.length ? ' † Return from first trading day: ' + lateOnes.join(', ') + '.' : '') + ' Click a header to sort.';
+    document.getElementById('mk-note').textContent = asof + '. Total return runs from the close on ' + dfmt(mkBase((T.SPY || Object.values(T)[0]).eod, start)[0]) + '. Market cap uses shares outstanding from the latest SEC filing' + (shd ? ' (as of ' + dfmt(shd) + ' or earlier)' : '') + '; financial measures are the trailing 12 months from the Company Financials tab.' + (lateOnes.length ? ' † Return from first trading day: ' + lateOnes.join(', ') + '.' : '') + ' Click a header to sort.';
     // chart: total return (dividends reinvested), price change (split-adjusted, no dividends) or share price in dollars
     const mode = ['px', 'usd'].includes(P.mkmode) ? P.mkmode : 'tsr';
     root.querySelectorAll('#mk-mode .am-chip').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
@@ -2905,7 +2929,7 @@ dash.calc('dotpeer', {
 
     const allQ = fin.status === 'ok' ? [...new Set(fin.data.map((r) => r.quarter))].sort() : [];
     const basis = P.dbasis === 'lq' ? 'lq' : 'ttm';  // DOT tab
-    const pbasis = P.basis === 'ttm' ? 'ttm' : 'lq';  // peer comparison
+    const pbasis = P.basis === 'ttm' || P.basis === 'fy' ? P.basis : 'lq';  // peer comparison
 
     // ---------- operating carriers (DOT) ----------
     const dpeer = dash.data('dotpeer'), dq = dash.data('dotq'), dcar = dash.data('dot_carriers');
@@ -3265,7 +3289,7 @@ dash.calc('dotpeer', {
           if (!bad(r['lopex_' + pbasis])) { const i = document.createElement('i'); i.className = 'am-ib'; i.style.width = Math.round(48 * r['lopex_' + pbasis] / maxL) + 'px'; lp.append(i); }
           lp.append(document.createTextNode(pct(r['lopex_' + pbasis])));
           tr.append(
-            td(r.ticker, 'l'), td(r.carrier, 'l am-hn'), td(r.latest ? ql(r.latest) : '—', 'l'),
+            td(r.ticker, 'l'), td(r.carrier, 'l am-hn'), td(pbasis === 'fy' ? r.fy_label || '—' : r.latest ? ql(r.latest) : '—', 'l'),
             withV(td(fmtM(r['rev_' + pbasis])), r['rev_' + pbasis]), withV(td(fmtM(r['ni_' + pbasis]), r['ni_' + pbasis] < 0 ? 'am-neg' : ''), r['ni_' + pbasis]), td(pct(op), op < 0 ? 'am-neg' : ''), withV(td(fmtM(r.debt)), r.debt), withV(td(fmtM(r.net_debt)), r.net_debt), withV(td(fmtM(r.lease_net_debt)), r.lease_net_debt), td(bad(r.leverage) ? (r.lev_nm ? 'n/m' : '—') : d3.format('.1f')(r.leverage) + '×'), withV(td(fmtM(r.due12)), r.due12), td(bad(r.cover) ? '—' : d3.format('.1f')(r.cover) + '×'), withV(td(fmtM(r['labor_' + pbasis])), r['labor_' + pbasis]), lp,
             td(sgn(r['lyoy_' + pbasis])), withV(td(fmtM(r['ret_' + pbasis])), r['ret_' + pbasis]), withV(td(fmtM(r['capex_' + pbasis])), r['capex_' + pbasis]), td(pct(r['loy_' + pbasis])), td(bad(r.fleet_age) ? '—' : d3.format('.1f')(r.fleet_age)), td(pct(r['rl_' + pbasis]), 'am-hn'),
             withV(td(fmtM(r.liquidity), 'am-hn'), r.liquidity),
