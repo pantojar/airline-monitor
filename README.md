@@ -28,7 +28,7 @@ To run it on demand, open the **Actions** tab, choose **Refresh data**, then **R
 | `config/overrides.json` | Hand-entered figures used only where SEC's structured data has a gap |
 | `config/news_queries.json` | Industry-wide news searches (labor, fuel, earnings) |
 | `config/exec_pay.json` | Hand-verified CEO pay figures: name, compensation actually paid, notes (one row per company and fiscal year) |
-| `config/fbc_bases.json` | Hub and crew-base metros listed first in the Family budget card (Pay & Prices) |
+| `config/fbc_bases.json` | Hub and crew-base metros listed first in the Family budget card (Cost of Living tab) |
 | `config/dot_carriers.json` | Operating carriers shown on the DOT tab: DOT code, owner, group, role, and footnotes |
 | `data/news_curated.json` | Hand-written news items with summaries; shown alongside the automatic feed |
 | `config/labor_sources.json` | Union websites the bargaining tracker reads (see below) |
@@ -48,7 +48,7 @@ A site that has neither, but has a news page listing articles, also needs `"list
 {"name": "Frontier flight attendants negotiations", "url": "https://example.org", "carriers": ["ULCC"], "craft": "flight att"}
 ```
 
-The **Union and company websites read** table on the Bargaining tab shows, after each weekly run, whether each site could be read and, if not, why.
+The **Union and company websites read** table on the Sources & Notes tab shows, after each weekly run, whether each site could be read and, if not, why.
 
 ## Settings
 

@@ -46,7 +46,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
 <script src="vendor/d3.min.js"></script>
 <script>
 window.dash = (function () {
-  var DEFAULTS = { group: 'All', basis: 'lq', dbasis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', pgroup: 'All', lcarrier: 'All', lopen: false, cpiidx: 'cpiw', cpispan: '12m', cpifrom: null, cpito: null, h2h: 'DAL,UAL', lcasmreg: false, relview: 'mkt', relper: 'ttm', relmetric: 'ontime', relsel: 'DL,UA,AA,WN,AS', mkfrom: 'ytd', mksel: 'DAL,UAL,AAL,LUV,SPY,JETS', mkmode: 'tsr', mkone: 'DAL', fbcarea: null, fbcad: 2, fbcch: 2, fbcrate: '', fbchrs: '2080', fbcearn: 1, fbchc: '' };
+  var DEFAULTS = { group: 'All', basis: 'lq', dbasis: 'ttm', inactive: false, carrier: 'DAL', tag: 'All', dgroup: 'All', dmetric: 'comp_fte', dcode: null, fuelcode: '', fuelrange: '2y', lcarrier: 'All', lopen: false, cpiidx: 'cpiw', cpispan: '12m', cpifrom: null, cpito: null, h2h: 'DAL,UAL', lcasmreg: false, relview: 'mkt', relper: 'ttm', relmetric: 'ontime', relsel: 'DL,UA,AA,WN,AS', mkfrom: 'ytd', mksel: 'DAL,UAL,AAL,LUV,SPY,JETS', mkmode: 'tsr', mkone: 'DAL', fbcarea: null, fbcad: 2, fbcch: 2, fbcrate: '', fbchrs: '2080', fbcearn: 1, fbchc: '' };
   var params = Object.assign({}, DEFAULTS), calcs = {}, order = [], res = null, fns = [];
   var DATA = null, state = 'loading';
   function compute() {
@@ -316,11 +316,11 @@ window.dash = (function () {
   <nav class="am-tabs" role="tablist">
     <button class="am-tab" role="tab" data-tab="peers" aria-selected="true">Company Financials</button>
     <button class="am-tab" role="tab" data-tab="carrier" aria-selected="false">Carrier Detail</button>
-    <button class="am-tab" role="tab" data-tab="opcarriers" aria-selected="false">Operating Carriers (DOT)</button>
-    <button class="am-tab" role="tab" data-tab="reliability" aria-selected="false">Operational Reliability</button>
-    <button class="am-tab" role="tab" data-tab="markets" aria-selected="false">Equity Markets</button>
-    <button class="am-tab" role="tab" data-tab="pay" aria-selected="false">Pay &amp; Prices</button>
+    <button class="am-tab" role="tab" data-tab="opcarriers" aria-selected="false">Unit Costs &amp; Labor (DOT)</button>
     <button class="am-tab" role="tab" data-tab="labor" aria-selected="false">Bargaining</button>
+    <button class="am-tab" role="tab" data-tab="pay" aria-selected="false">Cost of Living</button>
+    <button class="am-tab" role="tab" data-tab="markets" aria-selected="false">Markets &amp; Fuel</button>
+    <button class="am-tab" role="tab" data-tab="reliability" aria-selected="false">Reliability</button>
     <button class="am-tab" role="tab" data-tab="news" aria-selected="false">News</button>
     <button class="am-tab" role="tab" data-tab="notes" aria-selected="false">Sources &amp; Notes</button>
   </nav>
@@ -341,7 +341,7 @@ window.dash = (function () {
     </div>
 
     <div class="am-card" id="peer-card">
-      <h2>Peer comparison</h2>
+      <h2>Carrier comparison</h2>
       <p class="am-note" id="peer-note">GAAP figures as filed with the SEC, $ millions. Click a header to sort, or a row for that carrier's detail. Definitions are below the table.</p>
       <div class="am-tbl-box">
         <table class="am-t" id="peer-table" data-source="peer" data-row-key="ticker">
@@ -408,26 +408,6 @@ window.dash = (function () {
       <div class="am-multi" id="mult-mix" data-source="qtr"></div>
     </div>
 
-    <div class="am-card" id="fuel-card">
-      <h2>Jet fuel price</h2>
-      <p class="am-note">Daily U.S. Gulf Coast jet fuel spot price (EIA, via FRED; the newest days are estimated from EIA's daily diesel price until EIA posts jet fuel, usually within a week), with the average price U.S. passenger airlines actually paid each month, including taxes, into-plane fees and hedging (DOT Form 41). Dollars per gallon.</p>
-      <div class="am-tiles" id="fuel-tiles" style="margin-bottom:var(--cds-gap-md)">
-        <div class="am-tile"><div class="k" id="ft-spot-k">Spot price</div><div class="v" id="ft-spot">—</div><div class="d" id="ft-spot-d">—</div></div>
-        <div class="am-tile"><div class="k">Year earlier</div><div class="v" id="ft-ya">—</div><div class="d" id="ft-ya-d">—</div></div>
-        <div class="am-tile"><div class="k" id="ft-paid-k">Airlines paid</div><div class="v" id="ft-paid">—</div><div class="d" id="ft-paid-d">—</div></div>
-      </div>
-      <div class="am-bar" style="margin-bottom:var(--cds-gap-sm)">
-        <span id="fuel-range">
-          <button class="am-chip" data-range="1y" aria-pressed="false">1 year</button>
-          <button class="am-chip" data-range="2y" aria-pressed="true">2 years</button>
-          <button class="am-chip" data-range="all" aria-pressed="false">Since 2022</button>
-        </span>
-        <span class="sp"></span>
-        <select class="am-sel" id="fuel-code" aria-label="Carrier paid price" data-source="dot_carriers"></select>
-      </div>
-      <div class="am-legend" id="fuel-legend"></div>
-      <div class="am-wrap am-chart" id="fuel-chart" data-source="fuel_spot dot_fuel"></div>
-    </div>
 
     <div class="am-grid2">
       <div class="am-card" id="returns-card">
@@ -436,11 +416,27 @@ window.dash = (function () {
         <div class="am-legend"><span><i class="am-sw" id="sw-ret"></i>Buybacks + dividends</span><span><i class="am-sw" id="sw-ni"></i>Net income</span></div>
         <div class="am-wrap am-chart" id="ret-chart" data-source="peer"></div>
       </div>
-      <div class="am-card" id="latest-news">
-        <h2>Latest news</h2>
-        <p class="am-note">Most recent items from the News tab. <button class="am-link" id="all-news">See all news</button></p>
-        <div class="am-news" id="news-mini" data-source="news"></div>
+      <div class="am-card" id="ratio-card">
+        <h2>CEO pay ratio</h2>
+        <p class="am-note">How many years the median employee would need to work to earn what the CEO was paid in one. Read across carriers with care: an airline that outsources lower-paid work (ramp, cleaning, wheelchair service) reports a higher median wage, and so a lower ratio, than one that keeps that work in-house.</p>
+        <div class="am-wrap am-chart" id="ratio-chart" data-source="exec_pay"></div>
       </div>
+    </div>
+
+    <div class="am-card" id="exec-card">
+      <h2>CEO pay and the median employee</h2>
+      <p class="am-note" id="exec-note">From each company's latest proxy statement. CEO total is the Summary Compensation Table figure used for the SEC-required pay ratio. Compensation actually paid adds the change in value of the CEO's stock awards during the year, so it rises and falls with the share price. Median employee pay is the company's own figure for its middle-paid employee.</p>
+      <div class="am-tbl-box">
+        <table class="am-t" id="exec-table" data-source="exec_pay" data-row-key="ticker,fy">
+          <thead><tr>
+            <th class="l" data-field="ticker">Company</th><th class="l am-hn" data-field="ceo">CEO</th><th class="l" data-field="fy">Year</th>
+            <th data-field="ceo_total">CEO total pay</th><th data-field="cap">Comp. actually paid</th>
+            <th data-field="median">Median employee</th><th data-field="ratio">Pay ratio</th><th class="am-hn" data-field="ceo_chg">CEO pay vs prior year</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <ol class="am-foot" id="exec-foot"></ol>
     </div>
   </section>
 
@@ -454,7 +450,14 @@ window.dash = (function () {
     </div>
     <div class="am-card" id="tiles-card">
       <h2 id="tiles-h">Latest quarter</h2>
-      <p class="am-note">Changes are against the same quarter a year earlier.</p>
+      <p class="am-note" id="tiles-note">Changes are against the same quarter a year earlier.</p>
+      <div class="am-bar" style="margin-bottom:var(--cds-gap-sm)">
+        <span id="cbasis-chips">
+          <button class="am-chip" data-basis="lq" aria-pressed="true">Latest quarter</button>
+          <button class="am-chip" data-basis="ttm" aria-pressed="false">Trailing 12 months</button>
+          <button class="am-chip" data-basis="fy" aria-pressed="false">Last fiscal year</button>
+        </span>
+      </div>
       <div class="am-tiles" id="tiles">
         <div class="am-tile"><div class="k">Revenue</div><div class="v" id="t-rev">—</div><div class="d"><span id="t-rev-d">—</span> YoY</div></div>
         <div class="am-tile"><div class="k">Operating margin</div><div class="v" id="t-opm">—</div><div class="d" id="t-opm-d">—</div></div>
@@ -511,14 +514,15 @@ window.dash = (function () {
     </div>
   </section>
 
-  <!-- OPERATING CARRIERS (DOT) -->
+  <!-- UNIT COSTS & LABOR (DOT) -->
   <section class="am-page am-stack" id="opcarriers" hidden>
     <div class="am-bar">
       <span id="dgroup-chips" data-source="dot_carriers"></span>
       <span class="sp"></span>
       <span id="dbasis-chips">
-        <button class="am-chip" data-basis="ttm" aria-pressed="true">Trailing 12 months</button>
         <button class="am-chip" data-basis="lq" aria-pressed="false">Latest quarter</button>
+        <button class="am-chip" data-basis="ttm" aria-pressed="true">Trailing 12 months</button>
+        <button class="am-chip" data-basis="fy" aria-pressed="false">Last fiscal year</button>
       </span>
       <label class="am-chk"><input type="checkbox" id="dinactive"> Include carriers no longer reporting</label>
     </div>
@@ -568,6 +572,13 @@ window.dash = (function () {
       </div>
     </div>
 
+    <div class="am-card" id="workforce-card">
+      <h2>Workforce by employee group</h2>
+      <p class="am-note" id="workforce-note">DOT Schedule P-10 annual headcount. DOT's categories are broad: "Flight attendants &amp; passenger services" is its passenger/general services and administration group plus other flight personnel, where most carriers report flight attendants, and some carriers file the same work under different groups from year to year.</p>
+      <div class="am-legend" id="wf-legend"></div>
+      <div class="am-wrap am-chart" id="wf-chart" data-source="dot_annual"></div>
+    </div>
+
     <div class="am-card" id="dtrend-card">
       <h2 id="dtrend-h">Trend by carrier</h2>
       <p class="am-note" id="dtrend-note">Each point is a trailing four-quarter figure. All panels share one scale; the highlighted panel is the carrier you clicked.</p>
@@ -586,7 +597,7 @@ window.dash = (function () {
     </div>
   </section>
 
-  <!-- OPERATIONAL RELIABILITY -->
+  <!-- RELIABILITY -->
   <section class="am-page am-stack" id="reliability" hidden>
     <div class="am-bar">
       <span id="rel-view">
@@ -646,7 +657,7 @@ window.dash = (function () {
     </div>
   </section>
 
-  <!-- EQUITY MARKETS -->
+  <!-- MARKETS & FUEL -->
   <section class="am-page am-stack" id="markets" hidden>
     <div class="am-bar">
       <span id="mk-span">
@@ -702,9 +713,30 @@ window.dash = (function () {
       <div class="am-legend" id="tsr-legend"></div>
       <div class="am-wrap am-chart" id="tsr-chart" data-source="markets"></div>
     </div>
+
+    <div class="am-card" id="fuel-card">
+      <h2>Jet fuel price</h2>
+      <p class="am-note">Daily U.S. Gulf Coast jet fuel spot price (EIA, via FRED; the newest days are estimated from EIA's daily diesel price until EIA posts jet fuel, usually within a week), with the average price U.S. passenger airlines actually paid each month, including taxes, into-plane fees and hedging (DOT Form 41). Dollars per gallon.</p>
+      <div class="am-tiles" id="fuel-tiles" style="margin-bottom:var(--cds-gap-md)">
+        <div class="am-tile"><div class="k" id="ft-spot-k">Spot price</div><div class="v" id="ft-spot">—</div><div class="d" id="ft-spot-d">—</div></div>
+        <div class="am-tile"><div class="k">Year earlier</div><div class="v" id="ft-ya">—</div><div class="d" id="ft-ya-d">—</div></div>
+        <div class="am-tile"><div class="k" id="ft-paid-k">Airlines paid</div><div class="v" id="ft-paid">—</div><div class="d" id="ft-paid-d">—</div></div>
+      </div>
+      <div class="am-bar" style="margin-bottom:var(--cds-gap-sm)">
+        <span id="fuel-range">
+          <button class="am-chip" data-range="1y" aria-pressed="false">1 year</button>
+          <button class="am-chip" data-range="2y" aria-pressed="true">2 years</button>
+          <button class="am-chip" data-range="all" aria-pressed="false">Since 2022</button>
+        </span>
+        <span class="sp"></span>
+        <select class="am-sel" id="fuel-code" aria-label="Carrier paid price" data-source="dot_carriers"></select>
+      </div>
+      <div class="am-legend" id="fuel-legend"></div>
+      <div class="am-wrap am-chart" id="fuel-chart" data-source="fuel_spot dot_fuel"></div>
+    </div>
   </section>
 
-  <!-- PAY -->
+  <!-- COST OF LIVING -->
   <section class="am-page am-stack" id="pay" hidden>
     <div class="am-card" id="cpi-card">
       <h2>Consumer prices</h2>
@@ -784,42 +816,15 @@ window.dash = (function () {
       </ol>
     </div>
 
-    <div class="am-card" id="exec-card">
-      <h2>CEO pay and the median employee</h2>
-      <p class="am-note" id="exec-note">From each company's latest proxy statement. CEO total is the Summary Compensation Table figure used for the SEC-required pay ratio. Compensation actually paid adds the change in value of the CEO's stock awards during the year, so it rises and falls with the share price. Median employee pay is the company's own figure for its middle-paid employee.</p>
-      <div class="am-tbl-box">
-        <table class="am-t" id="exec-table" data-source="exec_pay" data-row-key="ticker,fy">
-          <thead><tr>
-            <th class="l" data-field="ticker">Company</th><th class="l am-hn" data-field="ceo">CEO</th><th class="l" data-field="fy">Year</th>
-            <th data-field="ceo_total">CEO total pay</th><th data-field="cap">Comp. actually paid</th>
-            <th data-field="median">Median employee</th><th data-field="ratio">Pay ratio</th><th class="am-hn" data-field="ceo_chg">CEO pay vs prior year</th>
-          </tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <ol class="am-foot" id="exec-foot"></ol>
-    </div>
 
-    <div class="am-card" id="ratio-card">
-      <h2>CEO pay ratio</h2>
-      <p class="am-note">How many years the median employee would need to work to earn what the CEO was paid in one. Read across carriers with care: an airline that outsources lower-paid work (ramp, cleaning, wheelchair service) reports a higher median wage, and so a lower ratio, than one that keeps that work in-house.</p>
-      <div class="am-wrap am-chart" id="ratio-chart" data-source="exec_pay"></div>
-    </div>
 
-    <div class="am-card" id="workforce-card">
-      <h2>Workforce by employee group</h2>
-      <p class="am-note" id="workforce-note">DOT Schedule P-10 annual headcount. DOT's categories are broad: "Flight attendants &amp; passenger services" is its passenger/general services and administration group plus other flight personnel, where most carriers report flight attendants, and some carriers file the same work under different groups from year to year.</p>
-      <div class="am-bar" style="margin-bottom:var(--cds-gap-sm)"><span id="pgroup-chips" data-source="dot_carriers"></span></div>
-      <div class="am-legend" id="wf-legend"></div>
-      <div class="am-wrap am-chart" id="wf-chart" data-source="dot_annual"></div>
-    </div>
   </section>
 
   <!-- BARGAINING -->
   <section class="am-page am-stack" id="labor" hidden>
     <div class="am-card" id="labor-sum-card">
       <h2>Union contracts</h2>
-      <p class="am-note" id="labor-note">Groups, unions, headcount and amendable dates come from each carrier's latest 10-K. Status is the most recent dated event from automatic sources: the unions' own websites (announcements and posted PDFs, read group by group), the airlines' newsrooms, the company's 10-Q and 10-K, and news headlines naming the carrier, the craft and a milestone. <b>Statuses are read automatically and can be wrong:</b> check the linked source before citing one. Hand-entered statuses say so.</p>
+      <p class="am-note" id="labor-note">Groups, unions, headcount and amendable dates come from each carrier's latest 10-K. Status is the most recent dated event from automatic sources: the unions' own websites (announcements and posted PDFs, read group by group), the airlines' newsrooms, the company's 10-Q and 10-K, and news headlines naming the carrier, the craft and a milestone. Which websites could be read on the last weekly check is on the Sources &amp; Notes tab. <b>Statuses are read automatically and can be wrong:</b> check the linked source before citing one. Hand-entered statuses say so.</p>
       <div class="am-tiles" id="labor-tiles">
         <div class="am-tile"><div class="k">Represented groups tracked</div><div class="v" id="lt-groups">—</div><div class="d" id="lt-groups-d">—</div></div>
         <div class="am-tile"><div class="k">Past amendable date</div><div class="v" id="lt-open">—</div><div class="d" id="lt-open-d">—</div></div>
@@ -854,16 +859,6 @@ window.dash = (function () {
       </div>
     </div>
 
-    <div class="am-card" id="usrc-card">
-      <h2>Union and company websites read</h2>
-      <p class="am-note">Checked weekly: union sites, plus each airline's own newsroom, where ratifications and tentative agreements are often announced. Sites that block automated reading, or don't publish in a readable form, show as unavailable; their news still reaches the tracker through headlines.</p>
-      <div class="am-tbl-box">
-        <table class="am-t" id="usrc-table" data-source="meta">
-          <thead><tr><th class="l">Site</th><th class="l">Read via</th><th>Items, past year</th><th>Groups it covers</th><th>Status events found</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </div>
 
   </section>
 
@@ -888,7 +883,7 @@ window.dash = (function () {
         <li><b>Quarters.</b> Where a filing reports only year-to-date amounts (every Q4, and all cash-flow items), the quarter is the year-to-date figure minus the prior year-to-date figure.</li>
         <li><b>Line items.</b> Revenue is total operating revenue. Labor is the salaries, wages and benefits line (us-gaap LaborAndRelatedExpense), which includes profit sharing for carriers that book it there. Fuel is aircraft fuel and related taxes. Returned to shareholders is cash paid for share repurchases plus dividends.</li>
         <li><b>Trailing 12 months</b> needs four consecutive reported quarters; carriers with a gap show a dash.</li>
-        <li><b>Last fiscal year</b> is the four quarters of each carrier's most recent fiscal year covered by a 10-K (every carrier covered uses the calendar year). CapEx uses the 10-K's full-year figure. Debt, cash, leverage and fleet age stay at the latest balance sheet whichever period is chosen.</li>
+        <li><b>Last fiscal year</b> is the four quarters of each carrier's most recent fiscal year covered by a 10-K (every carrier covered uses the calendar year). CapEx uses the 10-K's full-year figure. Debt, cash, leverage and fleet age stay at the latest balance sheet whichever period is chosen. On the Unit Costs &amp; Labor (DOT) tab, last fiscal year is the latest full calendar year of Form 41 reports, since DOT collects them by calendar year.</li>
         <li><b>Cash + ST investments</b> excludes undrawn credit lines, so it runs below the "total liquidity" carriers quote.</li>
         <li><b>Debt</b> is as each carrier tags it. Some include finance leases and some do not, so compare debt levels across carriers with care.</li>
         <li><b>Operating carriers (DOT Form 41).</b> Each airline certificate files its own reports with the Department of Transportation, published by BTS on TranStats. The dashboard uses Schedule P-1.2 (profit and loss), P-6 (salaries by employee group, benefits, fuel), P-1(a) (monthly employees) and T-100 (available seat miles, all services). Figures are summed across DOT reporting regions to a system total. Financial schedules run about one quarter behind SEC filings; BTS publishes Q3 2026 on December 17. The job checks for new DOT data weekly.</li>
@@ -912,6 +907,16 @@ window.dash = (function () {
             <th class="l" data-field="ticker">Ticker</th><th class="l" data-field="carrier">Carrier</th>
             <th class="l am-hn" data-field="group">Group</th><th class="l" data-field="status">Status</th><th class="l" data-field="note">Notes</th>
           </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="am-card" id="usrc-card">
+      <h2>Union and company websites read</h2>
+      <p class="am-note">Checked weekly: union sites, plus each airline's own newsroom, where ratifications and tentative agreements are often announced. Sites that block automated reading, or don't publish in a readable form, show as unavailable; their news still reaches the tracker through headlines.</p>
+      <div class="am-tbl-box">
+        <table class="am-t" id="usrc-table" data-source="meta">
+          <thead><tr><th class="l">Site</th><th class="l">Read via</th><th>Items, past year</th><th>Groups it covers</th><th>Status events found</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -1038,6 +1043,7 @@ dash.calc('peer', {
         ni_cum: cumOk ? cq.reduce((s, r) => s + num(r.ni), 0) : null,
         // EBITDAR, trailing 12 months: operating income + depreciation & amortization + aircraft rent
         ebitdar_ttm: ttmOk && t4.every((r) => num(r.da) !== null) ? opinc_ttm + t4.reduce((s, r) => s + num(r.da) + (num(r.rent) || 0), 0) : null,
+        ebitdar_fy: fyOk && f4.every((r) => num(r.da) !== null) ? opinc_fy + f4.reduce((s, r) => s + num(r.da) + (num(r.rent) || 0), 0) : null,
       };
     }).map((o) => {
       // leverage isn't meaningful when EBITDAR is near zero: analysts show "n/m" below about a 5% EBITDAR margin
@@ -1133,16 +1139,16 @@ dash.calc('dotq', {
 
 dash.calc('dotpeer', {
   title: 'DOT operating-carrier comparison',
-  description: 'One row per operating carrier: latest quarter and trailing four quarters of revenue, margin, salaries and benefits, unit costs per available seat mile, FTEs, labor cost per FTE, and salary shares by employee group.',
+  description: 'One row per operating carrier: latest quarter, trailing four quarters and last calendar year of revenue, margin, salaries and benefits, unit costs per available seat mile, FTEs, labor cost per FTE, and salary shares by employee group.',
   inputs: ['dot', 'dot_carriers'],
   fn: (dot, dot_carriers) => {
     const num = (v) => (v === null || v === undefined || v === '' ? null : Number(v));
     const dv = (a, b) => (a === null || b === null || !b ? null : a / b);
-    const nextQ = (q) => { let y = +q.slice(0, 4), m = +q.slice(5, 7) + 3; if (m > 12) { m -= 12; y += 1; } return y + '-' + String(m).padStart(2, '0'); };
     const prevQ = (q, n) => { let y = +q.slice(0, 4), m = +q.slice(5, 7) - 3 * n; while (m < 1) { m += 12; y -= 1; } return y + '-' + String(m).padStart(2, '0'); };
     const ok = (r) => !!r && ['rev', 'opex', 'comp'].every((k) => num(r[k]) !== null);
     const allLatest = d3.max(dot.filter(ok), (r) => r.quarter);
     const SAL = ['sal_flight', 'sal_maint', 'sal_traffic', 'sal_mgt', 'sal_other'];
+    const share = (arr) => { const t = arr.every((v) => v !== null) ? arr.reduce((a, b) => a + b, 0) : null; return arr.map((v) => (t ? v / t : null)); };
     return dot_carriers.map((c) => {
       const rs = dot.filter((r) => r.code === c.code);
       const m = new Map(rs.map((r) => [r.quarter, r]));
@@ -1150,27 +1156,45 @@ dash.calc('dotpeer', {
       const lq = done.length ? done[done.length - 1] : null;
       const L = lq ? m.get(lq) : {};
       const win = (end) => [3, 2, 1, 0].map((i) => m.get(prevQ(end, i)));
-      const t4 = lq ? win(lq) : [];
-      const p4 = lq ? win(prevQ(lq, 4)) : [];
       const full = (w, f) => w.length === 4 && w.every((r) => r && num(r[f]) !== null);
       const sum = (w, f) => (full(w, f) ? w.reduce((a, r) => a + num(r[f]), 0) : null);
-      const T = (f) => (t4.every(ok) ? sum(t4, f) : null);
-      const rev_ttm = T('rev'), opex_ttm = T('opex'), comp_ttm = T('comp'), fuel_ttm = T('fuel'), opinc_ttm = T('opinc'), asm_ttm = T('asm');
-      const rpm_ttm = T('rpm'), paxrev_ttm = T('pax_rev');
-      const fte_ttm = full(t4, 'fte') ? sum(t4, 'fte') / 4 : null;
-      const comp_prev = sum(p4, 'comp'), fte_prev = full(p4, 'fte') ? sum(p4, 'fte') / 4 : null;
+      // four-quarter figures for the window ending at `end`, keyed with suffix `sx` (ttm = latest four quarters, fy = last calendar year)
+      const year = (end, sx) => {
+        const w = end ? win(end) : [], pw = end ? win(prevQ(end, 4)) : [];
+        const T = (f) => (w.every(ok) ? sum(w, f) : null);
+        const rev = T('rev'), opex = T('opex'), comp = T('comp'), fuel = T('fuel'), opinc = T('opinc'), asm = T('asm'), rpm = T('rpm'), paxrev = T('pax_rev');
+        const fte = full(w, 'fte') ? sum(w, 'fte') / 4 : null;
+        const comp_prev = sum(pw, 'comp'), fte_prev = full(pw, 'fte') ? sum(pw, 'fte') / 4 : null;
+        const cf = comp !== null && fte ? (comp * 1e6) / fte : null;
+        const cf_prev = comp_prev !== null && fte_prev ? (comp_prev * 1e6) / fte_prev : null;
+        const o = {
+          rev, opm: dv(opinc, rev), comp, lopex: dv(comp, opex),
+          casm: asm ? dv(opex, asm) * 100 : null,
+          casmx: asm && fuel !== null && opex !== null ? dv(opex - fuel, asm) * 100 : null,
+          lcasm: asm ? dv(comp, asm) * 100 : null,
+          fte, comp_fte: cf, cfyoy: cf !== null && cf_prev ? cf / cf_prev - 1 : null,
+          asm_fte: asm && fte ? (asm * 1e3) / fte : null,
+          trasm: asm ? dv(rev, asm) * 100 : null, prasm: asm && paxrev !== null ? dv(paxrev, asm) * 100 : null,
+          lf: rpm !== null ? dv(rpm, asm) : null,
+        };
+        const out = {};
+        Object.keys(o).forEach((k) => { out[k + '_' + sx] = o[k]; });
+        share(SAL.map((f) => T(f))).forEach((v, i) => { out[SAL[i] + '_sh_' + sx] = v; });
+        return out;
+      };
       const ya = lq ? m.get(prevQ(lq, 4)) : null;
       const lqv = (f) => (lq ? num(L[f]) : null);
-      const cf_ttm = comp_ttm !== null && fte_ttm ? (comp_ttm * 1e6) / fte_ttm : null;
-      const cf_prev = comp_prev !== null && fte_prev ? (comp_prev * 1e6) / fte_prev : null;
       const cf_lq = lqv('comp') !== null && lqv('fte') ? (lqv('comp') * 4e6) / lqv('fte') : null;
       const cf_ya = ya && num(ya.comp) !== null && num(ya.fte) ? (num(ya.comp) * 4e6) / num(ya.fte) : null;
-      const salT = SAL.map((f) => T(f)), salL = SAL.map((f) => lqv(f));
-      const share = (arr) => { const t = arr.every((v) => v !== null) ? arr.reduce((a, b) => a + b, 0) : null; return arr.map((v) => (t ? v / t : null)); };
-      const sT = share(salT), sL = share(salL);
+      const sL = share(SAL.map((f) => lqv(f)));
+      // last calendar year: Form 41 is filed on a calendar-year basis for every carrier
+      const fyq = done.filter((q) => q.slice(5, 7) === '12').pop() || null;
+      const fyRow = year(fyq, 'fy');
+      const fyOk = fyRow.rev_fy !== null;
       const row = {
         code: c.code, name: c.name, parent: c.parent, group: c.group, role: c.role, note: c.note || '',
         latest: lq, current: !!lq && lq === allLatest && c.active !== false,
+        fy_q: fyOk ? fyq : null, fy_label: fyOk ? 'FY ' + fyq.slice(0, 4) : null,
         spike: (() => {
           // A quarter whose labor cost jumps well above the carrier's typical level (a ratification
           // payment, retro pay or a one-time accrual) distorts trailing figures; flag it.
@@ -1184,24 +1208,24 @@ dash.calc('dotpeer', {
           }
           return null;
         })(),
-        rev_lq: lqv('rev'), rev_ttm,
-        opm_lq: dv(lqv('opinc'), lqv('rev')), opm_ttm: dv(opinc_ttm, rev_ttm),
-        comp_lq: lqv('comp'), comp_ttm,
-        lopex_lq: dv(lqv('comp'), lqv('opex')), lopex_ttm: dv(comp_ttm, opex_ttm),
-        casm_lq: lqv('asm') ? dv(lqv('opex'), lqv('asm')) * 100 : null, casm_ttm: asm_ttm ? dv(opex_ttm, asm_ttm) * 100 : null,
+        rev_lq: lqv('rev'),
+        opm_lq: dv(lqv('opinc'), lqv('rev')),
+        comp_lq: lqv('comp'),
+        lopex_lq: dv(lqv('comp'), lqv('opex')),
+        casm_lq: lqv('asm') ? dv(lqv('opex'), lqv('asm')) * 100 : null,
         casmx_lq: lqv('asm') && lqv('fuel') !== null ? dv(lqv('opex') - lqv('fuel'), lqv('asm')) * 100 : null,
-        casmx_ttm: asm_ttm && fuel_ttm !== null && opex_ttm !== null ? dv(opex_ttm - fuel_ttm, asm_ttm) * 100 : null,
-        lcasm_lq: lqv('asm') ? dv(lqv('comp'), lqv('asm')) * 100 : null, lcasm_ttm: asm_ttm ? dv(comp_ttm, asm_ttm) * 100 : null,
-        fte_lq: lqv('fte'), fte_ttm,
-        comp_fte_lq: cf_lq, comp_fte_ttm: cf_ttm,
-        cfyoy_lq: cf_lq !== null && cf_ya ? cf_lq / cf_ya - 1 : null, cfyoy_ttm: cf_ttm !== null && cf_prev ? cf_ttm / cf_prev - 1 : null,
+        lcasm_lq: lqv('asm') ? dv(lqv('comp'), lqv('asm')) * 100 : null,
+        fte_lq: lqv('fte'),
+        comp_fte_lq: cf_lq,
+        cfyoy_lq: cf_lq !== null && cf_ya ? cf_lq / cf_ya - 1 : null,
         asm_fte_lq: lqv('asm') && lqv('fte') ? (lqv('asm') * 4e3) / lqv('fte') : null,
-        asm_fte_ttm: asm_ttm && fte_ttm ? (asm_ttm * 1e3) / fte_ttm : null,
-        trasm_lq: lqv('asm') ? dv(lqv('rev'), lqv('asm')) * 100 : null, trasm_ttm: asm_ttm ? dv(rev_ttm, asm_ttm) * 100 : null,
-        prasm_lq: lqv('asm') ? dv(lqv('pax_rev'), lqv('asm')) * 100 : null, prasm_ttm: asm_ttm && paxrev_ttm !== null ? dv(paxrev_ttm, asm_ttm) * 100 : null,
-        lf_lq: dv(lqv('rpm'), lqv('asm')), lf_ttm: rpm_ttm !== null ? dv(rpm_ttm, asm_ttm) : null,
+        trasm_lq: lqv('asm') ? dv(lqv('rev'), lqv('asm')) * 100 : null,
+        prasm_lq: lqv('asm') ? dv(lqv('pax_rev'), lqv('asm')) * 100 : null,
+        lf_lq: dv(lqv('rpm'), lqv('asm')),
+        ...year(lq, 'ttm'),
+        ...fyRow,
       };
-      SAL.forEach((f, i) => { row[f + '_sh_ttm'] = sT[i]; row[f + '_sh_lq'] = sL[i]; });
+      SAL.forEach((f, i) => { row[f + '_sh_lq'] = sL[i]; });
       return row;
     });
   },
@@ -1272,10 +1296,9 @@ dash.calc('dotpeer', {
     if (link) { try { window.goatcounter && window.goatcounter.count && window.goatcounter.count({ path: '/tab/' + id, title: 'Tab: ' + id }); } catch (e) {} }
   }
   tabs.forEach((b) => b.addEventListener('click', () => showTab(b.dataset.tab, true)));
-  document.getElementById('all-news').addEventListener('click', () => showTab('news', true));
 
   // controls
-  root.querySelectorAll('#basis-chips .am-chip').forEach((b) => b.addEventListener('click', () => dash.setParams({ basis: b.dataset.basis })));
+  root.querySelectorAll('#basis-chips .am-chip, #cbasis-chips .am-chip').forEach((b) => b.addEventListener('click', () => dash.setParams({ basis: b.dataset.basis })));
   const inact = document.getElementById('inactive');
   inact.addEventListener('change', () => dash.setParams({ inactive: inact.checked }));
   const carSel = document.getElementById('car-sel');
@@ -1684,10 +1707,11 @@ dash.calc('dotpeer', {
     const tbl = (head, body) => { const tb = el('table'); const tr = el('tr'); head.forEach(([h, c]) => tr.append(el('th', c || '', h))); const th = el('thead'); th.append(tr); const bd = el('tbody');
       body.forEach((r) => { const x = el('tr'); r.forEach(([v, c]) => x.append(el('td', c || '', v))); bd.append(x); }); tb.append(th, bd); return tb; };
     const L = el('div');
-    L.append(el('h2', '', 'Trailing 12 months'), tbl([['Measure', 'l'], ['Value']], [
-      [['Revenue', 'l'], [fmtM(pr.rev_ttm)]], [['Operating margin', 'l'], [pct(pr.opm_ttm), neg(pr.opm_ttm)]], [['Net income', 'l'], [fmtM(pr.ni_ttm), neg(pr.ni_ttm)]],
-      [['EBITDAR', 'l'], [fmtM(pr.ebitdar_ttm), neg(pr.ebitdar_ttm)]], [['Loyalty revenue as % of total', 'l'], [pct(pr.loy_ttm)]], [['Labor cost', 'l'], [fmtM(pr.labor_ttm)]], [['Labor cost vs prior 12 months', 'l'], [sgn(pr.lyoy_ttm)]], [['Labor as % of operating expense', 'l'], [pct(pr.lopex_ttm)]],
-      [['Returned to shareholders (buybacks + dividends)', 'l'], [fmtM(pr.ret_ttm)]], [['Returned to shareholders ÷ labor cost', 'l'], [pct(pr.rl_ttm)]], [['Capital spending (CapEx)', 'l'], [fmtM(pr.capex_ttm)]],
+    const ys = P.basis === 'fy' && pr.fy_label ? 'fy' : 'ttm', yv = (f) => pr[f + '_' + ys];
+    L.append(el('h2', '', ys === 'fy' ? 'Fiscal year ' + pr.fy_label.slice(3) : 'Trailing 12 months'), tbl([['Measure', 'l'], ['Value']], [
+      [['Revenue', 'l'], [fmtM(yv('rev'))]], [['Operating margin', 'l'], [pct(yv('opm')), neg(yv('opm'))]], [['Net income', 'l'], [fmtM(yv('ni')), neg(yv('ni'))]],
+      [['EBITDAR', 'l'], [fmtM(yv('ebitdar')), neg(yv('ebitdar'))]], [['Loyalty revenue as % of total', 'l'], [pct(yv('loy'))]], [['Labor cost', 'l'], [fmtM(yv('labor'))]], [[ys === 'fy' ? 'Labor cost vs prior fiscal year' : 'Labor cost vs prior 12 months', 'l'], [sgn(yv('lyoy'))]], [['Labor as % of operating expense', 'l'], [pct(yv('lopex'))]],
+      [['Returned to shareholders (buybacks + dividends)', 'l'], [fmtM(yv('ret'))]], [['Returned to shareholders ÷ labor cost', 'l'], [pct(yv('rl'))]], [['Capital spending (CapEx)', 'l'], [fmtM(yv('capex'))]],
     ]));
     const R = el('div');
     const act = peer.data.filter((r) => r.active);
@@ -1732,7 +1756,7 @@ dash.calc('dotpeer', {
     const fmtAx = (v) => (Math.abs(v) >= 1000 ? '$' + d3.format(',.0f')(v / 1000) + 'B' : '$' + d3.format(',.0f')(v) + 'M');
     const qlab = (q) => ql(q).replace(' 20', " '");
 
-    // market figures (same rules as the Equity Markets tab)
+    // market figures (same rules as the Markets & Fuel tab)
     const md = dash.data('markets'), MT = md.status === 'ok' && md.data[0] && md.data[0].tickers ? md.data[0].tickers : null;
     const tsrSince = (tk, start) => { const h = MT && MT[tk]; if (!h || !h.eod.length) return null; const b = mkBase(h.eod, start); if (b[0] > start) return null; const n = mkNow(h); return n ? n.adj / b[2] - 1 : null; };
     const mkt = (() => {
@@ -2305,7 +2329,7 @@ dash.calc('dotpeer', {
   }
 
   // ---------- family budget (EPI Family Budget Calculator) ----------
-  // data/fbc.json (metro areas, hubs and bases) loads the first time the Pay & Prices tab opens;
+  // data/fbc.json (metro areas, hubs and bases) loads the first time the Cost of Living tab opens;
   // data/fbc_county.json (counties) loads only when someone uses the search box.
   const FBC = { d: null, loading: false, failed: false, county: false, cLoading: false, byKey: new Map(), opts: new Map(), bases: [] };
   const FBC_PARTS = [['housing', 'Housing'], ['food', 'Food'], ['childcare', 'Child care'], ['transportation', 'Transportation'], ['healthcare', 'Health care'], ['other', 'Other necessities'], ['taxes', 'Taxes']];
@@ -2912,7 +2936,7 @@ dash.calc('dotpeer', {
     enrichPeer(peer, fin);
 
     // controls
-    root.querySelectorAll('#basis-chips .am-chip').forEach((b) => b.setAttribute('aria-pressed', String((P.basis || 'lq') === b.dataset.basis)));
+    root.querySelectorAll('#basis-chips .am-chip, #cbasis-chips .am-chip').forEach((b) => b.setAttribute('aria-pressed', String((P.basis || 'lq') === b.dataset.basis)));
     inact.checked = P.inactive === true;
     const gc = document.getElementById('group-chips');
     if (car.status === 'ok') {
@@ -2928,7 +2952,7 @@ dash.calc('dotpeer', {
     }
 
     const allQ = fin.status === 'ok' ? [...new Set(fin.data.map((r) => r.quarter))].sort() : [];
-    const basis = P.dbasis === 'lq' ? 'lq' : 'ttm';  // DOT tab
+    const basis = P.dbasis === 'lq' || P.dbasis === 'fy' ? P.dbasis : 'ttm';  // DOT tab
     const pbasis = P.basis === 'ttm' || P.basis === 'fy' ? P.basis : 'lq';  // peer comparison
 
     // ---------- operating carriers (DOT) ----------
@@ -2983,7 +3007,7 @@ dash.calc('dotpeer', {
           if (r.note) nm.title = r.note;
           if (r.note || r.spike) { const f = document.createElement('sup'); f.textContent = ' ' + (fnIndex.get(r.code) || ''); f.style.color = 'var(--color-fg-muted)'; nm.append(f); }
           const op = r[k('opm')];
-          tr.append(nm, td(r.parent === 'Private' ? 'Private' : r.parent, 'l am-hn'), td(r.latest ? ql(r.latest) : '—', 'l'),
+          tr.append(nm, td(r.parent === 'Private' ? 'Private' : r.parent, 'l am-hn'), td(basis === 'fy' ? r.fy_label || '—' : r.latest ? ql(r.latest) : '—', 'l'),
             withV(td(fmtM(r[k('rev')])), r[k('rev')]), td(pct(op), op < 0 ? 'am-neg' : ''), withV(td(fmtM(r[k('comp')])), r[k('comp')]), td(pct(r[k('lopex')])),
             ...[['casm', ''], ['casmx', 'am-hn']].map(([f, c]) => flagged(td(fmtC(r[k(f)]), c), r)), td(fmtC(r[k('lcasm')])),
             ...[['trasm', ''], ['prasm', 'am-hn']].map(([f, c]) => flagged(td(fmtC(r[k(f)]), c), r)), td(pct(r[k('lf')])), td(fmtN(r[k('fte')])),
@@ -3043,9 +3067,9 @@ dash.calc('dotpeer', {
       }
     }
 
-    // ---------- fuel (peer page) ----------
+    // ---------- fuel (Markets & Fuel tab) ----------
     const fspot = dash.data('fuel_spot'), fpaid = dash.data('fuelpaid');
-    if (tab === 'peers' && fspot.status === 'ok' && fpaid.status === 'ok' && fspot.data.length) {
+    if (tab === 'markets' && fspot.status === 'ok' && fpaid.status === 'ok' && fspot.data.length) {
       const range = P.fuelrange || '2y';
       root.querySelectorAll('#fuel-range .am-chip').forEach((b) => b.setAttribute('aria-pressed', String(range === b.dataset.range)));
       const lastD = fspot.data[fspot.data.length - 1].date;
@@ -3144,7 +3168,11 @@ dash.calc('dotpeer', {
         tr.append(td(r.carrier, 'l'), td(r.group, 'l wg'), td(r.union || '—', 'l am-hn wu'), td(r.employees ? d3.format(',')(r.employees) : '—'), td(amText(r), 'l'), st, td(r.status_changed ? dfmt(r.status_changed) : '—'), src);
         return tr;
       }));
-      // union sites
+    }
+
+    // ---------- union and company websites read (Sources & Notes tab) ----------
+    if (tab === 'notes' && lg.status === 'ok') {
+      const all = lg.data;
       const meta0 = dash.data('meta');
       const rep = meta0.status === 'ok' && meta0.data[0] && meta0.data[0].labor ? (meta0.data[0].labor.union_sites || []) : [];
       const evCount = new Map();
@@ -3198,7 +3226,11 @@ dash.calc('dotpeer', {
         document.getElementById('cpi-yoy-d').textContent = ya ? ymLabel(ya.ym) + ' to ' + ymLabel(L.ym) : '—';
         cpiChart(document.getElementById('cpi-chart'), S, idxName);
       }
-      const ex = dash.data('exec_pay'), ann = dash.data('dot_annual');
+    }
+
+    // ---------- CEO pay (Company Financials tab) ----------
+    if (tab === 'peers') {
+      const ex = dash.data('exec_pay');
       if (ex.status === 'ok') {
         const names = new Map((car.status === 'ok' ? car.data : []).map((c) => [c.ticker, c.carrier]));
         const latest = d3.rollups(ex.data.filter((r) => !bad(r.ratio)), (v) => v.sort((a, b) => b.fy - a.fy), (r) => r.ticker)
@@ -3225,15 +3257,15 @@ dash.calc('dotpeer', {
         hbar(document.getElementById('ratio-chart'), latest.map((r) => Object.assign({}, r, { group: '' })), (r) => r.ratio, (v) => d3.format(',.0f')(v) + ' : 1',
           (r) => [{ name: 'CEO total pay', value: fmtMM(r.ceo_total) }, { name: 'Median employee', value: fmtD(r.median) }, { name: 'Fiscal year', value: String(r.fy) }]);
       }
+    }
+
+    // ---------- workforce by employee group (DOT tab; follows that tab's carrier-group and inactive filters) ----------
+    if (tab === 'opcarriers') {
+      const ann = dash.data('dot_annual');
       if (ann.status === 'ok' && dcar.status === 'ok') {
         const info = new Map(dcar.data.map((c) => [c.code, c]));
-        const groups = ['All', ...new Set(dcar.data.map((c) => c.group))];
-        document.getElementById('pgroup-chips').replaceChildren(...groups.map((g) => {
-          const b = document.createElement('button'); b.className = 'am-chip'; b.textContent = g === 'All' ? 'All carriers' : g; b.style.marginRight = '6px';
-          b.setAttribute('aria-pressed', String((P.pgroup || 'All') === g)); b.addEventListener('click', () => dash.setParams({ pgroup: g })); return b;
-        }));
         const cur = new Set((dpeer.status === 'ok' ? dpeer.data : []).filter((r) => r.current).map((r) => r.code));
-        const okC = (c) => info.has(c) && cur.has(c) && (!P.pgroup || P.pgroup === 'All' || info.get(c).group === P.pgroup);
+        const okC = (c) => info.has(c) && (P.dinactive === true || cur.has(c)) && (!P.dgroup || P.dgroup === 'All' || info.get(c).group === P.dgroup);
         const byC = d3.group(ann.data, (r) => r.code);
         const hy = d3.max(ann.data.filter((r) => r.h_total), (r) => r.year);
         const wrows = [...byC].filter(([c]) => okC(c)).map(([c, v]) => {
@@ -3322,8 +3354,6 @@ dash.calc('dotpeer', {
       if (peer.status === 'ok') returnsChart(rc, visiblePeers(peer.data, P));
       else if (peer.status === 'error') fail(rc);
 
-      // mini news
-      if (nws.status === 'ok') newsItems(document.getElementById('news-mini'), nws.data.slice().sort((a, b) => (a.date < b.date ? 1 : -1)).filter((r) => r.kind !== 'Upcoming'), 4);
     }
 
     if (tab === 'carrier' && fin.status === 'ok' && qtr.status === 'ok' && peer.status === 'ok' && car.status === 'ok') {
@@ -3334,18 +3364,44 @@ dash.calc('dotpeer', {
       cs.textContent = (c.status && c.status !== 'Active' ? c.status + '. ' : '') + (c.note || '');
       const rows = fin.data.filter((r) => r.ticker === t).sort((a, b) => (a.quarter < b.quarter ? -1 : 1));
       const q = pr.latest;
-      document.getElementById('tiles-h').textContent = q ? 'Latest quarter: ' + ql(q) : 'Latest quarter';
-      const w = q ? 'ticker=' + encodeURIComponent(t) + '&quarter=' + encodeURIComponent(q) : null;
-      const f = rows.find((r) => r.quarter === q) || {};
-      const qr = qtr.data.find((r) => r.ticker === t && r.quarter === q) || {};
-      const S2 = (id, src, field, txt) => setMark(document.getElementById(id), src, field, w, txt);
-      S2('t-rev', 'financials', 'rev', fmtM(f.rev)); S2('t-rev-d', 'qtr', 'rev_yoy', sgn(qr.rev_yoy));
-      S2('t-opm', 'qtr', 'op_margin', pct(qr.op_margin)); S2('t-opm-d', 'qtr', 'opm_chg', pts(qr.opm_chg));
-      S2('t-lab', 'financials', 'labor', fmtM(f.labor)); S2('t-lab-d', 'qtr', 'labor_yoy', sgn(qr.labor_yoy));
-      S2('t-lpo', 'qtr', 'labor_pct_opex', pct(qr.labor_pct_opex)); S2('t-lpo-d', 'qtr', 'lopex_chg', pts(qr.lopex_chg));
-      S2('t-fpo', 'qtr', 'fuel_pct_opex', pct(qr.fuel_pct_opex)); S2('t-fpo-d', 'qtr', 'fuel_chg', pts(qr.fuel_chg));
-      S2('t-ret', 'qtr', 'returns', fmtM(qr.returns));
-      document.getElementById('t-opm').classList.toggle('am-neg', num(qr.op_margin) < 0);
+      if (pbasis === 'lq') {
+        document.getElementById('tiles-h').textContent = q ? 'Latest quarter: ' + ql(q) : 'Latest quarter';
+        document.getElementById('tiles-note').textContent = 'Changes are against the same quarter a year earlier.';
+        const w = q ? 'ticker=' + encodeURIComponent(t) + '&quarter=' + encodeURIComponent(q) : null;
+        const f = rows.find((r) => r.quarter === q) || {};
+        const qr = qtr.data.find((r) => r.ticker === t && r.quarter === q) || {};
+        const S2 = (id, src, field, txt) => setMark(document.getElementById(id), src, field, w, txt);
+        S2('t-rev', 'financials', 'rev', fmtM(f.rev)); S2('t-rev-d', 'qtr', 'rev_yoy', sgn(qr.rev_yoy));
+        S2('t-opm', 'qtr', 'op_margin', pct(qr.op_margin)); S2('t-opm-d', 'qtr', 'opm_chg', pts(qr.opm_chg));
+        S2('t-lab', 'financials', 'labor', fmtM(f.labor)); S2('t-lab-d', 'qtr', 'labor_yoy', sgn(qr.labor_yoy));
+        S2('t-lpo', 'qtr', 'labor_pct_opex', pct(qr.labor_pct_opex)); S2('t-lpo-d', 'qtr', 'lopex_chg', pts(qr.lopex_chg));
+        S2('t-fpo', 'qtr', 'fuel_pct_opex', pct(qr.fuel_pct_opex)); S2('t-fpo-d', 'qtr', 'fuel_chg', pts(qr.fuel_chg));
+        S2('t-ret', 'qtr', 'returns', fmtM(qr.returns));
+        document.getElementById('t-opm').classList.toggle('am-neg', num(qr.op_margin) < 0);
+      } else {
+        // trailing 12 months or last fiscal year, each against the four quarters before it
+        const end = pbasis === 'fy' ? pr.fy_q : (pr['rev_ttm'] !== null ? q : null);
+        const back = (qq, n) => { let y = +qq.slice(0, 4), mo = +qq.slice(5, 7) - 3 * n; while (mo < 1) { mo += 12; y -= 1; } return y + '-' + String(mo).padStart(2, '0'); };
+        const W = (e) => {
+          const rs = e ? [3, 2, 1, 0].map((i) => rows.find((r) => r.quarter === back(e, i))) : [];
+          const S = (fl) => (rs.length === 4 && rs.every((r) => r && num(r[fl]) !== null) ? rs.reduce((a, r) => a + num(r[fl]), 0) : null);
+          return { rev: S('rev'), opex: S('opex'), labor: S('labor'), fuel: S('fuel'), opinc: S('opinc') };
+        };
+        const A = W(end), B = end ? W(back(end, 4)) : W(null);
+        const dv2 = (a, b) => (a === null || b === null || !b ? null : a / b), dd = (a, b) => (a === null || b === null ? null : a - b);
+        const opmA = dv2(A.opinc, A.rev), opmB = dv2(B.opinc, B.rev), lpA = dv2(A.labor, A.opex), lpB = dv2(B.labor, B.opex), fpA = dv2(A.fuel, A.opex), fpB = dv2(B.fuel, B.opex);
+        document.getElementById('tiles-h').textContent = pbasis === 'fy' ? (pr.fy_label ? 'Fiscal year ' + pr.fy_label.slice(3) : 'Last fiscal year') : (end ? 'Trailing 12 months through ' + ql(end) : 'Trailing 12 months');
+        document.getElementById('tiles-note').textContent = pbasis === 'fy' ? 'Changes are against the fiscal year before.' : 'Changes are against the 12 months before.';
+        const w = 'ticker=' + encodeURIComponent(t);
+        const S2 = (id, field, txt) => setMark(document.getElementById(id), 'peer', field, w, txt);
+        S2('t-rev', 'rev_' + pbasis, fmtM(A.rev)); S2('t-rev-d', 'rev_' + pbasis, sgn(dv2(A.rev, B.rev) === null ? null : A.rev / B.rev - 1));
+        S2('t-opm', 'opm_' + pbasis, pct(opmA)); S2('t-opm-d', 'opm_' + pbasis, pts(dd(opmA, opmB)));
+        S2('t-lab', 'labor_' + pbasis, fmtM(A.labor)); S2('t-lab-d', 'lyoy_' + pbasis, sgn(pr['lyoy_' + pbasis]));
+        S2('t-lpo', 'lopex_' + pbasis, pct(lpA)); S2('t-lpo-d', 'lopex_' + pbasis, pts(dd(lpA, lpB)));
+        S2('t-fpo', 'lopex_' + pbasis, pct(fpA)); S2('t-fpo-d', 'lopex_' + pbasis, pts(dd(fpA, fpB)));
+        S2('t-ret', 'ret_' + pbasis, fmtM(pr['ret_' + pbasis]));
+        document.getElementById('t-opm').classList.toggle('am-neg', opmA !== null && opmA < 0);
+      }
       costChart(document.getElementById('det-chart'), rows.filter((r) => num(r.opex) !== null));
       const rv = revRows(t);
       document.getElementById('revmix-card').hidden = false;
