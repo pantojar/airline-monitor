@@ -159,6 +159,23 @@ def flow_q(cf, concept, QE):
             if p is not None:
                 out[E] = f["val"] - p["val"]
                 break
+    # a quarter tagged only inside a later year-to-date figure (Allegiant's Q1 2026 interest appears only in its
+    # six-month total): the next quarter's year-to-date less that quarter, less any year-to-date before this one
+    for i, E in enumerate(QE[:-1]):
+        if E in out:
+            continue
+        N = QE[i + 1]
+        qn = next((f for f in fs if f["end"] == N and 80 < days(f["start"], f["end"]) < 100), None)
+        if qn is None:
+            continue
+        for f in (g for g in fs if g["end"] == N and 170 < days(g["start"], g["end"]) < 380):
+            if 80 < days(f["start"], E) < 100:  # this quarter opens the year-to-date
+                out[E] = f["val"] - qn["val"]
+                break
+            p = next((g for g in fs if i > 0 and g["end"] == QE[i - 1] and g["start"] == f["start"]), None)
+            if p is not None:
+                out[E] = f["val"] - qn["val"] - p["val"]
+                break
     return out
 
 
@@ -282,6 +299,10 @@ def extract(cf, QE):
     # over at different times, so the two are pooled (a Q4 derived from year-to-date figures works across the
     # switch); narrower elements only fill quarters still empty
     out["intexp"] = pick(cf, [("InterestExpenseNonoperating", "InterestExpense"), "InterestExpenseDebt", "InterestAndDebtExpense"], flow_q, QE)
+    # Delta reports interest only net of interest income ("interest expense, net"); used only for a filer that
+    # tags no gross interest expense at all, so one carrier's series never mixes the two
+    if not out["intexp"]:
+        out["intexp"] = {k: -v for k, v in flow_q(cf, "InterestIncomeExpenseNonoperatingNet", QE).items()}
     out["pretax"] = pick(cf, ["IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
                               "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
                               "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic"], flow_q, QE)
@@ -292,7 +313,7 @@ def extract(cf, QE):
     out["equity"] = pick(cf, ["StockholdersEquity", "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"], inst_q, QE)
     out["cur_assets"] = pick(cf, ["AssetsCurrent"], inst_q, QE)
     out["cur_liab"] = pick(cf, ["LiabilitiesCurrent"], inst_q, QE)
-    out["recv"] = pick(cf, ["AccountsReceivableNetCurrent", "ReceivablesNetCurrent", "AccountsNotesAndLoansReceivableNetCurrent"], inst_q, QE)
+    out["recv"] = pick(cf, ["AccountsReceivableNetCurrent", "ReceivablesNetCurrent", "AccountsAndOtherReceivablesNetCurrent", "AccountsNotesAndLoansReceivableNetCurrent"], inst_q, QE)
     # diluted EPS: quarters as filed; a Q4 is the 10-K year less nine months, which is close but not exact because
     # the share count changes, so fiscal year-end rows also carry the 10-K's own full-year figure
     EPS = ["EarningsPerShareDiluted", "EarningsPerShareBasicAndDiluted"]
