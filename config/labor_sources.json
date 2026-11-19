@@ -9,6 +9,7 @@
  {"name": "Allied Pilots Association", "url": "https://www.alliedpilots.org", "unions": ["\\bAPA\\b", "Allied Pilots"], "carriers": ["AAL"]},
  {"name": "SWAPA", "url": "https://www.swapa.org", "unions": ["SWAPA"], "carriers": ["LUV"], "list": ["https://www.swapa.org/news/"], "link": "swapa\\.org/news/[^?#]+"},
  {"name": "Teamsters", "url": "https://teamster.org", "unions": ["\\bIBT\\b", "Teamsters"], "carriers": ["UAL", "ALK", "ULCC", "ALGT", "RJET", "LUV", "AAL"]},
+ {"name": "Teamsters Airline Division", "url": "https://teamster.org/division-news/airline-division/", "unions": ["\\bIBT\\b", "Teamsters"], "carriers": ["UAL", "ALK", "ULCC", "ALGT", "RJET", "LUV", "AAL"], "list": ["https://teamster.org/division-news/airline-division/"], "link": "teamster\\.org/20\\d\\d/\\d\\d/[a-z0-9-]+/?$", "all_articles": true},
  {"name": "TWU", "url": "https://www.twu.org", "names": {"AAL": "TWU-IAM|TechOps Association"}, "unions": ["\\bTWU\\b", "Transport Workers"], "carriers": ["LUV", "AAL", "JBLU", "ALK", "ULCC", "RJET", "ALGT"]},
  {"name": "TWU Local 556", "url": "https://www.twu556.org", "unions": ["\\bTWU\\b", "Transport Workers"], "carriers": ["LUV"]},
  {"name": "TWU Local 555", "url": "https://www.twu555.org", "unions": ["\\bTWU\\b", "Transport Workers"], "carriers": ["LUV"]},

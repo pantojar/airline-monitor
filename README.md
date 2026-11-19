@@ -48,6 +48,8 @@ A site that has neither, but has a news page listing articles, also needs `"list
 {"name": "Frontier flight attendants negotiations", "url": "https://example.org", "carriers": ["ULCC"], "craft": "flight att"}
 ```
 
+A news page that lists only airline labor news (the Teamsters Airline Division page, say) can add `"all_articles": true`, so every article on it is read, not only those whose headline contains a bargaining word ("Teamsters Land Industry-Leading Deal at United Airlines" has none).
+
 The **Union and company websites read** table on the Sources & Notes tab shows, after each weekly run, whether each site could be read and, if not, why.
 
 ## Settings

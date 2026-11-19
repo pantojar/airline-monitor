@@ -151,7 +151,7 @@ def _err(e):
 
 MONTHS = {m: i for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"], 1)}
 DATE_RE = re.compile(r"\b(?:(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.? (\d{1,2}),? (20\d\d)"
-                     r"|(\d{1,2})/(\d{1,2})/(20\d\d)|(20\d\d)-(\d\d)-(\d\d))\b", re.I)
+                     r"|(\d{1,2})/(\d{1,2})/(20\d\d)|(20\d\d)-(\d\d)-(\d\d)|(20\d\d)\.(\d\d)\.(\d\d))\b", re.I)
 
 
 def find_date(s):
@@ -163,7 +163,9 @@ def find_date(s):
             return dt.date(int(m.group(3)), MONTHS[m.group(1)[:3].lower()], int(m.group(2))).isoformat()
         if m.group(4):
             return dt.date(int(m.group(6)), int(m.group(4)), int(m.group(5))).isoformat()
-        return dt.date(int(m.group(7)), int(m.group(8)), int(m.group(9))).isoformat()
+        if m.group(7):
+            return dt.date(int(m.group(7)), int(m.group(8)), int(m.group(9))).isoformat()
+        return dt.date(int(m.group(10)), int(m.group(11)), int(m.group(12))).isoformat()  # 2026.11.06 (Teamsters)
     except ValueError:
         return None
 
@@ -448,7 +450,9 @@ def collect(root, groups, ua, aliases, since_days=400, budget_s=600):
                 elif c and (c.get("skipped") or c.get("error")):
                     continue
                 else:
-                    if not (ANNOUNCE_RE.search(it["title"]) and (len(site["carriers"]) == 1 or AIRLINE_WORDS.search(it["title"]))) \
+                    # "all_articles": a listing that is already airline labor news only (the Teamsters Airline
+                    # Division page), where headlines like "...Land Industry-Leading Deal at United" carry no keyword
+                    if not (site.get("all_articles") or (ANNOUNCE_RE.search(it["title"]) and (len(site["carriers"]) == 1 or AIRLINE_WORDS.search(it["title"])))) \
                             or (site.get("company") and not LABOR_WORDS.search(it["title"])):
                         cache[key] = {"date": it["date"] or dt.date.today().isoformat(), "skipped": True}
                         continue
@@ -505,7 +509,11 @@ def collect(root, groups, ua, aliases, since_days=400, budget_s=600):
     with open(cache_path, "w", encoding="utf-8") as fh:
         json.dump(cache, fh, separators=(",", ":"))
     for k in found:
-        found[k].sort(key=lambda e: e["date"], reverse=True)
+        # the same article can reach a group from two sources (the Teamsters site feed and its Airline Division page)
+        uniq = {}
+        for e in found[k]:
+            uniq.setdefault((e["url"].rstrip("/"), e["status"]), e)
+        found[k] = sorted(uniq.values(), key=lambda e: e["date"], reverse=True)
     return found, report
 
 
