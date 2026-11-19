@@ -1,0 +1,24 @@
+name: diag
+on: {push: {branches: [diag-xbrl]}}
+jobs:
+  d:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - env: {SEC_CONTACT: "${{ vars.SEC_CONTACT }}"}
+        run: |
+          python3 - <<'PY'
+          import json,os,re,urllib.request,time
+          ua="AirlineFinancialMonitor "+os.environ.get("SEC_CONTACT","")
+          car={c["ticker"]:c for c in json.load(open("config/carriers.json"))}
+          for t,pat in [("DAL","Interest"),("ALGT","Interest"),("SKYW","Receivable"),("RJET","Receivable"),("ALK","Interest")]:
+              cf=json.loads(urllib.request.urlopen(urllib.request.Request(f"https://data.sec.gov/api/xbrl/companyfacts/CIK{int(car[t]['cik']):010d}.json",headers={"User-Agent":ua})).read())
+              for ns,cs in cf["facts"].items():
+                  for n,v in cs.items():
+                      if not re.search(pat,n): continue
+                      fs=[f for u in v["units"].values() for f in u if re.match(r"10-[QK]",f.get("form","")) and f["end"]>="2025-01-01"]
+                      if fs:
+                          fs.sort(key=lambda f:(f["end"],f.get("start","")))
+                          print(t,ns,n,len(fs),[(f.get("start"),f["end"],f["val"]) for f in fs[-5:]])
+              time.sleep(0.5)
+          PY
