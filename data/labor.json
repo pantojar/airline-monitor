@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-19T15:43:53Z",
+ "generated": "2026-11-19T16:00:02Z",
  "companies": {
   "DAL": {
    "ticker": "DAL",
@@ -1200,10 +1200,10 @@
    "status": "Ratified",
    "status_source": "union",
    "news": {
-    "title": "United flight attendants ratify 5-year contract with 31% pay hike and boarding pay",
-    "date": "2026-05-13",
-    "source": "CBS News",
-    "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPUmlOcjdOVXNGQ3U4TXpBUG5wWGhkdGJucm9oaTBLbmZPQi1vWE55NGRqbHhBbE1nbnZhclNOR3BGdldGcFowbjdpNDRsRU5odTJna3JWQmNBeFdDM2ZmMVIyVzR2eU1KSnBDY1JZMnh5UXFqeDdhZzRPMEZpYkw4cENCOFQ3LUJlN1B6ZQ?oc=5"
+    "title": "AFA-Represented United Flight Attendants Ratify New Contract That Features A 31% Average Wage Increase For Nearly 30,000 Flight Attendants",
+    "date": "2026-05-14",
+    "source": "WNY Labor Today",
+    "url": "https://news.google.com/rss/articles/CBMirAJBVV95cUxQbDY1Y0xFWUFQQWJvRUxaMVNiYVlOS0w0TTVQa2luNm1zMEI0RFdXWVBRdHJpamZ3M2VtN1Z3M3Rxc1dMbjRVbjJpd2VVMzZtV1VxUHM3c0lKRmRHY2dQODY0UlRILXd3b19lRFlZamJ3ZlRaWmp2dVJKQjFoLUdRZm1UamtSMk1XSWlFS0g3dGJ0Q0I4NGFEN3hiOFlEd0ltaHlFLWxpUElucHNBX1FqcW5QNjd6X1NJYmw5eWhYSC1vZWo4VEs2clBoaGk4SHhhdG8yZU92aHN0ZHZ3WjRMNFpYbW5fN2hOMEo4TWF2TWJWSF9tUk1RTXp5RVVLX1pCc3ZGZlR5ZjhPS3NET29TaUpubjk4aGl1cHJNMjZ1eWNWaTZFOUFSNW11M04?oc=5"
    },
    "status_date": "2026-05-12",
    "filing_quote": "In May 2026, the Company's flight attendants, represented by the Association of Flight Attendants (\"AFA\"), ratified a five-year agreement, effective May 31, 2026, with the Company that included improvements with respect to scheduling, reserve requirements and other quality of life improvements, as well as pay rate increases.",
@@ -2003,13 +2003,6 @@
    "craft": "dispatchers",
    "status": "Ratified",
    "status_source": "union",
-   "news": {
-    "title": "American Dispatchers, Operations Specialists Approve New Contract",
-    "date": "2026-10-28",
-    "source": "AirlineGeeks.com",
-    "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNaEZXUXBpZ1ZvOVVuRVNuVjJYUS1QeDJLRnI2X1U2RGsxNHlndHotVFVqWjBqdW9CUnFFc2NYMFRNdUFWQkR3M1hhWWV5Z3Njc2hKS29jRXk4MzlmUk5zaFdxX2NIWXJ6ZWgxaGNrVlhZS1hmQVF5S2lLVGRSOTZsMTRySGE3RENfQy10bFhrR3ljb3kyS1ZwVmdGU1NwRE9ZakxJ?oc=5"
-   },
-   "status_date": "2026-10-27",
    "manual_note": "New five-year agreement ratified October 2026; the 10-K still shows the old contract's 2025 amendable date.",
    "union_events": [
     {
@@ -2022,6 +2015,7 @@
      "quote": "American Airlines dispatchers and operations specialists approve new 5-year contract."
     }
    ],
+   "status_date": "2026-10-27",
    "union_event": {
     "status": "Ratified",
     "date": "2026-10-27",
@@ -3025,7 +3019,7 @@
     {
      "status": "Picketing",
      "date": "2026-10-15",
-     "source": "Teamsters",
+     "source": "Teamsters Airline Division",
      "kind": "union",
      "title": "Teamsters Pilots at Horizon Air Hold Informational Pickets",
      "url": "https://teamster.org/2026/10/teamsters-pilots-at-horizon-air-hold-informational-pickets/",
@@ -3330,10 +3324,36 @@
    "open": true,
    "craft": "mechanics",
    "status": "Ratified",
-   "status_source": "10-Q",
-   "status_date": "2026-09",
+   "status_source": "union",
+   "status_date": "2026-09-16",
+   "news": {
+    "title": "Teamsters Frontier Airlines Mechanics Ratify Five-Year Contract With 93% Vote",
+    "date": "2026-09-16",
+    "source": "TradingView",
+    "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPdGZISmdSSkdmcVA0WUtwTXZVcW1HajV2VF9sRFk2enZuaHJEd3pia0FxSGZGZ1BneDJaRU9sNEFXbU5EcEdVR3pLMHVRZ3JadE5DWVJRMWNiajhDaTdjZU1EV0xuNXNNT0dEQkZ5VWVCX2dMblV2TFZodFpXT2hmNXh2Qzdsa2NhZVRaMVFZSFp4Y0dxWnBaVlFmVVE3ZU94bEV6c3YxVWU2S0x4dUZwTlZpTWtVU1pfRDdGZ2dTZEpmUVpfVFg0aHVfZEQxbC1aeHYwbktndnJRbm1KRXJR?oc=5"
+   },
    "filing_quote": "In September 2026, we entered into a collective bargaining contract ratification with the union representing our aircraft technicians.",
    "filing_url": "https://www.sec.gov/Archives/edgar/data/1670076/000167007626000103/fron-20260930.htm",
+   "union_events": [
+    {
+     "status": "Ratified",
+     "date": "2026-09-16",
+     "source": "Teamsters Airline Division",
+     "kind": "union",
+     "title": "Teamsters at Frontier Ratify Strong Five-Year Agreement",
+     "url": "https://teamster.org/2026/09/teamsters-at-frontier-ratify-strong-five-year-agreement/",
+     "quote": "Press Releases Teamsters at Frontier Ratify Strong Five-Year Agreement 2026.09.16 New Contract Delivers Major Economic Gains for Mechanics Press Contact: Lena Melentijevic Phone: (347) 208-2279 Email: LMelentijevic@teamster.org (WASHINGTON) – Teamsters mechanics at Frontier Airlines have voted by 93 percent to ratify a new five-year collective bargaining agreement that delivers significant improve"
+    }
+   ],
+   "union_event": {
+    "status": "Ratified",
+    "date": "2026-09-16",
+    "source": "Teamsters Airline Division",
+    "kind": "union",
+    "title": "Teamsters at Frontier Ratify Strong Five-Year Agreement",
+    "url": "https://teamster.org/2026/09/teamsters-at-frontier-ratify-strong-five-year-agreement/",
+    "quote": "Press Releases Teamsters at Frontier Ratify Strong Five-Year Agreement 2026.09.16 New Contract Delivers Major Economic Gains for Mechanics Press Contact: Lena Melentijevic Phone: (347) 208-2279 Email: LMelentijevic@teamster.org (WASHINGTON) – Teamsters mechanics at Frontier Airlines have voted by 93 percent to ratify a new five-year collective bargaining agreement that delivers significant improve"
+   },
    "status_changed": "2026-09"
   },
   {
@@ -3729,12 +3749,32 @@
    "carrier": "Sun Country Airlines",
    "craft": "fleet service",
    "open": false,
-   "status": "Contract in effect",
-   "status_source": "10-K",
-   "status_date": null,
+   "status": "Ratified",
+   "status_source": "union",
+   "status_date": "2025-11-10",
    "filing_quote": null,
    "manual": true,
-   "status_changed": null
+   "union_events": [
+    {
+     "status": "Ratified",
+     "date": "2025-11-10",
+     "source": "Teamsters Airline Division",
+     "kind": "union",
+     "title": "Sun Country Teamsters Ratify First Contract",
+     "url": "https://teamster.org/2025/11/sun-country-teamsters-ratify-first-contract/",
+     "quote": "Press Releases Sun Country Teamsters Ratify First Contract 2025.11.10 Three-Year Agreement Establishes New Standards for 200 Sun Country Fleet Service Workers Press Contact: Lena Melentijevic Phone: (347) 208-2279 Email: LMelentijevic@teamster.org (MINNEAPOLIS) – Fleet service workers at Sun Country Airlines have overwhelmingly ratified their first collective bargaining agreement with Teamsters Lo"
+    }
+   ],
+   "union_event": {
+    "status": "Ratified",
+    "date": "2025-11-10",
+    "source": "Teamsters Airline Division",
+    "kind": "union",
+    "title": "Sun Country Teamsters Ratify First Contract",
+    "url": "https://teamster.org/2025/11/sun-country-teamsters-ratify-first-contract/",
+    "quote": "Press Releases Sun Country Teamsters Ratify First Contract 2025.11.10 Three-Year Agreement Establishes New Standards for 200 Sun Country Fleet Service Workers Press Contact: Lena Melentijevic Phone: (347) 208-2279 Email: LMelentijevic@teamster.org (MINNEAPOLIS) – Fleet service workers at Sun Country Airlines have overwhelmingly ratified their first collective bargaining agreement with Teamsters Lo"
+   },
+   "status_changed": "2025-11-10"
   }
  ]
 }

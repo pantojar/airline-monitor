@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-11-19T15:49:08Z",
+  "at": "2026-11-19T15:50:09Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -152,9 +152,9 @@
    }
   }
  },
- "generated": "2026-11-19T15:49:46Z",
+ "generated": "2026-11-19T16:04:24Z",
  "news": {
-  "at": "2026-11-19T15:49:42Z",
+  "at": "2026-11-19T15:50:45Z",
   "items": 94,
   "errors": [
    "Envoy Air news: unavailable",
@@ -162,7 +162,7 @@
   ]
  },
  "dot": {
-  "at": "2026-11-19T15:45:12Z",
+  "at": "2026-11-19T16:01:20Z",
   "ok": true,
   "failed": [],
   "latest": {
@@ -176,7 +176,7 @@
   "rows": 453
  },
  "fuel_spot": {
-  "at": "2026-11-19T15:49:42Z",
+  "at": "2026-11-19T15:50:46Z",
   "latest": "2026-11-17",
   "rows": 1217,
   "diesel_close": "2026-11-18",
@@ -189,9 +189,11 @@
   "errors": []
  },
  "labor": {
-  "at": "2026-11-19T15:43:53Z",
+  "at": "2026-11-19T16:00:02Z",
   "groups": 102,
-  "errors": [],
+  "errors": [
+   "news American Airlines dispatchers: HTTPError"
+  ],
   "union_sites": [
    {
     "name": "IAM District 141",
@@ -283,7 +285,7 @@
     "groups": 20,
     "method": "html list",
     "items": 10,
-    "pdfs_read": 8
+    "pdfs_read": 1
    },
    {
     "name": "TWU",
@@ -444,12 +446,12 @@
   ]
  },
  "cpi": {
-  "at": "2026-11-19T15:49:43Z",
+  "at": "2026-11-19T15:50:47Z",
   "cpiw": "2026-10",
   "cpiu": "2026-10"
  },
  "revsplit": {
-  "at": "2026-11-19T15:49:09Z",
+  "at": "2026-11-19T15:50:10Z",
   "carriers": {
    "DAL": {
     "quarters": 19,
@@ -486,11 +488,16 @@
   }
  },
  "reliability": {
-  "at": "2026-11-19T15:49:46Z",
+  "at": "2026-11-19T16:04:24Z",
   "checked": "2026-11-19",
   "first": "2023-01",
-  "latest": "2026-08",
-  "fetched": {}
+  "latest": "2026-09",
+  "fetched": {
+   "2026-07": 697754,
+   "2026-08": 673065,
+   "2026-09": 630177,
+   "2026-10": "failed: ValueError: TranStats did not return a zip file"
+  }
  },
  "fbc": {
   "checked": "2026-11-18T16:43:35Z",

@@ -316,20 +316,20 @@
   "date": "2026-11-16",
   "tags": "UAL",
   "kind": "Headline",
-  "headline": "United Airlines Experiences Temporary System Outage in the Wake of Nationwide Ground Stop",
+  "headline": "United Airlines says it resolved system outage that delayed flights",
   "summary": "",
-  "source": "Time Magazine",
-  "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQaDVrRE1VZTNRbUtoSkxiSVVlbktQQmNBRzRhMjlURDh0ZW9iaWNiaXg1ZDlLbmFDWnRiN3VHaHNYUnNJQkNFZkI1VjBWZEplb2k1cHhPQUt1RUhvZUc2cjctaXcxVUJCbGg2MDNTTVRnejI3ZC1KaHZuRTZodTA2V0pWRkZVMk5rTUw2REtXMVpGS25CYXRVRm1aQ3hNZw?oc=5",
+  "source": "CNN",
+  "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBWdVNQc3RhVm1FaTNNOXdkNXlfaHZ3NE10blRxN215NUNwbW1KdmlqOWRmQlZrY0RtbDJmaC1OeUpVU3ptTDZTWUF6anZMbmRScEd0YTA1NVhIMGNwc01uLXU4ZlhVRGc?oc=5",
   "id": "f32"
  },
  {
   "date": "2026-11-16",
   "tags": "UAL",
   "kind": "Headline",
-  "headline": "United Airlines says it resolved system outage that delayed flights",
+  "headline": "United Airlines Experiences Temporary System Outage in the Wake of Nationwide Ground Stop",
   "summary": "",
-  "source": "CNN",
-  "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBWdVNQc3RhVm1FaTNNOXdkNXlfaHZ3NE10blRxN215NUNwbW1KdmlqOWRmQlZrY0RtbDJmaC1OeUpVU3ptTDZTWUF6anZMbmRScEd0YTA1NVhIMGNwc01uLXU4ZlhVRGc?oc=5",
+  "source": "Time Magazine",
+  "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQaDVrRE1VZTNRbUtoSkxiSVVlbktQQmNBRzRhMjlURDh0ZW9iaWNiaXg1ZDlLbmFDWnRiN3VHaHNYUnNJQkNFZkI1VjBWZEplb2k1cHhPQUt1RUhvZUc2cjctaXcxVUJCbGg2MDNTTVRnejI3ZC1KaHZuRTZodTA2V0pWRkZVMk5rTUw2REtXMVpGS25CYXRVRm1aQ3hNZw?oc=5",
   "id": "f33"
  },
  {
@@ -777,23 +777,13 @@
  },
  {
   "date": "2026-11-06",
-  "tags": "ALK",
-  "kind": "Labor",
-  "headline": "Pilots Union Sues Alaska Airlines' Regional Subsidiary Over Forcing Fatigued Aircrew to Fly to Another Destination",
-  "summary": "",
-  "source": "PYOK",
-  "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxPdGtSUU1yTXBXYzZmc1VsV29fNzEySVBxN3ZQREpMMjhCZG1uNzlzTlVlX3ZYdm1zc0RhYXBDRUE1WHl5V3BBMF82b0RfM1l0eERQX3o2U0FCLVp5SGRLTTlPSEFlSjVvbWtRbGprR0s2ODBIeVdzMDZFdmpCS1NxM01BLXhRT1NLQ2k5QVNBVVZBalFGdDNUSm4zX3Y2cFhxNy0wUlZpd0lBYW9hdnBUZlBPUHNqcnk4bEU4RGdpQkVwM1M3N3VuLXprNnMxWFNkUkROdmZtV2lsRkcxbmxReUpIUDk5NUVDU3RRVjF3QlFuQQ?oc=5",
-  "id": "f78"
- },
- {
-  "date": "2026-11-06",
   "tags": "Industry",
   "kind": "Costs",
   "headline": "Jet Fuel Prices Surge in 2026 as Regional Costs Diverge",
   "summary": "",
   "source": "AirGuide Business",
   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQQWp0U2xlUGlqNUVFNVhDOHhxd1R4SlBzNWhjU3hSYXVLTUJjUFp6dHNLWlR3T2phbVl0WTBxWWhZa0NRUzdtOElpOXpRNndfRW9EelhmZjVDRUlTRE9xc2JrM2RDUGt2dno4QS1sc0NtS2hpa0tEQ2l2RW5iU2F3MWVtM2U?oc=5",
-  "id": "f79"
+  "id": "f78"
  },
  {
   "date": "2026-11-06",
@@ -803,6 +793,16 @@
   "summary": "",
   "source": "Yahoo Finance",
   "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOOFpNSktOdFdHRjJNOWxrYVFyM0FFbFVGajg1bk56ZDc3LTZsb0lZdzVUU043b2hOajduWjBhdkxKQUFoc3d1VnU3R2FNeVdZejhSMk9fdnROdE5NamVySnFnX2J5TXpuV0xRaHllS2g2anZaSzB2bFZwaUxSRVFwd1BhZW9pM2g0RXRBZkpKX3BFRDFZZ3RycGg0NA?oc=5",
+  "id": "f79"
+ },
+ {
+  "date": "2026-11-05",
+  "tags": "Industry",
+  "kind": "Labor",
+  "headline": "PSA pilots agree to contract extension",
+  "summary": "",
+  "source": "FlightGlobal",
+  "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOUmJ2a2dFRTRmSXkwS01PYVBvSld0NmphRnNBZnMyQTZFclViWjlMclJTU01DQWltZzdvWXBQSnd6THVrc0k3RlFabGRqM2pOV0s3MGN0Q0RFcU1wVFJrRkNvbDBFaGwtYzdMQ0FweXN1QWJKNXVTMHY4N3pvRE50endndEVlRnl2NGF2UDFn?oc=5",
   "id": "f80"
  },
  {
