@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-11-18T21:38:08Z",
+  "at": "2026-11-19T02:25:48Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -152,14 +152,13 @@
    }
   }
  },
- "generated": "2026-11-18T21:38:52Z",
+ "generated": "2026-11-19T02:27:49Z",
  "news": {
-  "at": "2026-11-18T21:38:50Z",
-  "items": 105,
+  "at": "2026-11-19T02:26:26Z",
+  "items": 99,
   "errors": [
    "Envoy Air news: unavailable",
-   "PSA Airlines news: unavailable",
-   "Delta investor news: unavailable"
+   "PSA Airlines news: unavailable"
   ]
  },
  "dot": {
@@ -177,7 +176,7 @@
   "rows": 453
  },
  "fuel_spot": {
-  "at": "2026-11-18T21:38:51Z",
+  "at": "2026-11-19T02:26:27Z",
   "latest": "2026-11-17",
   "rows": 1217,
   "diesel_close": "2026-11-17"
@@ -435,12 +434,12 @@
   ]
  },
  "cpi": {
-  "at": "2026-11-18T21:38:51Z",
+  "at": "2026-11-19T02:26:27Z",
   "cpiw": "2026-10",
   "cpiu": "2026-10"
  },
  "revsplit": {
-  "at": "2026-11-18T21:38:09Z",
+  "at": "2026-11-19T02:25:50Z",
   "carriers": {
    "DAL": {
     "quarters": 19,
@@ -477,11 +476,13 @@
   }
  },
  "reliability": {
-  "at": "2026-11-18T21:38:52Z",
-  "checked": "2026-11-18",
+  "at": "2026-11-19T02:27:49Z",
+  "checked": "2026-11-19",
   "first": "2023-01",
   "latest": "2026-08",
-  "fetched": {}
+  "fetched": {
+   "2026-09": "failed: ValueError: TranStats did not return a zip file"
+  }
  },
  "fbc": {
   "checked": "2026-11-18T16:43:35Z",
