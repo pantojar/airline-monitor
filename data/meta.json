@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-11-19T15:50:09Z",
+  "at": "2026-11-19T18:58:36Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -152,9 +152,9 @@
    }
   }
  },
- "generated": "2026-11-19T16:04:24Z",
+ "generated": "2026-11-19T19:08:36Z",
  "news": {
-  "at": "2026-11-19T15:50:45Z",
+  "at": "2026-11-19T18:59:16Z",
   "items": 94,
   "errors": [
    "Envoy Air news: unavailable",
@@ -176,7 +176,7 @@
   "rows": 453
  },
  "fuel_spot": {
-  "at": "2026-11-19T15:50:46Z",
+  "at": "2026-11-19T18:59:17Z",
   "latest": "2026-11-17",
   "rows": 1217,
   "diesel_close": "2026-11-18",
@@ -189,11 +189,9 @@
   "errors": []
  },
  "labor": {
-  "at": "2026-11-19T16:00:02Z",
+  "at": "2026-11-19T19:08:36Z",
   "groups": 102,
-  "errors": [
-   "news American Airlines dispatchers: HTTPError"
-  ],
+  "errors": [],
   "union_sites": [
    {
     "name": "IAM District 141",
@@ -446,12 +444,12 @@
   ]
  },
  "cpi": {
-  "at": "2026-11-19T15:50:47Z",
+  "at": "2026-11-19T18:59:17Z",
   "cpiw": "2026-10",
   "cpiu": "2026-10"
  },
  "revsplit": {
-  "at": "2026-11-19T15:50:10Z",
+  "at": "2026-11-19T18:58:37Z",
   "carriers": {
    "DAL": {
     "quarters": 19,
@@ -488,16 +486,11 @@
   }
  },
  "reliability": {
-  "at": "2026-11-19T16:04:24Z",
+  "at": "2026-11-19T19:08:36Z",
   "checked": "2026-11-19",
   "first": "2023-01",
   "latest": "2026-09",
-  "fetched": {
-   "2026-07": 697754,
-   "2026-08": 673065,
-   "2026-09": 630177,
-   "2026-10": "failed: ValueError: TranStats did not return a zip file"
-  }
+  "fetched": {}
  },
  "fbc": {
   "checked": "2026-11-18T16:43:35Z",
