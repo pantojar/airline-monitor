@@ -73,6 +73,7 @@ ALT_NAMES = [
     (r"stock clerk|material specialist|storekeeper", ["store"]),
     (r"^(mechanic|technician)", ["mechanic"]),
     (r"^(mechanic|technician)", ["amt"]),
+    (r"^aircraft (mechanic|technician)", ["mechanic"]),  # Frontier's 10-K "Aircraft Technicians"; the Teamsters say "mechanics"
 ]
 
 

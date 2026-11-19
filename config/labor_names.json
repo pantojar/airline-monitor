@@ -103,6 +103,12 @@
   "query": "Allegiant",
   "match": "Allegiant"
  },
+ "Sun Country": {
+  "name": "Sun Country Airlines",
+  "query": "\"Sun Country\"",
+  "match": "Sun Country",
+  "parent": "ALGT"
+ },
  "RJET": {
   "name": "Republic Airways",
   "query": "\"Republic Airways\" OR \"Mesa Airlines\"",
