@@ -2,6 +2,8 @@
 
 A peer-comparison dashboard for US-listed passenger airlines: revenue, operating margin, labor cost, labor and fuel shares of operating expense, cash returned to shareholders, liquidity and debt, plus an industry and labor news feed.
 
+Designed, built and maintained by Rich Pantoja, Transport Workers Union of America (rpantoja@twu.org).
+
 The page is `index.html`. It loads the files in `data/` each time it opens.
 
 ## How it stays current
@@ -62,3 +64,7 @@ The **Union and company websites read** table on the Sources & Notes tab shows, 
 Figures are GAAP as filed, in $ millions. Quarters reported only year-to-date (every Q4, and all cash-flow items) are derived as year-to-date minus the prior year-to-date. Labor is `LaborAndRelatedExpense`; fuel is `FuelCosts`; shareholder returns are `PaymentsForRepurchaseOfCommonStock` plus dividends paid. Debt definitions vary by carrier (some include finance leases). See the **Sources & notes** tab on the page for carrier-specific gaps.
 
 DOT figures: salaries & benefits = P-6 total salaries and related fringe benefits less the "personnel expense" line, which reproduces the SEC labor line for single-certificate carriers (United and Southwest match to the dollar). Regions are summed to a system total; ASMs are T-100 all-service (class Z). FTEs are the quarter's average of monthly P-1(a) counts.
+
+## Author
+
+Rich Pantoja, Transport Workers Union of America — rpantoja@twu.org. Created 2026. Send questions and data corrections to the address above.
