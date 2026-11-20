@@ -2,7 +2,7 @@
 
 A peer-comparison dashboard for US-listed passenger airlines: revenue, operating margin, labor cost, labor and fuel shares of operating expense, cash returned to shareholders, liquidity and debt, plus an industry and labor news feed.
 
-Designed, built and maintained by Rich Pantoja, Transport Workers Union of America (rpantoja@twu.org).
+Designed, built and maintained by Rich Pantoja, Director, TWU Economic Analysis and Research (rpantoja@twu.org).
 
 The page is `index.html`. It loads the files in `data/` each time it opens.
 
@@ -67,4 +67,4 @@ DOT figures: salaries & benefits = P-6 total salaries and related fringe benefit
 
 ## Author
 
-Rich Pantoja, Transport Workers Union of America — rpantoja@twu.org. Created 2026. Send questions and data corrections to the address above.
+Rich Pantoja, Director, TWU Economic Analysis and Research, Transport Workers Union of America — rpantoja@twu.org. Created 2026. Send questions and data corrections to the address above.
