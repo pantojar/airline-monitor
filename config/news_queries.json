@@ -4,5 +4,7 @@
   {"query": "airline mechanics OR \"fleet service\" union contract", "tags": "Industry", "kind": "Labor"},
   {"query": "\"National Mediation Board\" airline", "tags": "Industry", "kind": "Labor"},
   {"query": "jet fuel prices airlines", "tags": "Industry", "kind": "Costs"},
-  {"query": "airline earnings guidance quarter", "tags": "Industry", "kind": "Earnings"}
+  {"query": "airline earnings guidance quarter", "tags": "Industry", "kind": "Earnings"},
+  {"query": "(airline OR airlines) site:wsj.com", "tags": "Industry", "kind": null},
+  {"query": "(airline OR airlines) site:nytimes.com", "tags": "Industry", "kind": null}
 ]
