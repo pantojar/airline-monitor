@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-19T19:08:36Z",
+ "generated": "2026-11-25T20:06:16Z",
  "companies": {
   "DAL": {
    "ticker": "DAL",
@@ -1200,10 +1200,10 @@
    "status": "Ratified",
    "status_source": "union",
    "news": {
-    "title": "United flight attendants ratify 5-year contract with 31% pay hike and boarding pay",
-    "date": "2026-05-13",
-    "source": "CBS News",
-    "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPUmlOcjdOVXNGQ3U4TXpBUG5wWGhkdGJucm9oaTBLbmZPQi1vWE55NGRqbHhBbE1nbnZhclNOR3BGdldGcFowbjdpNDRsRU5odTJna3JWQmNBeFdDM2ZmMVIyVzR2eU1KSnBDY1JZMnh5UXFqeDdhZzRPMEZpYkw4cENCOFQ3LUJlN1B6ZQ?oc=5"
+    "title": "Senior United Flight Attendants Land $100 Hr As New Contract Ratified",
+    "date": "2026-05-14",
+    "source": "Open Jaw",
+    "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNVDFxdkpYNEpxMGEtcC03TkVNTU1EOGxzNG1nWFFLU3ZscGdMZHdGaHM2WHlTcTc3M1JFVjdoNUtXM1BRNF90cUJHVEhVejJwcWM3bVBhbExoZlJKNkZsSm9oUlhHUWM3QWhTUWFqVUpfbmo1dXl1eDNoVktka0NzS0RVQzhJMFRzVTBtc0kteDMzenBIOWFqekdjd0JhVjJVVEMzTGhIZG03Tlk2U2g3UkpuenhRaU03?oc=5"
    },
    "status_date": "2026-05-12",
    "filing_quote": "In May 2026, the Company's flight attendants, represented by the Association of Flight Attendants (\"AFA\"), ratified a five-year agreement, effective May 31, 2026, with the Company that included improvements with respect to scheduling, reserve requirements and other quality of life improvements, as well as pay rate increases.",
@@ -2694,9 +2694,30 @@
    "carrier": "Southwest Airlines",
    "open": false,
    "craft": "mechanics",
-   "status": "Amendable within a year",
-   "status_source": "10-K",
-   "status_changed": "2026-07-01"
+   "status": "Tentative agreement",
+   "status_source": "union",
+   "union_events": [
+    {
+     "status": "Tentative agreement",
+     "date": "2026-11-20",
+     "source": "AMFA",
+     "kind": "union",
+     "title": "Joint Release: AMFA-SWA Contract Extension Agreement in Concept Reached",
+     "url": "https://www.amfanational.org/?zone=/unionactive/view_article.cfm&HomeID=1013618",
+     "quote": "Joint Release: AMFA-SWA Contract Extension Agreement in Concept Reached Nov 20, 2026 November 20, 2026 We are happy to share that Southwest Airlines and the Aircraft Mechanics Fraternal Association (AMFA) have reached an Agreement in Concept on a contract extension through 2030 for our Appearance Technicians and an Agreement in Concept for our Mechanics and Related Employees for the same duration."
+    }
+   ],
+   "status_date": "2026-11-20",
+   "union_event": {
+    "status": "Tentative agreement",
+    "date": "2026-11-20",
+    "source": "AMFA",
+    "kind": "union",
+    "title": "Joint Release: AMFA-SWA Contract Extension Agreement in Concept Reached",
+    "url": "https://www.amfanational.org/?zone=/unionactive/view_article.cfm&HomeID=1013618",
+    "quote": "Joint Release: AMFA-SWA Contract Extension Agreement in Concept Reached Nov 20, 2026 November 20, 2026 We are happy to share that Southwest Airlines and the Aircraft Mechanics Fraternal Association (AMFA) have reached an Agreement in Concept on a contract extension through 2030 for our Appearance Technicians and an Agreement in Concept for our Mechanics and Related Employees for the same duration."
+   },
+   "status_changed": "2026-11-20"
   },
   {
    "unit": null,
@@ -2712,9 +2733,18 @@
    "carrier": "Southwest Airlines",
    "open": false,
    "craft": "mechanics",
-   "status": "In negotiations",
+   "status": "Tentative agreement",
    "status_source": "union",
    "union_events": [
+    {
+     "status": "Tentative agreement",
+     "date": "2026-11-20",
+     "source": "AMFA",
+     "kind": "union",
+     "title": "Joint Release: AMFA-SWA Contract Extension Agreement in Concept Reached",
+     "url": "https://www.amfanational.org/?zone=/unionactive/view_article.cfm&HomeID=1013618",
+     "quote": "Joint Release: AMFA-SWA Contract Extension Agreement in Concept Reached Nov 20, 2026 November 20, 2026 We are happy to share that Southwest Airlines and the Aircraft Mechanics Fraternal Association (AMFA) have reached an Agreement in Concept on a contract extension through 2030 for our Appearance Technicians and an Agreement in Concept for our Mechanics and Related Employees for the same duration."
+    },
     {
      "status": "In negotiations",
      "date": "2026-08-24",
@@ -2725,17 +2755,17 @@
      "quote": "AMFA-SWA AMT Negotiations Update #1."
     }
    ],
-   "status_date": "2026-08-24",
+   "status_date": "2026-11-20",
    "union_event": {
-    "status": "In negotiations",
-    "date": "2026-08-24",
+    "status": "Tentative agreement",
+    "date": "2026-11-20",
     "source": "AMFA",
     "kind": "union",
-    "title": "AMFA-SWA AMT Negotiations Update #1",
-    "url": "https://www.amfanational.org/?zone=/unionactive/view_article.cfm&HomeID=1009673",
-    "quote": "AMFA-SWA AMT Negotiations Update #1."
+    "title": "Joint Release: AMFA-SWA Contract Extension Agreement in Concept Reached",
+    "url": "https://www.amfanational.org/?zone=/unionactive/view_article.cfm&HomeID=1013618",
+    "quote": "Joint Release: AMFA-SWA Contract Extension Agreement in Concept Reached Nov 20, 2026 November 20, 2026 We are happy to share that Southwest Airlines and the Aircraft Mechanics Fraternal Association (AMFA) have reached an Agreement in Concept on a contract extension through 2030 for our Appearance Technicians and an Agreement in Concept for our Mechanics and Related Employees for the same duration."
    },
-   "status_changed": "2026-08-24"
+   "status_changed": "2026-11-20"
   },
   {
    "unit": null,
@@ -2823,9 +2853,16 @@
    "carrier": "Alaska Airlines",
    "open": false,
    "craft": "flight attendants",
-   "status": "Contract in effect",
-   "status_source": "10-K",
-   "status_changed": "2026-11-05"
+   "status": "Strike vote",
+   "status_source": "news",
+   "news": {
+    "title": "Regional Flight Attendants At Alaska Airlines Expect Strike Vote 'Sooner Rather Than Later' As Contract Talks Drag On",
+    "date": "2025-12-30",
+    "source": "PYOK",
+    "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxON1ZIWWVCWWJ3SmZhTGlBVVdlRG9LX2xOd1pqbVY4WGdtclFVT085TTNnelBNaWNBN293Sm92RmUzWFNTR1Y0Q2Y5Q2NJRzBfN1M1N2dULWhTYVg5WEJneElhR1F4NmhYWG9JZ01TQk9nUUY5T25zalZseWNGYkdHcVd4d3lzUk16TmcwTXdfczBYNU9BZXlLaXlNbkdjSEJ4encyR3hkdmhqTV9ZWXdaNVpEcGEwUFNxV0U2NEduaFU2RDJjemhzMjB1NzhnX2g2TWc1SUUtc25wd0JDNEN4czNnUzkxYmoxZjhaVzMwRWNtZzRw?oc=5"
+   },
+   "status_date": "2025-12-30",
+   "status_changed": "2025-12-30"
   },
   {
    "unit": "Alaska",
@@ -3016,11 +3053,11 @@
     {
      "status": "In negotiations",
      "date": "2026-11-06",
-     "source": "Teamsters",
+     "source": "Teamsters Airline Division",
      "kind": "union",
      "title": "Horizon Air Teamsters Demand Accountability from Management",
      "url": "https://teamster.org/2026/11/horizon-air-teamsters-demand-accountability-from-management/",
-     "quote": "The actions come as pilots continue fighting for a new collective bargaining agreement after more than three and a half years of negotiations."
+     "quote": "The actions come as pilots continue fighting for a new collective bargaining agreement after more than three and a half years of negotiations.;"
     },
     {
      "status": "Picketing",
@@ -3035,11 +3072,11 @@
    "union_event": {
     "status": "In negotiations",
     "date": "2026-11-06",
-    "source": "Teamsters",
+    "source": "Teamsters Airline Division",
     "kind": "union",
     "title": "Horizon Air Teamsters Demand Accountability from Management",
     "url": "https://teamster.org/2026/11/horizon-air-teamsters-demand-accountability-from-management/",
-    "quote": "The actions come as pilots continue fighting for a new collective bargaining agreement after more than three and a half years of negotiations."
+    "quote": "The actions come as pilots continue fighting for a new collective bargaining agreement after more than three and a half years of negotiations.;"
    },
    "status_changed": "2026-11-06"
   },
@@ -3259,14 +3296,23 @@
    "craft": "flight attendants",
    "status": "Picketing",
    "status_source": "union",
-   "status_date": "2026-11-06",
+   "status_date": "2026-11-20",
    "news": {
-    "title": "Frontier flight attendants protest; Roswell road work begins",
-    "date": "2026-11-18",
-    "source": "FOX 5 Atlanta",
-    "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFB4aUxoNmFBQ2tnNEdVSnZHYUR4aVgxLVVPbXlXTkVvS3BUaXo2TzlEeUhQWXVXWHNEb3g3dWstUlFGREFOaHk0ZXVHTzFqMGNkMW5lUXJPV1lVR2doOGhFWWQ1ZnTSAWpBVV95cUxNd29UOHhmM0NkeDM3QkFpY0hiUnBsQjFETjZqOVo5R21zT1g0aUtBZ3BJOExnWkxZZ0tzTmNPdjRFQlNQT0RMdmQ4M1k1VmZpVGlNLTJYeU1yLVBBV2xlUC1YQUtncFdULTRn?oc=5"
+    "title": "Frontier Flight Attendants Protest for New Contract at Atlanta Airport",
+    "date": "2026-11-21",
+    "source": "Travel Radar",
+    "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPbVBVRms2eTc5LUdDVS05bTJqQjFMdklnR2U2Nm5OR0NyN3Q0WW5uOUJwSlk1RHBOWGc5a0xiR0RBZjQ5WTlTamdoVlVhQjdFSHg4bVg3U2FnLTFTUXBVUktKbkxEeDk0dFpKNFotQXl6VmNEdG5yejJJUEp3RW4zQTN3dEEwWGRFSmNuRHBtZHN4aFB4TFhSVWZzSHo?oc=5"
    },
    "union_events": [
+    {
+     "status": "Picketing",
+     "date": "2026-11-20",
+     "source": "AFA-CWA",
+     "kind": "union",
+     "title": "Frontier Flight Attendants Picket ATL",
+     "url": "https://afacwa.org/frontier-flight-attendants-picket-atl/",
+     "quote": "Frontier Flight Attendants Picket ATL."
+    },
     {
      "status": "Picketing",
      "date": "2026-11-06",
@@ -3293,25 +3339,16 @@
      "title": "3 Days Out: AFA Frontier Picket at PHL",
      "url": "https://afacwa.org/3-days-out-afa-frontier-picket-at-phl/",
      "quote": "Your support during the picket will show management that Frontier Flight Attendants won’t accept anything less than industry standards."
-    },
-    {
-     "status": "Picketing",
-     "date": "2026-10-09",
-     "source": "AFA-CWA",
-     "kind": "union",
-     "title": "Turn Out for Horizon and Frontier Flight Attendant Pickets",
-     "url": "https://afacwa.org/turn-out-for-horizon-and-frontier-flight-attendant-pickets/",
-     "quote": "Turn Out for Horizon and Frontier Flight Attendant Pickets."
     }
    ],
    "union_event": {
     "status": "Picketing",
-    "date": "2026-11-06",
+    "date": "2026-11-20",
     "source": "AFA-CWA",
     "kind": "union",
-    "title": "RSVP Now: Join AFA Frontier in ATL",
-    "url": "https://afacwa.org/rsvp-now-join-afa-frontier-in-atl/",
-    "quote": "Frontier Flight Attendants are building on the success of two incredible pickets at Frontier HQ in Denver and Philadelphia International Airport."
+    "title": "Frontier Flight Attendants Picket ATL",
+    "url": "https://afacwa.org/frontier-flight-attendants-picket-atl/",
+    "quote": "Frontier Flight Attendants Picket ATL."
    },
    "status_changed": "2026-09-18"
   },

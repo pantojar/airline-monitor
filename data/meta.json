@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-11-25T04:02:10Z",
+  "at": "2026-11-25T19:56:05Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -152,19 +152,34 @@
    }
   }
  },
- "generated": "2026-11-25T04:04:13Z",
+ "generated": "2026-11-25T20:15:07Z",
  "news": {
-  "at": "2026-11-25T04:02:54Z",
-  "items": 110,
+  "at": "2026-11-25T19:56:46Z",
+  "items": 106,
   "errors": [
    "Envoy Air news: unavailable",
    "PSA Airlines news: unavailable"
   ]
  },
  "dot": {
-  "at": "2026-11-19T16:01:20Z",
-  "ok": true,
-  "failed": [],
+  "at": "2026-11-25T20:15:07Z",
+  "ok": false,
+  "failed": [
+   "p12_2025",
+   "p12_2026",
+   "p6_2025",
+   "p6_2026",
+   "p1a_2025",
+   "p1a_2026",
+   "t1_2025",
+   "t1_2026",
+   "p10_2025",
+   "p52_2025",
+   "p52_2026",
+   "b43_2025",
+   "p12a_2025",
+   "p12a_2026"
+  ],
   "latest": {
    "financial": "2026-06",
    "traffic": "2026-06",
@@ -176,12 +191,10 @@
   "rows": 453
  },
  "fuel_spot": {
-  "at": "2026-11-25T04:02:54Z",
-  "latest": "2026-11-17",
-  "rows": 1217,
-  "diesel_close": "2026-11-23",
-  "estimated_through": "2026-11-23",
-  "spread": -0.27
+  "at": "2026-11-25T19:56:47Z",
+  "latest": "2026-11-24",
+  "rows": 1222,
+  "diesel_close": "2026-11-24"
  },
  "exec_pay": {
   "at": "2026-11-23T22:03:05Z",
@@ -189,7 +202,7 @@
   "errors": []
  },
  "labor": {
-  "at": "2026-11-19T19:08:36Z",
+  "at": "2026-11-25T20:06:16Z",
   "groups": 102,
   "errors": [],
   "union_sites": [
@@ -198,7 +211,7 @@
     "url": "https://iam141.org",
     "groups": 13,
     "method": "wp-posts,wp-media",
-    "items": 204,
+    "items": 217,
     "pdfs_read": 0
    },
    {
@@ -207,7 +220,7 @@
     "groups": 14,
     "method": "wp-posts,wp-media",
     "items": 599,
-    "pdfs_read": 0
+    "pdfs_read": 1
    },
    {
     "name": "IAM (international)",
@@ -215,7 +228,7 @@
     "groups": 22,
     "method": "wp-posts,wp-media",
     "items": 276,
-    "pdfs_read": 0
+    "pdfs_read": 1
    },
    {
     "name": "AFA-CWA",
@@ -316,16 +329,16 @@
     "url": "https://www.amfanational.org",
     "groups": 5,
     "method": "html list",
-    "items": 69,
-    "pdfs_read": 0
+    "items": 66,
+    "pdfs_read": 1
    },
    {
     "name": "CWA",
     "url": "https://cwa-union.org",
     "groups": 4,
     "method": "html list",
-    "items": 18,
-    "pdfs_read": 0
+    "items": 20,
+    "pdfs_read": 4
    },
    {
     "name": "American Airlines newsroom",
@@ -398,7 +411,7 @@
     "url": "https://news.alaskaair.com",
     "groups": 16,
     "method": "wp-posts",
-    "items": 190,
+    "items": 188,
     "pdfs_read": 0
    },
    {
@@ -406,7 +419,7 @@
     "url": "https://news.jetblue.com",
     "groups": 4,
     "method": "press releases",
-    "items": 80,
+    "items": 79,
     "pdfs_read": 0
    },
    {
@@ -438,18 +451,18 @@
     "url": "https://rjet.com",
     "groups": 3,
     "method": "wp-posts",
-    "items": 13,
+    "items": 12,
     "pdfs_read": 0
    }
   ]
  },
  "cpi": {
-  "at": "2026-11-25T04:02:55Z",
+  "at": "2026-11-25T19:56:47Z",
   "cpiw": "2026-10",
   "cpiu": "2026-10"
  },
  "revsplit": {
-  "at": "2026-11-25T04:02:12Z",
+  "at": "2026-11-25T19:56:06Z",
   "carriers": {
    "DAL": {
     "quarters": 19,
@@ -486,24 +499,21 @@
   }
  },
  "reliability": {
-  "at": "2026-11-25T04:04:13Z",
+  "at": "2026-11-25T20:15:07Z",
   "checked": "2026-11-25",
   "first": "2023-01",
   "latest": "2026-09",
-  "fetched": {
-   "2026-10": "failed: ValueError: TranStats did not return a zip file"
-  }
+  "fetched": {}
  },
  "fbc": {
-  "checked": "2026-11-18T16:43:35Z",
+  "checked": "2026-11-25T19:56:47Z",
   "url": "https://files.epi.org/uploads/fbc_data_2026.xlsx",
-  "found_by": "file",
+  "found_by": "guess",
   "bytes": 7969195,
   "sha": "eda46303451a8e0d",
-  "bases_missing": [],
   "edition": 2026,
   "dollars": 2025,
-  "metro": 673,
-  "changed": "2026-11-18T16:43:35Z"
+  "changed": "2026-11-18T16:43:35Z",
+  "bases_missing": []
  }
 }
