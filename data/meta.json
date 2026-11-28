@@ -1,6 +1,6 @@
 {
  "sec": {
-  "at": "2026-11-27T22:22:26Z",
+  "at": "2026-11-28T03:11:35Z",
   "contact_set": true,
   "carriers": {
    "DAL": {
@@ -152,11 +152,29 @@
    }
   }
  },
- "generated": "2026-11-27T22:23:12Z",
+ "generated": "2026-11-28T03:23:24Z",
  "news": {
-  "at": "2026-11-27T22:23:09Z",
-  "items": 106,
+  "at": "2026-11-28T03:22:06Z",
+  "items": 10,
   "errors": [
+   "\"Delta Air Lines\": HTTPError",
+   "\"United Airlines\": HTTPError",
+   "\"American Airlines\" OR \"Envoy Air\" OR \"PSA Airlines\" OR \"Piedmont Airlines\": HTTPError",
+   "\"Southwest Airlines\": HTTPError",
+   "\"Alaska Airlines\" OR \"Hawaiian Airlines\" OR \"Horizon Air\": HTTPError",
+   "JetBlue: HTTPError",
+   "\"Frontier Airlines\": HTTPError",
+   "Allegiant OR \"Sun Country\": HTTPError",
+   "SkyWest: HTTPError",
+   "\"Republic Airways\" OR \"Mesa Airlines\": HTTPError",
+   "airline pilots union contract: HTTPError",
+   "airline flight attendants union contract: HTTPError",
+   "airline mechanics OR \"fleet service\" union contract: HTTPError",
+   "\"National Mediation Board\" airline: HTTPError",
+   "jet fuel prices airlines: HTTPError",
+   "airline earnings guidance quarter: HTTPError",
+   "(airline OR airlines) site:wsj.com: HTTPError",
+   "(airline OR airlines) site:nytimes.com: HTTPError",
    "Envoy Air news: unavailable",
    "PSA Airlines news: unavailable"
   ]
@@ -176,7 +194,7 @@
   "rows": 453
  },
  "fuel_spot": {
-  "at": "2026-11-27T22:23:10Z",
+  "at": "2026-11-28T03:22:06Z",
   "latest": "2026-11-24",
   "rows": 1222,
   "diesel_close": "2026-11-25",
@@ -444,12 +462,12 @@
   ]
  },
  "cpi": {
-  "at": "2026-11-27T22:23:11Z",
+  "at": "2026-11-28T03:22:07Z",
   "cpiw": "2026-10",
   "cpiu": "2026-10"
  },
  "revsplit": {
-  "at": "2026-11-27T22:22:28Z",
+  "at": "2026-11-28T03:11:35Z",
   "carriers": {
    "DAL": {
     "quarters": 19,
@@ -486,11 +504,13 @@
   }
  },
  "reliability": {
-  "at": "2026-11-27T22:23:12Z",
-  "checked": "2026-11-27",
+  "at": "2026-11-28T03:23:24Z",
+  "checked": "2026-11-28",
   "first": "2023-01",
   "latest": "2026-09",
-  "fetched": {}
+  "fetched": {
+   "2026-10": "failed: ValueError: TranStats did not return a zip file"
+  }
  },
  "fbc": {
   "checked": "2026-11-25T19:56:47Z",
